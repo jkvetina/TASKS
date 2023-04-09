@@ -86,6 +86,30 @@
     user-defined-attributes: 
       translatable: false
 
+  - # ====== Entry: Tasks ========================================
+    id: 34904588365112132
+    label: 
+      label: Tasks
+
+    layout: 
+      sequence: 8
+      parent-entry: ' ' # 99409483413889233
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:240:&SESSION.::&DEBUG.:240:::'
+        page: 240 # Tasks [RAW]
+        clear-cache: 240
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
   - # ====== Entry: &APP_USER. ===================================
     id: 98989130787303843
     label: 

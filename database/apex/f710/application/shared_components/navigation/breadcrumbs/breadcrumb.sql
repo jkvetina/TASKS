@@ -15,6 +15,12 @@ wwv_flow_imp_shared.create_menu(
  p_id=>wwv_flow_imp.id(98776792421303600)
 ,p_name=>'Breadcrumb'
 );
+wwv_flow_imp_shared.create_menu_option(
+ p_id=>wwv_flow_imp.id(34891279798102835)
+,p_short_name=>'Tasks [RAW]'
+,p_link=>'f?p=&APP_ID.:240:&APP_SESSION.::&DEBUG.:::'
+,p_page_id=>240
+);
 wwv_flow_imp.component_end;
 end;
 /
