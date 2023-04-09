@@ -214,6 +214,7 @@ wwv_flow_imp_page.create_page_plug(
 '            AND t.project_id    = :P0_PROJECT_ID',
 '            AND t.board_id      = :P0_BOARD_ID',
 '            AND t.status_id     = s.status_id',
+'            AND (t.swimlane_id  = :P100_SWIMLANE_ID OR :P100_SWIMLANE_ID IS NULL)',
 '        GROUP BY',
 '            t.task_id,',
 '            t.task_name,',
@@ -317,6 +318,25 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Board Id'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_BOARDS'
+,p_lov_display_null=>'YES'
+,p_cHeight=>1
+,p_begin_on_new_line=>'N'
+,p_colspan=>2
+,p_field_template=>wwv_flow_imp.id(70967669576975668)
+,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
+,p_lov_display_extra=>'YES'
+,p_attribute_01=>'NONE'
+,p_attribute_02=>'N'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(34951490119065824)
+,p_name=>'P100_SWIMLANE_ID'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(69652345538556693)
+,p_prompt=>'Swimlane Id'
+,p_display_as=>'NATIVE_SELECT_LIST'
+,p_named_lov=>'LOV_TASK_SWIMLANES'
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_begin_on_new_line=>'N'
@@ -436,6 +456,25 @@ wwv_flow_imp_page.create_page_da_event(
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(34798178572743632)
 ,p_event_id=>wwv_flow_imp.id(34798017052743631)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_SUBMIT_PAGE'
+,p_attribute_02=>'Y'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(34951564344065825)
+,p_name=>'CHANGED_SWIMLINE'
+,p_event_sequence=>70
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P100_SWIMLANE_ID'
+,p_bind_type=>'bind'
+,p_execution_type=>'IMMEDIATE'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(34951606974065826)
+,p_event_id=>wwv_flow_imp.id(34951564344065825)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
 ,p_execute_on_page_init=>'N'

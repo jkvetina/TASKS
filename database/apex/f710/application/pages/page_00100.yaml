@@ -261,6 +261,7 @@ regions:
                   AND t.project_id    = :P0_PROJECT_ID
                   AND t.board_id      = :P0_BOARD_ID
                   AND t.status_id     = s.status_id
+                  AND (t.swimlane_id  = :P100_SWIMLANE_ID OR :P100_SWIMLANE_ID IS NULL)
               GROUP BY
                   t.task_id,
                   t.task_name,
@@ -572,6 +573,65 @@ page-items:
     store-value-encrypted-in-session-state: true
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P100_SWIMLANE_ID =========================
+  id: 34951490119065824
+  identification: 
+    name: P100_SWIMLANE_ID
+    type: Select List
+
+  label: 
+    label: Swimlane Id
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 40
+    region: Filters [F] # 69652345538556693
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_TASK_SWIMLANES # 34920402511183578
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
 buttons: 
 - # ====== Button: ADD_TASK ====================================
   id: 34798486722743635
@@ -702,6 +762,39 @@ dynamic-actions:
     execution: 
       sequence: 10
       event: CHANGED_CLIENT # 34906414430118509
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: CHANGED_SWIMLINE ====================
+  id: 34951564344065825
+  identification: 
+    name: CHANGED_SWIMLINE
+
+  execution: 
+    sequence: 70
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P100_SWIMLANE_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 34951606974065826
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 10
+      event: CHANGED_SWIMLINE # 34951564344065825
       fire-when-event-result-is: True
       fire-on-initialization: false
 
