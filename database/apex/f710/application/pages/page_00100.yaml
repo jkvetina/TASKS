@@ -34,14 +34,23 @@ javascript:
             task.classList.remove("DRAGGING");
             //
             const task_id   = task.getAttribute('id').replace('TASK_', '');
-            const status_id = p.target.parentElement.getAttribute('id').replace('STATUS_', '');
+            const target    = p.target.parentElement.getAttribute('id');
+            const status_id = target.replace('STATUS_', '');
+            const tasks     = document.getElementById(target).querySelectorAll(".TASK");
+            var   sorted    = [];
             //
-            console.log('TASK_MOVED', task_id, status_id);
+            tasks.forEach(function(task) {
+                sorted.push(task.getAttribute('id').replace('TASK_', ''));
+            });
+            sorted = sorted.join(':');
+            //
+            console.log('TASK_MOVED', task_id, status_id, sorted);
             //
             apex.server.process("UPDATE_TASK",
                 {
                     x01: task_id,
-                    x02: status_id
+                    x02: status_id,
+                    x03: sorted
                 },
                 {
                     dataType: 'text',
@@ -232,9 +241,9 @@ regions:
                   AND t.project_id    = :P0_PROJECT_ID
                   AND t.board_id      = :P0_BOARD_ID
                   AND t.status_id     = s.status_id
-              ORDER BY t.task_id
+              ORDER BY t.order# NULLS LAST, t.task_id
           ) LOOP
-              HTP.P('<div class="TASK" draggable="true" id="TASK_' || t.task_id || '">' || t.task_name || '</div>');
+              HTP.P('<div class="TASK" draggable="true" id="TASK_' || t.task_id || '">[' || t.task_id || '] ' || t.task_name || '</div>');
           END LOOP;
           --
           HTP.P('</div>');
@@ -562,7 +571,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
-      page: 105 # MODAL DIALOG TEMPLATE
+      page: 105 # New Task
       clear-cache: 105
 
     warn-on-unsaved-changes: Do Not Check

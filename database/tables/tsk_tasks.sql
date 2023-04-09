@@ -9,6 +9,7 @@ CREATE TABLE tsk_tasks (
     status_id                       VARCHAR2(32)    CONSTRAINT nn_tsk_tasks_status NOT NULL,
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
+    order#                          NUMBER(10,0),
     --
     CONSTRAINT pk_tsk_tasks
         PRIMARY KEY (task_id),
@@ -36,4 +37,5 @@ COMMENT ON COLUMN tsk_tasks.client_id       IS '';
 COMMENT ON COLUMN tsk_tasks.project_id      IS '';
 COMMENT ON COLUMN tsk_tasks.swimlane_id     IS '';
 COMMENT ON COLUMN tsk_tasks.status_id       IS '';
+COMMENT ON COLUMN tsk_tasks.order#          IS '';
 
