@@ -6,6 +6,7 @@ CREATE TABLE tsk_task_statuses (
     is_active                       CHAR(1),
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
+    order#                          NUMBER(4,0),
     --
     CONSTRAINT pk_tsk_status
         PRIMARY KEY (client_id, project_id, status_id),
@@ -28,4 +29,5 @@ COMMENT ON COLUMN tsk_task_statuses.status_name     IS '';
 COMMENT ON COLUMN tsk_task_statuses.client_id       IS '';
 COMMENT ON COLUMN tsk_task_statuses.project_id      IS '';
 COMMENT ON COLUMN tsk_task_statuses.is_active       IS '';
+COMMENT ON COLUMN tsk_task_statuses.order#          IS '';
 
