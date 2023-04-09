@@ -28,14 +28,14 @@ prompt APPLICATION 710 - Tasks
 -- Application Export:
 --   Application:     710
 --   Name:            Tasks
---   Date and Time:   17:30 Neděle Duben 9, 2023
+--   Date and Time:   18:08 Neděle Duben 9, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
 --     Pages:                      7
 --       Items:                   10
 --       Computations:             1
---       Processes:               13
+--       Processes:               14
 --       Regions:                 22
 --       Buttons:                  3
 --       Dynamic Actions:         13
@@ -14877,8 +14877,26 @@ wwv_flow_imp_page.create_page(
 '        task.classList.add("DRAGGING");',
 '    });',
 '    //',
-'    task.addEventListener("dragend", () => {',
+'    task.addEventListener("dragend", (p) => {',
 '        task.classList.remove("DRAGGING");',
+'        //',
+'        const task_id   = task.getAttribute(''id'').replace(''TASK_'', '''');',
+'        const status_id = p.target.parentElement.getAttribute(''id'').replace(''STATUS_'', '''');',
+'        //',
+'        console.log(''TASK_MOVED'', task_id, status_id);',
+'        //',
+'        apex.server.process("UPDATE_TASK",',
+'            {',
+'                x01: task_id,',
+'                x02: status_id',
+'            },',
+'            {',
+'                dataType: ''text'',',
+'                success: function(pData) {',
+'                    console.log(''RESULT'', pData);',
+'                }',
+'            }',
+'        );',
 '    });',
 '});',
 '',
@@ -14886,14 +14904,16 @@ wwv_flow_imp_page.create_page(
 '    zone.addEventListener("dragover", (e) => {',
 '        e.preventDefault();',
 '        //',
-'        const bottomTask = insertAboveTask(zone, e.clientY);',
-'        const curTask = document.querySelector(".DRAGGING");',
+'        const curr_task = document.querySelector(".DRAGGING");',
+'        const last_task = insertAboveTask(zone, e.clientY);',
 '        //',
-'        if (!bottomTask) {',
-'            zone.appendChild(curTask);',
+'        //console.log(''DRAGGING'', curr_task.getAttribute(''id''), zone.getAttribute(''id''));',
+'        //',
+'        if (!curr_task) {',
+'            zone.appendChild(curr_task);',
 '        }',
 '        else {',
-'            zone.insertBefore(curTask, bottomTask);',
+'            zone.insertBefore(curr_task, last_task);',
 '        }',
 '    });',
 '});',
@@ -14901,20 +14921,20 @@ wwv_flow_imp_page.create_page(
 'const insertAboveTask = (zone, mouseY) => {',
 '    const els = zone.querySelectorAll(".TASK:not(.DRAGGING)");',
 '    //',
-'    let closestTask   = null;',
-'    let closestOffset = Number.NEGATIVE_INFINITY;',
+'    let closest_task   = null;',
+'    let closest_offset = Number.NEGATIVE_INFINITY;',
 '    //',
 '    els.forEach((task) => {',
 '        const { top } = task.getBoundingClientRect();',
-'        const offset = mouseY - top;',
+'        const offset  = mouseY - top;',
 '        //',
-'        if (offset < 0 && offset > closestOffset) {',
-'            closestOffset = offset;',
-'            closestTask = task;',
+'        if (offset < 0 && offset > closest_offset) {',
+'            closest_offset = offset;',
+'            closest_task   = task;',
 '        }',
 '    });',
 '    //',
-'    return closestTask;',
+'    return closest_task;',
 '};',
 '',
 ''))
@@ -15006,7 +15026,7 @@ wwv_flow_imp_page.create_page_plug(
 '        AND s.project_id    = :P0_PROJECT_ID',
 '    ORDER BY s.order#',
 ') LOOP',
-'    HTP.P(''<div class="STATUS"><h3>'' || s.status_name || ''</h3>'');',
+'    HTP.P(''<div class="STATUS" id="STATUS_'' || s.status_id || ''"><h3>'' || s.status_name || ''</h3>'');',
 '    --',
 '    FOR t IN (',
 '        SELECT t.*',
@@ -15017,7 +15037,7 @@ wwv_flow_imp_page.create_page_plug(
 '            AND t.status_id     = s.status_id',
 '        ORDER BY t.task_id',
 '    ) LOOP',
-'        HTP.P(''<div class="TASK" draggable="true" data-id="'' || t.task_id || ''">'' || t.task_name || ''</div>'');',
+'        HTP.P(''<div class="TASK" draggable="true" id="TASK_'' || t.task_id || ''">'' || t.task_name || ''</div>'');',
 '    END LOOP;',
 '    --',
 '    HTP.P(''</div>'');',
@@ -15244,6 +15264,21 @@ wwv_flow_imp_page.create_page_process(
 ':P100_CLIENT_ID     := NVL(:P100_CLIENT_ID,     :P0_CLIENT_ID);',
 ':P100_PROJECT_ID    := NVL(:P100_PROJECT_ID,    :P0_PROJECT_ID);',
 ':P100_BOARD_ID      := NVL(:P100_BOARD_ID,      :P0_BOARD_ID);',
+''))
+,p_process_clob_language=>'PLSQL'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(34798564961743636)
+,p_process_sequence=>10
+,p_process_point=>'ON_DEMAND'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'UPDATE_TASK'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'UPDATE tsk_tasks t',
+'SET t.status_id = APEX_APPLICATION.G_X02',
+'WHERE t.task_id = APEX_APPLICATION.G_X01;',
+'--',
+'HTP.P(SQL%ROWCOUNT);',
 ''))
 ,p_process_clob_language=>'PLSQL'
 );
