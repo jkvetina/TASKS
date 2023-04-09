@@ -260,6 +260,8 @@ regions:
       primary-key: true
 
     default: 
+      type: Item
+      item: P0_CLIENT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -807,6 +809,8 @@ regions:
       primary-key: false
 
     default: 
+      type: Item
+      item: P0_CLIENT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -863,6 +867,8 @@ regions:
       primary-key: false
 
     default: 
+      type: Item
+      item: P0_PROJECT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -1253,7 +1259,7 @@ regions:
 
     default: 
       type: Item
-      item: P200_CLIENT_ID
+      item: P0_CLIENT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -1310,7 +1316,7 @@ regions:
 
     default: 
       type: Item
-      item: P200_PROJECT_ID
+      item: P0_PROJECT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -1916,7 +1922,7 @@ regions:
 
     default: 
       type: Item
-      item: P200_CLIENT_ID
+      item: P0_CLIENT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -1973,7 +1979,7 @@ regions:
 
     default: 
       type: Item
-      item: P200_PROJECT_ID
+      item: P0_PROJECT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -2180,266 +2186,6 @@ regions:
       font-color: '#000000'
       alignment: center
 
-- # ====== Region: Filters [F] =================================
-  id: 34747377206440346
-  identification: 
-    title: Filters [F]
-    type: Static Content
-
-  layout: 
-    sequence: 20
-    parent-region: No Parent
-    position: BODY
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Blank with Attributes # 70831193948975578
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: true
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: Filters =====================================
-  id: 34795056968743601
-  identification: 
-    title: Filters
-    type: Static Content
-
-  layout: 
-    sequence: 10
-    parent-region: No Parent
-    position: BODY
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Hero # 70864195177975601
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: true
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-page-items: 
-- # ====== Page Item: P200_CLIENT_ID ===========================
-  id: 34747507477440348
-  identification: 
-    name: P200_CLIENT_ID
-    type: Select List
-
-  label: 
-    label: Client Id
-    alignment: Left
-
-  settings: 
-    page-action-on-selection: None
-    allow-multi-selection: false
-
-  layout: 
-    sequence: 10
-    region: Filters [F] # 34747377206440346
-    position: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: 2
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating # 70967669576975668
-    template-options: 
-    - '#DEFAULT#'
-    height: 1
-
-  validation: 
-    value-required: false
-
-  list-of-values: 
-    type: Shared Component
-    list-of-values: LOV_CLIENTS # 34762829880497308
-    display-extra-values: true
-    display-null-value: true
-
-  advanced: 
-    warn-on-unsaved-changes: Ignore
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    storage: Per Session (Persistent)
-
-  quick-picks: 
-    show-quick-picks: false
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P200_PROJECT_ID ==========================
-  id: 34747637749440349
-  identification: 
-    name: P200_PROJECT_ID
-    type: Select List
-
-  label: 
-    label: Project Id
-    alignment: Left
-
-  settings: 
-    page-action-on-selection: None
-    allow-multi-selection: false
-
-  layout: 
-    sequence: 20
-    region: Filters [F] # 34747377206440346
-    position: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: true
-    column-span: 2
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating # 70967669576975668
-    template-options: 
-    - '#DEFAULT#'
-    height: 1
-
-  validation: 
-    value-required: false
-
-  list-of-values: 
-    type: Shared Component
-    list-of-values: LOV_PROJECTS # 34763034913500105
-    display-extra-values: true
-    display-null-value: true
-
-  advanced: 
-    warn-on-unsaved-changes: Ignore
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    storage: Per Session (Persistent)
-
-  quick-picks: 
-    show-quick-picks: false
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P200_BOARD_ID ============================
-  id: 34747749893440350
-  identification: 
-    name: P200_BOARD_ID
-    type: Select List
-
-  label: 
-    label: Board Id
-    alignment: Left
-
-  settings: 
-    page-action-on-selection: None
-    allow-multi-selection: false
-
-  layout: 
-    sequence: 30
-    region: Filters [F] # 34747377206440346
-    position: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: true
-    column-span: 2
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating # 70967669576975668
-    template-options: 
-    - '#DEFAULT#'
-    height: 1
-
-  validation: 
-    value-required: false
-
-  list-of-values: 
-    type: Shared Component
-    list-of-values: LOV_BOARDS # 34763544164505098
-    display-extra-values: true
-    display-null-value: true
-
-  advanced: 
-    warn-on-unsaved-changes: Ignore
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    storage: Per Session (Persistent)
-
-  quick-picks: 
-    show-quick-picks: false
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
-    restricted-characters: All characters can be saved.
-
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_CLIENT ======================
   id: 34795138149743602
@@ -2636,47 +2382,4 @@ processes:
 
   server-side-condition: 
     execution-scope: For Created and Modified Rows
-
-- # ====== Process: SET_FILTERS ================================
-  id: 34795300828743604
-  identification: 
-    name: SET_FILTERS
-    type: Execute Code
-
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: |
-      :P200_CLIENT_ID     := NVL(:P200_CLIENT_ID,     :P0_CLIENT_ID);
-      :P200_PROJECT_ID    := NVL(:P200_PROJECT_ID,    :P0_PROJECT_ID);
-      :P200_BOARD_ID      := NVL(:P200_BOARD_ID,      :P0_BOARD_ID);
-      
-
-  execution: 
-    sequence: 10
-    point: Before Header
-    run-process: Once Per Page Visit (default)
-
-- # ====== Process: SAVE_FILTERS ===============================
-  id: 34795427256743605
-  identification: 
-    name: SAVE_FILTERS
-    type: Execute Code
-
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: |
-      :P0_CLIENT_ID   := :P200_CLIENT_ID;
-      :P0_PROJECT_ID  := :P200_PROJECT_ID;
-      :P0_BOARD_ID    := :P200_BOARD_ID;
-      
-
-  execution: 
-    sequence: 10
-    point: After Submit
-    run-process: Once Per Page Visit (default)
-
-  error: 
-    display-location: Inline in Notification
 

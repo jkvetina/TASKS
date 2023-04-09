@@ -1,8 +1,8 @@
 ---
-# ====== Page: Home ==========================================
+# ====== Page: Tasks =========================================
 id: 100
 identification: 
-  name: Home
+  name: Tasks
   alias: HOME
   title: '&APP_NAME.'
   page-group: MAIN # 78949836938576475
@@ -38,7 +38,450 @@ advanced:
 server-cache: 
   caching: Disabled
 
+regions: 
+- # ====== Region: Tasks =======================================
+  id: 34744374076440316
+  identification: 
+    title: Tasks
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Tasks [CONTENT] =============================
+  id: 34744427648440317
+  identification: 
+    title: Tasks [CONTENT]
+    type: PL/SQL Dynamic Content [Legacy]
+
+  source: 
+    pl/sql-code: |
+      HTP.P('<div>');
+      HTP.P('</div>');
+      
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+- # ====== Region: Filters =====================================
+  id: 34797708668743628
+  identification: 
+    title: Filters
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Filters [F] =================================
+  id: 69652345538556693
+  identification: 
+    title: Filters [F]
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P100_CLIENT_ID ===========================
+  id: 34905220916116348
+  identification: 
+    name: P100_CLIENT_ID
+    type: Select List
+
+  label: 
+    label: Client Id
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 10
+    region: Filters [F] # 69652345538556693
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_CLIENTS # 34762829880497308
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_PROJECT_ID ==========================
+  id: 34905691081116349
+  identification: 
+    name: P100_PROJECT_ID
+    type: Select List
+
+  label: 
+    label: Project Id
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 20
+    region: Filters [F] # 69652345538556693
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_PROJECTS # 34763034913500105
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_BOARD_ID ============================
+  id: 34906072735116349
+  identification: 
+    name: P100_BOARD_ID
+    type: Select List
+
+  label: 
+    label: Board Id
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 30
+    region: Filters [F] # 69652345538556693
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_BOARDS # 34763544164505098
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
 dynamic-actions: 
+- # ====== Dynamic Action: CHANGED_PROJECT =====================
+  id: 34797895247743629
+  identification: 
+    name: CHANGED_PROJECT
+
+  execution: 
+    sequence: 50
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P100_PROJECT_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 34797941868743630
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 10
+      event: CHANGED_PROJECT # 34797895247743629
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: CHANGED_BOARD =======================
+  id: 34798017052743631
+  identification: 
+    name: CHANGED_BOARD
+
+  execution: 
+    sequence: 60
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P100_BOARD_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 34798178572743632
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 10
+      event: CHANGED_BOARD # 34798017052743631
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: CHANGED_CLIENT ======================
+  id: 34906414430118509
+  identification: 
+    name: CHANGED_CLIENT
+
+  execution: 
+    sequence: 40
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P100_CLIENT_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 34906818783118510
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 10
+      event: CHANGED_CLIENT # 34906414430118509
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
 - # ====== Dynamic Action: CHANGED_SET =========================
   id: 84772908433020013
   identification: 
@@ -137,4 +580,48 @@ dynamic-actions:
       event: CHANGED_SECTION # 84773457777020019
       fire-when-event-result-is: True
       fire-on-initialization: false
+
+processes: 
+- # ====== Process: SAVE_FILTERS ===============================
+  id: 34907319414119830
+  identification: 
+    name: SAVE_FILTERS
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      :P0_CLIENT_ID   := :P100_CLIENT_ID;
+      :P0_PROJECT_ID  := :P100_PROJECT_ID;
+      :P0_BOARD_ID    := :P100_BOARD_ID;
+      
+
+  execution: 
+    sequence: 10
+    point: After Submit
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: SET_FILTERS ================================
+  id: 34910738304127684
+  identification: 
+    name: SET_FILTERS
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      :P100_CLIENT_ID     := NVL(:P100_CLIENT_ID,     :P0_CLIENT_ID);
+      :P100_PROJECT_ID    := NVL(:P100_PROJECT_ID,    :P0_PROJECT_ID);
+      :P100_BOARD_ID      := NVL(:P100_BOARD_ID,      :P0_BOARD_ID);
+      
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
 
