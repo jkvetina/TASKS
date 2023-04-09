@@ -53,6 +53,7 @@ wwv_flow_imp_page.create_page(
 '                dataType: ''text'',',
 '                success: function(pData) {',
 '                    console.log(''RESULT'', pData);',
+'                    apex.message.showPageSuccess(pData);',
 '                }',
 '            }',
 '        );',
@@ -434,11 +435,26 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'UPDATE_TASK'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'-- update task status (column)',
 'UPDATE tsk_tasks t',
 'SET t.status_id = APEX_APPLICATION.G_X02',
 'WHERE t.task_id = APEX_APPLICATION.G_X01;',
 '--',
-'HTP.P(SQL%ROWCOUNT);',
+'IF SQL%ROWCOUNT = 1 THEN',
+'    HTP.P(''Task '' || APEX_APPLICATION.G_X01 || '' updated'');',
+'END IF;',
+'',
+'-- update order of tasks in column',
+'FOR s IN (',
+'    SELECT /*+ MATERIALIZE */',
+'        COLUMN_VALUE    AS task_id,',
+'        ROWNUM * 10     AS order#',
+'    FROM APEX_STRING.SPLIT(APEX_APPLICATION.G_X03, '':'')',
+') LOOP',
+'    UPDATE tsk_tasks t',
+'    SET t.order#    = s.order#',
+'    WHERE t.task_id = s.task_id;',
+'END LOOP;',
 ''))
 ,p_process_clob_language=>'PLSQL'
 );
