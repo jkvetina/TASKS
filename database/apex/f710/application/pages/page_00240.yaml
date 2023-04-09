@@ -5,6 +5,7 @@ identification:
   name: Tasks [RAW]
   alias: TASKS-RAW
   title: Tasks [RAW]
+  page-group: ADMIN # 78950012693576929
 
 appearance: 
   page-mode: Normal
@@ -20,6 +21,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
+  authorization-scheme: MASTER - IS_USER # 71258645843174377
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -708,6 +710,53 @@ regions:
     layout: 
       sequence: 10
 
+  - # ====== Column: ORDER# ======================================
+    id: 34798628073743637
+    identification: 
+      column-name: ORDER#
+      type: Number Field
+
+    heading: 
+      heading: Order#
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 140
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ORDER#
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   printing: 
     page: 
       size: Letter
@@ -746,6 +795,39 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
+
+buttons: 
+- # ====== Button: ADD_TASK ====================================
+  id: 34955570551090803
+  identification: 
+    button-name: ADD_TASK
+    label: Add Task
+
+  layout: 
+    sequence: 10
+    region: Tasks # 34796175637743612
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-plus
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
+      page: 105 # New Task
+      clear-cache: 105
+
+    warn-on-unsaved-changes: Do Not Check
 
 processes: 
 - # ====== Process: SAVE_TASKS =================================

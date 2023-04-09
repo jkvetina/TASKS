@@ -1,10 +1,11 @@
 ---
-# ====== Page: MODAL DIALOG TEMPLATE =========================
+# ====== Page: New Task ======================================
 id: 105
 identification: 
-  name: MODAL DIALOG TEMPLATE
-  alias: MODAL-DIALOG-TEMPLATE
-  title: MODAL DIALOG TEMPLATE
+  name: New Task
+  alias: NEW-TASK
+  title: New Task
+  page-group: MAIN # 78949836938576475
 
 appearance: 
   page-mode: Modal Dialog
@@ -23,6 +24,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
+  authorization-scheme: MASTER - IS_USER # 71258645843174377
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -81,11 +83,18 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: CONTENT =====================================
+- # ====== Region: [FORM] ======================================
   id: 63213536180844591
   identification: 
-    title: CONTENT
-    type: Static Content
+    title: '[FORM]'
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_TASKS
+    include-rowid-column: false
 
   layout: 
     sequence: 20
@@ -118,11 +127,555 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
 
 page-items: 
+- # ====== Page Item: P105_TASK_ID =============================
+  id: 34798917102743640
+  identification: 
+    name: P105_TASK_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: TASK_ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: true
+
+  default: 
+    type: Sequence
+    sequence: TSK_TASK_ID
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_TASK_NAME ===========================
+  id: 34799008594743641
+  identification: 
+    name: P105_TASK_NAME
+    type: Text Field
+
+  label: 
+    label: Task Name
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 20
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: true
+    maximum-length: 64
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: TASK_NAME
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_TASK_DESC ===========================
+  id: 34799148806743642
+  identification: 
+    name: P105_TASK_DESC
+    type: Textarea
+
+  label: 
+    label: Task Desc
+    alignment: Left
+
+  settings: 
+    resizable: true
+    auto-height: false
+    character-counter: false
+    trim-spaces: Leading and Trailing
+
+  layout: 
+    sequence: 30
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+    height: 5
+
+  validation: 
+    value-required: false
+    maximum-length: 4000
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: TASK_DESC
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_BOARD_ID ============================
+  id: 34799227459743643
+  identification: 
+    name: P105_BOARD_ID
+    type: Select List
+
+  label: 
+    label: Board Id
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 80
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_BOARDS # 34763544164505098
+    display-extra-values: true
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: BOARD_ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_CLIENT_ID ===========================
+  id: 34799302370743644
+  identification: 
+    name: P105_CLIENT_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: CLIENT_ID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  default: 
+    type: Item
+    item: P0_CLIENT_ID
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_PROJECT_ID ==========================
+  id: 34799438673743645
+  identification: 
+    name: P105_PROJECT_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: PROJECT_ID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  default: 
+    type: Item
+    item: P0_PROJECT_ID
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_SWIMLANE_ID =========================
+  id: 34799532575743646
+  identification: 
+    name: P105_SWIMLANE_ID
+    type: Select List
+
+  label: 
+    label: Swimlane Id
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 70
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_TASK_SWIMLANES # 34920402511183578
+    display-extra-values: true
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: SWIMLANE_ID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_STATUS_ID ===========================
+  id: 34799683532743647
+  identification: 
+    name: P105_STATUS_ID
+    type: Select List
+
+  label: 
+    label: Status Id
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 60
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_TASK_STATUSES # 34920754342188100
+    display-extra-values: true
+    display-null-value: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: STATUS_ID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_UPDATED_BY ==========================
+  id: 34799770741743648
+  identification: 
+    name: P105_UPDATED_BY
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 100
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: UPDATED_BY
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_UPDATED_AT ==========================
+  id: 34799818186743649
+  identification: 
+    name: P105_UPDATED_AT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 110
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: UPDATED_AT
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_ORDER_H =============================
+  id: 34799957644743650
+  identification: 
+    name: P105_ORDER_H
+    type: Number Field
+
+  label: 
+    label: Order#
+    alignment: Left
+
+  settings: 
+    number-alignment: Start
+    virtual-keyboard: Decimal
+
+  layout: 
+    sequence: 90
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: ORDER#
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
 - # ====== Page Item: P105_HEADER ==============================
   id: 63213944180844595
   identification: 
@@ -154,6 +707,36 @@ page-items:
     restricted-characters: All characters can be saved.
 
 buttons: 
+- # ====== Button: CREATE_TASK =================================
+  id: 34798797839743638
+  identification: 
+    button-name: CREATE_TASK
+    label: Create Task
+
+  layout: 
+    sequence: 10
+    region: '[FORM]' # 63213536180844591
+    position: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
 - # ====== Button: CLOSE_DIALOG ================================
   id: 63213580209844592
   identification: 
@@ -230,4 +813,81 @@ computations:
       FROM apex_application_pages p
       WHERE p.application_id  = :APP_ID
           AND p.page_id       = :APP_PAGE_ID;
+
+processes: 
+- # ====== Process: INIT_FORM ==================================
+  id: 34798826412743639
+  identification: 
+    name: INIT_FORM
+    type: Form - Initialization
+    form-region: '[FORM]' # 63213536180844591
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: SAVE_FORM ==================================
+  id: 34949211976065802
+  identification: 
+    name: SAVE_FORM
+    type: Form - Automatic Row Processing (DML)
+    form-region: '[FORM]' # 63213536180844591
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: No
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: INIT_DEFAULTS ==============================
+  id: 34954117428067239
+  identification: 
+    name: INIT_DEFAULTS
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      :P105_CLIENT_ID     := NVL(:P105_CLIENT_ID,     :P0_CLIENT_ID);
+      :P105_PROJECT_ID    := NVL(:P105_PROJECT_ID,    :P0_PROJECT_ID);
+      :P105_BOARD_ID      := NVL(:P105_BOARD_ID,      :P0_BOARD_ID);
+      
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: SAVE_FILTERS ===============================
+  id: 34956155001097869
+  identification: 
+    name: SAVE_FILTERS
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      :P105_CLIENT_ID   := NVL(:P105_CLIENT_ID, :P0_CLIENT_ID);
+      :P105_PROJECT_ID  := NVL(:P105_PROJECT_ID, :P0_PROJECT_ID);
+      :P105_BOARD_ID    := NVL(:P105_BOARD_ID, :P0_BOARD_ID);
+      
+
+  execution: 
+    sequence: 30
+    point: After Submit
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
 

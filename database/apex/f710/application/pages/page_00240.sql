@@ -17,7 +17,9 @@ wwv_flow_imp_page.create_page(
 ,p_alias=>'TASKS-RAW'
 ,p_step_title=>'Tasks [RAW]'
 ,p_autocomplete_on_off=>'OFF'
+,p_group_id=>wwv_flow_imp.id(78950012693576929)  -- ADMIN
 ,p_page_template_options=>'#DEFAULT#'
+,p_required_role=>wwv_flow_imp.id(71258645843174377)  -- MASTER - IS_USER
 ,p_protection_level=>'C'
 ,p_page_component_map=>'21'
 ,p_last_updated_by=>'DEV'
@@ -368,6 +370,32 @@ wwv_flow_imp_page.create_region_column(
 ,p_attribute_02=>'Y'
 ,p_attribute_03=>'N'
 );
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(34798628073743637)
+,p_name=>'ORDER#'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'ORDER#'
+,p_data_type=>'NUMBER'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_NUMBER_FIELD'
+,p_heading=>'Order#'
+,p_heading_alignment=>'RIGHT'
+,p_display_sequence=>140
+,p_value_alignment=>'RIGHT'
+,p_attribute_03=>'left'
+,p_attribute_04=>'decimal'
+,p_is_required=>false
+,p_enable_filter=>true
+,p_filter_is_required=>false
+,p_filter_lov_type=>'NONE'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>true
+,p_enable_control_break=>true
+,p_enable_hide=>true
+,p_is_primary_key=>false
+,p_duplicate_value=>true
+,p_include_in_export=>true
+);
 wwv_flow_imp_page.create_interactive_grid(
  p_id=>wwv_flow_imp.id(34796329092743614)
 ,p_internal_uid=>34796329092743614
@@ -500,6 +528,30 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_column_id=>wwv_flow_imp.id(34797429050743625)
 ,p_is_visible=>true
 ,p_is_frozen=>true
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(34938635948862474)
+,p_view_id=>wwv_flow_imp.id(34893100587109583)
+,p_display_seq=>12
+,p_column_id=>wwv_flow_imp.id(34798628073743637)
+,p_is_visible=>true
+,p_is_frozen=>false
+,p_sort_order=>1
+,p_sort_direction=>'ASC'
+,p_sort_nulls=>'LAST'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(34955570551090803)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(34796175637743612)
+,p_button_name=>'ADD_TASK'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
+,p_button_image_alt=>'Add Task'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_button_redirect_url=>'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
+,p_icon_css_classes=>'fa-plus'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34797614473743627)
