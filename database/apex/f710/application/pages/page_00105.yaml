@@ -737,6 +737,85 @@ buttons:
     warn-on-unsaved-changes: Do Not Check
     database-action: SQL INSERT action
 
+  server-side-condition: 
+    type: Item is NULL
+    item: P105_TASK_ID
+
+- # ====== Button: UPDATE_TASK =================================
+  id: 34949339576065803
+  identification: 
+    button-name: UPDATE_TASK
+    label: Update Task
+
+  layout: 
+    sequence: 20
+    region: '[FORM]' # 63213536180844591
+    position: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
+
+- # ====== Button: DELETE_TASK =================================
+  id: 34949592599065805
+  identification: 
+    button-name: DELETE_TASK
+    label: Delete Task
+
+  layout: 
+    sequence: 30
+    region: '[FORM]' # 63213536180844591
+    position: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+    icon: fa-trash-o
+
+  behavior: 
+    action: Submit Page
+    execute-validations: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL DELETE action
+
+  advanced: 
+    custom-attributes: 
+    - 'style="margin-right:'
+    - 0.5rem
+    - '!important;"'
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
+
 - # ====== Button: CLOSE_DIALOG ================================
   id: 63213580209844592
   identification: 
@@ -798,6 +877,23 @@ dynamic-actions:
 
 computations: 
 - # ====== Computation: P105_HEADER ============================
+  id: 34949428946065804
+  identification: 
+    item-name: P105_HEADER
+
+  execution: 
+    sequence: 20
+    point: Before Regions
+
+  computation: 
+    type: Static Value
+    static-value: Update Task
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
+
+- # ====== Computation: P105_HEADER ============================
   id: 63214052740844596
   identification: 
     item-name: P105_HEADER
@@ -813,6 +909,10 @@ computations:
       FROM apex_application_pages p
       WHERE p.application_id  = :APP_ID
           AND p.page_id       = :APP_PAGE_ID;
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P105_TASK_ID
 
 processes: 
 - # ====== Process: INIT_FORM ==================================
@@ -842,6 +942,20 @@ processes:
 
   execution: 
     sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: CLOSE_MODAL ================================
+  id: 34949717657065807
+  identification: 
+    name: CLOSE_MODAL
+    type: Close Dialog
+
+  execution: 
+    sequence: 20
     point: Processing
     run-process: Once Per Page Visit (default)
 
