@@ -110,8 +110,9 @@ css:
     }
     
     .BOARD h3 {
-      padding: 0rem 1rem;
-      font-size: 1rem;
+      margin            : 0.5rem 0.7rem;
+      padding           : 0;
+      font-size         : 1rem;
     }
     
     .COLUMNS {
@@ -130,15 +131,15 @@ css:
       min-height        : 0px;
       flex-direction    : column;
       flex-shrink       : 0;
-      gap               : 1rem;
-      box-shadow        : 0px 5px 15px rgba(0, 0, 0, 0.25);
+      gap               : 0.5rem;
+      box-shadow        : 0px 5px 10px rgba(0, 0, 0, 0.15);
       padding           : 0.5rem;
-      border-radius     : 4px;
-      background        : #f4f4f4;
+      border-radius     : 5px;
+      background        : #f9f9f9;
     }
     
     .TASK {
-      box-shadow        : 0px 5px 15px rgba(0, 0, 0, 0.15);
+      box-shadow        : 0px 5px 10px rgba(0, 0, 0, 0.10);
       padding           : 1rem;
       border-radius     : 4px;
       cursor            : move;
