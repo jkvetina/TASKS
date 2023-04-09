@@ -1,0 +1,42 @@
+---
+- # ====== Authentication: MASTER - APEX_ACCOUNTS ==============
+  id: 71254896610086700
+  identification: 
+    name: MASTER - APEX_ACCOUNTS
+
+  subscription: 
+    master: 
+      app: 705 # MASTER
+      referenced-id: 37901138623322271 # APEX_ACCOUNTS
+
+  settings: 
+    type: Oracle APEX Accounts
+
+  session-not-valid: 
+    redirect-to: Login Page
+
+  login-processing: 
+    switch-in-session: false
+
+  real-application-security: 
+    ras-mode: Disabled
+
+- # ====== Authentication: MASTER - OPEN_DOOR (TESTING ONLY) ===
+  id: 71255099014086701
+  identification: 
+    name: MASTER - OPEN_DOOR (TESTING ONLY)
+
+  subscription: 
+    master: 
+      app: 705 # MASTER
+      referenced-id: 38115413754324720 # OPEN_DOOR (TESTING ONLY)
+
+  settings: 
+    type: Open Door Credentials
+
+  login-processing: 
+    switch-in-session: false
+
+  real-application-security: 
+    ras-mode: Disabled
+

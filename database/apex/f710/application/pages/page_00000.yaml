@@ -1,0 +1,148 @@
+---
+# ====== Page: Global Page ===================================
+id: 0
+identification: 
+  name: Global Page
+
+regions: 
+- # ====== Region: JS ==========================================
+  id: 84937722349740906
+  identification: 
+    title: JS
+    type: Static Content
+
+  source: 
+    html-code: |
+      <script>
+      
+      //
+      // WAIT FOR ELEMENT TO EXIST
+      //
+      var wait_for_element = function(search, start, fn, disconnect) {
+          var ob  = new MutationObserver(function(mutations) {
+              if ($(search).length) {
+                  fn(search, start);
+                  if (disconnect) {
+                      observer.disconnect();  // keep observing
+                  }
+              }
+          });
+          //
+          ob.observe(document.getElementById(start), {
+              childList: true,
+              subtree: true
+          });
+      };
+      
+      //
+      // HIDE SUCCESS MESSAGE
+      //
+      var hide_success_message = function(search, start) {
+          var $start = $('#' + start);
+          //
+          setTimeout(function() {
+              apex.message.hidePageSuccess();  // hide message
+              var content = $start.text().trim();
+              if (content.length) {
+                  console.log('MESSAGE CLOSED:', content);
+              }
+              $start.html('').removeClass('u-visible');  // clean APEX mess
+          }, 2000);
+      };
+      
+      </script>
+      
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    position: BEFORE_FOOTER
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: CSS =========================================
+  id: 99337972662899178
+  identification: 
+    title: CSS
+    type: Static Content
+
+  source: 
+    html-code: |
+      <style>
+      
+      ul.DASH_LIST {
+        list-style-type: none;
+        margin: 0.5rem 0 0.5rem 3rem;
+      }
+      ul.DASH_LIST li:before {
+        content: '\2014';
+        position: absolute;
+        margin: 0 3rem 0 -1.5rem;
+      }
+      
+      </style>
+      
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    position: BEFORE_FOOTER
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+

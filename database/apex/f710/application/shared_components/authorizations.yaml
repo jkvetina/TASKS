@@ -1,0 +1,66 @@
+---
+- # ====== Authorization: MASTER - NOBODY ======================
+  id: 64431223403362138
+  identification: 
+    name: MASTER - NOBODY
+
+  subscription: 
+    master: 
+      app: 705 # MASTER
+      referenced-id: 29735378348651510 # NOBODY
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: RETURN FALSE;
+
+  server-cache: 
+    evaluation-point: Once per Session
+
+- # ====== Authorization: MASTER - IS_ADMIN ====================
+  id: 71258399003174376
+  identification: 
+    name: MASTER - IS_ADMIN
+
+  subscription: 
+    master: 
+      app: 705 # MASTER
+      referenced-id: 38537511032053456 # IS_ADMIN
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: RETURN FALSE;
+
+  server-cache: 
+    evaluation-point: Once per Page View
+
+  error: 
+    error-message: ACCESS_DENIED|ADMIN
+
+- # ====== Authorization: MASTER - IS_USER =====================
+  id: 71258645843174377
+  identification: 
+    name: MASTER - IS_USER
+
+  subscription: 
+    master: 
+      app: 705 # MASTER
+      referenced-id: 18075374317600391 # IS_USER
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: |
+      --selct .... app_id = :APP_ID and user = :APP_USER
+      RETURN TRUE;
+
+  server-cache: 
+    evaluation-point: Once per Page View
+
+  error: 
+    error-message: ACCESS_DENIED|USER
+

@@ -1,0 +1,45 @@
+---
+- # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
+  id: 54624749962706655
+  identification: 
+    name: MASTER - LOV_APPLICATIONS
+
+  subscription: 
+    master: 
+      app: 705 # MASTER
+      referenced-id: 9887859263442428 # LOV_APPLICATIONS
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: INT_P100_APPS_V
+
+  column-mapping: 
+    return: APP_ID
+    display: APPLICATION_NAME
+    default-sort: APPLICATION_NAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: MASTER - LOV_USERS ==================
+  id: 54625088629706656
+  identification: 
+    name: MASTER - LOV_USERS
+
+  subscription: 
+    master: 
+      app: 705 # MASTER
+      referenced-id: 18781697091885858 # LOV_USERS
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: INT_USERS
+
+  column-mapping: 
+    return: USER_ID
+    display: USER_NAME
+    default-sort: USER_NAME
+    sort-direction: Ascending (Nulls Last)
+

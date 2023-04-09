@@ -1,0 +1,106 @@
+---
+- # ====== Region Template: Alert ==============================
+  id: 70826035334975573
+  identification: 
+    name: Alert
+
+- # ====== Region Template: Blank with Attributes ==============
+  id: 70831193948975578
+  identification: 
+    name: Blank with Attributes
+
+- # ====== Region Template: Blank with Attributes (No Grid) ====
+  id: 70832601486975579
+  identification: 
+    name: Blank with Attributes (No Grid)
+
+- # ====== Region Template: Buttons Container ==================
+  id: 70834050394975582
+  identification: 
+    name: Buttons Container
+
+- # ====== Region Template: Cards Container ====================
+  id: 70838329605975585
+  identification: 
+    name: Cards Container
+
+- # ====== Region Template: Carousel Container =================
+  id: 70840247134975586
+  identification: 
+    name: Carousel Container
+
+- # ====== Region Template: Collapsible ========================
+  id: 70850135694975593
+  identification: 
+    name: Collapsible
+
+- # ====== Region Template: Content Block ======================
+  id: 70859643613975598
+  identification: 
+    name: Content Block
+
+- # ====== Region Template: Hero ===============================
+  id: 70864195177975601
+  identification: 
+    name: Hero
+
+- # ====== Region Template: Image ==============================
+  id: 70867419047975604
+  identification: 
+    name: Image
+
+- # ====== Region Template: Inline Dialog ======================
+  id: 70872863691975607
+  identification: 
+    name: Inline Dialog
+
+- # ====== Region Template: Inline Drawer ======================
+  id: 70877401776975609
+  identification: 
+    name: Inline Drawer
+
+- # ====== Region Template: Inline Popup =======================
+  id: 70881997340975612
+  identification: 
+    name: Inline Popup
+
+- # ====== Region Template: Interactive Report =================
+  id: 70887424081975615
+  identification: 
+    name: Interactive Report
+
+- # ====== Region Template: Item Container =====================
+  id: 70889556098975616
+  identification: 
+    name: Item Container
+
+- # ====== Region Template: Login ==============================
+  id: 70892025912975617
+  identification: 
+    name: Login
+
+- # ====== Region Template: Search Results Container ===========
+  id: 70894488545975619
+  identification: 
+    name: Search Results Container
+
+- # ====== Region Template: Standard ===========================
+  id: 70897202010975620
+  identification: 
+    name: Standard
+
+- # ====== Region Template: Tabs Container =====================
+  id: 70907050579975626
+  identification: 
+    name: Tabs Container
+
+- # ====== Region Template: Title Bar ==========================
+  id: 70909645866975627
+  identification: 
+    name: Title Bar
+
+- # ====== Region Template: Wizard Container ===================
+  id: 70914467541975630
+  identification: 
+    name: Wizard Container
+
