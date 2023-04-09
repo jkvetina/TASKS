@@ -54,6 +54,46 @@
     default-sort: BOARD_NAME
     sort-direction: Ascending (Nulls Last)
 
+- # ====== List of Values: LOV_TASK_SWIMLANES ==================
+  id: 34920402511183578
+  identification: 
+    name: LOV_TASK_SWIMLANES
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_TASK_SWIMLANES
+    where-clause: |
+      client_id = :P0_CLIENT_ID
+      AND project_id = :P0_PROJECT_ID
+
+  column-mapping: 
+    return: SWIMLANE_ID
+    display: SWIMLANE_NAME
+    default-sort: ORDER#
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: LOV_TASK_STATUSES ===================
+  id: 34920754342188100
+  identification: 
+    name: LOV_TASK_STATUSES
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_TASK_STATUSES
+    where-clause: |
+      client_id = :P0_CLIENT_ID
+      AND project_id = :P0_PROJECT_ID
+
+  column-mapping: 
+    return: STATUS_ID
+    display: STATUS_NAME
+    default-sort: ORDER#
+    sort-direction: Ascending (Nulls Last)
+
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
   id: 54624749962706655
   identification: 

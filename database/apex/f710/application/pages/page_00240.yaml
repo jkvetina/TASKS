@@ -509,15 +509,11 @@ regions:
     id: 34797046336743621
     identification: 
       column-name: SWIMLANE_ID
-      type: Text Field
+      type: Select List
 
     heading: 
       heading: Swimlane Id
       alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
 
     layout: 
       sequence: 100
@@ -529,7 +525,12 @@ regions:
 
     validation: 
       value-required: true
-      maximum-length: 32
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_TASK_SWIMLANES # 34920402511183578
+      display-extra-values: true
+      display-null-value: true
 
     source: 
       type: Database Column
@@ -549,7 +550,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 
@@ -564,18 +565,14 @@ regions:
     id: 34797137288743622
     identification: 
       column-name: STATUS_ID
-      type: Text Field
+      type: Select List
 
     heading: 
       heading: Status Id
       alignment: start
 
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
     layout: 
-      sequence: 110
+      sequence: 90
       column-alignment: start
       stretch: Use Report Setting
 
@@ -584,7 +581,12 @@ regions:
 
     validation: 
       value-required: true
-      maximum-length: 32
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_TASK_STATUSES # 34920754342188100
+      display-extra-values: true
+      display-null-value: true
 
     source: 
       type: Database Column
@@ -604,7 +606,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 

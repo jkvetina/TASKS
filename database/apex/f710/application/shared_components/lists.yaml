@@ -77,7 +77,7 @@
     link: 
       target: 
         url: 'f?p=&APP_ID.:200:&SESSION.::&DEBUG.:200:::'
-        page: 200 # Quick Administration
+        page: 200 # Projects, Boards...
         clear-cache: 200
 
     click-counting: 

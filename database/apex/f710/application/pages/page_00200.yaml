@@ -1,10 +1,10 @@
 ---
-# ====== Page: Quick Administration ==========================
+# ====== Page: Projects, Boards... ===========================
 id: 200
 identification: 
-  name: Quick Administration
-  alias: QUICK-ADMINISTRATION
-  title: Quick Administration
+  name: Projects, Boards...
+  alias: PROJECTS
+  title: Projects, Boards...
   page-group: MAIN # 78949836938576475
 
 appearance: 
@@ -400,14 +400,15 @@ regions:
 
     heading: 
       heading: Is Active
-      alignment: start
+      alignment: center
 
     settings: 
-      use-defaults: true
+      use-defaults: false
+      checked-value: Y
 
     layout: 
       sequence: 60
-      column-alignment: start
+      column-alignment: center
       stretch: Use Report Setting
 
     accessibility: 
@@ -1242,7 +1243,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
 
     list-of-values: 
       type: Shared Component
@@ -1299,7 +1300,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
 
     list-of-values: 
       type: Shared Component
@@ -1484,7 +1485,8 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
+      maximum-length: 32
 
     source: 
       type: Database Column
@@ -1591,6 +1593,53 @@ regions:
 
     layout: 
       sequence: 10
+
+  - # ====== Column: ORDER# ======================================
+    id: 34798273454743633
+    identification: 
+      column-name: ORDER#
+      type: Number Field
+
+    heading: 
+      heading: Order#
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 100
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ORDER#
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
 
   printing: 
     page: 
@@ -1801,7 +1850,8 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
+      maximum-length: 32
 
     source: 
       type: Database Column
@@ -1905,7 +1955,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
 
     list-of-values: 
       type: Shared Component
@@ -1962,7 +2012,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
 
     list-of-values: 
       type: Shared Component
@@ -2146,6 +2196,53 @@ regions:
 
     layout: 
       sequence: 10
+
+  - # ====== Column: ORDER# ======================================
+    id: 34798370759743634
+    identification: 
+      column-name: ORDER#
+      type: Number Field
+
+    heading: 
+      heading: Order#
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 110
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ORDER#
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
 
   printing: 
     page: 
