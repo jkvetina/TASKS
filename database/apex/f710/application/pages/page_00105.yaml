@@ -14,6 +14,7 @@ appearance:
   - '#DEFAULT#'
 
 dialog: 
+  width: 1024
   chained: true
 
 navigation-menu: 
@@ -22,6 +23,13 @@ navigation-menu:
 navigation: 
   cursor-focus: Do not focus cursor
   warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    #P105_TASK_DESC_CONTAINER > .t-Form-labelContainer {
+      display: none;
+    }
+    
 
 security: 
   authorization-scheme: MASTER - IS_USER # 71258645843174377
@@ -42,6 +50,430 @@ server-cache:
   caching: Disabled
 
 regions: 
+- # ====== Region: Checklist ===================================
+  id: 34949826771065808
+  identification: 
+    title: Checklist
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    - margin-top-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Comments ====================================
+  id: 34949992362065809
+  identification: 
+    title: Comments
+    type: Static Content
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    - margin-top-lg
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Checklist [LIST] ============================
+  id: 34950084031065810
+  identification: 
+    title: Checklist [LIST]
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_TASK_CHECKLIST
+    include-rowid-column: false
+    where-clause: 'task_id = :P105_TASK_ID'
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report # 70887424081975615
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: CHECKLIST
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 34950121876065811
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+      add-row-if-empty: false
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      select-first-row: false
+      fixed-row-height: true
+
+    pagination: 
+      type: Scroll
+      show-total-row-count: true
+
+    toolbar: 
+      show: false
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: false
+      define-chart-view: false
+      download: false
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 34970106412433080
+      identification: 
+        name: Primary Report
+        alias: 349702
+
+  columns: 
+  - # ====== Column: TASK_ID =====================================
+    id: 34950231038065812
+    identification: 
+      column-name: TASK_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 30
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: TASK_ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      type: Item
+      item: P105_TASK_ID
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: CHECKLIST_ID ================================
+    id: 34950331839065813
+    identification: 
+      column-name: CHECKLIST_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 40
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: CHECKLIST_ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: true
+
+    default: 
+      type: Sequence
+      sequence: TSK_CHECKLIST_ID
+      duplicate-copies-existing-value: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: CHECKLIST_ITEM ==============================
+    id: 34950476563065814
+    identification: 
+      column-name: CHECKLIST_ITEM
+      type: Text Field
+
+    heading: 
+      heading: Checklist Item
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 256
+
+    source: 
+      type: Database Column
+      database-column: CHECKLIST_ITEM
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: CHECKLIST_DONE ==============================
+    id: 34950592976065815
+    identification: 
+      column-name: CHECKLIST_DONE
+      type: Checkbox
+
+    heading: 
+      heading: Done
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 60
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: CHECKLIST_DONE
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: UPDATED_BY ==================================
+    id: 34950669329065816
+    identification: 
+      column-name: UPDATED_BY
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 70
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: UPDATED_BY
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: UPDATED_AT ==================================
+    id: 34950711939065817
+    identification: 
+      column-name: UPDATED_AT
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 80
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: UPDATED_AT
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
 - # ====== Region: &P105_HEADER. ===============================
   id: 63213380867844590
   identification: 
@@ -199,7 +631,7 @@ page-items:
     start-new-row: true
     column: Automatic
     new-column: true
-    column-span: Automatic
+    column-span: 8
     label-column-span: Page Template Default
 
   appearance: 
@@ -237,17 +669,15 @@ page-items:
   id: 34799148806743642
   identification: 
     name: P105_TASK_DESC
-    type: Textarea
+    type: Markdown Editor
 
   label: 
     label: Task Desc
     alignment: Left
 
   settings: 
-    resizable: true
-    auto-height: false
-    character-counter: false
-    trim-spaces: Leading and Trailing
+    toolbar: Full
+    syntax-highlighting: true
 
   layout: 
     sequence: 30
@@ -255,9 +685,9 @@ page-items:
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
-    new-column: true
+    new-column: false
     column-span: Automatic
     label-column-span: Page Template Default
 
@@ -265,12 +695,9 @@ page-items:
     template: Optional - Floating # 70967669576975668
     template-options: 
     - '#DEFAULT#'
-    width: 30
-    height: 5
 
   validation: 
     value-required: false
-    maximum-length: 4000
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -285,9 +712,6 @@ page-items:
   session-state: 
     data-type: VARCHAR2
     storage: Per Request (Memory Only)
-
-  quick-picks: 
-    show-quick-picks: false
 
   security: 
     session-state-protection: Unrestricted
@@ -309,12 +733,12 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 80
+    sequence: 40
     region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -366,7 +790,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 40
+    sequence: 70
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -403,7 +827,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 50
+    sequence: 80
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -445,14 +869,14 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 70
+    sequence: 60
     region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: false
     column: Automatic
-    new-column: true
+    new-column: false
     column-span: Automatic
     label-column-span: Page Template Default
 
@@ -507,14 +931,14 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 60
+    sequence: 50
     region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
-    new-column: true
+    new-column: false
     column-span: Automatic
     label-column-span: Page Template Default
 
@@ -564,7 +988,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 100
+    sequence: 110
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -597,7 +1021,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 110
+    sequence: 120
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -624,36 +1048,15 @@ page-items:
   id: 34799957644743650
   identification: 
     name: P105_ORDER_H
-    type: Number Field
-
-  label: 
-    label: Order#
-    alignment: Left
+    type: Hidden
 
   settings: 
-    number-alignment: Start
-    virtual-keyboard: Decimal
+    value-protected: true
 
   layout: 
-    sequence: 90
+    sequence: 100
     region: '[FORM]' # 63213536180844591
     position: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating # 70967669576975668
-    template-options: 
-    - '#DEFAULT#'
-    width: 30
-
-  validation: 
-    value-required: false
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -666,10 +1069,8 @@ page-items:
     primary-key: false
 
   session-state: 
+    data-type: VARCHAR2
     storage: Per Request (Memory Only)
-
-  quick-picks: 
-    show-quick-picks: false
 
   security: 
     session-state-protection: Unrestricted
@@ -816,6 +1217,33 @@ buttons:
     type: Item is NOT NULL
     item: P105_TASK_ID
 
+- # ====== Button: ADD_CHECKLIST_ITEM ==========================
+  id: 34951130580065821
+  identification: 
+    button-name: ADD_CHECKLIST_ITEM
+    label: Add Checklist Item
+
+  layout: 
+    sequence: 10
+    region: Checklist # 34949826771065808
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-plus
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
 - # ====== Button: CLOSE_DIALOG ================================
   id: 63213580209844592
   identification: 
@@ -846,6 +1274,47 @@ buttons:
     execute-validations: false
 
 dynamic-actions: 
+- # ====== Dynamic Action: ADD_ITEM ============================
+  id: 34951203421065822
+  identification: 
+    name: ADD_ITEM
+
+  execution: 
+    sequence: 20
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CLICK
+    selection-type: Button
+    button: ADD_CHECKLIST_ITEM # 34951130580065821
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 34951384737065823
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        var region  = apex.region("CHECKLIST");
+        var view    = region.call("getCurrentView");
+        //
+        if (view.internalIdentifier === "grid") {
+            var row$ = region.widget().find(".a-GV-row").last();
+            view.view$.grid("setSelection", row$);
+            region.call("getActions").invoke("selection-add-row");
+        }
+        
+
+    execution: 
+      sequence: 10
+      event: ADD_ITEM # 34951203421065822
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
 - # ====== Dynamic Action: CLOSE_DIALOG ========================
   id: 63213674749844593
   identification: 
@@ -941,7 +1410,7 @@ processes:
     return-primary-key(s)-after-insert: true
 
   execution: 
-    sequence: 10
+    sequence: 20
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -955,12 +1424,36 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 20
+    sequence: 40
     point: Processing
     run-process: Once Per Page Visit (default)
 
   error: 
     display-location: Inline in Notification
+
+- # ====== Process: SAVE_CHECKLIST =============================
+  id: 34951047615065820
+  identification: 
+    name: SAVE_CHECKLIST
+    type: Interactive Grid - Automatic Row Processing (DML)
+    editable-region: Checklist [LIST] # 34950084031065810
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: No
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
 
 - # ====== Process: INIT_DEFAULTS ==============================
   id: 34954117428067239
