@@ -242,21 +242,37 @@ regions:
           HTP.P('<div class="STATUS" id="STATUS_' || s.status_id || '"><h3>' || s.status_name || '</h3>');
           --
           FOR t IN (
-              SELECT t.*,
+              SELECT
+                  t.task_id,
+                  t.task_name,
+                  --
                   APEX_PAGE.GET_URL (
                       p_page          => 105,
                       p_clear_cache   => 105,
                       p_items         => 'P105_TASK_ID',
                       p_values        => t.task_id
-                   ) AS task_link
+                  ) AS task_link,
+                  --
+                  NULLIF(SUM(CASE WHEN l.checklist_done = 'Y' THEN 1 ELSE 0 END) || '/' || COUNT(l.checklist_id), '0/0') AS task_progress
               FROM tsk_tasks t
+              LEFT JOIN tsk_task_checklist l
+                  ON l.task_id        = t.task_id
               WHERE t.client_id       = :P0_CLIENT_ID
                   AND t.project_id    = :P0_PROJECT_ID
                   AND t.board_id      = :P0_BOARD_ID
                   AND t.status_id     = s.status_id
+              GROUP BY
+                  t.task_id,
+                  t.task_name,
+                  t.order#
               ORDER BY t.order# NULLS LAST, t.task_id
           ) LOOP
-              HTP.P('<div class="TASK" draggable="true" id="TASK_' || t.task_id || '"><a href="' || t.task_link || '">' || t.task_name || '</a></div>');
+              HTP.P(
+                  '<div class="TASK" draggable="true" id="TASK_' || t.task_id || '">' ||
+                  '<a href="' || t.task_link || '">' || t.task_name ||
+                  '<span style="float: right;">' || RTRIM(' ' || t.task_progress) || '</span>' ||
+                  '</a></div>'
+              );
           END LOOP;
           --
           HTP.P('</div>');
