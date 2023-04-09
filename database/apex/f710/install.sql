@@ -25,7 +25,6 @@ prompt --install
 @@application/shared_components/user_interface/lovs/master_lov_users.sql
 @@application/pages/page_groups.sql
 @@application/comments.sql
-@@application/shared_components/navigation/breadcrumbs/breadcrumb.sql
 @@application/shared_components/navigation/breadcrumbentry.sql
 @@application/shared_components/user_interface/templates/page/drawer.sql
 @@application/shared_components/user_interface/templates/page/left_side_column.sql
