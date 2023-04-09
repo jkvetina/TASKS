@@ -25,6 +25,22 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(34889302895064171)
+,p_list_item_display_sequence=>6
+,p_list_item_link_text=>'Clients'
+,p_list_item_link_target=>'f?p=&APP_ID.:210:&SESSION.::&DEBUG.:210:::'
+,p_parent_list_item_id=>wwv_flow_imp.id(99409483413889233)
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(34890269991072863)
+,p_list_item_display_sequence=>7
+,p_list_item_link_text=>'Projects, Boards...'
+,p_list_item_link_target=>'f?p=&APP_ID.:200:&SESSION.::&DEBUG.:200:::'
+,p_parent_list_item_id=>wwv_flow_imp.id(99409483413889233)
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_imp_shared.create_list_item(
  p_id=>wwv_flow_imp.id(98989130787303843)
 ,p_list_item_display_sequence=>10
 ,p_list_item_link_text=>'&APP_USER.'

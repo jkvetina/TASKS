@@ -28,7 +28,7 @@ prompt APPLICATION 710 - Tasks
 -- Application Export:
 --   Application:     710
 --   Name:            Tasks
---   Date and Time:   16:05 Neděle Duben 9, 2023
+--   Date and Time:   16:11 Neděle Duben 9, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -178,9 +178,24 @@ wwv_flow_imp_shared.create_list_item(
  p_id=>wwv_flow_imp.id(99409483413889233)
 ,p_list_item_display_sequence=>5
 ,p_list_item_link_text=>' '
-,p_list_item_link_target=>'f?p=&APP_ID.:200:&SESSION.::&DEBUG.:200:::'
 ,p_list_item_icon=>'fa-wrench'
 ,p_security_scheme=>wwv_flow_imp.id(99412902989034784)
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(34889302895064171)
+,p_list_item_display_sequence=>6
+,p_list_item_link_text=>'Clients'
+,p_list_item_link_target=>'f?p=&APP_ID.:210:&SESSION.::&DEBUG.:210:::'
+,p_parent_list_item_id=>wwv_flow_imp.id(99409483413889233)
+,p_list_item_current_type=>'TARGET_PAGE'
+);
+wwv_flow_imp_shared.create_list_item(
+ p_id=>wwv_flow_imp.id(34890269991072863)
+,p_list_item_display_sequence=>7
+,p_list_item_link_text=>'Projects, Boards...'
+,p_list_item_link_target=>'f?p=&APP_ID.:200:&SESSION.::&DEBUG.:200:::'
+,p_parent_list_item_id=>wwv_flow_imp.id(99409483413889233)
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_imp_shared.create_list_item(
@@ -14817,7 +14832,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(71258645843174377)  -- MASTER - IS_USER
 ,p_protection_level=>'C'
-,p_page_component_map=>'11'
+,p_page_component_map=>'10'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
@@ -16661,6 +16676,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(71258645843174377)  -- MASTER - IS_USER
 ,p_protection_level=>'C'
+,p_page_component_map=>'21'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );

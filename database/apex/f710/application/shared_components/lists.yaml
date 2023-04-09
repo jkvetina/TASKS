@@ -38,6 +38,54 @@
     type: Static Values
 
   entries: 
+  - # ====== Entry: Clients ======================================
+    id: 34889302895064171
+    label: 
+      label: Clients
+
+    layout: 
+      sequence: 6
+      parent-entry: ' ' # 99409483413889233
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:210:&SESSION.::&DEBUG.:210:::'
+        page: 210 # Clients
+        clear-cache: 210
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
+  - # ====== Entry: Projects, Boards... ==========================
+    id: 34890269991072863
+    label: 
+      label: Projects, Boards...
+
+    layout: 
+      sequence: 7
+      parent-entry: ' ' # 99409483413889233
+
+    is-current: 
+      type: Target Page
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:200:&SESSION.::&DEBUG.:200:::'
+        page: 200 # Quick Administration
+        clear-cache: 200
+
+    click-counting: 
+      count-clicks: false
+
+    user-defined-attributes: 
+      translatable: false
+
   - # ====== Entry: &APP_USER. ===================================
     id: 98989130787303843
     label: 
@@ -120,15 +168,6 @@
 
     is-current: 
       type: Target Page
-
-    link: 
-      target: 
-        url: 'f?p=&APP_ID.:200:&SESSION.::&DEBUG.:200:::'
-        page: 200 # Quick Administration
-        clear-cache: 200
-
-    click-counting: 
-      count-clicks: false
 
     user-defined-attributes: 
       translatable: false
