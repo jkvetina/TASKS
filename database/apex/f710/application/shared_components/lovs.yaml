@@ -1,4 +1,59 @@
 ---
+- # ====== List of Values: LOV_CLIENTS =========================
+  id: 34762829880497308
+  identification: 
+    name: LOV_CLIENTS
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_CLIENTS
+
+  column-mapping: 
+    return: CLIENT_ID
+    display: CLIENT_NAME
+    default-sort: CLIENT_NAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: LOV_PROJECTS ========================
+  id: 34763034913500105
+  identification: 
+    name: LOV_PROJECTS
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_PROJECTS
+    where-clause: 'client_id = :P0_CLIENT_ID'
+
+  column-mapping: 
+    return: PROJECT_ID
+    display: PROJECT_NAME
+    default-sort: PROJECT_NAME
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: LOV_BOARDS ==========================
+  id: 34763544164505098
+  identification: 
+    name: LOV_BOARDS
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_BOARDS
+    where-clause: |
+      client_id = :P0_CLIENT_ID
+      AND project_id = :P0_PROJECT_ID
+
+  column-mapping: 
+    return: BOARD_ID
+    display: BOARD_NAME
+    default-sort: BOARD_NAME
+    sort-direction: Ascending (Nulls Last)
+
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
   id: 54624749962706655
   identification: 

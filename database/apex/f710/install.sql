@@ -16,6 +16,9 @@ prompt --install
 @@application/shared_components/logic/application_settings.sql
 @@application/shared_components/navigation/tabs/standard.sql
 @@application/shared_components/navigation/tabs/parent.sql
+@@application/shared_components/user_interface/lovs/lov_boards.sql
+@@application/shared_components/user_interface/lovs/lov_clients.sql
+@@application/shared_components/user_interface/lovs/lov_projects.sql
 @@application/shared_components/user_interface/lovs/master_lov_applications.sql
 @@application/shared_components/user_interface/lovs/master_lov_users.sql
 @@application/pages/page_groups.sql
@@ -108,6 +111,8 @@ prompt --install
 @@application/pages/page_00000.sql
 @@application/pages/page_00100.sql
 @@application/pages/page_00105.sql
+@@application/pages/page_00200.sql
+@@application/pages/page_00210.sql
 @@application/pages/page_09999.sql
 @@application/deployment/definition.sql
 @@application/deployment/checks.sql

@@ -121,6 +121,15 @@
     is-current: 
       type: Target Page
 
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:200:&SESSION.::&DEBUG.:200:::'
+        page: 200 # Quick Administration
+        clear-cache: 200
+
+    click-counting: 
+      count-clicks: false
+
     user-defined-attributes: 
       translatable: false
 
