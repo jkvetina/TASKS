@@ -3,6 +3,7 @@ CREATE TABLE tsk_clients (
     client_name                     VARCHAR2(64),
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
+    is_active                       CHAR(1),
     --
     CONSTRAINT pk_tsk_clients
         PRIMARY KEY (client_id)
@@ -12,4 +13,5 @@ COMMENT ON TABLE tsk_clients IS '';
 --
 COMMENT ON COLUMN tsk_clients.client_id     IS '';
 COMMENT ON COLUMN tsk_clients.client_name   IS '';
+COMMENT ON COLUMN tsk_clients.is_active     IS '';
 
