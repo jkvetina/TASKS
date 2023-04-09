@@ -5,7 +5,7 @@ identification:
   name: Projects, Boards...
   alias: PROJECTS
   title: Projects, Boards...
-  page-group: MAIN # 78949836938576475
+  page-group: ADMIN # 78950012693576929
 
 appearance: 
   page-mode: Normal
