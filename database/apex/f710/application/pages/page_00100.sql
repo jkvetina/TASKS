@@ -18,6 +18,107 @@ wwv_flow_imp_page.create_page(
 ,p_step_title=>'&APP_NAME.'
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(78949836938576475)  -- MAIN
+,p_javascript_code=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'const draggables = document.querySelectorAll(".TASK");',
+'const droppables = document.querySelectorAll(".STATUS");',
+'',
+'draggables.forEach((task) => {',
+'    task.addEventListener("dragstart", () => {',
+'        task.classList.add("DRAGGING");',
+'    });',
+'    //',
+'    task.addEventListener("dragend", () => {',
+'        task.classList.remove("DRAGGING");',
+'    });',
+'});',
+'',
+'droppables.forEach((zone) => {',
+'    zone.addEventListener("dragover", (e) => {',
+'        e.preventDefault();',
+'        //',
+'        const bottomTask = insertAboveTask(zone, e.clientY);',
+'        const curTask = document.querySelector(".DRAGGING");',
+'        //',
+'        if (!bottomTask) {',
+'            zone.appendChild(curTask);',
+'        }',
+'        else {',
+'            zone.insertBefore(curTask, bottomTask);',
+'        }',
+'    });',
+'});',
+'',
+'const insertAboveTask = (zone, mouseY) => {',
+'    const els = zone.querySelectorAll(".TASK:not(.DRAGGING)");',
+'    //',
+'    let closestTask   = null;',
+'    let closestOffset = Number.NEGATIVE_INFINITY;',
+'    //',
+'    els.forEach((task) => {',
+'        const { top } = task.getBoundingClientRect();',
+'        const offset = mouseY - top;',
+'        //',
+'        if (offset < 0 && offset > closestOffset) {',
+'            closestOffset = offset;',
+'            closestTask = task;',
+'        }',
+'    });',
+'    //',
+'    return closestTask;',
+'};',
+'',
+''))
+,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'.BOARD {',
+'  width             : 100%;',
+'  height            : 100vh;',
+'  overflow          : scroll;',
+'}',
+'',
+'.BOARD h3 {',
+'  padding: 0rem 1rem;',
+'  font-size: 1rem;',
+'}',
+'',
+'.COLUMNS {',
+'  display           : flex;',
+'  height            : 100%;',
+'  overflow          : scroll;',
+'  align-items       : flex-start;',
+'  justify-content   : start;',
+'  gap               : 1rem;',
+'  padding           : 0.5rem;',
+'}',
+'',
+'.STATUS {',
+'  display           : flex;',
+'  width             : 300px;',
+'  min-height        : 0px;',
+'  flex-direction    : column;',
+'  flex-shrink       : 0;',
+'  gap               : 1rem;',
+'  box-shadow        : 0px 5px 15px rgba(0, 0, 0, 0.25);',
+'  padding           : 0.5rem;',
+'  border-radius     : 4px;',
+'  background        : #f4f4f4;',
+'}',
+'',
+'.TASK {',
+'  box-shadow        : 0px 5px 15px rgba(0, 0, 0, 0.15);',
+'  padding           : 1rem;',
+'  border-radius     : 4px;',
+'  cursor            : move;',
+'  background        : #fff;',
+'  color             : #000;',
+'}',
+'',
+'.DRAGGING {',
+'  box-shadow        : 0px 5px 15px rgba(0, 0, 0, 0.25);',
+'  background        : rgb(50, 50, 50);',
+'  color             : white;',
+'}',
+'',
+''))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(71258645843174377)  -- MASTER - IS_USER
 ,p_protection_level=>'C'
@@ -45,7 +146,34 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_sequence=>50
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'HTP.P(''<div>'');',
+'HTP.P(''<div class="BOARD">'');',
+'HTP.P(''<div class="COLUMNS">'');',
+'--',
+'FOR s IN (',
+'    SELECT s.*',
+'    FROM tsk_task_statuses s',
+'    WHERE s.client_id       = :P0_CLIENT_ID',
+'        AND s.project_id    = :P0_PROJECT_ID',
+'    ORDER BY s.order#',
+') LOOP',
+'    HTP.P(''<div class="STATUS"><h3>'' || s.status_name || ''</h3>'');',
+'    --',
+'    FOR t IN (',
+'        SELECT t.*',
+'        FROM tsk_tasks t',
+'        WHERE t.client_id       = :P0_CLIENT_ID',
+'            AND t.project_id    = :P0_PROJECT_ID',
+'            AND t.board_id      = :P0_BOARD_ID',
+'            AND t.status_id     = s.status_id',
+'        ORDER BY t.task_id',
+'    ) LOOP',
+'        HTP.P(''<div class="TASK" draggable="true" data-id="'' || t.task_id || ''">'' || t.task_name || ''</div>'');',
+'    END LOOP;',
+'    --',
+'    HTP.P(''</div>'');',
+'END LOOP;',
+'--',
+'HTP.P(''</div>'');',
 'HTP.P(''</div>'');',
 ''))
 ,p_plug_source_type=>'NATIVE_PLSQL'
@@ -72,6 +200,19 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(34798486722743635)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(34744374076440316)
+,p_button_name=>'ADD_TASK'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
+,p_button_image_alt=>'Add Task'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_button_redirect_url=>'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
+,p_icon_css_classes=>'fa-plus'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34905220916116348)

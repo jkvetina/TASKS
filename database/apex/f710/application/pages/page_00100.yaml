@@ -20,6 +20,111 @@ navigation:
   cursor-focus: Do not focus cursor
   warn-on-unsaved-changes: true
 
+javascript: 
+  function-and-global-variable-declaration: |
+    const draggables = document.querySelectorAll(".TASK");
+    const droppables = document.querySelectorAll(".STATUS");
+    
+    draggables.forEach((task) => {
+        task.addEventListener("dragstart", () => {
+            task.classList.add("DRAGGING");
+        });
+        //
+        task.addEventListener("dragend", () => {
+            task.classList.remove("DRAGGING");
+        });
+    });
+    
+    droppables.forEach((zone) => {
+        zone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            //
+            const bottomTask = insertAboveTask(zone, e.clientY);
+            const curTask = document.querySelector(".DRAGGING");
+            //
+            if (!bottomTask) {
+                zone.appendChild(curTask);
+            }
+            else {
+                zone.insertBefore(curTask, bottomTask);
+            }
+        });
+    });
+    
+    const insertAboveTask = (zone, mouseY) => {
+        const els = zone.querySelectorAll(".TASK:not(.DRAGGING)");
+        //
+        let closestTask   = null;
+        let closestOffset = Number.NEGATIVE_INFINITY;
+        //
+        els.forEach((task) => {
+            const { top } = task.getBoundingClientRect();
+            const offset = mouseY - top;
+            //
+            if (offset < 0 && offset > closestOffset) {
+                closestOffset = offset;
+                closestTask = task;
+            }
+        });
+        //
+        return closestTask;
+    };
+    
+    
+
+css: 
+  inline: |
+    .BOARD {
+      width             : 100%;
+      height            : 100vh;
+      overflow          : scroll;
+    }
+    
+    .BOARD h3 {
+      padding: 0rem 1rem;
+      font-size: 1rem;
+    }
+    
+    .COLUMNS {
+      display           : flex;
+      height            : 100%;
+      overflow          : scroll;
+      align-items       : flex-start;
+      justify-content   : start;
+      gap               : 1rem;
+      padding           : 0.5rem;
+    }
+    
+    .STATUS {
+      display           : flex;
+      width             : 300px;
+      min-height        : 0px;
+      flex-direction    : column;
+      flex-shrink       : 0;
+      gap               : 1rem;
+      box-shadow        : 0px 5px 15px rgba(0, 0, 0, 0.25);
+      padding           : 0.5rem;
+      border-radius     : 4px;
+      background        : #f4f4f4;
+    }
+    
+    .TASK {
+      box-shadow        : 0px 5px 15px rgba(0, 0, 0, 0.15);
+      padding           : 1rem;
+      border-radius     : 4px;
+      cursor            : move;
+      background        : #fff;
+      color             : #000;
+    }
+    
+    .DRAGGING {
+      box-shadow        : 0px 5px 15px rgba(0, 0, 0, 0.25);
+      background        : rgb(50, 50, 50);
+      color             : white;
+    }
+    
+    
+
 security: 
   authorization-scheme: MASTER - IS_USER # 71258645843174377
   authentication: Page Requires Authentication
@@ -88,7 +193,34 @@ regions:
 
   source: 
     pl/sql-code: |
-      HTP.P('<div>');
+      HTP.P('<div class="BOARD">');
+      HTP.P('<div class="COLUMNS">');
+      --
+      FOR s IN (
+          SELECT s.*
+          FROM tsk_task_statuses s
+          WHERE s.client_id       = :P0_CLIENT_ID
+              AND s.project_id    = :P0_PROJECT_ID
+          ORDER BY s.order#
+      ) LOOP
+          HTP.P('<div class="STATUS"><h3>' || s.status_name || '</h3>');
+          --
+          FOR t IN (
+              SELECT t.*
+              FROM tsk_tasks t
+              WHERE t.client_id       = :P0_CLIENT_ID
+                  AND t.project_id    = :P0_PROJECT_ID
+                  AND t.board_id      = :P0_BOARD_ID
+                  AND t.status_id     = s.status_id
+              ORDER BY t.task_id
+          ) LOOP
+              HTP.P('<div class="TASK" draggable="true" data-id="' || t.task_id || '">' || t.task_name || '</div>');
+          END LOOP;
+          --
+          HTP.P('</div>');
+      END LOOP;
+      --
+      HTP.P('</div>');
       HTP.P('</div>');
       
 
@@ -381,6 +513,39 @@ page-items:
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: true
     restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: ADD_TASK ====================================
+  id: 34798486722743635
+  identification: 
+    button-name: ADD_TASK
+    label: Add Task
+
+  layout: 
+    sequence: 10
+    region: Tasks # 34744374076440316
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-plus
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
+      page: 105 # MODAL DIALOG TEMPLATE
+      clear-cache: 105
+
+    warn-on-unsaved-changes: Do Not Check
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_PROJECT =====================
