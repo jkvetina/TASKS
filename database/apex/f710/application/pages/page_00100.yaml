@@ -22,41 +22,63 @@ navigation:
 
 javascript: 
   function-and-global-variable-declaration: |
-    const draggables = document.querySelectorAll(".TASK");
-    const droppables = document.querySelectorAll(".STATUS");
+    const draggables = document.querySelectorAll('.TASK');
+    const droppables = document.querySelectorAll('.TARGET');
     
     draggables.forEach((task) => {
-        task.addEventListener("dragstart", () => {
-            task.classList.add("DRAGGING");
+        task.addEventListener('dragstart', () => {
+            task.classList.add('DRAGGING');
         });
         //
-        task.addEventListener("dragend", (p) => {
-            task.classList.remove("DRAGGING");
+        task.addEventListener('dragend', (p) => {
+            task.classList.remove('DRAGGING');
             //
-            const task_id   = task.getAttribute('id').replace('TASK_', '');
-            const target    = p.target.parentElement.getAttribute('id');
-            const status_id = target.replace('STATUS_', '');
-            const tasks     = document.getElementById(target).querySelectorAll(".TASK");
-            var   sorted    = [];
+            var sorted          = [];
+            var target_primary  = p.target.parentElement.getAttribute('id');
+            var target_alt      = p.target.parentElement.parentElement.getAttribute('id');
+            //
+            const target        = target_primary.indexOf('TASK_') === 0 ? target_alt : target_primary;
+            const task_id       = task.getAttribute('id').replace('TASK_', '');
+            const status_id     = target.replace('STATUS_', '').split('__')[0];
+            const swimlane_id   = target.replace('STATUS_', '').split('__')[1];
+            const tasks         = document.getElementById(target).querySelectorAll('.TASK');
             //
             tasks.forEach(function(task) {
                 sorted.push(task.getAttribute('id').replace('TASK_', ''));
             });
             sorted = sorted.join(':');
             //
-            console.log('TASK_MOVED', task_id, status_id, sorted);
+            console.group('TASK_MOVED');
+            console.log('TASK:',        task_id);
+            console.log('TARGET:',      target, target_primary, target_alt);
+            console.log('STATUS:',      status_id);
+            console.log('SWIMLANE:',    swimlane_id);
+            console.log('SORTED:',      sorted);
+            console.groupEnd();
             //
-            apex.server.process("UPDATE_TASK",
+            apex.server.process('UPDATE_TASK',
                 {
                     x01: task_id,
                     x02: status_id,
-                    x03: sorted
+                    x03: swimlane_id,
+                    x04: sorted
                 },
                 {
                     dataType: 'text',
                     success: function(pData) {
                         console.log('RESULT', pData);
-                        apex.message.showPageSuccess(pData);
+                        if (pData.indexOf('sqlerrm') >= 0) {
+                            apex.message.showErrors([{
+                                type        : 'error',
+                                location    : ['page', 'inline'],
+                                pageItem    : '',
+                                message     : pData.split('sqlerrm:')[1],
+                                unsafe      : false
+                            }]);
+                        }
+                        else {
+                            apex.message.showPageSuccess(pData);
+                        }
                     }
                 }
             );
@@ -64,10 +86,10 @@ javascript:
     });
     
     droppables.forEach((zone) => {
-        zone.addEventListener("dragover", (e) => {
+        zone.addEventListener('dragover', (e) => {
             e.preventDefault();
             //
-            const curr_task = document.querySelector(".DRAGGING");
+            const curr_task = document.querySelector('.DRAGGING');
             const last_task = insertAboveTask(zone, e.clientY);
             //
             //console.log('DRAGGING', curr_task.getAttribute('id'), zone.getAttribute('id'));
@@ -82,7 +104,7 @@ javascript:
     });
     
     const insertAboveTask = (zone, mouseY) => {
-        const els = zone.querySelectorAll(".TASK:not(.DRAGGING)");
+        const els = zone.querySelectorAll('.TASK:not(.DRAGGING)');
         //
         let closest_task   = null;
         let closest_offset = Number.NEGATIVE_INFINITY;
@@ -109,43 +131,68 @@ css:
       height            : 100vh;
       overflow          : scroll;
     }
-    
     .BOARD h3 {
       margin            : 0.5rem 0.7rem;
       padding           : 0;
       font-size         : 1rem;
     }
     
+    .SWIMLANES {
+    }
+    .SWIMLANE {
+    }
+    
     .COLUMNS {
       display           : flex;
-      height            : 100%;
+      min-height        : 100%;
       overflow          : scroll;
-      align-items       : flex-start;
+      align-items       : stretch;
       justify-content   : start;
       gap               : 1rem;
       padding           : 0.5rem;
     }
     
-    .STATUS {
+    .TARGET,
+    .TARGET_CSS,
+    .COLUMNS > h3 {
       display           : flex;
       width             : 300px;
-      min-height        : 0px;
       flex-direction    : column;
       flex-shrink       : 0;
       gap               : 0.5rem;
-      box-shadow        : 0px 5px 10px rgba(0, 0, 0, 0.15);
+      box-shadow        : 0 5px 10px rgba(0, 0, 0, 0.10);
       padding           : 0.5rem;
       border-radius     : 5px;
       background        : #f9f9f9;
     }
+    .TARGET_CSS,
+    .COLUMNS > h3 {
+      box-shadow        : none;
+      padding           : 0 0.5rem;
+      border            : 0;
+      background        : transparent;
+      text-align        : center;
+    }
+    .COLUMNS > h3 {
+      width             : 100px !important;
+      margin            : 0;
+      padding           : 1rem 0;
+      text-align        : right;
+    }
     
     .TASK {
-      box-shadow        : 0px 5px 10px rgba(0, 0, 0, 0.10);
+      box-shadow        : 0 5px 10px rgba(0, 0, 0, 0.05);
       padding           : 1rem;
       border-radius     : 4px;
       cursor            : move;
+      font-size         : 90%;
       background        : #fff;
       color             : #000;
+    }
+    .TASK a,
+    .TASK a:hover {
+      color             : #000;
+      text-decoration   : none;
     }
     
     .DRAGGING {
@@ -153,12 +200,10 @@ css:
       background        : rgb(50, 50, 50);
       color             : #fff !important;
     }
-    
-    .TASK a,
-    .TASK a:hover {
-      color             : #000;
-      text-decoration   : none;
+    .DRAGGING a {
+      color             : #fff !important;
     }
+    
     
 
 security: 
@@ -230,52 +275,95 @@ regions:
   source: 
     pl/sql-code: |
       HTP.P('<div class="BOARD">');
-      HTP.P('<div class="COLUMNS">');
+      HTP.P('<div class="SWIMLANES">');
       --
-      FOR s IN (
-          SELECT s.*
-          FROM tsk_task_statuses s
-          WHERE s.client_id       = :P0_CLIENT_ID
-              AND s.project_id    = :P0_PROJECT_ID
-          ORDER BY s.order#
+      FOR w IN (
+          SELECT
+              w.*,
+              ROW_NUMBER() OVER (ORDER BY CASE WHEN w.swimlane_id = '-' THEN NULL ELSE w.order# END NULLS LAST) AS r#
+          FROM tsk_task_swimlanes w
+          WHERE w.client_id       = :P0_CLIENT_ID
+              AND w.project_id    = :P0_PROJECT_ID
+              AND (w.swimlane_id  = :P100_SWIMLANE_ID OR :P100_SWIMLANE_ID IS NULL)
+          ORDER BY r#
       ) LOOP
-          HTP.P('<div class="STATUS" id="STATUS_' || s.status_id || '"><h3>' || s.status_name || '</h3>');
+          -- column names
+          IF w.r# = 1 THEN
+              HTP.P('<div class="SWIMLANE">');
+              HTP.P('<div class="COLUMNS">');
+              HTP.P('<h3></h3>');
+              --
+              FOR s IN (
+                  SELECT s.*
+                  FROM tsk_task_statuses s
+                  WHERE s.client_id       = :P0_CLIENT_ID
+                      AND s.project_id    = :P0_PROJECT_ID
+                  ORDER BY s.order#
+              ) LOOP
+                  HTP.P('<div class="TARGET_CSS">');
+                  HTP.P('<h3>' || s.status_name || '</h3>');
+                  HTP.P('</div>');
+              END LOOP;
+              --
+              HTP.P('</div>');
+              HTP.P('</div>');
+          END IF;
+      
+          -- swimlanes per user
+          HTP.P('<div class="SWIMLANE" id="SWIMLANE_' || w.swimlane_id || '">');
+          HTP.P('<div class="COLUMNS">');
+          HTP.P('<h3>' || NULLIF('@' || w.swimlane_name, '@-') || '</h3>');
           --
-          FOR t IN (
-              SELECT
-                  t.task_id,
-                  t.task_name,
-                  --
-                  APEX_PAGE.GET_URL (
-                      p_page          => 105,
-                      p_clear_cache   => 105,
-                      p_items         => 'P105_TASK_ID',
-                      p_values        => t.task_id
-                  ) AS task_link,
-                  --
-                  NULLIF(SUM(CASE WHEN l.checklist_done = 'Y' THEN 1 ELSE 0 END) || '/' || COUNT(l.checklist_id), '0/0') AS task_progress
-              FROM tsk_tasks t
-              LEFT JOIN tsk_task_checklist l
-                  ON l.task_id        = t.task_id
-              WHERE t.client_id       = :P0_CLIENT_ID
-                  AND t.project_id    = :P0_PROJECT_ID
-                  AND t.board_id      = :P0_BOARD_ID
-                  AND t.status_id     = s.status_id
-                  AND (t.swimlane_id  = :P100_SWIMLANE_ID OR :P100_SWIMLANE_ID IS NULL)
-              GROUP BY
-                  t.task_id,
-                  t.task_name,
-                  t.order#
-              ORDER BY t.order# NULLS LAST, t.task_id
+          FOR s IN (
+              SELECT s.*
+              FROM tsk_task_statuses s
+              WHERE s.client_id       = :P0_CLIENT_ID
+                  AND s.project_id    = :P0_PROJECT_ID
+              ORDER BY s.order#
           ) LOOP
-              HTP.P(
-                  '<div class="TASK" draggable="true" id="TASK_' || t.task_id || '">' ||
-                  '<a href="' || t.task_link || '">#' || t.task_id || ' ' || t.task_name ||
-                  '<span style="float: right;">' || RTRIM(' ' || t.task_progress) || '</span>' ||
-                  '</a></div>'
-              );
+              HTP.P('<div class="TARGET" id="STATUS_' || s.status_id || '__' || w.swimlane_id || '">');
+              --
+              FOR t IN (
+                  SELECT
+                      t.task_id,
+                      t.task_name,
+                      --
+                      APEX_PAGE.GET_URL (
+                          p_page          => 105,
+                          p_clear_cache   => 105,
+                          p_items         => 'P105_TASK_ID',
+                          p_values        => t.task_id
+                      ) AS task_link,
+                      --
+                      NULLIF(SUM(CASE WHEN l.checklist_done = 'Y' THEN 1 ELSE 0 END) || '/' || COUNT(l.checklist_id), '0/0') AS task_progress
+                  FROM tsk_tasks t
+                  LEFT JOIN tsk_task_checklist l
+                      ON l.task_id        = t.task_id
+                  WHERE t.client_id       = :P0_CLIENT_ID
+                      AND t.project_id    = :P0_PROJECT_ID
+                      AND t.board_id      = :P0_BOARD_ID
+                      AND t.status_id     = s.status_id
+                      AND t.swimlane_id   = w.swimlane_id
+                  GROUP BY
+                      t.task_id,
+                      t.task_name,
+                      t.order#
+                  ORDER BY t.order# NULLS LAST, t.task_id
+              ) LOOP
+                  HTP.P(
+                      '<div class="TASK" draggable="true" id="TASK_' || t.task_id || '">' ||
+                      '<a href="' || t.task_link || '">#' || t.task_id || ' ' || t.task_name ||
+                      CASE WHEN t.task_progress IS NOT NULL
+                          THEN '<span style="float: right;">' || t.task_progress || '</span>'
+                          END ||
+                      '</a></div>'
+                  );
+              END LOOP;
+              --
+              HTP.P('</div>');
           END LOOP;
           --
+          HTP.P('</div>');
           HTP.P('</div>');
       END LOOP;
       --
@@ -831,24 +919,26 @@ processes:
     pl/sql-code: |
       -- update task status (column)
       UPDATE tsk_tasks t
-      SET t.status_id = APEX_APPLICATION.G_X02
-      WHERE t.task_id = APEX_APPLICATION.G_X01;
+      SET t.status_id     = APEX_APPLICATION.G_X02,
+          t.swimlane_id   = APEX_APPLICATION.G_X03
+      WHERE t.task_id     = APEX_APPLICATION.G_X01;
       --
       IF SQL%ROWCOUNT = 1 THEN
-          HTP.P('Task ' || APEX_APPLICATION.G_X01 || ' updated');
-      END IF;
+          -- update order of tasks in column
+          FOR s IN (
+              SELECT /*+ MATERIALIZE */
+                  COLUMN_VALUE    AS task_id,
+                  ROWNUM * 10     AS order#
+              FROM APEX_STRING.SPLIT(APEX_APPLICATION.G_X04, ':')
+          ) LOOP
+              UPDATE tsk_tasks t
+              SET t.order#    = s.order#
+              WHERE t.task_id = s.task_id;
+          END LOOP;
       
-      -- update order of tasks in column
-      FOR s IN (
-          SELECT /*+ MATERIALIZE */
-              COLUMN_VALUE    AS task_id,
-              ROWNUM * 10     AS order#
-          FROM APEX_STRING.SPLIT(APEX_APPLICATION.G_X03, ':')
-      ) LOOP
-          UPDATE tsk_tasks t
-          SET t.order#    = s.order#
-          WHERE t.task_id = s.task_id;
-      END LOOP;
+          -- message for app
+          HTP.P('Task #' || APEX_APPLICATION.G_X01 || ' updated');
+      END IF;
       
 
   execution: 
