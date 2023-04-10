@@ -122,88 +122,63 @@ javascript:
         return closest_task;
     };
     
-    
 
 css: 
   inline: |
     .BOARD {
-      width             : 100%;
-      height            : 100vh;
-      overflow          : scroll;
-    }
-    .BOARD h3 {
-      margin            : 0.5rem 0.7rem;
-      padding           : 0;
-      font-size         : 1rem;
-    }
-    
-    .SWIMLANES {
-    }
-    .SWIMLANE {
-    }
-    
-    .COLUMNS {
-      display           : flex;
-      min-height        : 100%;
-      overflow          : scroll;
-      align-items       : stretch;
-      justify-content   : start;
-      gap               : 1rem;
-      padding           : 0.5rem;
+        width                   : 100%;
+        height                  : 100vh;
+        overflow                : scroll;
+        display                 : grid;
+        grid-template-columns   : 100px repeat(6, minmax(300px, 1fr)); /* overridden on tag */
+        grid-auto-rows          : max-content;
+        grid-column-gap         : 0.5rem;
+        grid-row-gap            : 0.5rem;
+        padding                 : 0 1rem 1rem 0;
     }
     
     .TARGET,
-    .TARGET_CSS,
-    .COLUMNS > h3 {
-      display           : flex;
-      width             : 300px;
-      flex-direction    : column;
-      flex-shrink       : 0;
-      gap               : 0.5rem;
-      box-shadow        : 0 5px 10px rgba(0, 0, 0, 0.15);
-      padding           : 0.5rem;
-      border-radius     : 5px;
-      background        : #f9f9f9;
+    .TARGET_LIKE {
+        margin          : 0;
+        border-radius   : 5px;
+        box-shadow      : 0 5px 10px rgba(0, 0, 0, 0.15);
+        background      : #f9f9f9;
     }
-    .TARGET_CSS,
-    .COLUMNS > h3 {
-      box-shadow        : none;
-      padding           : 0 0.5rem;
-      border            : 0;
-      background        : transparent;
-      text-align        : center;
-    }
-    .COLUMNS > h3 {
-      width             : 100px !important;
-      margin            : 0;
-      padding           : 1rem 0;
-      text-align        : right;
+    .TARGET_LIKE,
+    .TARGET_LIKE h3,
+    .BOARD h3 {
+        padding         : 0 0.5rem;
+        border          : 0;
+        box-shadow      : none;
+        background      : transparent;
+        text-align      : center;
+        font-size       : 100%;
     }
     
     .TASK {
-      box-shadow        : 0 5px 10px rgba(0, 0, 0, 0.05);
-      padding           : 0.8rem;
-      border-radius     : 4px;
-      cursor            : move;
-      font-size         : 90%;
-      background        : #fff;
-      color             : #000;
+        margin          : 0.5rem;
+        padding         : 0.8rem;
+        border-radius   : 4px;
+        box-shadow      : 0 5px 10px rgba(0, 0, 0, 0.05);
+        cursor          : move;
+        font-size       : 90%;
+        background      : #fff;
+        color           : #000;
     }
     .TASK a,
     .TASK a:hover {
-      color             : #000;
-      text-decoration   : none;
+        color               : #000;
+        text-decoration     : none;
     }
     
     .DRAGGING {
-      box-shadow        : 0px 5px 10px rgba(0, 0, 0, 0.20);
-      background        : rgb(50, 50, 50);
-      color             : #fff !important;
+        box-shadow      : 0px 5px 10px rgba(0, 0, 0, 0.20);
+        background      : rgb(64, 64, 64);
+        color           : #fff !important;
     }
     .DRAGGING a {
-      color             : #fff !important;
+        color           : #fff !important;
     }
-    
     
 
 security: 
@@ -274,8 +249,19 @@ regions:
 
   source: 
     pl/sql-code: |
-      HTP.P('<div class="BOARD">');
-      HTP.P('<div class="SWIMLANES">');
+      DECLARE
+          in_statuses     PLS_INTEGER;
+      BEGIN
+          SELECT COUNT(s.status_id)
+          INTO in_statuses
+          FROM tsk_task_statuses s
+          WHERE s.client_id       = :P0_CLIENT_ID
+              AND s.project_id    = :P0_PROJECT_ID;
+          --
+          HTP.P('<div class="BOARD" style="' ||
+              'grid-template-columns: 100px repeat(' || in_statuses || ', minmax(300px, 1fr)); ' ||
+              '">');
+      END;
       --
       FOR w IN (
           SELECT
@@ -289,8 +275,6 @@ regions:
       ) LOOP
           -- column names
           IF w.r# = 1 THEN
-              HTP.P('<div class="SWIMLANE">');
-              HTP.P('<div class="COLUMNS">');
               HTP.P('<h3></h3>');
               --
               FOR s IN (
@@ -300,19 +284,14 @@ regions:
                       AND s.project_id    = :P0_PROJECT_ID
                   ORDER BY s.order#
               ) LOOP
-                  HTP.P('<div class="TARGET_CSS">');
+                  HTP.P('<div class="TARGET_LIKE">');
                   HTP.P('<h3>' || s.status_name || '</h3>');
                   HTP.P('</div>');
               END LOOP;
-              --
-              HTP.P('</div>');
-              HTP.P('</div>');
           END IF;
       
           -- swimlanes per user
-          HTP.P('<div class="SWIMLANE" id="SWIMLANE_' || w.swimlane_id || '">');
-          HTP.P('<div class="COLUMNS">');
-          HTP.P('<h3>' || NULLIF('@' || w.swimlane_name, '@-') || '</h3>');
+          HTP.P('<h3 style="text-align: right;">' || NULLIF('@' || w.swimlane_name, '@-') || '</h3>');
           --
           FOR s IN (
               SELECT s.*
@@ -362,12 +341,8 @@ regions:
               --
               HTP.P('</div>');
           END LOOP;
-          --
-          HTP.P('</div>');
-          HTP.P('</div>');
       END LOOP;
       --
-      HTP.P('</div>');
       HTP.P('</div>');
       
 
