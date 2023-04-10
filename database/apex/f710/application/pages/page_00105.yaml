@@ -1570,6 +1570,10 @@ processes:
   error: 
     display-location: Inline in Notification
 
+  server-side-condition: 
+    type: Item is NULL
+    item: P105_SOURCE_PAGE
+
 - # ====== Process: SAVE_CHECKLIST =============================
   id: 34951047615065820
   identification: 
@@ -1693,4 +1697,26 @@ processes:
 
   error: 
     display-location: Inline in Notification
+
+branches: 
+- # ====== Branch: REDIRECT_HOME ===============================
+  id: 34952922109065839
+  identification: 
+    name: REDIRECT_HOME
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100::&success_msg=#SUCCESS_MSG#'
+      page: 100 # Tasks
+      clear-cache: 100
+
+  server-side-condition: 
+    type: Item = Value
+    item: P105_SOURCE_PAGE
+    value: 100
 

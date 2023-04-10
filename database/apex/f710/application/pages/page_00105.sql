@@ -470,6 +470,17 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_css_classes=>'u-pullRight'
 ,p_icon_css_classes=>'fa-times'
 );
+wwv_flow_imp_page.create_page_branch(
+ p_id=>wwv_flow_imp.id(34952922109065839)
+,p_branch_name=>'REDIRECT_HOME'
+,p_branch_action=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100::&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'AFTER_PROCESSING'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_sequence=>10
+,p_branch_condition_type=>'VAL_OF_ITEM_IN_COND_EQ_COND2'
+,p_branch_condition=>'P105_SOURCE_PAGE'
+,p_branch_condition_text=>'100'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34798917102743640)
 ,p_name=>'P105_TASK_ID'
@@ -829,6 +840,8 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_type=>'NATIVE_CLOSE_WINDOW'
 ,p_process_name=>'CLOSE_MODAL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when=>'P105_SOURCE_PAGE'
+,p_process_when_type=>'ITEM_IS_NULL'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34798826412743639)
