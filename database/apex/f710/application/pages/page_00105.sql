@@ -756,16 +756,54 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(63213536180844591)
 ,p_process_type=>'NATIVE_FORM_DML'
-,p_process_name=>'SAVE_FORM'
+,p_process_name=>'SAVE_FORM_NEW'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_imp.id(34798797839743638)
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(34952570819065835)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_region_id=>wwv_flow_imp.id(63213536180844591)
+,p_process_type=>'NATIVE_FORM_DML'
+,p_process_name=>'SAVE_FORM_UPDATE'
+,p_attribute_01=>'REGION_SOURCE'
+,p_attribute_05=>'Y'
+,p_attribute_06=>'N'
+,p_attribute_08=>'Y'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_imp.id(34949339576065803)
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(34952654734065836)
+,p_process_sequence=>40
+,p_process_point=>'AFTER_SUBMIT'
+,p_region_id=>wwv_flow_imp.id(63213536180844591)
+,p_process_type=>'NATIVE_FORM_DML'
+,p_process_name=>'SAVE_FORM_DELETE'
+,p_attribute_01=>'PLSQL_CODE'
+,p_attribute_04=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DELETE FROM tsk_task_comments t',
+'WHERE t.task_id = :P105_TASK_ID;',
+'--',
+'DELETE FROM tsk_task_checklist t',
+'WHERE t.task_id = :P105_TASK_ID;',
+'--',
+'DELETE FROM tsk_tasks t',
+'WHERE t.task_id = :P105_TASK_ID;',
+''))
+,p_attribute_05=>'Y'
+,p_attribute_06=>'N'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_imp.id(34949592599065805)
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34949717657065807)
-,p_process_sequence=>40
+,p_process_sequence=>50
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_CLOSE_WINDOW'
 ,p_process_name=>'CLOSE_MODAL'
