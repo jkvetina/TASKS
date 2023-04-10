@@ -28,7 +28,7 @@ advanced:
 
 authentication: 
   public-user: APEX_PUBLIC_USER
-  authentication-scheme: MASTER - APEX_ACCOUNTS # 71254896610086700
+  authentication-scheme: MASTER - OPEN_DOOR (TESTING ONLY) # 71255099014086701
 
 authorization: 
   source-for-role-or-group-schemes: Access Control User Role Assignments

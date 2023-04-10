@@ -28,7 +28,7 @@ prompt APPLICATION 710 - Tasks
 -- Application Export:
 --   Application:     710
 --   Name:            Tasks
---   Date and Time:   06:25 Pondělí Duben 10, 2023
+--   Date and Time:   06:27 Pondělí Duben 10, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -98,7 +98,7 @@ wwv_flow_imp.create_flow(
 'Created by Jan Kvetina, 2/2022',
 'www.jankvetina.cz'))
 ,p_authentication=>'PLUGIN'
-,p_authentication_id=>wwv_flow_imp.id(71254896610086700)
+,p_authentication_id=>wwv_flow_imp.id(71255099014086701)
 ,p_application_tab_set=>1
 ,p_logo_type=>'T'
 ,p_logo_text=>'&APP_NAME.'
