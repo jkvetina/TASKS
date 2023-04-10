@@ -14,7 +14,7 @@ appearance:
   - '#DEFAULT#'
 
 dialog: 
-  width: 1024
+  width: 1280
   chained: true
 
 navigation-menu: 
@@ -26,8 +26,20 @@ navigation:
 
 css: 
   inline: |
-    #P105_TASK_DESC_CONTAINER > .t-Form-labelContainer {
+    #P105_TASK_DESC_CONTAINER .t-Form-labelContainer {
       display: none;
+    }
+    #P105_TASK_DESC_CONTAINER .t-Form-itemWrapper {
+      margin: 0 !important;
+    }
+    
+    #CHECKLIST_ig_content_container .a-GV-hdr,
+    #CHECKLIST_ig_content_container .a-GV-footer,
+    #CHECKLIST_ig_content_container .js-stickyWidget-placeholder {
+      display: none;
+    }
+    #CHECKLIST_ig_content_container .a-IG {
+      border: 0 !important;
     }
     
 
@@ -50,18 +62,18 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Checklist ===================================
-  id: 34949826771065808
+- # ====== Region: Comments ====================================
+  id: 34949992362065809
   identification: 
-    title: Checklist
+    title: Comments
     type: Static Content
 
   layout: 
-    sequence: 30
+    sequence: 100
     parent-region: No Parent
     position: BODY
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -81,47 +93,9 @@ regions:
     region-display-selector: true
     exclude-title-from-translation: false
 
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: Comments ====================================
-  id: 34949992362065809
-  identification: 
-    title: Comments
-    type: Static Content
-
-  layout: 
-    sequence: 50
-    parent-region: No Parent
-    position: BODY
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Hero # 70864195177975601
-    template-options: 
-    - '#DEFAULT#'
-    - margin-top-lg
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: true
-    exclude-title-from-translation: false
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
 
   server-cache: 
     caching: Disabled
@@ -149,13 +123,13 @@ regions:
     where-clause: 'task_id = :P105_TASK_ID'
 
   layout: 
-    sequence: 40
+    sequence: 80
     parent-region: No Parent
     position: BODY
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
-    new-column: true
+    new-column: false
     column-span: Automatic
 
   appearance: 
@@ -172,6 +146,10 @@ regions:
     static-id: CHECKLIST
     region-display-selector: true
     exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
 
   server-cache: 
     caching: Disabled
@@ -314,7 +292,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -367,7 +345,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 60
+      sequence: 50
       column-alignment: center
       stretch: Use Report Setting
 
@@ -416,7 +394,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 70
+      sequence: 80
 
     accessibility: 
       value-identifies-row: false
@@ -450,7 +428,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 80
+      sequence: 90
 
     accessibility: 
       value-identifies-row: false
@@ -474,6 +452,134 @@ regions:
     enable-users-to: 
       sort: false
 
+- # ====== Region: LEFT ========================================
+  id: 34952079744065830
+  identification: 
+    title: LEFT
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Checklist ===================================
+  id: 34952237728065832
+  identification: 
+    title: Checklist
+    type: Static Content
+
+  layout: 
+    sequence: 70
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    - margin-top-md
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: RIGHT =======================================
+  id: 34952309614065833
+  identification: 
+    title: RIGHT
+    type: Static Content
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
 - # ====== Region: &P105_HEADER. ===============================
   id: 63213380867844590
   identification: 
@@ -481,11 +587,11 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 10
+    sequence: 20
     parent-region: No Parent
     position: BODY
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -529,13 +635,13 @@ regions:
     include-rowid-column: false
 
   layout: 
-    sequence: 20
+    sequence: 60
     parent-region: No Parent
     position: BODY
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
-    new-column: true
+    new-column: false
     column-span: Automatic
 
   appearance: 
@@ -623,15 +729,15 @@ page-items:
     disabled: false
 
   layout: 
-    sequence: 20
-    region: '[FORM]' # 63213536180844591
+    sequence: 10
+    region: LEFT # 34952079744065830
     position: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: true
     column: Automatic
     new-column: true
-    column-span: 8
+    column-span: Automatic
     label-column-span: Page Template Default
 
   appearance: 
@@ -669,25 +775,25 @@ page-items:
   id: 34799148806743642
   identification: 
     name: P105_TASK_DESC
-    type: Markdown Editor
+    type: Rich Text Editor
 
   label: 
-    label: Task Desc
+    label: Description
     alignment: Left
 
   settings: 
-    toolbar: Full
-    syntax-highlighting: true
+    format: Markdown
+    minimum-height: 180
 
   layout: 
-    sequence: 30
-    region: '[FORM]' # 63213536180844591
+    sequence: 10
+    region: RIGHT # 34952309614065833
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
-    new-column: false
+    new-column: true
     column-span: Automatic
     label-column-span: Page Template Default
 
@@ -733,12 +839,12 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 40
-    region: '[FORM]' # 63213536180844591
+    sequence: 20
+    region: LEFT # 34952079744065830
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -790,7 +896,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 70
+    sequence: 20
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -827,7 +933,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 80
+    sequence: 40
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -869,14 +975,14 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 60
-    region: '[FORM]' # 63213536180844591
+    sequence: 40
+    region: LEFT # 34952079744065830
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
-    new-column: false
+    new-column: true
     column-span: Automatic
     label-column-span: Page Template Default
 
@@ -932,13 +1038,13 @@ page-items:
 
   layout: 
     sequence: 50
-    region: '[FORM]' # 63213536180844591
+    region: LEFT # 34952079744065830
     position: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: false
     column: Automatic
-    new-column: false
+    new-column: true
     column-span: Automatic
     label-column-span: Page Template Default
 
@@ -988,7 +1094,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 110
+    sequence: 60
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -1021,7 +1127,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 120
+    sequence: 70
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -1054,7 +1160,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 100
+    sequence: 50
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -1225,7 +1331,7 @@ buttons:
 
   layout: 
     sequence: 10
-    region: Checklist # 34949826771065808
+    region: Checklist # 34952237728065832
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -1356,7 +1462,7 @@ computations:
 
   computation: 
     type: Static Value
-    static-value: Update Task
+    static-value: 'Update Task #&P105_TASK_ID.'
 
   server-side-condition: 
     type: Item is NOT NULL
