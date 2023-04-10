@@ -39,8 +39,8 @@ javascript:
             //
             const target        = target_primary.indexOf('TASK_') === 0 ? target_alt : target_primary;
             const task_id       = task.getAttribute('id').replace('TASK_', '');
-            const status_id     = target.replace('STATUS_', '').split('__')[0];
-            const swimlane_id   = target.replace('STATUS_', '').split('__')[1];
+            const status_id     = target.replace('STATUS_', '').split('_SWIMLANE_')[0];
+            const swimlane_id   = target.replace('STATUS_', '').split('_SWIMLANE_')[1];
             const tasks         = document.getElementById(target).querySelectorAll('.TASK');
             //
             tasks.forEach(function(task) {
@@ -49,11 +49,11 @@ javascript:
             sorted = sorted.join(':');
             //
             console.group('TASK_MOVED');
-            console.log('TASK:',        task_id);
-            console.log('TARGET:',      target, target_primary, target_alt);
-            console.log('STATUS:',      status_id);
-            console.log('SWIMLANE:',    swimlane_id);
-            console.log('SORTED:',      sorted);
+            console.log('TASK     :', task_id);
+            console.log('TARGET   :', target, target_primary, target_alt);
+            console.log('STATUS   :', status_id);
+            console.log('SWIMLANE :', swimlane_id);
+            console.log('SORTED   :', sorted);
             console.groupEnd();
             //
             apex.server.process('UPDATE_TASK',
@@ -300,7 +300,7 @@ regions:
                   AND s.project_id    = :P0_PROJECT_ID
               ORDER BY s.order#
           ) LOOP
-              HTP.P('<div class="TARGET" id="STATUS_' || s.status_id || '__' || w.swimlane_id || '">');
+              HTP.P('<div class="TARGET" id="STATUS_' || s.status_id || '_SWIMLANE_' || w.swimlane_id || '">');
               --
               FOR t IN (
                   SELECT
