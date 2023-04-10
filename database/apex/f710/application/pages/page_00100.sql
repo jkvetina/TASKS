@@ -262,6 +262,18 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_redirect_url=>'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
 ,p_icon_css_classes=>'fa-plus'
 );
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(34952422242065834)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_imp.id(34744374076440316)
+,p_button_name=>'REFRESH_TASKS'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
+,p_button_image_alt=>'Refresh Tasks'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_icon_css_classes=>'fa-refresh'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34905220916116348)
 ,p_name=>'P100_CLIENT_ID'
