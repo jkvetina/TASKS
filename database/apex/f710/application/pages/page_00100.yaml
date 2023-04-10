@@ -151,7 +151,7 @@ css:
     .DRAGGING {
       box-shadow        : 0px 5px 15px rgba(0, 0, 0, 0.25);
       background        : rgb(50, 50, 50);
-      color             : #fff;
+      color             : #fff !important;
     }
     
     .TASK a,
@@ -187,7 +187,7 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 40
+    sequence: 20
     parent-region: No Parent
     position: BODY
     start-new-layout: false
@@ -270,7 +270,7 @@ regions:
           ) LOOP
               HTP.P(
                   '<div class="TASK" draggable="true" id="TASK_' || t.task_id || '">' ||
-                  '<a href="' || t.task_link || '">' || t.task_name ||
+                  '<a href="' || t.task_link || '">#' || t.task_id || ' ' || t.task_name ||
                   '<span style="float: right;">' || RTRIM(' ' || t.task_progress) || '</span>' ||
                   '</a></div>'
               );
@@ -284,7 +284,7 @@ regions:
       
 
   layout: 
-    sequence: 50
+    sequence: 30
     parent-region: No Parent
     position: BODY
     start-new-layout: false
@@ -313,47 +313,6 @@ regions:
   customization: 
     customizable: Not Customizable By End Users
 
-- # ====== Region: Filters =====================================
-  id: 34797708668743628
-  identification: 
-    title: Filters
-    type: Static Content
-
-  layout: 
-    sequence: 10
-    parent-region: No Parent
-    position: BODY
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Hero # 70864195177975601
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: true
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
 - # ====== Region: Filters [F] =================================
   id: 69652345538556693
   identification: 
@@ -361,7 +320,7 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 20
+    sequence: 10
     parent-region: No Parent
     position: BODY
     start-new-layout: false
@@ -798,102 +757,36 @@ dynamic-actions:
       fire-when-event-result-is: True
       fire-on-initialization: false
 
-- # ====== Dynamic Action: CHANGED_SET =========================
-  id: 84772908433020013
+- # ====== Dynamic Action: CLOSED_DETAIL =======================
+  id: 34951752190065827
   identification: 
-    name: CHANGED_SET
+    name: CLOSED_DETAIL
 
   execution: 
-    sequence: 10
+    sequence: 80
 
   when: 
-    event: EVENT.EVENT.BROWSER.CHANGE
-    selection-type: Item(s)
-    item(s): 
-    - P100_SET_ID
+    event: EVENT.EVENT.FAMEWORK.APEXAFTERCLOSEDIALOG
+    selection-type: JavaScript Expression
+    javascript-expression: window
 
   execution: 
     event-scope: Static
     type: Immediate
 
   actions: 
-  - # ====== Action: Submit Page =================================
-    id: 84772947980020014
+  - # ====== Action: Refresh =====================================
+    id: 34951801858065828
     identification: 
-      action: Submit Page
+      action: Refresh
 
-    settings: 
-      show-processing: true
+    affected-elements: 
+      selection-type: Region
+      region: Tasks [CONTENT] # 34744427648440317
 
     execution: 
       sequence: 10
-      event: CHANGED_SET # 84772908433020013
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-- # ====== Dynamic Action: CHANGED_CATEGORY ====================
-  id: 84773145626020016
-  identification: 
-    name: CHANGED_CATEGORY
-
-  execution: 
-    sequence: 20
-
-  when: 
-    event: EVENT.EVENT.BROWSER.CHANGE
-    selection-type: Item(s)
-    item(s): 
-    - P100_CATEGORY_ID
-
-  execution: 
-    event-scope: Static
-    type: Immediate
-
-  actions: 
-  - # ====== Action: Submit Page =================================
-    id: 84773283832020017
-    identification: 
-      action: Submit Page
-
-    settings: 
-      show-processing: true
-
-    execution: 
-      sequence: 10
-      event: CHANGED_CATEGORY # 84773145626020016
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-- # ====== Dynamic Action: CHANGED_SECTION =====================
-  id: 84773457777020019
-  identification: 
-    name: CHANGED_SECTION
-
-  execution: 
-    sequence: 30
-
-  when: 
-    event: EVENT.EVENT.BROWSER.CHANGE
-    selection-type: Item(s)
-    item(s): 
-    - P100_SECTION_ID
-
-  execution: 
-    event-scope: Static
-    type: Immediate
-
-  actions: 
-  - # ====== Action: Submit Page =================================
-    id: 84773595088020020
-    identification: 
-      action: Submit Page
-
-    settings: 
-      show-processing: true
-
-    execution: 
-      sequence: 10
-      event: CHANGED_SECTION # 84773457777020019
+      event: CLOSED_DETAIL # 34951752190065827
       fire-when-event-result-is: True
       fire-on-initialization: false
 
