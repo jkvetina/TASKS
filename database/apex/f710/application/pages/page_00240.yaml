@@ -191,16 +191,29 @@ regions:
     id: 34796434872743615
     identification: 
       column-name: TASK_ID
-      type: Hidden
+      type: Link
 
-    settings: 
-      value-protected: true
+    heading: 
+      heading: Task Id
+      alignment: end
 
     layout: 
       sequence: 30
+      column-alignment: end
+      stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TASK_ID:&TASK_ID.'
+        page: 105 # New Task
+        clear-cache: 105
+        values: 
+          p105_task_id: '&TASK_ID.'
+
+      link-text: '&TASK_ID.'
 
     source: 
       type: Database Column
@@ -214,8 +227,9 @@ regions:
       sequence: TSK_TASK_ID
       duplicate-copies-existing-value: true
 
-    session-state: 
-      data-type: VARCHAR2
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
 
     export-/-printing: 
       include-in-export-/-print: false
@@ -223,6 +237,10 @@ regions:
     enable-users-to: 
       sort: true
       control-break/aggregate: true
+      hide: true
+
+    security: 
+      escape-special-characters: true
 
   - # ====== Column: TASK_NAME ===================================
     id: 34796515684743616
@@ -827,6 +845,34 @@ buttons:
       page: 105 # New Task
       clear-cache: 105
 
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: REFRESH_TASKS ===============================
+  id: 35086687557868207
+  identification: 
+    button-name: REFRESH_TASKS
+    label: Refresh Tasks
+
+  layout: 
+    sequence: 20
+    region: Tasks # 34796175637743612
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-refresh
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
     warn-on-unsaved-changes: Do Not Check
 
 processes: 

@@ -87,19 +87,27 @@ wwv_flow_imp_page.create_region_column(
 ,p_source_type=>'DB_COLUMN'
 ,p_source_expression=>'TASK_ID'
 ,p_data_type=>'NUMBER'
-,p_session_state_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
-,p_item_type=>'NATIVE_HIDDEN'
+,p_item_type=>'NATIVE_LINK'
+,p_heading=>'Task Id'
+,p_heading_alignment=>'RIGHT'
 ,p_display_sequence=>30
-,p_attribute_01=>'Y'
+,p_value_alignment=>'RIGHT'
+,p_link_target=>'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TASK_ID:&TASK_ID.'
+,p_link_text=>'&TASK_ID.'
+,p_enable_filter=>true
+,p_filter_is_required=>false
+,p_filter_lov_type=>'DISTINCT'
 ,p_use_as_row_header=>false
 ,p_enable_sort_group=>true
 ,p_enable_control_break=>true
+,p_enable_hide=>true
 ,p_is_primary_key=>true
 ,p_default_type=>'SEQUENCE'
 ,p_default_expression=>'TSK_TASK_ID'
 ,p_duplicate_value=>true
 ,p_include_in_export=>false
+,p_escape_on_http_output=>true
 );
 wwv_flow_imp_page.create_region_column(
  p_id=>wwv_flow_imp.id(34796515684743616)
@@ -448,6 +456,7 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_column_id=>wwv_flow_imp.id(34796434872743615)
 ,p_is_visible=>true
 ,p_is_frozen=>false
+,p_width=>120
 );
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(34894554308109589)
@@ -470,8 +479,12 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_view_id=>wwv_flow_imp.id(34893100587109583)
 ,p_display_seq=>5
 ,p_column_id=>wwv_flow_imp.id(34796732967743618)
-,p_is_visible=>true
+,p_is_visible=>false
 ,p_is_frozen=>false
+,p_break_order=>10
+,p_break_is_enabled=>true
+,p_break_sort_direction=>'ASC'
+,p_break_sort_nulls=>'LAST'
 );
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(34897226707109598)
@@ -557,6 +570,18 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_position=>'RIGHT_OF_TITLE'
 ,p_button_redirect_url=>'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
 ,p_icon_css_classes=>'fa-plus'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(35086687557868207)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_imp.id(34796175637743612)
+,p_button_name=>'REFRESH_TASKS'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
+,p_button_image_alt=>'Refresh Tasks'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_icon_css_classes=>'fa-refresh'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34797614473743627)
