@@ -604,23 +604,3 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
-- # ====== Process: SET_FILTERS ================================
-  id: 34857427021030791
-  identification: 
-    name: SET_FILTERS
-    type: Execute Code
-
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: |
-      :P210_CLIENT_ID     := NVL(:P210_CLIENT_ID,     :P0_CLIENT_ID);
-      :P210_PROJECT_ID    := NVL(:P210_PROJECT_ID,    :P0_PROJECT_ID);
-      :P210_BOARD_ID      := NVL(:P210_BOARD_ID,      :P0_BOARD_ID);
-      
-
-  execution: 
-    sequence: 10
-    point: Before Header
-    run-process: Once Per Page Visit (default)
-
