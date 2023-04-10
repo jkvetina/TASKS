@@ -291,7 +291,7 @@ regions:
           END IF;
       
           -- swimlanes per user
-          HTP.P('<h3 style="text-align: right;">' || NULLIF('@' || w.swimlane_name, '@-') || '</h3>');
+          HTP.P('<h3 style="text-align: right;">' || NULLIF(w.swimlane_name, '-') || '</h3>');
           --
           FOR s IN (
               SELECT s.*
@@ -348,7 +348,7 @@ regions:
       
 
   layout: 
-    sequence: 30
+    sequence: 40
     parent-region: No Parent
     position: BODY
     start-new-layout: false
@@ -426,7 +426,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Client Id
+    label: Client
     alignment: Left
 
   settings: 
@@ -485,7 +485,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Project Id
+    label: Project
     alignment: Left
 
   settings: 
@@ -544,7 +544,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Board Id
+    label: Board
     alignment: Left
 
   settings: 
@@ -603,7 +603,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Swimlane Id
+    label: Swimlane
     alignment: Left
 
   settings: 
@@ -611,7 +611,7 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 40
+    sequence: 50
     region: Filters [F] # 69652345538556693
     position: BODY
     alignment: Left
@@ -717,6 +717,40 @@ buttons:
     action: Submit Page
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: ADD_BOARD ===================================
+  id: 34953082744065840
+  identification: 
+    button-name: ADD_BOARD
+    label: Add Board
+
+  layout: 
+    sequence: 40
+    region: Filters [F] # 69652345538556693
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 1
+    alignment: Left center
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-plus
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
+  advanced: 
+    custom-attributes: 
+    - 'style="margin-top:'
+    - 0.8rem;"
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_PROJECT =====================
