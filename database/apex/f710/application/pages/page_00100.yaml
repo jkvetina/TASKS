@@ -160,7 +160,7 @@ css:
       flex-direction    : column;
       flex-shrink       : 0;
       gap               : 0.5rem;
-      box-shadow        : 0 5px 10px rgba(0, 0, 0, 0.10);
+      box-shadow        : 0 5px 10px rgba(0, 0, 0, 0.15);
       padding           : 0.5rem;
       border-radius     : 5px;
       background        : #f9f9f9;
@@ -182,7 +182,7 @@ css:
     
     .TASK {
       box-shadow        : 0 5px 10px rgba(0, 0, 0, 0.05);
-      padding           : 1rem;
+      padding           : 0.8rem;
       border-radius     : 4px;
       cursor            : move;
       font-size         : 90%;
@@ -196,7 +196,7 @@ css:
     }
     
     .DRAGGING {
-      box-shadow        : 0px 5px 15px rgba(0, 0, 0, 0.25);
+      box-shadow        : 0px 5px 10px rgba(0, 0, 0, 0.20);
       background        : rgb(50, 50, 50);
       color             : #fff !important;
     }
@@ -706,9 +706,11 @@ buttons:
   behavior: 
     action: Redirect to Page in this Application
     target: 
-      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
+      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_SOURCE_PAGE:100'
       page: 105 # New Task
       clear-cache: 105
+      values: 
+        p105_source_page: 100
 
     warn-on-unsaved-changes: Do Not Check
 

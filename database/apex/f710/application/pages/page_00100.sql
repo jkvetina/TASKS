@@ -155,7 +155,7 @@ wwv_flow_imp_page.create_page(
 '  flex-direction    : column;',
 '  flex-shrink       : 0;',
 '  gap               : 0.5rem;',
-'  box-shadow        : 0 5px 10px rgba(0, 0, 0, 0.10);',
+'  box-shadow        : 0 5px 10px rgba(0, 0, 0, 0.15);',
 '  padding           : 0.5rem;',
 '  border-radius     : 5px;',
 '  background        : #f9f9f9;',
@@ -177,7 +177,7 @@ wwv_flow_imp_page.create_page(
 '',
 '.TASK {',
 '  box-shadow        : 0 5px 10px rgba(0, 0, 0, 0.05);',
-'  padding           : 1rem;',
+'  padding           : 0.8rem;',
 '  border-radius     : 4px;',
 '  cursor            : move;',
 '  font-size         : 90%;',
@@ -191,7 +191,7 @@ wwv_flow_imp_page.create_page(
 '}',
 '',
 '.DRAGGING {',
-'  box-shadow        : 0px 5px 15px rgba(0, 0, 0, 0.25);',
+'  box-shadow        : 0px 5px 10px rgba(0, 0, 0, 0.20);',
 '  background        : rgb(50, 50, 50);',
 '  color             : #fff !important;',
 '}',
@@ -347,7 +347,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
 ,p_button_image_alt=>'Add Task'
 ,p_button_position=>'RIGHT_OF_TITLE'
-,p_button_redirect_url=>'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
+,p_button_redirect_url=>'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_SOURCE_PAGE:100'
 ,p_icon_css_classes=>'fa-plus'
 );
 wwv_flow_imp_page.create_page_button(
