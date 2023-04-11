@@ -1,0 +1,20 @@
+---
+- # ====== Application Process: AFTER_AUTH =====================
+  id: 35098301947828232
+  identification: 
+    name: AFTER_AUTH
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      :P0_CLIENT_ID   := APEX_APP_SETTING.GET_VALUE('P0_CLIENT_ID');
+      :P0_PROJECT_ID  := APEX_APP_SETTING.GET_VALUE('P0_PROJECT_ID');
+      :P0_BOARD_ID    := APEX_APP_SETTING.GET_VALUE('P0_BOARD_ID');
+      
+
+  execution: 
+    sequence: 1
+    point: After Authentication
+

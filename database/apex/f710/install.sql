@@ -13,6 +13,7 @@ prompt --install
 @@application/shared_components/security/authorizations/master_is_admin.sql
 @@application/shared_components/security/authorizations/master_is_user.sql
 @@application/shared_components/navigation/navigation_bar.sql
+@@application/shared_components/logic/application_processes/after_auth.sql
 @@application/shared_components/logic/application_settings.sql
 @@application/shared_components/navigation/tabs/standard.sql
 @@application/shared_components/navigation/tabs/parent.sql

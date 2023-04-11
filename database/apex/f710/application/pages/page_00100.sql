@@ -579,6 +579,10 @@ wwv_flow_imp_page.create_page_process(
 ':P0_CLIENT_ID   := :P100_CLIENT_ID;',
 ':P0_PROJECT_ID  := :P100_PROJECT_ID;',
 ':P0_BOARD_ID    := :P100_BOARD_ID;',
+'--',
+'APEX_APP_SETTING.SET_VALUE(''P0_CLIENT_ID'',  :P0_CLIENT_ID);',
+'APEX_APP_SETTING.SET_VALUE(''P0_PROJECT_ID'', :P0_PROJECT_ID);',
+'APEX_APP_SETTING.SET_VALUE(''P0_BOARD_ID'',   :P0_BOARD_ID);',
 ''))
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
