@@ -20,7 +20,7 @@ wwv_flow_imp_shared.create_list_item(
  p_id=>wwv_flow_imp.id(98987558259303830)
 ,p_list_item_display_sequence=>10
 ,p_list_item_link_text=>'Home'
-,p_list_item_link_target=>'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
+,p_list_item_link_target=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:::'
 ,p_list_item_icon=>'fa-home'
 ,p_list_item_current_type=>'TARGET_PAGE'
 );

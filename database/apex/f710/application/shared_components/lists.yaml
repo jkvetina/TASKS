@@ -22,8 +22,9 @@
 
     link: 
       target: 
-        url: 'f?p=&APP_ID.:1:&APP_SESSION.::&DEBUG.:::'
-        page: 1
+        url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:::'
+        page: 100 # Tasks
+        clear-cache: 100
 
     click-counting: 
       count-clicks: false
