@@ -922,9 +922,8 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_PROJECTS
+    table-name: TSK_P100_PROJECTS_V
     include-rowid-column: false
-    where-clause: 'client_id = :P0_CLIENT_ID'
 
   layout: 
     sequence: 20
@@ -1040,6 +1039,54 @@ regions:
     layout: 
       sequence: 10
 
+  - # ====== Column: ACTIVATE_URL ================================
+    id: 35126597761937040
+    identification: 
+      column-name: ACTIVATE_URL
+      type: Link
+
+    heading: 
+      alignment: center
+
+    layout: 
+      sequence: 30
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: '&ACTIVATE_URL.'
+      link-text: ACTIVATE
+
+    source: 
+      type: Database Column
+      database-column: ACTIVATE_URL
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
   - # ====== Column: CLIENT_ID ===================================
     id: 68999757079897465
     identification: 
@@ -1051,7 +1098,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 30
+      sequence: 40
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1059,7 +1106,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
 
     list-of-values: 
       type: Shared Component
@@ -1113,7 +1160,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 40
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1121,7 +1168,8 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
+      maximum-length: 32
 
     source: 
       type: Database Column
@@ -1167,7 +1215,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1222,7 +1270,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: center
       stretch: Use Report Setting
 
@@ -1262,74 +1310,6 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
-
-  - # ====== Column: UPDATED_BY ==================================
-    id: 69000224785897469
-    identification: 
-      column-name: UPDATED_BY
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 70
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_BY
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 69000299140897470
-    identification: 
-      column-name: UPDATED_AT
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 80
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_AT
-      data-type: DATE
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
 
   printing: 
     page: 
@@ -1380,11 +1360,8 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_BOARDS
+    table-name: TSK_P100_BOARDS_V
     include-rowid-column: false
-    where-clause: |
-      client_id = :P0_CLIENT_ID
-      AND project_id = :P0_PROJECT_ID
 
   layout: 
     sequence: 20
@@ -1500,6 +1477,54 @@ regions:
     layout: 
       sequence: 10
 
+  - # ====== Column: ACTIVATE_URL ================================
+    id: 35126700179937042
+    identification: 
+      column-name: ACTIVATE_URL
+      type: Link
+
+    heading: 
+      alignment: center
+
+    layout: 
+      sequence: 30
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: '&ACTIVATE_URL.'
+      link-text: ACTIVATE
+
+    source: 
+      type: Database Column
+      database-column: ACTIVATE_URL
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
   - # ====== Column: BOARD_ID ====================================
     id: 69911063472924471
     identification: 
@@ -1510,7 +1535,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 30
+      sequence: 40
 
     accessibility: 
       value-identifies-row: false
@@ -1551,7 +1576,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 40
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1602,7 +1627,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1660,7 +1685,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1722,7 +1747,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 70
+      sequence: 80
       column-alignment: center
       stretch: Use Report Setting
 
@@ -1762,74 +1787,6 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
-
-  - # ====== Column: UPDATED_BY ==================================
-    id: 69911592019924476
-    identification: 
-      column-name: UPDATED_BY
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 80
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_BY
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 69911647935924477
-    identification: 
-      column-name: UPDATED_AT
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 90
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_AT
-      data-type: DATE
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
 
   printing: 
     page: 
@@ -3012,7 +2969,7 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_CLIENTS
+    table-name: TSK_P100_CLIENTS_V
     include-rowid-column: false
 
   layout: 
@@ -3129,6 +3086,54 @@ regions:
     layout: 
       sequence: 10
 
+  - # ====== Column: ACTIVATE_URL ================================
+    id: 35126698129937041
+    identification: 
+      column-name: ACTIVATE_URL
+      type: Link
+
+    heading: 
+      alignment: center
+
+    layout: 
+      sequence: 30
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: '&ACTIVATE_URL.'
+      link-text: ACTIVATE
+
+    source: 
+      type: Database Column
+      database-column: ACTIVATE_URL
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
   - # ====== Column: CLIENT_ID ===================================
     id: 103818515931884267
     identification: 
@@ -3144,7 +3149,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 30
+      sequence: 40
       column-alignment: start
       stretch: Use Report Setting
 
@@ -3199,7 +3204,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 40
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -3239,74 +3244,6 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: UPDATED_BY ==================================
-    id: 103818713922884269
-    identification: 
-      column-name: UPDATED_BY
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 60
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_BY
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 103818872593884270
-    identification: 
-      column-name: UPDATED_AT
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 70
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_AT
-      data-type: DATE
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
   - # ====== Column: IS_ACTIVE ===================================
     id: 103820103606884282
     identification: 
@@ -3322,7 +3259,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: center
       stretch: Use Report Setting
 
