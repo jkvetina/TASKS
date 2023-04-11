@@ -208,7 +208,7 @@ regions:
     link: 
       target: 
         url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TASK_ID:&TASK_ID.'
-        page: 105 # New Task
+        page: 105 # Task Detail
         clear-cache: 105
         values: 
           p105_task_id: '&TASK_ID.'
@@ -842,7 +842,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
-      page: 105 # New Task
+      page: 105 # Task Detail
       clear-cache: 105
 
     warn-on-unsaved-changes: Do Not Check
