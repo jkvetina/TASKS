@@ -1,6 +1,6 @@
 CREATE TABLE tsk_tasks (
     task_id                         NUMBER(10,0)    CONSTRAINT nn_tsk_tasks_id NOT NULL,
-    task_name                       VARCHAR2(64)    CONSTRAINT nn_tsk_tasks_name NOT NULL,
+    task_name                       VARCHAR2(128)   CONSTRAINT nn_tsk_tasks_name NOT NULL,
     task_desc                       VARCHAR2(4000),
     board_id                        NUMBER(10,0)    CONSTRAINT nn_tsk_tasks_board NOT NULL,
     client_id                       VARCHAR2(32)    CONSTRAINT nn_tsk_tasks_client NOT NULL,
