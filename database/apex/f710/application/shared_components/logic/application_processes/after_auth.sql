@@ -18,10 +18,20 @@ wwv_flow_imp_shared.create_flow_process(
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'AFTER_AUTH'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-':P0_CLIENT_ID   := APEX_APP_SETTING.GET_VALUE(''P0_CLIENT_ID'');',
-':P0_PROJECT_ID  := APEX_APP_SETTING.GET_VALUE(''P0_PROJECT_ID'');',
-':P0_BOARD_ID    := APEX_APP_SETTING.GET_VALUE(''P0_BOARD_ID'');',
-''))
+':P0_CLIENT_ID := APEX_UTIL.GET_PREFERENCE (',
+'    p_preference => ''P0_CLIENT_ID'',',
+'    p_user       => :APP_USER',
+');',
+'--',
+':P0_PROJECT_ID := APEX_UTIL.GET_PREFERENCE (',
+'    p_preference => ''P0_PROJECT_ID'',',
+'    p_user       => :APP_USER',
+');',
+'--',
+':P0_BOARD_ID := APEX_UTIL.GET_PREFERENCE (',
+'    p_preference => ''P0_BOARD_ID'',',
+'    p_user       => :APP_USER',
+');'))
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp.component_end;
