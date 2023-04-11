@@ -200,16 +200,16 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Tasks =======================================
+- # ====== Region: Tasks for &P100_BOARD_NAME. =================
   id: 34744374076440316
   identification: 
-    title: Tasks
+    title: Tasks for &P100_BOARD_NAME.
     type: Static Content
 
   layout: 
     sequence: 20
-    parent-region: No Parent
-    position: BODY
+    parent-region: Tasks # 35122875520937003
+    position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -227,7 +227,7 @@ regions:
     landmark-type: Template Default
 
   advanced: 
-    region-display-selector: true
+    region-display-selector: false
     exclude-title-from-translation: false
 
   server-cache: 
@@ -349,8 +349,8 @@ regions:
 
   layout: 
     sequence: 40
-    parent-region: No Parent
-    position: BODY
+    parent-region: Tasks # 35122875520937003
+    position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -361,6 +361,43 @@ regions:
     template: Blank with Attributes # 70831193948975578
     template-options: 
     - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+- # ====== Region: [TABS] ======================================
+  id: 35122764210937002
+  identification: 
+    title: '[TABS]'
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Tabs Container # 70907050579975626
+    template-options: 
+    - '#DEFAULT#'
+    - t-TabsRegion-mod--simple
     render-components: Above Content
 
   accessibility: 
@@ -377,16 +414,21 @@ regions:
   customization: 
     customizable: Not Customizable By End Users
 
-- # ====== Region: Filters [F] =================================
-  id: 69652345538556693
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Tasks =======================================
+  id: 35122875520937003
   identification: 
-    title: Filters [F]
+    title: Tasks
     type: Static Content
 
   layout: 
     sequence: 10
-    parent-region: No Parent
-    position: BODY
+    parent-region: '[TABS]' # 35122764210937002
+    position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -404,7 +446,294 @@ regions:
     landmark-type: Template Default
 
   advanced: 
-    region-display-selector: true
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Boards ======================================
+  id: 35123595461937010
+  identification: 
+    title: Boards
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: '[TABS]' # 35122764210937002
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Boards ======================================
+  id: 35123692965937011
+  identification: 
+    title: Boards
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: Boards # 35123595461937010
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Filters =====================================
+  id: 35123712321937012
+  identification: 
+    title: Filters
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: Tasks # 35122875520937003
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Projects ====================================
+  id: 35123823730937013
+  identification: 
+    title: Projects
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: '[TABS]' # 35122764210937002
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Projects ====================================
+  id: 35123907224937014
+  identification: 
+    title: Projects
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: Projects # 35123823730937013
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Clients =====================================
+  id: 35124097971937015
+  identification: 
+    title: Clients
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: '[TABS]' # 35122764210937002
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Clients =====================================
+  id: 35124184078937016
+  identification: 
+    title: Clients
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: Clients # 35124097971937015
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
     exclude-title-from-translation: false
 
   server-cache: 
@@ -435,7 +764,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: Filters [F] # 69652345538556693
+    region: Filters # 35123712321937012
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -457,7 +786,7 @@ page-items:
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_CLIENTS # 34762829880497308
-    display-extra-values: true
+    display-extra-values: false
     display-null-value: true
 
   advanced: 
@@ -493,8 +822,8 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 20
-    region: Filters [F] # 69652345538556693
+    sequence: 10
+    region: Filters # 35123712321937012
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -516,7 +845,7 @@ page-items:
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_PROJECTS # 34763034913500105
-    display-extra-values: true
+    display-extra-values: false
     display-null-value: true
 
   advanced: 
@@ -552,8 +881,8 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 30
-    region: Filters [F] # 69652345538556693
+    sequence: 10
+    region: Filters # 35123712321937012
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -575,7 +904,7 @@ page-items:
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_BOARDS # 34763544164505098
-    display-extra-values: true
+    display-extra-values: false
     display-null-value: true
 
   advanced: 
@@ -600,19 +929,18 @@ page-items:
   id: 34951490119065824
   identification: 
     name: P100_SWIMLANE_ID
-    type: Select List
+    type: Checkbox Group
 
   label: 
     label: Swimlane
     alignment: Left
 
   settings: 
-    page-action-on-selection: None
-    allow-multi-selection: false
+    number-of-columns: 1
 
   layout: 
-    sequence: 50
-    region: Filters [F] # 69652345538556693
+    sequence: 20
+    region: Filters # 35123712321937012
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -626,7 +954,6 @@ page-items:
     template: Optional - Floating # 70967669576975668
     template-options: 
     - '#DEFAULT#'
-    height: 1
 
   validation: 
     value-required: false
@@ -635,7 +962,6 @@ page-items:
     type: Shared Component
     list-of-values: LOV_TASK_SWIMLANES # 34920402511183578
     display-extra-values: true
-    display-null-value: true
 
   advanced: 
     warn-on-unsaved-changes: Ignore
@@ -647,12 +973,43 @@ page-items:
   session-state: 
     storage: Per Session (Persistent)
 
-  quick-picks: 
-    show-quick-picks: false
+  server-side-condition: 
+    type: Never
 
   security: 
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: true
+    escape-special-characters: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_BOARD_NAME ==========================
+  id: 35124240356937017
+  identification: 
+    name: P100_BOARD_NAME
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: Filters # 35123712321937012
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 buttons: 
@@ -664,7 +1021,7 @@ buttons:
 
   layout: 
     sequence: 10
-    region: Tasks # 34744374076440316
+    region: Tasks for &P100_BOARD_NAME. # 34744374076440316
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -673,17 +1030,18 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Icon # 70969417180975670
-    hot: false
+    button-template: Text with Icon # 70970191130975672
+    hot: true
     template-options: 
     - '#DEFAULT#'
+    - t-Button--iconLeft
     icon: fa-plus
 
   behavior: 
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_SOURCE_PAGE:100'
-      page: 105 # New Task
+      page: 105 # Task Detail
       clear-cache: 105
       values: 
         p105_source_page: 100
@@ -698,7 +1056,7 @@ buttons:
 
   layout: 
     sequence: 20
-    region: Tasks # 34744374076440316
+    region: Tasks for &P100_BOARD_NAME. # 34744374076440316
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -717,40 +1075,6 @@ buttons:
     action: Submit Page
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
-
-- # ====== Button: ADD_BOARD ===================================
-  id: 34953082744065840
-  identification: 
-    button-name: ADD_BOARD
-    label: Add Board
-
-  layout: 
-    sequence: 40
-    region: Filters [F] # 69652345538556693
-    position: BODY
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: true
-    column-span: 1
-    alignment: Left center
-
-  appearance: 
-    button-template: Icon # 70969417180975670
-    hot: false
-    template-options: 
-    - '#DEFAULT#'
-    icon: fa-plus
-
-  behavior: 
-    action: Submit Page
-    execute-validations: true
-    warn-on-unsaved-changes: Do Not Check
-
-  advanced: 
-    custom-attributes: 
-    - 'style="margin-top:'
-    - 0.8rem;"
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_PROJECT =====================
@@ -903,20 +1227,39 @@ dynamic-actions:
     type: Immediate
 
   actions: 
-  - # ====== Action: Refresh =====================================
-    id: 34951801858065828
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 35122614857937001
     identification: 
-      action: Refresh
+      action: Execute JavaScript Code
 
-    affected-elements: 
-      selection-type: Region
-      region: Tasks [CONTENT] # 34744427648440317
+    settings: 
+      code: |
+        console.log('DIALOG_CLOSED');
+        location.reload();
+        
 
     execution: 
       sequence: 10
       event: CLOSED_DETAIL # 34951752190065827
       fire-when-event-result-is: True
       fire-on-initialization: false
+
+computations: 
+- # ====== Computation: P100_BOARD_NAME ========================
+  id: 35124396504937018
+  identification: 
+    item-name: P100_BOARD_NAME
+
+  execution: 
+    sequence: 10
+    point: Before Regions
+
+  computation: 
+    type: SQL Query (return single value)
+    sql-query: |
+      SELECT b.board_name
+      FROM tsk_boards b
+      WHERE b.board_id = :P0_BOARD_ID;
 
 processes: 
 - # ====== Process: UPDATE_TASK ================================
@@ -936,16 +1279,17 @@ processes:
       WHERE t.task_id     = APEX_APPLICATION.G_X01;
       --
       IF SQL%ROWCOUNT = 1 THEN
-          -- update order of tasks in column
+          -- update order of passed tasks
           FOR s IN (
-              SELECT /*+ MATERIALIZE */
+              SELECT
                   COLUMN_VALUE    AS task_id,
                   ROWNUM * 10     AS order#
               FROM APEX_STRING.SPLIT(APEX_APPLICATION.G_X04, ':')
           ) LOOP
               UPDATE tsk_tasks t
-              SET t.order#    = s.order#
-              WHERE t.task_id = s.task_id;
+              SET t.order#        = s.order#
+              WHERE t.task_id     = s.task_id
+                  AND t.order#    != s.order#;
           END LOOP;
       
           -- message for app
@@ -972,9 +1316,23 @@ processes:
       :P0_PROJECT_ID  := :P100_PROJECT_ID;
       :P0_BOARD_ID    := :P100_BOARD_ID;
       --
-      APEX_APP_SETTING.SET_VALUE('P0_CLIENT_ID',  :P0_CLIENT_ID);
-      APEX_APP_SETTING.SET_VALUE('P0_PROJECT_ID', :P0_PROJECT_ID);
-      APEX_APP_SETTING.SET_VALUE('P0_BOARD_ID',   :P0_BOARD_ID);
+      APEX_UTIL.SET_PREFERENCE (
+          p_preference => 'P0_CLIENT_ID',
+          p_value      => :P0_CLIENT_ID,
+          p_user       => :APP_USER
+      );
+      --
+      APEX_UTIL.SET_PREFERENCE (
+          p_preference => 'P0_PROJECT_ID',
+          p_value      => :P0_PROJECT_ID,
+          p_user       => :APP_USER
+      );
+      --
+      APEX_UTIL.SET_PREFERENCE (
+          p_preference => 'P0_BOARD_ID',
+          p_value      => :P0_BOARD_ID,
+          p_user       => :APP_USER
+      );
       
 
   execution: 
