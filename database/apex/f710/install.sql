@@ -5,6 +5,10 @@ prompt --install
 @@application/user_interfaces.sql
 @@application/shared_components/navigation/lists/navigation_menu.sql
 @@application/shared_components/navigation/lists/navigation_bar.sql
+@@application/shared_components/files/app_js.sql
+@@application/shared_components/files/app_min_js.sql
+@@application/shared_components/files/app_css.sql
+@@application/shared_components/files/app_min_css.sql
 @@application/shared_components/files/icons_app_icon_32_png.sql
 @@application/shared_components/files/icons_app_icon_192_png.sql
 @@application/shared_components/files/icons_app_icon_512_png.sql

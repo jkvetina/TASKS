@@ -1,0 +1,56 @@
+.BOARD {
+    width                   : 100%;
+    display                 : grid;
+    grid-template-columns   : 100px repeat(6, minmax(300px, 1fr)); /* overridden on tag */
+    grid-auto-rows          : max-content;
+    grid-column-gap         : 1rem;
+    grid-row-gap            : 1rem;
+    padding                 : 0 1rem 1rem 0;
+}
+
+.TARGET,
+.TARGET_LIKE {
+    margin          : 0;
+    border-radius   : 5px;
+    box-shadow      : 0 5px 10px rgba(0, 0, 0, 0.15);
+    background      : #f9f9f9;
+}
+.TARGET_LIKE,
+.TARGET_LIKE h3,
+.BOARD h3 {
+    padding         : 0 0.5rem;
+    border          : 0;
+    box-shadow      : none;
+    background      : transparent;
+    text-align      : center;
+    font-size       : 100%;
+}
+.TARGET_LIKE h3 {
+    margin-bottom   : 0;
+}
+
+.TASK {
+    margin          : 0.5rem;
+    padding         : 0.8rem;
+    border-radius   : 4px;
+    box-shadow      : 0 5px 10px rgba(0, 0, 0, 0.05);
+    cursor          : move;
+    font-size       : 90%;
+    background      : #fff;
+    color           : #000;
+}
+.TASK a,
+.TASK a:hover {
+    color               : #000;
+    text-decoration     : none;
+}
+
+.DRAGGING {
+    box-shadow      : 0px 5px 10px rgba(0, 0, 0, 0.20);
+    background      : rgb(64, 64, 64);
+    color           : #fff !important;
+}
+.DRAGGING a {
+    color           : #fff !important;
+}
+
