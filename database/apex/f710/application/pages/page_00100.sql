@@ -2537,7 +2537,7 @@ wwv_flow_imp_page.create_page_process(
 '        UPDATE tsk_tasks t',
 '        SET t.order#        = s.order#',
 '        WHERE t.task_id     = s.task_id',
-'            AND t.order#    != s.order#;',
+'            AND (t.order#   != s.order# OR t.order# IS NULL);',
 '    END LOOP;',
 '',
 '    -- message for app',
