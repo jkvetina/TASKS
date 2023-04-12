@@ -77,13 +77,13 @@ regions:
     where-clause: 'task_id = :P105_TASK_ID'
 
   layout: 
-    sequence: 50
-    parent-region: Task Details # 44093139107578034
-    position: SUB_REGIONS
+    sequence: 10
+    parent-region: Checklist # 44094157892578044
+    position: BODY
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
-    new-column: false
+    new-column: true
     column-span: Automatic
 
   appearance: 
@@ -98,6 +98,9 @@ regions:
 
   advanced: 
     static-id: CHECKLIST
+    custom-attributes: 
+    - 'style="margin-top:'
+    - 0.5rem;"
     region-display-selector: false
     exclude-title-from-translation: false
 
@@ -448,52 +451,6 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Checklist ===================================
-  id: 34952237728065832
-  identification: 
-    title: Checklist
-    type: Static Content
-
-  layout: 
-    sequence: 40
-    parent-region: Task Details # 44093139107578034
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Hero # 70864195177975601
-    template-options: 
-    - '#DEFAULT#'
-    - margin-top-md
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-side-condition: 
-    type: Item is NOT NULL
-    item: P105_TASK_ID
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
 - # ====== Region: RIGHT =======================================
   id: 34952309614065833
   identification: 
@@ -507,7 +464,7 @@ regions:
     start-new-layout: false
     start-new-row: false
     column: Automatic
-    new-column: true
+    new-column: false
     column-span: Automatic
 
   appearance: 
@@ -667,7 +624,213 @@ regions:
 
   layout: 
     sequence: 20
+    parent-region: '[TABS_RIGHT]' # 44093969062578042
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: [TABS_RIGHT] ================================
+  id: 44093969062578042
+  identification: 
+    title: '[TABS_RIGHT]'
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Tabs Container # 70907050579975626
+    template-options: 
+    - '#DEFAULT#'
+    - t-TabsRegion-mod--simple
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Checklist ===================================
+  id: 44094157892578044
+  identification: 
+    title: Checklist
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: '[TABS_RIGHT]' # 44093969062578042
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Description =================================
+  id: 44094202470578045
+  identification: 
+    title: Description
+    type: Static Content
+
+  layout: 
+    sequence: 20
     parent-region: '[TABS]' # 44093072649578033
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Attachements ================================
+  id: 44094316535578046
+  identification: 
+    title: Attachements
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: '[TABS]' # 44093072649578033
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Git =========================================
+  id: 44094467518578047
+  identification: 
+    title: Git
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: '[TABS_RIGHT]' # 44093969062578042
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -1535,14 +1698,15 @@ buttons:
     label: Add Checklist Item
 
   layout: 
-    sequence: 10
-    region: Checklist # 34952237728065832
-    position: RIGHT_OF_TITLE
+    sequence: 30
+    region: Checklist # 44094157892578044
+    position: BODY
     start-new-layout: false
     start-new-row: true
     column: Automatic
     new-column: true
     column-span: Automatic
+    alignment: Left center
 
   appearance: 
     button-template: Icon # 70969417180975670
@@ -1554,6 +1718,10 @@ buttons:
   behavior: 
     action: Defined by Dynamic Action
     execute-validations: true
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
 
 - # ====== Button: UPDATE_AND_CLOSE ============================
   id: 44090106596578004
