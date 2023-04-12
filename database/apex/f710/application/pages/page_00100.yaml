@@ -129,31 +129,21 @@ regions:
 - # ====== Region: Tasks =======================================
   id: 35122875520937003
   identification: 
-    title: Swimlanes [GRID]
-    type: Interactive Grid
-
-  source: 
-    location: Local Database
-    type: Table / View
-    table-owner: Parsing Schema
-    table-name: TSK_TASK_SWIMLANES
-    include-rowid-column: false
-    where-clause: |
-      client_id = :P0_CLIENT_ID
-      AND project_id = :P0_PROJECT_ID
+    title: Tasks
+    type: Static Content
 
   layout: 
-    sequence: 20
-    parent-region: Swimlanes # 35126293865937037
-    position: SUB_REGIONS
+    sequence: 10
+    parent-region: No Parent
+    position: BODY
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
-    new-column: false
+    new-column: true
     column-span: Automatic
 
   appearance: 
-    template: Interactive Report # 70887424081975615
+    template: Blank with Attributes # 70831193948975578
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -173,550 +163,28 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 69923741558926608
-    edit: 
-      enabled: true
-      allowed-operations: 
-      - Add Row
-      - Update Row
-      - Delete Row
-      lost-update-type: Row Values
-      add-row-if-empty: false
-
-    performance: 
-      lazy-loading: false
-
-    appearance: 
-      select-first-row: false
-      fixed-row-height: true
-
-    pagination: 
-      type: Page
-      show-total-row-count: true
-
-    toolbar: 
-      show: true
-      controls: 
-      - Search Column Selection
-      - Search Field
-      - Actions Menu
-      - Save Button
-
-    enable-users-to: 
-      save-public-report: false
-      flashback: true
-      define-chart-view: true
-      download: true
-
-    download: 
-      formats: 
-      - CSV
-      - HTML
-      - Excel
-      - PDF
-      send-as-email: true
-
-    heading: 
-      fixed-to: Page
-
-    icon-view: 
-      show: false
-
-    detail-view: 
-      show: false
-
-    saved-reports: 
-    - # ====== Saved Report: Primary Report ========================
-      id: 69945884827099580
-      identification: 
-        name: Primary Report
-        alias: 347682
-
-  columns: 
-  - # ====== Column: APEX$ROW_ACTION =============================
-    id: 35125601861937031
-    identification: 
-      column-name: APEX$ROW_ACTION
-      type: Actions Menu
-
-    layout: 
-      sequence: 20
-
-  - # ====== Column: APEX$ROW_SELECTOR ===========================
-    id: 35125783870937032
-    identification: 
-      column-name: APEX$ROW_SELECTOR
-      type: Row Selector
-
     settings: 
-      enable-multi-select: true
-      show-select-all: true
-      hide-control: false
-
-    layout: 
-      sequence: 10
-
-  - # ====== Column: SWIMLANE_ID =================================
-    id: 69923797638926609
-    identification: 
-      column-name: SWIMLANE_ID
-      type: Text Field
-
-    heading: 
-      heading: Swimlane Id
-      alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
-    layout: 
-      sequence: 50
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-      maximum-length: 32
-
-    source: 
-      type: Database Column
-      database-column: SWIMLANE_ID
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: true
-
-    default: 
-      duplicate-copies-existing-value: false
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: SWIMLANE_NAME ===============================
-    id: 69923955593926610
-    identification: 
-      column-name: SWIMLANE_NAME
-      type: Text Field
-
-    heading: 
-      heading: Swimlane Name
-      alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
-    layout: 
-      sequence: 60
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-      maximum-length: 64
-
-    source: 
-      type: Database Column
-      database-column: SWIMLANE_NAME
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: CLIENT_ID ===================================
-    id: 69924038967926611
-    identification: 
-      column-name: CLIENT_ID
-      type: Select List
-
-    heading: 
-      heading: Client Id
-      alignment: start
-
-    layout: 
-      sequence: 30
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-
-    list-of-values: 
-      type: Shared Component
-      list-of-values: LOV_CLIENTS # 34762829880497308
-      display-extra-values: true
-      display-null-value: true
-
-    source: 
-      type: Database Column
-      database-column: CLIENT_ID
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: true
-
-    default: 
-      type: Item
-      item: P0_CLIENT_ID
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Use List of Values
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: PROJECT_ID ==================================
-    id: 69924079247926612
-    identification: 
-      column-name: PROJECT_ID
-      type: Select List
-
-    heading: 
-      heading: Project Id
-      alignment: start
-
-    layout: 
-      sequence: 40
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-
-    list-of-values: 
-      type: Shared Component
-      list-of-values: LOV_PROJECTS # 34763034913500105
-      display-extra-values: true
-      display-null-value: true
-
-    source: 
-      type: Database Column
-      database-column: PROJECT_ID
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: true
-
-    default: 
-      type: Item
-      item: P0_PROJECT_ID
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Use List of Values
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: IS_ACTIVE ===================================
-    id: 69924222587926613
-    identification: 
-      column-name: IS_ACTIVE
-      type: Checkbox
-
-    heading: 
-      heading: Is Active
-      alignment: center
-
-    settings: 
-      use-defaults: false
-      checked-value: Y
-
-    layout: 
-      sequence: 70
-      column-alignment: center
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-
-    source: 
-      type: Database Column
-      database-column: IS_ACTIVE
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      type: Static
-      static-value: Y
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: UPDATED_BY ==================================
-    id: 69924298124926614
-    identification: 
-      column-name: UPDATED_BY
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 80
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_BY
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 69924385950926615
-    identification: 
-      column-name: UPDATED_AT
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 90
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_AT
-      data-type: DATE
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: ORDER# ======================================
-    id: 69976145726229910
-    identification: 
-      column-name: ORDER#
-      type: Number Field
-
-    heading: 
-      heading: Order#
-      alignment: end
-
-    settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
-
-    layout: 
-      sequence: 100
-      column-alignment: end
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-
-    source: 
-      type: Database Column
-      database-column: ORDER#
-      data-type: NUMBER
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  printing: 
-    page: 
-      size: Letter
-      orientation: Landscape
-      units: Inches
-      width: 11
-      height: 8.5
-      border-width: 0.5
-      border-color: '#666666'
-
-    page-header: 
-      font: Helvetica
-      font-weight: Normal
-      font-size: 12
-      font-color: '#000000'
-      alignment: center
-      page-header-text: Swimlanes [GRID]
-
-    column-headings: 
-      font: Helvetica
-      font-weight: Bold
-      font-size: 10
-      font-color: '#000000'
-      background-color: '#EEEEEE'
-
-    columns: 
-      font: Helvetica
-      font-weight: Normal
-      font-size: 10
-      font-color: '#000000'
-      background-color: '#FFFFFF'
-
-    page-footer: 
-      font: Helvetica
-      font-weight: Normal
-      font-size: 12
-      font-color: '#000000'
-      alignment: center
-
-- # ====== Region: Clients [GRID] ==============================
-  id: 103818363045884265
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Filters =====================================
+  id: 35123712321937012
   identification: 
-    title: Clients [GRID]
-    type: Interactive Grid
-
-  source: 
-    location: Local Database
-    type: Table / View
-    table-owner: Parsing Schema
-    table-name: TSK_P100_CLIENTS_V
-    include-rowid-column: false
+    title: Filters
+    type: Static Content
 
   layout: 
     sequence: 20
-    parent-region: Clients # 35124097971937015
+    parent-region: Tasks # 35122875520937003
     position: SUB_REGIONS
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
-    new-column: false
+    new-column: true
     column-span: Automatic
 
   appearance: 
-    template: Interactive Report # 70887424081975615
+    template: Blank with Attributes # 70831193948975578
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -736,341 +204,9 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 103818499860884266
-    edit: 
-      enabled: true
-      allowed-operations: 
-      - Add Row
-      - Update Row
-      - Delete Row
-      lost-update-type: Row Values
-      add-row-if-empty: false
-
-    performance: 
-      lazy-loading: false
-
-    appearance: 
-      select-first-row: false
-      fixed-row-height: true
-
-    pagination: 
-      type: Page
-      show-total-row-count: true
-
-    toolbar: 
-      show: true
-      controls: 
-      - Search Column Selection
-      - Search Field
-      - Actions Menu
-      - Save Button
-
-    enable-users-to: 
-      save-public-report: false
-      flashback: true
-      define-chart-view: true
-      download: true
-
-    download: 
-      formats: 
-      - CSV
-      - HTML
-      - Excel
-      - PDF
-      send-as-email: true
-
-    heading: 
-      fixed-to: Page
-
-    icon-view: 
-      show: false
-
-    detail-view: 
-      show: false
-
-    saved-reports: 
-    - # ====== Saved Report: Primary Report ========================
-      id: 104711239597900061
-      identification: 
-        name: Primary Report
-        alias: 347276
-
-  columns: 
-  - # ====== Column: APEX$ROW_ACTION =============================
-    id: 35124477573937019
-    identification: 
-      column-name: APEX$ROW_ACTION
-      type: Actions Menu
-
-    layout: 
-      sequence: 20
-
-  - # ====== Column: APEX$ROW_SELECTOR ===========================
-    id: 35124507795937020
-    identification: 
-      column-name: APEX$ROW_SELECTOR
-      type: Row Selector
-
     settings: 
-      enable-multi-select: true
-      show-select-all: true
-      hide-control: false
-
-    layout: 
-      sequence: 10
-
-  - # ====== Column: ACTIVATE_URL ================================
-    id: 35126698129937041
-    identification: 
-      column-name: ACTIVATE_URL
-      type: Link
-
-    heading: 
-      alignment: center
-
-    layout: 
-      sequence: 30
-      column-alignment: center
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    link: 
-      target: '&ACTIVATE_URL.'
-      link-text: ACTIVATE
-
-    source: 
-      type: Database Column
-      database-column: ACTIVATE_URL
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: false
-      hide: true
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: CLIENT_ID ===================================
-    id: 103818515931884267
-    identification: 
-      column-name: CLIENT_ID
-      type: Text Field
-
-    heading: 
-      heading: Client Id
-      alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
-    layout: 
-      sequence: 40
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-      maximum-length: 32
-
-    source: 
-      type: Database Column
-      database-column: CLIENT_ID
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: true
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: CLIENT_NAME =================================
-    id: 103818697477884268
-    identification: 
-      column-name: CLIENT_NAME
-      type: Text Field
-
-    heading: 
-      heading: Client Name
-      alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
-    layout: 
-      sequence: 50
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-      maximum-length: 64
-
-    source: 
-      type: Database Column
-      database-column: CLIENT_NAME
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: IS_ACTIVE ===================================
-    id: 103820103606884282
-    identification: 
-      column-name: IS_ACTIVE
-      type: Checkbox
-
-    heading: 
-      heading: Is Active
-      alignment: center
-
-    settings: 
-      use-defaults: false
-      checked-value: Y
-
-    layout: 
-      sequence: 60
-      column-alignment: center
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-
-    source: 
-      type: Database Column
-      database-column: IS_ACTIVE
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      type: Static
-      static-value: Y
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  printing: 
-    page: 
-      size: Letter
-      orientation: Landscape
-      units: Inches
-      width: 11
-      height: 8.5
-      border-width: 0.5
-      border-color: '#666666'
-
-    page-header: 
-      font: Helvetica
-      font-weight: Normal
-      font-size: 12
-      font-color: '#000000'
-      alignment: center
-      page-header-text: Clients [GRID]
-
-    column-headings: 
-      font: Helvetica
-      font-weight: Bold
-      font-size: 10
-      font-color: '#000000'
-      background-color: '#EEEEEE'
-
-    columns: 
-      font: Helvetica
-      font-weight: Normal
-      font-size: 10
-      font-color: '#000000'
-      background-color: '#FFFFFF'
-
-    page-footer: 
-      font: Helvetica
-      font-weight: Normal
-      font-size: 12
-      font-color: '#000000'
-      alignment: center
+      output-as: HTML
+      expand-shortcuts: false
 
 page-items: 
 - # ====== Page Item: P100_CLIENT_ID ===========================
@@ -1129,7 +265,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_PROJECT_ID ==========================
@@ -1188,7 +324,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_BOARD_ID ============================
@@ -1247,7 +383,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_SWIMLANE_ID =========================
@@ -1264,7 +400,7 @@ page-items:
     number-of-columns: 1
 
   layout: 
-    sequence: 20
+    sequence: 30
     region: Filters # 35123712321937012
     position: BODY
     alignment: Left
@@ -1303,7 +439,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     escape-special-characters: true
     restricted-characters: All characters can be saved.
 
@@ -1317,7 +453,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 30
+    sequence: 40
     region: Filters # 35123712321937012
     position: BODY
 
@@ -1331,6 +467,65 @@ page-items:
   session-state: 
     data-type: VARCHAR2
     storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_BOARD_TYPE ==========================
+  id: 35127554191937050
+  identification: 
+    name: P100_BOARD_TYPE
+    type: Select List
+
+  label: 
+    label: Board Type
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 20
+    region: Filters # 35123712321937012
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_BOARD_TYPES # 44081882365233350
+    display-extra-values: false
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
 
   security: 
     session-state-protection: Unrestricted
@@ -1401,133 +596,11 @@ buttons:
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
 
-- # ====== Button: REORDER_STATUSES ============================
-  id: 35126878686937043
-  identification: 
-    button-name: REORDER_STATUSES
-    label: Reorder Statuses
-
-  layout: 
-    sequence: 10
-    region: Statuses # 35125984655937034
-    position: RIGHT_OF_TITLE
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    button-template: Icon # 70969417180975670
-    hot: false
-    template-options: 
-    - '#DEFAULT#'
-    icon: fa-list-ol
-
-  behavior: 
-    action: Submit Page
-    execute-validations: true
-    warn-on-unsaved-changes: Do Not Check
-
-- # ====== Button: REORDER_SWIMLANES ===========================
-  id: 35126986782937044
-  identification: 
-    button-name: REORDER_SWIMLANES
-    label: Reorder Swimlanes
-
-  layout: 
-    sequence: 10
-    region: Swimlanes # 35126053649937035
-    position: RIGHT_OF_TITLE
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    button-template: Icon # 70969417180975670
-    hot: false
-    template-options: 
-    - '#DEFAULT#'
-    icon: fa-list-ol
-
-  behavior: 
-    action: Submit Page
-    execute-validations: true
-    warn-on-unsaved-changes: Do Not Check
-
 dynamic-actions: 
-- # ====== Dynamic Action: CHANGED_PROJECT =====================
-  id: 34797895247743629
-  identification: 
-    name: CHANGED_PROJECT
-
-  execution: 
-    sequence: 50
-
-  when: 
-    event: EVENT.EVENT.BROWSER.CHANGE
-    selection-type: Item(s)
-    item(s): 
-    - P100_PROJECT_ID
-
-  execution: 
-    event-scope: Static
-    type: Immediate
-
-  actions: 
-  - # ====== Action: Submit Page =================================
-    id: 34797941868743630
-    identification: 
-      action: Submit Page
-
-    settings: 
-      show-processing: true
-
-    execution: 
-      sequence: 10
-      event: CHANGED_PROJECT # 34797895247743629
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-- # ====== Dynamic Action: CHANGED_BOARD =======================
-  id: 34798017052743631
-  identification: 
-    name: CHANGED_BOARD
-
-  execution: 
-    sequence: 60
-
-  when: 
-    event: EVENT.EVENT.BROWSER.CHANGE
-    selection-type: Item(s)
-    item(s): 
-    - P100_BOARD_ID
-
-  execution: 
-    event-scope: Static
-    type: Immediate
-
-  actions: 
-  - # ====== Action: Submit Page =================================
-    id: 34798178572743632
-    identification: 
-      action: Submit Page
-
-    settings: 
-      show-processing: true
-
-    execution: 
-      sequence: 10
-      event: CHANGED_BOARD # 34798017052743631
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-- # ====== Dynamic Action: CHANGED_CLIENT ======================
+- # ====== Dynamic Action: CHANGED_FILTERS =====================
   id: 34906414430118509
   identification: 
-    name: CHANGED_CLIENT
+    name: CHANGED_FILTERS
 
   execution: 
     sequence: 40
@@ -1537,6 +610,9 @@ dynamic-actions:
     selection-type: Item(s)
     item(s): 
     - P100_CLIENT_ID
+    - P100_PROJECT_ID
+    - P100_BOARD_ID
+    - P100_BOARD_TYPE
 
   execution: 
     event-scope: Static
@@ -1553,40 +629,7 @@ dynamic-actions:
 
     execution: 
       sequence: 10
-      event: CHANGED_CLIENT # 34906414430118509
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-- # ====== Dynamic Action: CHANGED_SWIMLINE ====================
-  id: 34951564344065825
-  identification: 
-    name: CHANGED_SWIMLINE
-
-  execution: 
-    sequence: 70
-
-  when: 
-    event: EVENT.EVENT.BROWSER.CHANGE
-    selection-type: Item(s)
-    item(s): 
-    - P100_SWIMLANE_ID
-
-  execution: 
-    event-scope: Static
-    type: Immediate
-
-  actions: 
-  - # ====== Action: Submit Page =================================
-    id: 34951606974065826
-    identification: 
-      action: Submit Page
-
-    settings: 
-      show-processing: true
-
-    execution: 
-      sequence: 10
-      event: CHANGED_SWIMLINE # 34951564344065825
+      event: CHANGED_FILTERS # 34906414430118509
       fire-when-event-result-is: True
       fire-on-initialization: false
 
