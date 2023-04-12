@@ -2527,14 +2527,8 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sequence=>20
 ,p_process_point=>'BEFORE_HEADER'
 ,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'SET_FILTERS'
-,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-':P100_CLIENT_ID     := NVL(:P100_CLIENT_ID,     :P0_CLIENT_ID);',
-':P100_PROJECT_ID    := NVL(:P100_PROJECT_ID,    :P0_PROJECT_ID);',
-':P100_BOARD_ID      := NVL(:P100_BOARD_ID,      :P0_BOARD_ID);',
-'--',
-'--IF :P100_BOARD_ID IS NULL ... get first one',
-''))
+,p_process_name=>'LOAD_FILTERS'
+,p_process_sql_clob=>'tsk_app.load_tasks_filters();'
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(
@@ -2543,31 +2537,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'ON_DEMAND'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'UPDATE_TASK'
-,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'-- update task status (column)',
-'UPDATE tsk_tasks t',
-'SET t.status_id     = APEX_APPLICATION.G_X02,',
-'    t.swimlane_id   = APEX_APPLICATION.G_X03',
-'WHERE t.task_id     = APEX_APPLICATION.G_X01;',
-'--',
-'IF SQL%ROWCOUNT = 1 THEN',
-'    -- update order of passed tasks',
-'    FOR s IN (',
-'        SELECT',
-'            COLUMN_VALUE    AS task_id,',
-'            ROWNUM * 10     AS order#',
-'        FROM APEX_STRING.SPLIT(APEX_APPLICATION.G_X04, '':'')',
-'    ) LOOP',
-'        UPDATE tsk_tasks t',
-'        SET t.order#        = s.order#',
-'        WHERE t.task_id     = s.task_id',
-'            AND (t.order#   != s.order# OR t.order# IS NULL);',
-'    END LOOP;',
-'',
-'    -- message for app',
-'    HTP.P(''Task #'' || APEX_APPLICATION.G_X01 || '' updated'');',
-'END IF;',
-''))
+,p_process_sql_clob=>'tsk_app.update_task_on_drag();'
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(
@@ -2576,29 +2546,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'ON_SUBMIT_BEFORE_COMPUTATION'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'SAVE_FILTERS'
-,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-':P0_CLIENT_ID   := :P100_CLIENT_ID;',
-':P0_PROJECT_ID  := :P100_PROJECT_ID;',
-':P0_BOARD_ID    := :P100_BOARD_ID;',
-'--',
-'APEX_UTIL.SET_PREFERENCE (',
-'    p_preference => ''P0_CLIENT_ID'',',
-'    p_value      => :P0_CLIENT_ID,',
-'    p_user       => :APP_USER',
-');',
-'--',
-'APEX_UTIL.SET_PREFERENCE (',
-'    p_preference => ''P0_PROJECT_ID'',',
-'    p_value      => :P0_PROJECT_ID,',
-'    p_user       => :APP_USER',
-');',
-'--',
-'APEX_UTIL.SET_PREFERENCE (',
-'    p_preference => ''P0_BOARD_ID'',',
-'    p_value      => :P0_BOARD_ID,',
-'    p_user       => :APP_USER',
-');',
-''))
+,p_process_sql_clob=>'tsk_app.save_tasks_filters();'
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );

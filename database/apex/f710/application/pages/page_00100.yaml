@@ -3919,31 +3919,7 @@ processes:
   source: 
     location: Local Database
     language: PL/SQL
-    pl/sql-code: |
-      -- update task status (column)
-      UPDATE tsk_tasks t
-      SET t.status_id     = APEX_APPLICATION.G_X02,
-          t.swimlane_id   = APEX_APPLICATION.G_X03
-      WHERE t.task_id     = APEX_APPLICATION.G_X01;
-      --
-      IF SQL%ROWCOUNT = 1 THEN
-          -- update order of passed tasks
-          FOR s IN (
-              SELECT
-                  COLUMN_VALUE    AS task_id,
-                  ROWNUM * 10     AS order#
-              FROM APEX_STRING.SPLIT(APEX_APPLICATION.G_X04, ':')
-          ) LOOP
-              UPDATE tsk_tasks t
-              SET t.order#        = s.order#
-              WHERE t.task_id     = s.task_id
-                  AND (t.order#   != s.order# OR t.order# IS NULL);
-          END LOOP;
-      
-          -- message for app
-          HTP.P('Task #' || APEX_APPLICATION.G_X01 || ' updated');
-      END IF;
-      
+    pl/sql-code: tsk_app.update_task_on_drag();
 
   execution: 
     sequence: 10
@@ -3959,29 +3935,7 @@ processes:
   source: 
     location: Local Database
     language: PL/SQL
-    pl/sql-code: |
-      :P0_CLIENT_ID   := :P100_CLIENT_ID;
-      :P0_PROJECT_ID  := :P100_PROJECT_ID;
-      :P0_BOARD_ID    := :P100_BOARD_ID;
-      --
-      APEX_UTIL.SET_PREFERENCE (
-          p_preference => 'P0_CLIENT_ID',
-          p_value      => :P0_CLIENT_ID,
-          p_user       => :APP_USER
-      );
-      --
-      APEX_UTIL.SET_PREFERENCE (
-          p_preference => 'P0_PROJECT_ID',
-          p_value      => :P0_PROJECT_ID,
-          p_user       => :APP_USER
-      );
-      --
-      APEX_UTIL.SET_PREFERENCE (
-          p_preference => 'P0_BOARD_ID',
-          p_value      => :P0_BOARD_ID,
-          p_user       => :APP_USER
-      );
-      
+    pl/sql-code: tsk_app.save_tasks_filters();
 
   execution: 
     sequence: 10
@@ -3991,22 +3945,16 @@ processes:
   error: 
     display-location: Inline in Notification
 
-- # ====== Process: SET_FILTERS ================================
+- # ====== Process: LOAD_FILTERS ===============================
   id: 34910738304127684
   identification: 
-    name: SET_FILTERS
+    name: LOAD_FILTERS
     type: Execute Code
 
   source: 
     location: Local Database
     language: PL/SQL
-    pl/sql-code: |
-      :P100_CLIENT_ID     := NVL(:P100_CLIENT_ID,     :P0_CLIENT_ID);
-      :P100_PROJECT_ID    := NVL(:P100_PROJECT_ID,    :P0_PROJECT_ID);
-      :P100_BOARD_ID      := NVL(:P100_BOARD_ID,      :P0_BOARD_ID);
-      --
-      --IF :P100_BOARD_ID IS NULL ... get first one
-      
+    pl/sql-code: tsk_app.load_tasks_filters();
 
   execution: 
     sequence: 20

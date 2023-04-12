@@ -28,7 +28,7 @@ prompt APPLICATION 710 - Tasks
 -- Application Export:
 --   Application:     710
 --   Name:            Tasks
---   Date and Time:   20:57 Úterý Duben 11, 2023
+--   Date and Time:   06:43 Středa Duben 12, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -37,7 +37,7 @@ prompt APPLICATION 710 - Tasks
 --       Computations:             3
 --       Processes:               21
 --       Regions:                 33
---       Buttons:                 10
+--       Buttons:                 12
 --       Dynamic Actions:          7
 --     Shared Components:
 --       Logic:
@@ -106,7 +106,7 @@ wwv_flow_imp.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-04-11'
+,p_flow_version=>'2023-04-12'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -15040,7 +15040,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(71258645843174377)  -- MASTER - IS_USER
 ,p_protection_level=>'C'
-,p_page_component_map=>'10'
+,p_page_component_map=>'21'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
@@ -17075,6 +17075,30 @@ wwv_flow_imp_page.create_page_button(
 ,p_icon_css_classes=>'fa-plus'
 );
 wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(35126878686937043)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(35125984655937034)
+,p_button_name=>'REORDER_STATUSES'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
+,p_button_image_alt=>'Reorder Statuses'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_icon_css_classes=>'fa-list-ol'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(35126986782937044)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(35126053649937035)
+,p_button_name=>'REORDER_SWIMLANES'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
+,p_button_image_alt=>'Reorder Swimlanes'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_icon_css_classes=>'fa-list-ol'
+);
+wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(34952422242065834)
 ,p_button_sequence=>20
 ,p_button_plug_id=>wwv_flow_imp.id(34744374076440316)
@@ -17283,10 +17307,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(103818363045884265)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'Clients [GRID] - Save Interactive Grid Data'
+,p_process_name=>'SAVE_CLIENTS'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
-,p_attribute_06=>'Y'
+,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
@@ -17296,10 +17320,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(68999230713897460)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'Projects [GRID] - Save Interactive Grid Data'
+,p_process_name=>'SAVE_PROJECTS'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
-,p_attribute_06=>'Y'
+,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
@@ -17309,10 +17333,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(69004865415898319)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'Boards [GRID] - Save Interactive Grid Data'
+,p_process_name=>'SAVE_BOARDS'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
-,p_attribute_06=>'Y'
+,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
@@ -17322,10 +17346,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(69917364734925850)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'Statuses [GRID] - Save Interactive Grid Data'
+,p_process_name=>'SAVE_STATUSES'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
-,p_attribute_06=>'Y'
+,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
@@ -17335,10 +17359,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(69922594965926597)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'Swimlanes [GRID] - Save Interactive Grid Data'
+,p_process_name=>'SAVE_SWIMLANES'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
-,p_attribute_06=>'Y'
+,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
@@ -17347,14 +17371,8 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sequence=>20
 ,p_process_point=>'BEFORE_HEADER'
 ,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'SET_FILTERS'
-,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-':P100_CLIENT_ID     := NVL(:P100_CLIENT_ID,     :P0_CLIENT_ID);',
-':P100_PROJECT_ID    := NVL(:P100_PROJECT_ID,    :P0_PROJECT_ID);',
-':P100_BOARD_ID      := NVL(:P100_BOARD_ID,      :P0_BOARD_ID);',
-'--',
-'--IF :P100_BOARD_ID IS NULL ... get first one',
-''))
+,p_process_name=>'LOAD_FILTERS'
+,p_process_sql_clob=>'tsk_app.load_tasks_filters();'
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(
@@ -17363,31 +17381,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'ON_DEMAND'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'UPDATE_TASK'
-,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'-- update task status (column)',
-'UPDATE tsk_tasks t',
-'SET t.status_id     = APEX_APPLICATION.G_X02,',
-'    t.swimlane_id   = APEX_APPLICATION.G_X03',
-'WHERE t.task_id     = APEX_APPLICATION.G_X01;',
-'--',
-'IF SQL%ROWCOUNT = 1 THEN',
-'    -- update order of passed tasks',
-'    FOR s IN (',
-'        SELECT',
-'            COLUMN_VALUE    AS task_id,',
-'            ROWNUM * 10     AS order#',
-'        FROM APEX_STRING.SPLIT(APEX_APPLICATION.G_X04, '':'')',
-'    ) LOOP',
-'        UPDATE tsk_tasks t',
-'        SET t.order#        = s.order#',
-'        WHERE t.task_id     = s.task_id',
-'            AND t.order#    != s.order#;',
-'    END LOOP;',
-'',
-'    -- message for app',
-'    HTP.P(''Task #'' || APEX_APPLICATION.G_X01 || '' updated'');',
-'END IF;',
-''))
+,p_process_sql_clob=>'tsk_app.update_task_on_drag();'
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(
@@ -17396,29 +17390,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'ON_SUBMIT_BEFORE_COMPUTATION'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'SAVE_FILTERS'
-,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-':P0_CLIENT_ID   := :P100_CLIENT_ID;',
-':P0_PROJECT_ID  := :P100_PROJECT_ID;',
-':P0_BOARD_ID    := :P100_BOARD_ID;',
-'--',
-'APEX_UTIL.SET_PREFERENCE (',
-'    p_preference => ''P0_CLIENT_ID'',',
-'    p_value      => :P0_CLIENT_ID,',
-'    p_user       => :APP_USER',
-');',
-'--',
-'APEX_UTIL.SET_PREFERENCE (',
-'    p_preference => ''P0_PROJECT_ID'',',
-'    p_value      => :P0_PROJECT_ID,',
-'    p_user       => :APP_USER',
-');',
-'--',
-'APEX_UTIL.SET_PREFERENCE (',
-'    p_preference => ''P0_BOARD_ID'',',
-'    p_value      => :P0_BOARD_ID,',
-'    p_user       => :APP_USER',
-');',
-''))
+,p_process_sql_clob=>'tsk_app.save_tasks_filters();'
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
