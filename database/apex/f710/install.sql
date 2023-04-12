@@ -22,6 +22,7 @@ prompt --install
 @@application/shared_components/navigation/tabs/standard.sql
 @@application/shared_components/navigation/tabs/parent.sql
 @@application/shared_components/user_interface/lovs/lov_boards.sql
+@@application/shared_components/user_interface/lovs/lov_board_types.sql
 @@application/shared_components/user_interface/lovs/lov_clients.sql
 @@application/shared_components/user_interface/lovs/lov_projects.sql
 @@application/shared_components/user_interface/lovs/lov_task_statuses.sql

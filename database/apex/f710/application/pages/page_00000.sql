@@ -140,6 +140,15 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(44089888931578001)
+,p_name=>'P0_BOARD_TYPE'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(34744230204440315)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
+);
 wwv_flow_imp.component_end;
 end;
 /
