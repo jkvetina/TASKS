@@ -277,7 +277,8 @@ regions:
       include-in-export-/-print: true
 
     enable-users-to: 
-      sort: false
+      sort: true
+      control-break/aggregate: true
       hide: true
 
   - # ====== Column: CHECKLIST_DONE ==============================
