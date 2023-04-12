@@ -1,5 +1,15 @@
 CREATE OR REPLACE PACKAGE tsk_app AS
 
+    PROCEDURE after_auth (
+        in_user_id          VARCHAR2
+    );
+
+
+
+    PROCEDURE init_defaults;
+
+
+
     PROCEDURE update_task_on_drag;
 
 

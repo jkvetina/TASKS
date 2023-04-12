@@ -1,5 +1,43 @@
 CREATE OR REPLACE PACKAGE BODY tsk_app AS
 
+    PROCEDURE after_auth (
+        in_user_id          VARCHAR2
+    )
+    AS
+    BEGIN
+        -- load stored preferences
+        tsk_app.load_user_preferences(in_user_id);
+    END;
+
+
+
+    PROCEDURE init_defaults
+    AS
+    BEGIN
+        -- save new preference when passed in address
+        FOR c IN (
+            SELECT 'P0_CLIENT_ID'   AS item_name FROM DUAL UNION ALL
+            SELECT 'P0_PROJECT_ID'  AS item_name FROM DUAL UNION ALL
+            SELECT 'P0_BOARD_ID'    AS item_name FROM DUAL UNION ALL
+            SELECT 'P0_BOARD_TYPE'  AS item_name FROM DUAL
+        ) LOOP
+            IF INSTR(core.get_request_url(TRUE), LOWER(c.item_name) || '=') > 0 THEN
+                APEX_UTIL.SET_PREFERENCE (
+                    p_preference => c.item_name,
+                    p_value      => core.get_item(c.item_name),
+                    p_user       => core.get_user_id()
+                );
+            END IF;
+        END LOOP;
+
+        -- load preferences
+        IF core.get_page_id() IN (100) THEN
+            tsk_app.load_user_preferences();
+        END IF;
+    END;
+
+
+
     PROCEDURE update_task_on_drag
     AS
     BEGIN
