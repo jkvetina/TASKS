@@ -3668,6 +3668,62 @@ buttons:
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
 
+- # ====== Button: REORDER_STATUSES ============================
+  id: 35126878686937043
+  identification: 
+    button-name: REORDER_STATUSES
+    label: Reorder Statuses
+
+  layout: 
+    sequence: 10
+    region: Statuses # 35125984655937034
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-list-ol
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: REORDER_SWIMLANES ===========================
+  id: 35126986782937044
+  identification: 
+    button-name: REORDER_SWIMLANES
+    label: Reorder Swimlanes
+
+  layout: 
+    sequence: 10
+    region: Swimlanes # 35126053649937035
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-list-ol
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_PROJECT =====================
   id: 34797895247743629
