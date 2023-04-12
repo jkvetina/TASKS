@@ -408,7 +408,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'ON_SUBMIT_BEFORE_COMPUTATION'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'SAVE_FILTERS'
-,p_process_sql_clob=>'tsk_app.save_tasks_filters();'
+,p_process_sql_clob=>'tsk_app.save_user_preferences();'
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );

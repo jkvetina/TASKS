@@ -2,9 +2,20 @@ CREATE OR REPLACE PACKAGE tsk_app AS
 
     PROCEDURE update_task_on_drag;
 
-    PROCEDURE save_tasks_filters;
 
-    PROCEDURE load_tasks_filters;
+
+    PROCEDURE save_user_preferences (
+        in_user_id          VARCHAR2    := NULL
+    );
+
+
+
+    PROCEDURE load_user_preferences (
+        in_user_id          VARCHAR2    := NULL
+    );
+
+
+
 
 
 

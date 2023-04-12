@@ -30,45 +30,76 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
 
 
 
-    PROCEDURE save_tasks_filters
+    PROCEDURE save_user_preferences (
+        in_user_id          VARCHAR2    := NULL
+    )
     AS
     BEGIN
-        -- store in global items
-        core.set_item('P0_CLIENT_ID',   core.get_item('P100_CLIENT_ID'));
-        core.set_item('P0_PROJECT_ID',  core.get_item('P100_PROJECT_ID'));
-        core.set_item('P0_BOARD_ID',    core.get_item('P100_BOARD_ID'));
-
-        -- store also in preferences for next session
-        APEX_UTIL.SET_PREFERENCE (
-            p_preference => 'P0_CLIENT_ID',
-            p_value      => core.get_item('P0_CLIENT_ID'),
-            p_user       => core.get_user_id()
-        );
-        --
-        APEX_UTIL.SET_PREFERENCE (
-            p_preference => 'P0_PROJECT_ID',
-            p_value      => core.get_item('P0_PROJECT_ID'),
-            p_user       => core.get_user_id()
-        );
-        --
-        APEX_UTIL.SET_PREFERENCE (
-            p_preference => 'P0_BOARD_ID',
-            p_value      => core.get_item('P0_BOARD_ID'),
-            p_user       => core.get_user_id()
-        );
+        -- store in global items and in preferences for next session
+        FOR c IN (
+            SELECT 'P0_CLIENT_ID'   AS item_name FROM DUAL UNION ALL
+            SELECT 'P0_PROJECT_ID'  AS item_name FROM DUAL UNION ALL
+            SELECT 'P0_BOARD_ID'    AS item_name FROM DUAL UNION ALL
+            SELECT 'P0_BOARD_TYPE'  AS item_name FROM DUAL
+        ) LOOP
+            core.set_item (
+                c.item_name,
+                core.get_item(REPLACE(c.item_name, 'P0_', 'P100_'))
+            );
+            --
+            APEX_UTIL.SET_PREFERENCE (
+                p_preference => c.item_name,
+                p_value      => core.get_item(c.item_name),
+                p_user       => COALESCE(in_user_id, core.get_user_id())
+            );
+        END LOOP;
     END;
 
 
 
-    PROCEDURE load_tasks_filters
+    PROCEDURE load_user_preferences (
+        in_user_id          VARCHAR2    := NULL
+    )
     AS
     BEGIN
-        core.set_item('P100_CLIENT_ID',     core.get_item('P0_CLIENT_ID'));
-        core.set_item('P100_PROJECT_ID',    core.get_item('P0_PROJECT_ID'));
-        core.set_item('P100_BOARD_ID',      core.get_item('P0_BOARD_ID'));
+        FOR c IN (
+            SELECT 'P0_CLIENT_ID'   AS item_name FROM DUAL UNION ALL
+            SELECT 'P0_PROJECT_ID'  AS item_name FROM DUAL UNION ALL
+            SELECT 'P0_BOARD_ID'    AS item_name FROM DUAL UNION ALL
+            SELECT 'P0_BOARD_TYPE'  AS item_name FROM DUAL
+        ) LOOP
+            core.set_item (
+                c.item_name,
+                APEX_UTIL.GET_PREFERENCE (
+                    p_preference => c.item_name,
+                    p_user       => COALESCE(in_user_id, core.get_user_id())
+                )
+            );
+            --
+            core.set_item (
+                REPLACE(c.item_name, 'P0_', 'P100_'),
+                core.get_item(c.item_name)
+            );
+/*
+            core.raise_error(core.get_item(c.item_name) || '|' || APEX_UTIL.GET_PREFERENCE (
+                p_preference => c.item_name,
+                p_user       => COALESCE(in_user_id, core.get_user_id())
+            ));
+            */
+        END LOOP;
 
         -- also save them, they might be changed without submitting the page
-        tsk_app.save_tasks_filters();
+        --tsk_app.save_user_preferences();
+        --
+        -- @TODO: optimize
+        --
+    END;
+
+
+
+    AS
+    BEGIN
+
 
 
     PROCEDURE generate_board (
