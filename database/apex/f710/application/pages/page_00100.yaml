@@ -3957,17 +3957,17 @@ processes:
     point: Before Header
     run-process: Once Per Page Visit (default)
 
-- # ====== Process: Clients [GRID] - Save Interactive Grid Data 
+- # ====== Process: SAVE_CLIENTS ===============================
   id: 35124678578937021
   identification: 
-    name: Clients [GRID] - Save Interactive Grid Data
+    name: SAVE_CLIENTS
     type: Interactive Grid - Automatic Row Processing (DML)
     editable-region: Clients [GRID] # 103818363045884265
 
   settings: 
     target-type: Region Source
     prevent-lost-updates: true
-    lock-row: Yes
+    lock-row: No
     return-primary-key(s)-after-insert: true
 
   execution: 
@@ -3981,17 +3981,17 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
-- # ====== Process: Projects [GRID] - Save Interactive Grid Data
+- # ====== Process: SAVE_PROJECTS ==============================
   id: 35124975121937024
   identification: 
-    name: Projects [GRID] - Save Interactive Grid Data
+    name: SAVE_PROJECTS
     type: Interactive Grid - Automatic Row Processing (DML)
     editable-region: Projects [GRID] # 68999230713897460
 
   settings: 
     target-type: Region Source
     prevent-lost-updates: true
-    lock-row: Yes
+    lock-row: No
     return-primary-key(s)-after-insert: true
 
   execution: 
@@ -4005,17 +4005,17 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
-- # ====== Process: Boards [GRID] - Save Interactive Grid Data =
+- # ====== Process: SAVE_BOARDS ================================
   id: 35125218112937027
   identification: 
-    name: Boards [GRID] - Save Interactive Grid Data
+    name: SAVE_BOARDS
     type: Interactive Grid - Automatic Row Processing (DML)
     editable-region: Boards [GRID] # 69004865415898319
 
   settings: 
     target-type: Region Source
     prevent-lost-updates: true
-    lock-row: Yes
+    lock-row: No
     return-primary-key(s)-after-insert: true
 
   execution: 
@@ -4029,17 +4029,17 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
-- # ====== Process: Statuses [GRID] - Save Interactive Grid Data
+- # ====== Process: SAVE_STATUSES ==============================
   id: 35125564158937030
   identification: 
-    name: Statuses [GRID] - Save Interactive Grid Data
+    name: SAVE_STATUSES
     type: Interactive Grid - Automatic Row Processing (DML)
     editable-region: Statuses [GRID] # 69917364734925850
 
   settings: 
     target-type: Region Source
     prevent-lost-updates: true
-    lock-row: Yes
+    lock-row: No
     return-primary-key(s)-after-insert: true
 
   execution: 
@@ -4053,17 +4053,17 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
-- # ====== Process: Swimlanes [GRID] - Save Interactive Grid Dat
+- # ====== Process: SAVE_SWIMLANES =============================
   id: 35125827314937033
   identification: 
-    name: Swimlanes [GRID] - Save Interactive Grid Data
+    name: SAVE_SWIMLANES
     type: Interactive Grid - Automatic Row Processing (DML)
     editable-region: Swimlanes [GRID] # 69922594965926597
 
   settings: 
     target-type: Region Source
     prevent-lost-updates: true
-    lock-row: Yes
+    lock-row: No
     return-primary-key(s)-after-insert: true
 
   execution: 

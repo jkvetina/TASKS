@@ -178,7 +178,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(71258645843174377)  -- MASTER - IS_USER
 ,p_protection_level=>'C'
-,p_page_component_map=>'10'
+,p_page_component_map=>'21'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
@@ -2439,10 +2439,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(103818363045884265)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'Clients [GRID] - Save Interactive Grid Data'
+,p_process_name=>'SAVE_CLIENTS'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
-,p_attribute_06=>'Y'
+,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
@@ -2452,10 +2452,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(68999230713897460)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'Projects [GRID] - Save Interactive Grid Data'
+,p_process_name=>'SAVE_PROJECTS'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
-,p_attribute_06=>'Y'
+,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
@@ -2465,10 +2465,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(69004865415898319)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'Boards [GRID] - Save Interactive Grid Data'
+,p_process_name=>'SAVE_BOARDS'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
-,p_attribute_06=>'Y'
+,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
@@ -2478,10 +2478,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(69917364734925850)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'Statuses [GRID] - Save Interactive Grid Data'
+,p_process_name=>'SAVE_STATUSES'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
-,p_attribute_06=>'Y'
+,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
@@ -2491,10 +2491,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(69922594965926597)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'Swimlanes [GRID] - Save Interactive Grid Data'
+,p_process_name=>'SAVE_SWIMLANES'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
-,p_attribute_06=>'Y'
+,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
