@@ -290,7 +290,13 @@ regions:
   attributes: 
     id: 44091164972578014
     edit: 
-      enabled: false
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+      add-row-if-empty: false
 
     performance: 
       lazy-loading: false
@@ -353,7 +359,7 @@ regions:
       alignment: end
 
     layout: 
-      sequence: 10
+      sequence: 30
       column-alignment: end
       stretch: Use Report Setting
 
@@ -405,7 +411,7 @@ regions:
       trim-spaces: Leading and Trailing
 
     layout: 
-      sequence: 20
+      sequence: 40
       column-alignment: start
       stretch: Use Report Setting
 
@@ -456,7 +462,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 30
+      sequence: 50
 
     accessibility: 
       value-identifies-row: false
@@ -495,7 +501,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 60
+      sequence: 80
       column-alignment: end
       stretch: Use Report Setting
 
@@ -546,7 +552,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 40
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -602,7 +608,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 50
+      sequence: 70
       column-alignment: start
       stretch: Use Report Setting
 
@@ -646,6 +652,29 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 44093517138578038
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
+  - # ====== Column: APEX$ROW_SELECTOR ===========================
+    id: 44093647704578039
+    identification: 
+      column-name: APEX$ROW_SELECTOR
+      type: Row Selector
+
+    settings: 
+      enable-multi-select: true
+      show-select-all: true
+      hide-control: false
+
+    layout: 
+      sequence: 10
 
   printing: 
     page: 
@@ -1301,4 +1330,28 @@ processes:
 
   error: 
     display-location: Inline in Notification
+
+- # ====== Process: SAVE_TASKS =================================
+  id: 44093742632578040
+  identification: 
+    name: SAVE_TASKS
+    type: Interactive Grid - Automatic Row Processing (DML)
+    editable-region: Tasks [GRID] # 44091050489578013
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: No
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
 
