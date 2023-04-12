@@ -42,7 +42,7 @@ wwv_flow_imp_shared.create_plug_template(
 ,p_translate_this_template=>'N'
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(60581375756311714)
+ p_id=>wwv_flow_imp.id(40686141033599099)
 ,p_plug_template_id=>wwv_flow_imp.id(70864195177975601)
 ,p_name=>'Region Body'
 ,p_placeholder=>'BODY'
@@ -53,7 +53,7 @@ wwv_flow_imp_shared.create_plug_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(60581919693311715)
+ p_id=>wwv_flow_imp.id(40686647681599099)
 ,p_plug_template_id=>wwv_flow_imp.id(70864195177975601)
 ,p_name=>'Next'
 ,p_placeholder=>'NEXT'
@@ -64,7 +64,7 @@ wwv_flow_imp_shared.create_plug_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(60582395077311715)
+ p_id=>wwv_flow_imp.id(40687124754599100)
 ,p_plug_template_id=>wwv_flow_imp.id(70864195177975601)
 ,p_name=>'Search Field and Smart Filters'
 ,p_placeholder=>'SMART_FILTERS'
@@ -75,7 +75,7 @@ wwv_flow_imp_shared.create_plug_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(60582916034311715)
+ p_id=>wwv_flow_imp.id(40687695994599100)
 ,p_plug_template_id=>wwv_flow_imp.id(70864195177975601)
 ,p_name=>'Sub Regions'
 ,p_placeholder=>'SUB_REGIONS'

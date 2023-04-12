@@ -1,7 +1,7 @@
-prompt --application/shared_components/logic/application_processes/after_auth
+prompt --application/shared_components/logic/application_processes/init_defaults
 begin
 --   Manifest
---     APPLICATION PROCESS: AFTER_AUTH
+--     APPLICATION PROCESS: INIT_DEFAULTS
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2022.10.07'
@@ -12,12 +12,12 @@ wwv_flow_imp.component_begin (
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_flow_process(
- p_id=>wwv_flow_imp.id(35098301947828232)
+ p_id=>wwv_flow_imp.id(44096575667033004)
 ,p_process_sequence=>1
-,p_process_point=>'AFTER_LOGIN'
+,p_process_point=>'BEFORE_HEADER'
 ,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'AFTER_AUTH'
-,p_process_sql_clob=>'tsk_app.after_auth(:APP_USER);'
+,p_process_name=>'INIT_DEFAULTS'
+,p_process_sql_clob=>'tsk_app.init_defaults();'
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp.component_end;

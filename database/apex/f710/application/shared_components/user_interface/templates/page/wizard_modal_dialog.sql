@@ -143,7 +143,7 @@ wwv_flow_imp_shared.create_template(
 ,p_reference_id=>37931436979322312
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(60479689959311648)
+ p_id=>wwv_flow_imp.id(40584470542599025)
 ,p_page_template_id=>wwv_flow_imp.id(70824490137975571)
 ,p_name=>'Wizard Body'
 ,p_placeholder=>'BODY'
@@ -155,7 +155,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>12
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(60480238730311648)
+ p_id=>wwv_flow_imp.id(40584975651599026)
 ,p_page_template_id=>wwv_flow_imp.id(70824490137975571)
 ,p_name=>'Wizard Progress Bar'
 ,p_placeholder=>'REGION_POSITION_01'
@@ -166,7 +166,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(60480678172311648)
+ p_id=>wwv_flow_imp.id(40585435119599026)
 ,p_page_template_id=>wwv_flow_imp.id(70824490137975571)
 ,p_name=>'Wizard Buttons'
 ,p_placeholder=>'REGION_POSITION_03'

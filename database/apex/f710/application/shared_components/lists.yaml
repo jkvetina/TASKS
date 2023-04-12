@@ -1,36 +1,32 @@
 ---
-- # ====== List: Navigation Menu ===============================
-  id: 98777266544303604
+- # ====== List: NAVIGATION_TOP ================================
+  id: 35451863240367303
   identification: 
-    name: Navigation Menu
-    type: Static Values
+    name: NAVIGATION_TOP
+    type: SQL Query
 
-  entries: 
-  - # ====== Entry: Home =========================================
-    id: 98987558259303830
-    label: 
-      label: Home
-
-    icon: 
-      image/icon-css-classes: fa-home
-
-    layout: 
-      sequence: 10
-
-    is-current: 
-      type: Target Page
-
-    link: 
-      target: 
-        url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:::'
-        page: 100 # Tasks
-        clear-cache: 100
-
-    click-counting: 
-      count-clicks: false
-
-    user-defined-attributes: 
-      translatable: false
+  source: 
+    sql-query: |
+      SELECT
+          t.lvl,
+          t.label, 
+          t.target, 
+          t.is_current_list_entry,
+          t.image, 
+          t.image_attribute,
+          t.image_alt_attribute,
+          t.attribute01,
+          t.attribute02,
+          t.attribute03,
+          t.attribute04,
+          t.attribute05,
+          t.attribute06,
+          t.attribute07,
+          t.attribute08,
+          t.attribute09,
+          t.attribute10
+      FROM tsk_navigation_top_v t
+      ORDER BY t.order#;
 
 - # ====== List: Navigation Bar ================================
   id: 98977601115303770

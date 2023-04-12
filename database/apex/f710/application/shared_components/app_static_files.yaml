@@ -1,4 +1,40 @@
 ---
+- # ====== Static Application File: app.js =====================
+  id: 35440018769131074
+  identification: 
+    file-name: app.js
+
+  attributes: 
+    mime-type: text/javascript
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: app.min.js =================
+  id: 35441067987131953
+  identification: 
+    file-name: app.min.js
+
+  attributes: 
+    mime-type: text/javascript
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: app.css ====================
+  id: 35441424388134577
+  identification: 
+    file-name: app.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+
+- # ====== Static Application File: app.min.css ================
+  id: 44089643111330798
+  identification: 
+    file-name: app.min.css
+
+  attributes: 
+    mime-type: text/css
+    file-character-set: Unicode UTF-8
+
 - # ====== Static Application File: icons/app-icon-32.png ======
   id: 98978636326303790
   identification: 
