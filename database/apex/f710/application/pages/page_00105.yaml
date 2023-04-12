@@ -77,9 +77,9 @@ regions:
     where-clause: 'task_id = :P105_TASK_ID'
 
   layout: 
-    sequence: 80
-    parent-region: No Parent
-    position: BODY
+    sequence: 50
+    parent-region: Task Details # 44093139107578034
+    position: SUB_REGIONS
     start-new-layout: false
     start-new-row: false
     column: Automatic
@@ -98,8 +98,12 @@ regions:
 
   advanced: 
     static-id: CHECKLIST
-    region-display-selector: true
+    region-display-selector: false
     exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
 
   server-cache: 
     caching: Disabled
@@ -410,9 +414,9 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 40
-    parent-region: No Parent
-    position: BODY
+    sequence: 20
+    parent-region: Task Details # 44093139107578034
+    position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -430,7 +434,7 @@ regions:
     landmark-type: Template Default
 
   advanced: 
-    region-display-selector: true
+    region-display-selector: false
     exclude-title-from-translation: false
 
   server-cache: 
@@ -451,9 +455,9 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 70
-    parent-region: No Parent
-    position: BODY
+    sequence: 40
+    parent-region: Task Details # 44093139107578034
+    position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -472,8 +476,12 @@ regions:
     landmark-type: Template Default
 
   advanced: 
-    region-display-selector: true
+    region-display-selector: false
     exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
 
   server-cache: 
     caching: Disabled
@@ -493,9 +501,9 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 50
-    parent-region: No Parent
-    position: BODY
+    sequence: 30
+    parent-region: Task Details # 44093139107578034
+    position: SUB_REGIONS
     start-new-layout: false
     start-new-row: false
     column: Automatic
@@ -513,7 +521,7 @@ regions:
     landmark-type: Template Default
 
   advanced: 
-    region-display-selector: true
+    region-display-selector: false
     exclude-title-from-translation: false
 
   server-cache: 
@@ -534,9 +542,9 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 110
-    parent-region: No Parent
-    position: BODY
+    sequence: 10
+    parent-region: Comments # 44093310803578036
+    position: SUB_REGIONS
     start-new-layout: false
     start-new-row: false
     column: Automatic
@@ -554,7 +562,131 @@ regions:
     landmark-type: Template Default
 
   advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: [TABS] ======================================
+  id: 44093072649578033
+  identification: 
+    title: '[TABS]'
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Tabs Container # 70907050579975626
+    template-options: 
+    - '#DEFAULT#'
+    - t-TabsRegion-mod--simple
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
     region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Task Details ================================
+  id: 44093139107578034
+  identification: 
+    title: Task Details
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: '[TABS]' # 44093072649578033
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Comments ====================================
+  id: 44093310803578036
+  identification: 
+    title: Comments
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: '[TABS]' # 44093072649578033
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
     exclude-title-from-translation: false
 
   server-cache: 
@@ -623,9 +755,9 @@ regions:
     include-rowid-column: false
 
   layout: 
-    sequence: 60
-    parent-region: No Parent
-    position: BODY
+    sequence: 10
+    parent-region: Task Details # 44093139107578034
+    position: SUB_REGIONS
     start-new-layout: false
     start-new-row: false
     column: Automatic
@@ -643,7 +775,7 @@ regions:
     landmark-type: Template Default
 
   advanced: 
-    region-display-selector: true
+    region-display-selector: false
     exclude-title-from-translation: false
 
   server-cache: 
