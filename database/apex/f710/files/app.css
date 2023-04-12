@@ -16,8 +16,7 @@
     background      : #f9f9f9;
 }
 .TARGET_LIKE,
-.TARGET_LIKE h3,
-.BOARD h3 {
+.TARGET_LIKE h3 {
     padding         : 0 0.5rem;
     border          : 0;
     box-shadow      : none;
@@ -27,6 +26,9 @@
 }
 .TARGET_LIKE h3 {
     margin-bottom   : 0;
+}
+.TARGET {
+    min-height      : 3rem;
 }
 
 .TASK {
