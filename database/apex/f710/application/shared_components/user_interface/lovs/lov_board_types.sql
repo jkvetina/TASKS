@@ -21,13 +21,13 @@ wwv_flow_imp_shared.create_static_lov_data(
  p_id=>wwv_flow_imp.id(44082120173233372)
 ,p_lov_disp_sequence=>1
 ,p_lov_disp_value=>'My tasks + unassigned'
-,p_lov_return_value=>'MY'
+,p_lov_return_value=>'MY+'
 );
 wwv_flow_imp_shared.create_static_lov_data(
  p_id=>wwv_flow_imp.id(44082510607233376)
 ,p_lov_disp_sequence=>2
 ,p_lov_disp_value=>'My tasks'
-,p_lov_return_value=>'MY+'
+,p_lov_return_value=>'MY'
 );
 wwv_flow_imp.component_end;
 end;

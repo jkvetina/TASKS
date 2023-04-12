@@ -108,14 +108,14 @@
     entry: 
       sequence: 1
       display: My tasks + unassigned
-      return: MY
+      return: MY+
 
   - # ====== Entry: My tasks =====================================
     id: 44082510607233376
     entry: 
       sequence: 2
       display: My tasks
-      return: MY+
+      return: MY
 
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
   id: 54624749962706655
