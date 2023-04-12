@@ -200,7 +200,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         in_swimlane_id      tsk_task_swimlanes.swimlane_id%TYPE := NULL
     )
     AS
-        v_statuses     PLS_INTEGER;
+        v_statuses          PLS_INTEGER;
+        v_board_type        VARCHAR2(128);
     BEGIN
         -- calculate number of columns
         SELECT COUNT(s.status_id)
@@ -214,6 +215,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
             'grid-template-columns: repeat(' || v_statuses || ', minmax(300px, 1fr)); ' ||
             '">');
 
+        --
+        v_board_type := core.get_item('P0_BOARD_TYPE');
+
         -- generate grid
         FOR w IN (
             SELECT
@@ -223,6 +227,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
             WHERE w.client_id       = in_client_id
                 AND w.project_id    = in_project_id
                 AND (w.swimlane_id  = in_swimlane_id OR in_swimlane_id IS NULL)
+                AND (
+                    v_board_type IS NULL
+                    OR v_board_type = w.swimlane_id
+                    OR (v_board_type = 'MY'     AND w.swimlane_id IN (core.get_user_id()))
+                    OR (v_board_type = 'MY+'    AND w.swimlane_id IN (core.get_user_id(), '-'))
+                )
                 AND w.is_active     = 'Y'
             ORDER BY r#
         ) LOOP
