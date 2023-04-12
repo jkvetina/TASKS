@@ -107,7 +107,7 @@ n AS (
                 APEX_PAGE.GET_URL (
                     p_application   => t.app_id,
                     p_page          => NVL(t.page_alias, t.page_id),
-                    p_clear_cache   => CASE WHEN t.is_reset = 'Y' THEN NVL(t.page_alias, t.page_id) END
+                    p_clear_cache   => CASE WHEN t.is_reset = 'Y' THEN t.page_id END
                 )
             END AS target,
         --
