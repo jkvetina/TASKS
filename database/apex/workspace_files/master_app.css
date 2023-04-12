@@ -1,0 +1,127 @@
+/* HIDE HEADER ON MODAL DIALOG PAGES */
+/* USE HERO FOR TITLE AND CUSTOM BUTTONS */
+.ui-dialog-titlebar {
+    border-bottom       : 0;
+    margin-bottom       : 0;
+}
+.ui-dialog-titlebar > * {
+    display             : none;
+}
+
+
+
+/* HERO REGION */
+.t-HeroRegion {
+    padding             : 2.25rem 0.5rem 1.5rem;
+}
+.t-HeroRegion.SHORTER {
+    padding-bottom      : 1rem;
+}
+h1.t-HeroRegion-title {
+    line-height         : 150%;
+}
+
+/* HERO REGION - HIDE ICON */
+.t-HeroRegion-col.t-HeroRegion-col--left,
+.t-HeroRegion-col.t-HeroRegion-col--right {
+    display             : none;
+}
+
+/* HERO REGION - ADJUST BUTTONS */
+h1.t-HeroRegion-title button {
+    position            : relative;
+    top                 : -0.2rem;
+    margin-left         : 0.25rem !important;
+}
+h1.t-HeroRegion-title button:first-child {
+    margin-left         : 1rem !important;
+}
+
+/* FIX HERO SIZE FOR WITH AND WITHOUT BUTTONS */
+.t-HeroRegion-top {
+    height              : 3rem !important;
+    margin-bottom       : -1rem;
+}
+.FILTERS .t-HeroRegion-top {
+    margin-bottom       : 4rem;
+}
+
+/* FIX HERO FOR MODAL DIALOGS */
+body.t-Dialog-page .t-HeroRegion-top {
+    margin-top          : -3rem !important;
+    margin-bottom       : -0.5rem !important;
+}
+body.t-Dialog-page .t-HeroRegion {
+    padding-bottom      : 0.5rem !important;
+}
+
+/* BUTTON FLOATING RIGHT */
+.t-Button.u-pullRight {
+    margin-right        : 0.25rem !important;
+}
+.t-Button.u-pullRight:last-child {
+    margin-right        : 0 !important;
+}
+
+/* HIDE BACKGROUND FOR CARD BUTTONS */
+.a-CardView-actions {
+    background          : transparent;
+    padding-top         : 0;
+}
+.CLEAR_ACTIONS .a-CardView-media.a-CardView-media--body.a-CardView-media--fit {
+    margin-left         : 0;
+    margin-right        : 0;
+}
+
+
+
+/* FIX READ ONLY LABELS ON FORM TEXTAREA */
+.apex-item-wrapper--display-only label {
+    background: transparent !important;
+}
+.apex-item-wrapper--display-only label::before {
+    background: transparent !important;
+}
+
+
+
+/* HIDE USELESS EDIT BUTTON ON IG */
+div.a-Toolbar-group [data-action="edit"] {
+    display             : none !important;
+}
+
+
+
+/* BORDERLESS COLORFUL CELL IN IG/IR */
+.COLOR_CELL,
+.COLOR_CELL_LEFT {
+    padding             : 0 !important;
+    margin              : 0 !important;
+    border-radius       : 4px;
+}
+.COLOR_CELL > *,
+.COLOR_CELL_LEFT > * {
+    display             : flex;
+    align-items         : center;
+    justify-content     : center;
+    min-height          : 2.5rem;
+    padding-left        : 0.8rem;
+    padding-right       : 0.8rem;
+}
+.COLOR_CELL_LEFT > * {
+    justify-content     : flex-start;
+}
+
+
+
+/* CHECKLISTS */
+ul.DASH_LIST {
+  list-style-type       : none;
+  margin                : 0.5rem 0 0.5rem 3rem;
+}
+ul.DASH_LIST li:before {
+  content               : '\2014';
+  position              : absolute;
+  margin                : 0 3rem 0 -1.5rem;
+}
+
