@@ -13,7 +13,7 @@ wwv_flow_imp.component_begin (
 );
 wwv_flow_imp_page.create_page(
  p_id=>900
-,p_name=>'&APP_USER.'
+,p_name=>'&APP_USER. &nbsp;<span class="fa fa-user-arrow-down"></span>'
 ,p_alias=>'USER-PROFILE'
 ,p_step_title=>'User Profile'
 ,p_autocomplete_on_off=>'OFF'

@@ -75,7 +75,7 @@
 }
 #t_Header > #top_header > nav ul li a {
     display:                block;
-    padding:                1rem 1.2rem 0 !important;
+    padding:                1rem 0.9rem 0 !important;
     white-space:            nowrap;
     height:                 3rem;  /* BAR_HEIGHT */
     line-height:            1rem;
