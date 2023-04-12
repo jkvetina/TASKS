@@ -1,10 +1,10 @@
 ---
-# ====== Page: New Task ======================================
+# ====== Page: Task Detail ===================================
 id: 105
 identification: 
-  name: New Task
-  alias: NEW-TASK
-  title: New Task
+  name: Task Detail
+  alias: TASK
+  title: Task Detail
   page-group: MAIN # 78949836938576475
 
 appearance: 
@@ -62,52 +62,6 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Comments ====================================
-  id: 34949992362065809
-  identification: 
-    title: Comments
-    type: Static Content
-
-  layout: 
-    sequence: 100
-    parent-region: No Parent
-    position: BODY
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Hero # 70864195177975601
-    template-options: 
-    - '#DEFAULT#'
-    - margin-top-md
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: true
-    exclude-title-from-translation: false
-
-  server-side-condition: 
-    type: Item is NOT NULL
-    item: P105_TASK_ID
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
 - # ====== Region: Checklist [LIST] ============================
   id: 34950084031065810
   identification: 
@@ -147,10 +101,6 @@ regions:
     region-display-selector: true
     exclude-title-from-translation: false
 
-  server-side-condition: 
-    type: Item is NOT NULL
-    item: P105_TASK_ID
-
   server-cache: 
     caching: Disabled
 
@@ -166,7 +116,7 @@ regions:
       - Update Row
       - Delete Row
       lost-update-type: Row Values
-      add-row-if-empty: false
+      add-row-if-empty: true
 
     performance: 
       lazy-loading: false
@@ -300,7 +250,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: true
+      value-required: false
       maximum-length: 256
 
     source: 
@@ -524,10 +474,6 @@ regions:
     region-display-selector: true
     exclude-title-from-translation: false
 
-  server-side-condition: 
-    type: Item is NOT NULL
-    item: P105_TASK_ID
-
   server-cache: 
     caching: Disabled
 
@@ -547,6 +493,47 @@ regions:
 
   layout: 
     sequence: 50
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Comments [FORM] =============================
+  id: 34953102387065841
+  identification: 
+    title: Comments [FORM]
+    type: Static Content
+
+  layout: 
+    sequence: 110
     parent-region: No Parent
     position: BODY
     start-new-layout: false
@@ -748,7 +735,7 @@ page-items:
 
   validation: 
     value-required: true
-    maximum-length: 64
+    maximum-length: 128
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -1213,6 +1200,63 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P105_COMMENT =============================
+  id: 34953248782065842
+  identification: 
+    name: P105_COMMENT
+    type: Textarea
+
+  label: 
+    label: Comment
+    alignment: Left
+
+  settings: 
+    resizable: true
+    auto-height: false
+    character-counter: false
+    trim-spaces: Leading and Trailing
+
+  layout: 
+    sequence: 10
+    region: Comments [FORM] # 34953102387065841
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+    height: 5
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
 - # ====== Page Item: P105_HEADER ==============================
   id: 63213944180844595
   identification: 
@@ -1252,8 +1296,8 @@ buttons:
 
   layout: 
     sequence: 10
-    region: '[FORM]' # 63213536180844591
-    position: NEXT
+    region: '&P105_HEADER.' # 63213380867844590
+    position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -1262,11 +1306,9 @@ buttons:
 
   appearance: 
     button-template: Text # 70970074101975671
-    hot: true
+    hot: false
     template-options: 
     - '#DEFAULT#'
-    css-classes: 
-    - u-pullRight
 
   behavior: 
     action: Submit Page
@@ -1278,16 +1320,16 @@ buttons:
     type: Item is NULL
     item: P105_TASK_ID
 
-- # ====== Button: UPDATE_TASK =================================
+- # ====== Button: UPDATE_ONLY =================================
   id: 34949339576065803
   identification: 
-    button-name: UPDATE_TASK
-    label: Update Task
+    button-name: UPDATE_ONLY
+    label: Update
 
   layout: 
-    sequence: 20
-    region: '[FORM]' # 63213536180844591
-    position: NEXT
+    sequence: 50
+    region: '&P105_HEADER.' # 63213380867844590
+    position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -1296,11 +1338,9 @@ buttons:
 
   appearance: 
     button-template: Text # 70970074101975671
-    hot: true
+    hot: false
     template-options: 
     - '#DEFAULT#'
-    css-classes: 
-    - u-pullRight
 
   behavior: 
     action: Submit Page
@@ -1319,9 +1359,9 @@ buttons:
     label: Delete Task
 
   layout: 
-    sequence: 30
-    region: '[FORM]' # 63213536180844591
-    position: NEXT
+    sequence: 70
+    region: '&P105_HEADER.' # 63213380867844590
+    position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -1333,8 +1373,6 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
-    css-classes: 
-    - u-pullRight
     icon: fa-trash-o
 
   behavior: 
@@ -1342,6 +1380,10 @@ buttons:
     execute-validations: false
     warn-on-unsaved-changes: Do Not Check
     database-action: SQL DELETE action
+
+  confirmation: 
+    message: Are you sure?
+    style: Default
 
   advanced: 
     custom-attributes: 
@@ -1380,6 +1422,104 @@ buttons:
     action: Defined by Dynamic Action
     execute-validations: true
 
+- # ====== Button: UPDATE_AND_CLOSE ============================
+  id: 44090106596578004
+  identification: 
+    button-name: UPDATE_AND_CLOSE
+    label: Update and Close
+
+  layout: 
+    sequence: 60
+    region: '&P105_HEADER.' # 63213380867844590
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
+
+- # ====== Button: CREATE_AND_CLOSE ============================
+  id: 44090486634578007
+  identification: 
+    button-name: CREATE_AND_CLOSE
+    label: Create and Close
+
+  layout: 
+    sequence: 30
+    region: '&P105_HEADER.' # 63213380867844590
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P105_TASK_ID
+
+- # ====== Button: CREATE_ANOTHER ==============================
+  id: 44090573922578008
+  identification: 
+    button-name: CREATE_ANOTHER
+    label: Create and
+
+  layout: 
+    sequence: 20
+    region: '&P105_HEADER.' # 63213380867844590
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text with Icon # 70970191130975672
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    - t-Button--iconRight
+    icon: fa-plus
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P105_TASK_ID
+
 - # ====== Button: CLOSE_DIALOG ================================
   id: 63213580209844592
   identification: 
@@ -1387,7 +1527,7 @@ buttons:
     label: Close Dialog
 
   layout: 
-    sequence: 10
+    sequence: 80
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -1554,25 +1694,9 @@ processes:
     display-location: Inline in Notification
 
   server-side-condition: 
-    when-button-pressed: CREATE_TASK # 34798797839743638
-
-- # ====== Process: CLOSE_MODAL ================================
-  id: 34949717657065807
-  identification: 
-    name: CLOSE_MODAL
-    type: Close Dialog
-
-  execution: 
-    sequence: 50
-    point: Processing
-    run-process: Once Per Page Visit (default)
-
-  error: 
-    display-location: Inline in Notification
-
-  server-side-condition: 
-    type: Item is NULL
-    item: P105_SOURCE_PAGE
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: APEX_APPLICATION.G_REQUEST LIKE 'CREATE_%'
 
 - # ====== Process: SAVE_CHECKLIST =============================
   id: 34951047615065820
@@ -1620,7 +1744,9 @@ processes:
     display-location: Inline in Notification
 
   server-side-condition: 
-    when-button-pressed: UPDATE_TASK # 34949339576065803
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: APEX_APPLICATION.G_REQUEST LIKE 'UPDATE_%'
 
 - # ====== Process: SAVE_FORM_DELETE ===========================
   id: 34952654734065836
@@ -1665,6 +1791,7 @@ processes:
     location: Local Database
     language: PL/SQL
     pl/sql-code: |
+      -- use globals as defaults
       :P105_CLIENT_ID     := NVL(:P105_CLIENT_ID,     :P0_CLIENT_ID);
       :P105_PROJECT_ID    := NVL(:P105_PROJECT_ID,    :P0_PROJECT_ID);
       :P105_BOARD_ID      := NVL(:P105_BOARD_ID,      :P0_BOARD_ID);
@@ -1685,9 +1812,10 @@ processes:
     location: Local Database
     language: PL/SQL
     pl/sql-code: |
-      :P105_CLIENT_ID   := NVL(:P105_CLIENT_ID, :P0_CLIENT_ID);
+      -- use globals as defaults
+      :P105_CLIENT_ID   := NVL(:P105_CLIENT_ID,  :P0_CLIENT_ID);
       :P105_PROJECT_ID  := NVL(:P105_PROJECT_ID, :P0_PROJECT_ID);
-      :P105_BOARD_ID    := NVL(:P105_BOARD_ID, :P0_BOARD_ID);
+      :P105_BOARD_ID    := NVL(:P105_BOARD_ID,   :P0_BOARD_ID);
       
 
   execution: 
@@ -1698,11 +1826,62 @@ processes:
   error: 
     display-location: Inline in Notification
 
-branches: 
-- # ====== Branch: REDIRECT_HOME ===============================
-  id: 34952922109065839
+- # ====== Process: CLOSE_DIALOG_UPDATE ========================
+  id: 44090282159578005
   identification: 
-    name: REDIRECT_HOME
+    name: CLOSE_DIALOG_UPDATE
+    type: Close Dialog
+
+  execution: 
+    sequence: 60
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: UPDATE_AND_CLOSE # 44090106596578004
+
+- # ====== Process: CLOSE_DIALOG_DELETE ========================
+  id: 44090374597578006
+  identification: 
+    name: CLOSE_DIALOG_DELETE
+    type: Close Dialog
+
+  execution: 
+    sequence: 80
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: DELETE_TASK # 34949592599065805
+
+- # ====== Process: CLOSE_DIALOG_CREATE ========================
+  id: 44090654922578009
+  identification: 
+    name: CLOSE_DIALOG_CREATE
+    type: Close Dialog
+
+  execution: 
+    sequence: 50
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: CREATE_AND_CLOSE # 44090486634578007
+
+branches: 
+- # ====== Branch: CREATE_ANOTHER ==============================
+  id: 44090980886578012
+  identification: 
+    name: CREATE_ANOTHER
 
   execution: 
     sequence: 10
@@ -1711,12 +1890,10 @@ branches:
   behavior: 
     type: Page or URL (Redirect)
     target: 
-      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100::&success_msg=#SUCCESS_MSG#'
-      page: 100 # Tasks
-      clear-cache: 100
+      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::&success_msg=#SUCCESS_MSG#'
+      page: 105 # Task Detail
+      clear-cache: 105
 
   server-side-condition: 
-    type: Item = Value
-    item: P105_SOURCE_PAGE
-    value: 100
+    when-button-pressed: CREATE_ANOTHER # 44090573922578008
 
