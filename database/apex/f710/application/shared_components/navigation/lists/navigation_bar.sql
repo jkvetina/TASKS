@@ -25,14 +25,6 @@ wwv_flow_imp_shared.create_list_item(
 ,p_list_item_current_type=>'TARGET_PAGE'
 );
 wwv_flow_imp_shared.create_list_item(
- p_id=>wwv_flow_imp.id(34904588365112132)
-,p_list_item_display_sequence=>8
-,p_list_item_link_text=>'Tasks'
-,p_list_item_link_target=>'f?p=&APP_ID.:240:&SESSION.::&DEBUG.:240:::'
-,p_parent_list_item_id=>wwv_flow_imp.id(99409483413889233)
-,p_list_item_current_type=>'TARGET_PAGE'
-);
-wwv_flow_imp_shared.create_list_item(
  p_id=>wwv_flow_imp.id(98989130787303843)
 ,p_list_item_display_sequence=>10
 ,p_list_item_link_text=>'&APP_USER.'
