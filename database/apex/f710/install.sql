@@ -3,7 +3,7 @@ prompt --install
 @@application/delete_application.sql
 @@application/create_application.sql
 @@application/user_interfaces.sql
-@@application/shared_components/navigation/lists/navigation_menu.sql
+@@application/shared_components/navigation/lists/navigation_top.sql
 @@application/shared_components/navigation/lists/navigation_bar.sql
 @@application/shared_components/files/app_js.sql
 @@application/shared_components/files/app_min_js.sql
@@ -31,6 +31,7 @@ prompt --install
 @@application/pages/page_groups.sql
 @@application/comments.sql
 @@application/shared_components/navigation/breadcrumbentry.sql
+@@application/shared_components/user_interface/templates/page/standard_q_nav.sql
 @@application/shared_components/user_interface/templates/page/drawer.sql
 @@application/shared_components/user_interface/templates/page/left_side_column.sql
 @@application/shared_components/user_interface/templates/page/left_and_right_side_columns.sql
@@ -66,6 +67,7 @@ prompt --install
 @@application/shared_components/user_interface/templates/region/tabs_container.sql
 @@application/shared_components/user_interface/templates/region/title_bar.sql
 @@application/shared_components/user_interface/templates/region/wizard_container.sql
+@@application/shared_components/user_interface/templates/list/navigation_bar_q.sql
 @@application/shared_components/user_interface/templates/list/badge_list.sql
 @@application/shared_components/user_interface/templates/list/cards.sql
 @@application/shared_components/user_interface/templates/list/links_list.sql

@@ -95,19 +95,23 @@ navigation-menu:
 
 navigation-bar: 
   implementation: List
-  list: Navigation Bar # 98977601115303770
-  list-template: Navigation Bar # 70957527289975660
+  list: NAVIGATION_TOP # 35451863240367303
+  list-template: Navigation Bar Q # 36169612602377518
   template-options: 
   - '#DEFAULT#'
 
 javascript: 
   file-urls: 
-  - '#WORKSPACE_FILES#master_app#MIN#.js?version=#APP_VERSION#'
+  - '#WORKSPACE_FILES#master_app#MIN#.js?version=#APP_VERSION#'
+  - '#APP_FILES#app#MIN#.js?version=#APP_VERSION#'
   include-jquery-migrate: false
 
 css: 
   file-urls: 
-  - '#WORKSPACE_FILES#master_app#MIN#.css?version=#APP_VERSION#'
+  - '#WORKSPACE_FILES#master_fonts#MIN#.css?version=#APP_VERSION#'
+  - '#WORKSPACE_FILES#master_menu_top#MIN#.css?version=#APP_VERSION#'
+  - '#WORKSPACE_FILES#master_app#MIN#.css?version=#APP_VERSION#'
+  - '#APP_FILES#app#MIN#.css?version=#APP_VERSION#'
 
 attributes: 
   theme: Universal Theme # 700
