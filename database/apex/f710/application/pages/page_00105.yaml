@@ -1627,6 +1627,36 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P105_DELETE_COMMENT ======================
+  id: 44171623173914723
+  identification: 
+    name: P105_DELETE_COMMENT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 90
+    region: '&P105_HEADER.' # 63213380867844590
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 - # ====== Page Item: P105_HEADER ==============================
   id: 63213944180844595
   identification: 
@@ -2301,6 +2331,8 @@ processes:
               :APP_USER,
               SYSDATE
           );
+          --
+          :P105_COMMENT := '';
       END IF;
       
 
@@ -2311,6 +2343,29 @@ processes:
 
   error: 
     display-location: Inline in Notification
+
+- # ====== Process: DELETE_COMMENT =============================
+  id: 44171763739914724
+  identification: 
+    name: DELETE_COMMENT
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      IF :P105_DELETE_COMMENT IS NOT NULL THEN
+          DELETE FROM tsk_task_comments c
+          WHERE c.task_id         = :P105_TASK_ID
+              AND c.comment_id    = :P105_DELETE_COMMENT;
+      END IF;
+      
+      
+
+  execution: 
+    sequence: 30
+    point: Before Header
+    run-process: Once Per Page Visit (default)
 
 branches: 
 - # ====== Branch: CREATE_ANOTHER ==============================
