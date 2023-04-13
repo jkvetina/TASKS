@@ -8,13 +8,12 @@
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_CLIENTS
+    table-name: TSK_LOV_CLIENTS_V
 
   column-mapping: 
     return: CLIENT_ID
     display: CLIENT_NAME
-    default-sort: CLIENT_NAME
-    sort-direction: Ascending (Nulls Last)
+    default-sort: Use Order By from Query
 
 - # ====== List of Values: LOV_PROJECTS ========================
   id: 34763034913500105
@@ -25,14 +24,12 @@
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_PROJECTS
-    where-clause: 'client_id = :P0_CLIENT_ID'
+    table-name: TSK_LOV_PROJECTS_V
 
   column-mapping: 
     return: PROJECT_ID
     display: PROJECT_NAME
-    default-sort: PROJECT_NAME
-    sort-direction: Ascending (Nulls Last)
+    default-sort: Use Order By from Query
 
 - # ====== List of Values: LOV_BOARDS ==========================
   id: 34763544164505098
@@ -43,16 +40,12 @@
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_BOARDS
-    where-clause: |
-      client_id = :P0_CLIENT_ID
-      AND project_id = :P0_PROJECT_ID
+    table-name: TSK_LOV_BOARDS_V
 
   column-mapping: 
     return: BOARD_ID
     display: BOARD_NAME
-    default-sort: BOARD_NAME
-    sort-direction: Ascending (Nulls Last)
+    default-sort: Use Order By from Query
 
 - # ====== List of Values: LOV_TASK_SWIMLANES ==================
   id: 34920402511183578
@@ -63,16 +56,12 @@
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_TASK_SWIMLANES
-    where-clause: |
-      client_id = :P0_CLIENT_ID
-      AND project_id = :P0_PROJECT_ID
+    table-name: TSK_LOV_TASK_SWIMLANES_V
 
   column-mapping: 
     return: SWIMLANE_ID
     display: SWIMLANE_NAME
-    default-sort: ORDER#
-    sort-direction: Ascending (Nulls Last)
+    default-sort: Use Order By from Query
 
 - # ====== List of Values: LOV_TASK_STATUSES ===================
   id: 34920754342188100
@@ -83,16 +72,12 @@
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_TASK_STATUSES
-    where-clause: |
-      client_id = :P0_CLIENT_ID
-      AND project_id = :P0_PROJECT_ID
+    table-name: TSK_LOV_TASK_STATUSES_V
 
   column-mapping: 
     return: STATUS_ID
     display: STATUS_NAME
-    default-sort: ORDER#
-    sort-direction: Ascending (Nulls Last)
+    default-sort: Use Order By from Query
 
 - # ====== List of Values: LOV_BOARD_TYPES =====================
   id: 44164215535767295
