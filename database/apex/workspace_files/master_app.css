@@ -75,6 +75,7 @@ body.t-Dialog-page .t-HeroRegion {
 
 /* BUTTON FLOATING RIGHT */
 .t-Button.u-pullRight {
+    margin-top          : 0.2rem;
     margin-right        : 0.25rem !important;
 }
 .t-Button.u-pullRight:last-child {
