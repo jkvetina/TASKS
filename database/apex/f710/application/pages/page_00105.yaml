@@ -78,7 +78,7 @@ regions:
 
   layout: 
     sequence: 10
-    parent-region: Checklist # 44094157892578044
+    parent-region: Checklist &P105_BADGE_CHECKLIST. # 44094157892578044
     position: BODY
     start-new-layout: false
     start-new-row: true
@@ -410,88 +410,6 @@ regions:
     enable-users-to: 
       sort: false
 
-- # ====== Region: LEFT ========================================
-  id: 34952079744065830
-  identification: 
-    title: LEFT
-    type: Static Content
-
-  layout: 
-    sequence: 20
-    parent-region: Task Details # 44093139107578034
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Blank with Attributes # 70831193948975578
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: RIGHT =======================================
-  id: 34952309614065833
-  identification: 
-    title: RIGHT
-    type: Static Content
-
-  layout: 
-    sequence: 30
-    parent-region: Task Details # 44093139107578034
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: false
-    column-span: Automatic
-
-  appearance: 
-    template: Blank with Attributes # 70831193948975578
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
 - # ====== Region: Comments [FORM] =============================
   id: 34953102387065841
   identification: 
@@ -500,7 +418,7 @@ regions:
 
   layout: 
     sequence: 10
-    parent-region: Comments # 44093310803578036
+    parent-region: Comments &P105_BADGE_COMMENTS. # 44093310803578036
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: false
@@ -553,6 +471,7 @@ regions:
     template: Tabs Container # 70907050579975626
     template-options: 
     - '#DEFAULT#'
+    - js-useLocalStorage
     - t-TabsRegion-mod--simple
     render-components: Above Content
 
@@ -575,10 +494,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Task Details ================================
+- # ====== Region: Status ======================================
   id: 44093139107578034
   identification: 
-    title: Task Details
+    title: Status
     type: Static Content
 
   layout: 
@@ -616,10 +535,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Comments ====================================
+- # ====== Region: Comments &P105_BADGE_COMMENTS. ==============
   id: 44093310803578036
   identification: 
-    title: Comments
+    title: Comments &P105_BADGE_COMMENTS.
     type: Static Content
 
   layout: 
@@ -677,6 +596,7 @@ regions:
     template: Tabs Container # 70907050579975626
     template-options: 
     - '#DEFAULT#'
+    - js-useLocalStorage
     - t-TabsRegion-mod--simple
     render-components: Above Content
 
@@ -699,10 +619,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Checklist ===================================
+- # ====== Region: Checklist &P105_BADGE_CHECKLIST. ============
   id: 44094157892578044
   identification: 
-    title: Checklist
+    title: Checklist &P105_BADGE_CHECKLIST.
     type: Static Content
 
   layout: 
@@ -740,10 +660,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Description =================================
+- # ====== Region: Description &P105_BADGE_DESC. ===============
   id: 44094202470578045
   identification: 
-    title: Description
+    title: Description &P105_BADGE_DESC.
     type: Static Content
 
   layout: 
@@ -781,10 +701,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Attachements ================================
+- # ====== Region: Attachements &P105_BADGE_FILES. =============
   id: 44094316535578046
   identification: 
-    title: Attachements
+    title: Attachements &P105_BADGE_FILES.
     type: Static Content
 
   layout: 
@@ -822,10 +742,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Git =========================================
+- # ====== Region: Git &P105_BADGE_GIT. ========================
   id: 44094467518578047
   identification: 
-    title: Git
+    title: Git &P105_BADGE_GIT.
     type: Static Content
 
   layout: 
@@ -919,7 +839,7 @@ regions:
 
   layout: 
     sequence: 10
-    parent-region: Task Details # 44093139107578034
+    parent-region: Status # 44093139107578034
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: false
@@ -967,7 +887,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 10
+    sequence: 50
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -1013,7 +933,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: LEFT # 34952079744065830
+    region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1066,11 +986,11 @@ page-items:
 
   settings: 
     format: Markdown
-    minimum-height: 180
+    minimum-height: 300
 
   layout: 
     sequence: 10
-    region: RIGHT # 34952309614065833
+    region: Description &P105_BADGE_DESC. # 44094202470578045
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1123,7 +1043,7 @@ page-items:
 
   layout: 
     sequence: 20
-    region: LEFT # 34952079744065830
+    region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1179,7 +1099,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 20
+    sequence: 60
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -1216,7 +1136,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 40
+    sequence: 70
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -1258,8 +1178,8 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 40
-    region: LEFT # 34952079744065830
+    sequence: 30
+    region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1320,8 +1240,8 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 50
-    region: LEFT # 34952079744065830
+    sequence: 40
+    region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1377,7 +1297,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 60
+    sequence: 90
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -1410,7 +1330,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 70
+    sequence: 100
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -1443,7 +1363,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 50
+    sequence: 80
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -1551,6 +1471,156 @@ page-items:
   security: 
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_BADGE_DESC ==========================
+  id: 44094592561578048
+  identification: 
+    name: P105_BADGE_DESC
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: '&P105_HEADER.' # 63213380867844590
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_BADGE_FILES =========================
+  id: 44094693211578049
+  identification: 
+    name: P105_BADGE_FILES
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 70
+    region: '&P105_HEADER.' # 63213380867844590
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_BADGE_COMMENTS ======================
+  id: 44094758979578050
+  identification: 
+    name: P105_BADGE_COMMENTS
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 60
+    region: '&P105_HEADER.' # 63213380867844590
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_BADGE_GIT ===========================
+  id: 44169799793914704
+  identification: 
+    name: P105_BADGE_GIT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 80
+    region: '&P105_HEADER.' # 63213380867844590
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_BADGE_CHECKLIST =====================
+  id: 44169888190914705
+  identification: 
+    name: P105_BADGE_CHECKLIST
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: '&P105_HEADER.' # 63213380867844590
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P105_HEADER ==============================
@@ -1699,7 +1769,7 @@ buttons:
 
   layout: 
     sequence: 30
-    region: Checklist # 44094157892578044
+    region: Checklist &P105_BADGE_CHECKLIST. # 44094157892578044
     position: BODY
     start-new-layout: false
     start-new-row: true
@@ -1939,6 +2009,36 @@ computations:
     type: Item is NOT NULL
     item: P105_TASK_ID
 
+- # ====== Computation: P105_BADGE_DESC ========================
+  id: 44169465017914701
+  identification: 
+    item-name: P105_BADGE_DESC
+
+  execution: 
+    sequence: 30
+    point: Before Regions
+
+  computation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: "CASE WHEN LENGTH(:P105_TASK_DESC) > 0 THEN ' &nbsp;<span class=\"fa fa-arrow-circle-down\"></span>' END"
+
+- # ====== Computation: P105_BADGE_COMMENTS ====================
+  id: 44169582610914702
+  identification: 
+    item-name: P105_BADGE_COMMENTS
+
+  execution: 
+    sequence: 40
+    point: Before Regions
+
+  computation: 
+    type: SQL Query (return single value)
+    sql-query: |
+      SELECT CASE WHEN COUNT(*) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END AS badge
+      FROM tsk_task_comments c
+      WHERE c.task_id = :P105_TASK_ID
+
 - # ====== Computation: P105_HEADER ============================
   id: 63214052740844596
   identification: 
@@ -1987,7 +2087,7 @@ processes:
     return-primary-key(s)-after-insert: true
 
   execution: 
-    sequence: 20
+    sequence: 30
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2037,7 +2137,7 @@ processes:
     return-primary-key(s)-after-insert: true
 
   execution: 
-    sequence: 30
+    sequence: 40
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2072,7 +2172,7 @@ processes:
     lock-row: No
 
   execution: 
-    sequence: 40
+    sequence: 50
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2134,7 +2234,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 60
+    sequence: 70
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2168,7 +2268,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 50
+    sequence: 60
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2177,6 +2277,36 @@ processes:
 
   server-side-condition: 
     when-button-pressed: CREATE_AND_CLOSE # 44090486634578007
+
+- # ====== Process: SAVE_COMMENT ===============================
+  id: 44169642373914703
+  identification: 
+    name: SAVE_COMMENT
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      IF :P105_COMMENT IS NOT NULL THEN
+          INSERT INTO tsk_task_comments (task_id, comment_id, comment_payload, updated_by, updated_at)
+          VALUES (
+              :P105_TASK_ID,
+              tsk_comment_id.NEXTVAL,
+              :P105_COMMENT,
+              :APP_USER,
+              SYSDATE
+          );
+      END IF;
+      
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
 
 branches: 
 - # ====== Branch: CREATE_ANOTHER ==============================
