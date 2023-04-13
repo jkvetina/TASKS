@@ -152,6 +152,166 @@ wwv_flow_imp_page.create_page_plug(
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
+wwv_flow_imp_page.create_report_region(
+ p_id=>wwv_flow_imp.id(44169902430914706)
+,p_name=>'Comments [REPORT]'
+,p_parent_plug_id=>wwv_flow_imp.id(44093310803578036)
+,p_template=>wwv_flow_imp.id(70831193948975578)
+,p_display_sequence=>20
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#:t-Comments--chat:t-Comments--iconsRounded:t-Report--hideNoPagination'
+,p_display_point=>'SUB_REGIONS'
+,p_source_type=>'NATIVE_SQL_REPORT'
+,p_query_type=>'TABLE'
+,p_query_table=>'TSK_P105_COMMENTS_V'
+,p_query_where=>'task_id = :P105_TASK_ID'
+,p_query_order_by_type=>'STATIC'
+,p_query_order_by=>'COMMENT_ID DESC'
+,p_include_rowid_column=>false
+,p_ajax_enabled=>'Y'
+,p_ajax_items_to_submit=>'P105_TASK_ID'
+,p_lazy_loading=>false
+,p_query_row_template=>wwv_flow_imp.id(70926520748975639)
+,p_query_num_rows=>100
+,p_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_csv_output=>'N'
+,p_prn_output=>'N'
+,p_sort_null=>'L'
+,p_plug_query_strip_html=>'N'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44170055879914707)
+,p_query_column_id=>1
+,p_column_alias=>'TASK_ID'
+,p_column_display_sequence=>10
+,p_column_heading=>'Task Id'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44170181695914708)
+,p_query_column_id=>2
+,p_column_alias=>'COMMENT_ID'
+,p_column_display_sequence=>20
+,p_column_heading=>'Comment Id'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44170557256914712)
+,p_query_column_id=>3
+,p_column_alias=>'ACTIONS'
+,p_column_display_sequence=>30
+,p_column_heading=>'Actions'
+,p_use_as_row_header=>'N'
+,p_column_link=>'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TASK_ID,P105_DELETE_COMMENT:#TASK_ID#,#COMMENT_ID#'
+,p_column_linktext=>'#ACTIONS#'
+,p_display_as=>'WITHOUT_MODIFICATION'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44170628422914713)
+,p_query_column_id=>4
+,p_column_alias=>'ATTRIBUTE_1'
+,p_column_display_sequence=>40
+,p_column_heading=>'Attribute 1'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44170702725914714)
+,p_query_column_id=>5
+,p_column_alias=>'ATTRIBUTE_2'
+,p_column_display_sequence=>50
+,p_column_heading=>'Attribute 2'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44170887789914715)
+,p_query_column_id=>6
+,p_column_alias=>'ATTRIBUTE_3'
+,p_column_display_sequence=>60
+,p_column_heading=>'Attribute 3'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44170966809914716)
+,p_query_column_id=>7
+,p_column_alias=>'ATTRIBUTE_4'
+,p_column_display_sequence=>70
+,p_column_heading=>'Attribute 4'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44171011922914717)
+,p_query_column_id=>8
+,p_column_alias=>'COMMENT_DATE'
+,p_column_display_sequence=>80
+,p_column_heading=>'Comment Date'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44171197513914718)
+,p_query_column_id=>9
+,p_column_alias=>'COMMENT_MODIFIERS'
+,p_column_display_sequence=>90
+,p_column_heading=>'Comment Modifiers'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44171205589914719)
+,p_query_column_id=>10
+,p_column_alias=>'COMMENT_TEXT'
+,p_column_display_sequence=>100
+,p_column_heading=>'Comment Text'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44171336756914720)
+,p_query_column_id=>11
+,p_column_alias=>'ICON_MODIFIER'
+,p_column_display_sequence=>110
+,p_column_heading=>'Icon Modifier'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44171428955914721)
+,p_query_column_id=>12
+,p_column_alias=>'USER_ICON'
+,p_column_display_sequence=>120
+,p_column_heading=>'User Icon'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
+wwv_flow_imp_page.create_report_columns(
+ p_id=>wwv_flow_imp.id(44171519984914722)
+,p_query_column_id=>13
+,p_column_alias=>'USER_NAME'
+,p_column_display_sequence=>130
+,p_column_heading=>'User Name'
+,p_use_as_row_header=>'N'
+,p_derived_column=>'N'
+,p_include_in_export=>'Y'
+);
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(44094157892578044)
 ,p_plug_name=>'Checklist &P105_BADGE_CHECKLIST.'
