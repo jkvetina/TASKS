@@ -82,6 +82,41 @@ body.t-Dialog-page .t-HeroRegion {
     margin-right        : 0 !important;
 }
 
+
+
+/* REMOVE OUTLINE FROM ACTIVE TABS */
+ul.t-Tabs li.t-Tabs-item a.t-Tabs-link {
+    outline             : none !important;
+}
+
+/* TABS COLOR BORDER AND SOME SPACING ADJUSTMENTS */
+ul.t-Tabs {
+    margin-bottom       : 0.5rem;
+}
+ul.t-Tabs .t-Tabs-link {
+    padding-bottom      : 0.5rem;
+    background          : transparent;
+}
+ul.t-Tabs .is-active .t-Tabs-link {
+    outline             : none;
+    box-shadow          : none;
+    border-bottom       : 5px solid #555;
+    font-weight         : 600;
+}
+ul.t-Tabs li.t-Tabs-item a.t-Tabs-link:hover {
+    background          : transparent;
+    border-bottom       : 5px solid #555 !important;
+    font-weight         : 600;
+}
+.t-TabsRegion-items > div {
+    display             : none;
+}
+.t-TabsRegion-items > div.apex-rds-slider {
+    display             : block;
+}
+
+
+
 /* HIDE BACKGROUND FOR CARD BUTTONS */
 .a-CardView-actions {
     background          : transparent;
