@@ -10,6 +10,22 @@
 
 
 
+/* MODAL DIALOG, REMOVE THE IMAGE AND PADDING AT TOP */
+.ui-dialog .ui-dialog-titlebar {
+    -webkit-padding-before  : 0.6rem;
+    padding-block-start     : 0.6rem;
+}
+.ui-dialog .ui-dialog-titlebar:before {
+    background-image        : none;
+}
+.ui-dialog .ui-dialog-titlebar:before {
+    /*
+    background: gray;
+    */
+}
+
+
+
 /* HERO REGION */
 .t-HeroRegion {
     padding             : 2.25rem 0.5rem 1.5rem;
@@ -36,6 +52,8 @@ h1.t-HeroRegion-title button {
 h1.t-HeroRegion-title button:first-child {
     margin-left         : 1rem !important;
 }
+
+
 
 /* FIX HERO SIZE FOR WITH AND WITHOUT BUTTONS */
 .t-HeroRegion-top {
