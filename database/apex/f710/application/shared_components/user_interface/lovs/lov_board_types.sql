@@ -12,22 +12,17 @@ wwv_flow_imp.component_begin (
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_list_of_values(
- p_id=>wwv_flow_imp.id(44081882365233350)  -- LOV_BOARD_TYPES
+ p_id=>wwv_flow_imp.id(44164215535767295)  -- LOV_BOARD_TYPES
 ,p_lov_name=>'LOV_BOARD_TYPES'
-,p_lov_query=>'.'||wwv_flow_imp.id(44081882365233350)||'.'
-,p_location=>'STATIC'
-);
-wwv_flow_imp_shared.create_static_lov_data(
- p_id=>wwv_flow_imp.id(44082120173233372)
-,p_lov_disp_sequence=>1
-,p_lov_disp_value=>'My tasks + unassigned'
-,p_lov_return_value=>'MY+'
-);
-wwv_flow_imp_shared.create_static_lov_data(
- p_id=>wwv_flow_imp.id(44082510607233376)
-,p_lov_disp_sequence=>2
-,p_lov_disp_value=>'My tasks'
-,p_lov_return_value=>'MY'
+,p_source_type=>'TABLE'
+,p_location=>'LOCAL'
+,p_use_local_sync_table=>false
+,p_query_table=>'TSK_LOV_BOARD_TYPES_V'
+,p_return_column_name=>'ID'
+,p_display_column_name=>'NAME'
+,p_group_sort_direction=>'ASC'
+,p_default_sort_column_name=>'ORDER#'
+,p_default_sort_direction=>'ASC'
 );
 wwv_flow_imp.component_end;
 end;

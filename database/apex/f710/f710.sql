@@ -28,7 +28,7 @@ prompt APPLICATION 710 - Tasks
 -- Application Export:
 --   Application:     710
 --   Name:            Tasks
---   Date and Time:   20:56 Středa Duben 12, 2023
+--   Date and Time:   05:30 Čtvrtek Duben 13, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -106,7 +106,7 @@ wwv_flow_imp.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-04-12'
+,p_flow_version=>'2023-04-13'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -706,22 +706,17 @@ end;
 prompt --application/shared_components/user_interface/lovs/lov_board_types
 begin
 wwv_flow_imp_shared.create_list_of_values(
- p_id=>wwv_flow_imp.id(44081882365233350)  -- LOV_BOARD_TYPES
+ p_id=>wwv_flow_imp.id(44164215535767295)  -- LOV_BOARD_TYPES
 ,p_lov_name=>'LOV_BOARD_TYPES'
-,p_lov_query=>'.'||wwv_flow_imp.id(44081882365233350)||'.'
-,p_location=>'STATIC'
-);
-wwv_flow_imp_shared.create_static_lov_data(
- p_id=>wwv_flow_imp.id(44082120173233372)
-,p_lov_disp_sequence=>1
-,p_lov_disp_value=>'My tasks + unassigned'
-,p_lov_return_value=>'MY+'
-);
-wwv_flow_imp_shared.create_static_lov_data(
- p_id=>wwv_flow_imp.id(44082510607233376)
-,p_lov_disp_sequence=>2
-,p_lov_disp_value=>'My tasks'
-,p_lov_return_value=>'MY'
+,p_source_type=>'TABLE'
+,p_location=>'LOCAL'
+,p_use_local_sync_table=>false
+,p_query_table=>'TSK_LOV_BOARD_TYPES_V'
+,p_return_column_name=>'ID'
+,p_display_column_name=>'NAME'
+,p_group_sort_direction=>'ASC'
+,p_default_sort_column_name=>'ORDER#'
+,p_default_sort_direction=>'ASC'
 );
 end;
 /
@@ -15435,7 +15430,7 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(34744374076440316)
-,p_plug_name=>'Tasks for &P100_BOARD_NAME.'
+,p_plug_name=>'&P100_HEADER.'
 ,p_parent_plug_id=>wwv_flow_imp.id(35122875520937003)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70864195177975601)
@@ -15980,7 +15975,7 @@ wwv_flow_imp_page.create_page_item(
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(35124240356937017)
-,p_name=>'P100_BOARD_NAME'
+,p_name=>'P100_HEADER'
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(35123712321937012)
 ,p_display_as=>'NATIVE_HIDDEN'
@@ -15995,7 +15990,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Board Type'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_BOARD_TYPES'
-,p_lov=>'.'||wwv_flow_imp.id(44081882365233350)||'.'
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_begin_on_new_line=>'N'
@@ -16011,21 +16005,23 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44092987495578032)
 ,p_name=>'P100_SHOW_GRID'
-,p_item_sequence=>10
-,p_item_plug_id=>wwv_flow_imp.id(34744374076440316)
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_imp.id(35123712321937012)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_attribute_01=>'Y'
 );
 wwv_flow_imp_page.create_page_computation(
  p_id=>wwv_flow_imp.id(35124396504937018)
 ,p_computation_sequence=>10
-,p_computation_item=>'P100_BOARD_NAME'
+,p_computation_item=>'P100_HEADER'
 ,p_computation_point=>'BEFORE_BOX_BODY'
 ,p_computation_type=>'QUERY'
 ,p_computation=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT b.board_name',
+'SELECT NVL(l.name, ''Tasks'') || '' for '' || b.board_name AS name',
 'FROM tsk_boards b',
-'WHERE b.board_id = :P0_BOARD_ID;'))
+'LEFT JOIN tsk_lov_board_types_v l',
+'    ON l.id         = :P100_BOARD_TYPE',
+'WHERE b.board_id    = :P0_BOARD_ID;'))
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(34906414430118509)

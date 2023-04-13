@@ -95,27 +95,21 @@
     sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: LOV_BOARD_TYPES =====================
-  id: 44081882365233350
+  id: 44164215535767295
   identification: 
     name: LOV_BOARD_TYPES
 
   source: 
-    location: Static Values
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_LOV_BOARD_TYPES_V
 
-  entries: 
-  - # ====== Entry: My tasks + unassigned ========================
-    id: 44082120173233372
-    entry: 
-      sequence: 1
-      display: My tasks + unassigned
-      return: MY+
-
-  - # ====== Entry: My tasks =====================================
-    id: 44082510607233376
-    entry: 
-      sequence: 2
-      display: My tasks
-      return: MY
+  column-mapping: 
+    return: ID
+    display: NAME
+    default-sort: ORDER#
+    sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
   id: 54624749962706655

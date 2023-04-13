@@ -39,10 +39,10 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Tasks for &P100_BOARD_NAME. =================
+- # ====== Region: &P100_HEADER. ===============================
   id: 34744374076440316
   identification: 
-    title: Tasks for &P100_BOARD_NAME.
+    title: '&P100_HEADER.'
     type: Static Content
 
   layout: 
@@ -950,10 +950,10 @@ page-items:
     escape-special-characters: true
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P100_BOARD_NAME ==========================
+- # ====== Page Item: P100_HEADER ==============================
   id: 35124240356937017
   identification: 
-    name: P100_BOARD_NAME
+    name: P100_HEADER
     type: Hidden
 
   settings: 
@@ -1017,7 +1017,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_BOARD_TYPES # 44081882365233350
+    list-of-values: LOV_BOARD_TYPES # 44164215535767295
     display-extra-values: false
     display-null-value: true
 
@@ -1049,8 +1049,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 10
-    region: Tasks for &P100_BOARD_NAME. # 34744374076440316
+    sequence: 50
+    region: Filters # 35123712321937012
     position: BODY
 
   advanced: 
@@ -1078,7 +1078,7 @@ buttons:
 
   layout: 
     sequence: 10
-    region: Tasks for &P100_BOARD_NAME. # 34744374076440316
+    region: '&P100_HEADER.' # 34744374076440316
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -1113,7 +1113,7 @@ buttons:
 
   layout: 
     sequence: 40
-    region: Tasks for &P100_BOARD_NAME. # 34744374076440316
+    region: '&P100_HEADER.' # 34744374076440316
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -1141,7 +1141,7 @@ buttons:
 
   layout: 
     sequence: 20
-    region: Tasks for &P100_BOARD_NAME. # 34744374076440316
+    region: '&P100_HEADER.' # 34744374076440316
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -1178,7 +1178,7 @@ buttons:
 
   layout: 
     sequence: 30
-    region: Tasks for &P100_BOARD_NAME. # 34744374076440316
+    region: '&P100_HEADER.' # 34744374076440316
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -1279,10 +1279,10 @@ dynamic-actions:
       fire-on-initialization: false
 
 computations: 
-- # ====== Computation: P100_BOARD_NAME ========================
+- # ====== Computation: P100_HEADER ============================
   id: 35124396504937018
   identification: 
-    item-name: P100_BOARD_NAME
+    item-name: P100_HEADER
 
   execution: 
     sequence: 10
@@ -1291,9 +1291,11 @@ computations:
   computation: 
     type: SQL Query (return single value)
     sql-query: |
-      SELECT b.board_name
+      SELECT NVL(l.name, 'Tasks') || ' for ' || b.board_name AS name
       FROM tsk_boards b
-      WHERE b.board_id = :P0_BOARD_ID;
+      LEFT JOIN tsk_lov_board_types_v l
+          ON l.id         = :P100_BOARD_TYPE
+      WHERE b.board_id    = :P0_BOARD_ID;
 
 processes: 
 - # ====== Process: UPDATE_TASK ================================
