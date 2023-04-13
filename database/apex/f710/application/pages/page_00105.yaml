@@ -21,7 +21,7 @@ navigation-menu:
   override-user-interface-level: false
 
 navigation: 
-  cursor-focus: Do not focus cursor
+  cursor-focus: First item on page
   warn-on-unsaved-changes: true
 
 css: 
@@ -40,6 +40,10 @@ css:
     }
     #CHECKLIST_ig_content_container .a-IG {
       border: 0 !important;
+    }
+    
+    .a-GV-footer {
+        display: none !important;
     }
     
 

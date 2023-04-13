@@ -17,6 +17,7 @@ wwv_flow_imp_page.create_page(
 ,p_alias=>'TASK'
 ,p_page_mode=>'MODAL'
 ,p_step_title=>'Task Detail'
+,p_first_item=>'AUTO_FIRST_ITEM'
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(78949836938576475)  -- MAIN
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -34,6 +35,10 @@ wwv_flow_imp_page.create_page(
 '}',
 '#CHECKLIST_ig_content_container .a-IG {',
 '  border: 0 !important;',
+'}',
+'',
+'.a-GV-footer {',
+'    display: none !important;',
 '}',
 ''))
 ,p_page_template_options=>'#DEFAULT#'
