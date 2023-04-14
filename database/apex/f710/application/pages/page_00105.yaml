@@ -24,11 +24,6 @@ navigation:
   cursor-focus: First item on page
   warn-on-unsaved-changes: true
 
-javascript: 
-  execute-when-page-loads: |
-    apex.region('CHECKLIST').call('getActions').set('edit', true);
-    
-
 css: 
   inline: |
     #P105_TASK_DESC_CONTAINER .t-Form-labelContainer {
@@ -135,10 +130,6 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
-  server-side-condition: 
-    type: Item is NOT NULL
-    item: P105_TASK_ID
-
   server-cache: 
     caching: Disabled
 
@@ -154,7 +145,7 @@ regions:
       - Update Row
       - Delete Row
       lost-update-type: Row Values
-      add-row-if-empty: true
+      add-row-if-empty: false
 
     performance: 
       lazy-loading: false
@@ -165,7 +156,7 @@ regions:
 
     pagination: 
       type: Scroll
-      show-total-row-count: true
+      show-total-row-count: false
 
     toolbar: 
       show: false
@@ -184,19 +175,6 @@ regions:
 
     detail-view: 
       show: false
-
-    advanced: 
-      initialization-javascript-function: |
-        function(config) {
-            if (!config.toolbar) {
-                config.toolbar = {};
-            }
-            config.toolbar.searchField = false;
-            config.toolbar.actionMenu = false;
-            config.views.grid.features.footer = false;
-            config.editable.autoAddRow = true;
-            return config;
-        }
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
@@ -300,6 +278,10 @@ regions:
     accessibility: 
       value-identifies-row: false
 
+    appearance: 
+      css-classes: 
+      - CHECKLIST_ITEM
+
     validation: 
       value-required: false
       maximum-length: 256
@@ -354,6 +336,10 @@ regions:
     accessibility: 
       value-identifies-row: false
 
+    appearance: 
+      css-classes: 
+      - CHECKLIST_BOX
+
     validation: 
       value-required: false
 
@@ -385,74 +371,6 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
-
-  - # ====== Column: UPDATED_BY ==================================
-    id: 34950669329065816
-    identification: 
-      column-name: UPDATED_BY
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 80
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_BY
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 34950711939065817
-    identification: 
-      column-name: UPDATED_AT
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 90
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_AT
-      data-type: DATE
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
 
 - # ====== Region: Comments [FORM] =============================
   id: 34953102387065841

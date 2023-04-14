@@ -20,9 +20,6 @@ wwv_flow_imp_page.create_page(
 ,p_first_item=>'AUTO_FIRST_ITEM'
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(78949836938576475)  -- MAIN
-,p_javascript_code_onload=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'apex.region(''CHECKLIST'').call(''getActions'').set(''edit'', true);',
-''))
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '#P105_TASK_DESC_CONTAINER .t-Form-labelContainer {',
 '  display: none;',
@@ -472,6 +469,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_heading_alignment=>'CENTER'
 ,p_display_sequence=>50
 ,p_value_alignment=>'CENTER'
+,p_value_css_classes=>'CHECKLIST_BOX'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'Y'
 ,p_is_required=>false
@@ -489,54 +487,20 @@ wwv_flow_imp_page.create_region_column(
 ,p_duplicate_value=>true
 ,p_include_in_export=>true
 );
-wwv_flow_imp_page.create_region_column(
- p_id=>wwv_flow_imp.id(34950669329065816)
-,p_name=>'UPDATED_BY'
-,p_source_type=>'DB_COLUMN'
-,p_source_expression=>'UPDATED_BY'
-,p_data_type=>'VARCHAR2'
-,p_session_state_data_type=>'VARCHAR2'
-,p_is_query_only=>false
-,p_item_type=>'NATIVE_HIDDEN'
-,p_display_sequence=>80
-,p_attribute_01=>'Y'
-,p_use_as_row_header=>false
-,p_enable_sort_group=>false
-,p_is_primary_key=>false
-,p_duplicate_value=>true
-,p_include_in_export=>false
-);
-wwv_flow_imp_page.create_region_column(
- p_id=>wwv_flow_imp.id(34950711939065817)
-,p_name=>'UPDATED_AT'
-,p_source_type=>'DB_COLUMN'
-,p_source_expression=>'UPDATED_AT'
-,p_data_type=>'DATE'
-,p_session_state_data_type=>'VARCHAR2'
-,p_is_query_only=>false
-,p_item_type=>'NATIVE_HIDDEN'
-,p_display_sequence=>90
-,p_attribute_01=>'Y'
-,p_use_as_row_header=>false
-,p_enable_sort_group=>false
-,p_is_primary_key=>false
-,p_duplicate_value=>true
-,p_include_in_export=>false
-);
 wwv_flow_imp_page.create_interactive_grid(
  p_id=>wwv_flow_imp.id(34950121876065811)
 ,p_internal_uid=>34950121876065811
 ,p_is_editable=>true
 ,p_edit_operations=>'i:u:d'
 ,p_lost_update_check_type=>'VALUES'
-,p_add_row_if_empty=>true
+,p_add_row_if_empty=>false
 ,p_submit_checked_rows=>false
 ,p_lazy_loading=>false
 ,p_requires_filter=>false
 ,p_select_first_row=>false
 ,p_fixed_row_height=>true
 ,p_pagination_type=>'SCROLL'
-,p_show_total_row_count=>true
+,p_show_total_row_count=>false
 ,p_show_toolbar=>false
 ,p_toolbar_buttons=>null
 ,p_enable_save_public_report=>false
@@ -548,17 +512,6 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_fixed_header=>'PAGE'
 ,p_show_icon_view=>false
 ,p_show_detail_view=>false
-,p_javascript_code=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'function(config) {',
-'    if (!config.toolbar) {',
-'        config.toolbar = {};',
-'    }',
-'    config.toolbar.searchField = false;',
-'    config.toolbar.actionMenu = false;',
-'    config.views.grid.features.footer = false;',
-'    config.editable.autoAddRow = true;',
-'    return config;',
-'}'))
 );
 wwv_flow_imp_page.create_ig_report(
  p_id=>wwv_flow_imp.id(34970106412433080)
@@ -617,22 +570,6 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_sort_direction=>'ASC'
 ,p_sort_nulls=>'LAST'
 );
-wwv_flow_imp_page.create_ig_report_column(
- p_id=>wwv_flow_imp.id(34974458107433121)
-,p_view_id=>wwv_flow_imp.id(34970334928433080)
-,p_display_seq=>5
-,p_column_id=>wwv_flow_imp.id(34950669329065816)
-,p_is_visible=>true
-,p_is_frozen=>false
-);
-wwv_flow_imp_page.create_ig_report_column(
- p_id=>wwv_flow_imp.id(34975357226433124)
-,p_view_id=>wwv_flow_imp.id(34970334928433080)
-,p_display_seq=>6
-,p_column_id=>wwv_flow_imp.id(34950711939065817)
-,p_is_visible=>true
-,p_is_frozen=>false
-);
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(44094467518578047)
 ,p_plug_name=>'Git &P105_BADGE_GIT.'
@@ -656,20 +593,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
-);
-wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(34951130580065821)
-,p_button_sequence=>30
-,p_button_plug_id=>wwv_flow_imp.id(44094157892578044)
-,p_button_name=>'ADD_CHECKLIST_ITEM'
-,p_button_action=>'DEFINED_BY_DA'
-,p_button_template_options=>'#DEFAULT#'
-,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
-,p_button_image_alt=>'Add Checklist Item'
-,p_warn_on_unsaved_changes=>null
-,p_button_condition_type=>'NEVER'
-,p_icon_css_classes=>'fa-plus'
-,p_grid_new_row=>'Y'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(34798797839743638)
