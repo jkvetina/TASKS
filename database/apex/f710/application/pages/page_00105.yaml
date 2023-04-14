@@ -2731,27 +2731,6 @@ processes:
   server-side-condition: 
     when-button-pressed: DELETE_TASK # 34949592599065805
 
-- # ====== Process: INIT_DEFAULTS ==============================
-  id: 34954117428067239
-  identification: 
-    name: INIT_DEFAULTS
-    type: Execute Code
-
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: |
-      -- use globals as defaults
-      :P105_CLIENT_ID     := NVL(:P105_CLIENT_ID,     :P0_CLIENT_ID);
-      :P105_PROJECT_ID    := NVL(:P105_PROJECT_ID,    :P0_PROJECT_ID);
-      :P105_BOARD_ID      := NVL(:P105_BOARD_ID,      :P0_BOARD_ID);
-      
-
-  execution: 
-    sequence: 20
-    point: Before Header
-    run-process: Once Per Page Visit (default)
-
 - # ====== Process: SAVE_FILTERS ===============================
   id: 34956155001097869
   identification: 
@@ -2874,7 +2853,6 @@ processes:
           WHERE c.task_id         = :P105_TASK_ID
               AND c.comment_id    = :P105_DELETE_COMMENT;
       END IF;
-      
       
 
   execution: 

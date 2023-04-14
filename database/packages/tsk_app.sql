@@ -46,6 +46,24 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
     BEGIN
         -- load preferences
         tsk_app.load_user_preferences();
+
+
+
+    PROCEDURE init_defaults_p105
+    AS
+    BEGIN
+        -- use globals as defaults
+        IF core.get_item('P105_CLIENT_ID') IS NULL THEN
+            core.set_item('P105_CLIENT_ID', core.get_item('P0_CLIENT_ID'));
+        END IF;
+        --
+        IF core.get_item('P105_PROJECT_ID') IS NULL THEN
+            core.set_item('P105_PROJECT_ID', core.get_item('P0_PROJECT_ID'));
+        END IF;
+        --
+        IF core.get_item('P105_BOARD_ID') IS NULL THEN
+            core.set_item('P105_BOARD_ID', core.get_item('P0_BOARD_ID'));
+        END IF;
     END;
 
 

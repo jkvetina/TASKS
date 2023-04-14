@@ -1269,20 +1269,6 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_name=>'INIT_FORM'
 );
 wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(34954117428067239)
-,p_process_sequence=>20
-,p_process_point=>'BEFORE_HEADER'
-,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'INIT_DEFAULTS'
-,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'-- use globals as defaults',
-':P105_CLIENT_ID     := NVL(:P105_CLIENT_ID,     :P0_CLIENT_ID);',
-':P105_PROJECT_ID    := NVL(:P105_PROJECT_ID,    :P0_PROJECT_ID);',
-':P105_BOARD_ID      := NVL(:P105_BOARD_ID,      :P0_BOARD_ID);',
-''))
-,p_process_clob_language=>'PLSQL'
-);
-wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(44171763739914724)
 ,p_process_sequence=>30
 ,p_process_point=>'BEFORE_HEADER'
@@ -1294,7 +1280,6 @@ wwv_flow_imp_page.create_page_process(
 '    WHERE c.task_id         = :P105_TASK_ID',
 '        AND c.comment_id    = :P105_DELETE_COMMENT;',
 'END IF;',
-'',
 ''))
 ,p_process_clob_language=>'PLSQL'
 );
