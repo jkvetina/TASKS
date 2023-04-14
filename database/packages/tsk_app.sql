@@ -50,6 +50,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
 
         -- generate task link
         core.set_item('P100_TASK_LINK', tsk_app.get_task_link(core.get_item('P100_TASK_ID')));
+    END;
+
 
 
     PROCEDURE init_defaults_p105
@@ -70,6 +72,23 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
 
         -- generate task link
         core.set_item('P105_TASK_LINK', tsk_app.get_task_link(core.get_item('P105_TASK_ID'), 'EXTERNAL'));
+
+        -- calculate prev/next tasks
+        FOR c IN (
+            SELECT task_id, prev_task, next_task
+            FROM (
+                SELECT
+                    t.task_id,
+                    LAG(t.task_id)  OVER (ORDER BY t.swimlane_order# NULLS LAST, t.status_order# NULLS LAST, t.task_order# NULLS LAST) AS prev_task,
+                    LEAD(t.task_id) OVER (ORDER BY t.swimlane_order# NULLS LAST, t.status_order# NULLS LAST, t.task_order# NULLS LAST) AS next_task
+                    --
+                FROM tsk_p100_tasks_grid_v t
+            )
+            WHERE task_id = core.get_number_item('P105_TASK_ID')
+        ) LOOP
+            core.set_item('P105_PREV_TASK_ID', NULLIF(c.prev_task, c.task_id));
+            core.set_item('P105_NEXT_TASK_ID', NULLIF(c.next_task, c.task_id));
+        END LOOP;
     END;
 
 

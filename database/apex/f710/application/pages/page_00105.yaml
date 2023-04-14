@@ -3008,7 +3008,7 @@ branches:
     name: CREATE_ANOTHER
 
   execution: 
-    sequence: 10
+    sequence: 30
     point: After Processing
 
   behavior: 
@@ -3020,4 +3020,46 @@ branches:
 
   server-side-condition: 
     when-button-pressed: CREATE_ANOTHER # 44090573922578008
+
+- # ====== Branch: GOTO_PREV_TASK ==============================
+  id: 44174013111914747
+  identification: 
+    name: GOTO_PREV_TASK
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TASK_ID:&P105_PREV_TASK_ID.&success_msg=#SUCCESS_MSG#'
+      page: 105 # Task Detail
+      clear-cache: 105
+      values: 
+        p105_task_id: '&P105_PREV_TASK_ID.'
+
+  server-side-condition: 
+    when-button-pressed: GOTO_PREV_TASK # 44172282401914729
+
+- # ====== Branch: GOTO_NEXT_TASK ==============================
+  id: 44174136087914748
+  identification: 
+    name: GOTO_NEXT_TASK
+
+  execution: 
+    sequence: 20
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TASK_ID:&P105_NEXT_TASK_ID.&success_msg=#SUCCESS_MSG#'
+      page: 105 # Task Detail
+      clear-cache: 105
+      values: 
+        p105_task_id: '&P105_NEXT_TASK_ID.'
+
+  server-side-condition: 
+    when-button-pressed: GOTO_NEXT_TASK # 44172109399914728
 
