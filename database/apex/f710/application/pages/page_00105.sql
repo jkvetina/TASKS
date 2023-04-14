@@ -668,14 +668,35 @@ wwv_flow_imp_page.create_page_button(
 ,p_database_action=>'UPDATE'
 );
 wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(34949592599065805)
+ p_id=>wwv_flow_imp.id(44172282401914729)
 ,p_button_sequence=>70
 ,p_button_plug_id=>wwv_flow_imp.id(63213380867844590)
-,p_button_name=>'DELETE_TASK'
+,p_button_name=>'GOTO_PREV_TASK'
 ,p_button_action=>'SUBMIT'
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
-,p_button_image_alt=>'Delete Task'
+,p_button_image_alt=>'Save changes and go to previous task'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_button_condition=>'P105_PREV_TASK_ID'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+,p_icon_css_classes=>'fa-arrow-left'
+,p_database_action=>'UPDATE'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(44172109399914728)
+,p_button_sequence=>80
+,p_button_plug_id=>wwv_flow_imp.id(63213380867844590)
+,p_button_name=>'GOTO_NEXT_TASK'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
+,p_button_image_alt=>'Save changes and go to next task'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_button_condition=>'P105_NEXT_TASK_ID'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+,p_icon_css_classes=>'fa-arrow-right'
+,p_database_action=>'UPDATE'
+);
 ,p_button_position=>'RIGHT_OF_TITLE'
 ,p_button_execute_validations=>'N'
 ,p_confirm_message=>'Are you sure?'
