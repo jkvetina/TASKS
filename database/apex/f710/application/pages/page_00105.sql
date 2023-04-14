@@ -1284,6 +1284,19 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(44171812187914725)
+,p_process_sequence=>40
+,p_process_point=>'BEFORE_HEADER'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'DELETE_EMPTY_CHECKLIST'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DELETE FROM tsk_task_checklist c',
+'WHERE c.task_id             = :P105_TASK_ID',
+'    AND c.checklist_item    = ''-'';',
+''))
+,p_process_clob_language=>'PLSQL'
+);
+wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34956155001097869)
 ,p_process_sequence=>30
 ,p_process_point=>'ON_SUBMIT_BEFORE_COMPUTATION'

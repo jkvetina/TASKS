@@ -2860,6 +2860,26 @@ processes:
     point: Before Header
     run-process: Once Per Page Visit (default)
 
+- # ====== Process: DELETE_EMPTY_CHECKLIST =====================
+  id: 44171812187914725
+  identification: 
+    name: DELETE_EMPTY_CHECKLIST
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      DELETE FROM tsk_task_checklist c
+      WHERE c.task_id             = :P105_TASK_ID
+          AND c.checklist_item    = '-';
+      
+
+  execution: 
+    sequence: 40
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
 branches: 
 - # ====== Branch: CREATE_ANOTHER ==============================
   id: 44090980886578012
