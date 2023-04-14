@@ -308,3 +308,37 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+dynamic-actions: 
+- # ====== Dynamic Action: AUTOHIDE_SUCCESS ====================
+  id: 30749497144683909
+  identification: 
+    name: AUTOHIDE_SUCCESS
+
+  execution: 
+    sequence: 10
+
+  when: 
+    event: EVENT.EVENT.BROWSER.READY
+
+  execution: 
+    event-scope: Static
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 30749530360683910
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        apex.theme42.util.configAPEXMsgs({
+            autoDismiss : true,
+            duration    : 2000
+        });
+
+    execution: 
+      sequence: 10
+      event: AUTOHIDE_SUCCESS # 30749497144683909
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

@@ -149,6 +149,26 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(30749497144683909)
+,p_name=>'AUTOHIDE_SUCCESS'
+,p_event_sequence=>10
+,p_bind_type=>'bind'
+,p_bind_event_type=>'ready'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(30749530360683910)
+,p_event_id=>wwv_flow_imp.id(30749497144683909)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'apex.theme42.util.configAPEXMsgs({',
+'    autoDismiss : true,',
+'    duration    : 2000',
+'});'))
+);
 wwv_flow_imp.component_end;
 end;
 /
