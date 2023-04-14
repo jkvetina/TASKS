@@ -2190,6 +2190,36 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P105_TASK_LINK ===========================
+  id: 44172874732914735
+  identification: 
+    name: P105_TASK_LINK
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 120
+    region: '&P105_HEADER.' # 63213380867844590
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 - # ====== Page Item: P105_HEADER ==============================
   id: 63213944180844595
   identification: 
@@ -2292,7 +2322,7 @@ buttons:
     label: Delete Task
 
   layout: 
-    sequence: 70
+    sequence: 110
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -2306,6 +2336,8 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
     icon: fa-trash-o
 
   behavior: 
@@ -2327,37 +2359,6 @@ buttons:
   server-side-condition: 
     type: Item is NOT NULL
     item: P105_TASK_ID
-
-- # ====== Button: ADD_CHECKLIST_ITEM ==========================
-  id: 34951130580065821
-  identification: 
-    button-name: ADD_CHECKLIST_ITEM
-    label: Add Checklist Item
-
-  layout: 
-    sequence: 30
-    region: Checklist &P105_BADGE_CHECKLIST. # 44094157892578044
-    position: BODY
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-    alignment: Left center
-
-  appearance: 
-    button-template: Icon # 70969417180975670
-    hot: false
-    template-options: 
-    - '#DEFAULT#'
-    icon: fa-plus
-
-  behavior: 
-    action: Defined by Dynamic Action
-    execute-validations: true
-
-  server-side-condition: 
-    type: Never
 
 - # ====== Button: UPDATE_AND_CLOSE ============================
   id: 44090106596578004
@@ -2457,6 +2458,103 @@ buttons:
     type: Item is NULL
     item: P105_TASK_ID
 
+- # ====== Button: GOTO_NEXT_TASK ==============================
+  id: 44172109399914728
+  identification: 
+    button-name: GOTO_NEXT_TASK
+    label: Save changes and go to next task
+
+  layout: 
+    sequence: 80
+    region: '&P105_HEADER.' # 63213380867844590
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-arrow-right
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_NEXT_TASK_ID
+
+- # ====== Button: GOTO_PREV_TASK ==============================
+  id: 44172282401914729
+  identification: 
+    button-name: GOTO_PREV_TASK
+    label: Save changes and go to previous task
+
+  layout: 
+    sequence: 70
+    region: '&P105_HEADER.' # 63213380867844590
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-arrow-left
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_PREV_TASK_ID
+
+- # ====== Button: COPY_LINK ===================================
+  id: 44172728522914734
+  identification: 
+    button-name: COPY_LINK
+    label: Copy link to clipboard
+
+  layout: 
+    sequence: 90
+    region: '&P105_HEADER.' # 63213380867844590
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-copy
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
+
 - # ====== Button: CLOSE_DIALOG ================================
   id: 63213580209844592
   identification: 
@@ -2464,7 +2562,7 @@ buttons:
     label: Close Dialog
 
   layout: 
-    sequence: 80
+    sequence: 100
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -2737,7 +2835,9 @@ processes:
   server-side-condition: 
     type: Expression
     language: PL/SQL
-    pl/sql-expression: APEX_APPLICATION.G_REQUEST LIKE 'UPDATE_%'
+    pl/sql-expression: |
+      APEX_APPLICATION.G_REQUEST LIKE 'UPDATE_%'
+      OR APEX_APPLICATION.G_REQUEST LIKE 'GOTO_%'
 
 - # ====== Process: SAVE_FORM_DELETE ===========================
   id: 34952654734065836
