@@ -2502,10 +2502,18 @@ dynamic-actions:
   execution: 
     sequence: 20
 
+- # ====== Dynamic Action: COPY_TO_CLIPBOARD ===================
+  id: 44172926343914736
+  identification: 
+    name: COPY_TO_CLIPBOARD
+
+  execution: 
+    sequence: 40
+
   when: 
     event: EVENT.EVENT.BROWSER.CLICK
     selection-type: Button
-    button: ADD_CHECKLIST_ITEM # 34951130580065821
+    button: COPY_LINK # 44172728522914734
 
   execution: 
     event-scope: Static
@@ -2514,6 +2522,22 @@ dynamic-actions:
   actions: 
   - # ====== Action: Execute JavaScript Code =====================
     id: 34951384737065823
+    id: 44173012895914737
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        copy_to_clipboard(apex.item('P105_TASK_LINK').getValue());
+        apex.message.showPageSuccess('Link copied to clipboard');
+        
+
+    execution: 
+      sequence: 10
+      event: COPY_TO_CLIPBOARD # 44172926343914736
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
     identification: 
       action: Execute JavaScript Code
 

@@ -1138,28 +1138,26 @@ wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(34951203421065822)
 ,p_name=>'ADD_ITEM'
 ,p_event_sequence=>20
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(44172926343914736)
+,p_name=>'COPY_TO_CLIPBOARD'
+,p_event_sequence=>40
 ,p_triggering_element_type=>'BUTTON'
-,p_triggering_button_id=>wwv_flow_imp.id(34951130580065821)
+,p_triggering_button_id=>wwv_flow_imp.id(44172728522914734)
 ,p_bind_type=>'bind'
 ,p_execution_type=>'IMMEDIATE'
 ,p_bind_event_type=>'click'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(34951384737065823)
-,p_event_id=>wwv_flow_imp.id(34951203421065822)
+ p_id=>wwv_flow_imp.id(44173012895914737)
+,p_event_id=>wwv_flow_imp.id(44172926343914736)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'var region  = apex.region("CHECKLIST");',
-'var view    = region.call("getCurrentView");',
-'//',
-'if (view.internalIdentifier === "grid") {',
-'    var row$ = region.widget().find(".a-GV-row").last();',
-'    view.view$.grid("setSelection", row$);',
-'    region.call("getActions").invoke("selection-add-row");',
-'}',
+'copy_to_clipboard(apex.item(''P105_TASK_LINK'').getValue());',
+'apex.message.showPageSuccess(''Link copied to clipboard'');',
 ''))
 );
 wwv_flow_imp_page.create_page_process(

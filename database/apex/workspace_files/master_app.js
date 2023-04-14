@@ -1,4 +1,18 @@
 //
+// COPY TO CLIPBOARD
+//
+var copy_to_clipboard = function (text) {
+    var dummy = document.createElement('textarea');
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummy);
+}
+
+
+
+//
 // CREATE COLORFUL IG/IR CELLS
 //
 const color_cell = function (options, value, title, color_bg, color_text) {
