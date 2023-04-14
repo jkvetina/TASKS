@@ -66,10 +66,10 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Checklist [LIST] ============================
+- # ====== Region: Checklist [GRID] ============================
   id: 34950084031065810
   identification: 
-    title: Checklist [LIST]
+    title: Checklist [GRID]
     type: Interactive Grid
 
   source: 
@@ -1553,7 +1553,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Board Id
+    label: Board
     alignment: Left
 
   settings: 
@@ -1689,7 +1689,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Swimlane Id
+    label: Swimlane
     alignment: Left
 
   settings: 
@@ -1751,7 +1751,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Status Id
+    label: Status
     alignment: Left
 
   settings: 
@@ -2529,10 +2529,10 @@ dynamic-actions:
     type: Immediate
 
   actions: 
-  - # ====== Action: Close Dialog ================================
+  - # ====== Action: Cancel Dialog ===============================
     id: 63213859633844594
     identification: 
-      action: Close Dialog
+      action: Cancel Dialog
 
     execution: 
       sequence: 10
@@ -2653,7 +2653,7 @@ processes:
   identification: 
     name: SAVE_CHECKLIST
     type: Interactive Grid - Automatic Row Processing (DML)
-    editable-region: Checklist [LIST] # 34950084031065810
+    editable-region: Checklist [GRID] # 34950084031065810
 
   settings: 
     target-type: Region Source
