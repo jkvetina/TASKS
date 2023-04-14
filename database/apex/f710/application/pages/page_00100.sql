@@ -555,8 +555,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(35124240356937017)
 ,p_name=>'P100_HEADER'
-,p_item_sequence=>40
-,p_item_plug_id=>wwv_flow_imp.id(35123712321937012)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(34744374076440316)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
@@ -584,9 +584,28 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44092987495578032)
 ,p_name=>'P100_SHOW_GRID'
-,p_item_sequence=>50
-,p_item_plug_id=>wwv_flow_imp.id(35123712321937012)
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_imp.id(34744374076440316)
 ,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(44172558470914732)
+,p_name=>'P100_TASK_ID'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(34744374076440316)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(44173953530914746)
+,p_name=>'P100_TASK_LINK'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(34744374076440316)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
 wwv_flow_imp_page.create_page_computation(
@@ -641,6 +660,26 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'console.log(''DIALOG_CLOSED'');',
 'location.reload();',
+''))
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(44173741419914744)
+,p_name=>'SHOW_DETAIL'
+,p_event_sequence=>90
+,p_bind_type=>'bind'
+,p_bind_event_type=>'ready'
+,p_display_when_type=>'ITEM_IS_NOT_NULL'
+,p_display_when_cond=>'P100_TASK_LINK'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(44173818773914745)
+,p_event_id=>wwv_flow_imp.id(44173741419914744)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'window.location.href = apex.item(''P100_TASK_LINK'').getValue();',
 ''))
 );
 wwv_flow_imp_page.create_page_process(

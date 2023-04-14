@@ -932,8 +932,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 40
-    region: Filters # 35123712321937012
+    sequence: 10
+    region: '&P100_HEADER.' # 34744374076440316
     position: BODY
 
   advanced: 
@@ -1021,8 +1021,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 50
-    region: Filters # 35123712321937012
+    sequence: 20
+    region: '&P100_HEADER.' # 34744374076440316
     position: BODY
 
   advanced: 
@@ -1038,7 +1038,67 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_TASK_ID =============================
+  id: 44172558470914732
+  identification: 
+    name: P100_TASK_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: '&P100_HEADER.' # 34744374076440316
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_TASK_LINK ===========================
+  id: 44173953530914746
+  identification: 
+    name: P100_TASK_LINK
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: '&P100_HEADER.' # 34744374076440316
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 buttons: 
@@ -1247,6 +1307,41 @@ dynamic-actions:
     execution: 
       sequence: 10
       event: CLOSED_DETAIL # 34951752190065827
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: SHOW_DETAIL =========================
+  id: 44173741419914744
+  identification: 
+    name: SHOW_DETAIL
+
+  execution: 
+    sequence: 90
+
+  when: 
+    event: EVENT.EVENT.BROWSER.READY
+
+  execution: 
+    event-scope: Static
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P100_TASK_LINK
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 44173818773914745
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        window.location.href = apex.item('P100_TASK_LINK').getValue();
+        
+
+    execution: 
+      sequence: 10
+      event: SHOW_DETAIL # 44173741419914744
       fire-when-event-result-is: True
       fire-on-initialization: false
 
