@@ -443,7 +443,8 @@ wwv_flow_imp_page.create_region_column(
 ,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>60
 ,p_value_alignment=>'LEFT'
-,p_attribute_05=>'BOTH'
+,p_value_css_classes=>'CHECKLIST_ITEM'
+,p_attribute_05=>'NONE'
 ,p_is_required=>false
 ,p_max_length=>256
 ,p_enable_filter=>true
