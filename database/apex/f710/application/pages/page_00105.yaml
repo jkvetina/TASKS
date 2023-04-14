@@ -88,9 +88,8 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_TASK_CHECKLIST
+    table-name: TSK_P105_CHECKLIST_V
     include-rowid-column: false
-    where-clause: 'task_id = :P105_TASK_ID'
 
   layout: 
     sequence: 10
