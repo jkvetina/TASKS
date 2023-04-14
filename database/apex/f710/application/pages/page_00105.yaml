@@ -24,6 +24,11 @@ navigation:
   cursor-focus: First item on page
   warn-on-unsaved-changes: true
 
+javascript: 
+  execute-when-page-loads: |
+    apex.region('CHECKLIST').call('getActions').set('edit', true);
+    
+
 css: 
   inline: |
     #P105_TASK_DESC_CONTAINER .t-Form-labelContainer {
@@ -33,17 +38,24 @@ css:
       margin: 0 !important;
     }
     
+    /* HIDE EVERYTHING RELATED TO GRID */
     #CHECKLIST_ig_content_container .a-GV-hdr,
     #CHECKLIST_ig_content_container .a-GV-footer,
     #CHECKLIST_ig_content_container .js-stickyWidget-placeholder {
-      display: none;
+      display       : none;
     }
     #CHECKLIST_ig_content_container .a-IG {
-      border: 0 !important;
+      border        : 0 !important;
     }
     
-    .a-GV-footer {
-        display: none !important;
+    #CHECKLIST .a-IG-header,
+    #CHECKLIST .a-GV-footer {
+        display     : none !important;
+    }
+    #CHECKLIST * {
+      border        : 0 !important;
+      box-shadow    : none !important;
+      background    : transparent !important;
     }
     
 
@@ -157,6 +169,19 @@ regions:
 
     detail-view: 
       show: false
+
+    advanced: 
+      initialization-javascript-function: |
+        function(config) {
+            if (!config.toolbar) {
+                config.toolbar = {};
+            }
+            config.toolbar.searchField = false;
+            config.toolbar.actionMenu = false;
+            config.views.grid.features.footer = false;
+            config.editable.autoAddRow = true;
+            return config;
+        }
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
@@ -2339,8 +2364,7 @@ buttons:
     execute-validations: true
 
   server-side-condition: 
-    type: Item is NOT NULL
-    item: P105_TASK_ID
+    type: Never
 
 - # ====== Button: UPDATE_AND_CLOSE ============================
   id: 44090106596578004
