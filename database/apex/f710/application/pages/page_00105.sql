@@ -1167,10 +1167,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_region_id=>wwv_flow_imp.id(34950084031065810)
 ,p_process_type=>'NATIVE_IG_DML'
 ,p_process_name=>'SAVE_CHECKLIST'
-,p_attribute_01=>'REGION_SOURCE'
+,p_attribute_01=>'PLSQL_CODE'
+,p_attribute_04=>'tsk_app.save_checklist();'
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
-,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp_page.create_page_process(
@@ -1253,7 +1253,7 @@ wwv_flow_imp_page.create_page_process(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(44090654922578009)
-,p_process_sequence=>60
+,p_process_sequence=>70
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_CLOSE_WINDOW'
 ,p_process_name=>'CLOSE_DIALOG_CREATE'
@@ -1262,7 +1262,7 @@ wwv_flow_imp_page.create_page_process(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(44090282159578005)
-,p_process_sequence=>70
+,p_process_sequence=>80
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_CLOSE_WINDOW'
 ,p_process_name=>'CLOSE_DIALOG_UPDATE'
@@ -1271,7 +1271,7 @@ wwv_flow_imp_page.create_page_process(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(44090374597578006)
-,p_process_sequence=>80
+,p_process_sequence=>90
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_CLOSE_WINDOW'
 ,p_process_name=>'CLOSE_DIALOG_DELETE'
@@ -1298,19 +1298,6 @@ wwv_flow_imp_page.create_page_process(
 '    WHERE c.task_id         = :P105_TASK_ID',
 '        AND c.comment_id    = :P105_DELETE_COMMENT;',
 'END IF;',
-''))
-,p_process_clob_language=>'PLSQL'
-);
-wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(44171812187914725)
-,p_process_sequence=>40
-,p_process_point=>'BEFORE_HEADER'
-,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'DELETE_EMPTY_CHECKLIST'
-,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'DELETE FROM tsk_task_checklist c',
-'WHERE c.task_id             = :P105_TASK_ID',
-'    AND c.checklist_item    = ''-'';',
 ''))
 ,p_process_clob_language=>'PLSQL'
 );

@@ -2704,10 +2704,10 @@ processes:
     editable-region: Checklist [GRID] # 34950084031065810
 
   settings: 
-    target-type: Region Source
+    target-type: PL/SQL Code
+    pl/sql-code-to-insert/update/delete: tsk_app.save_checklist();
     prevent-lost-updates: true
     lock-row: No
-    return-primary-key(s)-after-insert: true
 
   execution: 
     sequence: 10
@@ -2810,7 +2810,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 70
+    sequence: 80
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2827,7 +2827,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 80
+    sequence: 90
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2844,7 +2844,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 60
+    sequence: 70
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2905,26 +2905,6 @@ processes:
 
   execution: 
     sequence: 30
-    point: Before Header
-    run-process: Once Per Page Visit (default)
-
-- # ====== Process: DELETE_EMPTY_CHECKLIST =====================
-  id: 44171812187914725
-  identification: 
-    name: DELETE_EMPTY_CHECKLIST
-    type: Execute Code
-
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: |
-      DELETE FROM tsk_task_checklist c
-      WHERE c.task_id             = :P105_TASK_ID
-          AND c.checklist_item    = '-';
-      
-
-  execution: 
-    sequence: 40
     point: Before Header
     run-process: Once Per Page Visit (default)
 

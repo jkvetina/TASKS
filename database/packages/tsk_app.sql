@@ -419,6 +419,47 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         HTP.P('</div>');
     END;
 
+
+
+    PROCEDURE save_checklist
+    AS
+        v_action            CHAR;
+        rec                 tsk_task_checklist%ROWTYPE;
+    BEGIN
+        v_action            := APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
+        --
+        rec.task_id         := APEX_UTIL.GET_SESSION_STATE('TASK_ID');
+        rec.checklist_id    := APEX_UTIL.GET_SESSION_STATE('CHECKLIST_ID');
+        rec.checklist_item  := APEX_UTIL.GET_SESSION_STATE('CHECKLIST_ITEM');
+        rec.checklist_done  := APEX_UTIL.GET_SESSION_STATE('CHECKLIST_DONE');
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
+        --
+        IF rec.task_id IS NULL THEN
+            rec.task_id     := APEX_UTIL.GET_SESSION_STATE('P105_TASK_ID');
+        END IF;
+        --
+        IF (v_action = 'D' OR rec.checklist_item IS NULL) THEN
+            DELETE FROM tsk_task_checklist t
+            WHERE t.task_id         = rec.task_id
+                AND t.checklist_id  = rec.checklist_id;
+            --
+            RETURN;
+        END IF;
+        --
+        IF rec.checklist_id IS NOT NULL THEN
+            UPDATE tsk_task_checklist t
+            SET ROW = rec
+            WHERE t.task_id         = rec.task_id
+                AND t.checklist_id  = rec.checklist_id;
+        ELSE
+            rec.checklist_id := tsk_checklist_id.NEXTVAL;
+            --
+            INSERT INTO tsk_task_checklist
+            VALUES rec;
+        END IF;
+    END;
+
 END;
 /
 
