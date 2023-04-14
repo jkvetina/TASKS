@@ -48,6 +48,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         tsk_app.load_user_preferences();
 
 
+        -- generate task link
+        core.set_item('P100_TASK_LINK', tsk_app.get_task_link(core.get_item('P100_TASK_ID')));
+
 
     PROCEDURE init_defaults_p105
     AS
@@ -64,6 +67,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         IF core.get_item('P105_BOARD_ID') IS NULL THEN
             core.set_item('P105_BOARD_ID', core.get_item('P0_BOARD_ID'));
         END IF;
+
+        -- generate task link
+        core.set_item('P105_TASK_LINK', tsk_app.get_task_link(core.get_item('P105_TASK_ID'), 'EXTERNAL'));
     END;
 
 
@@ -89,6 +95,54 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
             ));
         --
         RETURN out_procedure;
+    END;
+
+
+
+    FUNCTION get_task_link (
+        in_task_id          tsk_tasks.task_id%TYPE,
+        in_external         CHAR                        := NULL
+    )
+    RETURN VARCHAR2
+    AS
+    BEGIN
+        IF in_external IS NOT NULL THEN
+            RETURN
+                REGEXP_REPLACE(APEX_MAIL.GET_INSTANCE_URL, '/ords/.*$', '') ||
+                APEX_PAGE.GET_URL (
+                    p_application       => core.get_app_id(),
+                    p_session           => core.get_session_id(),
+                    p_page              => 100,
+                    p_clear_cache       => 100,
+                    p_items             => 'P100_TASK_ID',
+                    p_values            => in_task_id,
+                    p_plain_url         => TRUE
+                );
+        END IF;
+        --
+        FOR c IN (
+            SELECT
+                t.task_id,
+                t.client_id,
+                t.project_id,
+                t.board_id
+            FROM tsk_tasks t
+            WHERE t.task_id = in_task_id
+        ) LOOP
+            RETURN
+                APEX_PAGE.GET_URL (
+                    p_page              => 105,
+                    p_clear_cache       => 105,
+                    p_items             => 'P0_CLIENT_ID,P0_PROJECT_ID,P0_BOARD_ID,P105_TASK_ID',
+                    p_values            =>
+                        c.client_id     || ',' ||
+                        c.project_id    || ',' ||
+                        c.board_id      || ',' ||
+                        c.task_id
+                );
+        END LOOP;
+        --
+        RETURN NULL;
     END;
 
 

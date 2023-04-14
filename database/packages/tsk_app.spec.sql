@@ -20,6 +20,14 @@ CREATE OR REPLACE PACKAGE tsk_app AS
 
 
 
+    FUNCTION get_task_link (
+        in_task_id          tsk_tasks.task_id%TYPE,
+        in_external         CHAR                        := NULL
+    )
+    RETURN VARCHAR2;
+
+
+
     PROCEDURE update_task_on_drag;
 
 
