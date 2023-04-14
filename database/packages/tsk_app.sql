@@ -13,6 +13,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
 
     PROCEDURE init_defaults
     AS
+        v_procedure_name        VARCHAR2(61);
     BEGIN
         -- save new preference when passed in address
         FOR c IN (
@@ -30,10 +31,46 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
             END IF;
         END LOOP;
 
-        -- load preferences
-        IF core.get_page_id() IN (100) THEN
-            tsk_app.load_user_preferences();
+        -- find init block for specific/current page
+        v_procedure_name := get_init_defaults_procedure(core.get_page_id());
+        --
+        IF v_procedure_name IS NOT NULL THEN
+            EXECUTE IMMEDIATE 'BEGIN ' || v_procedure_name || '(); END;';
         END IF;
+    END;
+
+
+
+    PROCEDURE init_defaults_p100
+    AS
+    BEGIN
+        -- load preferences
+        tsk_app.load_user_preferences();
+    END;
+
+
+
+    FUNCTION get_init_defaults_procedure (
+        in_page_id      NUMBER
+    )
+    RETURN VARCHAR2
+    RESULT_CACHE
+    AS
+        out_procedure   VARCHAR2(61);
+    BEGIN
+        SELECT MAX(p.object_name || '.' || p.procedure_name)
+        INTO out_procedure
+        FROM user_procedures p
+        WHERE ((
+                p.object_name           = $$PLSQL_UNIT
+                AND p.procedure_name    = 'INIT_DEFAULTS_P' || TO_CHAR(in_page_id)
+            )
+            OR (
+                p.object_name           = REPLACE($$PLSQL_UNIT, '_APP', '_P') || TO_CHAR(in_page_id)
+                AND p.procedure_name    = 'INIT_DEFAULTS'
+            ));
+        --
+        RETURN out_procedure;
     END;
 
 

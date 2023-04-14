@@ -7,6 +7,15 @@ CREATE OR REPLACE PACKAGE tsk_app AS
 
 
     PROCEDURE init_defaults;
+    PROCEDURE init_defaults_p100;
+
+
+
+    FUNCTION get_init_defaults_procedure (
+        in_page_id      NUMBER
+    )
+    RETURN VARCHAR2
+    RESULT_CACHE;
 
 
 
