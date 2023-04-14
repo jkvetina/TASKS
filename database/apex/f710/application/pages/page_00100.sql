@@ -89,38 +89,9 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_template=>wwv_flow_imp.id(70887424081975615)
 ,p_plug_display_sequence=>50
 ,p_plug_display_point=>'SUB_REGIONS'
-,p_query_type=>'SQL'
-,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT',
-'    t.task_id,',
-'    t.task_name,',
-'    --',
-'    APEX_PAGE.GET_URL (',
-'        p_page          => 105,',
-'        p_clear_cache   => 105,',
-'        p_items         => ''P105_TASK_ID,P105_SOURCE_PAGE'',',
-'        p_values        => '''' || t.task_id || '',100''',
-'    ) AS task_link,',
-'    --',
-'    NULLIF(SUM(CASE WHEN l.checklist_done = ''Y'' THEN 1 ELSE 0 END) || ''/'' || COUNT(l.checklist_id), ''0/0'') AS task_progress,',
-'    --',
-'    t.status_id,',
-'    t.swimlane_id',
-'    --',
-'FROM tsk_tasks t',
-'LEFT JOIN tsk_task_checklist l',
-'    ON l.task_id        = t.task_id',
-'WHERE t.client_id       = :P0_CLIENT_ID',
-'    AND t.project_id    = :P0_PROJECT_ID',
-'    AND t.board_id      = :P0_BOARD_ID',
-'    --AND t.swimlane_id   = w.swimlane_id',
-'GROUP BY',
-'    t.task_id,',
-'    t.task_name,',
-'    t.status_id,',
-'    t.swimlane_id,',
-'    t.order#',
-''))
+,p_query_type=>'TABLE'
+,p_query_table=>'TSK_P100_TASKS_GRID_V'
+,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_display_condition_type=>'ITEM_IS_NOT_NULL'

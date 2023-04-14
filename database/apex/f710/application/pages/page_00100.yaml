@@ -220,38 +220,10 @@ regions:
 
   source: 
     location: Local Database
-    type: SQL Query
-    sql-query: |
-      SELECT
-          t.task_id,
-          t.task_name,
-          --
-          APEX_PAGE.GET_URL (
-              p_page          => 105,
-              p_clear_cache   => 105,
-              p_items         => 'P105_TASK_ID,P105_SOURCE_PAGE',
-              p_values        => '' || t.task_id || ',100'
-          ) AS task_link,
-          --
-          NULLIF(SUM(CASE WHEN l.checklist_done = 'Y' THEN 1 ELSE 0 END) || '/' || COUNT(l.checklist_id), '0/0') AS task_progress,
-          --
-          t.status_id,
-          t.swimlane_id
-          --
-      FROM tsk_tasks t
-      LEFT JOIN tsk_task_checklist l
-          ON l.task_id        = t.task_id
-      WHERE t.client_id       = :P0_CLIENT_ID
-          AND t.project_id    = :P0_PROJECT_ID
-          AND t.board_id      = :P0_BOARD_ID
-          --AND t.swimlane_id   = w.swimlane_id
-      GROUP BY
-          t.task_id,
-          t.task_name,
-          t.status_id,
-          t.swimlane_id,
-          t.order#
-      
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_P100_TASKS_GRID_V
+    include-rowid-column: false
 
   layout: 
     sequence: 50
