@@ -179,3 +179,9 @@ ul.DASH_LIST li:before {
   margin                : 0 3rem 0 -1.5rem;
 }
 
+
+/* SELECTED TEXT BACKGROUND */
+::selection {
+  color                 : #fff;
+  background            : #555;
+}
