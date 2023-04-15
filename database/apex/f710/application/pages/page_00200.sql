@@ -217,10 +217,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_point=>'SUB_REGIONS'
 ,p_query_type=>'TABLE'
 ,p_query_table=>'TSK_P100_BOARDS_V'
-,p_query_where=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'1 = 1',
-'AND client_id   = :P0_CLIENT_ID',
-'AND project_id  = :P0_PROJECT_ID'))
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -594,10 +590,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_point=>'SUB_REGIONS'
 ,p_query_type=>'TABLE'
 ,p_query_table=>'TSK_P100_TASK_STATUSES_V'
-,p_query_where=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'1 = 1',
-'AND client_id   = :P0_CLIENT_ID',
-'AND project_id  = :P0_PROJECT_ID'))
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -976,10 +968,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_point=>'SUB_REGIONS'
 ,p_query_type=>'TABLE'
 ,p_query_table=>'TSK_P100_TASK_SWIMLANES_V'
-,p_query_where=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'1 = 1',
-'AND client_id   = :P0_CLIENT_ID',
-'AND project_id  = :P0_PROJECT_ID'))
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'

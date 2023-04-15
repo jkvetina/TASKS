@@ -458,10 +458,6 @@ regions:
     table-owner: Parsing Schema
     table-name: TSK_P100_BOARDS_V
     include-rowid-column: false
-    where-clause: |
-      1 = 1
-      AND client_id   = :P0_CLIENT_ID
-      AND project_id  = :P0_PROJECT_ID
 
   layout: 
     sequence: 20
@@ -939,10 +935,6 @@ regions:
     table-owner: Parsing Schema
     table-name: TSK_P100_TASK_STATUSES_V
     include-rowid-column: false
-    where-clause: |
-      1 = 1
-      AND client_id   = :P0_CLIENT_ID
-      AND project_id  = :P0_PROJECT_ID
 
   layout: 
     sequence: 20
@@ -1438,10 +1430,6 @@ regions:
     table-owner: Parsing Schema
     table-name: TSK_P100_TASK_SWIMLANES_V
     include-rowid-column: false
-    where-clause: |
-      1 = 1
-      AND client_id   = :P0_CLIENT_ID
-      AND project_id  = :P0_PROJECT_ID
 
   layout: 
     sequence: 20
