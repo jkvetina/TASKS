@@ -1,3 +1,10 @@
+/* REMOVE BACKGROUND IMAGE */
+body {
+    background-image    : none !important;
+}
+
+
+
 /* HIDE HEADER ON MODAL DIALOG PAGES */
 /* USE HERO FOR TITLE AND CUSTOM BUTTONS */
 .ui-dialog-titlebar {
