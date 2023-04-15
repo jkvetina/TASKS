@@ -1345,25 +1345,6 @@ dynamic-actions:
       fire-when-event-result-is: True
       fire-on-initialization: false
 
-computations: 
-- # ====== Computation: P100_HEADER ============================
-  id: 35124396504937018
-  identification: 
-    item-name: P100_HEADER
-
-  execution: 
-    sequence: 10
-    point: Before Regions
-
-  computation: 
-    type: SQL Query (return single value)
-    sql-query: |
-      SELECT NVL(l.name, 'Tasks') || ' for ' || b.board_name AS name
-      FROM tsk_boards b
-      LEFT JOIN tsk_lov_board_types_v l
-          ON l.id         = :P100_BOARD_TYPE
-      WHERE b.board_id    = :P0_BOARD_ID;
-
 processes: 
 - # ====== Process: UPDATE_TASK ================================
   id: 34798564961743636

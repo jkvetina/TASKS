@@ -2,9 +2,32 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
 
     PROCEDURE init_defaults
     AS
+        v_board_id          tsk_boards.board_id%TYPE;
+        v_board_type        tsk_lov_board_types_v.id%TYPE;
+        v_project_id        tsk_boards.project_id%TYPE;
+        v_client_id         tsk_boards.client_id%TYPE;
     BEGIN
         -- load preferences
         tsk_app.load_user_preferences();
+
+        -- get global items
+        v_board_id          := core.get_number_item('P0_BOARD_ID');
+        v_board_type        := core.get_item('P100_BOARD_TYPE');
+        v_project_id        := core.get_item('P0_PROJECT_ID');
+        v_client_id         := core.get_item('P0_CLIENT_ID');
+
+        -- get board header
+        IF v_board_type IS NOT NULL THEN
+            FOR c IN (
+                SELECT NVL(l.name, 'Tasks') || ' for ' || b.board_name AS name
+                FROM tsk_boards b
+                LEFT JOIN tsk_lov_board_types_v l
+                    ON l.id         = v_board_type
+                WHERE b.board_id    = v_board_id
+            ) LOOP
+                core.set_item('P100_HEADER', c.name);
+            END LOOP;
+        END IF;
 
         -- generate task link
         core.set_item('P100_TASK_LINK', tsk_app.get_task_link(core.get_item('P100_TASK_ID')));

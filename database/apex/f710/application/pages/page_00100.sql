@@ -608,19 +608,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
-wwv_flow_imp_page.create_page_computation(
- p_id=>wwv_flow_imp.id(35124396504937018)
-,p_computation_sequence=>10
-,p_computation_item=>'P100_HEADER'
-,p_computation_point=>'BEFORE_BOX_BODY'
-,p_computation_type=>'QUERY'
-,p_computation=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT NVL(l.name, ''Tasks'') || '' for '' || b.board_name AS name',
-'FROM tsk_boards b',
-'LEFT JOIN tsk_lov_board_types_v l',
-'    ON l.id         = :P100_BOARD_TYPE',
-'WHERE b.board_id    = :P0_BOARD_ID;'))
-);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(34906414430118509)
 ,p_name=>'CHANGED_FILTERS'
