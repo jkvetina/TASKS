@@ -2,3 +2,4 @@
 
 database/apex/f710/application/shared_components/files/*.*
 database/apex/f710/application/shared_components/app_static_files/*.*
+database/grants/
