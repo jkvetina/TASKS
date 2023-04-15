@@ -2585,21 +2585,13 @@ buttons:
     execute-validations: false
 
 dynamic-actions: 
-- # ====== Dynamic Action: ADD_ITEM ============================
-  id: 34951203421065822
-  identification: 
-    name: ADD_ITEM
-
-  execution: 
-    sequence: 20
-
 - # ====== Dynamic Action: COPY_TO_CLIPBOARD ===================
   id: 44172926343914736
   identification: 
     name: COPY_TO_CLIPBOARD
 
   execution: 
-    sequence: 40
+    sequence: 20
 
   when: 
     event: EVENT.EVENT.BROWSER.CLICK
@@ -2612,7 +2604,6 @@ dynamic-actions:
 
   actions: 
   - # ====== Action: Execute JavaScript Code =====================
-    id: 34951384737065823
     id: 44173012895914737
     identification: 
       action: Execute JavaScript Code
@@ -2626,27 +2617,6 @@ dynamic-actions:
     execution: 
       sequence: 10
       event: COPY_TO_CLIPBOARD # 44172926343914736
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-    identification: 
-      action: Execute JavaScript Code
-
-    settings: 
-      code: |
-        var region  = apex.region("CHECKLIST");
-        var view    = region.call("getCurrentView");
-        //
-        if (view.internalIdentifier === "grid") {
-            var row$ = region.widget().find(".a-GV-row").last();
-            view.view$.grid("setSelection", row$);
-            region.call("getActions").invoke("selection-add-row");
-        }
-        
-
-    execution: 
-      sequence: 10
-      event: ADD_ITEM # 34951203421065822
       fire-when-event-result-is: True
       fire-on-initialization: false
 
@@ -2679,75 +2649,6 @@ dynamic-actions:
       fire-when-event-result-is: True
       fire-on-initialization: false
 
-computations: 
-- # ====== Computation: P105_HEADER ============================
-  id: 34949428946065804
-  identification: 
-    item-name: P105_HEADER
-
-  execution: 
-    sequence: 20
-    point: Before Regions
-
-  computation: 
-    type: Static Value
-    static-value: 'Update Task #&P105_TASK_ID.'
-
-  server-side-condition: 
-    type: Item is NOT NULL
-    item: P105_TASK_ID
-
-- # ====== Computation: P105_BADGE_DESC ========================
-  id: 44169465017914701
-  identification: 
-    item-name: P105_BADGE_DESC
-
-  execution: 
-    sequence: 30
-    point: Before Regions
-
-  computation: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: "CASE WHEN LENGTH(:P105_TASK_DESC) > 0 THEN ' &nbsp;<span class=\"fa fa-arrow-circle-down\"></span>' END"
-
-- # ====== Computation: P105_BADGE_COMMENTS ====================
-  id: 44169582610914702
-  identification: 
-    item-name: P105_BADGE_COMMENTS
-
-  execution: 
-    sequence: 40
-    point: Before Regions
-
-  computation: 
-    type: SQL Query (return single value)
-    sql-query: |
-      SELECT CASE WHEN COUNT(*) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END AS badge
-      FROM tsk_task_comments c
-      WHERE c.task_id = :P105_TASK_ID
-
-- # ====== Computation: P105_HEADER ============================
-  id: 63214052740844596
-  identification: 
-    item-name: P105_HEADER
-
-  execution: 
-    sequence: 10
-    point: Before Regions
-
-  computation: 
-    type: SQL Query (return single value)
-    sql-query: |
-      SELECT p.page_name
-      FROM apex_application_pages p
-      WHERE p.application_id  = :APP_ID
-          AND p.page_id       = :APP_PAGE_ID;
-
-  server-side-condition: 
-    type: Item is NULL
-    item: P105_TASK_ID
-
 processes: 
 - # ====== Process: INIT_FORM ==================================
   id: 34798826412743639
@@ -2775,7 +2676,7 @@ processes:
     return-primary-key(s)-after-insert: true
 
   execution: 
-    sequence: 30
+    sequence: 10
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2801,7 +2702,7 @@ processes:
     lock-row: No
 
   execution: 
-    sequence: 10
+    sequence: 20
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2825,7 +2726,7 @@ processes:
     return-primary-key(s)-after-insert: true
 
   execution: 
-    sequence: 40
+    sequence: 50
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2862,7 +2763,7 @@ processes:
     lock-row: No
 
   execution: 
-    sequence: 50
+    sequence: 60
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2972,7 +2873,7 @@ processes:
       
 
   execution: 
-    sequence: 20
+    sequence: 30
     point: Processing
     run-process: Once Per Page Visit (default)
 

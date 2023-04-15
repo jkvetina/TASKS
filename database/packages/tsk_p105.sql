@@ -2,7 +2,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
     PROCEDURE init_defaults
     AS
+        rec                 tsk_tasks%ROWTYPE;
     BEGIN
+        -- get tasks details
+        BEGIN
+            SELECT t.* INTO rec
+            FROM tsk_tasks t
+            WHERE t.task_id = core.get_number_item('P105_TASK_ID');
+        EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            NULL;
+        END;
+
         -- use globals as defaults
         IF core.get_item('P105_CLIENT_ID') IS NULL THEN
             core.set_item('P105_CLIENT_ID', core.get_item('P0_CLIENT_ID'));
@@ -16,8 +27,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             core.set_item('P105_BOARD_ID', core.get_item('P0_BOARD_ID'));
         END IF;
 
-        -- generate task link
-        core.set_item('P105_TASK_LINK', tsk_app.get_task_link(core.get_item('P105_TASK_ID'), 'EXTERNAL'));
+        -- generate task header
+        core.set_item('P105_TASK_LINK', tsk_app.get_task_link(rec.task_id, 'EXTERNAL'));
 
         -- calculate prev/next tasks
         FOR c IN (
@@ -30,11 +41,32 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
                     --
                 FROM tsk_p100_tasks_grid_v t
             )
-            WHERE task_id = core.get_number_item('P105_TASK_ID')
+            WHERE task_id = rec.task_id
         ) LOOP
             core.set_item('P105_PREV_TASK_ID', NULLIF(c.prev_task, c.task_id));
             core.set_item('P105_NEXT_TASK_ID', NULLIF(c.next_task, c.task_id));
         END LOOP;
+
+        -- calculate page header
+        core.set_item('P105_HEADER', CASE WHEN rec.task_id IS NOT NULL THEN 'Update Task ' || rec.task_id ELSE core.get_page_name(105) END);
+
+        -- calculate tab badges
+        FOR c IN (
+            SELECT
+                CASE WHEN COUNT(*) > 0
+                    THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>'
+                    END AS badge
+            FROM tsk_task_comments c
+            WHERE c.task_id = rec.task_id
+        ) LOOP
+            core.set_item('P105_BADGE_COMMENTS', c.badge);
+        END LOOP;
+        --
+        core.set_item('P105_BADGE_DESC',        CASE WHEN LENGTH(rec.task_desc) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END);
+        core.set_item('P105_BADGE_CHECKLIST',   '');
+        core.set_item('P105_BADGE_COMMENTS',    '');
+        core.set_item('P105_BADGE_FILES',       '');
+        core.set_item('P105_BADGE_GIT',         '');
     END;
 
 

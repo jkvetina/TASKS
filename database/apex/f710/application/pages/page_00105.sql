@@ -1008,6 +1008,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.10.07'
+,p_release=>'22.2.4'
+,p_default_workspace_id=>8506563800894011
+,p_default_application_id=>710
+,p_default_id_offset=>84847035874187356
+,p_default_owner=>'APPS'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44094693211578049)
 ,p_name=>'P105_BADGE_FILES'
@@ -1034,18 +1046,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.10.07'
-,p_release=>'22.2.4'
-,p_default_workspace_id=>8506563800894011
-,p_default_application_id=>710
-,p_default_id_offset=>84847035874187356
-,p_default_owner=>'APPS'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44169888190914705)
@@ -1101,50 +1101,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
-wwv_flow_imp_page.create_page_computation(
- p_id=>wwv_flow_imp.id(63214052740844596)
-,p_computation_sequence=>10
-,p_computation_item=>'P105_HEADER'
-,p_computation_point=>'BEFORE_BOX_BODY'
-,p_computation_type=>'QUERY'
-,p_computation=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT p.page_name',
-'FROM apex_application_pages p',
-'WHERE p.application_id  = :APP_ID',
-'    AND p.page_id       = :APP_PAGE_ID;'))
-,p_compute_when=>'P105_TASK_ID'
-,p_compute_when_type=>'ITEM_IS_NULL'
-);
-wwv_flow_imp_page.create_page_computation(
- p_id=>wwv_flow_imp.id(34949428946065804)
-,p_computation_sequence=>20
-,p_computation_item=>'P105_HEADER'
-,p_computation_point=>'BEFORE_BOX_BODY'
-,p_computation_type=>'STATIC_ASSIGNMENT'
-,p_computation=>'Update Task #&P105_TASK_ID.'
-,p_compute_when=>'P105_TASK_ID'
-,p_compute_when_type=>'ITEM_IS_NOT_NULL'
-);
-wwv_flow_imp_page.create_page_computation(
- p_id=>wwv_flow_imp.id(44169465017914701)
-,p_computation_sequence=>30
-,p_computation_item=>'P105_BADGE_DESC'
-,p_computation_point=>'BEFORE_BOX_BODY'
-,p_computation_type=>'EXPRESSION'
-,p_computation_language=>'PLSQL'
-,p_computation=>'CASE WHEN LENGTH(:P105_TASK_DESC) > 0 THEN '' &nbsp;<span class="fa fa-arrow-circle-down"></span>'' END'
-);
-wwv_flow_imp_page.create_page_computation(
- p_id=>wwv_flow_imp.id(44169582610914702)
-,p_computation_sequence=>40
-,p_computation_item=>'P105_BADGE_COMMENTS'
-,p_computation_point=>'BEFORE_BOX_BODY'
-,p_computation_type=>'QUERY'
-,p_computation=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT CASE WHEN COUNT(*) > 0 THEN '' &nbsp;<span class="fa fa-arrow-circle-down"></span>'' END AS badge',
-'FROM tsk_task_comments c',
-'WHERE c.task_id = :P105_TASK_ID'))
-);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(63213674749844593)
 ,p_name=>'CLOSE_DIALOG'
@@ -1164,13 +1120,9 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_DIALOG_CANCEL'
 );
 wwv_flow_imp_page.create_page_da_event(
- p_id=>wwv_flow_imp.id(34951203421065822)
-,p_name=>'ADD_ITEM'
-,p_event_sequence=>20
-wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(44172926343914736)
 ,p_name=>'COPY_TO_CLIPBOARD'
-,p_event_sequence=>40
+,p_event_sequence=>20
 ,p_triggering_element_type=>'BUTTON'
 ,p_triggering_button_id=>wwv_flow_imp.id(44172728522914734)
 ,p_bind_type=>'bind'
@@ -1190,8 +1142,24 @@ wwv_flow_imp_page.create_page_da_action(
 ''))
 );
 wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(34951047615065820)
+ p_id=>wwv_flow_imp.id(34949211976065802)
 ,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_region_id=>wwv_flow_imp.id(63213536180844591)
+,p_process_type=>'NATIVE_FORM_DML'
+,p_process_name=>'SAVE_FORM_NEW'
+,p_attribute_01=>'REGION_SOURCE'
+,p_attribute_05=>'Y'
+,p_attribute_06=>'N'
+,p_attribute_08=>'Y'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when=>'APEX_APPLICATION.G_REQUEST LIKE ''CREATE_%'''
+,p_process_when_type=>'EXPRESSION'
+,p_process_when2=>'PLSQL'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(34951047615065820)
+,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(34950084031065810)
 ,p_process_type=>'NATIVE_IG_DML'
@@ -1204,7 +1172,7 @@ wwv_flow_imp_page.create_page_process(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(44169642373914703)
-,p_process_sequence=>20
+,p_process_sequence=>30
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'SAVE_COMMENT'
@@ -1226,24 +1194,8 @@ wwv_flow_imp_page.create_page_process(
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(34949211976065802)
-,p_process_sequence=>30
-,p_process_point=>'AFTER_SUBMIT'
-,p_region_id=>wwv_flow_imp.id(63213536180844591)
-,p_process_type=>'NATIVE_FORM_DML'
-,p_process_name=>'SAVE_FORM_NEW'
-,p_attribute_01=>'REGION_SOURCE'
-,p_attribute_05=>'Y'
-,p_attribute_06=>'N'
-,p_attribute_08=>'Y'
-,p_error_display_location=>'INLINE_IN_NOTIFICATION'
-,p_process_when=>'APEX_APPLICATION.G_REQUEST LIKE ''CREATE_%'''
-,p_process_when_type=>'EXPRESSION'
-,p_process_when2=>'PLSQL'
-);
-wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34952570819065835)
-,p_process_sequence=>40
+,p_process_sequence=>50
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(63213536180844591)
 ,p_process_type=>'NATIVE_FORM_DML'
@@ -1261,7 +1213,7 @@ wwv_flow_imp_page.create_page_process(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34952654734065836)
-,p_process_sequence=>50
+,p_process_sequence=>60
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(63213536180844591)
 ,p_process_type=>'NATIVE_FORM_DML'
