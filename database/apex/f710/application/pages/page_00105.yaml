@@ -2341,7 +2341,7 @@ buttons:
     label: Delete Task
 
   layout: 
-    sequence: 130
+    sequence: 80
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -2355,8 +2355,6 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
-    css-classes: 
-    - u-pullRight
     icon: fa-trash-o
 
   behavior: 
@@ -2368,12 +2366,6 @@ buttons:
   confirmation: 
     message: Are you sure?
     style: Default
-
-  advanced: 
-    custom-attributes: 
-    - 'style="margin-right:'
-    - 0.5rem
-    - '!important;"'
 
   server-side-condition: 
     type: Item is NOT NULL
@@ -2484,7 +2476,7 @@ buttons:
     label: Save changes and go to next task
 
   layout: 
-    sequence: 90
+    sequence: 120
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -2498,6 +2490,8 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
     icon: fa-arrow-right
 
   behavior: 
@@ -2517,7 +2511,7 @@ buttons:
     label: Save changes and go to previous task
 
   layout: 
-    sequence: 80
+    sequence: 130
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -2531,6 +2525,8 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
     icon: fa-arrow-left
 
   behavior: 
@@ -2550,7 +2546,7 @@ buttons:
     label: Copy link to clipboard
 
   layout: 
-    sequence: 100
+    sequence: 90
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -2612,7 +2608,7 @@ buttons:
     label: Close Dialog
 
   layout: 
-    sequence: 120
+    sequence: 100
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
