@@ -2909,11 +2909,10 @@ processes:
     location: Local Database
     language: PL/SQL
     pl/sql-code: |
-      IF :P105_DELETE_COMMENT IS NOT NULL THEN
-          DELETE FROM tsk_task_comments c
-          WHERE c.task_id         = :P105_TASK_ID
-              AND c.comment_id    = :P105_DELETE_COMMENT;
-      END IF;
+      tsk_p105.delete_comment (
+          in_task_id      => :P105_TASK_ID,
+          in_comment_id   => :P105_DELETE_COMMENT
+      );
       
 
   execution: 

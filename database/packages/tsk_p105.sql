@@ -124,6 +124,21 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             '"></span>' END;
     END;
 
+
+
+    PROCEDURE delete_comment (
+        in_task_id          tsk_task_comments.task_id%TYPE,
+        in_comment_id       tsk_task_comments.comment_id%TYPE
+    )
+    AS
+    BEGIN
+        IF in_task_id IS NOT NULL THEN
+            DELETE FROM tsk_task_comments c
+            WHERE c.task_id         = in_task_id
+                AND c.comment_id    = in_comment_id;
+        END IF;
+    END;
+
 END;
 /
 

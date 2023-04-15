@@ -1294,11 +1294,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'DELETE_COMMENT'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'IF :P105_DELETE_COMMENT IS NOT NULL THEN',
-'    DELETE FROM tsk_task_comments c',
-'    WHERE c.task_id         = :P105_TASK_ID',
-'        AND c.comment_id    = :P105_DELETE_COMMENT;',
-'END IF;',
+'tsk_p105.delete_comment (',
+'    in_task_id      => :P105_TASK_ID,',
+'    in_comment_id   => :P105_DELETE_COMMENT',
+');',
 ''))
 ,p_process_clob_language=>'PLSQL'
 );
