@@ -930,10 +930,13 @@ processes:
     editable-region: Projects [GRID] # 104323750697905488
 
   settings: 
-    target-type: Region Source
+    target-type: PL/SQL Code
+    pl/sql-code-to-insert/update/delete: |
+      tsk_p300.save_projects (
+          io_project_id       => :PROJECT_ID
+      );
     prevent-lost-updates: true
     lock-row: No
-    return-primary-key(s)-after-insert: true
 
   execution: 
     sequence: 20
