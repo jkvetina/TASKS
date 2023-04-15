@@ -394,6 +394,10 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
+  server-side-condition: 
+    type: Item is NULL
+    item: P200_SHOW_ALL
+
   server-cache: 
     caching: Disabled
 
@@ -435,6 +439,10 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
+  server-side-condition: 
+    type: Item is NULL
+    item: P200_SHOW_ALL
+
   server-cache: 
     caching: Disabled
 
@@ -456,7 +464,7 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_P100_BOARDS_V
+    table-name: TSK_P200_BOARDS_V
     include-rowid-column: false
 
   layout: 
@@ -933,7 +941,7 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_P100_TASK_STATUSES_V
+    table-name: TSK_P200_TASK_STATUSES_V
     include-rowid-column: false
 
   layout: 
@@ -1428,7 +1436,7 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_P100_TASK_SWIMLANES_V
+    table-name: TSK_P200_TASK_SWIMLANES_V
     include-rowid-column: false
 
   layout: 
@@ -1913,6 +1921,37 @@ regions:
       font-color: '#000000'
       alignment: center
 
+page-items: 
+- # ====== Page Item: P200_SHOW_ALL ============================
+  id: 44174309728914750
+  identification: 
+    name: P200_SHOW_ALL
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Boards # 70383447796825293
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 buttons: 
 - # ====== Button: REORDER_SWIMLANES ===========================
   id: 35279539837888325
@@ -1969,6 +2008,42 @@ buttons:
     action: Submit Page
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: SHOW_ALL ====================================
+  id: 44174265203914749
+  identification: 
+    button-name: SHOW_ALL
+    label: Show All
+
+  layout: 
+    sequence: 10
+    region: Boards # 70383447796825293
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:200:&SESSION.::&DEBUG.::P200_SHOW_ALL:Y'
+      page: 200 # Boards
+      values: 
+        p200_show_all: Y
+
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P200_SHOW_ALL
 
 processes: 
 - # ====== Process: SAVE_BOARDS ================================
