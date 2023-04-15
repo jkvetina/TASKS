@@ -7,8 +7,6 @@ CREATE OR REPLACE PACKAGE tsk_app AS
 
 
     PROCEDURE init_defaults;
-    PROCEDURE init_defaults_p100;
-    PROCEDURE init_defaults_p105;
 
 
 
@@ -28,10 +26,6 @@ CREATE OR REPLACE PACKAGE tsk_app AS
 
 
 
-    PROCEDURE update_task_on_drag;
-
-
-
     PROCEDURE save_user_preferences (
         in_user_id          VARCHAR2    := NULL
     );
@@ -41,33 +35,6 @@ CREATE OR REPLACE PACKAGE tsk_app AS
     PROCEDURE load_user_preferences (
         in_user_id          VARCHAR2    := NULL
     );
-
-
-
-    PROCEDURE reorder_task_statuses (
-        in_client_id        tsk_task_statuses.client_id%TYPE    := NULL,
-        in_project_id       tsk_task_statuses.project_id%TYPE   := NULL
-    );
-
-
-
-    PROCEDURE reorder_task_swimlanes (
-        in_client_id        tsk_task_swimlanes.client_id%TYPE   := NULL,
-        in_project_id       tsk_task_swimlanes.project_id%TYPE  := NULL
-    );
-
-
-
-    PROCEDURE generate_board (
-        in_client_id        tsk_boards.client_id%TYPE           := NULL,
-        in_project_id       tsk_boards.project_id%TYPE          := NULL,
-        in_board_id         tsk_boards.board_id%TYPE            := NULL,
-        in_swimlane_id      tsk_task_swimlanes.swimlane_id%TYPE := NULL
-    );
-
-
-
-    PROCEDURE save_checklist;
 
 
 

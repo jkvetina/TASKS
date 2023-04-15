@@ -57,7 +57,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_sequence=>40
 ,p_plug_display_point=>'SUB_REGIONS'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'tsk_app.generate_board (',
+'tsk_p100.generate_board (',
 '    in_client_id        => :P0_CLIENT_ID,',
 '    in_project_id       => :P0_PROJECT_ID,',
 '    in_board_id         => :P0_BOARD_ID,',
@@ -701,7 +701,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'ON_DEMAND'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'UPDATE_TASK'
-,p_process_sql_clob=>'tsk_app.update_task_on_drag();'
+,p_process_sql_clob=>'tsk_p100.update_task_on_drag();'
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(

@@ -2141,7 +2141,7 @@ processes:
     location: Local Database
     language: PL/SQL
     pl/sql-code: |
-      tsk_app.reorder_task_statuses (
+      tsk_p200.reorder_task_statuses (
           in_client_id        => :P0_CLIENT_ID,
           in_project_id       => :P0_PROJECT_ID
       );
@@ -2168,7 +2168,7 @@ processes:
     location: Local Database
     language: PL/SQL
     pl/sql-code: |
-      tsk_app.reorder_task_swimlanes (
+      tsk_p200.reorder_task_swimlanes (
           in_client_id        => :P0_CLIENT_ID,
           in_project_id       => :P0_PROJECT_ID
       );

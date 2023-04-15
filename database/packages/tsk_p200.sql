@@ -139,6 +139,64 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         io_swimlane_id      := rec.swimlane_id;
     END;
 
+
+
+    PROCEDURE reorder_task_statuses (
+        in_client_id        tsk_task_statuses.client_id%TYPE    := NULL,
+        in_project_id       tsk_task_statuses.project_id%TYPE   := NULL
+    )
+    AS
+    BEGIN
+        FOR s IN (
+            SELECT
+                t.status_id,
+                t.client_id,
+                t.project_id,
+                --
+                ROW_NUMBER() OVER (PARTITION BY t.client_id, t.project_id ORDER BY t.order# NULLS LAST, t.status_name, t.status_id) * 10 AS order#
+            FROM tsk_task_statuses t
+            WHERE 1 = 1
+                AND (t.client_id    = in_client_id  OR in_client_id  IS NULL)
+                AND (t.project_id   = in_project_id OR in_project_id IS NULL)
+        ) LOOP
+            UPDATE tsk_task_statuses t
+            SET t.order#            = s.order#
+            WHERE t.status_id       = s.status_id
+                AND t.client_id     = s.client_id
+                AND t.project_id    = s.project_id
+                AND (t.order#       != s.order# OR t.order# IS NULL);
+        END LOOP;
+    END;
+
+
+
+    PROCEDURE reorder_task_swimlanes (
+        in_client_id        tsk_task_swimlanes.client_id%TYPE   := NULL,
+        in_project_id       tsk_task_swimlanes.project_id%TYPE  := NULL
+    )
+    AS
+    BEGIN
+        FOR s IN (
+            SELECT
+                t.swimlane_id,
+                t.client_id,
+                t.project_id,
+                --
+                ROW_NUMBER() OVER (PARTITION BY t.client_id, t.project_id ORDER BY t.order# NULLS LAST, t.swimlane_name, t.swimlane_id) * 10 AS order#
+            FROM tsk_task_swimlanes t
+            WHERE 1 = 1
+                AND (t.client_id    = in_client_id  OR in_client_id  IS NULL)
+                AND (t.project_id   = in_project_id OR in_project_id IS NULL)
+        ) LOOP
+            UPDATE tsk_task_swimlanes t
+            SET t.order#            = s.order#
+            WHERE t.swimlane_id     = s.swimlane_id
+                AND t.client_id     = s.client_id
+                AND t.project_id    = s.project_id
+                AND (t.order#       != s.order# OR t.order# IS NULL);
+        END LOOP;
+    END;
+
 END;
 /
 
