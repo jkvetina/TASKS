@@ -536,6 +536,38 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         RETURN NULL;
     END;
 
+
+
+    FUNCTION get_grid_client_id (
+        in_client_id        tsk_clients.client_id%TYPE := NULL
+    )
+    RETURN tsk_clients.client_id%TYPE
+    AS
+    BEGIN
+        RETURN COALESCE (
+            tsk_app.validate_client_id(in_client_id),
+            tsk_app.validate_client_id(APEX_UTIL.GET_SESSION_STATE('CLIENT_ID')),
+            core.get_item('P200_CLIENT_ID'),
+            core.get_item('P0_CLIENT_ID')
+        );
+    END;
+
+
+
+    FUNCTION get_grid_project_id (
+        in_project_id       tsk_projects.project_id%TYPE := NULL
+    )
+    RETURN tsk_projects.project_id%TYPE
+    AS
+    BEGIN
+        RETURN COALESCE (
+            tsk_app.validate_client_id(in_project_id),
+            tsk_app.validate_project_id(APEX_UTIL.GET_SESSION_STATE('PROJECT_ID')),
+            core.get_item('P200_PROJECT_ID'),
+            core.get_item('P0_PROJECT_ID')
+        );
+    END;
+
 END;
 /
 

@@ -90,6 +90,20 @@ CREATE OR REPLACE PACKAGE tsk_app AS
     )
     RETURN tsk_boards.board_id%TYPE;
 
+
+
+    FUNCTION get_grid_client_id (
+        in_client_id        tsk_clients.client_id%TYPE := NULL
+    )
+    RETURN tsk_clients.client_id%TYPE;
+
+
+
+    FUNCTION get_grid_project_id (
+        in_project_id       tsk_projects.project_id%TYPE := NULL
+    )
+    RETURN tsk_projects.project_id%TYPE;
+
 END;
 /
 
