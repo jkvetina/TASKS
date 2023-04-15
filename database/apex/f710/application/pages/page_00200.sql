@@ -1366,10 +1366,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_region_id=>wwv_flow_imp.id(105177119565814132)
 ,p_process_type=>'NATIVE_IG_DML'
 ,p_process_name=>'SAVE_STATUSES'
-,p_attribute_01=>'REGION_SOURCE'
+,p_attribute_01=>'PLSQL_CODE'
+,p_attribute_04=>'tsk_p200.save_task_statuses();'
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
-,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp_page.create_page_process(

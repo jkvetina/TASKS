@@ -2027,10 +2027,10 @@ processes:
     editable-region: Statuses [GRID] # 105177119565814132
 
   settings: 
-    target-type: Region Source
+    target-type: PL/SQL Code
+    pl/sql-code-to-insert/update/delete: tsk_p200.save_task_statuses();
     prevent-lost-updates: true
     lock-row: No
-    return-primary-key(s)-after-insert: true
 
   execution: 
     sequence: 20
