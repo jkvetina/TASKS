@@ -292,7 +292,7 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_P100_PROJECTS_V
+    table-name: TSK_P300_PROJECTS_V
     include-rowid-column: false
 
   layout: 
@@ -719,6 +719,74 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
+
+page-items: 
+- # ====== Page Item: P300_SHOW_ALL ============================
+  id: 44285149373494703
+  identification: 
+    name: P300_SHOW_ALL
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: Projects # 70448427208945042
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: SHOW_ALL ====================================
+  id: 44285014494494702
+  identification: 
+    button-name: SHOW_ALL
+    label: Show All
+
+  layout: 
+    sequence: 10
+    region: Projects # 70448427208945042
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:300:&SESSION.::&DEBUG.::P300_SHOW_ALL:Y'
+      page: 300 # Projects
+      values: 
+        p300_show_all: Y
+
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P300_SHOW_ALL
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_CLIENT ======================
