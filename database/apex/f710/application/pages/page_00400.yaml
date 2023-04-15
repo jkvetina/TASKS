@@ -804,10 +804,13 @@ processes:
     editable-region: Clients [GRID] # 139230452615906107
 
   settings: 
-    target-type: Region Source
+    target-type: PL/SQL Code
+    pl/sql-code-to-insert/update/delete: |
+      tsk_p400.save_clients (
+          io_client_id        => :CLIENT_ID
+      );
     prevent-lost-updates: true
     lock-row: No
-    return-primary-key(s)-after-insert: true
 
   execution: 
     sequence: 10
