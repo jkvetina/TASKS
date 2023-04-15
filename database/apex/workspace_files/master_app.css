@@ -1,6 +1,7 @@
 /* REMOVE BACKGROUND IMAGE */
 body {
     background-image    : none !important;
+    background-color    : var(--ut-body-main-background-color);
 }
 
 
