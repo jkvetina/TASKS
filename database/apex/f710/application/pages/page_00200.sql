@@ -1393,8 +1393,8 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_name=>'REORDER_STATUSES'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'tsk_app.reorder_task_statuses (',
-'    in_client_id        => NULL,',
-'    in_project_id       => NULL',
+'    in_client_id        => :P0_CLIENT_ID,',
+'    in_project_id       => :P0_PROJECT_ID',
 ');',
 ''))
 ,p_process_clob_language=>'PLSQL'
@@ -1409,8 +1409,8 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_name=>'REORDER_SWIMLANES'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'tsk_app.reorder_task_swimlanes (',
-'    in_client_id        => NULL,',
-'    in_project_id       => NULL',
+'    in_client_id        => :P0_CLIENT_ID,',
+'    in_project_id       => :P0_PROJECT_ID',
 ');',
 ''))
 ,p_process_clob_language=>'PLSQL'
