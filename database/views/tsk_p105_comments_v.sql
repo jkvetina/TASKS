@@ -19,15 +19,30 @@ SELECT
     '' AS attribute_3,
     '' AS attribute_4,
     --
-    TO_CHAR(c.updated_at, 'YYYY-MM-DD HH24:MI') AS comment_date,
-    ''                  AS comment_modifiers,
+    CASE WHEN c.updated_at < TRUNC(SYSDATE)
+        THEN TO_CHAR(c.updated_at, 'YYYY-MM-DD HH24:MI')
+        ELSE APEX_UTIL.GET_SINCE(c.updated_at)
+        END AS comment_date,
+    --
+    CASE WHEN c.updated_by != x.user_id
+        THEN 'OTHERS'
+        END AS comment_modifiers,
+    --
     c.comment_payload   AS comment_text,
     --
     --'u-color-' || ORA_HASH(c.updated_by, 45) AS icon_modifier,
-    '' AS icon_modifier,
+    CASE WHEN c.updated_by = x.user_id
+        THEN 'u-color-5'
+        ELSE 'u-color-6'
+        END AS icon_modifier,
     --
     APEX_STRING.GET_INITIALS(c.updated_by)  AS user_icon,
-    INITCAP(c.updated_by)                   AS user_name
+    --
+    CASE WHEN c.updated_by = x.user_id
+        THEN NULL
+        ELSE INITCAP(c.updated_by)
+        END AS user_name
+    --
 FROM tsk_task_comments c
 CROSS JOIN x
 ORDER BY
