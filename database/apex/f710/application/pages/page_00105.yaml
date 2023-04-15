@@ -26,12 +26,15 @@ navigation:
 
 css: 
   inline: |
+    /* HIDE DESC LABEL */
     #P105_TASK_DESC_CONTAINER .t-Form-labelContainer {
       display: none;
     }
     #P105_TASK_DESC_CONTAINER .t-Form-itemWrapper {
       margin: 0 !important;
     }
+    
+    
     
     /* HIDE EVERYTHING RELATED TO GRID */
     #CHECKLIST .a-IG-header,
@@ -66,6 +69,20 @@ css:
     }
     #CHECKLIST .a-GV-w-scroll {
         margin-left     : -0.6rem;
+    }
+    
+    
+    
+    /* RIGHT ALIGN USER COMMENTS */
+    #COMMENTS .t-Comments--chat li.OTHERS .t-Comments-icon {
+        margin-left     : 2rem;
+    }
+    
+    /* FIX TRASH ICON ALIGNMENT */
+    span.t-Comments-actions {
+        display         : block;
+        float           : right;
+        margin          : 0.25rem 0 -0.25rem;
     }
     
     
@@ -786,6 +803,7 @@ regions:
     landmark-type: Template Default
 
   advanced: 
+    static-id: COMMENTS
     region-display-selector: false
     exclude-title-from-translation: false
 
@@ -1925,6 +1943,7 @@ page-items:
     template: Optional - Floating # 70967669576975668
     template-options: 
     - '#DEFAULT#'
+    - margin-bottom-md
     width: 30
     height: 5
 

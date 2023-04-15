@@ -21,12 +21,15 @@ wwv_flow_imp_page.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(78949836938576475)  -- MAIN
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'/* HIDE DESC LABEL */',
 '#P105_TASK_DESC_CONTAINER .t-Form-labelContainer {',
 '  display: none;',
 '}',
 '#P105_TASK_DESC_CONTAINER .t-Form-itemWrapper {',
 '  margin: 0 !important;',
 '}',
+'',
+'',
 '',
 '/* HIDE EVERYTHING RELATED TO GRID */',
 '#CHECKLIST .a-IG-header,',
@@ -61,6 +64,20 @@ wwv_flow_imp_page.create_page(
 '}',
 '#CHECKLIST .a-GV-w-scroll {',
 '    margin-left     : -0.6rem;',
+'}',
+'',
+'',
+'',
+'/* RIGHT ALIGN USER COMMENTS */',
+'#COMMENTS .t-Comments--chat li.OTHERS .t-Comments-icon {',
+'    margin-left     : 2rem;',
+'}',
+'',
+'/* FIX TRASH ICON ALIGNMENT */',
+'span.t-Comments-actions {',
+'    display         : block;',
+'    float           : right;',
+'    margin          : 0.25rem 0 -0.25rem;',
 '}',
 '',
 ''))
@@ -178,6 +195,7 @@ wwv_flow_imp_page.create_page_plug(
 wwv_flow_imp_page.create_report_region(
  p_id=>wwv_flow_imp.id(44169902430914706)
 ,p_name=>'Comments [REPORT]'
+,p_region_name=>'COMMENTS'
 ,p_parent_plug_id=>wwv_flow_imp.id(44093310803578036)
 ,p_template=>wwv_flow_imp.id(70831193948975578)
 ,p_display_sequence=>20
@@ -993,20 +1011,11 @@ wwv_flow_imp_page.create_page_item(
 ,p_cSize=>30
 ,p_cHeight=>5
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
-,p_item_template_options=>'#DEFAULT#'
+,p_item_template_options=>'#DEFAULT#:margin-bottom-md'
 ,p_attribute_01=>'Y'
 ,p_attribute_02=>'N'
 ,p_attribute_03=>'N'
 ,p_attribute_04=>'BOTH'
-);
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(44094592561578048)
-,p_name=>'P105_BADGE_DESC'
-,p_item_sequence=>40
-,p_item_plug_id=>wwv_flow_imp.id(63213380867844590)
-,p_display_as=>'NATIVE_HIDDEN'
-,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'Y'
 );
 wwv_flow_imp.component_end;
 end;
@@ -1019,6 +1028,15 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>710
 ,p_default_id_offset=>84847035874187356
 ,p_default_owner=>'APPS'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(44094592561578048)
+,p_name=>'P105_BADGE_DESC'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(63213380867844590)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44094693211578049)
