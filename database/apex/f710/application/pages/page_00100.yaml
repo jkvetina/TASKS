@@ -1109,7 +1109,7 @@ buttons:
     label: Add Task
 
   layout: 
-    sequence: 10
+    sequence: 20
     region: '&P100_HEADER.' # 34744374076440316
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -1119,11 +1119,10 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Text with Icon # 70970191130975672
+    button-template: Text # 70970074101975671
     hot: true
     template-options: 
     - '#DEFAULT#'
-    - t-Button--iconLeft
     icon: fa-plus
 
   behavior: 
@@ -1144,7 +1143,7 @@ buttons:
     label: Refresh Tasks
 
   layout: 
-    sequence: 40
+    sequence: 10
     region: '&P100_HEADER.' # 34744374076440316
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -1172,7 +1171,7 @@ buttons:
     label: Show as List
 
   layout: 
-    sequence: 20
+    sequence: 30
     region: '&P100_HEADER.' # 34744374076440316
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -1209,7 +1208,7 @@ buttons:
     label: Show as Columns
 
   layout: 
-    sequence: 30
+    sequence: 40
     region: '&P100_HEADER.' # 34744374076440316
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -1237,6 +1236,60 @@ buttons:
   server-side-condition: 
     type: Item is NOT NULL
     item: P100_SHOW_GRID
+
+- # ====== Button: SEARCH ======================================
+  id: 44285202572494704
+  identification: 
+    button-name: SEARCH
+    label: Search
+
+  layout: 
+    sequence: 60
+    region: '&P100_HEADER.' # 34744374076440316
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-search
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
+- # ====== Button: BULK_OPERATIONS =============================
+  id: 44285362883494705
+  identification: 
+    button-name: BULK_OPERATIONS
+    label: Bulk Operations
+
+  layout: 
+    sequence: 70
+    region: '&P100_HEADER.' # 34744374076440316
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-bolt
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_FILTERS =====================
