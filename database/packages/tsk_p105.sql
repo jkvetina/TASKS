@@ -52,10 +52,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
         -- calculate tab badges
         FOR c IN (
-            SELECT
-                CASE WHEN COUNT(*) > 0
-                    THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>'
-                    END AS badge
+            SELECT tsk_p105.get_badge_icon(COUNT(*)) AS badge
             FROM tsk_task_comments c
             WHERE c.task_id = rec.task_id
         ) LOOP
@@ -64,7 +61,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         --
         core.set_item('P105_BADGE_DESC',        CASE WHEN LENGTH(rec.task_desc) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END);
         core.set_item('P105_BADGE_CHECKLIST',   '');
-        core.set_item('P105_BADGE_COMMENTS',    '');
         core.set_item('P105_BADGE_FILES',       '');
         core.set_item('P105_BADGE_GIT',         '');
     END;
@@ -108,6 +104,24 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             INSERT INTO tsk_task_checklist
             VALUES rec;
         END IF;
+    END;
+
+
+
+    FUNCTION get_badge_icon (
+        in_value            NUMBER
+    )
+    RETURN VARCHAR2
+    AS
+    BEGIN
+        RETURN CASE WHEN in_value > 0 THEN
+            ' &nbsp;<span class="fa ' ||
+            CASE
+                WHEN in_value < 10
+                    THEN 'fa-number-' || in_value  -- LOWER(TO_CHAR(TO_DATE(in_value, 'J'), 'JSP'))
+                ELSE 'fa-arrow-circle-down'
+                END ||
+            '"></span>' END;
     END;
 
 END;
