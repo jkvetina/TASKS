@@ -1,4 +1,4 @@
-CREATE OR REPLACE FORCE VIEW tsk_p100_task_statuses_v AS
+CREATE OR REPLACE FORCE VIEW tsk_p200_task_swimlanes_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
         core.get_item('P0_CLIENT_ID')   AS client_id,
@@ -8,15 +8,15 @@ WITH x AS (
 SELECT
     t.client_id,
     t.project_id,
-    t.status_id,
-    t.status_name,
+    t.swimlane_id,
+    t.swimlane_name,
     t.order#,
     t.is_active
     --
-FROM tsk_task_statuses t
+FROM tsk_task_swimlanes t
 JOIN x
     ON x.client_id      = t.client_id
     AND x.project_id    = t.project_id;
 --
-COMMENT ON TABLE tsk_p100_task_statuses_v IS '';
+COMMENT ON TABLE tsk_p200_task_swimlanes_v IS '';
 

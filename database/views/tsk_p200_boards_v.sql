@@ -1,8 +1,10 @@
-CREATE OR REPLACE FORCE VIEW tsk_p100_boards_v AS
+CREATE OR REPLACE FORCE VIEW tsk_p200_boards_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
         core.get_item('P0_CLIENT_ID')   AS client_id,
-        core.get_item('P0_PROJECT_ID')  AS project_id
+        core.get_item('P0_PROJECT_ID')  AS project_id,
+        core.get_item('P200_SHOW_ALL')  AS show_all
+
     FROM DUAL
 )
 SELECT
@@ -21,9 +23,14 @@ SELECT
     ) AS activate_url
     --
 FROM tsk_boards t
-JOIN x
-    ON x.client_id      = t.client_id
-    AND x.project_id    = t.project_id;
+CROSS JOIN x
+WHERE (
+    (
+        x.client_id         = t.client_id
+        AND x.project_id    = t.project_id
+    )
+    OR x.show_all IS NOT NULL
+);
 --
-COMMENT ON TABLE tsk_p100_boards_v IS '';
+COMMENT ON TABLE tsk_p200_boards_v IS '';
 
