@@ -1,4 +1,4 @@
-CREATE OR REPLACE FORCE VIEW tsk_p100_clients_v AS
+CREATE OR REPLACE FORCE VIEW tsk_p400_clients_v AS
 SELECT
     t.client_id,
     t.client_name,
@@ -14,5 +14,5 @@ SELECT
     --
 FROM tsk_clients t;
 --
-COMMENT ON TABLE tsk_p100_clients_v IS '';
+COMMENT ON TABLE tsk_p400_clients_v IS '';
 

@@ -292,7 +292,7 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_P100_CLIENTS_V
+    table-name: TSK_P400_CLIENTS_V
     include-rowid-column: false
 
   layout: 
