@@ -2054,10 +2054,13 @@ processes:
     editable-region: Boards [GRID] # 104264620246786601
 
   settings: 
-    target-type: Region Source
+    target-type: PL/SQL Code
+    pl/sql-code-to-insert/update/delete: |
+      tsk_p200.save_boards (
+          io_board_id         => :BOARD_ID
+      );
     prevent-lost-updates: true
     lock-row: No
-    return-primary-key(s)-after-insert: true
 
   execution: 
     sequence: 10

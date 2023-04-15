@@ -28,6 +28,7 @@ WHERE (
     (
         x.client_id         = t.client_id
         AND x.project_id    = t.project_id
+        --AND t.is_active     = 'Y'
     )
     OR x.show_all IS NOT NULL
 );
