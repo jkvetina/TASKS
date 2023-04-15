@@ -479,6 +479,63 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         END IF;
     END;
 
+
+
+    FUNCTION validate_client_id (
+        in_client_id        tsk_clients.client_id%TYPE
+    )
+    RETURN tsk_clients.client_id%TYPE
+    AS
+        out_client_id       tsk_clients.client_id%TYPE;
+    BEGIN
+        SELECT t.client_id INTO out_client_id
+        FROM tsk_clients t
+        WHERE t.client_id = in_client_id;
+        --
+        RETURN out_client_id;
+    EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+    END;
+
+
+
+    FUNCTION validate_project_id (
+        in_project_id       tsk_projects.project_id%TYPE
+    )
+    RETURN tsk_projects.project_id%TYPE
+    AS
+        out_project_id      tsk_projects.project_id%TYPE;
+    BEGIN
+        SELECT t.project_id INTO out_project_id
+        FROM tsk_projects t
+        WHERE t.project_id = in_project_id;
+        --
+        RETURN out_project_id;
+    EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+    END;
+
+
+
+    FUNCTION validate_board_id (
+        in_board_id         tsk_boards.board_id%TYPE
+    )
+    RETURN tsk_boards.board_id%TYPE
+    AS
+        out_board_id        tsk_boards.board_id%TYPE;
+    BEGIN
+        SELECT t.board_id INTO out_board_id
+        FROM tsk_boards t
+        WHERE t.board_id = in_board_id;
+        --
+        RETURN out_board_id;
+    EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+    END;
+
 END;
 /
 

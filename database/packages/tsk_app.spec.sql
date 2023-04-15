@@ -69,6 +69,27 @@ CREATE OR REPLACE PACKAGE tsk_app AS
 
     PROCEDURE save_checklist;
 
+
+
+    FUNCTION validate_client_id (
+        in_client_id        tsk_clients.client_id%TYPE
+    )
+    RETURN tsk_clients.client_id%TYPE;
+
+
+
+    FUNCTION validate_project_id (
+        in_project_id       tsk_projects.project_id%TYPE
+    )
+    RETURN tsk_projects.project_id%TYPE;
+
+
+
+    FUNCTION validate_board_id (
+        in_board_id         tsk_boards.board_id%TYPE
+    )
+    RETURN tsk_boards.board_id%TYPE;
+
 END;
 /
 
