@@ -645,14 +645,13 @@ wwv_flow_imp_page.create_region_column(
 ,p_source_type=>'DB_COLUMN'
 ,p_source_expression=>'CLIENT_ID'
 ,p_data_type=>'VARCHAR2'
-,p_session_state_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_SELECT_LIST'
 ,p_heading=>'Client Id'
 ,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>30
 ,p_value_alignment=>'LEFT'
-,p_is_required=>true
+,p_is_required=>false
 ,p_lov_type=>'SHARED'
 ,p_lov_id=>wwv_flow_imp.id(34762829880497308)  -- LOV_CLIENTS
 ,p_lov_display_extra=>true
@@ -667,7 +666,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_sort_group=>true
 ,p_enable_control_break=>true
 ,p_enable_hide=>true
-,p_is_primary_key=>true
+,p_is_primary_key=>false
 ,p_default_type=>'ITEM'
 ,p_default_expression=>'P0_CLIENT_ID'
 ,p_duplicate_value=>true
@@ -679,14 +678,13 @@ wwv_flow_imp_page.create_region_column(
 ,p_source_type=>'DB_COLUMN'
 ,p_source_expression=>'PROJECT_ID'
 ,p_data_type=>'VARCHAR2'
-,p_session_state_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_SELECT_LIST'
 ,p_heading=>'Project Id'
 ,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>40
 ,p_value_alignment=>'LEFT'
-,p_is_required=>true
+,p_is_required=>false
 ,p_lov_type=>'SHARED'
 ,p_lov_id=>wwv_flow_imp.id(34763034913500105)  -- LOV_PROJECTS
 ,p_lov_display_extra=>true
@@ -701,7 +699,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_sort_group=>true
 ,p_enable_control_break=>true
 ,p_enable_hide=>true
-,p_is_primary_key=>true
+,p_is_primary_key=>false
 ,p_default_type=>'ITEM'
 ,p_default_expression=>'P0_PROJECT_ID'
 ,p_duplicate_value=>true
@@ -1095,14 +1093,13 @@ wwv_flow_imp_page.create_region_column(
 ,p_source_type=>'DB_COLUMN'
 ,p_source_expression=>'CLIENT_ID'
 ,p_data_type=>'VARCHAR2'
-,p_session_state_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_SELECT_LIST'
 ,p_heading=>'Client Id'
 ,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>30
 ,p_value_alignment=>'LEFT'
-,p_is_required=>true
+,p_is_required=>false
 ,p_lov_type=>'SHARED'
 ,p_lov_id=>wwv_flow_imp.id(34762829880497308)  -- LOV_CLIENTS
 ,p_lov_display_extra=>true
@@ -1117,7 +1114,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_sort_group=>true
 ,p_enable_control_break=>true
 ,p_enable_hide=>true
-,p_is_primary_key=>true
+,p_is_primary_key=>false
 ,p_default_type=>'ITEM'
 ,p_default_expression=>'P0_CLIENT_ID'
 ,p_duplicate_value=>true
@@ -1129,14 +1126,13 @@ wwv_flow_imp_page.create_region_column(
 ,p_source_type=>'DB_COLUMN'
 ,p_source_expression=>'PROJECT_ID'
 ,p_data_type=>'VARCHAR2'
-,p_session_state_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_SELECT_LIST'
 ,p_heading=>'Project Id'
 ,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>40
 ,p_value_alignment=>'LEFT'
-,p_is_required=>true
+,p_is_required=>false
 ,p_lov_type=>'SHARED'
 ,p_lov_id=>wwv_flow_imp.id(34763034913500105)  -- LOV_PROJECTS
 ,p_lov_display_extra=>true
@@ -1151,7 +1147,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_sort_group=>true
 ,p_enable_control_break=>true
 ,p_enable_hide=>true
-,p_is_primary_key=>true
+,p_is_primary_key=>false
 ,p_default_type=>'ITEM'
 ,p_default_expression=>'P0_PROJECT_ID'
 ,p_duplicate_value=>true
@@ -1367,7 +1363,12 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_type=>'NATIVE_IG_DML'
 ,p_process_name=>'SAVE_STATUSES'
 ,p_attribute_01=>'PLSQL_CODE'
-,p_attribute_04=>'tsk_p200.save_task_statuses();'
+,p_attribute_04=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'tsk_p200.save_task_statuses (',
+'    io_client_id        => :CLIENT_ID,',
+'    io_project_id       => :PROJECT_ID,',
+'    io_status_id        => :STATUS_ID',
+');'))
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
@@ -1379,10 +1380,15 @@ wwv_flow_imp_page.create_page_process(
 ,p_region_id=>wwv_flow_imp.id(105182349796814879)
 ,p_process_type=>'NATIVE_IG_DML'
 ,p_process_name=>'SAVE_SWIMLANES'
-,p_attribute_01=>'REGION_SOURCE'
+,p_attribute_01=>'PLSQL_CODE'
+,p_attribute_04=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'tsk_p200.save_task_swimlanes (',
+'    io_client_id        => :CLIENT_ID,',
+'    io_project_id       => :PROJECT_ID,',
+'    io_swimlane_id      => :SWIMLANE_ID',
+');'))
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
-,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp_page.create_page_process(

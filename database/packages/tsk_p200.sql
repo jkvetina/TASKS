@@ -48,6 +48,56 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         io_status_id        := rec.status_id;
     END;
 
+
+
+    PROCEDURE save_task_swimlanes (
+        io_client_id        IN OUT NOCOPY   tsk_task_swimlanes.client_id%TYPE,
+        io_project_id       IN OUT NOCOPY   tsk_task_swimlanes.project_id%TYPE,
+        io_swimlane_id      IN OUT NOCOPY   tsk_task_swimlanes.swimlane_id%TYPE
+    )
+    AS
+        v_action            CHAR;
+        rec                 tsk_task_swimlanes%ROWTYPE;
+    BEGIN
+        v_action            := APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
+        --
+        rec.client_id       := tsk_app.get_grid_client_id(io_client_id);
+        rec.project_id      := tsk_app.get_grid_project_id(io_project_id);
+        --
+        rec.swimlane_id     := APEX_UTIL.GET_SESSION_STATE('SWIMLANE_ID');
+        rec.swimlane_name   := APEX_UTIL.GET_SESSION_STATE('SWIMLANE_NAME');
+        rec.is_active       := APEX_UTIL.GET_SESSION_STATE('IS_ACTIVE');
+        rec.order#          := APEX_UTIL.GET_SESSION_STATE('ORDER#');
+        --
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
+        --
+        IF v_action = 'D' THEN
+            DELETE FROM tsk_task_swimlanes t
+            WHERE t.swimlane_id     = rec.swimlane_id
+                AND t.client_id     = rec.client_id
+                AND t.project_id    = rec.project_id;
+            --
+            RETURN;
+        END IF;
+        --
+        UPDATE tsk_task_swimlanes t
+        SET ROW = rec
+        WHERE t.swimlane_id     = rec.swimlane_id
+            AND t.client_id     = rec.client_id
+            AND t.project_id    = rec.project_id;
+        --
+        IF SQL%ROWCOUNT = 0 THEN
+            INSERT INTO tsk_task_swimlanes
+            VALUES rec;
+        END IF;
+
+        -- update keys to APEX
+        io_client_id        := rec.client_id;
+        io_project_id       := rec.project_id;
+        io_swimlane_id      := rec.swimlane_id;
+    END;
+
 END;
 /
 
