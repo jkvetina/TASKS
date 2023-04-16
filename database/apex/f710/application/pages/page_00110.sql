@@ -279,8 +279,8 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_fixed_row_height=>true
 ,p_pagination_type=>'SCROLL'
 ,p_show_total_row_count=>false
-,p_show_toolbar=>true
-,p_toolbar_buttons=>'ACTIONS_MENU'
+,p_show_toolbar=>false
+,p_toolbar_buttons=>null
 ,p_enable_save_public_report=>false
 ,p_enable_subscriptions=>true
 ,p_enable_flashback=>false
@@ -410,6 +410,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
@@ -420,12 +421,13 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P110_SOURCE_SWIMLANE'
 ,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(44286090683494712)
-,p_prompt=>'Source Swimlanes'
+,p_prompt=>'Source Swimlane'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_TASK_SWIMLANES'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
@@ -444,6 +446,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_read_only_when_type=>'ALWAYS'
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
@@ -462,6 +465,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_read_only_when_type=>'ALWAYS'
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
@@ -480,6 +484,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_read_only_when_type=>'ALWAYS'
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
@@ -487,19 +492,20 @@ wwv_flow_imp_page.create_page_item(
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44287004908494722)
-,p_name=>'P110_TARGET_CLIENT'
+,p_name=>'P110_CLIENT_ID'
 ,p_is_required=>true
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_item_default=>'P0_CLIENT_ID'
 ,p_item_default_type=>'ITEM'
-,p_prompt=>'Target Client'
+,p_prompt=>'Client Id'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_CLIENTS'
+,p_named_lov=>'LOV_CLIENTS_ALL'
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
@@ -507,19 +513,23 @@ wwv_flow_imp_page.create_page_item(
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44287133015494723)
-,p_name=>'P110_TARGET_PROJECT'
+,p_name=>'P110_PROJECT_ID'
 ,p_is_required=>true
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_item_default=>'P0_PROJECT_ID'
 ,p_item_default_type=>'ITEM'
-,p_prompt=>'Target Project'
+,p_prompt=>'Project Id'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_PROJECTS'
+,p_named_lov=>'LOV_PROJECTS_ALL'
 ,p_lov_display_null=>'YES'
+,p_lov_cascade_parent_items=>'P110_CLIENT_ID'
+,p_ajax_items_to_submit=>'P110_CLIENT_ID'
+,p_ajax_optimize_refresh=>'Y'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
@@ -527,19 +537,23 @@ wwv_flow_imp_page.create_page_item(
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44287282406494724)
-,p_name=>'P110_TARGET_BOARD'
+,p_name=>'P110_BOARD_ID'
 ,p_is_required=>true
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_item_default=>'P0_BOARD_ID'
 ,p_item_default_type=>'ITEM'
-,p_prompt=>'Target Board'
+,p_prompt=>'Board Id'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_BOARDS'
+,p_named_lov=>'LOV_BOARDS_ALL'
 ,p_lov_display_null=>'YES'
+,p_lov_cascade_parent_items=>'P110_PROJECT_ID'
+,p_ajax_items_to_submit=>'P110_CLIENT_ID,P110_PROJECT_ID'
+,p_ajax_optimize_refresh=>'Y'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_lov_display_extra=>'YES'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
@@ -547,19 +561,23 @@ wwv_flow_imp_page.create_page_item(
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44287369760494725)
-,p_name=>'P110_TARGET_STATUS'
+,p_name=>'P110_STATUS_ID'
 ,p_is_required=>true
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_item_default=>'P100_BOARD_TYPE'
 ,p_item_default_type=>'ITEM'
-,p_prompt=>'Target Status'
+,p_prompt=>'Status Id'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_TASK_STATUSES'
+,p_named_lov=>'LOV_TASK_STATUSES_ALL'
 ,p_lov_display_null=>'YES'
+,p_lov_cascade_parent_items=>'P110_BOARD_ID'
+,p_ajax_items_to_submit=>'P110_CLIENT_ID,P110_PROJECT_ID,P110_BOARD_ID'
+,p_ajax_optimize_refresh=>'Y'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_lov_display_extra=>'NO'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
@@ -567,18 +585,22 @@ wwv_flow_imp_page.create_page_item(
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44287496487494726)
-,p_name=>'P110_TARGET_SWIMLANE'
+,p_name=>'P110_SWIMLANE_ID'
 ,p_is_required=>true
 ,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_item_default=>'P100_SWIMLANE_ID'
 ,p_item_default_type=>'ITEM'
-,p_prompt=>'Target Swimlanes'
+,p_prompt=>'Swimlane Id'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_TASK_SWIMLANES'
+,p_named_lov=>'LOV_TASK_SWIMLANES_ALL'
+,p_lov_cascade_parent_items=>'P110_BOARD_ID'
+,p_ajax_items_to_submit=>'P110_CLIENT_ID,P110_PROJECT_ID,P110_BOARD_ID'
+,p_ajax_optimize_refresh=>'Y'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_lov_display_extra=>'NO'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
@@ -628,12 +650,13 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(44287803008494730)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'Select Tasks [GRID] - Save Interactive Grid Data'
+,p_process_name=>'SAVE_SELECTED_TASKS'
 ,p_attribute_01=>'REGION_SOURCE'
 ,p_attribute_05=>'Y'
-,p_attribute_06=>'Y'
+,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_only_for_changed_rows=>'N'
 );
 wwv_flow_imp.component_end;
 end;

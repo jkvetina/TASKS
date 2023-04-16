@@ -21,6 +21,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
         core.set_item('P110_SOURCE_BOARD',      COALESCE(core.get_item('P110_SOURCE_BOARD'),    v_board_id));
         core.set_item('P110_SOURCE_STATUS',     COALESCE(core.get_item('P110_SOURCE_STATUS'),   v_status_id));
         core.set_item('P110_SOURCE_SWIMLANE',   COALESCE(core.get_item('P110_SOURCE_SWIMLANE'), v_swimlane_id));
+        --
+        core.set_item('P110_CLIENT_ID',     COALESCE(core.get_item('P110_CLIENT_ID'),   core.get_item('P110_SOURCE_CLIENT')));
+        core.set_item('P110_PROJECT_ID',    COALESCE(core.get_item('P110_PROJECT_ID'),  core.get_item('P110_SOURCE_PROJECT')));
+        core.set_item('P110_BOARD_ID',      COALESCE(core.get_item('P110_BOARD_ID'),    core.get_item('P110_SOURCE_BOARD')));
+        core.set_item('P110_STATUS_ID',     COALESCE(core.get_item('P110_STATUS_ID'),   core.get_item('P110_SOURCE_STATUS')));
+        core.set_item('P110_SWIMLANE_ID',   COALESCE(core.get_item('P110_SWIMLANE_ID'), core.get_item('P110_SOURCE_SWIMLANE')));
     END;
 
 END;
