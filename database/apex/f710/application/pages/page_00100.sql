@@ -481,12 +481,12 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_sequence=>60
 ,p_button_plug_id=>wwv_flow_imp.id(34744374076440316)
 ,p_button_name=>'SEARCH'
-,p_button_action=>'DEFINED_BY_DA'
+,p_button_action=>'REDIRECT_PAGE'
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
 ,p_button_image_alt=>'Search'
 ,p_button_position=>'RIGHT_OF_TITLE'
-,p_warn_on_unsaved_changes=>null
+,p_button_redirect_url=>'f?p=&APP_ID.:115:&SESSION.::&DEBUG.:115::'
 ,p_icon_css_classes=>'fa-search'
 );
 wwv_flow_imp_page.create_page_button(
@@ -494,12 +494,12 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_sequence=>70
 ,p_button_plug_id=>wwv_flow_imp.id(34744374076440316)
 ,p_button_name=>'BULK_OPERATIONS'
-,p_button_action=>'DEFINED_BY_DA'
+,p_button_action=>'REDIRECT_PAGE'
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
 ,p_button_image_alt=>'Bulk Operations'
 ,p_button_position=>'RIGHT_OF_TITLE'
-,p_warn_on_unsaved_changes=>null
+,p_button_redirect_url=>'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110::'
 ,p_icon_css_classes=>'fa-bolt'
 );
 wwv_flow_imp_page.create_page_item(

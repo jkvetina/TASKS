@@ -1321,8 +1321,13 @@ buttons:
     icon: fa-search
 
   behavior: 
-    action: Defined by Dynamic Action
-    execute-validations: true
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:115:&SESSION.::&DEBUG.:115::'
+      page: 115 # Searching
+      clear-cache: 115
+
+    warn-on-unsaved-changes: Do Not Check
 
 - # ====== Button: BULK_OPERATIONS =============================
   id: 44285362883494705
@@ -1348,8 +1353,13 @@ buttons:
     icon: fa-bolt
 
   behavior: 
-    action: Defined by Dynamic Action
-    execute-validations: true
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110::'
+      page: 110 # Bulk Operations
+      clear-cache: 110
+
+    warn-on-unsaved-changes: Do Not Check
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_FILTERS =====================
