@@ -721,10 +721,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Git &P105_BADGE_GIT. ========================
+- # ====== Region: Commits &P105_BADGE_COMMITS. ================
   id: 44094467518578047
   identification: 
-    title: Git &P105_BADGE_GIT.
+    title: Commits &P105_BADGE_COMMITS.
     type: Static Content
 
   layout: 
@@ -2059,10 +2059,10 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P105_BADGE_GIT ===========================
+- # ====== Page Item: P105_BADGE_COMMITS =======================
   id: 44169799793914704
   identification: 
-    name: P105_BADGE_GIT
+    name: P105_BADGE_COMMITS
     type: Hidden
 
   settings: 

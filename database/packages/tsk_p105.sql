@@ -70,7 +70,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         --
         core.set_item('P105_BADGE_DESC',    CASE WHEN LENGTH(rec.task_desc) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END);
         core.set_item('P105_BADGE_FILES',   '');
-        core.set_item('P105_BADGE_GIT',     '');
+        core.set_item('P105_BADGE_COMMITS', '');
     END;
 
 

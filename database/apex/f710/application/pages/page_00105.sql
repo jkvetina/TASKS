@@ -590,7 +590,7 @@ wwv_flow_imp_page.create_ig_report_column(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(44094467518578047)
-,p_plug_name=>'Git &P105_BADGE_GIT.'
+,p_plug_name=>'Commits &P105_BADGE_COMMITS.'
 ,p_parent_plug_id=>wwv_flow_imp.id(44093969062578042)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70831193948975578)
@@ -1074,7 +1074,7 @@ wwv_flow_imp_page.create_page_item(
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44169799793914704)
-,p_name=>'P105_BADGE_GIT'
+,p_name=>'P105_BADGE_COMMITS'
 ,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_imp.id(63213380867844590)
 ,p_display_as=>'NATIVE_HIDDEN'
