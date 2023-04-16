@@ -29,6 +29,30 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
         core.set_item('P110_SWIMLANE_ID',   COALESCE(core.get_item('P110_SWIMLANE_ID'), core.get_item('P110_SOURCE_SWIMLANE')));
     END;
 
+
+
+    PROCEDURE process_bulk_init
+    AS
+    BEGIN
+        NULL;
+    END;
+
+
+
+    PROCEDURE process_bulk_task_filters
+    AS
+    BEGIN
+        NULL;
+    END;
+
+
+
+    PROCEDURE process_bulk_request
+    AS
+    BEGIN
+        NULL;
+    END;
+
 END;
 /
 

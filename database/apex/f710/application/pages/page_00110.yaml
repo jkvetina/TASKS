@@ -147,10 +147,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: LEFT ========================================
+- # ====== Region: SOURCE ======================================
   id: 44286090683494712
   identification: 
-    title: LEFT
+    title: SOURCE
     type: Static Content
 
   layout: 
@@ -188,10 +188,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: RIGHT =======================================
+- # ====== Region: TARGET ======================================
   id: 44286194908494713
   identification: 
-    title: RIGHT
+    title: TARGET
     type: Static Content
 
   layout: 
@@ -229,10 +229,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Select Tasks [GRID] =========================
+- # ====== Region: FILTER_TASKS [GRID] =========================
   id: 44287803008494730
   identification: 
-    title: Select Tasks [GRID]
+    title: FILTER_TASKS [GRID]
     type: Interactive Grid
 
   source: 
@@ -387,11 +387,8 @@ regions:
       type: Database Column
       database-column: TASK_NAME
       data-type: VARCHAR2
-      query-only: false
+      query-only: true
       primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
 
     session-state: 
       data-type: VARCHAR2
@@ -490,11 +487,8 @@ regions:
       type: Database Column
       database-column: TASK_LINK
       data-type: VARCHAR2
-      query-only: false
+      query-only: true
       primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
 
     session-state: 
       data-type: VARCHAR2
@@ -604,7 +598,7 @@ page-items:
 
   layout: 
     sequence: 40
-    region: LEFT # 44286090683494712
+    region: SOURCE # 44286090683494712
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -663,7 +657,7 @@ page-items:
 
   layout: 
     sequence: 50
-    region: LEFT # 44286090683494712
+    region: SOURCE # 44286090683494712
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -722,7 +716,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: LEFT # 44286090683494712
+    region: SOURCE # 44286090683494712
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -784,7 +778,7 @@ page-items:
 
   layout: 
     sequence: 20
-    region: LEFT # 44286090683494712
+    region: SOURCE # 44286090683494712
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -846,7 +840,7 @@ page-items:
 
   layout: 
     sequence: 30
-    region: LEFT # 44286090683494712
+    region: SOURCE # 44286090683494712
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -908,7 +902,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: RIGHT # 44286194908494713
+    region: TARGET # 44286194908494713
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -971,7 +965,7 @@ page-items:
 
   layout: 
     sequence: 20
-    region: RIGHT # 44286194908494713
+    region: TARGET # 44286194908494713
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1041,7 +1035,7 @@ page-items:
 
   layout: 
     sequence: 30
-    region: RIGHT # 44286194908494713
+    region: TARGET # 44286194908494713
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1112,7 +1106,7 @@ page-items:
 
   layout: 
     sequence: 40
-    region: RIGHT # 44286194908494713
+    region: TARGET # 44286194908494713
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1184,7 +1178,7 @@ page-items:
 
   layout: 
     sequence: 50
-    region: RIGHT # 44286194908494713
+    region: TARGET # 44286194908494713
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1333,7 +1327,7 @@ dynamic-actions:
 
     affected-elements: 
       selection-type: Region
-      region: Select Tasks [GRID] # 44287803008494730
+      region: FILTER_TASKS [GRID] # 44287803008494730
 
     execution: 
       sequence: 10
@@ -1371,21 +1365,21 @@ dynamic-actions:
       fire-on-initialization: false
 
 processes: 
-- # ====== Process: SAVE_SELECTED_TASKS ========================
+- # ====== Process: PROCESS_BULK_TASK_FILTERS ==================
   id: 45281063417457925
   identification: 
-    name: SAVE_SELECTED_TASKS
+    name: PROCESS_BULK_TASK_FILTERS
     type: Interactive Grid - Automatic Row Processing (DML)
-    editable-region: Select Tasks [GRID] # 44287803008494730
+    editable-region: FILTER_TASKS [GRID] # 44287803008494730
 
   settings: 
-    target-type: Region Source
-    prevent-lost-updates: true
+    target-type: PL/SQL Code
+    pl/sql-code-to-insert/update/delete: tsk_p110.process_bulk_task_filters();
+    prevent-lost-updates: false
     lock-row: No
-    return-primary-key(s)-after-insert: true
 
   execution: 
-    sequence: 10
+    sequence: 20
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -1394,4 +1388,42 @@ processes:
 
   server-side-condition: 
     execution-scope: All Submitted Rows
+
+- # ====== Process: PROCESS_BULK_REQUEST =======================
+  id: 45281481702457929
+  identification: 
+    name: PROCESS_BULK_REQUEST
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: tsk_p110.process_bulk_request();
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: PROCESS_BULK_INIT ==========================
+  id: 45281519596457930
+  identification: 
+    name: PROCESS_BULK_INIT
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: tsk_p110.process_bulk_init();
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
 

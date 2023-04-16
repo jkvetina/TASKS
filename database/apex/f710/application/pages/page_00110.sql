@@ -103,7 +103,7 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(44286090683494712)
-,p_plug_name=>'LEFT'
+,p_plug_name=>'SOURCE'
 ,p_parent_plug_id=>wwv_flow_imp.id(44285977800494711)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70831193948975578)
@@ -116,7 +116,7 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(44286194908494713)
-,p_plug_name=>'RIGHT'
+,p_plug_name=>'TARGET'
 ,p_parent_plug_id=>wwv_flow_imp.id(44285977800494711)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70831193948975578)
@@ -130,7 +130,7 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(44287803008494730)
-,p_plug_name=>'Select Tasks [GRID]'
+,p_plug_name=>'FILTER_TASKS [GRID]'
 ,p_region_name=>'CHECKLIST'
 ,p_parent_plug_id=>wwv_flow_imp.id(44285977800494711)
 ,p_region_template_options=>'#DEFAULT#'
@@ -199,7 +199,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_source_expression=>'TASK_NAME'
 ,p_data_type=>'VARCHAR2'
 ,p_session_state_data_type=>'VARCHAR2'
-,p_is_query_only=>false
+,p_is_query_only=>true
 ,p_item_type=>'NATIVE_DISPLAY_ONLY'
 ,p_heading=>'Task'
 ,p_heading_alignment=>'LEFT'
@@ -216,7 +216,6 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_sort_group=>false
 ,p_enable_hide=>true
 ,p_is_primary_key=>false
-,p_duplicate_value=>true
 ,p_include_in_export=>true
 );
 wwv_flow_imp_page.create_region_column(
@@ -256,14 +255,13 @@ wwv_flow_imp_page.create_region_column(
 ,p_source_expression=>'TASK_LINK'
 ,p_data_type=>'VARCHAR2'
 ,p_session_state_data_type=>'VARCHAR2'
-,p_is_query_only=>false
+,p_is_query_only=>true
 ,p_item_type=>'NATIVE_HIDDEN'
 ,p_display_sequence=>50
 ,p_attribute_01=>'Y'
 ,p_use_as_row_header=>false
 ,p_enable_sort_group=>false
 ,p_is_primary_key=>false
-,p_duplicate_value=>true
 ,p_include_in_export=>false
 );
 wwv_flow_imp_page.create_interactive_grid(
@@ -645,18 +643,38 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_affected_region_id=>wwv_flow_imp.id(44287803008494730)
 );
 wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(45281063417457925)
+ p_id=>wwv_flow_imp.id(45281519596457930)
 ,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'PROCESS_BULK_INIT'
+,p_process_sql_clob=>'tsk_p110.process_bulk_init();'
+,p_process_clob_language=>'PLSQL'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(45281063417457925)
+,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(44287803008494730)
 ,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'SAVE_SELECTED_TASKS'
-,p_attribute_01=>'REGION_SOURCE'
-,p_attribute_05=>'Y'
+,p_process_name=>'PROCESS_BULK_TASK_FILTERS'
+,p_attribute_01=>'PLSQL_CODE'
+,p_attribute_04=>'tsk_p110.process_bulk_task_filters();'
+,p_attribute_05=>'N'
 ,p_attribute_06=>'N'
-,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_only_for_changed_rows=>'N'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(45281481702457929)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'PROCESS_BULK_REQUEST'
+,p_process_sql_clob=>'tsk_p110.process_bulk_request();'
+,p_process_clob_language=>'PLSQL'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp.component_end;
 end;
