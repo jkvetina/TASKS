@@ -193,23 +193,27 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
 
 
-    PROCEDURE save_comment (
-        in_task_id          tsk_task_comments.task_id%TYPE,
-        in_comment_id       tsk_task_comments.comment_id%TYPE
-    )
+    PROCEDURE save_comment
     AS
+        rec                 tsk_task_comments%ROWTYPE;
     BEGIN
-        IF in_comment_id IS NOT NULL THEN
-            INSERT INTO tsk_task_comments (task_id, comment_id, comment_payload, updated_by, updated_at)
-            VALUES (
-                in_task_id,
-                tsk_comment_id.NEXTVAL,
-                in_comment_id,
-                core.get_user_id(),
-                SYSDATE
-            );
+        rec.task_id         := core.get_item('P105_TASK_ID');
+        rec.comment_id      := core.get_item('P105_COMMENT_ID');
+        rec.comment_payload := core.get_item('P105_COMMENT');
+        --
+        IF rec.comment_id IS NULL THEN
+            rec.comment_id  := tsk_comment_id.NEXTVAL;
+        END IF;
+        --
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
+        --
+        IF rec.comment_id IS NOT NULL AND rec.comment_payload IS NOT NULL THEN
+            INSERT INTO tsk_task_comments
+            VALUES rec;
             --
-            core.set_item('P105_COMMENT_ID', '');
+            core.set_item('P105_COMMENT_ID',    '');
+            core.set_item('P105_COMMENT',       '');
         END IF;
     END;
 

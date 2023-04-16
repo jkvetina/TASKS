@@ -19,10 +19,7 @@ CREATE OR REPLACE PACKAGE tsk_p105 AS
 
 
 
-    PROCEDURE save_comment (
-        in_task_id          tsk_task_comments.task_id%TYPE,
-        in_comment_id       tsk_task_comments.comment_id%TYPE
-    );
+    PROCEDURE save_comment;
 
 
 

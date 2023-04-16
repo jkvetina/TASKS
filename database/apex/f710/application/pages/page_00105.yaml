@@ -24,6 +24,36 @@ navigation:
   cursor-focus: First item on page
   warn-on-unsaved-changes: true
 
+javascript: 
+  function-and-global-variable-declaration: |
+    var delete_comment = function (task_id, comment_id) {
+        apex.server.process('DELETE_COMMENT',
+            {
+                x01: task_id,
+                x02: comment_id
+            },
+            {
+                dataType: 'text',
+                success: function(pData) {
+                    console.log('RESULT', pData);
+                    if (pData.indexOf('sqlerrm') >= 0) {
+                        apex.message.showErrors([{
+                            type        : 'error',
+                            location    : ['page', 'inline'],
+                            pageItem    : '',
+                            message     : pData.split('sqlerrm:')[1],
+                            unsafe      : false
+                        }]);
+                    }
+                    else {
+                        apex.message.showPageSuccess(pData);
+                    }
+                }
+            }
+        );
+    };
+    
+
 css: 
   inline: |
     /* HIDE DESC LABEL */
@@ -878,14 +908,7 @@ regions:
       value-identifies-row: false
 
     link: 
-      target: 
-        url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TASK_ID,P105_DELETE_COMMENT:#TASK_ID#,#COMMENT_ID#'
-        page: 105 # Task Detail
-        clear-cache: 105
-        values: 
-          p105_task_id: '#TASK_ID#'
-          p105_delete_comment: '#COMMENT_ID#'
-
+      target: "javascript: { delete_comment('#TASK_ID#', '#COMMENT_ID#'); $('#UPDATE_ONLY').click(); }"
       link-text: '#ACTIONS#'
 
     sorting: 
@@ -2174,36 +2197,6 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P105_DELETE_COMMENT ======================
-  id: 44171623173914723
-  identification: 
-    name: P105_DELETE_COMMENT
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 90
-    region: '&P105_HEADER.' # 63213380867844590
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
 - # ====== Page Item: P105_PREV_TASK_ID ========================
   id: 44172311455914730
   identification: 
@@ -2214,7 +2207,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 100
+    sequence: 90
     region: '&P105_HEADER.' # 63213380867844590
     position: BODY
 
@@ -2244,7 +2237,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 110
+    sequence: 100
     region: '&P105_HEADER.' # 63213380867844590
     position: BODY
 
@@ -2384,6 +2377,9 @@ buttons:
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
     database-action: SQL UPDATE action
+
+  advanced: 
+    static-id: UPDATE_ONLY
 
   server-side-condition: 
     type: Item is NOT NULL
@@ -2892,12 +2888,7 @@ processes:
   source: 
     location: Local Database
     language: PL/SQL
-    pl/sql-code: |
-      tsk_p105.save_comment (
-          in_task_id      => :P105_TASK_ID,
-          in_comment_id   => :P105_COMMENT
-      );
-      
+    pl/sql-code: tsk_p105.save_comment();
 
   execution: 
     sequence: 30
@@ -2908,7 +2899,7 @@ processes:
     display-location: Inline in Notification
 
 - # ====== Process: DELETE_COMMENT =============================
-  id: 44171763739914724
+  id: 45281736757457932
   identification: 
     name: DELETE_COMMENT
     type: Execute Code
@@ -2916,16 +2907,11 @@ processes:
   source: 
     location: Local Database
     language: PL/SQL
-    pl/sql-code: |
-      tsk_p105.delete_comment (
-          in_task_id      => :P105_TASK_ID,
-          in_comment_id   => :P105_DELETE_COMMENT
-      );
-      
+    pl/sql-code: tsk_p105.ajax_delete_comment();
 
   execution: 
-    sequence: 30
-    point: Before Header
+    sequence: 10
+    point: Ajax Callback
     run-process: Once Per Page Visit (default)
 
 branches: 
