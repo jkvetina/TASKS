@@ -86,7 +86,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
             t.status_id         = v_target.status_id,
             t.swimlane_id       = v_target.swimlane_id,
             t.updated_by        = v_target.updated_by,
-            t.updated_at        = v_target.updated_at
+            t.updated_at        = v_target.updated_at,
+            t.order#            = t.order# + 1000
         WHERE 1 = 1
             AND t.client_id     = v_source.client_id
             AND t.project_id    = v_source.project_id
@@ -99,6 +100,25 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
                 FROM apex_collections c
                 WHERE c.collection_name = c_coll_task_filter
             );
+
+        -- resort targets
+        FOR s IN (
+            SELECT
+                t.task_id,
+                ROW_NUMBER() OVER (ORDER BY t.order# NULLS LAST, t.task_id) * 10 AS order#
+            FROM tsk_tasks t
+            WHERE 1 = 1
+                AND t.client_id     = v_target.client_id
+                AND t.project_id    = v_target.project_id
+                AND t.board_id      = v_target.board_id
+                AND t.status_id     = v_target.status_id
+                AND t.swimlane_id   = v_target.swimlane_id
+        ) LOOP
+            UPDATE tsk_tasks t
+            SET t.order#        = s.order#
+            WHERE t.task_id     = s.task_id
+                AND (t.order#   != s.order# OR t.order# IS NULL);
+        END LOOP;
 
         -- clear collection
         APEX_COLLECTION.TRUNCATE_COLLECTION(c_coll_task_filter);
