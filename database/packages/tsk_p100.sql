@@ -6,6 +6,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         v_board_type        tsk_lov_board_types_v.id%TYPE;
         v_project_id        tsk_boards.project_id%TYPE;
         v_client_id         tsk_boards.client_id%TYPE;
+        v_task_id           tsk_tasks.task_id%TYPE;
     BEGIN
         -- load preferences
         tsk_app.load_user_preferences();
@@ -15,6 +16,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         v_board_type        := core.get_item('P100_BOARD_TYPE');
         v_project_id        := core.get_item('P0_PROJECT_ID');
         v_client_id         := core.get_item('P0_CLIENT_ID');
+        v_task_id           := core.get_item('P100_TASK_ID');
 
         -- get board header
         IF v_board_type IS NOT NULL THEN
@@ -30,7 +32,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         END IF;
 
         -- generate task link
-        core.set_item('P100_TASK_LINK', tsk_app.get_task_link(core.get_item('P100_TASK_ID')));
+        IF v_task_id IS NOT NULL THEN
+            core.set_item('P100_TASK_LINK', tsk_app.get_task_link(v_task_id));
+        END IF;
     END;
 
 
