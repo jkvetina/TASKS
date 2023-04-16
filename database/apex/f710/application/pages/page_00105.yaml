@@ -34,58 +34,6 @@ css:
       margin: 0 !important;
     }
     
-    
-    
-    /* HIDE EVERYTHING RELATED TO GRID */
-    #CHECKLIST .a-IG-header,
-    #CHECKLIST .a-GV-footer,
-    #CHECKLIST_ig_content_container .a-GV-hdr,
-    #CHECKLIST_ig_content_container .a-GV-footer,
-    #CHECKLIST_ig_content_container .js-stickyWidget-placeholder {
-        display         : none !important;
-    }
-    #CHECKLIST_ig_content_container .a-IG {
-        border          : 0 !important;
-    }
-    #CHECKLIST * {
-        border          : 0 !important;
-        box-shadow      : none !important;
-        background      : transparent !important;
-    }
-    #CHECKLIST .CHECKLIST_BOX {
-        margin-bottom   : -0.5rem;
-    }
-    #CHECKLIST .CHECKLIST_ITEM {
-        border-bottom   : 1px dotted #333 !important;
-        padding-left    : 0;
-        padding-right   : 0;
-    }
-    #CHECKLIST .CHECKLIST_BOX .apex-item-single-checkbox {
-        padding         : 3px 0 0 0.6rem;
-    }
-    #CHECKLIST .a-GV-cell.is-changed:not(.is-active):before,
-    #CHECKLIST .a-GV-row.is-updated .a-GV-selHeader:before {
-        display         : none !important;
-    }
-    #CHECKLIST .a-GV-w-scroll {
-        margin-left     : -0.6rem;
-    }
-    
-    
-    
-    /* RIGHT ALIGN USER COMMENTS */
-    #COMMENTS .t-Comments--chat li.OTHERS .t-Comments-icon {
-        margin-left     : 2rem;
-    }
-    
-    /* FIX TRASH ICON ALIGNMENT */
-    span.t-Comments-actions {
-        display         : block;
-        float           : right;
-        margin          : 0.25rem 0 -0.25rem;
-    }
-    
-    
 
 security: 
   authorization-scheme: MASTER - IS_USER # 71258645843174377
@@ -141,9 +89,6 @@ regions:
 
   advanced: 
     static-id: CHECKLIST
-    custom-attributes: 
-    - 'style="margin-top:'
-    - 0.5rem;"
     region-display-selector: false
     exclude-title-from-translation: false
 

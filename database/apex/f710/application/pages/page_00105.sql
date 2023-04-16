@@ -28,58 +28,6 @@ wwv_flow_imp_page.create_page(
 '#P105_TASK_DESC_CONTAINER .t-Form-itemWrapper {',
 '  margin: 0 !important;',
 '}',
-'',
-'',
-'',
-'/* HIDE EVERYTHING RELATED TO GRID */',
-'#CHECKLIST .a-IG-header,',
-'#CHECKLIST .a-GV-footer,',
-'#CHECKLIST_ig_content_container .a-GV-hdr,',
-'#CHECKLIST_ig_content_container .a-GV-footer,',
-'#CHECKLIST_ig_content_container .js-stickyWidget-placeholder {',
-'    display         : none !important;',
-'}',
-'#CHECKLIST_ig_content_container .a-IG {',
-'    border          : 0 !important;',
-'}',
-'#CHECKLIST * {',
-'    border          : 0 !important;',
-'    box-shadow      : none !important;',
-'    background      : transparent !important;',
-'}',
-'#CHECKLIST .CHECKLIST_BOX {',
-'    margin-bottom   : -0.5rem;',
-'}',
-'#CHECKLIST .CHECKLIST_ITEM {',
-'    border-bottom   : 1px dotted #333 !important;',
-'    padding-left    : 0;',
-'    padding-right   : 0;',
-'}',
-'#CHECKLIST .CHECKLIST_BOX .apex-item-single-checkbox {',
-'    padding         : 3px 0 0 0.6rem;',
-'}',
-'#CHECKLIST .a-GV-cell.is-changed:not(.is-active):before,',
-'#CHECKLIST .a-GV-row.is-updated .a-GV-selHeader:before {',
-'    display         : none !important;',
-'}',
-'#CHECKLIST .a-GV-w-scroll {',
-'    margin-left     : -0.6rem;',
-'}',
-'',
-'',
-'',
-'/* RIGHT ALIGN USER COMMENTS */',
-'#COMMENTS .t-Comments--chat li.OTHERS .t-Comments-icon {',
-'    margin-left     : 2rem;',
-'}',
-'',
-'/* FIX TRASH ICON ALIGNMENT */',
-'span.t-Comments-actions {',
-'    display         : block;',
-'    float           : right;',
-'    margin          : 0.25rem 0 -0.25rem;',
-'}',
-'',
 ''))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(71258645843174377)  -- MASTER - IS_USER
@@ -371,7 +319,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_region_name=>'CHECKLIST'
 ,p_parent_plug_id=>wwv_flow_imp.id(44094157892578044)
 ,p_region_template_options=>'#DEFAULT#'
-,p_region_attributes=>'style="margin-top: 0.5rem;"'
 ,p_plug_template=>wwv_flow_imp.id(70887424081975615)
 ,p_plug_display_sequence=>10
 ,p_query_type=>'TABLE'
@@ -1008,18 +955,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.10.07'
-,p_release=>'22.2.4'
-,p_default_workspace_id=>8506563800894011
-,p_default_application_id=>710
-,p_default_id_offset=>84847035874187356
-,p_default_owner=>'APPS'
-);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34952779982065837)
 ,p_name=>'P105_SOURCE_PAGE'
@@ -1071,6 +1006,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.10.07'
+,p_release=>'22.2.4'
+,p_default_workspace_id=>8506563800894011
+,p_default_application_id=>710
+,p_default_id_offset=>84847035874187356
+,p_default_owner=>'APPS'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44169799793914704)
