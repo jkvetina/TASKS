@@ -13,7 +13,9 @@ JOIN x
     ON x.client_id      = t.client_id
     AND x.project_id    = t.project_id
 WHERE t.is_active       = 'Y'
-ORDER BY t.board_name, t.board_id;
+ORDER BY
+    t.board_name,
+    t.board_id;
 --
 COMMENT ON TABLE tsk_lov_boards_v IS '';
 

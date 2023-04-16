@@ -23,11 +23,17 @@ prompt --install
 @@application/shared_components/navigation/tabs/standard.sql
 @@application/shared_components/navigation/tabs/parent.sql
 @@application/shared_components/user_interface/lovs/lov_boards.sql
+@@application/shared_components/user_interface/lovs/lov_boards_all.sql
 @@application/shared_components/user_interface/lovs/lov_board_types.sql
 @@application/shared_components/user_interface/lovs/lov_clients.sql
+@@application/shared_components/user_interface/lovs/lov_clients_all.sql
 @@application/shared_components/user_interface/lovs/lov_projects.sql
+@@application/shared_components/user_interface/lovs/lov_projects_all.sql
+@@application/shared_components/user_interface/lovs/lov_swimlanes_all.sql
 @@application/shared_components/user_interface/lovs/lov_task_statuses.sql
+@@application/shared_components/user_interface/lovs/lov_task_statuses_all.sql
 @@application/shared_components/user_interface/lovs/lov_task_swimlanes.sql
+@@application/shared_components/user_interface/lovs/lov_task_swimlanes_all.sql
 @@application/shared_components/user_interface/lovs/master_lov_applications.sql
 @@application/shared_components/user_interface/lovs/master_lov_users.sql
 @@application/pages/page_groups.sql
