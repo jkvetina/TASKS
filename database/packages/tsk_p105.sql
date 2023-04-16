@@ -29,6 +29,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
         -- generate task header
         core.set_item('P105_TASK_LINK', tsk_app.get_task_link(rec.task_id, 'EXTERNAL'));
+        core.set_item('P105_UPDATED_AT', rec.updated_at);
 
         -- calculate prev/next tasks
         FOR c IN (
@@ -75,6 +76,55 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
 
 
+    PROCEDURE save_task
+    AS
+        v_action            VARCHAR2(64);
+        rec                 tsk_tasks%ROWTYPE;
+    BEGIN
+        v_action            := APEX_APPLICATION.G_REQUEST;
+        --
+        rec.task_id         := core.get_item('P105_TASK_ID');
+        rec.task_name       := core.get_item('P105_TASK_NAME');
+        rec.task_desc       := core.get_item('P105_TASK_DESC');
+        rec.board_id        := core.get_item('P105_BOARD_ID');
+        rec.client_id       := core.get_item('P105_CLIENT_ID');
+        rec.project_id      := core.get_item('P105_PROJECT_ID');
+        rec.swimlane_id     := core.get_item('P105_SWIMLANE_ID');
+        rec.status_id       := core.get_item('P105_STATUS_ID');
+        rec.order#          := core.get_item('P105_ORDER#');
+        --
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
+        --
+        IF v_action LIKE 'DELETE%' THEN
+            DELETE FROM tsk_task_comments t
+            WHERE t.task_id = rec.task_id;
+            --
+            DELETE FROM tsk_task_checklist t
+            WHERE t.task_id = rec.task_id;
+            --
+            DELETE FROM tsk_tasks t
+            WHERE t.task_id = rec.task_id;
+            --
+            RETURN;
+        END IF;
+        --
+        UPDATE tsk_tasks t
+        SET ROW = rec
+        WHERE t.task_id         = rec.task_id;
+        --
+        IF SQL%ROWCOUNT = 0 THEN
+            rec.task_id := tsk_task_id.NEXTVAL;
+            --
+            core.set_item('P105_TASK_ID', rec.task_id);
+            --
+            INSERT INTO tsk_tasks
+            VALUES rec;
+        END IF;
+    END;
+
+
+
     PROCEDURE save_checklist
     AS
         v_action            CHAR;
@@ -86,13 +136,22 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         rec.checklist_id    := APEX_UTIL.GET_SESSION_STATE('CHECKLIST_ID');
         rec.checklist_item  := NULLIF(LTRIM(RTRIM(APEX_UTIL.GET_SESSION_STATE('CHECKLIST_ITEM'))), '-');
         rec.checklist_done  := APEX_UTIL.GET_SESSION_STATE('CHECKLIST_DONE');
-        rec.updated_by      := core.get_user_id();
-        rec.updated_at      := SYSDATE;
         --
         IF rec.task_id IS NULL THEN
-            rec.task_id     := APEX_UTIL.GET_SESSION_STATE('P105_TASK_ID');
+            rec.task_id     := core.get_item('P105_TASK_ID');
         END IF;
-        --
+
+        -- verify if task exists
+        BEGIN
+            SELECT t.task_id INTO rec.task_id
+            FROM tsk_tasks t
+            WHERE t.task_id = rec.task_id;
+        EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            RETURN;
+        END;
+
+        -- proceed
         IF (v_action = 'D' OR rec.checklist_item IS NULL) THEN
             DELETE FROM tsk_task_checklist t
             WHERE t.task_id         = rec.task_id
@@ -130,6 +189,28 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
                 ELSE 'fa-arrow-circle-down'
                 END ||
             '"></span>' END;
+    END;
+
+
+
+    PROCEDURE save_comment (
+        in_task_id          tsk_task_comments.task_id%TYPE,
+        in_comment_id       tsk_task_comments.comment_id%TYPE
+    )
+    AS
+    BEGIN
+        IF in_comment_id IS NOT NULL THEN
+            INSERT INTO tsk_task_comments (task_id, comment_id, comment_payload, updated_by, updated_at)
+            VALUES (
+                in_task_id,
+                tsk_comment_id.NEXTVAL,
+                in_comment_id,
+                core.get_user_id(),
+                SYSDATE
+            );
+            --
+            core.set_item('P105_COMMENT_ID', '');
+        END IF;
     END;
 
 

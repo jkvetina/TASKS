@@ -1839,7 +1839,7 @@ page-items:
     form-region: '[FORM]' # 63213536180844591
     column: UPDATED_BY
     data-type: VARCHAR2
-    query-only: false
+    query-only: true
     primary-key: false
 
   session-state: 
@@ -1891,7 +1891,7 @@ page-items:
     form-region: '[FORM]' # 63213536180844591
     column: UPDATED_AT
     data-type: DATE
-    query-only: false
+    query-only: true
     primary-key: false
 
   session-state: 
@@ -2763,32 +2763,6 @@ processes:
     point: Before Header
     run-process: Once Per Page Visit (default)
 
-- # ====== Process: SAVE_FORM_NEW ==============================
-  id: 34949211976065802
-  identification: 
-    name: SAVE_FORM_NEW
-    type: Form - Automatic Row Processing (DML)
-    form-region: '[FORM]' # 63213536180844591
-
-  settings: 
-    target-type: Region Source
-    prevent-lost-updates: true
-    lock-row: No
-    return-primary-key(s)-after-insert: true
-
-  execution: 
-    sequence: 10
-    point: Processing
-    run-process: Once Per Page Visit (default)
-
-  error: 
-    display-location: Inline in Notification
-
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: APEX_APPLICATION.G_REQUEST LIKE 'CREATE_%'
-
 - # ====== Process: SAVE_CHECKLIST =============================
   id: 34951047615065820
   identification: 
@@ -2813,66 +2787,26 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
-- # ====== Process: SAVE_FORM_UPDATE ===========================
+- # ====== Process: SAVE_FORM ==================================
   id: 34952570819065835
   identification: 
-    name: SAVE_FORM_UPDATE
-    type: Form - Automatic Row Processing (DML)
-    form-region: '[FORM]' # 63213536180844591
-
-  settings: 
-    target-type: Region Source
-    prevent-lost-updates: true
-    lock-row: No
-    return-primary-key(s)-after-insert: true
-
-  execution: 
-    sequence: 50
-    point: Processing
-    run-process: Once Per Page Visit (default)
-
-  error: 
-    display-location: Inline in Notification
-
-  server-side-condition: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: |
-      APEX_APPLICATION.G_REQUEST LIKE 'UPDATE_%'
-      OR APEX_APPLICATION.G_REQUEST LIKE 'GOTO_%'
-
-- # ====== Process: SAVE_FORM_DELETE ===========================
-  id: 34952654734065836
-  identification: 
-    name: SAVE_FORM_DELETE
+    name: SAVE_FORM
     type: Form - Automatic Row Processing (DML)
     form-region: '[FORM]' # 63213536180844591
 
   settings: 
     target-type: PL/SQL Code
-    pl/sql-code-to-insert/update/delete: |
-      DELETE FROM tsk_task_comments t
-      WHERE t.task_id = :P105_TASK_ID;
-      --
-      DELETE FROM tsk_task_checklist t
-      WHERE t.task_id = :P105_TASK_ID;
-      --
-      DELETE FROM tsk_tasks t
-      WHERE t.task_id = :P105_TASK_ID;
-      
+    pl/sql-code-to-insert/update/delete: tsk_p105.save_task();
     prevent-lost-updates: true
     lock-row: No
 
   execution: 
-    sequence: 60
+    sequence: 10
     point: Processing
     run-process: Once Per Page Visit (default)
 
   error: 
     display-location: Inline in Notification
-
-  server-side-condition: 
-    when-button-pressed: DELETE_TASK # 34949592599065805
 
 - # ====== Process: SAVE_FILTERS ===============================
   id: 34956155001097869
@@ -2905,7 +2839,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 80
+    sequence: 50
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2922,7 +2856,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 90
+    sequence: 60
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2939,7 +2873,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 70
+    sequence: 40
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2959,18 +2893,10 @@ processes:
     location: Local Database
     language: PL/SQL
     pl/sql-code: |
-      IF :P105_COMMENT IS NOT NULL THEN
-          INSERT INTO tsk_task_comments (task_id, comment_id, comment_payload, updated_by, updated_at)
-          VALUES (
-              :P105_TASK_ID,
-              tsk_comment_id.NEXTVAL,
-              :P105_COMMENT,
-              :APP_USER,
-              SYSDATE
-          );
-          --
-          :P105_COMMENT := '';
-      END IF;
+      tsk_p105.save_comment (
+          in_task_id      => :P105_TASK_ID,
+          in_comment_id   => :P105_COMMENT
+      );
       
 
   execution: 

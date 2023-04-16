@@ -947,6 +947,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34799770741743648)
 ,p_name=>'P105_UPDATED_BY'
 ,p_source_data_type=>'VARCHAR2'
+,p_is_query_only=>true
 ,p_item_sequence=>100
 ,p_item_plug_id=>wwv_flow_imp.id(63213536180844591)
 ,p_item_source_plug_id=>wwv_flow_imp.id(63213536180844591)
@@ -961,6 +962,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34799818186743649)
 ,p_name=>'P105_UPDATED_AT'
 ,p_source_data_type=>'DATE'
+,p_is_query_only=>true
 ,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_imp.id(63213536180844591)
 ,p_item_source_plug_id=>wwv_flow_imp.id(63213536180844591)
@@ -992,15 +994,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(34952779982065837)
-,p_name=>'P105_SOURCE_PAGE'
-,p_item_sequence=>30
-,p_item_plug_id=>wwv_flow_imp.id(63213380867844590)
-,p_display_as=>'NATIVE_HIDDEN'
-,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'Y'
-);
 wwv_flow_imp.component_end;
 end;
 /
@@ -1012,6 +1005,15 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>710
 ,p_default_id_offset=>84847035874187356
 ,p_default_owner=>'APPS'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(34952779982065837)
+,p_name=>'P105_SOURCE_PAGE'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(63213380867844590)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34953248782065842)
@@ -1160,20 +1162,17 @@ wwv_flow_imp_page.create_page_da_action(
 ''))
 );
 wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(34949211976065802)
+ p_id=>wwv_flow_imp.id(34952570819065835)
 ,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(63213536180844591)
 ,p_process_type=>'NATIVE_FORM_DML'
-,p_process_name=>'SAVE_FORM_NEW'
-,p_attribute_01=>'REGION_SOURCE'
+,p_process_name=>'SAVE_FORM'
+,p_attribute_01=>'PLSQL_CODE'
+,p_attribute_04=>'tsk_p105.save_task();'
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
-,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
-,p_process_when=>'APEX_APPLICATION.G_REQUEST LIKE ''CREATE_%'''
-,p_process_when_type=>'EXPRESSION'
-,p_process_when2=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34951047615065820)
@@ -1195,66 +1194,17 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'SAVE_COMMENT'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'IF :P105_COMMENT IS NOT NULL THEN',
-'    INSERT INTO tsk_task_comments (task_id, comment_id, comment_payload, updated_by, updated_at)',
-'    VALUES (',
-'        :P105_TASK_ID,',
-'        tsk_comment_id.NEXTVAL,',
-'        :P105_COMMENT,',
-'        :APP_USER,',
-'        SYSDATE',
-'    );',
-'    --',
-'    :P105_COMMENT := '''';',
-'END IF;',
+'tsk_p105.save_comment (',
+'    in_task_id      => :P105_TASK_ID,',
+'    in_comment_id   => :P105_COMMENT',
+');',
 ''))
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(34952570819065835)
-,p_process_sequence=>50
-,p_process_point=>'AFTER_SUBMIT'
-,p_region_id=>wwv_flow_imp.id(63213536180844591)
-,p_process_type=>'NATIVE_FORM_DML'
-,p_process_name=>'SAVE_FORM_UPDATE'
-,p_attribute_01=>'REGION_SOURCE'
-,p_attribute_05=>'Y'
-,p_attribute_06=>'N'
-,p_attribute_08=>'Y'
-,p_error_display_location=>'INLINE_IN_NOTIFICATION'
-,p_process_when=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'APEX_APPLICATION.G_REQUEST LIKE ''UPDATE_%''',
-'OR APEX_APPLICATION.G_REQUEST LIKE ''GOTO_%'''))
-,p_process_when_type=>'EXPRESSION'
-,p_process_when2=>'PLSQL'
-);
-wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(34952654734065836)
-,p_process_sequence=>60
-,p_process_point=>'AFTER_SUBMIT'
-,p_region_id=>wwv_flow_imp.id(63213536180844591)
-,p_process_type=>'NATIVE_FORM_DML'
-,p_process_name=>'SAVE_FORM_DELETE'
-,p_attribute_01=>'PLSQL_CODE'
-,p_attribute_04=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'DELETE FROM tsk_task_comments t',
-'WHERE t.task_id = :P105_TASK_ID;',
-'--',
-'DELETE FROM tsk_task_checklist t',
-'WHERE t.task_id = :P105_TASK_ID;',
-'--',
-'DELETE FROM tsk_tasks t',
-'WHERE t.task_id = :P105_TASK_ID;',
-''))
-,p_attribute_05=>'Y'
-,p_attribute_06=>'N'
-,p_error_display_location=>'INLINE_IN_NOTIFICATION'
-,p_process_when_button_id=>wwv_flow_imp.id(34949592599065805)
-);
-wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(44090654922578009)
-,p_process_sequence=>70
+,p_process_sequence=>40
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_CLOSE_WINDOW'
 ,p_process_name=>'CLOSE_DIALOG_CREATE'
@@ -1263,7 +1213,7 @@ wwv_flow_imp_page.create_page_process(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(44090282159578005)
-,p_process_sequence=>80
+,p_process_sequence=>50
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_CLOSE_WINDOW'
 ,p_process_name=>'CLOSE_DIALOG_UPDATE'
@@ -1272,7 +1222,7 @@ wwv_flow_imp_page.create_page_process(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(44090374597578006)
-,p_process_sequence=>90
+,p_process_sequence=>60
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_CLOSE_WINDOW'
 ,p_process_name=>'CLOSE_DIALOG_DELETE'
