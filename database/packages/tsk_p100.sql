@@ -33,6 +33,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         IF v_task_id IS NOT NULL THEN
             core.set_item('P100_TASK_LINK', tsk_app.get_task_link(v_task_id));
         END IF;
+        --
+        core.set_item('P100_TASKS_LINK', core.get_page_url(100));
     END;
 
 
@@ -58,7 +60,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         HTP.P('<div class="BOARD" style="' ||
             'grid-template-columns: repeat(' || v_statuses || ', minmax(300px, 1fr)); ' ||
             '">');
-
         --
         v_board_type := core.get_item('P0_BOARD_TYPE');
 

@@ -424,11 +424,12 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_sequence=>10
 ,p_button_plug_id=>wwv_flow_imp.id(34744374076440316)
 ,p_button_name=>'REFRESH_TASKS'
-,p_button_action=>'SUBMIT'
+,p_button_action=>'REDIRECT_PAGE'
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
 ,p_button_image_alt=>'Refresh Tasks'
 ,p_button_position=>'RIGHT_OF_TITLE'
+,p_button_redirect_url=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100::'
 ,p_icon_css_classes=>'fa-refresh'
 );
 wwv_flow_imp_page.create_page_button(
@@ -628,6 +629,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_colspan=>2
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
+,p_warn_on_unsaved_changes=>'I'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 ,p_attribute_02=>'N'
@@ -638,6 +640,15 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44173953530914746)
 ,p_name=>'P100_TASK_LINK'
 ,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(34744374076440316)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(44285739769494709)
+,p_name=>'P100_TASKS_LINK'
+,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(34744374076440316)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -680,8 +691,8 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'console.log(''DIALOG_CLOSED'');',
-'location.reload();',
+'//location.reload();',
+'window.location = apex.item(''P100_TASKS_LINK'').getValue();',
 ''))
 );
 wwv_flow_imp_page.create_page_da_event(

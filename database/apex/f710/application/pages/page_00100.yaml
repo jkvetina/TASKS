@@ -1080,7 +1080,7 @@ page-items:
     value-required: false
 
   advanced: 
-    warn-on-unsaved-changes: Page Default
+    warn-on-unsaved-changes: Ignore
 
   source: 
     type: Null
@@ -1108,6 +1108,36 @@ page-items:
 
   layout: 
     sequence: 40
+    region: '&P100_HEADER.' # 34744374076440316
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_TASKS_LINK ==========================
+  id: 44285739769494709
+  identification: 
+    name: P100_TASKS_LINK
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
     region: '&P100_HEADER.' # 34744374076440316
     position: BODY
 
@@ -1186,8 +1216,12 @@ buttons:
     icon: fa-refresh
 
   behavior: 
-    action: Submit Page
-    execute-validations: true
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100::'
+      page: 100 # Tasks
+      clear-cache: 100
+
     warn-on-unsaved-changes: Do Not Check
 
 - # ====== Button: SHOW_LIST ===================================
@@ -1379,8 +1413,8 @@ dynamic-actions:
 
     settings: 
       code: |
-        console.log('DIALOG_CLOSED');
-        location.reload();
+        //location.reload();
+        window.location = apex.item('P100_TASKS_LINK').getValue();
         
 
     execution: 
