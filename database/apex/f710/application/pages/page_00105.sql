@@ -674,7 +674,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_position=>'RIGHT_OF_TITLE'
 ,p_button_execute_validations=>'N'
 ,p_warn_on_unsaved_changes=>null
-,p_button_condition=>'P105_TASK_ID'
+,p_button_condition=>'P105_SHOW_SPLIT'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_icon_css_classes=>'fa-accessor-more'
 );
@@ -1127,6 +1127,15 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44172874732914735)
 ,p_name=>'P105_TASK_LINK'
 ,p_item_sequence=>120
+,p_item_plug_id=>wwv_flow_imp.id(63213380867844590)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(45282165104457936)
+,p_name=>'P105_SHOW_SPLIT'
+,p_item_sequence=>130
 ,p_item_plug_id=>wwv_flow_imp.id(63213380867844590)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'

@@ -2287,6 +2287,36 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P105_SHOW_SPLIT ==========================
+  id: 45282165104457936
+  identification: 
+    name: P105_SHOW_SPLIT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 130
+    region: '&P105_HEADER.' # 63213380867844590
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 - # ====== Page Item: P105_HEADER ==============================
   id: 63213944180844595
   identification: 
@@ -2650,7 +2680,7 @@ buttons:
 
   server-side-condition: 
     type: Item is NOT NULL
-    item: P105_TASK_ID
+    item: P105_SHOW_SPLIT
 
 - # ====== Button: CLOSE_DIALOG ================================
   id: 63213580209844592

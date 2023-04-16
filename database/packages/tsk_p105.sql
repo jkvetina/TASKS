@@ -67,6 +67,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             WHERE c.task_id             = rec.task_id
         ) LOOP
             core.set_item(c.item_name, c.badge);
+            --
+            IF c.item_name = 'P105_BADGE_CHECKLIST' AND INSTR(c.badge, 'fa-number') >= 0 THEN
+                core.set_item('P105_SHOW_SPLIT', 'Y');
+            END IF;
         END LOOP;
         --
         core.set_item('P105_BADGE_DESC',    CASE WHEN LENGTH(rec.task_desc) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END);
