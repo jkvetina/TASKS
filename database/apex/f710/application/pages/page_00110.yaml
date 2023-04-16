@@ -229,6 +229,231 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
+- # ====== Region: Select Tasks ================================
+  id: 44287803008494730
+  identification: 
+    title: Select Tasks
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_P110_TASKS_V
+    include-rowid-column: false
+    page-items-to-submit: 
+    - P110_SOURCE_CLIENT
+    - P110_SOURCE_PROJECT
+    - P110_SOURCE_BOARD
+    - P110_SOURCE_STATUS
+    - P110_SOURCE_SWIMLANE
+
+  layout: 
+    sequence: 30
+    parent-region: Bulk Operations [FORM] # 44285977800494711
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report # 70887424081975615
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 44288066643494732
+    edit: 
+      enabled: false
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      select-first-row: false
+      fixed-row-height: true
+
+    pagination: 
+      type: Scroll
+      show-total-row-count: false
+
+    toolbar: 
+      show: false
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: false
+      define-chart-view: false
+      download: false
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 45255383118346884
+      identification: 
+        name: Primary Report
+        alias: 452554
+
+  columns: 
+  - # ====== Column: TASK_ID =====================================
+    id: 44289491525494746
+    identification: 
+      column-name: TASK_ID
+      type: Link
+
+    heading: 
+      heading: Task Id
+      alignment: end
+
+    layout: 
+      sequence: 30
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: '&TASK_LINK.'
+      link-text: '&TASK_ID.'
+
+    source: 
+      type: Database Column
+      database-column: TASK_ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: TASK_NAME ===================================
+    id: 44289537842494747
+    identification: 
+      column-name: TASK_NAME
+      type: Text Field
+
+    heading: 
+      heading: Task Name
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 128
+
+    source: 
+      type: Database Column
+      database-column: TASK_NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: TASK_LINK ===================================
+    id: 44289692375494748
+    identification: 
+      column-name: TASK_LINK
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 50
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: TASK_LINK
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
 - # ====== Region: Bulk Operations =============================
   id: 108389736618010267
   identification: 
@@ -327,7 +552,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P110_SOURCE_SWIMLANE =====================
@@ -369,7 +594,7 @@ page-items:
     type: Shared Component
     list-of-values: LOV_TASK_SWIMLANES # 34920402511183578
     display-extra-values: true
-    display-null-value: true
+    display-null-value: false
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -386,7 +611,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P110_SOURCE_CLIENT =======================
@@ -437,19 +662,18 @@ page-items:
     type: Null
     used: Only when current value in session state is null
 
-  default: 
-    type: Item
-    item: P0_CLIENT_ID
-
   session-state: 
     storage: Per Session (Persistent)
 
   quick-picks: 
     show-quick-picks: false
 
+  read-only: 
+    type: Always
+
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P110_SOURCE_PROJECT ======================
@@ -500,19 +724,18 @@ page-items:
     type: Null
     used: Only when current value in session state is null
 
-  default: 
-    type: Item
-    item: P0_PROJECT_ID
-
   session-state: 
     storage: Per Session (Persistent)
 
   quick-picks: 
     show-quick-picks: false
 
+  read-only: 
+    type: Always
+
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P110_SOURCE_BOARD ========================
@@ -563,19 +786,18 @@ page-items:
     type: Null
     used: Only when current value in session state is null
 
-  default: 
-    type: Item
-    item: P0_BOARD_ID
-
   session-state: 
     storage: Per Session (Persistent)
 
   quick-picks: 
     show-quick-picks: false
 
+  read-only: 
+    type: Always
+
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P110_TARGET_CLIENT =======================
@@ -611,7 +833,7 @@ page-items:
     height: 1
 
   validation: 
-    value-required: false
+    value-required: true
 
   list-of-values: 
     type: Shared Component
@@ -638,7 +860,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P110_TARGET_PROJECT ======================
@@ -674,7 +896,7 @@ page-items:
     height: 1
 
   validation: 
-    value-required: false
+    value-required: true
 
   list-of-values: 
     type: Shared Component
@@ -701,7 +923,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P110_TARGET_BOARD ========================
@@ -737,7 +959,7 @@ page-items:
     height: 1
 
   validation: 
-    value-required: false
+    value-required: true
 
   list-of-values: 
     type: Shared Component
@@ -764,7 +986,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P110_TARGET_STATUS =======================
@@ -800,12 +1022,12 @@ page-items:
     height: 1
 
   validation: 
-    value-required: false
+    value-required: true
 
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_TASK_STATUSES # 34920754342188100
-    display-extra-values: true
+    display-extra-values: false
     display-null-value: true
 
   advanced: 
@@ -815,6 +1037,10 @@ page-items:
     type: Null
     used: Only when current value in session state is null
 
+  default: 
+    type: Item
+    item: P100_BOARD_TYPE
+
   session-state: 
     storage: Per Session (Persistent)
 
@@ -823,7 +1049,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P110_TARGET_SWIMLANE =====================
@@ -859,45 +1085,13 @@ page-items:
     height: 1
 
   validation: 
-    value-required: false
+    value-required: true
 
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_TASK_SWIMLANES # 34920402511183578
-    display-extra-values: true
-    display-null-value: true
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    storage: Per Session (Persistent)
-
-  quick-picks: 
-    show-quick-picks: false
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P110_AFFECTED_TASKS ======================
-  id: 44287582624494727
-  identification: 
-    name: P110_AFFECTED_TASKS
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 10
-    region: Bulk Operations # 108389736618010267
-    position: BODY
+    display-extra-values: false
+    display-null-value: false
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -907,16 +1101,18 @@ page-items:
     used: Only when current value in session state is null
 
   default: 
-    type: Static
-    static-value: 0
+    type: Item
+    item: P100_SWIMLANE_ID
 
   session-state: 
-    data-type: VARCHAR2
     storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 buttons: 
@@ -924,7 +1120,7 @@ buttons:
   id: 44286883866494720
   identification: 
     button-name: MAKE_CHANGES
-    label: Make Changes on &P110_AFFECTED_TASKS. tasks
+    label: Make Changes
 
   layout: 
     sequence: 10
@@ -946,6 +1142,9 @@ buttons:
     action: Submit Page
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
+
+  advanced: 
+    static-id: MAKE_CHANGES
 
 - # ====== Button: CLOSE_DIALOG ================================
   id: 45188962868165718
@@ -977,6 +1176,44 @@ buttons:
     execute-validations: false
 
 dynamic-actions: 
+- # ====== Dynamic Action: SOURCE_CHANGED ======================
+  id: 44287653154494728
+  identification: 
+    name: SOURCE_CHANGED
+
+  execution: 
+    sequence: 20
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P110_SOURCE_CLIENT
+    - P110_SOURCE_PROJECT
+    - P110_SOURCE_BOARD
+    - P110_SOURCE_STATUS
+    - P110_SOURCE_SWIMLANE
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 44287759729494729
+    identification: 
+      action: Refresh
+
+    affected-elements: 
+      selection-type: Region
+      region: Select Tasks # 44287803008494730
+
+    execution: 
+      sequence: 10
+      event: SOURCE_CHANGED # 44287653154494728
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
 - # ====== Dynamic Action: CLOSE_DIALOG ========================
   id: 45209390022165756
   identification: 
