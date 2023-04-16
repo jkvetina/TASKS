@@ -157,7 +157,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
 
 
 
-    PROCEDURE update_task_on_drag
+    PROCEDURE ajax_update_task_on_drag
     AS
     BEGIN
         -- update task status (column)

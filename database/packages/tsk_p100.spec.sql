@@ -17,7 +17,7 @@ CREATE OR REPLACE PACKAGE tsk_p100 AS
 
 
 
-    PROCEDURE update_task_on_drag;
+    PROCEDURE ajax_update_task_on_drag;
 
 END;
 /

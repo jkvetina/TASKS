@@ -1478,7 +1478,7 @@ processes:
   source: 
     location: Local Database
     language: PL/SQL
-    pl/sql-code: tsk_p100.update_task_on_drag();
+    pl/sql-code: tsk_p100.ajax_update_task_on_drag();
 
   execution: 
     sequence: 10

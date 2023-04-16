@@ -215,16 +215,22 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
 
 
-    PROCEDURE delete_comment (
-        in_task_id          tsk_task_comments.task_id%TYPE,
-        in_comment_id       tsk_task_comments.comment_id%TYPE
-    )
+    PROCEDURE ajax_delete_comment
     AS
+        v_task_id           tsk_task_comments.task_id%TYPE;
+        v_comment_id        tsk_task_comments.comment_id%TYPE;
     BEGIN
-        IF in_task_id IS NOT NULL THEN
+        v_task_id           := APEX_APPLICATION.G_X01;
+        v_comment_id        := APEX_APPLICATION.G_X02;
+        --
+        IF v_task_id IS NOT NULL AND v_comment_id IS NOT NULL THEN
             DELETE FROM tsk_task_comments c
-            WHERE c.task_id         = in_task_id
-                AND c.comment_id    = in_comment_id;
+            WHERE c.task_id         = v_task_id
+                AND c.comment_id    = v_comment_id;
+            --
+            IF SQL%ROWCOUNT = 1 THEN
+                HTP.P('Comment deleted');
+            END IF;
         END IF;
     END;
 

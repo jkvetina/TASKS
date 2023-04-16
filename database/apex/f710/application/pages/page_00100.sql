@@ -734,7 +734,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'ON_DEMAND'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'UPDATE_TASK'
-,p_process_sql_clob=>'tsk_p100.update_task_on_drag();'
+,p_process_sql_clob=>'tsk_p100.ajax_update_task_on_drag();'
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(
