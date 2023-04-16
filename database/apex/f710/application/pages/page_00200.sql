@@ -524,7 +524,7 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_view_id=>wwv_flow_imp.id(105177737760823559)
 ,p_display_seq=>4
 ,p_column_id=>wwv_flow_imp.id(105171059749812755)
-,p_is_visible=>false
+,p_is_visible=>true
 ,p_is_frozen=>false
 ,p_sort_order=>1
 ,p_break_order=>5
@@ -539,7 +539,7 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_view_id=>wwv_flow_imp.id(105177737760823559)
 ,p_display_seq=>5
 ,p_column_id=>wwv_flow_imp.id(105171140843812756)
-,p_is_visible=>false
+,p_is_visible=>true
 ,p_is_frozen=>false
 ,p_break_order=>10
 ,p_break_is_enabled=>true
