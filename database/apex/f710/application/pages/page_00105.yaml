@@ -1327,7 +1327,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 50
+    sequence: 10
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -1372,7 +1372,7 @@ page-items:
     disabled: false
 
   layout: 
-    sequence: 10
+    sequence: 20
     region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
@@ -1482,7 +1482,7 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 20
+    sequence: 50
     region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
@@ -1504,9 +1504,17 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_BOARDS # 34763544164505098
+    list-of-values: LOV_BOARDS_ALL # 45358569306027190
     display-extra-values: true
     display-null-value: false
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P105_PROJECT_ID
+    items-to-submit: 
+    - P105_CLIENT_ID
+    - P105_PROJECT_ID
+    parent-required: true
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -1533,84 +1541,10 @@ page-items:
   id: 34799302370743644
   identification: 
     name: P105_CLIENT_ID
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 60
-    region: '[FORM]' # 63213536180844591
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    form-region: '[FORM]' # 63213536180844591
-    column: CLIENT_ID
-    data-type: VARCHAR2
-    query-only: false
-    primary-key: false
-
-  default: 
-    type: Item
-    item: P0_CLIENT_ID
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Request (Memory Only)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P105_PROJECT_ID ==========================
-  id: 34799438673743645
-  identification: 
-    name: P105_PROJECT_ID
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 70
-    region: '[FORM]' # 63213536180844591
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    form-region: '[FORM]' # 63213536180844591
-    column: PROJECT_ID
-    data-type: VARCHAR2
-    query-only: false
-    primary-key: false
-
-  default: 
-    type: Item
-    item: P0_PROJECT_ID
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Request (Memory Only)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P105_SWIMLANE_ID =========================
-  id: 34799532575743646
-  identification: 
-    name: P105_SWIMLANE_ID
     type: Select List
 
   label: 
-    label: Swimlane
+    label: Client
     alignment: Left
 
   settings: 
@@ -1636,13 +1570,161 @@ page-items:
     height: 1
 
   validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_CLIENTS_ALL # 45359037932027195
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: CLIENT_ID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  default: 
+    type: Item
+    item: P0_CLIENT_ID
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_PROJECT_ID ==========================
+  id: 34799438673743645
+  identification: 
+    name: P105_PROJECT_ID
+    type: Select List
+
+  label: 
+    label: Project
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 40
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_PROJECTS_ALL # 45359394002027195
+    display-extra-values: true
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P105_CLIENT_ID
+    items-to-submit: 
+    - P105_CLIENT_ID
+    parent-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: PROJECT_ID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  default: 
+    type: Item
+    item: P0_PROJECT_ID
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_SWIMLANE_ID =========================
+  id: 34799532575743646
+  identification: 
+    name: P105_SWIMLANE_ID
+    type: Select List
+
+  label: 
+    label: Swimlane
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 70
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
     value-required: true
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_TASK_SWIMLANES # 34920402511183578
+    list-of-values: LOV_TASK_SWIMLANES_ALL # 45359983154027195
     display-extra-values: true
     display-null-value: false
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P105_BOARD_ID
+    items-to-submit: 
+    - P105_CLIENT_ID
+    - P105_PROJECT_ID
+    - P105_BOARD_ID
+    parent-required: true
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -1680,7 +1762,7 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 40
+    sequence: 60
     region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
@@ -1702,9 +1784,18 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_TASK_STATUSES # 34920754342188100
+    list-of-values: LOV_TASK_STATUSES_ALL # 45359629206027195
     display-extra-values: true
     display-null-value: false
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P105_BOARD_ID
+    items-to-submit: 
+    - P105_CLIENT_ID
+    - P105_PROJECT_ID
+    - P105_BOARD_ID
+    parent-required: true
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -1737,7 +1828,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 90
+    sequence: 100
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -1764,15 +1855,34 @@ page-items:
   id: 34799818186743649
   identification: 
     name: P105_UPDATED_AT
-    type: Hidden
+    type: Display Only
+
+  label: 
+    label: Updated At
+    alignment: Left
 
   settings: 
-    value-protected: true
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
 
   layout: 
-    sequence: 100
+    sequence: 80
     region: '[FORM]' # 63213536180844591
     position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -1803,7 +1913,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 80
+    sequence: 90
     region: '[FORM]' # 63213536180844591
     position: BODY
 
