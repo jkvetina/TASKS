@@ -1,0 +1,250 @@
+---
+# ====== Page: Searching =====================================
+id: 115
+identification: 
+  name: Searching
+  alias: SEARCHING
+  title: Searching
+  page-group: MAIN # 78949836938576475
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+dialog: 
+  width: 1280
+  chained: true
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: First item on page
+  warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    /* HIDE DESC LABEL */
+    #P105_TASK_DESC_CONTAINER .t-Form-labelContainer {
+      display: none;
+    }
+    #P105_TASK_DESC_CONTAINER .t-Form-itemWrapper {
+      margin: 0 !important;
+    }
+    
+    
+    
+    /* HIDE EVERYTHING RELATED TO GRID */
+    #CHECKLIST .a-IG-header,
+    #CHECKLIST .a-GV-footer,
+    #CHECKLIST_ig_content_container .a-GV-hdr,
+    #CHECKLIST_ig_content_container .a-GV-footer,
+    #CHECKLIST_ig_content_container .js-stickyWidget-placeholder {
+        display         : none !important;
+    }
+    #CHECKLIST_ig_content_container .a-IG {
+        border          : 0 !important;
+    }
+    #CHECKLIST * {
+        border          : 0 !important;
+        box-shadow      : none !important;
+        background      : transparent !important;
+    }
+    #CHECKLIST .CHECKLIST_BOX {
+        margin-bottom   : -0.5rem;
+    }
+    #CHECKLIST .CHECKLIST_ITEM {
+        border-bottom   : 1px dotted #333 !important;
+        padding-left    : 0;
+        padding-right   : 0;
+    }
+    #CHECKLIST .CHECKLIST_BOX .apex-item-single-checkbox {
+        padding         : 3px 0 0 0.6rem;
+    }
+    #CHECKLIST .a-GV-cell.is-changed:not(.is-active):before,
+    #CHECKLIST .a-GV-row.is-updated .a-GV-selHeader:before {
+        display         : none !important;
+    }
+    #CHECKLIST .a-GV-w-scroll {
+        margin-left     : -0.6rem;
+    }
+    
+    
+    
+    /* RIGHT ALIGN USER COMMENTS */
+    #COMMENTS .t-Comments--chat li.OTHERS .t-Comments-icon {
+        margin-left     : 2rem;
+    }
+    
+    /* FIX TRASH ICON ALIGNMENT */
+    span.t-Comments-actions {
+        display         : block;
+        float           : right;
+        margin          : 0.25rem 0 -0.25rem;
+    }
+    
+    
+
+security: 
+  authorization-scheme: MASTER - IS_USER # 71258645843174377
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Searching [FORM] ============================
+  id: 89525778213683337
+  identification: 
+    title: Searching [FORM]
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Searching ===================================
+  id: 153629537031198893
+  identification: 
+    title: Searching
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+buttons: 
+- # ====== Button: CLOSE_DIALOG ================================
+  id: 45240770564188627
+  identification: 
+    button-name: CLOSE_DIALOG
+    label: Close Dialog
+
+  layout: 
+    sequence: 10
+    region: Searching # 153629537031198893
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+    icon: fa-times
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: false
+
+dynamic-actions: 
+- # ====== Dynamic Action: CLOSE_DIALOG ========================
+  id: 45241195474188628
+  identification: 
+    name: CLOSE_DIALOG
+
+  execution: 
+    sequence: 10
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CLICK
+    selection-type: Button
+    button: CLOSE_DIALOG # 45240770564188627
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Cancel Dialog ===============================
+    id: 45241617692188628
+    identification: 
+      action: Cancel Dialog
+
+    execution: 
+      sequence: 10
+      event: CLOSE_DIALOG # 45241195474188628
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
