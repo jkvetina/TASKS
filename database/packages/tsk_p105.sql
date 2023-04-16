@@ -141,6 +141,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         rec.checklist_item  := NULLIF(LTRIM(RTRIM(APEX_UTIL.GET_SESSION_STATE('CHECKLIST_ITEM'))), '-');
         rec.checklist_done  := APEX_UTIL.GET_SESSION_STATE('CHECKLIST_DONE');
         --
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
+        --
         IF rec.task_id IS NULL THEN
             rec.task_id     := core.get_item('P105_TASK_ID');
         END IF;
@@ -175,6 +178,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             INSERT INTO tsk_task_checklist
             VALUES rec;
         END IF;
+
+        -- update also task
+        UPDATE tsk_tasks t
+        SET t.updated_at        = rec.updated_at,
+            t.updated_by        = rec.updated_by
+        WHERE t.task_id         = rec.task_id;
     END;
 
 
