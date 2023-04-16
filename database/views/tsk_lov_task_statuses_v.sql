@@ -12,6 +12,7 @@ FROM tsk_task_statuses t
 JOIN x
     ON x.client_id      = t.client_id
     AND x.project_id    = t.project_id
+WHERE t.is_active       = 'Y'
 ORDER BY t.order# NULLS LAST, t.status_id;
 --
 COMMENT ON TABLE tsk_lov_task_statuses_v IS '';

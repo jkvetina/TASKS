@@ -10,6 +10,7 @@ SELECT
 FROM tsk_projects t
 JOIN x
     ON x.client_id      = t.client_id
+WHERE t.is_active       = 'Y'
 ORDER BY t.project_name, t.project_id;
 --
 COMMENT ON TABLE tsk_lov_projects_v IS '';
