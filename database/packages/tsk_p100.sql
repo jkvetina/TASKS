@@ -19,17 +19,15 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         v_task_id           := core.get_item('P100_TASK_ID');
 
         -- get board header
-        IF v_board_type IS NOT NULL THEN
-            FOR c IN (
-                SELECT NVL(l.name, 'Tasks') || ' for ' || b.board_name AS name
-                FROM tsk_boards b
-                LEFT JOIN tsk_lov_board_types_v l
-                    ON l.id         = v_board_type
-                WHERE b.board_id    = v_board_id
-            ) LOOP
-                core.set_item('P100_HEADER', c.name);
-            END LOOP;
-        END IF;
+        FOR c IN (
+            SELECT NVL(l.name, 'Tasks') || ' for ' || b.board_name AS name
+            FROM tsk_boards b
+            LEFT JOIN tsk_lov_board_types_v l
+                ON l.id         = v_board_type
+            WHERE b.board_id    = v_board_id
+        ) LOOP
+            core.set_item('P100_HEADER', c.name);
+        END LOOP;
 
         -- generate task link
         IF v_task_id IS NOT NULL THEN
