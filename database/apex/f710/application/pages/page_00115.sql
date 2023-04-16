@@ -84,7 +84,9 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(71258645843174377)  -- MASTER - IS_USER
 ,p_dialog_width=>'1280'
+,p_dialog_chained=>'N'
 ,p_protection_level=>'C'
+,p_page_component_map=>'11'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );

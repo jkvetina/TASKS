@@ -15,7 +15,7 @@ appearance:
 
 dialog: 
   width: 1280
-  chained: true
+  chained: false
 
 navigation-menu: 
   override-user-interface-level: false
