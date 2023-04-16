@@ -95,7 +95,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         rec.project_id      := core.get_item('P105_PROJECT_ID');
         rec.swimlane_id     := core.get_item('P105_SWIMLANE_ID');
         rec.status_id       := core.get_item('P105_STATUS_ID');
-        rec.order#          := core.get_item('P105_ORDER#');
+        rec.order#          := core.get_item('P105_ORDER');
         --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;

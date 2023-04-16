@@ -1926,10 +1926,10 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P105_ORDER_H =============================
+- # ====== Page Item: P105_ORDER ===============================
   id: 34799957644743650
   identification: 
-    name: P105_ORDER_H
+    name: P105_ORDER
     type: Hidden
 
   settings: 

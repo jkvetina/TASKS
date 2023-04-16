@@ -1030,7 +1030,7 @@ wwv_flow_imp_page.create_page_item(
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34799957644743650)
-,p_name=>'P105_ORDER_H'
+,p_name=>'P105_ORDER'
 ,p_source_data_type=>'NUMBER'
 ,p_item_sequence=>90
 ,p_item_plug_id=>wwv_flow_imp.id(63213536180844591)
