@@ -52,25 +52,25 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
         -- calculate tab badges
         FOR c IN (
-            SELECT tsk_p105.get_badge_icon(COUNT(*)) AS badge
+            SELECT
+                'P105_BADGE_CHECKLIST'              AS item_name,
+                tsk_p105.get_badge_icon(COUNT(*))   AS badge
             FROM tsk_task_checklist c
             WHERE c.task_id             = rec.task_id
                 AND c.checklist_done    IS NULL
-        ) LOOP
-            core.set_item('P105_BADGE_CHECKLIST', c.badge);
-        END LOOP;
-        --
-        FOR c IN (
-            SELECT tsk_p105.get_badge_icon(COUNT(*)) AS badge
+            UNION ALL
+            SELECT
+                'P105_BADGE_COMMENTS'               AS item_name,
+                tsk_p105.get_badge_icon(COUNT(*))   AS badge
             FROM tsk_task_comments c
-            WHERE c.task_id = rec.task_id
+            WHERE c.task_id             = rec.task_id
         ) LOOP
-            core.set_item('P105_BADGE_COMMENTS', c.badge);
+            core.set_item(c.item_name, c.badge);
         END LOOP;
         --
-        core.set_item('P105_BADGE_DESC',        CASE WHEN LENGTH(rec.task_desc) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END);
-        core.set_item('P105_BADGE_FILES',       '');
-        core.set_item('P105_BADGE_GIT',         '');
+        core.set_item('P105_BADGE_DESC',    CASE WHEN LENGTH(rec.task_desc) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END);
+        core.set_item('P105_BADGE_FILES',   '');
+        core.set_item('P105_BADGE_GIT',     '');
     END;
 
 
