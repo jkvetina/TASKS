@@ -251,6 +251,31 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         END IF;
     END;
 
+
+
+    PROCEDURE save_split_checklist
+    AS
+        rec                 tsk_tasks%ROWTYPE;
+        v_source_task_id    tsk_tasks.task_id%TYPE;
+    BEGIN
+        v_source_task_id := core.get_item('P105_TASK_ID');
+        --
+        SELECT t.* INTO rec
+        FROM tsk_tasks t
+        WHERE t.task_id = v_source_task_id;
+        --
+        rec.task_id := tsk_task_id.NEXTVAL;
+        --
+        INSERT INTO tsk_tasks VALUES rec;
+        --
+        UPDATE tsk_task_checklist t
+        SET t.task_id               = rec.task_id
+        WHERE t.task_id             = v_source_task_id
+            AND t.checklist_done    IS NULL;
+        --
+        core.set_item('P105_TASK_ID', rec.task_id);
+    END;
+
 END;
 /
 

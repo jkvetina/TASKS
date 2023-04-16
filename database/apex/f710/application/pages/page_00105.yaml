@@ -2675,8 +2675,9 @@ buttons:
     icon: fa-accessor-more
 
   behavior: 
-    action: Defined by Dynamic Action
-    execute-validations: false
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
 
   server-side-condition: 
     type: Item is NOT NULL
@@ -2865,7 +2866,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 50
+    sequence: 60
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2882,7 +2883,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 60
+    sequence: 70
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2899,7 +2900,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 40
+    sequence: 50
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2943,6 +2944,28 @@ processes:
     sequence: 10
     point: Ajax Callback
     run-process: Once Per Page Visit (default)
+
+- # ====== Process: SAVE_SPLIT_CHECKLIST =======================
+  id: 45282249548457937
+  identification: 
+    name: SAVE_SPLIT_CHECKLIST
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: tsk_p105.save_split_checklist();
+
+  execution: 
+    sequence: 40
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: SPLIT_TASK # 44285432437494706
 
 branches: 
 - # ====== Branch: CREATE_ANOTHER ==============================
@@ -3005,4 +3028,25 @@ branches:
 
   server-side-condition: 
     when-button-pressed: GOTO_NEXT_TASK # 44172109399914728
+
+- # ====== Branch: GOTO_SPLIT_TASK =============================
+  id: 45282323901457938
+  identification: 
+    name: GOTO_SPLIT_TASK
+
+  execution: 
+    sequence: 40
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TASK_ID:&P105_TASK_ID.&success_msg=#SUCCESS_MSG#'
+      page: 105 # Task Detail
+      clear-cache: 105
+      values: 
+        p105_task_id: '&P105_TASK_ID.'
+
+  server-side-condition: 
+    when-button-pressed: SPLIT_TASK # 44285432437494706
 
