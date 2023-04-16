@@ -48,7 +48,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         END LOOP;
 
         -- calculate page header
-        core.set_item('P105_HEADER', CASE WHEN rec.task_id IS NOT NULL THEN 'Update Task ' || rec.task_id ELSE core.get_page_name(105) END);
+        core.set_item('P105_HEADER', CASE WHEN rec.task_id IS NOT NULL THEN 'Update Task ' || tsk_p100.c_task_prefix || rec.task_id ELSE core.get_page_name(105) END);
 
         -- calculate tab badges
         FOR c IN (

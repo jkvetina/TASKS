@@ -143,7 +143,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                         CASE WHEN t.task_progress IS NOT NULL
                             THEN '<span style="float: right;">' || t.task_progress || '</span>'
                             END ||
-                        '#' || t.task_id || ' ' || t.task_name ||
+                        c_task_prefix || t.task_id || ' ' || t.task_name ||
                         '</a></div>'
                     );
                 END LOOP;
@@ -181,7 +181,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             END LOOP;
 
             -- message for app
-            HTP.P('Task #' || APEX_APPLICATION.G_X01 || ' updated');
+            HTP.P('Task ' || c_task_prefix || APEX_APPLICATION.G_X01 || ' updated');
         END IF;
     END;
 
