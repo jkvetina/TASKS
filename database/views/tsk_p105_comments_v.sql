@@ -1,7 +1,8 @@
 CREATE OR REPLACE FORCE VIEW tsk_p105_comments_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        core.get_user_id() AS user_id
+        core.get_number_item('P105_TASK_ID')    AS task_id,
+        core.get_user_id()                      AS user_id
     FROM DUAL
 )
 SELECT
@@ -44,7 +45,8 @@ SELECT
         END AS user_name
     --
 FROM tsk_task_comments c
-CROSS JOIN x
+JOIN x
+    ON x.task_id = c.task_id
 ORDER BY
     c.task_id,
     c.comment_id DESC;
