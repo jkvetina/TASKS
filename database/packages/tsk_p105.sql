@@ -65,6 +65,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
                 tsk_p105.get_badge_icon(COUNT(*))   AS badge
             FROM tsk_task_comments c
             WHERE c.task_id             = rec.task_id
+            UNION ALL
+            SELECT
+                'P105_BADGE_COMMITS'                AS item_name,
+                tsk_p105.get_badge_icon(COUNT(*))   AS badge
+            FROM tsk_task_commits c
+            WHERE c.task_id             = rec.task_id
+            UNION ALL
+            SELECT
+                'P105_BADGE_FILES'                  AS item_name,
+                tsk_p105.get_badge_icon(COUNT(*))   AS badge
+            FROM tsk_task_files c
+            WHERE c.task_id             = rec.task_id
         ) LOOP
             core.set_item(c.item_name, c.badge);
             --
@@ -74,8 +86,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         END LOOP;
         --
         core.set_item('P105_BADGE_DESC',    CASE WHEN LENGTH(rec.task_desc) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END);
-        core.set_item('P105_BADGE_FILES',   '');
-        core.set_item('P105_BADGE_COMMITS', '');
     END;
 
 
