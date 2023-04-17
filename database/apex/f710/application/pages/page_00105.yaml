@@ -1256,6 +1256,288 @@ regions:
     security: 
       escape-special-characters: true
 
+- # ====== Region: FILES [REPORT] ==============================
+  id: 45282758424457942
+  identification: 
+    title: FILES [REPORT]
+    type: Classic Report
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_P105_FILES_V
+    include-rowid-column: false
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 10
+    parent-region: Attachements &P105_BADGE_FILES. # 44094316535578046
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
+    appearance: 
+      template-type: Theme
+      template: Standard # 70935111081975645
+      template-options: 
+      - '#DEFAULT#'
+      - t-Report--stretch
+      - t-Report--altRowsDefault
+      - t-Report--rowHighlight
+      - t-Report--hideNoPagination
+
+    pagination: 
+      type: No Pagination (Show All Rows)
+      partial-page-refresh: true
+
+    performance: 
+      lazy-loading: false
+
+    break-formatting: 
+      break-columns: No Break
+
+    advanced: 
+      strip-html: false
+      sort-nulls: Last
+
+    heading: 
+      type: Custom Headings
+
+    download: 
+      csv-export-enabled: false
+
+    printing: 
+      enabled: false
+
+  columns: 
+  - # ====== Column: FILE_ID =====================================
+    id: 45282839863457943
+    identification: 
+      column-name: FILE_ID
+      type: Hidden Column
+
+    layout: 
+      sequence: 10
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: FILE_NAME ===================================
+    id: 45282959095457944
+    identification: 
+      column-name: FILE_NAME
+      type: Link
+
+    heading: 
+      heading: File Name
+      alignment: center
+
+    layout: 
+      sequence: 20
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: '#DOWNLOAD_LINK#'
+      link-text: '#FILE_NAME#'
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: DOWNLOAD_LINK ===============================
+    id: 45283184732457946
+    identification: 
+      column-name: DOWNLOAD_LINK
+      type: Hidden Column
+
+    layout: 
+      sequence: 40
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: DELETE_LINK =================================
+    id: 45283282241457947
+    identification: 
+      column-name: DELETE_LINK
+      type: Plain Text
+
+    heading: 
+      heading: Delete Link
+      alignment: center
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    column-formatting: 
+      html-expression: <span class="fa fa-trash-o"></span>
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: FILE_SIZE ===================================
+    id: 45283357102457948
+    identification: 
+      column-name: FILE_SIZE
+      type: Plain Text
+
+    heading: 
+      heading: File Size
+      alignment: end
+
+    layout: 
+      sequence: 30
+      column-alignment: end
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: UPDATED_BY ==================================
+    id: 45283471244457949
+    identification: 
+      column-name: UPDATED_BY
+      type: Plain Text
+
+    heading: 
+      heading: Updated By
+      alignment: center
+
+    layout: 
+      sequence: 70
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: UPDATED_AT ==================================
+    id: 45283530727457950
+    identification: 
+      column-name: UPDATED_AT
+      type: Plain Text
+
+    heading: 
+      heading: Updated At
+      alignment: center
+
+    layout: 
+      sequence: 80
+      column-alignment: start
+
+    accessibility: 
+      value-identifies-row: false
+
+    sorting: 
+      sortable: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    advanced: 
+      compute-sum: false
+
+    ui-defaults-reference: 
+      table-owner: Parsing Schema
+
+    security: 
+      escape-special-characters: true
+
 - # ====== Region: &P105_HEADER. ===============================
   id: 63213380867844590
   identification: 
@@ -2928,7 +3210,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 60
+    sequence: 80
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2945,7 +3227,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 70
+    sequence: 90
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -2962,7 +3244,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 50
+    sequence: 70
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -3028,6 +3310,29 @@ processes:
 
   server-side-condition: 
     when-button-pressed: SPLIT_TASK # 44285432437494706
+
+- # ====== Process: SAVE_ATTACHEMENTS ==========================
+  id: 45282650022457941
+  identification: 
+    name: SAVE_ATTACHEMENTS
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: tsk_p105.save_attachements();
+
+  execution: 
+    sequence: 50
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_ATTACHED_FILES
 
 branches: 
 - # ====== Branch: CREATE_ANOTHER ==============================
