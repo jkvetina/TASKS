@@ -412,6 +412,18 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_sort_direction=>'DESC'
 ,p_sort_nulls=>'LAST'
 );
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(45415049705005628)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(115968681835017731)
+,p_button_name=>'SYNC_GITHUB'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70970074101975671)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Sync GitHub'
+,p_button_position=>'RIGHT_OF_TITLE'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(45437050304058897)
 ,p_name=>'CHANGED_CLIENT'
@@ -501,6 +513,17 @@ wwv_flow_imp_page.create_page_process(
 ,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(45415190909005629)
+,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'SYNC_GITHUB'
+,p_process_sql_clob=>'tsk_p500.sync_commits();'
+,p_process_clob_language=>'PLSQL'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_imp.id(45415049705005628)
 );
 wwv_flow_imp.component_end;
 end;

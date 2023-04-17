@@ -622,6 +622,34 @@ regions:
       font-color: '#000000'
       alignment: center
 
+buttons: 
+- # ====== Button: SYNC_GITHUB =================================
+  id: 45415049705005628
+  identification: 
+    button-name: SYNC_GITHUB
+    label: Sync GitHub
+
+  layout: 
+    sequence: 10
+    region: Commits # 115968681835017731
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_CLIENT ======================
   id: 45437050304058897
@@ -781,4 +809,26 @@ processes:
 
   server-side-condition: 
     execution-scope: For Created and Modified Rows
+
+- # ====== Process: SYNC_GITHUB ================================
+  id: 45415190909005629
+  identification: 
+    name: SYNC_GITHUB
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: tsk_p500.sync_commits();
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: SYNC_GITHUB # 45415049705005628
 
