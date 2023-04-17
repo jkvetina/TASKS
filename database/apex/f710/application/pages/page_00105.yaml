@@ -64,6 +64,15 @@ css:
       margin: 0 !important;
     }
     
+    /* HIDE FILES LABEL */
+    #ATTACHEMENTS .t-Form-fieldContainer--floatingLabel .t-Form-labelContainer {
+        display: none;
+    }
+    #ATTACHEMENTS .t-Form-fieldContainer--floatingLabel.t-Form-fieldContainer {
+        padding-top: 0;
+        margin-top: -1.2rem;
+    }
+    
 
 security: 
   authorization-scheme: MASTER - IS_USER # 71258645843174377
@@ -682,6 +691,7 @@ regions:
     landmark-type: Template Default
 
   advanced: 
+    static-id: ATTACHEMENTS
     region-display-selector: false
     exclude-title-from-translation: false
 
@@ -2315,6 +2325,58 @@ page-items:
   security: 
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_ATTACHED_FILES ======================
+  id: 45282538739457940
+  identification: 
+    name: P105_ATTACHED_FILES
+    type: File Browse...
+
+  label: 
+    label: Attach Files
+    alignment: Left
+
+  settings: 
+    display-as: Block Dropzone
+    storage-type: Table APEX_APPLICATION_TEMP_FILES
+    purge-file-at: End of Session
+    allow-multiple-files: true
+    maximum-file-size: 20000
+
+  layout: 
+    sequence: 10
+    region: Attachements &P105_BADGE_FILES. # 44094316535578046
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P105_HEADER ==============================
