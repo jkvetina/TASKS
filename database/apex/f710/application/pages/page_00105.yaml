@@ -1256,11 +1256,11 @@ regions:
     security: 
       escape-special-characters: true
 
-- # ====== Region: Files [REPORT] ==============================
+- # ====== Region: Files [CARDS] ===============================
   id: 45282758424457942
   identification: 
-    title: Files [REPORT]
-    type: Classic Report
+    title: Files [CARDS]
+    type: Cards
 
   source: 
     location: Local Database
@@ -1283,7 +1283,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Blank with Attributes # 70831193948975578
+    template: Cards Container # 70838329605975585
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -1303,246 +1303,62 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    layout: 
-      number-of-rows-type: Static Value
-      number-of-rows: 15
-
+    id: 45415911942005637
     appearance: 
-      template-type: Theme
-      template: Standard # 70935111081975645
-      template-options: 
-      - '#DEFAULT#'
-      - t-Report--stretch
-      - t-Report--altRowsDefault
-      - t-Report--rowHighlight
-      - t-Report--hideNoPagination
+      layout: Grid
+      grid-columns: 3 Columns
 
-    pagination: 
-      type: No Pagination (Show All Rows)
-      partial-page-refresh: true
+    card: 
+      primary-key-column-1: FILE_ID
+
+    title: 
+      advanced-formatting: false
+
+    subtitle: 
+      advanced-formatting: false
+
+    body: 
+      advanced-formatting: false
+      column: FILE_NAME
+
+    secondary-body: 
+      advanced-formatting: true
+      html-expression: |
+        &UPDATED_AT.<br />
+        &UPDATED_BY.
+
+    icon-and-badge: 
+      icon-source: No Icon
+
+    media: 
+      advanced-formatting: false
+      source: No Media
 
     performance: 
       lazy-loading: false
 
-    break-formatting: 
-      break-columns: No Break
+    pagination: 
+      type: Scroll
+      show-total-row-count: false
 
-    advanced: 
-      strip-html: false
-      sort-nulls: Last
+    actions: 
+    - # ====== Action: FULL_CARD ===================================
+      id: 45416051080005638
+      identification: 
+        type: Full Card
 
-    heading: 
-      type: Custom Headings
+      layout: 
+        sequence: 10
 
-    download: 
-      csv-export-enabled: false
+      link: 
+        type: Redirect to URL
+        target: '&DOWNLOAD_LINK.'
 
-    printing: 
-      enabled: false
-
-  columns: 
-  - # ====== Column: FILE_ID =====================================
-    id: 45282839863457943
-    identification: 
-      column-name: FILE_ID
-      type: Hidden Column
-
-    layout: 
-      sequence: 10
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: FILE_NAME ===================================
-    id: 45282959095457944
-    identification: 
-      column-name: FILE_NAME
-      type: Link
-
-    heading: 
-      heading: File Name
-      alignment: center
-
-    layout: 
-      sequence: 20
-      column-alignment: start
-
-    accessibility: 
-      value-identifies-row: false
-
-    link: 
-      target: '#DOWNLOAD_LINK#'
-      link-text: '#FILE_NAME#'
-
-    sorting: 
-      sortable: false
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    advanced: 
-      compute-sum: false
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: DOWNLOAD_LINK ===============================
-    id: 45283184732457946
-    identification: 
-      column-name: DOWNLOAD_LINK
-      type: Hidden Column
-
-    layout: 
-      sequence: 40
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: DELETE_LINK =================================
-    id: 45283282241457947
-    identification: 
-      column-name: DELETE_LINK
-      type: Plain Text
-
-    heading: 
-      heading: Delete Link
-      alignment: center
-
-    layout: 
-      sequence: 50
-      column-alignment: start
-
-    accessibility: 
-      value-identifies-row: false
-
-    column-formatting: 
-      html-expression: <span class="fa fa-trash-o"></span>
-
-    sorting: 
-      sortable: false
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    advanced: 
-      compute-sum: false
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: FILE_SIZE ===================================
-    id: 45283357102457948
-    identification: 
-      column-name: FILE_SIZE
-      type: Plain Text
-
-    heading: 
-      heading: File Size
-      alignment: end
-
-    layout: 
-      sequence: 30
-      column-alignment: end
-
-    accessibility: 
-      value-identifies-row: false
-
-    sorting: 
-      sortable: false
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    advanced: 
-      compute-sum: false
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: UPDATED_BY ==================================
-    id: 45283471244457949
-    identification: 
-      column-name: UPDATED_BY
-      type: Plain Text
-
-    heading: 
-      heading: Updated By
-      alignment: center
-
-    layout: 
-      sequence: 70
-      column-alignment: start
-
-    accessibility: 
-      value-identifies-row: false
-
-    sorting: 
-      sortable: false
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    advanced: 
-      compute-sum: false
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 45283530727457950
-    identification: 
-      column-name: UPDATED_AT
-      type: Plain Text
-
-    heading: 
-      heading: Updated At
-      alignment: center
-
-    layout: 
-      sequence: 80
-      column-alignment: start
-
-    accessibility: 
-      value-identifies-row: false
-
-    sorting: 
-      sortable: false
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    advanced: 
-      compute-sum: false
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
-
-- # ====== Region: Commits [REPORT] ============================
+- # ====== Region: Commits [LIST] ==============================
   id: 45415241254005630
   identification: 
-    title: Commits [REPORT]
-    type: Classic Report
+    title: Commits [LIST]
+    type: List View
 
   source: 
     location: Local Database
@@ -1563,9 +1379,12 @@ regions:
     column: Automatic
     new-column: true
     column-span: Automatic
+    column-attributes: 
+    - 'style="margin-top:'
+    - 0.5rem;"
 
   appearance: 
-    template: Blank with Attributes # 70831193948975578
+    template: Cards Container # 70838329605975585
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -1578,6 +1397,9 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
+  security: 
+    escape-special-characters: true
+
   server-cache: 
     caching: Disabled
 
@@ -1585,189 +1407,14 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
+    settings: 
+      text-column: COMMIT_MESSAGE
+      supplemental-information-column: CREATED
+      link-target: "javascript: { window.open('&COMMIT_URL.', '_blank'); }"
+
     layout: 
       number-of-rows-type: Static Value
       number-of-rows: 15
-
-    appearance: 
-      template-type: Theme
-      template: Standard # 70935111081975645
-      template-options: 
-      - '#DEFAULT#'
-      - t-Report--altRowsDefault
-      - t-Report--rowHighlight
-
-    pagination: 
-      type: Row Ranges X to Y (with next and previous links)
-      display-position: Bottom - Right
-      partial-page-refresh: true
-
-    performance: 
-      lazy-loading: false
-
-    break-formatting: 
-      break-columns: No Break
-
-    advanced: 
-      strip-html: false
-      sort-nulls: Last
-
-    heading: 
-      type: Custom Headings
-
-    download: 
-      csv-export-enabled: false
-
-    printing: 
-      enabled: false
-
-  columns: 
-  - # ====== Column: COMMIT_ID ===================================
-    id: 45415316742005631
-    identification: 
-      column-name: COMMIT_ID
-      type: Link
-
-    heading: 
-      heading: Commit Id
-      alignment: center
-
-    layout: 
-      sequence: 10
-      column-alignment: start
-
-    accessibility: 
-      value-identifies-row: false
-
-    link: 
-      target: "javascript: { window.open('&COMMIT_URL.', '_blank'); }"
-      link-text: '#COMMIT_ID#'
-
-    sorting: 
-      sortable: false
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    advanced: 
-      compute-sum: false
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: COMMIT_MESSAGE ==============================
-    id: 45415497446005632
-    identification: 
-      column-name: COMMIT_MESSAGE
-      type: Plain Text
-
-    heading: 
-      heading: Commit Message
-      alignment: center
-
-    layout: 
-      sequence: 20
-      column-alignment: start
-
-    accessibility: 
-      value-identifies-row: false
-
-    sorting: 
-      sortable: false
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    advanced: 
-      compute-sum: false
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: COMMIT_URL ==================================
-    id: 45415550455005633
-    identification: 
-      column-name: COMMIT_URL
-      type: Hidden Column
-
-    layout: 
-      sequence: 30
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: CREATED_BY ==================================
-    id: 45415691336005634
-    identification: 
-      column-name: CREATED_BY
-      type: Plain Text
-
-    heading: 
-      heading: Created By
-      alignment: center
-
-    layout: 
-      sequence: 40
-      column-alignment: start
-
-    accessibility: 
-      value-identifies-row: false
-
-    sorting: 
-      sortable: false
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    advanced: 
-      compute-sum: false
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: CREATED_AT ==================================
-    id: 45415791326005635
-    identification: 
-      column-name: CREATED_AT
-      type: Plain Text
-
-    heading: 
-      heading: Created At
-      alignment: center
-
-    layout: 
-      sequence: 50
-      column-alignment: start
-
-    accessibility: 
-      value-identifies-row: false
-
-    sorting: 
-      sortable: false
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    advanced: 
-      compute-sum: false
-
-    ui-defaults-reference: 
-      table-owner: Parsing Schema
-
-    security: 
-      escape-special-characters: true
 
 - # ====== Region: &P105_HEADER. ===============================
   id: 63213380867844590

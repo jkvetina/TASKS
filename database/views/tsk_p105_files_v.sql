@@ -10,7 +10,7 @@ SELECT
     f.file_name,
     f.file_size,
     f.updated_by,
-    f.updated_at,
+    TO_CHAR(f.updated_at, 'YYYY-MM-DD HH24:MI') AS updated_at,
     --
     NULL AS download_link,
     NULL AS delete_link

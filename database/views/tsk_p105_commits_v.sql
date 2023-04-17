@@ -9,7 +9,9 @@ SELECT
     t.commit_message,
     t.commit_url,
     t.created_by,
-    t.created_at
+    t.created_at,
+    --
+    t.created_at || ' ' || t.created_by AS created,
     --
 FROM tsk_p500_commits_v t
 JOIN x
