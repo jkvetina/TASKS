@@ -276,6 +276,33 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         core.set_item('P105_TASK_ID', rec.task_id);
     END;
 
+
+
+    PROCEDURE save_attachements
+    AS
+        rec         tsk_task_files%ROWTYPE;
+    BEGIN
+        FOR c IN (
+            SELECT f.*
+            FROM apex_application_temp_files f
+            JOIN APEX_STRING.SPLIT(core.get_item('P105_ATTACHED_FILES'), ':') i
+                ON i.column_value   = f.name
+            WHERE f.application_id  = core.get_app_id()
+        ) LOOP
+            rec.file_id         := tsk_file_id.NEXTVAL;
+            rec.file_name       := c.filename;
+            rec.file_mime       := c.mime_type;
+            rec.file_size       := DBMS_LOB.GETLENGTH(c.blob_content);
+            rec.file_payload    := c.blob_content;
+            --
+            rec.task_id         := core.get_item('P105_TASK_ID');
+            rec.updated_by      := core.get_user_id();
+            rec.updated_at      := SYSDATE;
+            --
+            INSERT INTO tsk_task_files VALUES rec;
+        END LOOP;
+    END;
+
 END;
 /
 
