@@ -462,25 +462,274 @@ regions:
       column-alignment: start
       stretch: Use Report Setting
 
-security: 
-  authorization-scheme: MASTER - IS_USER # 71258645843174377
-  authentication: Page Requires Authentication
-  deep-linking: Application Default
-  page-access-protection: Arguments Must Have Checksum
-  form-auto-complete: Off
-  browser-cache: Application Default
+    accessibility: 
+      value-identifies-row: false
 
-session-management: 
-  rejoin-sessions: Application Default
+    validation: 
+      value-required: false
+      maximum-length: 128
 
-advanced: 
-  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
-  reload-on-submit: Only for Success
+    source: 
+      type: Database Column
+      database-column: BRANCH_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
 
-server-cache: 
-  caching: Disabled
+    default: 
+      duplicate-copies-existing-value: true
 
-regions: 
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: API_TYPE ====================================
+    id: 45413271348005610
+    identification: 
+      column-name: API_TYPE
+      type: Text Field
+
+    heading: 
+      heading: Api Type
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 80
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 16
+
+    source: 
+      type: Database Column
+      database-column: API_TYPE
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: API_TOKEN ===================================
+    id: 45413340052005611
+    identification: 
+      column-name: API_TOKEN
+      type: Textarea
+
+    heading: 
+      heading: Api Token
+      alignment: start
+
+    settings: 
+      resizable: true
+      auto-height: false
+      character-counter: false
+      trim-spaces: Leading and Trailing
+
+    layout: 
+      sequence: 90
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 128
+
+    source: 
+      type: Database Column
+      database-column: API_TOKEN
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: LAST_SYNCED_AT ==============================
+    id: 45413490057005612
+    identification: 
+      column-name: LAST_SYNCED_AT
+      type: Date Picker
+
+    heading: 
+      heading: Last Synced At
+      alignment: center
+
+    settings: 
+      show-time: false
+      display-as: Popup
+      minimum-date: None
+      maximum-date: None
+      multiple-months: No
+      use-defaults: true
+
+    layout: 
+      sequence: 100
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: LAST_SYNCED_AT
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    read-only: 
+      type: Always
+      execute: Once
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 45413508350005613
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
+  - # ====== Column: APEX$ROW_SELECTOR ===========================
+    id: 45413677388005614
+    identification: 
+      column-name: APEX$ROW_SELECTOR
+      type: Row Selector
+
+    settings: 
+      enable-multi-select: true
+      show-select-all: true
+      hide-control: false
+
+    layout: 
+      sequence: 10
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+      page-header-text: Repositories [GRID]
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Bold
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#EEEEEE'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#FFFFFF'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
 - # ====== Region: Projects ====================================
   id: 70448343714945041
   identification: 
@@ -1221,6 +1470,30 @@ processes:
 
   execution: 
     sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+
+- # ====== Process: SAVE_REPOSITORIES ==========================
+  id: 45413703430005615
+  identification: 
+    name: SAVE_REPOSITORIES
+    type: Interactive Grid - Automatic Row Processing (DML)
+    editable-region: Repositories [GRID] # 45412504406005603
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: No
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 30
     point: Processing
     run-process: Once Per Page Visit (default)
 
