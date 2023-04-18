@@ -304,7 +304,7 @@ regions:
 
     list-of-values: 
       type: Shared Component
-      list-of-values: LOV_PROJECTS_ALL # 45359394002027195
+      list-of-values: LOV_PROJECTS_ALL # 45510330697215422
       display-extra-values: true
       display-null-value: true
 

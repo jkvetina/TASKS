@@ -1,7 +1,7 @@
-prompt --application/shared_components/user_interface/lovs/lov_task_swimlanes
+prompt --application/shared_components/user_interface/lovs/lov_statuses_all
 begin
 --   Manifest
---     LOV_TASK_SWIMLANES
+--     LOV_STATUSES_ALL
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2022.10.07'
@@ -12,15 +12,17 @@ wwv_flow_imp.component_begin (
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_list_of_values(
- p_id=>wwv_flow_imp.id(34920402511183578)  -- LOV_TASK_SWIMLANES
-,p_lov_name=>'LOV_TASK_SWIMLANES'
+ p_id=>wwv_flow_imp.id(45514224857289669)  -- LOV_STATUSES_ALL
+,p_lov_name=>'LOV_STATUSES_ALL'
 ,p_source_type=>'TABLE'
 ,p_location=>'LOCAL'
 ,p_use_local_sync_table=>false
-,p_query_table=>'TSK_LOV_TASK_SWIMLANES_V'
-,p_return_column_name=>'SWIMLANE_ID'
-,p_display_column_name=>'SWIMLANE_NAME'
+,p_query_table=>'TSK_LOV_TASK_STATUSES_ALL_V'
+,p_return_column_name=>'STATUS_ID'
+,p_display_column_name=>'STATUS_NAME'
+,p_group_column_name=>'IS_ACTIVE'
 ,p_group_sort_direction=>'ASC'
+,p_default_sort_column_name=>'STATUS_NAME'
 ,p_default_sort_direction=>'ASC'
 );
 wwv_flow_imp.component_end;

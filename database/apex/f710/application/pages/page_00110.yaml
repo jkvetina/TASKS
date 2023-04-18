@@ -556,7 +556,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_TASK_STATUSES # 34920754342188100
+    list-of-values: LOV_STATUSES # 34920754342188100
     display-extra-values: true
     display-null-value: true
 
@@ -615,7 +615,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_TASK_SWIMLANES # 34920402511183578
+    list-of-values: LOV_SWIMLANES # 34920402511183578
     display-extra-values: true
     display-null-value: false
 
@@ -923,7 +923,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_PROJECTS_ALL # 45359394002027195
+    list-of-values: LOV_PROJECTS_ALL # 45510330697215422
     display-extra-values: true
     display-null-value: true
 
@@ -1064,7 +1064,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_TASK_STATUSES_ALL # 45359629206027195
+    list-of-values: LOV_STATUSES_ALL # 45514224857289669
     display-extra-values: false
     display-null-value: true
 
@@ -1136,7 +1136,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_TASK_SWIMLANES_ALL # 45359983154027195
+    list-of-values: LOV_SWIMLANES_ALL # 45512714615269179
     display-extra-values: false
     display-null-value: false
 

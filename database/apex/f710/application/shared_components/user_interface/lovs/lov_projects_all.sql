@@ -12,7 +12,7 @@ wwv_flow_imp.component_begin (
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_list_of_values(
- p_id=>wwv_flow_imp.id(45359394002027195)  -- LOV_PROJECTS_ALL
+ p_id=>wwv_flow_imp.id(45510330697215422)  -- LOV_PROJECTS_ALL
 ,p_lov_name=>'LOV_PROJECTS_ALL'
 ,p_source_type=>'TABLE'
 ,p_location=>'LOCAL'
@@ -20,30 +20,10 @@ wwv_flow_imp_shared.create_list_of_values(
 ,p_query_table=>'TSK_LOV_PROJECTS_ALL_V'
 ,p_return_column_name=>'PROJECT_ID'
 ,p_display_column_name=>'PROJECT_NAME'
+,p_group_column_name=>'IS_ACTIVE'
 ,p_group_sort_direction=>'ASC'
+,p_default_sort_column_name=>'PROJECT_NAME'
 ,p_default_sort_direction=>'ASC'
-);
-wwv_flow_imp_shared.create_list_of_values_cols(
- p_id=>wwv_flow_imp.id(45365806947141043)
-,p_query_column_name=>'PROJECT_ID'
-,p_display_sequence=>10
-,p_data_type=>'VARCHAR2'
-,p_is_visible=>'N'
-,p_is_searchable=>'N'
-);
-wwv_flow_imp_shared.create_list_of_values_cols(
- p_id=>wwv_flow_imp.id(45366204678141043)
-,p_query_column_name=>'PROJECT_NAME'
-,p_heading=>'Project Name'
-,p_display_sequence=>20
-,p_data_type=>'VARCHAR2'
-);
-wwv_flow_imp_shared.create_list_of_values_cols(
- p_id=>wwv_flow_imp.id(45366657687141043)
-,p_query_column_name=>'IS_ACTIVE'
-,p_heading=>'Is Active'
-,p_display_sequence=>30
-,p_data_type=>'VARCHAR2'
 );
 wwv_flow_imp.component_end;
 end;

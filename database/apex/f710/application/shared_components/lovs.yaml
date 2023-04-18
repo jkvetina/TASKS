@@ -47,10 +47,10 @@
     display: BOARD_NAME
     default-sort: Use Order By from Query
 
-- # ====== List of Values: LOV_TASK_SWIMLANES ==================
+- # ====== List of Values: LOV_SWIMLANES =======================
   id: 34920402511183578
   identification: 
-    name: LOV_TASK_SWIMLANES
+    name: LOV_SWIMLANES
 
   source: 
     location: Local Database
@@ -63,10 +63,10 @@
     display: SWIMLANE_NAME
     default-sort: Use Order By from Query
 
-- # ====== List of Values: LOV_TASK_STATUSES ===================
+- # ====== List of Values: LOV_STATUSES ========================
   id: 34920754342188100
   identification: 
-    name: LOV_TASK_STATUSES
+    name: LOV_STATUSES
 
   source: 
     location: Local Database
@@ -164,77 +164,6 @@
     advanced: 
       searchable: true
 
-- # ====== List of Values: LOV_SWIMLANES_ALL ===================
-  id: 45358709937027194
-  identification: 
-    name: LOV_SWIMLANES_ALL
-
-  source: 
-    location: Local Database
-    type: Table / View
-    table-owner: Parsing Schema
-    table-name: TSK_LOV_TASK_SWIMLANES_ALL_V
-
-  column-mapping: 
-    return: SWIMLANE_ID
-    display: SWIMLANE_NAME
-    default-sort: Use Order By from Query
-
-  columns: 
-  - # ====== Column: SWIMLANE_ID =================================
-    id: 45367125778146238
-    identification: 
-      column-name: SWIMLANE_ID
-      show: true
-
-    heading: 
-      heading: Swimlane Id
-
-    layout: 
-      sequence: 10
-
-    source: 
-      data-type: VARCHAR2
-
-    advanced: 
-      searchable: true
-
-  - # ====== Column: SWIMLANE_NAME ===============================
-    id: 45367588392146238
-    identification: 
-      column-name: SWIMLANE_NAME
-      show: true
-
-    heading: 
-      heading: Swimlane Name
-
-    layout: 
-      sequence: 20
-
-    source: 
-      data-type: VARCHAR2
-
-    advanced: 
-      searchable: true
-
-  - # ====== Column: IS_ACTIVE ===================================
-    id: 45367928379146238
-    identification: 
-      column-name: IS_ACTIVE
-      show: true
-
-    heading: 
-      heading: Is Active
-
-    layout: 
-      sequence: 30
-
-    source: 
-      data-type: VARCHAR2
-
-    advanced: 
-      searchable: true
-
 - # ====== List of Values: LOV_CLIENTS_ALL =====================
   id: 45359037932027195
   identification: 
@@ -304,7 +233,7 @@
       searchable: true
 
 - # ====== List of Values: LOV_PROJECTS_ALL ====================
-  id: 45359394002027195
+  id: 45510330697215422
   identification: 
     name: LOV_PROJECTS_ALL
 
@@ -317,64 +246,34 @@
   column-mapping: 
     return: PROJECT_ID
     display: PROJECT_NAME
-    default-sort: Use Order By from Query
+    default-sort: PROJECT_NAME
+    sort-direction: Ascending (Nulls Last)
+    group: IS_ACTIVE
+    group-sort-direction: Ascending (Nulls Last)
 
-  columns: 
-  - # ====== Column: PROJECT_ID ==================================
-    id: 45365806947141043
-    identification: 
-      column-name: PROJECT_ID
-      show: false
-
-    layout: 
-      sequence: 10
-
-    source: 
-      data-type: VARCHAR2
-
-    advanced: 
-      searchable: false
-
-  - # ====== Column: PROJECT_NAME ================================
-    id: 45366204678141043
-    identification: 
-      column-name: PROJECT_NAME
-      show: true
-
-    heading: 
-      heading: Project Name
-
-    layout: 
-      sequence: 20
-
-    source: 
-      data-type: VARCHAR2
-
-    advanced: 
-      searchable: true
-
-  - # ====== Column: IS_ACTIVE ===================================
-    id: 45366657687141043
-    identification: 
-      column-name: IS_ACTIVE
-      show: true
-
-    heading: 
-      heading: Is Active
-
-    layout: 
-      sequence: 30
-
-    source: 
-      data-type: VARCHAR2
-
-    advanced: 
-      searchable: true
-
-- # ====== List of Values: LOV_TASK_STATUSES_ALL ===============
-  id: 45359629206027195
+- # ====== List of Values: LOV_SWIMLANES_ALL ===================
+  id: 45512714615269179
   identification: 
-    name: LOV_TASK_STATUSES_ALL
+    name: LOV_SWIMLANES_ALL
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_LOV_TASK_SWIMLANES_ALL_V
+
+  column-mapping: 
+    return: SWIMLANE_ID
+    display: SWIMLANE_NAME
+    default-sort: SWIMLANE_NAME
+    sort-direction: Ascending (Nulls Last)
+    group: IS_ACTIVE
+    group-sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: LOV_STATUSES_ALL ====================
+  id: 45514224857289669
+  identification: 
+    name: LOV_STATUSES_ALL
 
   source: 
     location: Local Database
@@ -385,75 +284,10 @@
   column-mapping: 
     return: STATUS_ID
     display: STATUS_NAME
-    default-sort: Use Order By from Query
-
-  columns: 
-  - # ====== Column: STATUS_ID ===================================
-    id: 45368730175147983
-    identification: 
-      column-name: STATUS_ID
-      show: false
-
-    layout: 
-      sequence: 10
-
-    source: 
-      data-type: VARCHAR2
-
-    advanced: 
-      searchable: false
-
-  - # ====== Column: STATUS_NAME =================================
-    id: 45369177340147984
-    identification: 
-      column-name: STATUS_NAME
-      show: true
-
-    heading: 
-      heading: Status Name
-
-    layout: 
-      sequence: 20
-
-    source: 
-      data-type: VARCHAR2
-
-    advanced: 
-      searchable: true
-
-  - # ====== Column: IS_ACTIVE ===================================
-    id: 45369576593147984
-    identification: 
-      column-name: IS_ACTIVE
-      show: true
-
-    heading: 
-      heading: Is Active
-
-    layout: 
-      sequence: 30
-
-    source: 
-      data-type: VARCHAR2
-
-    advanced: 
-      searchable: true
-
-- # ====== List of Values: LOV_TASK_SWIMLANES_ALL ==============
-  id: 45359983154027195
-  identification: 
-    name: LOV_TASK_SWIMLANES_ALL
-
-  source: 
-    location: Local Database
-    type: Table / View
-    table-owner: Parsing Schema
-    table-name: TSK_LOV_TASK_SWIMLANES_V
-
-  column-mapping: 
-    return: SWIMLANE_ID
-    display: SWIMLANE_NAME
-    default-sort: Use Order By from Query
+    default-sort: STATUS_NAME
+    sort-direction: Ascending (Nulls Last)
+    group: IS_ACTIVE
+    group-sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
   id: 54624749962706655

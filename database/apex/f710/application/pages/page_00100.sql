@@ -242,7 +242,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_value_alignment=>'LEFT'
 ,p_is_required=>true
 ,p_lov_type=>'SHARED'
-,p_lov_id=>wwv_flow_imp.id(34920754342188100)  -- LOV_TASK_STATUSES
+,p_lov_id=>wwv_flow_imp.id(34920754342188100)  -- LOV_STATUSES
 ,p_lov_display_extra=>true
 ,p_lov_display_null=>true
 ,p_enable_filter=>true
@@ -273,7 +273,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_value_alignment=>'LEFT'
 ,p_is_required=>true
 ,p_lov_type=>'SHARED'
-,p_lov_id=>wwv_flow_imp.id(34920402511183578)  -- LOV_TASK_SWIMLANES
+,p_lov_id=>wwv_flow_imp.id(34920402511183578)  -- LOV_SWIMLANES
 ,p_lov_display_extra=>true
 ,p_lov_display_null=>true
 ,p_enable_filter=>true
@@ -568,7 +568,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(35123712321937012)
 ,p_prompt=>'Swimlane'
 ,p_display_as=>'NATIVE_CHECKBOX'
-,p_named_lov=>'LOV_TASK_SWIMLANES'
+,p_named_lov=>'LOV_SWIMLANES'
 ,p_begin_on_new_line=>'N'
 ,p_colspan=>2
 ,p_display_when_type=>'NEVER'

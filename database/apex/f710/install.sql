@@ -29,11 +29,10 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_clients_all.sql
 @@application/shared_components/user_interface/lovs/lov_projects.sql
 @@application/shared_components/user_interface/lovs/lov_projects_all.sql
+@@application/shared_components/user_interface/lovs/lov_statuses.sql
+@@application/shared_components/user_interface/lovs/lov_statuses_all.sql
+@@application/shared_components/user_interface/lovs/lov_swimlanes.sql
 @@application/shared_components/user_interface/lovs/lov_swimlanes_all.sql
-@@application/shared_components/user_interface/lovs/lov_task_statuses.sql
-@@application/shared_components/user_interface/lovs/lov_task_statuses_all.sql
-@@application/shared_components/user_interface/lovs/lov_task_swimlanes.sql
-@@application/shared_components/user_interface/lovs/lov_task_swimlanes_all.sql
 @@application/shared_components/user_interface/lovs/master_lov_applications.sql
 @@application/shared_components/user_interface/lovs/master_lov_users.sql
 @@application/pages/page_groups.sql
