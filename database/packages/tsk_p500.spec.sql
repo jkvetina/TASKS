@@ -14,6 +14,13 @@ CREATE OR REPLACE PACKAGE tsk_p500 AS
 
     PROCEDURE sync_commits;
 
+
+
+    PROCEDURE save_commits (
+        io_commit_id        IN OUT NOCOPY   VARCHAR2,
+        io_task_id          IN OUT NOCOPY   VARCHAR2
+    );
+
 END;
 /
 

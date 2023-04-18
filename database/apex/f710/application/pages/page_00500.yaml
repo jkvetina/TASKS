@@ -792,12 +792,14 @@ processes:
     editable-region: Commits [GRID] # 184662860801964980
 
   settings: 
-    target-type: Table / View
-    table-owner: PARSING SCHEMA
-    table-name: TSK_TASK_COMMITS
+    target-type: PL/SQL Code
+    pl/sql-code-to-insert/update/delete: |
+      tsk_p500.save_commits (
+          io_commit_id    => :COMMIT_ID,
+          io_task_id      => :TASK_ID
+      );
     prevent-lost-updates: true
     lock-row: No
-    return-primary-key(s)-after-insert: true
 
   execution: 
     sequence: 10

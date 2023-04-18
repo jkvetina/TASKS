@@ -507,11 +507,14 @@ wwv_flow_imp_page.create_page_process(
 ,p_region_id=>wwv_flow_imp.id(184662860801964980)
 ,p_process_type=>'NATIVE_IG_DML'
 ,p_process_name=>'SAVE_COMMITS'
-,p_attribute_01=>'TABLE'
-,p_attribute_03=>'TSK_TASK_COMMITS'
+,p_attribute_01=>'PLSQL_CODE'
+,p_attribute_04=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'tsk_p500.save_commits (',
+'    io_commit_id    => :COMMIT_ID,',
+'    io_task_id      => :TASK_ID',
+');'))
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
-,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp_page.create_page_process(
