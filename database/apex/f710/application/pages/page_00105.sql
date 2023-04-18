@@ -144,44 +144,40 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(45282758424457942)
-,p_plug_name=>'Files [CARDS]'
+,p_plug_name=>'Files [LIST]'
 ,p_parent_plug_id=>wwv_flow_imp.id(44094316535578046)
 ,p_region_template_options=>'#DEFAULT#'
+,p_escape_on_http_output=>'Y'
 ,p_plug_template=>wwv_flow_imp.id(70838329605975585)
-,p_plug_display_sequence=>10
+,p_plug_display_sequence=>20
+,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'SUB_REGIONS'
 ,p_query_type=>'TABLE'
 ,p_query_table=>'TSK_P105_FILES_V'
 ,p_include_rowid_column=>false
-,p_lazy_loading=>false
-,p_plug_source_type=>'NATIVE_CARDS'
-,p_plug_query_num_rows_type=>'SCROLL'
+,p_plug_source_type=>'NATIVE_JQM_LIST_VIEW'
+,p_plug_query_num_rows=>15
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_show_total_row_count=>false
+,p_plug_display_condition_type=>'EXISTS'
+,p_plug_display_when_condition=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT 1',
+'FROM TSK_P105_FILES_V',
+'WHERE ROWNUM = 1'))
+,p_attribute_02=>'FILE_NAME'
+,p_attribute_06=>'UPDATED_AT'
+,p_attribute_16=>'f?p=&APP_ID.:106:&SESSION.::&DEBUG.:Y,106:P106_FILE_ID:&FILE_ID.'
 );
-wwv_flow_imp_page.create_card(
- p_id=>wwv_flow_imp.id(45415911942005637)
-,p_region_id=>wwv_flow_imp.id(45282758424457942)
-,p_layout_type=>'GRID'
-,p_grid_column_count=>3
-,p_title_adv_formatting=>false
-,p_sub_title_adv_formatting=>false
-,p_body_adv_formatting=>false
-,p_body_column_name=>'FILE_NAME'
-,p_second_body_adv_formatting=>true
-,p_second_body_html_expr=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'&UPDATED_AT.<br />',
-'&UPDATED_BY.'))
-,p_media_adv_formatting=>false
-,p_pk1_column_name=>'FILE_ID'
-);
-wwv_flow_imp_page.create_card_action(
- p_id=>wwv_flow_imp.id(45416051080005638)
-,p_card_id=>wwv_flow_imp.id(45415911942005637)
-,p_action_type=>'FULL_CARD'
-,p_display_sequence=>10
-,p_link_target_type=>'REDIRECT_URL'
-,p_link_target=>'&DOWNLOAD_LINK.'
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(45516744279836007)
+,p_plug_name=>'UPLOADER'
+,p_parent_plug_id=>wwv_flow_imp.id(44094316535578046)
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(70831193948975578)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'SUB_REGIONS'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(44093969062578042)
@@ -1223,7 +1219,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(45282538739457940)
 ,p_name=>'P105_ATTACHED_FILES'
 ,p_item_sequence=>10
-,p_item_plug_id=>wwv_flow_imp.id(44094316535578046)
+,p_item_plug_id=>wwv_flow_imp.id(45516744279836007)
 ,p_prompt=>'Attach Files'
 ,p_display_as=>'NATIVE_FILE'
 ,p_cSize=>30

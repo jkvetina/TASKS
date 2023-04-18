@@ -1256,11 +1256,11 @@ regions:
     security: 
       escape-special-characters: true
 
-- # ====== Region: Files [CARDS] ===============================
+- # ====== Region: Files [LIST] ================================
   id: 45282758424457942
   identification: 
-    title: Files [CARDS]
-    type: Cards
+    title: Files [LIST]
+    type: List View
 
   source: 
     location: Local Database
@@ -1273,11 +1273,11 @@ regions:
     type: None
 
   layout: 
-    sequence: 10
+    sequence: 20
     parent-region: Attachements &P105_BADGE_FILES. # 44094316535578046
     position: SUB_REGIONS
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -1296,6 +1296,16 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
+  server-side-condition: 
+    type: Rows returned
+    sql-query: |
+      SELECT 1
+      FROM TSK_P105_FILES_V
+      WHERE ROWNUM = 1
+
+  security: 
+    escape-special-characters: true
+
   server-cache: 
     caching: Disabled
 
@@ -1303,56 +1313,19 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 45415911942005637
-    appearance: 
-      layout: Grid
-      grid-columns: 3 Columns
+    settings: 
+      text-column: FILE_NAME
+      supplemental-information-column: UPDATED_AT
+      link-target: 
+        url: 'f?p=&APP_ID.:106:&SESSION.::&DEBUG.:Y,106:P106_FILE_ID:&FILE_ID.'
+        page: 106 # Download File
+        clear-cache: Y,106
+        values: 
+          p106_file_id: '&FILE_ID.'
 
-    card: 
-      primary-key-column-1: FILE_ID
-
-    title: 
-      advanced-formatting: false
-
-    subtitle: 
-      advanced-formatting: false
-
-    body: 
-      advanced-formatting: false
-      column: FILE_NAME
-
-    secondary-body: 
-      advanced-formatting: true
-      html-expression: |
-        &UPDATED_AT.<br />
-        &UPDATED_BY.
-
-    icon-and-badge: 
-      icon-source: No Icon
-
-    media: 
-      advanced-formatting: false
-      source: No Media
-
-    performance: 
-      lazy-loading: false
-
-    pagination: 
-      type: Scroll
-      show-total-row-count: false
-
-    actions: 
-    - # ====== Action: FULL_CARD ===================================
-      id: 45416051080005638
-      identification: 
-        type: Full Card
-
-      layout: 
-        sequence: 10
-
-      link: 
-        type: Redirect to URL
-        target: '&DOWNLOAD_LINK.'
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
 
 - # ====== Region: Commits [LIST] ==============================
   id: 45415241254005630
@@ -1415,6 +1388,47 @@ regions:
     layout: 
       number-of-rows-type: Static Value
       number-of-rows: 15
+
+- # ====== Region: UPLOADER ====================================
+  id: 45516744279836007
+  identification: 
+    title: UPLOADER
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: Attachements &P105_BADGE_FILES. # 44094316535578046
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
 
 - # ====== Region: &P105_HEADER. ===============================
   id: 63213380867844590
@@ -2506,7 +2520,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: Attachements &P105_BADGE_FILES. # 44094316535578046
+    region: UPLOADER # 45516744279836007
     position: BODY
     alignment: Left
     start-new-layout: false

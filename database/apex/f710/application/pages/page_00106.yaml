@@ -1,0 +1,89 @@
+---
+# ====== Page: Download File =================================
+id: 106
+identification: 
+  name: Download File
+  alias: DOWNLOAD-FILE
+  title: Download File
+
+appearance: 
+  page-mode: Normal
+  page-template: Minimal (No Navigation) # 70809113777975563
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+page-items: 
+- # ====== Page Item: P106_FILE_ID =============================
+  id: 45516818015836008
+  identification: 
+    name: P106_FILE_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: No Parent
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+processes: 
+- # ====== Process: DOWNLOAD_FILE ==============================
+  id: 45516989188836009
+  identification: 
+    name: DOWNLOAD_FILE
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      tsk_p105.download_attachement (
+          in_file_id => :P106_FILE_ID
+      );
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+

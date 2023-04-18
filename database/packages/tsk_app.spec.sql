@@ -71,6 +71,14 @@ CREATE OR REPLACE PACKAGE tsk_app AS
     )
     RETURN tsk_projects.project_id%TYPE;
 
+
+
+    PROCEDURE download_file (
+        in_file_name                        VARCHAR2,
+        in_file_mime                        VARCHAR2,
+        in_file_payload     IN OUT NOCOPY   BLOB
+    );
+
 END;
 /
 

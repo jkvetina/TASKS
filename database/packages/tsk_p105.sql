@@ -313,6 +313,32 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         END LOOP;
     END;
 
+
+
+    PROCEDURE download_attachement (
+        in_file_id              tsk_task_files.file_id%TYPE
+    ) AS
+        rec                     tsk_task_files%ROWTYPE;
+    BEGIN
+        BEGIN
+            SELECT f.* INTO rec
+            FROM tsk_task_files f
+            JOIN tsk_tasks t
+                ON t.task_id        = f.task_id
+            WHERE f.file_id         = in_file_id
+                AND t.project_id    = core.get_item('P0_PROJECT_ID');
+        EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            core.raise_error('FILE_NOT_FOUND');
+        END;
+        --
+        tsk_app.download_file (
+            in_file_name        => rec.file_name,
+            in_file_mime        => rec.file_mime,
+            in_file_payload     => rec.file_payload
+        );
+    END;
+
 END;
 /
 

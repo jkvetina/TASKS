@@ -33,6 +33,12 @@ CREATE OR REPLACE PACKAGE tsk_p105 AS
 
     PROCEDURE save_attachements;
 
+
+
+    PROCEDURE download_attachement (
+        in_file_id              tsk_task_files.file_id%TYPE
+    );
+
 END;
 /
 
