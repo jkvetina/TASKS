@@ -6,11 +6,11 @@ CREATE TABLE tsk_projects (
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
     --
-    CONSTRAINT pk_tsk_projects
-        PRIMARY KEY (client_id, project_id),
-    --
     CONSTRAINT ch_tsk_projects
         CHECK (is_active = 'Y' OR is_active IS NULL),
+    --
+    CONSTRAINT pk_tsk_projects
+        PRIMARY KEY (client_id, project_id),
     --
     CONSTRAINT fk_tsk_projects_client
         FOREIGN KEY (client_id)

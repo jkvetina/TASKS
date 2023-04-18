@@ -7,14 +7,14 @@ CREATE TABLE tsk_boards (
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
     --
+    CONSTRAINT ch_tsk_boards
+        CHECK (is_active = 'Y' OR is_active IS NULL),
+    --
     CONSTRAINT pk_tsk_boards
         PRIMARY KEY (board_id),
     --
     CONSTRAINT uq_tsk_boards
         UNIQUE (client_id, project_id, board_name),
-    --
-    CONSTRAINT ch_tsk_boards
-        CHECK (is_active = 'Y' OR is_active IS NULL),
     --
     CONSTRAINT fk_tsk_boards_project
         FOREIGN KEY (client_id, project_id)
