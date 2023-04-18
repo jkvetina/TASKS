@@ -8,7 +8,8 @@ WITH x AS (
 d AS (
     SELECT /*+ MATERIALIZE */
         t.task_id,
-        SUBSTR(c.commit_id, 1, 8) AS commit_id,
+        c.commit_id,
+        SUBSTR(c.commit_id, 1, 8) AS commit_short,
         c.commit_message,
         c.commit_url,
         c.created_by,
@@ -32,6 +33,7 @@ z AS (
 SELECT
     d.task_id,
     d.commit_id,
+    d.commit_short,
     d.commit_message,
     d.commit_url,
     d.created_by,

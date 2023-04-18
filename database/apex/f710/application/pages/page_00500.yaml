@@ -272,10 +272,10 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: COMMIT_ID ===================================
+  - # ====== Column: COMMIT_SHORT ================================
     id: 45413945198005617
     identification: 
-      column-name: COMMIT_ID
+      column-name: COMMIT_SHORT
       type: Link
 
     heading: 
@@ -283,7 +283,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 40
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -292,14 +292,14 @@ regions:
 
     link: 
       target: "javascript: { window.open('&COMMIT_URL.', '_blank'); }"
-      link-text: '&COMMIT_ID.'
+      link-text: '&COMMIT_SHORT.'
 
     source: 
       type: Database Column
-      database-column: COMMIT_ID
+      database-column: COMMIT_SHORT
       data-type: VARCHAR2
       query-only: false
-      primary-key: true
+      primary-key: false
 
     default: 
       duplicate-copies-existing-value: true
@@ -341,7 +341,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 50
+      sequence: 70
       column-alignment: start
       stretch: Use Report Setting
 
@@ -350,6 +350,7 @@ regions:
 
     validation: 
       value-required: false
+      maximum-length: 2000
 
     source: 
       type: Database Column
@@ -386,7 +387,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 60
+      sequence: 80
 
     accessibility: 
       value-identifies-row: false
@@ -422,7 +423,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 70
+      sequence: 90
       column-alignment: start
       stretch: Use Report Setting
 
@@ -472,7 +473,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 80
+      sequence: 100
       column-alignment: center
       stretch: Use Report Setting
 
@@ -523,7 +524,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 90
+      sequence: 110
       column-alignment: start
       stretch: Use Report Setting
 
@@ -582,6 +583,40 @@ regions:
 
     layout: 
       sequence: 10
+
+  - # ====== Column: COMMIT_ID ===================================
+    id: 45516680203836006
+    identification: 
+      column-name: COMMIT_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 40
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COMMIT_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
 
   printing: 
     page: 
