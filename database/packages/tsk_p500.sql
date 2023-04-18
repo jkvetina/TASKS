@@ -36,7 +36,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         v_method        VARCHAR2(16)        := 'GET';
         --
         v_clob          CLOB;
-        repo            tsk_commit_repos%ROWTYPE;
+        repo            tsk_repos%ROWTYPE;
     BEGIN
         -- get repo setting
         SELECT r.* INTO repo
@@ -115,7 +115,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         END LOOP;
 
         -- update last sync date
-        UPDATE tsk_commit_repos r
+        UPDATE tsk_repos r
         SET r.last_synced_at    = SYSDATE
         WHERE r.repo_id         = repo.repo_id
             AND r.owner_id      = repo.owner_id

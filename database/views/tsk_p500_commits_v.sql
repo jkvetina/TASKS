@@ -16,7 +16,7 @@ d AS (
         TO_CHAR(c.created_at, 'YYYY-MM-DD')         AS today
     FROM tsk_commits c
     CROSS JOIN x
-    JOIN tsk_commit_repos r
+    JOIN tsk_repos r
         ON r.client_id      = x.client_id
         AND r.project_id    = x.project_id
     LEFT JOIN tsk_task_commits t

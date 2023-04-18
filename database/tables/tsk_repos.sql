@@ -1,4 +1,4 @@
-CREATE TABLE tsk_commit_repos (
+CREATE TABLE tsk_repos (
     repo_id                         VARCHAR2(64)    CONSTRAINT nn_tsk_repos_repo NOT NULL,
     owner_id                        VARCHAR2(64)    CONSTRAINT nn_tsk_repos_owner NOT NULL,
     client_id                       VARCHAR2(32)    CONSTRAINT nn_tsk_repos_client NOT NULL,
@@ -10,22 +10,22 @@ CREATE TABLE tsk_commit_repos (
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
     --
-    CONSTRAINT pk_tsk_commit_repos
+    CONSTRAINT pk_tsk_repos
         PRIMARY KEY (repo_id, owner_id),
     --
-    CONSTRAINT fk_tsk_commits_project
+    CONSTRAINT fk_tsk_repos_project
         FOREIGN KEY (client_id, project_id)
         REFERENCES tsk_projects (client_id, project_id)
 );
 --
-COMMENT ON TABLE tsk_commit_repos IS '';
+COMMENT ON TABLE tsk_repos IS '';
 --
-COMMENT ON COLUMN tsk_commit_repos.repo_id          IS '';
-COMMENT ON COLUMN tsk_commit_repos.owner_id         IS '';
-COMMENT ON COLUMN tsk_commit_repos.client_id        IS '';
-COMMENT ON COLUMN tsk_commit_repos.project_id       IS '';
-COMMENT ON COLUMN tsk_commit_repos.branch_id        IS '';
-COMMENT ON COLUMN tsk_commit_repos.api_type         IS '';
-COMMENT ON COLUMN tsk_commit_repos.api_token        IS '';
-COMMENT ON COLUMN tsk_commit_repos.last_synced_at   IS '';
+COMMENT ON COLUMN tsk_repos.repo_id             IS '';
+COMMENT ON COLUMN tsk_repos.owner_id            IS '';
+COMMENT ON COLUMN tsk_repos.client_id           IS '';
+COMMENT ON COLUMN tsk_repos.project_id          IS '';
+COMMENT ON COLUMN tsk_repos.branch_id           IS '';
+COMMENT ON COLUMN tsk_repos.api_type            IS '';
+COMMENT ON COLUMN tsk_repos.api_token           IS '';
+COMMENT ON COLUMN tsk_repos.last_synced_at      IS '';
 
