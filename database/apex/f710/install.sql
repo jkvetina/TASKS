@@ -132,6 +132,7 @@ prompt --install
 @@application/pages/page_00300.sql
 @@application/pages/page_00400.sql
 @@application/pages/page_00500.sql
+@@application/pages/page_00510.sql
 @@application/pages/page_00900.sql
 @@application/pages/page_09999.sql
 @@application/deployment/definition.sql
