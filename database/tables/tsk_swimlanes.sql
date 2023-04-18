@@ -8,26 +8,26 @@ CREATE TABLE tsk_swimlanes (
     updated_at                      DATE,
     order#                          NUMBER(4,0),
     --
+    CONSTRAINT ch_tsk_swimlanes
+        CHECK (is_active = 'Y' OR is_active IS NULL),
+    --
     CONSTRAINT pk_tsk_swimlanes
         PRIMARY KEY (client_id, project_id, swimlane_id),
     --
     CONSTRAINT uq_tsk_swimlanes
         UNIQUE (client_id, project_id, swimlane_name),
     --
-    CONSTRAINT ch_tsk_swimlanes
-        CHECK (is_active = 'Y' OR is_active IS NULL),
-    --
     CONSTRAINT fk_tsk_swimlanes_project
         FOREIGN KEY (client_id, project_id)
         REFERENCES tsk_projects (client_id, project_id)
 );
 --
-COMMENT ON TABLE tsk_task_swimlanes IS '';
+COMMENT ON TABLE tsk_swimlanes IS '';
 --
-COMMENT ON COLUMN tsk_task_swimlanes.swimlane_id        IS '';
-COMMENT ON COLUMN tsk_task_swimlanes.swimlane_name      IS '';
-COMMENT ON COLUMN tsk_task_swimlanes.client_id          IS '';
-COMMENT ON COLUMN tsk_task_swimlanes.project_id         IS '';
-COMMENT ON COLUMN tsk_task_swimlanes.is_active          IS '';
-COMMENT ON COLUMN tsk_task_swimlanes.order#             IS '';
+COMMENT ON COLUMN tsk_swimlanes.swimlane_id     IS '';
+COMMENT ON COLUMN tsk_swimlanes.swimlane_name   IS '';
+COMMENT ON COLUMN tsk_swimlanes.client_id       IS '';
+COMMENT ON COLUMN tsk_swimlanes.project_id      IS '';
+COMMENT ON COLUMN tsk_swimlanes.is_active       IS '';
+COMMENT ON COLUMN tsk_swimlanes.order#          IS '';
 
