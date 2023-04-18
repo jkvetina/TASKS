@@ -1484,7 +1484,7 @@ buttons:
     label: Bulk Operations
 
   layout: 
-    sequence: 70
+    sequence: 50
     region: '&P100_HEADER.' # 34744374076440316
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -1508,6 +1508,33 @@ buttons:
       clear-cache: 110
 
     warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: ADD_TO_FAVORITES ============================
+  id: 45517331940836013
+  identification: 
+    button-name: ADD_TO_FAVORITES
+    label: Add to Favorites
+
+  layout: 
+    sequence: 70
+    region: '&P100_HEADER.' # 34744374076440316
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-heart-o
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_FILTERS =====================
