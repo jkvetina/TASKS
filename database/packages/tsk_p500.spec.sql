@@ -13,6 +13,7 @@ CREATE OR REPLACE PACKAGE tsk_p500 AS
 
 
     PROCEDURE sync_commits;
+    PROCEDURE sync_commits_job;
 
 
 

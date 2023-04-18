@@ -137,6 +137,31 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
 
 
 
+    PROCEDURE sync_commits_job
+    AS
+    BEGIN
+        core.create_session(core.get_owner(), 710, 500);    -- user, app, page
+        --
+        FOR c IN (
+            SELECT r.project_id
+            FROM tsk_repos r
+            JOIN tsk_repo_endpoints e
+                ON e.owner_id       = r.owner_id
+                AND e.repo_id       = r.repo_id
+            JOIN tsk_projects p
+                ON p.project_id     = r.project_id
+                AND p.is_active     = 'Y'
+        ) LOOP
+            core.set_item('P0_PROJECT_ID', c.project_id);
+            --
+            tsk_p500.sync_commits();
+            --
+            COMMIT;
+        END LOOP;
+    END;
+
+
+
     PROCEDURE save_commits (
         io_commit_id        IN OUT NOCOPY   VARCHAR2,
         io_task_id          IN OUT NOCOPY   VARCHAR2
