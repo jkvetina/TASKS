@@ -12,7 +12,7 @@ CREATE TABLE tsk_commits (
     --
     CONSTRAINT fk_tsk_commits_repo
         FOREIGN KEY (repo_id, owner_id)
-        REFERENCES tsk_commit_repos (repo_id, owner_id)
+        REFERENCES tsk_repos (repo_id, owner_id)
 );
 --
 COMMENT ON TABLE tsk_commits IS '';
