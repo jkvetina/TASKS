@@ -1,5 +1,5 @@
 CREATE TABLE tsk_task_files (
-    task_id                         NUMBER(10,0)    CONSTRAINT nn_tsk_task_files_task NOT NULL,
+    task_id                         VARCHAR2(16)    CONSTRAINT nn_tsk_task_files_task NOT NULL,
     file_id                         NUMBER(10,0)    CONSTRAINT nn_tsk_task_files_id NOT NULL,
     file_name                       VARCHAR2(256)   CONSTRAINT nn_tsk_task_files_name NOT NULL,
     file_mime                       VARCHAR2(256)   CONSTRAINT nn_tsk_task_files_mime NOT NULL,

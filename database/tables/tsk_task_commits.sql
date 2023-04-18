@@ -1,5 +1,5 @@
 CREATE TABLE tsk_task_commits (
-    task_id                         NUMBER(10,0)    CONSTRAINT nn_tsk_task_commits_task NOT NULL,
+    task_id                         VARCHAR2(16)    CONSTRAINT nn_tsk_task_commits_task NOT NULL,
     commit_id                       VARCHAR2(64)    CONSTRAINT nn_tsk_task_commits_commit NOT NULL,
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,

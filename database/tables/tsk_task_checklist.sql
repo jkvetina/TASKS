@@ -2,7 +2,7 @@ CREATE TABLE tsk_task_checklist (
     checklist_id                    NUMBER(10,0)    CONSTRAINT nn_tsk_checklist_item_id NOT NULL,
     checklist_item                  VARCHAR2(256)   CONSTRAINT nn_tsk_checklist_item NOT NULL,
     checklist_done                  CHAR(1),
-    task_id                         NUMBER(10,0)    CONSTRAINT nn_tsk_checklist_task_id NOT NULL,
+    task_id                         VARCHAR2(16)    CONSTRAINT nn_tsk_checklist_task_id NOT NULL,
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
     --

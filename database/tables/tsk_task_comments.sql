@@ -1,5 +1,5 @@
 CREATE TABLE tsk_task_comments (
-    task_id                         NUMBER(10,0)    CONSTRAINT nn_tsk_comments_task_id NOT NULL,
+    task_id                         VARCHAR2(16)    CONSTRAINT nn_tsk_comments_task_id NOT NULL,
     comment_id                      NUMBER(10,0)    CONSTRAINT nn_tsk_comments_id NOT NULL,
     comment_payload                 VARCHAR2(4000),
     updated_by                      VARCHAR2(128),
