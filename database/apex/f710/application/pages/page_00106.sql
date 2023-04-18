@@ -17,9 +17,12 @@ wwv_flow_imp_page.create_page(
 ,p_alias=>'DOWNLOAD-FILE'
 ,p_step_title=>'Download File'
 ,p_autocomplete_on_off=>'OFF'
+,p_group_id=>wwv_flow_imp.id(78949836938576475)  -- MAIN
 ,p_step_template=>wwv_flow_imp.id(70809113777975563)
 ,p_page_template_options=>'#DEFAULT#'
+,p_required_role=>wwv_flow_imp.id(71258645843174377)  -- MASTER - IS_USER
 ,p_protection_level=>'C'
+,p_page_component_map=>'11'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
