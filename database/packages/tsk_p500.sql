@@ -31,26 +31,29 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         in_start_date   CONSTANT DATE                           := TRUNC(SYSDATE) - 1;
         in_page_id      CONSTANT NUMBER                         := 1;
         --
-        v_url           VARCHAR2(2000)      := 'https://api.github.com/repos/#OWNER_ID#/#REPO_ID#/commits?since=#START_DATE#T00:00:00Z&per_page=100&page=#PAGE_ID##BRANCH_ID#';
-        v_body          VARCHAR2(32767)     := '';
-        v_method        VARCHAR2(16)        := 'GET';
-        --
-        v_clob          CLOB;
+        v_response      CLOB;
         repo            tsk_repos%ROWTYPE;
+        endpoint        tsk_repo_endpoints%ROWTYPE;
     BEGIN
         -- get repo setting
         SELECT r.* INTO repo
-        FROM tsk_commit_repos r
+        FROM tsk_repos r
         JOIN tsk_projects p
             ON p.project_id     = r.project_id
         WHERE p.project_id      = in_project_id;
+        --
+        SELECT t.* INTO endpoint
+        FROM tsk_repo_endpoints t
+        WHERE t.repo_id         = repo.repo_id
+            AND t.owner_id      = repo.owner_id
+            AND t.endpoint_id   = 'COMMITS';
 
         -- adjust request
-        v_url := REPLACE(v_url, '#OWNER_ID#',     repo.owner_id);
-        v_url := REPLACE(v_url, '#REPO_ID#',      repo.repo_id);
-        v_url := REPLACE(v_url, '#BRANCH_ID#',    NULLIF('&' || 'sha=' || repo.branch_id, '&' || 'sha='));
-        v_url := REPLACE(v_url, '#START_DATE#',   TO_CHAR(in_start_date, 'YYYY-MM-DD'));
-        v_url := REPLACE(v_url, '#PAGE_ID#',      in_page_id);
+        endpoint.endpoint_url := REPLACE(endpoint.endpoint_url, '#OWNER_ID#',       repo.owner_id);
+        endpoint.endpoint_url := REPLACE(endpoint.endpoint_url, '#REPO_ID#',        repo.repo_id);
+        endpoint.endpoint_url := REPLACE(endpoint.endpoint_url, '#BRANCH_ID#',      NULLIF('&' || 'sha=' || repo.branch_id, '&' || 'sha='));
+        endpoint.endpoint_url := REPLACE(endpoint.endpoint_url, '#START_DATE#',     TO_CHAR(in_start_date, 'YYYY-MM-DD'));
+        endpoint.endpoint_url := REPLACE(endpoint.endpoint_url, '#PAGE_ID#',        in_page_id);
 
         -- init request
         set_header(1, 'Authorization',  'Bearer ' || repo.api_token);
@@ -58,10 +61,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         set_header(3, 'Content-Type',   'application/json; charset=utf-8');
 
         -- get response
-        v_clob := APEX_WEB_SERVICE.MAKE_REST_REQUEST (
-            p_url           => v_url,
-            p_http_method   => v_method,
-            p_body          => v_body
+        v_response := APEX_WEB_SERVICE.MAKE_REST_REQUEST (
+            p_url           => endpoint.endpoint_url,
+            p_http_method   => endpoint.endpoint_method,
+            p_body          => endpoint.endpoint_body
         );
 
         -- store response in table
@@ -75,7 +78,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
                 t.created_by,
                 core.get_date(REPLACE(REPLACE(t.created_at, 'T', ' '), 'Z', '')) AS created_at
                 --
-            FROM JSON_TABLE(v_clob, '$[*]'
+            FROM JSON_TABLE(v_response, '$[*]'
                 COLUMNS (
                     commit_id       VARCHAR2(64)    PATH '$.sha',
                     commit_message  VARCHAR2(2000)  PATH '$.commit.message',
