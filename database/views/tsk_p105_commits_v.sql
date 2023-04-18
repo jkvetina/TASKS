@@ -1,7 +1,7 @@
 CREATE OR REPLACE FORCE VIEW tsk_p105_commits_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        core.get_number_item('P105_TASK_ID')    AS task_id
+        core.get_item('P105_TASK_ID')   AS task_id
     FROM DUAL
 )
 SELECT
