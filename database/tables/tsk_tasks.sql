@@ -20,11 +20,11 @@ CREATE TABLE tsk_tasks (
     --
     CONSTRAINT fk_tsk_tasks_status
         FOREIGN KEY (client_id, project_id, status_id)
-        REFERENCES tsk_task_statuses (client_id, project_id, status_id),
+        REFERENCES tsk_statuses (client_id, project_id, status_id),
     --
     CONSTRAINT fk_tsk_tasks_swimlane
         FOREIGN KEY (client_id, project_id, swimlane_id)
-        REFERENCES tsk_task_swimlanes (client_id, project_id, swimlane_id)
+        REFERENCES tsk_swimlanes (client_id, project_id, swimlane_id)
 );
 --
 COMMENT ON TABLE tsk_tasks IS '';

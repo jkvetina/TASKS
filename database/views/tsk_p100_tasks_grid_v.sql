@@ -27,9 +27,9 @@ SELECT
     --
 FROM tsk_tasks t
 CROSS JOIN x
-JOIN tsk_task_statuses s
+JOIN tsk_statuses s
     ON s.status_id      = t.status_id
-JOIN tsk_task_swimlanes w
+JOIN tsk_swimlanes w
     ON w.swimlane_id    = t.swimlane_id
 LEFT JOIN tsk_task_checklist l
     ON l.task_id        = t.task_id

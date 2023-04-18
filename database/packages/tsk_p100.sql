@@ -43,7 +43,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         in_client_id        tsk_boards.client_id%TYPE           := NULL,
         in_project_id       tsk_boards.project_id%TYPE          := NULL,
         in_board_id         tsk_boards.board_id%TYPE            := NULL,
-        in_swimlane_id      tsk_task_swimlanes.swimlane_id%TYPE := NULL
+        in_swimlane_id      tsk_swimlanes.swimlane_id%TYPE      := NULL
     )
     AS
         v_statuses          PLS_INTEGER;
@@ -52,7 +52,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         -- calculate number of columns
         SELECT COUNT(s.status_id)
         INTO v_statuses
-        FROM tsk_task_statuses s
+        FROM tsk_statuses s
         WHERE s.client_id       = in_client_id
             AND s.project_id    = in_project_id
             AND s.is_active     = 'Y';
@@ -68,7 +68,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             SELECT
                 w.*,
                 ROW_NUMBER() OVER (ORDER BY CASE WHEN w.swimlane_id = '-' THEN NULL ELSE w.order# END NULLS LAST) AS r#
-            FROM tsk_task_swimlanes w
+            FROM tsk_swimlanes w
             WHERE w.client_id       = in_client_id
                 AND w.project_id    = in_project_id
                 AND (w.swimlane_id  = in_swimlane_id OR in_swimlane_id IS NULL)
@@ -87,7 +87,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                     s.status_id,
                     s.status_name,
                     ROWNUM AS r#
-                FROM tsk_task_statuses s
+                FROM tsk_statuses s
                 WHERE s.client_id       = in_client_id
                     AND s.project_id    = in_project_id
                     AND s.is_active     = 'Y'
@@ -102,7 +102,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             FOR s IN (
                 SELECT
                     s.status_id
-                FROM tsk_task_statuses s
+                FROM tsk_statuses s
                 WHERE s.client_id       = in_client_id
                     AND s.project_id    = in_project_id
                     AND s.is_active     = 'Y'

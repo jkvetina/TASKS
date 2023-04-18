@@ -42,13 +42,13 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
 
     PROCEDURE save_task_statuses (
-        io_client_id        IN OUT NOCOPY   tsk_task_statuses.client_id%TYPE,
-        io_project_id       IN OUT NOCOPY   tsk_task_statuses.project_id%TYPE,
-        io_status_id        IN OUT NOCOPY   tsk_task_statuses.status_id%TYPE
+        io_client_id        IN OUT NOCOPY   tsk_statuses.client_id%TYPE,
+        io_project_id       IN OUT NOCOPY   tsk_statuses.project_id%TYPE,
+        io_status_id        IN OUT NOCOPY   tsk_statuses.status_id%TYPE
     )
     AS
         v_action            CHAR;
-        rec                 tsk_task_statuses%ROWTYPE;
+        rec                 tsk_statuses%ROWTYPE;
     BEGIN
         v_action            := APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
         --
@@ -64,7 +64,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.updated_at      := SYSDATE;
         --
         IF v_action = 'D' THEN
-            DELETE FROM tsk_task_statuses t
+            DELETE FROM tsk_statuses t
             WHERE t.status_id       = rec.status_id
                 AND t.client_id     = rec.client_id
                 AND t.project_id    = rec.project_id;
@@ -72,14 +72,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
             RETURN;
         END IF;
         --
-        UPDATE tsk_task_statuses t
+        UPDATE tsk_statuses t
         SET ROW = rec
         WHERE t.status_id       = rec.status_id
             AND t.client_id     = rec.client_id
             AND t.project_id    = rec.project_id;
         --
         IF SQL%ROWCOUNT = 0 THEN
-            INSERT INTO tsk_task_statuses
+            INSERT INTO tsk_statuses
             VALUES rec;
         END IF;
 
@@ -92,13 +92,13 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
 
     PROCEDURE save_task_swimlanes (
-        io_client_id        IN OUT NOCOPY   tsk_task_swimlanes.client_id%TYPE,
-        io_project_id       IN OUT NOCOPY   tsk_task_swimlanes.project_id%TYPE,
-        io_swimlane_id      IN OUT NOCOPY   tsk_task_swimlanes.swimlane_id%TYPE
+        io_client_id        IN OUT NOCOPY   tsk_swimlanes.client_id%TYPE,
+        io_project_id       IN OUT NOCOPY   tsk_swimlanes.project_id%TYPE,
+        io_swimlane_id      IN OUT NOCOPY   tsk_swimlanes.swimlane_id%TYPE
     )
     AS
         v_action            CHAR;
-        rec                 tsk_task_swimlanes%ROWTYPE;
+        rec                 tsk_swimlanes%ROWTYPE;
     BEGIN
         v_action            := APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
         --
@@ -114,7 +114,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.updated_at      := SYSDATE;
         --
         IF v_action = 'D' THEN
-            DELETE FROM tsk_task_swimlanes t
+            DELETE FROM tsk_swimlanes t
             WHERE t.swimlane_id     = rec.swimlane_id
                 AND t.client_id     = rec.client_id
                 AND t.project_id    = rec.project_id;
@@ -122,14 +122,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
             RETURN;
         END IF;
         --
-        UPDATE tsk_task_swimlanes t
+        UPDATE tsk_swimlanes t
         SET ROW = rec
         WHERE t.swimlane_id     = rec.swimlane_id
             AND t.client_id     = rec.client_id
             AND t.project_id    = rec.project_id;
         --
         IF SQL%ROWCOUNT = 0 THEN
-            INSERT INTO tsk_task_swimlanes
+            INSERT INTO tsk_swimlanes
             VALUES rec;
         END IF;
 
@@ -142,8 +142,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
 
     PROCEDURE reorder_task_statuses (
-        in_client_id        tsk_task_statuses.client_id%TYPE    := NULL,
-        in_project_id       tsk_task_statuses.project_id%TYPE   := NULL
+        in_client_id        tsk_statuses.client_id%TYPE    := NULL,
+        in_project_id       tsk_statuses.project_id%TYPE   := NULL
     )
     AS
     BEGIN
@@ -154,12 +154,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
                 t.project_id,
                 --
                 ROW_NUMBER() OVER (PARTITION BY t.client_id, t.project_id ORDER BY t.order# NULLS LAST, t.status_name, t.status_id) * 10 AS order#
-            FROM tsk_task_statuses t
+            FROM tsk_statuses t
             WHERE 1 = 1
                 AND (t.client_id    = in_client_id  OR in_client_id  IS NULL)
                 AND (t.project_id   = in_project_id OR in_project_id IS NULL)
         ) LOOP
-            UPDATE tsk_task_statuses t
+            UPDATE tsk_statuses t
             SET t.order#            = s.order#
             WHERE t.status_id       = s.status_id
                 AND t.client_id     = s.client_id
@@ -171,8 +171,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
 
     PROCEDURE reorder_task_swimlanes (
-        in_client_id        tsk_task_swimlanes.client_id%TYPE   := NULL,
-        in_project_id       tsk_task_swimlanes.project_id%TYPE  := NULL
+        in_client_id        tsk_swimlanes.client_id%TYPE   := NULL,
+        in_project_id       tsk_swimlanes.project_id%TYPE  := NULL
     )
     AS
     BEGIN
@@ -183,12 +183,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
                 t.project_id,
                 --
                 ROW_NUMBER() OVER (PARTITION BY t.client_id, t.project_id ORDER BY t.order# NULLS LAST, t.swimlane_name, t.swimlane_id) * 10 AS order#
-            FROM tsk_task_swimlanes t
+            FROM tsk_swimlanes t
             WHERE 1 = 1
                 AND (t.client_id    = in_client_id  OR in_client_id  IS NULL)
                 AND (t.project_id   = in_project_id OR in_project_id IS NULL)
         ) LOOP
-            UPDATE tsk_task_swimlanes t
+            UPDATE tsk_swimlanes t
             SET t.order#            = s.order#
             WHERE t.swimlane_id     = s.swimlane_id
                 AND t.client_id     = s.client_id

@@ -9,7 +9,7 @@ SELECT
     t.status_id,
     t.status_name,
     t.is_active
-FROM tsk_task_statuses t
+FROM tsk_statuses t
 JOIN x
     ON x.client_id      = t.client_id
     AND x.project_id    = t.project_id

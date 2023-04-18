@@ -8,7 +8,7 @@ WITH x AS (
 SELECT
     t.swimlane_id,
     t.swimlane_name
-FROM tsk_task_swimlanes t
+FROM tsk_swimlanes t
 JOIN x
     ON x.client_id      = t.client_id
     AND x.project_id    = t.project_id
