@@ -739,6 +739,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
 ,p_button_image_alt=>'Split Task'
 ,p_button_position=>'RIGHT_OF_TITLE'
+,p_confirm_message=>'Do you want to move unchecked items to the new task?'
 ,p_button_condition=>'P105_SHOW_SPLIT'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_icon_css_classes=>'fa-accessor-more'
@@ -754,7 +755,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_image_alt=>'Delete Task'
 ,p_button_position=>'RIGHT_OF_TITLE'
 ,p_button_execute_validations=>'N'
-,p_confirm_message=>'Are you sure?'
+,p_confirm_message=>'Do you want to delete this task?'
 ,p_button_condition=>'P105_TASK_ID'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_icon_css_classes=>'fa-trash-o'
