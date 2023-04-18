@@ -982,19 +982,27 @@ CREATE OR REPLACE PACKAGE BODY core AS
         in_arg8                 VARCHAR2    := NULL,
         --
         in_payload              VARCHAR2    := NULL,
-        in_rollback             BOOLEAN     := FALSE
+        in_rollback             BOOLEAN     := FALSE,
+        in_traceback            BOOLEAN     := FALSE
     )
     AS
+        v_message               VARCHAR2(4000);
     BEGIN
         IF in_rollback THEN
             ROLLBACK;
         END IF;
         --
-        RAISE_APPLICATION_ERROR (
-            core.app_exception_code,
-            COALESCE(in_action_name, core.get_caller_name(), 'UNEXPECTED_ERROR'),
-            TRUE
-        );
+        v_message := SUBSTR(
+            RTRIM(in_action_name ||
+                '|' || in_arg1 || '|' || in_arg2 || '|' || in_arg3 || '|' || in_arg4 ||
+                '|' || in_arg5 || '|' || in_arg6 || '|' || in_arg7 || '|' || in_arg8,
+                '|'
+            ) ||
+            '|' || core.get_caller_name() ||
+            CASE WHEN in_traceback THEN '|' || DBMS_UTILITY.FORMAT_ERROR_BACKTRACE END,
+            1, 4000);
+        --
+        RAISE_APPLICATION_ERROR(core.app_exception_code, v_message, TRUE);
     END;
 
 

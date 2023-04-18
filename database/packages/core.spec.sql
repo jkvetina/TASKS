@@ -405,7 +405,8 @@ CREATE OR REPLACE PACKAGE core AS
         in_arg8                 VARCHAR2    := NULL,
         --
         in_payload              VARCHAR2    := NULL,
-        in_rollback             BOOLEAN     := FALSE
+        in_rollback             BOOLEAN     := FALSE,
+        in_traceback            BOOLEAN     := FALSE
     );
 
 
