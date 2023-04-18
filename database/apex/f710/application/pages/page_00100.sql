@@ -622,6 +622,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P100_TASK_ID'
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(35123712321937012)
+,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Quick Task Search'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30

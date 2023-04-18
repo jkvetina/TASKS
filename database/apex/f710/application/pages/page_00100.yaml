@@ -1084,7 +1084,7 @@ page-items:
 
   source: 
     type: Null
-    used: Only when current value in session state is null
+    used: Always, replacing any existing value in session state
 
   session-state: 
     storage: Per Session (Persistent)
