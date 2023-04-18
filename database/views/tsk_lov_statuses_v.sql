@@ -1,4 +1,4 @@
-CREATE OR REPLACE FORCE VIEW tsk_lov_task_statuses_v AS
+CREATE OR REPLACE FORCE VIEW tsk_lov_statuses_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
         core.get_item('P0_CLIENT_ID')   AS client_id,

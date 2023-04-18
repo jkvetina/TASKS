@@ -1,4 +1,4 @@
-CREATE OR REPLACE FORCE VIEW tsk_lov_task_swimlanes_all_v AS
+CREATE OR REPLACE FORCE VIEW tsk_lov_swimlanes_all_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
         core.get_item('$CLIENT_ID')     AS client_id,
