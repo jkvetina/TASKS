@@ -1,0 +1,2 @@
+"repo_id";"owner_id";"endpoint_id";"endpoint_url";"endpoint_body";"endpoint_method"
+"tasks";"jkvetina";"COMMITS";"https://api.github.com/repos/#OWNER_ID#/#REPO_ID#/commits?since=#START_DATE#T00:00:00Z&per_page=100&page=#PAGE_ID##BRANCH_ID#";"";"GET"
