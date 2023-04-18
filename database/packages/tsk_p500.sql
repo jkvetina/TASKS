@@ -36,17 +36,27 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         endpoint        tsk_repo_endpoints%ROWTYPE;
     BEGIN
         -- get repo setting
-        SELECT r.* INTO repo
-        FROM tsk_repos r
-        JOIN tsk_projects p
-            ON p.project_id     = r.project_id
-        WHERE p.project_id      = in_project_id;
+        BEGIN
+            SELECT r.* INTO repo
+            FROM tsk_repos r
+            JOIN tsk_projects p
+                ON p.project_id     = r.project_id
+            WHERE p.project_id      = in_project_id;
+        EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            core.raise_error('REPO_NOT_FOUND');
+        END;
         --
-        SELECT t.* INTO endpoint
-        FROM tsk_repo_endpoints t
-        WHERE t.repo_id         = repo.repo_id
-            AND t.owner_id      = repo.owner_id
-            AND t.endpoint_id   = 'COMMITS';
+        BEGIN
+            SELECT t.* INTO endpoint
+            FROM tsk_repo_endpoints t
+            WHERE t.repo_id         = repo.repo_id
+                AND t.owner_id      = repo.owner_id
+                AND t.endpoint_id   = 'COMMITS';
+        EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            core.raise_error('ENDPOINT_NOT_FOUND');
+        END;
 
         -- adjust request
         endpoint.endpoint_url := REPLACE(endpoint.endpoint_url, '#OWNER_ID#',       repo.owner_id);
