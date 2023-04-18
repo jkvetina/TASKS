@@ -3040,7 +3040,7 @@ processes:
   settings: 
     target-type: PL/SQL Code
     pl/sql-code-to-insert/update/delete: tsk_p105.save_checklist();
-    prevent-lost-updates: true
+    prevent-lost-updates: false
     lock-row: No
 
   execution: 
