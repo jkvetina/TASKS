@@ -203,7 +203,7 @@ regions:
     source: 
       type: Database Column
       database-column: TASK_ID
-      data-type: NUMBER
+      data-type: VARCHAR2
       query-only: false
       primary-key: false
 
@@ -1544,7 +1544,7 @@ page-items:
   source: 
     form-region: '[FORM]' # 63213536180844591
     column: TASK_ID
-    data-type: NUMBER
+    data-type: VARCHAR2
     query-only: false
     primary-key: true
 
@@ -1777,7 +1777,7 @@ page-items:
     height: 1
 
   validation: 
-    value-required: false
+    value-required: true
 
   list-of-values: 
     type: Shared Component
@@ -1843,7 +1843,7 @@ page-items:
     height: 1
 
   validation: 
-    value-required: false
+    value-required: true
 
   list-of-values: 
     type: Shared Component

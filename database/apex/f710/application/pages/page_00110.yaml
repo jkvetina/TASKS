@@ -279,7 +279,7 @@ regions:
     source: 
       type: Database Column
       database-column: TASK_ID
-      data-type: NUMBER
+      data-type: VARCHAR2
       query-only: false
       primary-key: true
 

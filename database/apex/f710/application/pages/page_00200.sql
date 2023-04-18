@@ -496,7 +496,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>30
 ,p_value_alignment=>'LEFT'
-,p_is_required=>false
+,p_is_required=>true
 ,p_lov_type=>'SHARED'
 ,p_lov_id=>wwv_flow_imp.id(34762829880497308)  -- LOV_CLIENTS
 ,p_lov_display_extra=>true
@@ -529,7 +529,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>40
 ,p_value_alignment=>'LEFT'
-,p_is_required=>false
+,p_is_required=>true
 ,p_lov_type=>'SHARED'
 ,p_lov_id=>wwv_flow_imp.id(34763034913500105)  -- LOV_PROJECTS
 ,p_lov_display_extra=>true
@@ -934,7 +934,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>30
 ,p_value_alignment=>'LEFT'
-,p_is_required=>false
+,p_is_required=>true
 ,p_lov_type=>'SHARED'
 ,p_lov_id=>wwv_flow_imp.id(34762829880497308)  -- LOV_CLIENTS
 ,p_lov_display_extra=>true
@@ -967,7 +967,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>40
 ,p_value_alignment=>'LEFT'
-,p_is_required=>false
+,p_is_required=>true
 ,p_lov_type=>'SHARED'
 ,p_lov_id=>wwv_flow_imp.id(34763034913500105)  -- LOV_PROJECTS
 ,p_lov_display_extra=>true

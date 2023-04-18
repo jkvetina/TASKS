@@ -97,7 +97,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_name=>'TASK_ID'
 ,p_source_type=>'DB_COLUMN'
 ,p_source_expression=>'TASK_ID'
-,p_data_type=>'NUMBER'
+,p_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_NUMBER_FIELD'
 ,p_heading=>'Task Id'
@@ -107,8 +107,11 @@ wwv_flow_imp_page.create_region_column(
 ,p_attribute_03=>'left'
 ,p_attribute_04=>'decimal'
 ,p_is_required=>false
+,p_max_length=>16
 ,p_enable_filter=>true
+,p_filter_operators=>'C:S:CASE_INSENSITIVE:REGEXP'
 ,p_filter_is_required=>false
+,p_filter_text_case=>'MIXED'
 ,p_filter_lov_type=>'NONE'
 ,p_use_as_row_header=>false
 ,p_enable_sort_group=>true

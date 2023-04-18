@@ -916,7 +916,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
 
     list-of-values: 
       type: Shared Component
@@ -974,7 +974,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
 
     list-of-values: 
       type: Shared Component
@@ -1521,7 +1521,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
 
     list-of-values: 
       type: Shared Component
@@ -1579,7 +1579,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
 
     list-of-values: 
       type: Shared Component

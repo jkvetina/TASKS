@@ -436,7 +436,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_name=>'TASK_ID'
 ,p_source_type=>'DB_COLUMN'
 ,p_source_expression=>'TASK_ID'
-,p_data_type=>'NUMBER'
+,p_data_type=>'VARCHAR2'
 ,p_session_state_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_HIDDEN'
@@ -862,7 +862,7 @@ wwv_flow_imp_page.create_page_branch(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34798917102743640)
 ,p_name=>'P105_TASK_ID'
-,p_source_data_type=>'NUMBER'
+,p_source_data_type=>'VARCHAR2'
 ,p_is_primary_key=>true
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(63213536180844591)
@@ -947,6 +947,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34799302370743644)
 ,p_name=>'P105_CLIENT_ID'
 ,p_source_data_type=>'VARCHAR2'
+,p_is_required=>true
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_imp.id(63213536180844591)
 ,p_item_source_plug_id=>wwv_flow_imp.id(63213536180844591)
@@ -971,6 +972,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34799438673743645)
 ,p_name=>'P105_PROJECT_ID'
 ,p_source_data_type=>'VARCHAR2'
+,p_is_required=>true
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(63213536180844591)
 ,p_item_source_plug_id=>wwv_flow_imp.id(63213536180844591)

@@ -345,7 +345,7 @@ regions:
     source: 
       type: Database Column
       database-column: TASK_ID
-      data-type: NUMBER
+      data-type: VARCHAR2
       query-only: false
       primary-key: true
 
@@ -354,7 +354,14 @@ regions:
 
     column-filter: 
       enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
       lov-type: Distinct Column
+      exact-match: true
 
     export-/-printing: 
       include-in-export-/-print: false
@@ -647,6 +654,147 @@ regions:
 
     layout: 
       sequence: 10
+
+  - # ====== Column: SWIMLANE_ORDER# =============================
+    id: 45517023496836010
+    identification: 
+      column-name: SWIMLANE_ORDER#
+      type: Number Field
+
+    heading: 
+      heading: Swimlane Order#
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 90
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: SWIMLANE_ORDER#
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: STATUS_ORDER# ===============================
+    id: 45517135140836011
+    identification: 
+      column-name: STATUS_ORDER#
+      type: Number Field
+
+    heading: 
+      heading: Status Order#
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 100
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_ORDER#
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: TASK_ORDER# =================================
+    id: 45517223190836012
+    identification: 
+      column-name: TASK_ORDER#
+      type: Number Field
+
+    heading: 
+      heading: Task Order#
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 110
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: TASK_ORDER#
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
 
   printing: 
     page: 

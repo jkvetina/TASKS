@@ -249,11 +249,12 @@ regions:
 
     validation: 
       value-required: false
+      maximum-length: 16
 
     source: 
       type: Database Column
       database-column: TASK_ID
-      data-type: NUMBER
+      data-type: VARCHAR2
       query-only: false
       primary-key: false
 
@@ -262,6 +263,12 @@ regions:
 
     column-filter: 
       enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
       lov-type: None
 
     export-/-printing: 

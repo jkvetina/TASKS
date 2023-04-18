@@ -118,7 +118,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_name=>'TASK_ID'
 ,p_source_type=>'DB_COLUMN'
 ,p_source_expression=>'TASK_ID'
-,p_data_type=>'NUMBER'
+,p_data_type=>'VARCHAR2'
 ,p_session_state_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_HIDDEN'
