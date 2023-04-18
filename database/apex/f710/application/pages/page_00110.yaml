@@ -830,7 +830,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Client Id
+    label: Target Client
     alignment: Left
 
   settings: 
@@ -893,7 +893,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Project Id
+    label: Target Project
     alignment: Left
 
   settings: 
@@ -963,7 +963,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Board Id
+    label: Target Board
     alignment: Left
 
   settings: 
@@ -1034,7 +1034,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Status Id
+    label: Target Status
     alignment: Left
 
   settings: 
@@ -1106,7 +1106,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Swimlane Id
+    label: Target Swimlane
     alignment: Left
 
   settings: 

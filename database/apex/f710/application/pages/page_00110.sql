@@ -435,7 +435,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_item_default=>'P0_CLIENT_ID'
 ,p_item_default_type=>'ITEM'
-,p_prompt=>'Client Id'
+,p_prompt=>'Target Client'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_CLIENTS_ALL'
 ,p_lov_display_null=>'YES'
@@ -456,7 +456,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_item_default=>'P0_PROJECT_ID'
 ,p_item_default_type=>'ITEM'
-,p_prompt=>'Project Id'
+,p_prompt=>'Target Project'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_PROJECTS_ALL'
 ,p_lov_display_null=>'YES'
@@ -480,7 +480,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_item_default=>'P0_BOARD_ID'
 ,p_item_default_type=>'ITEM'
-,p_prompt=>'Board Id'
+,p_prompt=>'Target Board'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_BOARDS_ALL'
 ,p_lov_display_null=>'YES'
@@ -504,7 +504,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_item_default=>'P100_BOARD_TYPE'
 ,p_item_default_type=>'ITEM'
-,p_prompt=>'Status Id'
+,p_prompt=>'Target Status'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_STATUSES_ALL'
 ,p_lov_display_null=>'YES'
@@ -528,7 +528,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_item_default=>'P100_SWIMLANE_ID'
 ,p_item_default_type=>'ITEM'
-,p_prompt=>'Swimlane Id'
+,p_prompt=>'Target Swimlane'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_SWIMLANES_ALL'
 ,p_lov_cascade_parent_items=>'P110_BOARD_ID'
