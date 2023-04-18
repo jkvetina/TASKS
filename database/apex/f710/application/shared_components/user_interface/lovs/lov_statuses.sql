@@ -17,7 +17,7 @@ wwv_flow_imp_shared.create_list_of_values(
 ,p_source_type=>'TABLE'
 ,p_location=>'LOCAL'
 ,p_use_local_sync_table=>false
-,p_query_table=>'TSK_LOV_TASK_STATUSES_V'
+,p_query_table=>'TSK_LOV_STATUSES_V'
 ,p_return_column_name=>'STATUS_ID'
 ,p_display_column_name=>'STATUS_NAME'
 ,p_group_sort_direction=>'ASC'

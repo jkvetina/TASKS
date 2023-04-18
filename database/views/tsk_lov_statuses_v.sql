@@ -17,5 +17,5 @@ ORDER BY
     t.order# NULLS LAST,
     t.status_id;
 --
-COMMENT ON TABLE tsk_lov_task_statuses_v IS '';
+COMMENT ON TABLE tsk_lov_statuses_v IS '';
 

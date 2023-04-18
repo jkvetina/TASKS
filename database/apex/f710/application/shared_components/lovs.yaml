@@ -56,7 +56,7 @@
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_LOV_TASK_SWIMLANES_V
+    table-name: TSK_LOV_SWIMLANES_V
 
   column-mapping: 
     return: SWIMLANE_ID
@@ -72,7 +72,7 @@
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_LOV_TASK_STATUSES_V
+    table-name: TSK_LOV_STATUSES_V
 
   column-mapping: 
     return: STATUS_ID
@@ -260,7 +260,7 @@
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_LOV_TASK_SWIMLANES_ALL_V
+    table-name: TSK_LOV_SWIMLANES_ALL_V
 
   column-mapping: 
     return: SWIMLANE_ID
@@ -279,7 +279,7 @@
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_LOV_TASK_STATUSES_ALL_V
+    table-name: TSK_LOV_STATUSES_ALL_V
 
   column-mapping: 
     return: STATUS_ID
