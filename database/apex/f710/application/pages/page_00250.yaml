@@ -1,10 +1,10 @@
 ---
-# ====== Page: Boards ========================================
-id: 200
+# ====== Page: Swimlanes =====================================
+id: 250
 identification: 
-  name: Boards
-  alias: BOARDS
-  title: Boards
+  name: Swimlanes
+  alias: SWIMLANES
+  title: Swimlanes
   page-group: MAIN # 78949836938576475
 
 appearance: 
@@ -39,56 +39,15 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Boards ======================================
-  id: 70383350292825292
+- # ====== Region: Swimlanes ===================================
+  id: 116033389391130743
   identification: 
-    title: Boards
+    title: Swimlanes
     type: Static Content
 
   layout: 
     sequence: 10
-    parent-region: No Parent
-    position: BODY
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Blank with Attributes # 70831193948975578
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: Boards ======================================
-  id: 70383447796825293
-  identification: 
-    title: Boards
-    type: Static Content
-
-  layout: 
-    sequence: 10
-    parent-region: Boards # 70383350292825292
+    parent-region: Swimlanes # 116033629607130745
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -121,22 +80,63 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Boards [GRID] ===============================
-  id: 104264620246786601
+- # ====== Region: Swimlanes ===================================
+  id: 116033629607130745
   identification: 
-    title: Boards [GRID]
+    title: Swimlanes
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Swimlanes [GRID] ============================
+  id: 150829930707120305
+  identification: 
+    title: Swimlanes [GRID]
     type: Interactive Grid
 
   source: 
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_P200_BOARDS_V
+    table-name: TSK_P250_SWIMLANES_V
     include-rowid-column: false
 
   layout: 
     sequence: 20
-    parent-region: Boards # 70383350292825292
+    parent-region: Swimlanes # 116033629607130745
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: false
@@ -165,7 +165,7 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 105170751304812752
+    id: 150831077300120316
     edit: 
       enabled: true
       allowed-operations: 
@@ -219,14 +219,146 @@ regions:
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
-      id: 105177522185823559
+      id: 150853220568293288
       identification: 
         name: Primary Report
-        alias: 347497
+        alias: 347682
 
   columns: 
+  - # ====== Column: COUNT_BOARD =================================
+    id: 45517798469836017
+    identification: 
+      column-name: COUNT_BOARD
+      type: Display Only
+
+    heading: 
+      heading: Count Board
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 110
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_BOARD
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_PROJECT ===============================
+    id: 45517837163836018
+    identification: 
+      column-name: COUNT_PROJECT
+      type: Display Only
+
+    heading: 
+      heading: Count Project
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 120
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_PROJECT
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_CLIENT ================================
+    id: 45517964692836019
+    identification: 
+      column-name: COUNT_CLIENT
+      type: Display Only
+
+    heading: 
+      heading: Count Client
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 130
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_CLIENT
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   - # ====== Column: APEX$ROW_ACTION =============================
-    id: 70384843189825307
+    id: 116032937603130739
     identification: 
       column-name: APEX$ROW_ACTION
       type: Actions Menu
@@ -235,7 +367,7 @@ regions:
       sequence: 20
 
   - # ====== Column: APEX$ROW_SELECTOR ===========================
-    id: 70384925691825308
+    id: 116033119612130740
     identification: 
       column-name: APEX$ROW_SELECTOR
       type: Row Selector
@@ -248,98 +380,14 @@ regions:
     layout: 
       sequence: 10
 
-  - # ====== Column: ACTIVATE_URL ================================
-    id: 70386455010825324
+  - # ====== Column: SWIMLANE_ID =================================
+    id: 150831133380120317
     identification: 
-      column-name: ACTIVATE_URL
-      type: Link
-
-    heading: 
-      alignment: center
-
-    layout: 
-      sequence: 30
-      column-alignment: center
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    link: 
-      target: '&ACTIVATE_URL.'
-      link-text: ACTIVATE
-
-    source: 
-      type: Database Column
-      database-column: ACTIVATE_URL
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: false
-      hide: true
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: BOARD_ID ====================================
-    id: 105170818303812753
-    identification: 
-      column-name: BOARD_ID
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 40
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: BOARD_ID
-      data-type: NUMBER
-      query-only: false
-      primary-key: true
-
-    default: 
-      type: Sequence
-      sequence: TSK_BOARD_ID
-      duplicate-copies-existing-value: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: BOARD_NAME ==================================
-    id: 105170980379812754
-    identification: 
-      column-name: BOARD_NAME
+      column-name: SWIMLANE_ID
       type: Text Field
 
     heading: 
-      heading: Board Name
+      heading: Swimlane Id
       alignment: start
 
     settings: 
@@ -356,11 +404,66 @@ regions:
 
     validation: 
       value-required: true
+      maximum-length: 32
+
+    source: 
+      type: Database Column
+      database-column: SWIMLANE_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: false
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: SWIMLANE_NAME ===============================
+    id: 150831291335120318
+    identification: 
+      column-name: SWIMLANE_NAME
+      type: Text Field
+
+    heading: 
+      heading: Swimlane Name
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
       maximum-length: 64
 
     source: 
       type: Database Column
-      database-column: BOARD_NAME
+      database-column: SWIMLANE_NAME
       data-type: VARCHAR2
       query-only: false
       primary-key: false
@@ -388,7 +491,7 @@ regions:
       hide: true
 
   - # ====== Column: CLIENT_ID ===================================
-    id: 105171059749812755
+    id: 150831374709120319
     identification: 
       column-name: CLIENT_ID
       type: Select List
@@ -398,7 +501,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 60
+      sequence: 30
       column-alignment: start
       stretch: Use Report Setting
 
@@ -438,7 +541,7 @@ regions:
       exact-match: true
 
     export-/-printing: 
-      include-in-export-/-print: true
+      include-in-export-/-print: false
 
     enable-users-to: 
       sort: true
@@ -446,7 +549,7 @@ regions:
       hide: true
 
   - # ====== Column: PROJECT_ID ==================================
-    id: 105171140843812756
+    id: 150831414989120320
     identification: 
       column-name: PROJECT_ID
       type: Select List
@@ -456,7 +559,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 70
+      sequence: 40
       column-alignment: start
       stretch: Use Report Setting
 
@@ -496,7 +599,7 @@ regions:
       exact-match: true
 
     export-/-printing: 
-      include-in-export-/-print: true
+      include-in-export-/-print: false
 
     enable-users-to: 
       sort: true
@@ -504,7 +607,7 @@ regions:
       hide: true
 
   - # ====== Column: IS_ACTIVE ===================================
-    id: 105171196736812757
+    id: 150831558329120321
     identification: 
       column-name: IS_ACTIVE
       type: Checkbox
@@ -518,7 +621,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 80
+      sequence: 70
       column-alignment: center
       stretch: Use Report Setting
 
@@ -559,6 +662,53 @@ regions:
       control-break/aggregate: true
       hide: true
 
+  - # ====== Column: ORDER# ======================================
+    id: 150883481467423618
+    identification: 
+      column-name: ORDER#
+      type: Number Field
+
+    heading: 
+      heading: Order#
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 100
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ORDER#
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   printing: 
     page: 
       size: Letter
@@ -575,7 +725,7 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
-      page-header-text: Boards [GRID]
+      page-header-text: Swimlanes [GRID]
 
     column-headings: 
       font: Helvetica
@@ -598,47 +748,16 @@ regions:
       font-color: '#000000'
       alignment: center
 
-page-items: 
-- # ====== Page Item: P200_SHOW_ALL ============================
-  id: 44174309728914750
-  identification: 
-    name: P200_SHOW_ALL
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 10
-    region: Boards # 70383447796825293
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
 buttons: 
-- # ====== Button: SHOW_ALL ====================================
-  id: 44174265203914749
+- # ====== Button: REORDER_SWIMLANES ===========================
+  id: 45659035770305439
   identification: 
-    button-name: SHOW_ALL
-    label: Show All
+    button-name: REORDER_SWIMLANES
+    label: Reorder Swimlanes
 
   layout: 
     sequence: 10
-    region: Boards # 70383447796825293
+    region: Swimlanes # 116033389391130743
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -647,44 +766,38 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Text # 70970074101975671
+    button-template: Icon # 70969417180975670
     hot: false
     template-options: 
     - '#DEFAULT#'
+    icon: fa-list-ol
 
   behavior: 
-    action: Redirect to Page in this Application
-    target: 
-      url: 'f?p=&APP_ID.:200:&SESSION.::&DEBUG.::P200_SHOW_ALL:Y'
-      page: 200 # Boards
-      values: 
-        p200_show_all: Y
-
+    action: Submit Page
+    execute-validations: true
     warn-on-unsaved-changes: Do Not Check
 
-  server-side-condition: 
-    type: Item is NULL
-    item: P200_SHOW_ALL
-
 processes: 
-- # ====== Process: SAVE_BOARDS ================================
-  id: 35265137187888308
+- # ====== Process: SAVE_SWIMLANES =============================
+  id: 45658357467305438
   identification: 
-    name: SAVE_BOARDS
+    name: SAVE_SWIMLANES
     type: Interactive Grid - Automatic Row Processing (DML)
-    editable-region: Boards [GRID] # 104264620246786601
+    editable-region: Swimlanes [GRID] # 150829930707120305
 
   settings: 
     target-type: PL/SQL Code
     pl/sql-code-to-insert/update/delete: |
-      tsk_p200.save_boards (
-          io_board_id         => :BOARD_ID
+      tsk_p200.save_task_swimlanes (
+          io_client_id        => :CLIENT_ID,
+          io_project_id       => :PROJECT_ID,
+          io_swimlane_id      => :SWIMLANE_ID
       );
     prevent-lost-updates: true
     lock-row: No
 
   execution: 
-    sequence: 10
+    sequence: 40
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -693,4 +806,31 @@ processes:
 
   server-side-condition: 
     execution-scope: For Created and Modified Rows
+
+- # ====== Process: REORDER_SWIMLANES ==========================
+  id: 45665498236305447
+  identification: 
+    name: REORDER_SWIMLANES
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      tsk_p200.reorder_task_swimlanes (
+          in_client_id        => :P0_CLIENT_ID,
+          in_project_id       => :P0_PROJECT_ID
+      );
+      
+
+  execution: 
+    sequence: 50
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: REORDER_SWIMLANES # 45659035770305439
 

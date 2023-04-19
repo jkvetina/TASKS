@@ -1,10 +1,10 @@
 ---
-# ====== Page: Boards ========================================
-id: 200
+# ====== Page: Statuses ======================================
+id: 230
 identification: 
-  name: Boards
-  alias: BOARDS
-  title: Boards
+  name: Statuses
+  alias: STATUSES
+  title: Statuses
   page-group: MAIN # 78949836938576475
 
 appearance: 
@@ -39,10 +39,51 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Boards ======================================
-  id: 70383350292825292
+- # ====== Region: Statuses ====================================
+  id: 116014803885128117
   identification: 
-    title: Boards
+    title: Statuses
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: Statuses # 116014920363128119
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Statuses ====================================
+  id: 116014920363128119
+  identification: 
+    title: Statuses
     type: Static Content
 
   layout: 
@@ -80,63 +121,22 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Boards ======================================
-  id: 70383447796825293
+- # ====== Region: Statuses [GRID] =============================
+  id: 150806183964116933
   identification: 
-    title: Boards
-    type: Static Content
-
-  layout: 
-    sequence: 10
-    parent-region: Boards # 70383350292825292
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Hero # 70864195177975601
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: Boards [GRID] ===============================
-  id: 104264620246786601
-  identification: 
-    title: Boards [GRID]
+    title: Statuses [GRID]
     type: Interactive Grid
 
   source: 
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_P200_BOARDS_V
+    table-name: TSK_P230_STATUSES_V
     include-rowid-column: false
 
   layout: 
     sequence: 20
-    parent-region: Boards # 70383350292825292
+    parent-region: Statuses # 116014920363128119
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: false
@@ -165,7 +165,7 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 105170751304812752
+    id: 150806506016116936
     edit: 
       enabled: true
       allowed-operations: 
@@ -219,14 +219,146 @@ regions:
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
-      id: 105177522185823559
+      id: 150828999025289917
       identification: 
         name: Primary Report
-        alias: 347497
+        alias: 347675
 
   columns: 
+  - # ====== Column: COUNT_CLIENT ================================
+    id: 45517489443836014
+    identification: 
+      column-name: COUNT_CLIENT
+      type: Display Only
+
+    heading: 
+      heading: Count Client
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 130
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_CLIENT
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_PROJECT ===============================
+    id: 45517561289836015
+    identification: 
+      column-name: COUNT_PROJECT
+      type: Display Only
+
+    heading: 
+      heading: Count Project
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 120
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_PROJECT
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_BOARD =================================
+    id: 45517626732836016
+    identification: 
+      column-name: COUNT_BOARD
+      type: Display Only
+
+    heading: 
+      heading: Count Board
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 110
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_BOARD
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   - # ====== Column: APEX$ROW_ACTION =============================
-    id: 70384843189825307
+    id: 116014136705128111
     identification: 
       column-name: APEX$ROW_ACTION
       type: Actions Menu
@@ -235,7 +367,7 @@ regions:
       sequence: 20
 
   - # ====== Column: APEX$ROW_SELECTOR ===========================
-    id: 70384925691825308
+    id: 116014240464128112
     identification: 
       column-name: APEX$ROW_SELECTOR
       type: Row Selector
@@ -248,147 +380,8 @@ regions:
     layout: 
       sequence: 10
 
-  - # ====== Column: ACTIVATE_URL ================================
-    id: 70386455010825324
-    identification: 
-      column-name: ACTIVATE_URL
-      type: Link
-
-    heading: 
-      alignment: center
-
-    layout: 
-      sequence: 30
-      column-alignment: center
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    link: 
-      target: '&ACTIVATE_URL.'
-      link-text: ACTIVATE
-
-    source: 
-      type: Database Column
-      database-column: ACTIVATE_URL
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: false
-      hide: true
-
-    security: 
-      escape-special-characters: true
-
-  - # ====== Column: BOARD_ID ====================================
-    id: 105170818303812753
-    identification: 
-      column-name: BOARD_ID
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 40
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: BOARD_ID
-      data-type: NUMBER
-      query-only: false
-      primary-key: true
-
-    default: 
-      type: Sequence
-      sequence: TSK_BOARD_ID
-      duplicate-copies-existing-value: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: BOARD_NAME ==================================
-    id: 105170980379812754
-    identification: 
-      column-name: BOARD_NAME
-      type: Text Field
-
-    heading: 
-      heading: Board Name
-      alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
-    layout: 
-      sequence: 50
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-      maximum-length: 64
-
-    source: 
-      type: Database Column
-      database-column: BOARD_NAME
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
   - # ====== Column: CLIENT_ID ===================================
-    id: 105171059749812755
+    id: 150806789378116939
     identification: 
       column-name: CLIENT_ID
       type: Select List
@@ -398,7 +391,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 60
+      sequence: 30
       column-alignment: start
       stretch: Use Report Setting
 
@@ -438,7 +431,7 @@ regions:
       exact-match: true
 
     export-/-printing: 
-      include-in-export-/-print: true
+      include-in-export-/-print: false
 
     enable-users-to: 
       sort: true
@@ -446,7 +439,7 @@ regions:
       hide: true
 
   - # ====== Column: PROJECT_ID ==================================
-    id: 105171140843812756
+    id: 150806884922116940
     identification: 
       column-name: PROJECT_ID
       type: Select List
@@ -456,7 +449,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 70
+      sequence: 40
       column-alignment: start
       stretch: Use Report Setting
 
@@ -496,7 +489,7 @@ regions:
       exact-match: true
 
     export-/-printing: 
-      include-in-export-/-print: true
+      include-in-export-/-print: false
 
     enable-users-to: 
       sort: true
@@ -504,7 +497,7 @@ regions:
       hide: true
 
   - # ====== Column: IS_ACTIVE ===================================
-    id: 105171196736812757
+    id: 150806951203116941
     identification: 
       column-name: IS_ACTIVE
       type: Checkbox
@@ -518,7 +511,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 80
+      sequence: 70
       column-alignment: center
       stretch: Use Report Setting
 
@@ -559,6 +552,163 @@ regions:
       control-break/aggregate: true
       hide: true
 
+  - # ====== Column: STATUS_ID ===================================
+    id: 150807279067116944
+    identification: 
+      column-name: STATUS_ID
+      type: Text Field
+
+    heading: 
+      heading: Status Id
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 32
+
+    source: 
+      type: Database Column
+      database-column: STATUS_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: STATUS_NAME =================================
+    id: 150807353697116945
+    identification: 
+      column-name: STATUS_NAME
+      type: Text Field
+
+    heading: 
+      heading: Status Name
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 64
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ORDER# ======================================
+    id: 150859808126420247
+    identification: 
+      column-name: ORDER#
+      type: Number Field
+
+    heading: 
+      heading: Order#
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 100
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ORDER#
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   printing: 
     page: 
       size: Letter
@@ -575,7 +725,7 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
-      page-header-text: Boards [GRID]
+      page-header-text: Statuses [GRID]
 
     column-headings: 
       font: Helvetica
@@ -598,47 +748,16 @@ regions:
       font-color: '#000000'
       alignment: center
 
-page-items: 
-- # ====== Page Item: P200_SHOW_ALL ============================
-  id: 44174309728914750
-  identification: 
-    name: P200_SHOW_ALL
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 10
-    region: Boards # 70383447796825293
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
 buttons: 
-- # ====== Button: SHOW_ALL ====================================
-  id: 44174265203914749
+- # ====== Button: REORDER_STATUSES ============================
+  id: 45641524596302836
   identification: 
-    button-name: SHOW_ALL
-    label: Show All
+    button-name: REORDER_STATUSES
+    label: Reorder Statuses
 
   layout: 
     sequence: 10
-    region: Boards # 70383447796825293
+    region: Statuses # 116014803885128117
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -647,44 +766,38 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Text # 70970074101975671
+    button-template: Icon # 70969417180975670
     hot: false
     template-options: 
     - '#DEFAULT#'
+    icon: fa-list-ol
 
   behavior: 
-    action: Redirect to Page in this Application
-    target: 
-      url: 'f?p=&APP_ID.:200:&SESSION.::&DEBUG.::P200_SHOW_ALL:Y'
-      page: 200 # Boards
-      values: 
-        p200_show_all: Y
-
+    action: Submit Page
+    execute-validations: true
     warn-on-unsaved-changes: Do Not Check
 
-  server-side-condition: 
-    type: Item is NULL
-    item: P200_SHOW_ALL
-
 processes: 
-- # ====== Process: SAVE_BOARDS ================================
-  id: 35265137187888308
+- # ====== Process: SAVE_STATUSES ==============================
+  id: 45646183804302840
   identification: 
-    name: SAVE_BOARDS
+    name: SAVE_STATUSES
     type: Interactive Grid - Automatic Row Processing (DML)
-    editable-region: Boards [GRID] # 104264620246786601
+    editable-region: Statuses [GRID] # 150806183964116933
 
   settings: 
     target-type: PL/SQL Code
     pl/sql-code-to-insert/update/delete: |
-      tsk_p200.save_boards (
-          io_board_id         => :BOARD_ID
+      tsk_p200.save_task_statuses (
+          io_client_id        => :CLIENT_ID,
+          io_project_id       => :PROJECT_ID,
+          io_status_id        => :STATUS_ID
       );
     prevent-lost-updates: true
     lock-row: No
 
   execution: 
-    sequence: 10
+    sequence: 20
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -693,4 +806,31 @@ processes:
 
   server-side-condition: 
     execution-scope: For Created and Modified Rows
+
+- # ====== Process: REORDER_STATUSES ===========================
+  id: 45646531934302851
+  identification: 
+    name: REORDER_STATUSES
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      tsk_p200.reorder_task_statuses (
+          in_client_id        => :P0_CLIENT_ID,
+          in_project_id       => :P0_PROJECT_ID
+      );
+      
+
+  execution: 
+    sequence: 50
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: REORDER_STATUSES # 45641524596302836
 

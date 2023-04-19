@@ -13,6 +13,8 @@ USING (
     SELECT 100 AS page_id, NULL AS parent_id, 100 AS order#, NULL AS is_hidden, 'Y' AS is_reset FROM DUAL UNION ALL
     SELECT 105 AS page_id, 100 AS parent_id, 10 AS order#, 'Y' AS is_hidden, 'Y' AS is_reset FROM DUAL UNION ALL
     SELECT 200 AS page_id, NULL AS parent_id, 200 AS order#, NULL AS is_hidden, 'Y' AS is_reset FROM DUAL UNION ALL
+    SELECT 230 AS page_id, 200 AS parent_id, 10 AS order#, NULL AS is_hidden, 'Y' AS is_reset FROM DUAL UNION ALL
+    SELECT 250 AS page_id, 200 AS parent_id, 20 AS order#, NULL AS is_hidden, 'Y' AS is_reset FROM DUAL UNION ALL
     SELECT 300 AS page_id, NULL AS parent_id, 300 AS order#, NULL AS is_hidden, 'Y' AS is_reset FROM DUAL UNION ALL
     SELECT 400 AS page_id, NULL AS parent_id, 400 AS order#, NULL AS is_hidden, 'Y' AS is_reset FROM DUAL UNION ALL
     SELECT 500 AS page_id, NULL AS parent_id, 500 AS order#, NULL AS is_hidden, 'Y' AS is_reset FROM DUAL UNION ALL

@@ -130,6 +130,8 @@ prompt --install
 @@application/pages/page_00110.sql
 @@application/pages/page_00115.sql
 @@application/pages/page_00200.sql
+@@application/pages/page_00230.sql
+@@application/pages/page_00250.sql
 @@application/pages/page_00300.sql
 @@application/pages/page_00400.sql
 @@application/pages/page_00500.sql
