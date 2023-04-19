@@ -8,7 +8,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         BEGIN
             SELECT t.* INTO rec
             FROM tsk_tasks t
-            WHERE t.task_id = core.get_number_item('P105_TASK_ID');
+            WHERE t.task_id = core.get_item('P105_TASK_ID');
         EXCEPTION
         WHEN NO_DATA_FOUND THEN
             NULL;
@@ -33,16 +33,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
         -- calculate prev/next tasks
         FOR c IN (
-            SELECT task_id, prev_task, next_task
-            FROM (
-                SELECT
-                    t.task_id,
-                    LAG(t.task_id)  OVER (ORDER BY t.swimlane_order# NULLS LAST, t.status_order# NULLS LAST, t.task_order# NULLS LAST) AS prev_task,
-                    LEAD(t.task_id) OVER (ORDER BY t.swimlane_order# NULLS LAST, t.status_order# NULLS LAST, t.task_order# NULLS LAST) AS next_task
-                    --
-                FROM tsk_p100_tasks_grid_v t
-            )
-            WHERE task_id = rec.task_id
+            SELECT t.task_id, t.prev_task, t.next_task
+            FROM tsk_p100_tasks_grid_v t
+            WHERE t.task_id = rec.task_id
         ) LOOP
             core.set_item('P105_PREV_TASK_ID', NULLIF(c.prev_task, c.task_id));
             core.set_item('P105_NEXT_TASK_ID', NULLIF(c.next_task, c.task_id));

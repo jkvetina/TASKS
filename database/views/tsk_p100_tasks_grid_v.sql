@@ -23,21 +23,38 @@ SELECT
     t.swimlane_id,
     w.order#            AS swimlane_order#,
     s.order#            AS status_order#,
-    t.order#            AS task_order#
+    t.order#            AS task_order#,
+    --
+    LAG(t.task_id) OVER (
+        PARTITION BY t.client_id, t.project_id, t.board_id
+        ORDER BY w.order# NULLS LAST, s.order# NULLS LAST, t.order# NULLS LAST
+    ) AS prev_task,
+    --
+    LEAD(t.task_id) OVER (
+        PARTITION BY t.client_id, t.project_id, t.board_id
+        ORDER BY w.order# NULLS LAST, s.order# NULLS LAST, t.order# NULLS LAST
+    ) AS next_task
     --
 FROM tsk_tasks t
-CROSS JOIN x
+JOIN x
+    ON x.client_id      = t.client_id
+    AND x.project_id    = t.project_id
+    AND x.board_id      = t.board_id
 JOIN tsk_statuses s
     ON s.status_id      = t.status_id
+    AND s.client_id     = t.client_id
+    AND s.project_id    = t.project_id
 JOIN tsk_swimlanes w
     ON w.swimlane_id    = t.swimlane_id
+    AND w.client_id     = t.client_id
+    AND W.project_id    = t.project_id
 LEFT JOIN tsk_task_checklist l
     ON l.task_id        = t.task_id
-WHERE t.client_id       = x.client_id
-    AND t.project_id    = x.project_id
-    AND t.board_id      = x.board_id
     --AND t.swimlane_id   = w.swimlane_id
 GROUP BY
+    t.client_id,
+    t.project_id,
+    t.board_id,
     t.task_id,
     t.task_name,
     t.status_id,
