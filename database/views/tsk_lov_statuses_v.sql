@@ -7,15 +7,14 @@ WITH x AS (
 )
 SELECT
     t.status_id,
-    t.status_name
+    t.status_name,
+    ROW_NUMBER() OVER (ORDER BY t.order# NULLS LAST, t.status_id) AS order#
+    --
 FROM tsk_statuses t
 JOIN x
     ON x.client_id      = t.client_id
     AND x.project_id    = t.project_id
-WHERE t.is_active       = 'Y'
-ORDER BY
-    t.order# NULLS LAST,
-    t.status_id;
+WHERE t.is_active       = 'Y';
 --
 COMMENT ON TABLE tsk_lov_statuses_v IS '';
 

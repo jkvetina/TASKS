@@ -8,14 +8,15 @@ WITH x AS (
 SELECT
     t.status_id,
     t.status_name,
-    t.is_active
+    --
+    CASE WHEN t.is_active = 'Y' THEN 'Active:' ELSE 'Not Active:' END AS is_active,
+    --
+    ROW_NUMBER() OVER (ORDER BY t.order# NULLS LAST, t.status_id) AS order#
+    --
 FROM tsk_statuses t
 JOIN x
     ON x.client_id      = t.client_id
-    AND x.project_id    = t.project_id
-ORDER BY
-    t.order# NULLS LAST,
-    t.status_id;
+    AND x.project_id    = t.project_id;
 --
 COMMENT ON TABLE tsk_lov_statuses_all_v IS '';
 

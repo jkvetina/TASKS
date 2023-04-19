@@ -7,15 +7,14 @@ WITH x AS (
 )
 SELECT
     t.swimlane_id,
-    t.swimlane_name
+    t.swimlane_name,
+    ROW_NUMBER() OVER (ORDER BY t.order# NULLS LAST, t.swimlane_id) AS order#
+    --
 FROM tsk_swimlanes t
 JOIN x
     ON x.client_id      = t.client_id
     AND x.project_id    = t.project_id
-WHERE t.is_active       = 'Y'
-ORDER BY
-    t.order# NULLS LAST,
-    t.swimlane_id;
+WHERE t.is_active       = 'Y';
 --
 COMMENT ON TABLE tsk_lov_swimlanes_v IS '';
 

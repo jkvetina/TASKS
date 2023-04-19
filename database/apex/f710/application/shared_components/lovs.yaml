@@ -61,7 +61,8 @@
   column-mapping: 
     return: SWIMLANE_ID
     display: SWIMLANE_NAME
-    default-sort: Use Order By from Query
+    default-sort: ORDER#
+    sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: LOV_STATUSES ========================
   id: 34920754342188100
@@ -77,7 +78,8 @@
   column-mapping: 
     return: STATUS_ID
     display: STATUS_NAME
-    default-sort: Use Order By from Query
+    default-sort: ORDER#
+    sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: LOV_BOARD_TYPES =====================
   id: 44164215535767295
@@ -265,7 +267,7 @@
   column-mapping: 
     return: SWIMLANE_ID
     display: SWIMLANE_NAME
-    default-sort: SWIMLANE_NAME
+    default-sort: ORDER#
     sort-direction: Ascending (Nulls Last)
     group: IS_ACTIVE
     group-sort-direction: Ascending (Nulls Last)
@@ -284,7 +286,7 @@
   column-mapping: 
     return: STATUS_ID
     display: STATUS_NAME
-    default-sort: STATUS_NAME
+    default-sort: ORDER#
     sort-direction: Ascending (Nulls Last)
     group: IS_ACTIVE
     group-sort-direction: Ascending (Nulls Last)
