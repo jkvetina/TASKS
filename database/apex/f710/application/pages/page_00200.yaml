@@ -39,10 +39,10 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Boards ======================================
-  id: 70383350292825292
+- # ====== Region: Project Boards ==============================
+  id: 45519167778836031
   identification: 
-    title: Boards
+    title: Project Boards
     type: Static Content
 
   layout: 
@@ -80,51 +80,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Boards ======================================
-  id: 70383447796825293
+- # ====== Region: Project Boards [GRID] =======================
+  id: 45519220948836032
   identification: 
-    title: Boards
-    type: Static Content
-
-  layout: 
-    sequence: 10
-    parent-region: Boards # 70383350292825292
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Hero # 70864195177975601
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: Boards [GRID] ===============================
-  id: 104264620246786601
-  identification: 
-    title: Boards [GRID]
+    title: Project Boards [GRID]
     type: Interactive Grid
 
   source: 
@@ -136,12 +95,12 @@ regions:
 
   layout: 
     sequence: 20
-    parent-region: Boards # 70383350292825292
+    parent-region: Project Boards # 45519167778836031
     position: SUB_REGIONS
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
-    new-column: false
+    new-column: true
     column-span: Automatic
 
   appearance: 
@@ -165,7 +124,7 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 105170751304812752
+    id: 45519350792836033
     edit: 
       enabled: true
       allowed-operations: 
@@ -173,7 +132,7 @@ regions:
       - Update Row
       - Delete Row
       lost-update-type: Row Values
-      add-row-if-empty: false
+      add-row-if-empty: true
 
     performance: 
       lazy-loading: false
@@ -219,55 +178,26 @@ regions:
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
-      id: 105177522185823559
+      id: 45739868706717010
       identification: 
         name: Primary Report
-        alias: 347497
+        alias: 457399
 
   columns: 
-  - # ====== Column: APEX$ROW_ACTION =============================
-    id: 70384843189825307
-    identification: 
-      column-name: APEX$ROW_ACTION
-      type: Actions Menu
-
-    layout: 
-      sequence: 20
-
-  - # ====== Column: APEX$ROW_SELECTOR ===========================
-    id: 70384925691825308
-    identification: 
-      column-name: APEX$ROW_SELECTOR
-      type: Row Selector
-
-    settings: 
-      enable-multi-select: true
-      show-select-all: true
-      hide-control: false
-
-    layout: 
-      sequence: 10
-
   - # ====== Column: ACTIVATE_URL ================================
-    id: 70386455010825324
+    id: 45519625527836036
     identification: 
       column-name: ACTIVATE_URL
-      type: Link
+      type: Hidden
 
-    heading: 
-      alignment: center
+    settings: 
+      value-protected: true
 
     layout: 
-      sequence: 30
-      column-alignment: center
-      stretch: Use Report Setting
+      sequence: 90
 
     accessibility: 
       value-identifies-row: false
-
-    link: 
-      target: '&ACTIVATE_URL.'
-      link-text: ACTIVATE
 
     source: 
       type: Database Column
@@ -276,28 +206,17 @@ regions:
       query-only: true
       primary-key: false
 
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
+    session-state: 
+      data-type: VARCHAR2
 
     export-/-printing: 
-      include-in-export-/-print: true
+      include-in-export-/-print: false
 
     enable-users-to: 
       sort: false
-      hide: true
-
-    security: 
-      escape-special-characters: true
 
   - # ====== Column: BOARD_ID ====================================
-    id: 105170818303812753
+    id: 45519793673836037
     identification: 
       column-name: BOARD_ID
       type: Hidden
@@ -306,7 +225,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 40
+      sequence: 50
 
     accessibility: 
       value-identifies-row: false
@@ -333,7 +252,7 @@ regions:
       sort: false
 
   - # ====== Column: BOARD_NAME ==================================
-    id: 105170980379812754
+    id: 45519875445836038
     identification: 
       column-name: BOARD_NAME
       type: Text Field
@@ -347,7 +266,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -388,7 +307,7 @@ regions:
       hide: true
 
   - # ====== Column: CLIENT_ID ===================================
-    id: 105171059749812755
+    id: 45519983056836039
     identification: 
       column-name: CLIENT_ID
       type: Select List
@@ -398,7 +317,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 60
+      sequence: 30
       column-alignment: start
       stretch: Use Report Setting
 
@@ -446,7 +365,7 @@ regions:
       hide: true
 
   - # ====== Column: PROJECT_ID ==================================
-    id: 105171140843812756
+    id: 45520050895836040
     identification: 
       column-name: PROJECT_ID
       type: Select List
@@ -456,7 +375,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 70
+      sequence: 40
       column-alignment: start
       stretch: Use Report Setting
 
@@ -504,7 +423,7 @@ regions:
       hide: true
 
   - # ====== Column: IS_ACTIVE ===================================
-    id: 105171196736812757
+    id: 45520144278836041
     identification: 
       column-name: IS_ACTIVE
       type: Checkbox
@@ -518,7 +437,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 80
+      sequence: 110
       column-alignment: center
       stretch: Use Report Setting
 
@@ -559,6 +478,201 @@ regions:
       control-break/aggregate: true
       hide: true
 
+  - # ====== Column: IS_CURRENT ==================================
+    id: 45760200833794020
+    identification: 
+      column-name: IS_CURRENT
+      type: Checkbox
+
+    heading: 
+      heading: Is Current
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 100
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_CURRENT
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    read-only: 
+      type: Always
+      execute: Once
+
+  - # ====== Column: EDIT_ACTION =================================
+    id: 45760329531794021
+    identification: 
+      column-name: EDIT_ACTION
+      type: Link
+
+    heading: 
+      heading: Action
+      alignment: center
+
+    layout: 
+      sequence: 70
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:205:&SESSION.::&DEBUG.:205:P205_BOARD_ID:&BOARD_ID.'
+        page: 205 # Add/Edit Board
+        clear-cache: 205
+        values: 
+          p205_board_id: '&BOARD_ID.'
+
+      link-text: '&EDIT_ACTION.'
+
+    source: 
+      type: Database Column
+      database-column: EDIT_ACTION
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: ACTIVATE_ACTION =============================
+    id: 45760444959794022
+    identification: 
+      column-name: ACTIVATE_ACTION
+      type: Link
+
+    heading: 
+      heading: Action
+      alignment: center
+
+    layout: 
+      sequence: 80
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: '&ACTIVATE_URL.'
+      link-text: '&ACTIVATE_ACTION.'
+
+    source: 
+      type: Database Column
+      database-column: ACTIVATE_ACTION
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    security: 
+      escape-special-characters: true
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 45761195463794029
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
+  - # ====== Column: APEX$ROW_SELECTOR ===========================
+    id: 45761251853794030
+    identification: 
+      column-name: APEX$ROW_SELECTOR
+      type: Row Selector
+
+    settings: 
+      enable-multi-select: true
+      show-select-all: true
+      hide-control: false
+
+    layout: 
+      sequence: 10
+
   printing: 
     page: 
       size: Letter
@@ -575,7 +689,7 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
-      page-header-text: Boards [GRID]
+      page-header-text: Project Boards [GRID]
 
     column-headings: 
       font: Helvetica
@@ -598,47 +712,57 @@ regions:
       font-color: '#000000'
       alignment: center
 
-page-items: 
-- # ====== Page Item: P200_SHOW_ALL ============================
-  id: 44174309728914750
+- # ====== Region: Project Boards ==============================
+  id: 45520208745836042
   identification: 
-    name: P200_SHOW_ALL
-    type: Hidden
-
-  settings: 
-    value-protected: true
+    title: Project Boards
+    type: Static Content
 
   layout: 
     sequence: 10
-    region: Boards # 70383447796825293
-    position: BODY
+    parent-region: Project Boards # 45519167778836031
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
 
   advanced: 
-    warn-on-unsaved-changes: Page Default
+    region-display-selector: false
+    exclude-title-from-translation: false
 
-  source: 
-    type: Null
-    used: Only when current value in session state is null
+  server-cache: 
+    caching: Disabled
 
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
+  customization: 
+    customizable: Not Customizable By End Users
 
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
 
 buttons: 
-- # ====== Button: SHOW_ALL ====================================
-  id: 44174265203914749
+- # ====== Button: ADD_BOARD ===================================
+  id: 45760155557794019
   identification: 
-    button-name: SHOW_ALL
-    label: Show All
+    button-name: ADD_BOARD
+    label: Add Board
 
   layout: 
     sequence: 10
-    region: Boards # 70383447796825293
+    region: Project Boards # 45520208745836042
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -647,32 +771,28 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Text # 70970074101975671
+    button-template: Icon # 70969417180975670
     hot: false
     template-options: 
     - '#DEFAULT#'
+    icon: fa-plus
 
   behavior: 
     action: Redirect to Page in this Application
     target: 
-      url: 'f?p=&APP_ID.:200:&SESSION.::&DEBUG.::P200_SHOW_ALL:Y'
-      page: 200 # Boards
-      values: 
-        p200_show_all: Y
+      url: 'f?p=&APP_ID.:205:&SESSION.::&DEBUG.:205::'
+      page: 205 # Add/Edit Board
+      clear-cache: 205
 
     warn-on-unsaved-changes: Do Not Check
 
-  server-side-condition: 
-    type: Item is NULL
-    item: P200_SHOW_ALL
-
 processes: 
 - # ====== Process: SAVE_BOARDS ================================
-  id: 35265137187888308
+  id: 45761302259794031
   identification: 
     name: SAVE_BOARDS
     type: Interactive Grid - Automatic Row Processing (DML)
-    editable-region: Boards [GRID] # 104264620246786601
+    editable-region: Project Boards [GRID] # 45519220948836032
 
   settings: 
     target-type: PL/SQL Code
