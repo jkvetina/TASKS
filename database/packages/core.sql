@@ -998,7 +998,7 @@ CREATE OR REPLACE PACKAGE BODY core AS
                 '|' || in_arg5 || '|' || in_arg6 || '|' || in_arg7 || '|' || in_arg8,
                 '|'
             ) ||
-            '|' || core.get_caller_name() ||
+            '|' || core.get_caller_name(3) ||
             CASE WHEN in_traceback THEN '|' || DBMS_UTILITY.FORMAT_ERROR_BACKTRACE END,
             1, 4000);
         --
