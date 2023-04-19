@@ -1203,6 +1203,9 @@ buttons:
 
   advanced: 
     static-id: MAKE_CHANGES
+    custom-attributes: 
+    - 'style="display:'
+    - none;"
 
 - # ====== Button: CLOSE_DIALOG ================================
   id: 45188962868165718
@@ -1298,6 +1301,39 @@ dynamic-actions:
     execution: 
       sequence: 10
       event: CLOSE_DIALOG # 45209390022165756
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: TARGET_SELECTED =====================
+  id: 45518574258836025
+  identification: 
+    name: TARGET_SELECTED
+
+  execution: 
+    sequence: 30
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P110_STATUS_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 45518694715836026
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: $('#MAKE_CHANGES').show();
+
+    execution: 
+      sequence: 10
+      event: TARGET_SELECTED # 45518574258836025
       fire-when-event-result-is: True
       fire-on-initialization: false
 
