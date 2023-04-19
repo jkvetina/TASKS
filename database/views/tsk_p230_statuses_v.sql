@@ -18,6 +18,8 @@ c AS (
     GROUP BY t.status_id
 )
 SELECT
+    t.status_id         AS pk_status_id,    -- to allow PK changes
+    --
     t.client_id,
     t.project_id,
     t.status_id,

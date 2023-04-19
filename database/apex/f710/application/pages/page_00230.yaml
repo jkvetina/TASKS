@@ -240,7 +240,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 130
+      sequence: 120
       column-alignment: end
       stretch: Use Report Setting
 
@@ -284,7 +284,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 120
+      sequence: 110
       column-alignment: end
       stretch: Use Report Setting
 
@@ -328,7 +328,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 110
+      sequence: 100
       column-alignment: end
       stretch: Use Report Setting
 
@@ -356,6 +356,40 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
+
+  - # ====== Column: PK_STATUS_ID ================================
+    id: 45518085982836020
+    identification: 
+      column-name: PK_STATUS_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 30
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: PK_STATUS_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
 
   - # ====== Column: APEX$ROW_ACTION =============================
     id: 116014136705128111
@@ -391,7 +425,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 30
+      sequence: 40
       column-alignment: start
       stretch: Use Report Setting
 
@@ -449,7 +483,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 40
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -511,7 +545,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 70
+      sequence: 80
       column-alignment: center
       stretch: Use Report Setting
 
@@ -567,7 +601,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -583,7 +617,7 @@ regions:
       database-column: STATUS_ID
       data-type: VARCHAR2
       query-only: false
-      primary-key: true
+      primary-key: false
 
     default: 
       duplicate-copies-existing-value: true
@@ -622,7 +656,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: start
       stretch: Use Report Setting
 
@@ -677,7 +711,7 @@ regions:
       virtual-keyboard: Decimal
 
     layout: 
-      sequence: 100
+      sequence: 90
       column-alignment: end
       stretch: Use Report Setting
 
@@ -791,7 +825,7 @@ processes:
       tsk_p200.save_task_statuses (
           io_client_id        => :CLIENT_ID,
           io_project_id       => :PROJECT_ID,
-          io_status_id        => :STATUS_ID
+          io_status_id        => :PK_STATUS_ID
       );
     prevent-lost-updates: true
     lock-row: No

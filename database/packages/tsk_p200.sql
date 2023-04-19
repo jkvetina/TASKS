@@ -44,7 +44,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
     PROCEDURE save_task_statuses (
         io_client_id        IN OUT NOCOPY   tsk_statuses.client_id%TYPE,
         io_project_id       IN OUT NOCOPY   tsk_statuses.project_id%TYPE,
-        io_status_id        IN OUT NOCOPY   tsk_statuses.status_id%TYPE
+        io_status_id        IN OUT NOCOPY   tsk_statuses.status_id%TYPE         -- old key
     )
     AS
         v_action            CHAR;
@@ -55,14 +55,15 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.client_id       := tsk_app.get_grid_client_id(io_client_id);
         rec.project_id      := tsk_app.get_grid_project_id(io_project_id);
         --
-        rec.status_id       := APEX_UTIL.GET_SESSION_STATE('STATUS_ID');
+        rec.status_id       := APEX_UTIL.GET_SESSION_STATE('STATUS_ID');        -- new key
         rec.status_name     := APEX_UTIL.GET_SESSION_STATE('STATUS_NAME');
         rec.is_active       := APEX_UTIL.GET_SESSION_STATE('IS_ACTIVE');
         rec.order#          := APEX_UTIL.GET_SESSION_STATE('ORDER#');
         --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
-        --
+
+        -- are we deleting the status?
         IF v_action = 'D' THEN
             DELETE FROM tsk_statuses t
             WHERE t.status_id       = rec.status_id
@@ -71,16 +72,36 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
             --
             RETURN;
         END IF;
-        --
-        UPDATE tsk_statuses t
-        SET ROW = rec
-        WHERE t.status_id       = rec.status_id
-            AND t.client_id     = rec.client_id
-            AND t.project_id    = rec.project_id;
-        --
-        IF SQL%ROWCOUNT = 0 THEN
+
+        -- are we renaming the primary key?
+        IF rec.status_id != io_status_id AND v_action = 'U' THEN
+            -- create new status
             INSERT INTO tsk_statuses
             VALUES rec;
+
+            -- move old lines to the new status
+            UPDATE tsk_tasks t
+            SET t.status_id         = rec.status_id         -- new key
+            WHERE t.status_id       = io_status_id          -- old key
+                AND t.client_id     = rec.client_id
+                AND t.project_id    = rec.project_id;
+            --
+            DELETE FROM tsk_statuses t
+            WHERE t.status_id       = io_status_id          -- old key
+                AND t.client_id     = rec.client_id
+                AND t.project_id    = rec.project_id;
+        ELSE
+            -- proceed with update or insert
+            UPDATE tsk_statuses t
+            SET ROW = rec
+            WHERE t.status_id       = rec.status_id
+                AND t.client_id     = rec.client_id
+                AND t.project_id    = rec.project_id;
+            --
+            IF SQL%ROWCOUNT = 0 THEN
+                INSERT INTO tsk_statuses
+                VALUES rec;
+            END IF;
         END IF;
 
         -- update keys to APEX

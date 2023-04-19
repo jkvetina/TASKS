@@ -14,9 +14,6 @@ CREATE TABLE tsk_statuses (
     CONSTRAINT pk_tsk_status
         PRIMARY KEY (client_id, project_id, status_id),
     --
-    CONSTRAINT uq_tsk_status
-        UNIQUE (client_id, project_id, status_name),
-    --
     CONSTRAINT fk_tsk_status_project
         FOREIGN KEY (client_id, project_id)
         REFERENCES tsk_projects (client_id, project_id)
