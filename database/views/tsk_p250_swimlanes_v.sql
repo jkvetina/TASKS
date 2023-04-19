@@ -1,9 +1,9 @@
 CREATE OR REPLACE FORCE VIEW tsk_p250_swimlanes_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        core.get_item('P0_CLIENT_ID')   AS client_id,
-        core.get_item('P0_PROJECT_ID')  AS project_id,
-        core.get_item('P0_BOARD_ID')    AS board_id
+        core.get_item('P0_CLIENT_ID')           AS client_id,
+        core.get_item('P0_PROJECT_ID')          AS project_id,
+        core.get_number_item('P0_BOARD_ID')     AS board_id
     FROM DUAL
 ),
 c AS (
@@ -18,6 +18,8 @@ c AS (
     GROUP BY t.swimlane_id
 )
 SELECT
+    t.swimlane_id       AS pk_swimlane_id,    -- to allow PK changes
+    --
     t.client_id,
     t.project_id,
     t.swimlane_id,

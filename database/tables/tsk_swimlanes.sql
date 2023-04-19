@@ -14,9 +14,6 @@ CREATE TABLE tsk_swimlanes (
     CONSTRAINT pk_tsk_swimlanes
         PRIMARY KEY (client_id, project_id, swimlane_id),
     --
-    CONSTRAINT uq_tsk_swimlanes
-        UNIQUE (client_id, project_id, swimlane_name),
-    --
     CONSTRAINT fk_tsk_swimlanes_project
         FOREIGN KEY (client_id, project_id)
         REFERENCES tsk_projects (client_id, project_id)

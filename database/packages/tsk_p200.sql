@@ -66,9 +66,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         -- are we deleting the status?
         IF v_action = 'D' THEN
             DELETE FROM tsk_statuses t
-            WHERE t.status_id       = rec.status_id
-                AND t.client_id     = rec.client_id
-                AND t.project_id    = rec.project_id;
+            WHERE t.status_id       = io_status_id          -- old key
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
             --
             RETURN;
         END IF;
@@ -83,20 +83,20 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
             UPDATE tsk_tasks t
             SET t.status_id         = rec.status_id         -- new key
             WHERE t.status_id       = io_status_id          -- old key
-                AND t.client_id     = rec.client_id
-                AND t.project_id    = rec.project_id;
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
             --
             DELETE FROM tsk_statuses t
             WHERE t.status_id       = io_status_id          -- old key
-                AND t.client_id     = rec.client_id
-                AND t.project_id    = rec.project_id;
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
         ELSE
             -- proceed with update or insert
             UPDATE tsk_statuses t
             SET ROW = rec
-            WHERE t.status_id       = rec.status_id
-                AND t.client_id     = rec.client_id
-                AND t.project_id    = rec.project_id;
+            WHERE t.status_id       = io_status_id
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
             --
             IF SQL%ROWCOUNT = 0 THEN
                 INSERT INTO tsk_statuses
@@ -136,22 +136,41 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         --
         IF v_action = 'D' THEN
             DELETE FROM tsk_swimlanes t
-            WHERE t.swimlane_id     = rec.swimlane_id
-                AND t.client_id     = rec.client_id
-                AND t.project_id    = rec.project_id;
+            WHERE t.swimlane_id     = io_swimlane_id        -- old key
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
             --
             RETURN;
         END IF;
-        --
-        UPDATE tsk_swimlanes t
-        SET ROW = rec
-        WHERE t.swimlane_id     = rec.swimlane_id
-            AND t.client_id     = rec.client_id
-            AND t.project_id    = rec.project_id;
-        --
-        IF SQL%ROWCOUNT = 0 THEN
+
+        -- are we renaming the primary key?
+        IF rec.swimlane_id != io_swimlane_id AND v_action = 'U' THEN
+            -- create new status
             INSERT INTO tsk_swimlanes
             VALUES rec;
+
+            -- move old lines to the new status
+            UPDATE tsk_tasks t
+            SET t.swimlane_id       = rec.swimlane_id       -- new key
+            WHERE t.swimlane_id     = io_swimlane_id        -- old key
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
+            --
+            DELETE FROM tsk_swimlanes t
+            WHERE t.swimlane_id     = io_swimlane_id        -- old key
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
+        ELSE
+            UPDATE tsk_swimlanes t
+            SET ROW = rec
+            WHERE t.swimlane_id     = io_swimlane_id
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
+            --
+            IF SQL%ROWCOUNT = 0 THEN
+                INSERT INTO tsk_swimlanes
+                VALUES rec;
+            END IF;
         END IF;
 
         -- update keys to APEX
