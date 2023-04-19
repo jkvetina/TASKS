@@ -793,31 +793,9 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_02=>'Y'
 );
 wwv_flow_imp_page.create_page_da_event(
- p_id=>wwv_flow_imp.id(34951752190065827)
-,p_name=>'CLOSED_DETAIL'
-,p_event_sequence=>80
-,p_triggering_element_type=>'JAVASCRIPT_EXPRESSION'
-,p_triggering_element=>'window'
-,p_bind_type=>'bind'
-,p_execution_type=>'IMMEDIATE'
-,p_bind_event_type=>'apexafterclosedialog'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(35122614857937001)
-,p_event_id=>wwv_flow_imp.id(34951752190065827)
-,p_event_result=>'TRUE'
-,p_action_sequence=>10
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_JAVASCRIPT_CODE'
-,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'//location.reload();',
-'window.location = apex.item(''P100_TASKS_LINK'').getValue();',
-''))
-);
-wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(44173741419914744)
 ,p_name=>'SHOW_DETAIL'
-,p_event_sequence=>90
+,p_event_sequence=>100
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'ready'
 ,p_display_when_type=>'ITEM_IS_NOT_NULL'
@@ -832,6 +810,28 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_JAVASCRIPT_CODE'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'window.location.href = apex.item(''P100_TASK_LINK'').getValue();',
+''))
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(45518772288836027)
+,p_name=>'DIALOG_CLOSED'
+,p_event_sequence=>110
+,p_triggering_element_type=>'JAVASCRIPT_EXPRESSION'
+,p_triggering_element=>'window'
+,p_bind_type=>'bind'
+,p_execution_type=>'IMMEDIATE'
+,p_bind_event_type=>'apexafterclosedialog'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(45518875443836028)
+,p_event_id=>wwv_flow_imp.id(45518772288836027)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'//location.reload();  // dont work properly',
+'window.location = apex.item(''P100_TASKS_LINK'').getValue();',
 ''))
 );
 wwv_flow_imp_page.create_page_process(

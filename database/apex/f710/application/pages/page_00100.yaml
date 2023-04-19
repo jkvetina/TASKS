@@ -1573,48 +1573,13 @@ dynamic-actions:
       fire-when-event-result-is: True
       fire-on-initialization: false
 
-- # ====== Dynamic Action: CLOSED_DETAIL =======================
-  id: 34951752190065827
-  identification: 
-    name: CLOSED_DETAIL
-
-  execution: 
-    sequence: 80
-
-  when: 
-    event: EVENT.EVENT.FAMEWORK.APEXAFTERCLOSEDIALOG
-    selection-type: JavaScript Expression
-    javascript-expression: window
-
-  execution: 
-    event-scope: Static
-    type: Immediate
-
-  actions: 
-  - # ====== Action: Execute JavaScript Code =====================
-    id: 35122614857937001
-    identification: 
-      action: Execute JavaScript Code
-
-    settings: 
-      code: |
-        //location.reload();
-        window.location = apex.item('P100_TASKS_LINK').getValue();
-        
-
-    execution: 
-      sequence: 10
-      event: CLOSED_DETAIL # 34951752190065827
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
 - # ====== Dynamic Action: SHOW_DETAIL =========================
   id: 44173741419914744
   identification: 
     name: SHOW_DETAIL
 
   execution: 
-    sequence: 90
+    sequence: 100
 
   when: 
     event: EVENT.EVENT.BROWSER.READY
@@ -1640,6 +1605,41 @@ dynamic-actions:
     execution: 
       sequence: 10
       event: SHOW_DETAIL # 44173741419914744
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: DIALOG_CLOSED =======================
+  id: 45518772288836027
+  identification: 
+    name: DIALOG_CLOSED
+
+  execution: 
+    sequence: 110
+
+  when: 
+    event: EVENT.EVENT.FAMEWORK.APEXAFTERCLOSEDIALOG
+    selection-type: JavaScript Expression
+    javascript-expression: window
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 45518875443836028
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        //location.reload();  // dont work properly
+        window.location = apex.item('P100_TASKS_LINK').getValue();
+        
+
+    execution: 
+      sequence: 10
+      event: DIALOG_CLOSED # 45518772288836027
       fire-when-event-result-is: True
       fire-on-initialization: false
 
