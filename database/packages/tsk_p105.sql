@@ -11,25 +11,15 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             WHERE t.task_id = core.get_item('P105_TASK_ID');
         EXCEPTION
         WHEN NO_DATA_FOUND THEN
-            NULL;
+            core.raise_error('INVALID_TASK');
         END;
 
-        -- use globals as defaults
-        IF core.get_item('P105_CLIENT_ID') IS NULL THEN
-            core.set_item('P105_CLIENT_ID', core.get_item('P0_CLIENT_ID'));
-        END IF;
-        --
-        IF core.get_item('P105_PROJECT_ID') IS NULL THEN
-            core.set_item('P105_PROJECT_ID', core.get_item('P0_PROJECT_ID'));
-        END IF;
-        --
-        IF core.get_item('P105_BOARD_ID') IS NULL THEN
-            core.set_item('P105_BOARD_ID', core.get_item('P0_BOARD_ID'));
-        END IF;
-
-        -- generate task header
-        core.set_item('P105_TASK_LINK', tsk_app.get_task_link(rec.task_id, 'EXTERNAL'));
-        core.set_item('P105_UPDATED_AT', rec.updated_at);
+        -- overwrite some page items
+        core.set_item('P105_CLIENT_ID',     rec.client_id);
+        core.set_item('P105_PROJECT_ID',    rec.project_id);
+        core.set_item('P105_BOARD_ID',      rec.board_id);
+        core.set_item('P105_TASK_LINK',     tsk_app.get_task_link(rec.task_id, 'EXTERNAL'));
+        core.set_item('P105_AUDIT',         TO_CHAR(rec.updated_at, 'YYYY-MM-DD HH24:MI') || ' ' || rec.updated_by);
 
         -- calculate prev/next tasks
         FOR c IN (
@@ -72,7 +62,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             WHERE c.task_id             = rec.task_id
         ) LOOP
             core.set_item(c.item_name, c.badge);
-            --
+
+            -- offer task split when there are unfinished items on checklist
             IF c.item_name = 'P105_BADGE_CHECKLIST' AND INSTR(c.badge, 'fa-number') >= 0 THEN
                 core.set_item('P105_SHOW_SPLIT', 'Y');
             END IF;
@@ -91,7 +82,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         v_action            VARCHAR2(64);
         rec                 tsk_tasks%ROWTYPE;
     BEGIN
-        v_action            := APEX_APPLICATION.G_REQUEST;
+        v_action            := core.get_request();
         --
         rec.task_id         := core.get_item('P105_TASK_ID');
         rec.task_name       := core.get_item('P105_TASK_NAME');
