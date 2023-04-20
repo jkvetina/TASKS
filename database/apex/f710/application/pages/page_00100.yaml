@@ -328,11 +328,11 @@ regions:
 
     heading: 
       heading: Task Id
-      alignment: end
+      alignment: start
 
     layout: 
       sequence: 30
-      column-alignment: end
+      column-alignment: start
       stretch: Use Report Setting
 
     accessibility: 
@@ -527,7 +527,7 @@ regions:
       type: Select List
 
     heading: 
-      heading: Status Id
+      heading: Status
       alignment: start
 
     layout: 
@@ -583,7 +583,7 @@ regions:
       type: Select List
 
     heading: 
-      heading: Swimlane Id
+      heading: Swimlane
       alignment: start
 
     layout: 

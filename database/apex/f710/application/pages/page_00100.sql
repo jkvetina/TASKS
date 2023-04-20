@@ -134,9 +134,9 @@ wwv_flow_imp_page.create_region_column(
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_LINK'
 ,p_heading=>'Task Id'
-,p_heading_alignment=>'RIGHT'
+,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>30
-,p_value_alignment=>'RIGHT'
+,p_value_alignment=>'LEFT'
 ,p_link_target=>'&TASK_LINK.'
 ,p_link_text=>'&TASK_ID.'
 ,p_enable_filter=>true
@@ -239,7 +239,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_SELECT_LIST'
-,p_heading=>'Status Id'
+,p_heading=>'Status'
 ,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>60
 ,p_value_alignment=>'LEFT'
@@ -270,7 +270,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_SELECT_LIST'
-,p_heading=>'Swimlane Id'
+,p_heading=>'Swimlane'
 ,p_heading_alignment=>'LEFT'
 ,p_display_sequence=>70
 ,p_value_alignment=>'LEFT'
@@ -505,7 +505,7 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_view_id=>wwv_flow_imp.id(44117527032087233)
 ,p_display_seq=>8
 ,p_column_id=>wwv_flow_imp.id(45517023496836010)
-,p_is_visible=>true
+,p_is_visible=>false
 ,p_is_frozen=>false
 );
 wwv_flow_imp_page.create_ig_report_column(

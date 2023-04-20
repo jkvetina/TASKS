@@ -20,10 +20,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
 
         -- get board header
         FOR c IN (
-            SELECT NVL(l.name, 'Tasks') || ' for ' || b.board_name AS name
+            SELECT p.project_name || ' - ' || b.board_name AS name
             FROM tsk_boards b
-            LEFT JOIN tsk_lov_board_types_v l
-                ON l.id         = v_board_type
+            JOIN tsk_projects p
+                ON b.project_id = p.project_id
+            --LEFT JOIN tsk_lov_board_types_v l
+            --    ON l.id         = v_board_type
             WHERE b.board_id    = v_board_id
         ) LOOP
             core.set_item('P100_HEADER', c.name);
