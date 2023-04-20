@@ -1,0 +1,7 @@
+CREATE OR REPLACE PACKAGE tsk_p900 AS
+
+    PROCEDURE init_defaults;
+
+END;
+/
+

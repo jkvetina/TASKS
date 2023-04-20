@@ -53,7 +53,7 @@ regions:
     start-new-row: true
     column: Automatic
     new-column: true
-    column-span: Automatic
+    column-span: 6
 
   appearance: 
     template: Hero # 70864195177975601
@@ -79,4 +79,298 @@ regions:
     settings: 
       output-as: HTML
       expand-shortcuts: false
+
+- # ====== Region: User Profile [FORM] =========================
+  id: 45894908819541629
+  identification: 
+    title: User Profile [FORM]
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_USERS
+    include-rowid-column: false
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Update Row
+      lost-update-type: Row Values
+
+page-items: 
+- # ====== Page Item: P900_USER_ID =============================
+  id: 45895158953541631
+  identification: 
+    name: P900_USER_ID
+    type: Display Only
+
+  label: 
+    label: User Id
+    alignment: Left
+
+  settings: 
+    format: Plain Text
+    based-on: Item Value
+    show-line-breaks: true
+    send-on-page-submit: true
+
+  layout: 
+    sequence: 10
+    region: User Profile [FORM] # 45894908819541629
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: User Profile [FORM] # 45894908819541629
+    column: USER_ID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P900_USER_NAME ===========================
+  id: 45895298957541632
+  identification: 
+    name: P900_USER_NAME
+    type: Text Field
+
+  label: 
+    label: User Name
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 20
+    region: User Profile [FORM] # 45894908819541629
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+    maximum-length: 64
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: User Profile [FORM] # 45894908819541629
+    column: USER_NAME
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P900_UPDATED_BY ==========================
+  id: 45895360876541633
+  identification: 
+    name: P900_UPDATED_BY
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: User Profile [FORM] # 45894908819541629
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: User Profile [FORM] # 45894908819541629
+    column: UPDATED_BY
+    data-type: VARCHAR2
+    query-only: true
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P900_UPDATED_AT ==========================
+  id: 45895414373541634
+  identification: 
+    name: P900_UPDATED_AT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: User Profile [FORM] # 45894908819541629
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: User Profile [FORM] # 45894908819541629
+    column: UPDATED_AT
+    data-type: DATE
+    query-only: true
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: UPDATE_PROFILE ==============================
+  id: 45895581026541635
+  identification: 
+    button-name: UPDATE_PROFILE
+    label: Update Profile
+
+  layout: 
+    sequence: 50
+    region: User Profile [FORM] # 45894908819541629
+    position: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL UPDATE action
+
+processes: 
+- # ====== Process: INIT_FORM ==================================
+  id: 45895052535541630
+  identification: 
+    name: INIT_FORM
+    type: Form - Initialization
+    form-region: User Profile [FORM] # 45894908819541629
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: SAVE_CHANGES ===============================
+  id: 45895680453541636
+  identification: 
+    name: SAVE_CHANGES
+    type: Form - Automatic Row Processing (DML)
+    form-region: User Profile [FORM] # 45894908819541629
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: No
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
 
