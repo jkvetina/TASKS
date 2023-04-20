@@ -179,18 +179,15 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         io_task_id          IN OUT NOCOPY   VARCHAR2
     )
     AS
-        v_action            CHAR;
         rec                 tsk_task_commits%ROWTYPE;
     BEGIN
-        v_action            := APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
-        --
-        rec.commit_id       := APEX_UTIL.GET_SESSION_STATE('COMMIT_ID');
-        rec.task_id         := APEX_UTIL.GET_SESSION_STATE('TASK_ID');
+        rec.commit_id       := core.get_grid_data('COMMIT_ID');
+        rec.task_id         := core.get_grid_data('TASK_ID');
         --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
         --
-        IF (v_action = 'D' OR rec.task_id IS NULL) THEN
+        IF (core.get_grid_action() = 'D' OR rec.task_id IS NULL) THEN
             DELETE FROM tsk_task_commits t
             WHERE t.commit_id   = io_commit_id
                 AND t.task_id   = io_task_id;
