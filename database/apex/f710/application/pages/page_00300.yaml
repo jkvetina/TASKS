@@ -80,10 +80,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: &P0_CLIENT_ID. - Projects ===================
+- # ====== Region: &P300_HEADER. ===============================
   id: 70448427208945042
   identification: 
-    title: '&P0_CLIENT_ID. - Projects'
+    title: '&P300_HEADER.'
     type: Static Content
 
   layout: 
@@ -557,7 +557,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: '&P0_CLIENT_ID. - Projects' # 70448427208945042
+    region: '&P300_HEADER.' # 70448427208945042
     position: BODY
 
   advanced: 

@@ -1,5 +1,9 @@
 CREATE OR REPLACE PACKAGE tsk_p200 AS
 
+    PROCEDURE init_defaults;
+
+
+
     PROCEDURE save_boards (
         io_board_id         IN OUT NOCOPY   VARCHAR2
     );

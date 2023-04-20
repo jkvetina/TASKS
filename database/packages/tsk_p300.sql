@@ -1,5 +1,22 @@
 CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
 
+    PROCEDURE init_defaults
+    AS
+    BEGIN
+        FOR c IN (
+            SELECT c.client_name || ' - Projects' AS name
+            FROM tsk_clients c
+            WHERE c.client_id = core.get_item('P0_CLIENT_ID')
+        ) LOOP
+            core.set_item('P300_HEADER', c.name);
+        END LOOP;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
     PROCEDURE save_projects (
         io_project_id       IN OUT NOCOPY   VARCHAR2
     )

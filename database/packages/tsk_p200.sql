@@ -1,5 +1,22 @@
 CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
+    PROCEDURE init_defaults
+    AS
+    BEGIN
+        FOR c IN (
+            SELECT p.project_name || ' - Projects' AS name
+            FROM tsk_projects p
+            WHERE p.project_id = core.get_item('P0_PROJECT_ID')
+        ) LOOP
+            core.set_item('P200_HEADER', c.name);
+        END LOOP;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
     PROCEDURE save_boards (
         io_board_id         IN OUT NOCOPY   VARCHAR2
     )

@@ -37,7 +37,7 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(70448427208945042)
-,p_plug_name=>'&P0_CLIENT_ID. - Projects'
+,p_plug_name=>'&P300_HEADER.'
 ,p_parent_plug_id=>wwv_flow_imp.id(70448343714945041)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70864195177975601)
