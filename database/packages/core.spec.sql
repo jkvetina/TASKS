@@ -504,6 +504,14 @@ CREATE OR REPLACE PACKAGE core AS
     )
     RETURN VARCHAR2;
 
+
+
+    PROCEDURE download_file (
+        in_file_name                        VARCHAR2,
+        in_file_mime                        VARCHAR2,
+        in_file_payload     IN OUT NOCOPY   BLOB
+    );
+
 END;
 /
 

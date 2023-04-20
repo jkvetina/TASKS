@@ -1527,6 +1527,32 @@ CREATE OR REPLACE PACKAGE BODY core AS
         RETURN out_value;
     END;
 
+
+
+    PROCEDURE download_file (
+        in_file_name                        VARCHAR2,
+        in_file_mime                        VARCHAR2,
+        in_file_payload     IN OUT NOCOPY   BLOB
+    ) AS
+    BEGIN
+        HTP.INIT;
+        OWA_UTIL.MIME_HEADER(in_file_mime, FALSE);
+        --
+        HTP.P('Content-Type: application/octet-stream');
+        HTP.P('Content-Length: ' || DBMS_LOB.GETLENGTH(in_file_payload));
+        HTP.P('Content-Disposition: attachment; filename="' || REGEXP_SUBSTR(in_file_name, '([^/]*)$') || '"');
+        HTP.P('Cache-Control: max-age=0');
+        --
+        OWA_UTIL.HTTP_HEADER_CLOSE;
+        WPG_DOCLOAD.DOWNLOAD_FILE(in_file_payload);
+        APEX_APPLICATION.STOP_APEX_ENGINE;              -- throws ORA-20876 Stop APEX Engine
+    EXCEPTION
+    WHEN APEX_APPLICATION.E_STOP_APEX_ENGINE THEN
+        NULL;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
 END;
 /
 
