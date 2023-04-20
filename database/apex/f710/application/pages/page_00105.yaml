@@ -2058,14 +2058,14 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P105_UPDATED_AT ==========================
+- # ====== Page Item: P105_AUDIT ===============================
   id: 34799818186743649
   identification: 
-    name: P105_UPDATED_AT
+    name: P105_AUDIT
     type: Display Only
 
   label: 
-    label: Updated At
+    label: Last Change
     alignment: Left
 
   settings: 
@@ -2095,15 +2095,12 @@ page-items:
     warn-on-unsaved-changes: Page Default
 
   source: 
-    form-region: '[FORM]' # 63213536180844591
-    column: UPDATED_AT
-    data-type: DATE
-    query-only: true
-    primary-key: false
+    type: Null
+    used: Only when current value in session state is null
 
   session-state: 
     data-type: VARCHAR2
-    storage: Per Request (Memory Only)
+    storage: Per Session (Persistent)
 
   security: 
     session-state-protection: Unrestricted
@@ -2551,6 +2548,39 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_UPDATED_AT ==========================
+  id: 45896153044541641
+  identification: 
+    name: P105_UPDATED_AT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 110
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: UPDATED_AT
+    data-type: DATE
+    query-only: true
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P105_HEADER ==============================
