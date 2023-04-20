@@ -31,6 +31,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
         core.set_item('P110_BOARD_ID',      COALESCE(core.get_item('P110_BOARD_ID'),    core.get_item('P110_SOURCE_BOARD')));
         core.set_item('P110_STATUS_ID',     COALESCE(core.get_item('P110_STATUS_ID'),   core.get_item('P110_SOURCE_STATUS')));
         core.set_item('P110_SWIMLANE_ID',   COALESCE(core.get_item('P110_SWIMLANE_ID'), core.get_item('P110_SOURCE_SWIMLANE')));
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -40,6 +43,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
     BEGIN
         -- init collection to gather moving tasks
         APEX_COLLECTION.CREATE_OR_TRUNCATE_COLLECTION(c_coll_task_filter);
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -54,6 +60,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
                 p_c001              => APEX_UTIL.GET_SESSION_STATE('TASK_ID')
             );
         END IF;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -122,6 +131,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
 
         -- clear collection
         APEX_COLLECTION.TRUNCATE_COLLECTION(c_coll_task_filter);
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 END;

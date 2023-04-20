@@ -1,5 +1,16 @@
 CREATE OR REPLACE PACKAGE BODY tsk_p400 AS
 
+    PROCEDURE init_defaults
+    AS
+    BEGIN
+        NULL;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
     PROCEDURE save_clients (
         io_client_id        IN OUT NOCOPY   VARCHAR2
     )
@@ -34,6 +45,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p400 AS
 
         -- update keys to APEX
         io_client_id       := TO_CHAR(rec.client_id);
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 END;

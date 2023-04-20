@@ -25,6 +25,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
 
         -- load stored preferences
         tsk_app.load_user_preferences(in_user_id);
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -59,6 +62,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         IF v_procedure_name IS NOT NULL THEN
             EXECUTE IMMEDIATE 'BEGIN ' || v_procedure_name || '(); END;';
         END IF;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -132,6 +138,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         END LOOP;
         --
         RETURN NULL;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 

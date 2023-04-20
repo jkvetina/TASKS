@@ -4,6 +4,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
     AS
     BEGIN
         NULL;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -21,6 +24,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         --
         APEX_WEB_SERVICE.G_REQUEST_HEADERS(in_id).name  := in_name;
         APEX_WEB_SERVICE.G_REQUEST_HEADERS(in_id).value := in_value;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -133,6 +139,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         WHERE r.repo_id         = repo.repo_id
             AND r.owner_id      = repo.owner_id
             AND r.project_id    = in_project_id;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -158,6 +167,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
             --
             COMMIT;
         END LOOP;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -197,6 +209,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         -- update keys to APEX
         io_commit_id        := rec.commit_id;
         io_task_id          := rec.task_id;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 END;

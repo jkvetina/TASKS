@@ -79,6 +79,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         END LOOP;
         --
         core.set_item('P105_BADGE_DESC',    CASE WHEN LENGTH(rec.task_desc) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END);
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -128,6 +131,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             INSERT INTO tsk_tasks
             VALUES rec;
         END IF;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -187,6 +193,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         SET t.updated_at        = rec.updated_at,
             t.updated_by        = rec.updated_by
         WHERE t.task_id         = rec.task_id;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -231,6 +240,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             core.set_item('P105_COMMENT_ID',    '');
             core.set_item('P105_COMMENT',       '');
         END IF;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -252,6 +264,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
                 HTP.P('Comment deleted');
             END IF;
         END IF;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -277,6 +292,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             AND t.checklist_done    IS NULL;
         --
         core.set_item('P105_TASK_ID', rec.task_id);
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -304,6 +322,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             --
             INSERT INTO tsk_task_files VALUES rec;
         END LOOP;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -325,11 +346,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             core.raise_error('FILE_NOT_FOUND');
         END;
         --
-        tsk_app.download_file (
+        core.download_file (
             in_file_name        => rec.file_name,
             in_file_mime        => rec.file_mime,
             in_file_payload     => rec.file_payload
         );
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 END;

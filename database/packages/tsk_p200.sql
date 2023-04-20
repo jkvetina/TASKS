@@ -37,6 +37,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
         -- update keys to APEX
         io_board_id         := TO_CHAR(rec.board_id);
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -108,6 +111,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         io_client_id        := rec.client_id;
         io_project_id       := rec.project_id;
         io_status_id        := rec.status_id;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -177,6 +183,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         io_client_id        := rec.client_id;
         io_project_id       := rec.project_id;
         io_swimlane_id      := rec.swimlane_id;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -206,6 +215,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
                 AND t.project_id    = s.project_id
                 AND (t.order#       != s.order# OR t.order# IS NULL);
         END LOOP;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -235,6 +247,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
                 AND t.project_id    = s.project_id
                 AND (t.order#       != s.order# OR t.order# IS NULL);
         END LOOP;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 END;

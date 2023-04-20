@@ -36,6 +36,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
 
         -- update keys to APEX
         io_project_id       := TO_CHAR(rec.project_id);
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 END;
