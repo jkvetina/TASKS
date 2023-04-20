@@ -1,8 +1,7 @@
 CREATE OR REPLACE FORCE VIEW tsk_p300_projects_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        core.get_item('P0_CLIENT_ID')   AS client_id,
-        core.get_item('P300_SHOW_ALL')  AS show_all
+        core.get_item('P0_CLIENT_ID')   AS client_id
     FROM DUAL
 )
 SELECT
@@ -20,13 +19,8 @@ SELECT
     ) AS activate_url
     --
 FROM tsk_projects t
-CROSS JOIN x
-WHERE (
-    (
-        x.client_id         = t.client_id
-    )
-    OR x.show_all IS NOT NULL
-);
+JOIN x
+    ON x.client_id      = t.client_id;
 --
 COMMENT ON TABLE tsk_p300_projects_v IS '';
 

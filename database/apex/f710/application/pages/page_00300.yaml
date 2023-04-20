@@ -80,10 +80,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Projects ====================================
+- # ====== Region: &P0_CLIENT_ID. - Projects ===================
   id: 70448427208945042
   identification: 
-    title: Projects
+    title: '&P0_CLIENT_ID. - Projects'
     type: Static Content
 
   layout: 
@@ -546,18 +546,18 @@ regions:
       alignment: center
 
 page-items: 
-- # ====== Page Item: P300_SHOW_ALL ============================
-  id: 44285149373494703
+- # ====== Page Item: P300_HEADER ==============================
+  id: 45895835728541638
   identification: 
-    name: P300_SHOW_ALL
+    name: P300_HEADER
     type: Hidden
 
   settings: 
     value-protected: true
 
   layout: 
-    sequence: 20
-    region: Projects # 70448427208945042
+    sequence: 10
+    region: '&P0_CLIENT_ID. - Projects' # 70448427208945042
     position: BODY
 
   advanced: 
@@ -575,43 +575,6 @@ page-items:
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
-
-buttons: 
-- # ====== Button: SHOW_ALL ====================================
-  id: 44285014494494702
-  identification: 
-    button-name: SHOW_ALL
-    label: Show All
-
-  layout: 
-    sequence: 10
-    region: Projects # 70448427208945042
-    position: RIGHT_OF_TITLE
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    button-template: Text # 70970074101975671
-    hot: false
-    template-options: 
-    - '#DEFAULT#'
-
-  behavior: 
-    action: Redirect to Page in this Application
-    target: 
-      url: 'f?p=&APP_ID.:300:&SESSION.::&DEBUG.::P300_SHOW_ALL:Y'
-      page: 300 # Projects
-      values: 
-        p300_show_all: Y
-
-    warn-on-unsaved-changes: Do Not Check
-
-  server-side-condition: 
-    type: Item is NULL
-    item: P300_SHOW_ALL
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_CLIENT ======================

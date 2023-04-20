@@ -37,7 +37,7 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(70448427208945042)
-,p_plug_name=>'Projects'
+,p_plug_name=>'&P0_CLIENT_ID. - Projects'
 ,p_parent_plug_id=>wwv_flow_imp.id(70448343714945041)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70864195177975601)
@@ -286,7 +286,7 @@ wwv_flow_imp_page.create_ig_report(
 ,p_type=>'PRIMARY'
 ,p_default_view=>'GRID'
 ,p_show_row_number=>false
-,p_settings_area_expanded=>false
+,p_settings_area_expanded=>true
 );
 wwv_flow_imp_page.create_ig_report_view(
  p_id=>wwv_flow_imp.id(105216953892921280)
@@ -319,13 +319,9 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_view_id=>wwv_flow_imp.id(105216953892921280)
 ,p_display_seq=>3
 ,p_column_id=>wwv_flow_imp.id(104324277063905493)
-,p_is_visible=>true
+,p_is_visible=>false
 ,p_is_frozen=>false
 ,p_sort_order=>1
-,p_break_order=>5
-,p_break_is_enabled=>true
-,p_break_sort_direction=>'ASC'
-,p_break_sort_nulls=>'LAST'
 ,p_sort_direction=>'ASC'
 ,p_sort_nulls=>'LAST'
 );
@@ -354,24 +350,10 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_is_frozen=>false
 ,p_width=>80
 );
-wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(44285014494494702)
-,p_button_sequence=>10
-,p_button_plug_id=>wwv_flow_imp.id(70448427208945042)
-,p_button_name=>'SHOW_ALL'
-,p_button_action=>'REDIRECT_PAGE'
-,p_button_template_options=>'#DEFAULT#'
-,p_button_template_id=>wwv_flow_imp.id(70970074101975671)
-,p_button_image_alt=>'Show All'
-,p_button_position=>'RIGHT_OF_TITLE'
-,p_button_redirect_url=>'f?p=&APP_ID.:300:&SESSION.::&DEBUG.::P300_SHOW_ALL:Y'
-,p_button_condition=>'P300_SHOW_ALL'
-,p_button_condition_type=>'ITEM_IS_NULL'
-);
 wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(44285149373494703)
-,p_name=>'P300_SHOW_ALL'
-,p_item_sequence=>20
+ p_id=>wwv_flow_imp.id(45895835728541638)
+,p_name=>'P300_HEADER'
+,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(70448427208945042)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
