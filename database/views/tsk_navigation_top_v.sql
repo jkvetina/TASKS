@@ -7,7 +7,8 @@ WITH curr AS (
         n.page_id,
         n.parent_id,
         NULL                            AS root_id,
-        core.get_page_group(n.page_id)  AS page_group
+        core.get_page_group(n.page_id)  AS page_group,
+        core.get_user_id()              AS user_id
     FROM tsk_navigation n
     WHERE n.page_id = core.get_page_id()
 ),
@@ -60,24 +61,24 @@ t AS (
         curr.app_id     AS app_id,
         curr.app_id     AS curr_app_id,
         --
-        m.page_id,
-        m.parent_id,
+        n.page_id,
+        n.parent_id,
         --
         s.page_alias,
         s.page_name,        -- core.get_page_name(t.page_id)
         s.auth_scheme,
-        m.is_reset,
-        m.order#
-    FROM tsk_navigation m
+        n.is_reset,
+        n.order#
+    FROM tsk_navigation n
     CROSS JOIN curr
     JOIN s
-        ON s.page_id        = m.page_id
-    WHERE m.is_hidden       IS NULL
+        ON s.page_id        = n.page_id
+    WHERE n.is_hidden       IS NULL
         --
         --AND 'Y' = core.check_auth(s.auth_scheme, s.app_id, s.page_id, s.procedure_, s.data_type, s.page_argument)
     --
     UNION ALL
-    SELECT      -- append launchpad icon
+    SELECT              -- append launchpad icon
         700             AS app_id,
         curr.app_id     AS curr_app_id,
         --
@@ -160,14 +161,14 @@ SELECT
     n.image,
     n.image_attribute,
     n.image_alt_attribute,
-    n.attribute01,
-    n.attribute02,
-    n.attribute03,
-    n.attribute04,
-    n.attribute05,
-    n.attribute06,
-    n.attribute07,
-    n.attribute08,
+    n.attribute01,          -- <li class="...">
+    n.attribute02,          -- <li>...<a>
+    n.attribute03,          -- <a class="..."
+    n.attribute04,          -- <a title="..."
+    n.attribute05,          -- <a ...> // javascript onclick
+    n.attribute06,          -- <a>... #TEXT</a>
+    n.attribute07,          -- <a>#TEXT ...</a>
+    n.attribute08,          -- </a>...
     n.attribute09,
     n.attribute10,
     n.page_id,
