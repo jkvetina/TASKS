@@ -35,6 +35,16 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         END IF;
         --
         core.set_item('P100_TASKS_LINK', core.get_page_url(100));
+
+        -- check favorite status
+        FOR c IN (
+            SELECT 'Y' AS is_favorite
+            FROM tsk_user_fav_boards b
+            WHERE b.user_id     = core.get_user_id()
+                AND b.board_id  = v_board_id
+        ) LOOP
+            core.set_item('P100_IS_FAVORITE', c.is_favorite);
+        END LOOP;
     END;
 
 
@@ -183,6 +193,48 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             -- message for app
             HTP.P('Task ' || c_task_prefix || APEX_APPLICATION.G_X01 || ' updated');
         END IF;
+    END;
+
+
+
+    PROCEDURE add_to_favorites (
+        in_board_id         tsk_user_fav_boards.board_id%TYPE   := NULL,
+        in_user_id          tsk_user_fav_boards.user_id%TYPE    := NULL
+    )
+    AS
+        rec                 tsk_user_fav_boards%ROWTYPE;
+    BEGIN
+        rec.user_id         := COALESCE(in_user_id,     core.get_user_id());
+        rec.board_id        := COALESCE(in_board_id,    core.get_number_item('P0_BOARD_ID'));
+        --
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
+        --
+        BEGIN
+            INSERT INTO tsk_user_fav_boards VALUES rec;
+        EXCEPTION
+        WHEN DUP_VAL_ON_INDEX THEN
+            NULL;
+        END;
+    END;
+
+
+
+    PROCEDURE remove_from_favorites (
+        in_board_id         tsk_user_fav_boards.board_id%TYPE   := NULL,
+        in_user_id          tsk_user_fav_boards.user_id%TYPE    := NULL
+    )
+    AS
+        rec                 tsk_user_fav_boards%ROWTYPE;
+    BEGIN
+        rec.user_id         := COALESCE(in_user_id,     core.get_user_id());
+        rec.board_id        := COALESCE(in_board_id,    core.get_number_item('P0_BOARD_ID'));
+        --
+        DELETE FROM tsk_user_fav_boards b
+        WHERE b.user_id     = rec.user_id
+            AND b.board_id  = rec.board_id;
+        --
+        core.set_item('P100_IS_FAVORITE', '');
     END;
 
 END;

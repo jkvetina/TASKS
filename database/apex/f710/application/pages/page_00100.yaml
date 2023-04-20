@@ -1305,6 +1305,36 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P100_IS_FAVORITE =========================
+  id: 45892296544541602
+  identification: 
+    name: P100_IS_FAVORITE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 60
+    region: '&P100_HEADER.' # 34744374076440316
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 buttons: 
 - # ====== Button: ADD_TASK ====================================
   id: 34798486722743635
@@ -1533,8 +1563,45 @@ buttons:
     icon: fa-heart-o
 
   behavior: 
-    action: Defined by Dynamic Action
+    action: Submit Page
     execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P100_IS_FAVORITE
+
+- # ====== Button: REMOVE_FROM_FAVORITES =======================
+  id: 45892186832541601
+  identification: 
+    button-name: REMOVE_FROM_FAVORITES
+    label: Remove from Favorites
+
+  layout: 
+    sequence: 80
+    region: '&P100_HEADER.' # 34744374076440316
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-heart
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P100_IS_FAVORITE
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_FILTERS =====================
@@ -1702,4 +1769,48 @@ processes:
 
   server-side-condition: 
     execution-scope: For Created and Modified Rows
+
+- # ====== Process: ADD_TO_FAVORITES ===========================
+  id: 45892317855541603
+  identification: 
+    name: ADD_TO_FAVORITES
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: tsk_p100.add_to_favorites();
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: ADD_TO_FAVORITES # 45517331940836013
+
+- # ====== Process: REMOVE_FROM_FAVORITES ======================
+  id: 45892489830541604
+  identification: 
+    name: REMOVE_FROM_FAVORITES
+    type: Execute Code
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: tsk_p100.remove_from_favorites();
+
+  execution: 
+    sequence: 30
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: REMOVE_FROM_FAVORITES # 45892186832541601
 
