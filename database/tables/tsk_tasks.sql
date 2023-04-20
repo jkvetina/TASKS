@@ -7,9 +7,9 @@ CREATE TABLE tsk_tasks (
     board_id                        NUMBER(10,0)    CONSTRAINT nn_tsk_tasks_board NOT NULL,
     status_id                       VARCHAR2(32)    CONSTRAINT nn_tsk_tasks_status NOT NULL,
     swimlane_id                     VARCHAR2(32)    CONSTRAINT nn_tsk_tasks_swimlane NOT NULL,
+    order#                          NUMBER(10,0),
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
-    order#                          NUMBER(10,0),
     --
     CONSTRAINT pk_tsk_tasks
         PRIMARY KEY (task_id),

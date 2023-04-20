@@ -4,9 +4,9 @@ CREATE TABLE tsk_statuses (
     client_id                       VARCHAR2(32)    CONSTRAINT nn_tsk_status_client NOT NULL,
     project_id                      VARCHAR2(32)    CONSTRAINT nn_tsk_status_project NOT NULL,
     is_active                       CHAR(1),
+    order#                          NUMBER(4,0),
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
-    order#                          NUMBER(4,0),
     --
     CONSTRAINT ch_tsk_statuses
         CHECK (is_active = 'Y' OR is_active IS NULL),
