@@ -212,6 +212,18 @@ CREATE OR REPLACE PACKAGE core AS
 
 
 
+    FUNCTION get_grid_data (
+        in_column_name          VARCHAR2
+    )
+    RETURN VARCHAR2;
+
+
+
+    FUNCTION get_grid_action
+    RETURN VARCHAR2;
+
+
+
     FUNCTION get_item_name (
         in_name                 apex_application_page_items.item_name%TYPE,
         in_page_id              apex_application_page_items.page_id%TYPE            := NULL,

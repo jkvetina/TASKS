@@ -491,6 +491,26 @@ CREATE OR REPLACE PACKAGE BODY core AS
 
 
 
+    FUNCTION get_grid_data (
+        in_column_name          VARCHAR2
+    )
+    RETURN VARCHAR2
+    AS
+    BEGIN
+        RETURN APEX_UTIL.GET_SESSION_STATE(in_column_name);
+    END;
+
+
+
+    FUNCTION get_grid_action
+    RETURN VARCHAR2
+    AS
+    BEGIN
+        RETURN APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
+    END;
+
+
+
     FUNCTION get_item_name (
         in_name                 apex_application_page_items.item_name%TYPE,
         in_page_id              apex_application_page_items.page_id%TYPE            := NULL,
