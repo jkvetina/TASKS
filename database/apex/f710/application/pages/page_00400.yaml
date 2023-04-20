@@ -94,7 +94,7 @@ regions:
     start-new-row: true
     column: Automatic
     new-column: true
-    column-span: Automatic
+    column-span: 6
 
   appearance: 
     template: Hero # 70864195177975601
@@ -233,20 +233,6 @@ regions:
 
     layout: 
       sequence: 20
-
-  - # ====== Column: APEX$ROW_SELECTOR ===========================
-    id: 70536597365958862
-    identification: 
-      column-name: APEX$ROW_SELECTOR
-      type: Row Selector
-
-    settings: 
-      enable-multi-select: true
-      show-select-all: true
-      hide-control: false
-
-    layout: 
-      sequence: 10
 
   - # ====== Column: ACTIVATE_URL ================================
     id: 70538787699958883
