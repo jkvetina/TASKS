@@ -240,7 +240,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 120
+      sequence: 140
       column-alignment: end
       stretch: Use Report Setting
 
@@ -284,7 +284,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 110
+      sequence: 130
       column-alignment: end
       stretch: Use Report Setting
 
@@ -328,7 +328,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 100
+      sequence: 120
       column-alignment: end
       stretch: Use Report Setting
 
@@ -390,6 +390,114 @@ regions:
 
     enable-users-to: 
       sort: false
+
+  - # ====== Column: IS_DEFAULT ==================================
+    id: 45933134779991409
+    identification: 
+      column-name: IS_DEFAULT
+      type: Checkbox
+
+    heading: 
+      heading: Is Default
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 90
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_DEFAULT
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_WITH_NAME ================================
+    id: 45933279848991410
+    identification: 
+      column-name: IS_WITH_NAME
+      type: Checkbox
+
+    heading: 
+      heading: Is With Name
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 100
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_WITH_NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
 
   - # ====== Column: APEX$ROW_ACTION =============================
     id: 116014136705128111
@@ -711,7 +819,7 @@ regions:
       virtual-keyboard: Decimal
 
     layout: 
-      sequence: 90
+      sequence: 110
       column-alignment: end
       stretch: Use Report Setting
 

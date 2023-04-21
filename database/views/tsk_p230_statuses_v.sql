@@ -26,6 +26,8 @@ SELECT
     t.status_name,
     t.order#,
     t.is_active,
+    t.is_default,
+    t.is_with_name,
     --
     c.count_board,
     c.count_project,

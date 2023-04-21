@@ -4,12 +4,20 @@ CREATE TABLE tsk_statuses (
     client_id                       VARCHAR2(32)    CONSTRAINT nn_tsk_status_client NOT NULL,
     project_id                      VARCHAR2(32)    CONSTRAINT nn_tsk_status_project NOT NULL,
     is_active                       CHAR(1),
+    is_default                      CHAR(1),
+    is_with_name                    CHAR(1),
     order#                          NUMBER(4,0),
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
     --
     CONSTRAINT ch_tsk_statuses
         CHECK (is_active = 'Y' OR is_active IS NULL),
+    --
+    CONSTRAINT ch_tsk_statuses_default
+        CHECK (is_default = 'Y' OR is_default IS NULL),
+    --
+    CONSTRAINT ch_tsk_statuses_name
+        CHECK (is_with_name = 'Y' OR is_with_name IS NULL),
     --
     CONSTRAINT pk_tsk_status
         PRIMARY KEY (client_id, project_id, status_id),
