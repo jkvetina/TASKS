@@ -98,15 +98,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                 SELECT
                     s.status_id,
                     s.status_name,
-                    ROWNUM AS r#
-                FROM tsk_statuses s
-                WHERE s.client_id       = in_client_id
-                    AND s.project_id    = in_project_id
-                    AND s.is_active     = 'Y'
+                    s.is_with_name
+                FROM tsk_lov_statuses_v s
                 ORDER BY s.order#
             ) LOOP
                 HTP.P('<div class="TARGET_LIKE">');
-                HTP.P('<h3>' || s.status_name || CASE WHEN s.r# = 1 THEN NULLIF(' @' || w.swimlane_name, ' @-') END || '</h3>');
+                HTP.P('<h3>' || s.status_name || CASE WHEN s.is_with_name = 'Y' THEN NULLIF(' @' || w.swimlane_name, ' @-') END || '</h3>');
                 HTP.P('</div>');
             END LOOP;
 
@@ -114,10 +111,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             FOR s IN (
                 SELECT
                     s.status_id
-                FROM tsk_statuses s
-                WHERE s.client_id       = in_client_id
-                    AND s.project_id    = in_project_id
-                    AND s.is_active     = 'Y'
+                FROM tsk_lov_statuses_v s
                 ORDER BY s.order#
             ) LOOP
                 HTP.P('<div class="TARGET" id="STATUS_' || s.status_id || '_SWIMLANE_' || w.swimlane_id || '">');
