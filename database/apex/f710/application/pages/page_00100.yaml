@@ -377,17 +377,15 @@ regions:
     id: 44091306446578016
     identification: 
       column-name: TASK_NAME
-      type: Textarea
+      type: Text Field
 
     heading: 
       heading: Task Name
       alignment: start
 
     settings: 
-      resizable: true
-      auto-height: false
-      character-counter: false
       trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
 
     layout: 
       sequence: 40
@@ -410,9 +408,6 @@ regions:
 
     default: 
       duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
@@ -469,15 +464,15 @@ regions:
     id: 44092403082578027
     identification: 
       column-name: TASK_PROGRESS
-      type: Text Field
+      type: Display Only
 
     heading: 
       heading: Task Progress
       alignment: end
 
     settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
+      format: Plain Text
+      based-on: Item Value
 
     layout: 
       sequence: 80
@@ -486,10 +481,6 @@ regions:
 
     accessibility: 
       value-identifies-row: false
-
-    validation: 
-      value-required: false
-      maximum-length: 81
 
     source: 
       type: Database Column
@@ -500,6 +491,9 @@ regions:
 
     default: 
       duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
