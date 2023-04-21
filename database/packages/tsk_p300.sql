@@ -11,6 +11,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
             core.set_item('P300_HEADER', c.name);
         END LOOP;
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -54,6 +56,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
         -- update keys to APEX
         io_project_id       := TO_CHAR(rec.project_id);
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;

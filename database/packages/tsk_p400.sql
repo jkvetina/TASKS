@@ -5,6 +5,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p400 AS
     BEGIN
         NULL;
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -43,6 +45,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p400 AS
         -- update keys to APEX
         io_client_id       := TO_CHAR(rec.client_id);
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;

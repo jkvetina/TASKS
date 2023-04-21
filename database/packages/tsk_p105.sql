@@ -144,6 +144,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             VALUES rec;
         END IF;
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -206,6 +208,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             t.updated_by        = rec.updated_by
         WHERE t.task_id         = rec.task_id;
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -253,6 +257,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             core.set_item('P105_COMMENT',       '');
         END IF;
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -277,6 +283,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             END IF;
         END IF;
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -305,6 +313,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         --
         core.set_item('P105_TASK_ID', rec.task_id);
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -335,6 +345,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             INSERT INTO tsk_task_files VALUES rec;
         END LOOP;
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -364,6 +376,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             in_file_payload     => rec.file_payload
         );
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
