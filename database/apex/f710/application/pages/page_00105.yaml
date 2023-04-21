@@ -3060,6 +3060,10 @@ processes:
     point: Before Header
     run-process: Once Per Page Visit (default)
 
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TASK_ID
+
 - # ====== Process: SAVE_CHECKLIST =============================
   id: 34951047615065820
   identification: 

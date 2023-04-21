@@ -1385,6 +1385,8 @@ wwv_flow_imp_page.create_page_process(
 ,p_region_id=>wwv_flow_imp.id(63213536180844591)
 ,p_process_type=>'NATIVE_FORM_INIT'
 ,p_process_name=>'INIT_FORM'
+,p_process_when=>'P105_TASK_ID'
+,p_process_when_type=>'ITEM_IS_NOT_NULL'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45281736757457932)

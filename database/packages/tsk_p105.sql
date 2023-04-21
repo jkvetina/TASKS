@@ -6,7 +6,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
     BEGIN
         -- get tasks details
         rec.task_id := core.get_item('P105_TASK_ID');
-        --
+
+        -- for existing task
         IF rec.task_id IS NOT NULL THEN
             BEGIN
                 SELECT t.* INTO rec
@@ -19,65 +20,78 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             WHEN NO_DATA_FOUND THEN
                 core.raise_error('INVALID_TASK');
             END;
+
+            -- calculate prev/next tasks
+            FOR c IN (
+                SELECT t.task_id, t.prev_task, t.next_task
+                FROM tsk_p100_tasks_grid_v t
+                WHERE t.task_id = rec.task_id
+            ) LOOP
+                core.set_item('P105_PREV_TASK_ID', NULLIF(c.prev_task, c.task_id));
+                core.set_item('P105_NEXT_TASK_ID', NULLIF(c.next_task, c.task_id));
+            END LOOP;
+
+            -- calculate tab badges
+            FOR c IN (
+                SELECT
+                    'P105_BADGE_CHECKLIST'              AS item_name,
+                    tsk_p105.get_badge_icon(COUNT(*))   AS badge
+                FROM tsk_task_checklist c
+                WHERE c.task_id             = rec.task_id
+                    AND c.checklist_done    IS NULL
+                UNION ALL
+                SELECT
+                    'P105_BADGE_COMMENTS'               AS item_name,
+                    tsk_p105.get_badge_icon(COUNT(*))   AS badge
+                FROM tsk_task_comments c
+                WHERE c.task_id             = rec.task_id
+                UNION ALL
+                SELECT
+                    'P105_BADGE_COMMITS'                AS item_name,
+                    tsk_p105.get_badge_icon(COUNT(*))   AS badge
+                FROM tsk_task_commits c
+                WHERE c.task_id             = rec.task_id
+                UNION ALL
+                SELECT
+                    'P105_BADGE_FILES'                  AS item_name,
+                    tsk_p105.get_badge_icon(COUNT(*))   AS badge
+                FROM tsk_task_files c
+                WHERE c.task_id             = rec.task_id
+            ) LOOP
+                core.set_item(c.item_name, c.badge);
+    
+                -- offer task split when there are unfinished items on checklist
+                IF c.item_name = 'P105_BADGE_CHECKLIST' AND INSTR(c.badge, 'fa-number') >= 0 THEN
+                    core.set_item('P105_SHOW_SPLIT', 'Y');
+                END IF;
+            END LOOP;
+            --
+            core.set_item('P105_BADGE_DESC',    CASE WHEN LENGTH(rec.task_desc) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END);
+            --
+        ELSE
+            -- get defaults for new task
+            core.set_item('P105_CLIENT_ID',     tsk_app2.get_client_id());
+            core.set_item('P105_PROJECT_ID',    tsk_app2.get_project_id());
+            core.set_item('P105_BOARD_ID',      tsk_app2.get_board_id());
+            --
+            FOR c IN (
+                SELECT s.status_id
+                FROM tsk_lov_statuses_v s
+                WHERE s.is_default = 'Y'
+            ) LOOP
+                core.set_item('P105_STATUS_ID', rec.status_id);
+            END LOOP;
         END IF;
 
         -- overwrite some page items
-        core.set_item('P105_CLIENT_ID',     rec.client_id);
-        core.set_item('P105_PROJECT_ID',    rec.project_id);
-        core.set_item('P105_BOARD_ID',      rec.board_id);
         core.set_item('P105_TASK_LINK',     tsk_app.get_task_link(rec.task_id, 'EXTERNAL'));
         core.set_item('P105_AUDIT',         TO_CHAR(rec.updated_at, 'YYYY-MM-DD HH24:MI') || ' ' || rec.updated_by);
 
-        -- calculate prev/next tasks
-        FOR c IN (
-            SELECT t.task_id, t.prev_task, t.next_task
-            FROM tsk_p100_tasks_grid_v t
-            WHERE t.task_id = rec.task_id
-        ) LOOP
-            core.set_item('P105_PREV_TASK_ID', NULLIF(c.prev_task, c.task_id));
-            core.set_item('P105_NEXT_TASK_ID', NULLIF(c.next_task, c.task_id));
-        END LOOP;
-
         -- calculate page header
         core.set_item('P105_HEADER', CASE WHEN rec.task_id IS NOT NULL THEN 'Update Task ' || tsk_p100.c_task_prefix || rec.task_id ELSE core.get_page_name(105) END);
-
-        -- calculate tab badges
-        FOR c IN (
-            SELECT
-                'P105_BADGE_CHECKLIST'              AS item_name,
-                tsk_p105.get_badge_icon(COUNT(*))   AS badge
-            FROM tsk_task_checklist c
-            WHERE c.task_id             = rec.task_id
-                AND c.checklist_done    IS NULL
-            UNION ALL
-            SELECT
-                'P105_BADGE_COMMENTS'               AS item_name,
-                tsk_p105.get_badge_icon(COUNT(*))   AS badge
-            FROM tsk_task_comments c
-            WHERE c.task_id             = rec.task_id
-            UNION ALL
-            SELECT
-                'P105_BADGE_COMMITS'                AS item_name,
-                tsk_p105.get_badge_icon(COUNT(*))   AS badge
-            FROM tsk_task_commits c
-            WHERE c.task_id             = rec.task_id
-            UNION ALL
-            SELECT
-                'P105_BADGE_FILES'                  AS item_name,
-                tsk_p105.get_badge_icon(COUNT(*))   AS badge
-            FROM tsk_task_files c
-            WHERE c.task_id             = rec.task_id
-        ) LOOP
-            core.set_item(c.item_name, c.badge);
-
-            -- offer task split when there are unfinished items on checklist
-            IF c.item_name = 'P105_BADGE_CHECKLIST' AND INSTR(c.badge, 'fa-number') >= 0 THEN
-                core.set_item('P105_SHOW_SPLIT', 'Y');
-            END IF;
-        END LOOP;
-        --
-        core.set_item('P105_BADGE_DESC',    CASE WHEN LENGTH(rec.task_desc) > 0 THEN ' &nbsp;<span class="fa fa-arrow-circle-down"></span>' END);
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
