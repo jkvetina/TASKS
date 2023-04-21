@@ -5,14 +5,21 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         rec                 tsk_tasks%ROWTYPE;
     BEGIN
         -- get tasks details
-        BEGIN
-            SELECT t.* INTO rec
-            FROM tsk_tasks t
-            WHERE t.task_id = core.get_item('P105_TASK_ID');
-        EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-            core.raise_error('INVALID_TASK');
-        END;
+        rec.task_id := core.get_item('P105_TASK_ID');
+        --
+        IF rec.task_id IS NOT NULL THEN
+            BEGIN
+                SELECT t.* INTO rec
+                FROM tsk_tasks t
+                --
+                -- @TODO: AUTH
+                --
+                WHERE t.task_id = rec.task_id;
+            EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                core.raise_error('INVALID_TASK');
+            END;
+        END IF;
 
         -- overwrite some page items
         core.set_item('P105_CLIENT_ID',     rec.client_id);
