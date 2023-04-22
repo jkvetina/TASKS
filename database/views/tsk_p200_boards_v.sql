@@ -1,10 +1,10 @@
 CREATE OR REPLACE FORCE VIEW tsk_p200_boards_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        core.get_item('P0_CLIENT_ID')           AS client_id,
-        core.get_item('P0_PROJECT_ID')          AS project_id,
-        core.get_number_item('P0_BOARD_ID')     AS board_id,
-        core.get_user_id()                      AS user_id
+        tsk_app.get_client_id()     AS client_id,
+        tsk_app.get_client_id()     AS project_id,
+        tsk_app.get_board_id()      AS board_id,
+        core.get_user_id()          AS user_id
     FROM DUAL
 ),
 s AS (
@@ -44,9 +44,9 @@ SELECT
         THEN '<span class="fa fa-check-square"></span>'
         ELSE '<a href="' ||
             core.get_page_url (
-                in_page_id      => core.get_page_id(),
+                in_page_id      => 100,
                 in_app_id       => core.get_app_id(),
-                in_names        => 'P0_CLIENT_ID,P0_PROJECT_ID,P0_BOARD_ID',
+                in_names        => 'P100_CLIENT_ID,P100_PROJECT_ID,P100_BOARD_ID',
                 in_values       => t.client_id || ',' || t.project_id || ',' || t.board_id,
                 in_reset        => 'Y'
             ) || '">SET</a>'

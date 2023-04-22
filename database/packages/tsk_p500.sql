@@ -37,7 +37,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
 
     PROCEDURE sync_commits
     AS
-        in_project_id   CONSTANT tsk_projects.project_id%TYPE   := core.get_item('P0_PROJECT_ID');
+        in_project_id   CONSTANT tsk_projects.project_id%TYPE   := tsk_app.get_project_id();
         in_start_date   CONSTANT DATE                           := TRUNC(SYSDATE) - 1;
         in_page_id      CONSTANT NUMBER                         := 1;
         --
@@ -158,7 +158,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         core.create_session(core.get_owner(), 710, 500);    -- user, app, page
         --
         FOR c IN (
-            SELECT r.project_id
+            SELECT
+                r.client_id,
+                r.project_id
             FROM tsk_repos r
             JOIN tsk_repo_endpoints e
                 ON e.owner_id       = r.owner_id
@@ -167,7 +169,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
                 ON p.project_id     = r.project_id
                 AND p.is_active     = 'Y'
         ) LOOP
-            core.set_item('P0_PROJECT_ID', c.project_id);
+            APEX_UTIL.SET_PREFERENCE('CLIENT_ID',   c.client_id);
+            APEX_UTIL.SET_PREFERENCE('PROJECT_ID',  c.project_id);
             --
             tsk_p500.sync_commits();
             --

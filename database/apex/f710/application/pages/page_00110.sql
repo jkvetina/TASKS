@@ -434,8 +434,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_is_required=>true
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
-,p_item_default=>'P0_CLIENT_ID'
-,p_item_default_type=>'ITEM'
 ,p_prompt=>'Target Client'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_CLIENTS_ALL'
@@ -455,8 +453,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_is_required=>true
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
-,p_item_default=>'P0_PROJECT_ID'
-,p_item_default_type=>'ITEM'
 ,p_prompt=>'Target Project'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_PROJECTS_ALL'
@@ -479,8 +475,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_is_required=>true
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
-,p_item_default=>'P0_BOARD_ID'
-,p_item_default_type=>'ITEM'
 ,p_prompt=>'Target Board'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_BOARDS_ALL'
@@ -503,8 +497,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_is_required=>true
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
-,p_item_default=>'P100_BOARD_TYPE'
-,p_item_default_type=>'ITEM'
 ,p_prompt=>'Target Status'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_STATUSES_ALL'
@@ -527,8 +519,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_is_required=>true
 ,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
-,p_item_default=>'P100_SWIMLANE_ID'
-,p_item_default_type=>'ITEM'
 ,p_prompt=>'Target Swimlane'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_SWIMLANES_ALL'

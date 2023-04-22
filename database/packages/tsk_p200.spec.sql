@@ -26,17 +26,11 @@ CREATE OR REPLACE PACKAGE tsk_p200 AS
 
 
 
-    PROCEDURE reorder_task_statuses (
-        in_client_id        tsk_statuses.client_id%TYPE    := NULL,
-        in_project_id       tsk_statuses.project_id%TYPE   := NULL
-    );
+    PROCEDURE reorder_task_statuses;
 
 
 
-    PROCEDURE reorder_task_swimlanes (
-        in_client_id        tsk_swimlanes.client_id%TYPE   := NULL,
-        in_project_id       tsk_swimlanes.project_id%TYPE  := NULL
-    );
+    PROCEDURE reorder_task_swimlanes;
 
 END;
 /

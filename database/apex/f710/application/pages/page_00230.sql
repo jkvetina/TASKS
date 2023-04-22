@@ -305,8 +305,6 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_control_break=>true
 ,p_enable_hide=>true
 ,p_is_primary_key=>false
-,p_default_type=>'ITEM'
-,p_default_expression=>'P0_CLIENT_ID'
 ,p_duplicate_value=>true
 ,p_include_in_export=>false
 );
@@ -338,8 +336,6 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_control_break=>true
 ,p_enable_hide=>true
 ,p_is_primary_key=>false
-,p_default_type=>'ITEM'
-,p_default_expression=>'P0_PROJECT_ID'
 ,p_duplicate_value=>true
 ,p_include_in_export=>false
 );
@@ -656,10 +652,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'REORDER_STATUSES'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'tsk_p200.reorder_task_statuses (',
-'    in_client_id        => :P0_CLIENT_ID,',
-'    in_project_id       => :P0_PROJECT_ID',
-');',
+'tsk_p200.reorder_task_statuses();',
 ''))
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'

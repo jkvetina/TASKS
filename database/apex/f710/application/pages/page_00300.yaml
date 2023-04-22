@@ -395,8 +395,6 @@ regions:
       primary-key: false
 
     default: 
-      type: Item
-      item: P0_CLIENT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 

@@ -87,13 +87,7 @@ regions:
     type: PL/SQL Dynamic Content [Legacy]
 
   source: 
-    pl/sql-code: |
-      tsk_p100.generate_board (
-          in_client_id        => :P0_CLIENT_ID,
-          in_project_id       => :P0_PROJECT_ID,
-          in_board_id         => :P0_BOARD_ID,
-          in_swimlane_id      => :P100_SWIMLANE_ID
-      );
+    pl/sql-code: tsk_p100.generate_board();
 
   layout: 
     sequence: 40

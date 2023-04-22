@@ -1,5 +1,7 @@
 CREATE OR REPLACE FORCE VIEW tsk_p200_boards_first8_v AS
-SELECT s.*
+SELECT
+    s.status_id,
+    s.r#
 FROM (
     SELECT
         s.status_id,

@@ -871,10 +871,6 @@ page-items:
     type: Null
     used: Only when current value in session state is null
 
-  default: 
-    type: Item
-    item: P0_CLIENT_ID
-
   session-state: 
     storage: Per Session (Persistent)
 
@@ -940,10 +936,6 @@ page-items:
   source: 
     type: Null
     used: Only when current value in session state is null
-
-  default: 
-    type: Item
-    item: P0_PROJECT_ID
 
   session-state: 
     storage: Per Session (Persistent)
@@ -1011,10 +1003,6 @@ page-items:
   source: 
     type: Null
     used: Only when current value in session state is null
-
-  default: 
-    type: Item
-    item: P0_BOARD_ID
 
   session-state: 
     storage: Per Session (Persistent)
@@ -1084,10 +1072,6 @@ page-items:
     type: Null
     used: Only when current value in session state is null
 
-  default: 
-    type: Item
-    item: P100_BOARD_TYPE
-
   session-state: 
     storage: Per Session (Persistent)
 
@@ -1155,10 +1139,6 @@ page-items:
   source: 
     type: Null
     used: Only when current value in session state is null
-
-  default: 
-    type: Item
-    item: P100_SWIMLANE_ID
 
   session-state: 
     storage: Per Session (Persistent)

@@ -59,7 +59,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
                 WHERE c.task_id             = rec.task_id
             ) LOOP
                 core.set_item(c.item_name, c.badge);
-    
+
                 -- offer task split when there are unfinished items on checklist
                 IF c.item_name = 'P105_BADGE_CHECKLIST' AND INSTR(c.badge, 'fa-number') >= 0 THEN
                     core.set_item('P105_SHOW_SPLIT', 'Y');
@@ -70,9 +70,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             --
         ELSE
             -- get defaults for new task
-            core.set_item('P105_CLIENT_ID',     tsk_app2.get_client_id());
-            core.set_item('P105_PROJECT_ID',    tsk_app2.get_project_id());
-            core.set_item('P105_BOARD_ID',      tsk_app2.get_board_id());
+            core.set_item('P105_CLIENT_ID',     tsk_app.get_client_id());
+            core.set_item('P105_PROJECT_ID',    tsk_app.get_project_id());
+            core.set_item('P105_BOARD_ID',      tsk_app.get_board_id());
             --
             FOR c IN (
                 SELECT s.status_id
@@ -157,12 +157,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         v_action            CHAR;
         rec                 tsk_task_checklist%ROWTYPE;
     BEGIN
-        v_action            := APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
+        v_action            := core.get_grid_action();
         --
-        rec.task_id         := APEX_UTIL.GET_SESSION_STATE('TASK_ID');
-        rec.checklist_id    := APEX_UTIL.GET_SESSION_STATE('CHECKLIST_ID');
-        rec.checklist_item  := NULLIF(LTRIM(RTRIM(APEX_UTIL.GET_SESSION_STATE('CHECKLIST_ITEM'))), '-');
-        rec.checklist_done  := APEX_UTIL.GET_SESSION_STATE('CHECKLIST_DONE');
+        rec.task_id         := core.get_grid_data('TASK_ID');
+        rec.checklist_id    := core.get_grid_data('CHECKLIST_ID');
+        rec.checklist_item  := NULLIF(LTRIM(RTRIM(core.get_grid_data('CHECKLIST_ITEM'))), '-');
+        rec.checklist_done  := core.get_grid_data('CHECKLIST_DONE');
         --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
@@ -364,7 +364,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             JOIN tsk_tasks t
                 ON t.task_id        = f.task_id
             WHERE f.file_id         = in_file_id
-                AND t.project_id    = core.get_item('P0_PROJECT_ID');
+                AND t.project_id    = tsk_app.get_project_id();
         EXCEPTION
         WHEN NO_DATA_FOUND THEN
             core.raise_error('FILE_NOT_FOUND');

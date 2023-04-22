@@ -6,7 +6,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         FOR c IN (
             SELECT p.project_name || ' - Projects' AS name
             FROM tsk_projects p
-            WHERE p.project_id = core.get_item('P0_PROJECT_ID')
+            WHERE p.project_id = tsk_app.get_project_id()
         ) LOOP
             core.set_item('P200_HEADER', c.name);
         END LOOP;
@@ -23,22 +23,19 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         io_board_id         IN OUT NOCOPY   VARCHAR2
     )
     AS
-        v_action            CHAR;
         rec                 tsk_boards%ROWTYPE;
     BEGIN
-        v_action            := APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
+        rec.client_id       := tsk_app.get_client_id();
+        rec.project_id      := tsk_app.get_project_id();
         --
-        rec.client_id       := tsk_app.get_grid_client_id();
-        rec.project_id      := tsk_app.get_grid_project_id();
-        --
-        rec.board_id        := APEX_UTIL.GET_SESSION_STATE('BOARD_ID');
-        rec.board_name      := APEX_UTIL.GET_SESSION_STATE('BOARD_NAME');
-        rec.is_active       := APEX_UTIL.GET_SESSION_STATE('IS_ACTIVE');
+        rec.board_id        := core.get_grid_data('BOARD_ID');
+        rec.board_name      := core.get_grid_data('BOARD_NAME');
+        rec.is_active       := core.get_grid_data('IS_ACTIVE');
         --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
         --
-        IF v_action = 'D' THEN
+        IF core.get_grid_action() = 'D' THEN
             DELETE FROM tsk_boards t
             WHERE t.board_id    = rec.board_id;
             --
@@ -71,26 +68,23 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         io_status_id        IN OUT NOCOPY   tsk_statuses.status_id%TYPE         -- old key
     )
     AS
-        v_action            CHAR;
         rec                 tsk_statuses%ROWTYPE;
     BEGIN
-        v_action            := APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
+        rec.client_id       := tsk_app.get_client_id();
+        rec.project_id      := tsk_app.get_project_id();
         --
-        rec.client_id       := tsk_app.get_grid_client_id(io_client_id);
-        rec.project_id      := tsk_app.get_grid_project_id(io_project_id);
-        --
-        rec.status_id       := APEX_UTIL.GET_SESSION_STATE('STATUS_ID');        -- new key
-        rec.status_name     := APEX_UTIL.GET_SESSION_STATE('STATUS_NAME');
-        rec.is_active       := APEX_UTIL.GET_SESSION_STATE('IS_ACTIVE');
-        rec.is_default      := APEX_UTIL.GET_SESSION_STATE('IS_DEFAULT');
-        rec.is_named        := APEX_UTIL.GET_SESSION_STATE('IS_NAMED');
-        rec.order#          := APEX_UTIL.GET_SESSION_STATE('ORDER#');
+        rec.status_id       := core.get_grid_data('STATUS_ID');        -- new key
+        rec.status_name     := core.get_grid_data('STATUS_NAME');
+        rec.is_active       := core.get_grid_data('IS_ACTIVE');
+        rec.is_default      := core.get_grid_data('IS_DEFAULT');
+        rec.is_named        := core.get_grid_data('IS_NAMED');
+        rec.order#          := core.get_grid_data('ORDER#');
         --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
 
         -- are we deleting the status?
-        IF v_action = 'D' THEN
+        IF core.get_grid_action() = 'D' THEN
             DELETE FROM tsk_statuses t
             WHERE t.status_id       = io_status_id          -- old key
                 AND t.client_id     = io_client_id
@@ -100,7 +94,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         END IF;
 
         -- are we renaming the primary key?
-        IF rec.status_id != io_status_id AND v_action = 'U' THEN
+        IF rec.status_id != io_status_id AND core.get_grid_action() = 'U' THEN
             -- create new status
             INSERT INTO tsk_statuses
             VALUES rec;
@@ -149,23 +143,20 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         io_swimlane_id      IN OUT NOCOPY   tsk_swimlanes.swimlane_id%TYPE
     )
     AS
-        v_action            CHAR;
         rec                 tsk_swimlanes%ROWTYPE;
     BEGIN
-        v_action            := APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
+        rec.client_id       := tsk_app.get_client_id();
+        rec.project_id      := tsk_app.get_project_id();
         --
-        rec.client_id       := tsk_app.get_grid_client_id(io_client_id);
-        rec.project_id      := tsk_app.get_grid_project_id(io_project_id);
-        --
-        rec.swimlane_id     := APEX_UTIL.GET_SESSION_STATE('SWIMLANE_ID');
-        rec.swimlane_name   := APEX_UTIL.GET_SESSION_STATE('SWIMLANE_NAME');
-        rec.is_active       := APEX_UTIL.GET_SESSION_STATE('IS_ACTIVE');
-        rec.order#          := APEX_UTIL.GET_SESSION_STATE('ORDER#');
+        rec.swimlane_id     := core.get_grid_data('SWIMLANE_ID');
+        rec.swimlane_name   := core.get_grid_data('SWIMLANE_NAME');
+        rec.is_active       := core.get_grid_data('IS_ACTIVE');
+        rec.order#          := core.get_grid_data('ORDER#');
         --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
         --
-        IF v_action = 'D' THEN
+        IF core.get_grid_action() = 'D' THEN
             DELETE FROM tsk_swimlanes t
             WHERE t.swimlane_id     = io_swimlane_id        -- old key
                 AND t.client_id     = io_client_id
@@ -175,7 +166,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         END IF;
 
         -- are we renaming the primary key?
-        IF rec.swimlane_id != io_swimlane_id AND v_action = 'U' THEN
+        IF rec.swimlane_id != io_swimlane_id AND core.get_grid_action() = 'U' THEN
             -- create new status
             INSERT INTO tsk_swimlanes
             VALUES rec;
@@ -217,11 +208,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
 
 
-    PROCEDURE reorder_task_statuses (
-        in_client_id        tsk_statuses.client_id%TYPE    := NULL,
-        in_project_id       tsk_statuses.project_id%TYPE   := NULL
-    )
+    PROCEDURE reorder_task_statuses
     AS
+        in_client_id        CONSTANT tsk_statuses.client_id%TYPE    := tsk_app.get_client_id();
+        in_project_id       CONSTANT tsk_statuses.project_id%TYPE   := tsk_app.get_project_id();
     BEGIN
         FOR s IN (
             SELECT
@@ -251,11 +241,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
 
 
-    PROCEDURE reorder_task_swimlanes (
-        in_client_id        tsk_swimlanes.client_id%TYPE   := NULL,
-        in_project_id       tsk_swimlanes.project_id%TYPE  := NULL
-    )
+    PROCEDURE reorder_task_swimlanes
     AS
+        in_client_id        CONSTANT tsk_statuses.client_id%TYPE    := tsk_app.get_client_id();
+        in_project_id       CONSTANT tsk_statuses.project_id%TYPE   := tsk_app.get_project_id();
     BEGIN
         FOR s IN (
             SELECT

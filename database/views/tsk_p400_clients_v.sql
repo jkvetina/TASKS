@@ -15,9 +15,9 @@ SELECT
     t.is_active,
     --
     core.get_page_url (
-        in_page_id      => core.get_page_id(),
+        in_page_id      => 100,
         in_app_id       => core.get_app_id(),
-        in_names        => 'P0_CLIENT_ID,P0_PROJECT_ID,P0_BOARD_ID',
+        in_names        => 'P100_CLIENT_ID,P100_PROJECT_ID,P100_BOARD_ID',
         in_values       => t.client_id || ',,',
         in_reset        => 'Y'
     ) AS activate_url,

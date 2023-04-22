@@ -207,8 +207,6 @@ regions:
       primary-key: true
 
     default: 
-      type: Sequence
-      sequence: TSK_BOARD_ID
       duplicate-copies-existing-value: false
 
     session-state: 
@@ -311,8 +309,6 @@ regions:
       primary-key: false
 
     default: 
-      type: Item
-      item: P0_CLIENT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -369,8 +365,6 @@ regions:
       primary-key: false
 
     default: 
-      type: Item
-      item: P0_PROJECT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 

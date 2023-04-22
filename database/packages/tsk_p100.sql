@@ -2,20 +2,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
 
     PROCEDURE init_defaults
     AS
-        v_board_id          tsk_boards.board_id%TYPE;
-        v_board_type        tsk_lov_board_types_v.id%TYPE;
-        v_project_id        tsk_boards.project_id%TYPE;
-        v_client_id         tsk_boards.client_id%TYPE;
+        in_client_id        CONSTANT tsk_tasks.client_id%TYPE   := tsk_app.get_client_id();
+        in_project_id       CONSTANT tsk_tasks.project_id%TYPE  := tsk_app.get_project_id();
+        in_board_id         CONSTANT tsk_tasks.board_id%TYPE    := tsk_app.get_board_id();
+        --
         v_task_id           tsk_tasks.task_id%TYPE;
     BEGIN
-        -- load preferences
-        tsk_app.load_user_preferences();
-
-        -- get global items
-        v_board_id          := core.get_number_item('P0_BOARD_ID');
-        v_board_type        := core.get_item('P100_BOARD_TYPE');
-        v_project_id        := core.get_item('P0_PROJECT_ID');
-        v_client_id         := core.get_item('P0_CLIENT_ID');
         v_task_id           := core.get_item('P100_TASK_ID');
 
         -- get board header
@@ -24,9 +16,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             FROM tsk_boards b
             JOIN tsk_projects p
                 ON b.project_id = p.project_id
-            --LEFT JOIN tsk_lov_board_types_v l
-            --    ON l.id         = v_board_type
-            WHERE b.board_id    = v_board_id
+            WHERE b.board_id    = in_board_id
         ) LOOP
             core.set_item('P100_HEADER', c.name);
         END LOOP;
@@ -43,7 +33,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             SELECT 'Y' AS is_favorite
             FROM tsk_user_fav_boards b
             WHERE b.user_id     = core.get_user_id()
-                AND b.board_id  = v_board_id
+                AND b.board_id  = in_board_id
         ) LOOP
             core.set_item('P100_IS_FAVORITE', c.is_favorite);
         END LOOP;
@@ -56,16 +46,20 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
 
 
 
-    PROCEDURE generate_board (
-        in_client_id        tsk_boards.client_id%TYPE           := NULL,
-        in_project_id       tsk_boards.project_id%TYPE          := NULL,
-        in_board_id         tsk_boards.board_id%TYPE            := NULL,
-        in_swimlane_id      tsk_swimlanes.swimlane_id%TYPE      := NULL
-    )
+    PROCEDURE generate_board
     AS
+        in_client_id        tsk_boards.client_id%TYPE;
+        in_project_id       tsk_boards.project_id%TYPE;
+        in_board_id         tsk_boards.board_id%TYPE;
+        in_swimlane_id      tsk_swimlanes.swimlane_id%TYPE;
+        --
         v_statuses          PLS_INTEGER;
-        v_board_type        VARCHAR2(128);
     BEGIN
+        in_client_id        := tsk_app.get_client_id();
+        in_project_id       := tsk_app.get_project_id();
+        in_board_id         := tsk_app.get_board_id();
+        in_swimlane_id      := tsk_app.get_swimlane_id();
+
         -- calculate number of columns
         SELECT COUNT(s.status_id)
         INTO v_statuses
@@ -77,8 +71,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         HTP.P('<div class="BOARD" style="' ||
             'grid-template-columns: repeat(' || v_statuses || ', minmax(300px, 1fr)); ' ||
             '">');
-        --
-        v_board_type := core.get_item('P0_BOARD_TYPE');
 
         -- generate grid
         FOR w IN (
@@ -90,10 +82,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                 AND w.project_id    = in_project_id
                 AND (w.swimlane_id  = in_swimlane_id OR in_swimlane_id IS NULL)
                 AND (
-                    v_board_type IS NULL
-                    OR v_board_type = w.swimlane_id
-                    OR (v_board_type = 'MY'     AND w.swimlane_id IN (core.get_user_id()))
-                    OR (v_board_type = 'MY+'    AND w.swimlane_id IN (core.get_user_id(), '-'))
+                    in_swimlane_id IS NULL
+                    OR in_swimlane_id   = w.swimlane_id
+                    OR (in_swimlane_id  = 'MY'      AND w.swimlane_id IN (core.get_user_id()))
+                    OR (in_swimlane_id  = 'MY+'     AND w.swimlane_id IN (core.get_user_id(), '-'))
                 )
                 AND w.is_active     = 'Y'
             ORDER BY r#
@@ -216,7 +208,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         rec                 tsk_user_fav_boards%ROWTYPE;
     BEGIN
         rec.user_id         := COALESCE(in_user_id,     core.get_user_id());
-        rec.board_id        := COALESCE(in_board_id,    core.get_number_item('P0_BOARD_ID'));
+        rec.board_id        := COALESCE(in_board_id,    tsk_app.get_board_id());
         --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
@@ -244,7 +236,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         rec                 tsk_user_fav_boards%ROWTYPE;
     BEGIN
         rec.user_id         := COALESCE(in_user_id,     core.get_user_id());
-        rec.board_id        := COALESCE(in_board_id,    core.get_number_item('P0_BOARD_ID'));
+        rec.board_id        := COALESCE(in_board_id,    tsk_app.get_board_id());
         --
         DELETE FROM tsk_user_fav_boards b
         WHERE b.user_id     = rec.user_id

@@ -952,8 +952,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_imp.id(63213536180844591)
 ,p_item_source_plug_id=>wwv_flow_imp.id(63213536180844591)
-,p_item_default=>'P0_CLIENT_ID'
-,p_item_default_type=>'ITEM'
 ,p_prompt=>'Client'
 ,p_source=>'CLIENT_ID'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -977,8 +975,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(63213536180844591)
 ,p_item_source_plug_id=>wwv_flow_imp.id(63213536180844591)
-,p_item_default=>'P0_PROJECT_ID'
-,p_item_default_type=>'ITEM'
 ,p_prompt=>'Project'
 ,p_source=>'PROJECT_ID'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -1404,11 +1400,13 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'SAVE_FILTERS'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'-- use globals as defaults',
-':P105_CLIENT_ID   := NVL(:P105_CLIENT_ID,  :P0_CLIENT_ID);',
-':P105_PROJECT_ID  := NVL(:P105_PROJECT_ID, :P0_PROJECT_ID);',
-':P105_BOARD_ID    := NVL(:P105_BOARD_ID,   :P0_BOARD_ID);',
-''))
+'tsk_app.set_user_preferences (',
+'    in_user_id          => core.get_user_id(),',
+'    in_client_id        => :P105_CLIENT_ID,',
+'    in_project_id       => :P105_PROJECT_ID,',
+'    in_board_id         => :P105_BOARD_ID,',
+'    in_swimlane_id      => :P105_SWIMLANE_ID',
+');'))
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );

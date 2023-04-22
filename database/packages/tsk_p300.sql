@@ -6,7 +6,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
         FOR c IN (
             SELECT c.client_name || ' - Projects' AS name
             FROM tsk_clients c
-            WHERE c.client_id = core.get_item('P0_CLIENT_ID')
+            WHERE c.client_id = tsk_app.get_client_id()
         ) LOOP
             core.set_item('P300_HEADER', c.name);
         END LOOP;
@@ -25,11 +25,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
     AS
         rec                 tsk_projects%ROWTYPE;
     BEGIN
-        rec.client_id       := tsk_app.get_grid_client_id();
+        rec.client_id       := tsk_app.get_client_id();
         --
-        rec.project_id      := APEX_UTIL.GET_SESSION_STATE('PROJECT_ID');
-        rec.project_name    := APEX_UTIL.GET_SESSION_STATE('PROJECT_NAME');
-        rec.is_active       := APEX_UTIL.GET_SESSION_STATE('IS_ACTIVE');
+        rec.project_id      := core.get_grid_data('PROJECT_ID');
+        rec.project_name    := core.get_grid_data('PROJECT_NAME');
+        rec.is_active       := core.get_grid_data('IS_ACTIVE');
         --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;

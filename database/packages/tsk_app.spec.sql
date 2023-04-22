@@ -26,57 +26,42 @@ CREATE OR REPLACE PACKAGE tsk_app AS
 
 
 
-    PROCEDURE save_user_preferences (
-        in_user_id          VARCHAR2    := NULL
-    );
-
-
-
-    PROCEDURE load_user_preferences (
-        in_user_id          VARCHAR2    := NULL
-    );
-
-
-
-    FUNCTION validate_client_id (
-        in_client_id        tsk_clients.client_id%TYPE
-    )
+    FUNCTION get_client_id
     RETURN tsk_clients.client_id%TYPE;
 
 
 
-    FUNCTION validate_project_id (
-        in_project_id       tsk_projects.project_id%TYPE
-    )
+    FUNCTION get_project_id
     RETURN tsk_projects.project_id%TYPE;
 
 
 
-    FUNCTION validate_board_id (
-        in_board_id         tsk_boards.board_id%TYPE
-    )
+    FUNCTION get_board_id
     RETURN tsk_boards.board_id%TYPE;
 
 
 
-    FUNCTION get_grid_client_id (
-        in_client_id        tsk_clients.client_id%TYPE := NULL
-    )
-    RETURN tsk_clients.client_id%TYPE;
+    FUNCTION get_swimlane_id
+    RETURN tsk_swimlanes.swimlane_id%TYPE;
 
 
 
-    FUNCTION get_grid_project_id (
-        in_project_id       tsk_projects.project_id%TYPE := NULL
-    )
-    RETURN tsk_projects.project_id%TYPE;
+    PROCEDURE set_user_preferences (
+        in_user_id          tsk_users.user_id%TYPE,
+        in_client_id        tsk_clients.client_id%TYPE,
+        in_project_id       tsk_projects.project_id%TYPE,
+        in_board_id         tsk_boards.board_id%TYPE,
+        in_swimlane_id      tsk_swimlanes.swimlane_id%TYPE
+    );
 
 
 
-    PROCEDURE download_file (
-        in_file_name                        VARCHAR2,
-        in_file_mime                        VARCHAR2,
-        in_file_payload     IN OUT NOCOPY   BLOB
+    PROCEDURE validate_user_preferences (
+        io_user_id          IN OUT NOCOPY   tsk_users.user_id%TYPE,
+        io_client_id        IN OUT NOCOPY   tsk_clients.client_id%TYPE,
+        io_project_id       IN OUT NOCOPY   tsk_projects.project_id%TYPE,
+        io_board_id         IN OUT NOCOPY   tsk_boards.board_id%TYPE,
+        io_swimlane_id      IN OUT NOCOPY   tsk_swimlanes.swimlane_id%TYPE
     );
 
 END;
