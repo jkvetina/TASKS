@@ -2,13 +2,34 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
 
     PROCEDURE init_defaults
     AS
-        in_client_id        CONSTANT tsk_tasks.client_id%TYPE   := tsk_app.get_client_id();
-        in_project_id       CONSTANT tsk_tasks.project_id%TYPE  := tsk_app.get_project_id();
-        in_board_id         CONSTANT tsk_tasks.board_id%TYPE    := tsk_app.get_board_id();
-        --
+        v_client_id         tsk_tasks.client_id%TYPE    := tsk_app.get_client_id();
+        v_project_id        tsk_tasks.project_id%TYPE   := tsk_app.get_project_id();
+        v_board_id          tsk_tasks.board_id%TYPE     := tsk_app.get_board_id();
+        v_swimlane_id       tsk_tasks.swimlane_id%TYPE  := tsk_app.get_swimlane_id();
         v_task_id           tsk_tasks.task_id%TYPE;
     BEGIN
         v_task_id           := core.get_item('P100_TASK_ID');
+
+        -- overwrite settings if new are passed in url
+        IF core.get_request_url() LIKE '%p100_board_id=%' THEN
+            v_client_id     := core.get_item('P100_CLIENT_ID');
+            v_project_id    := core.get_item('P100_PROJECT_ID');
+            v_board_id      := core.get_item('P100_BOARD_ID');
+            --
+            tsk_app.set_user_preferences (
+                in_user_id          => core.get_user_id(),
+                in_client_id        => v_client_id,
+                in_project_id       => v_project_id,
+                in_board_id         => v_board_id,
+                in_swimlane_id      => v_swimlane_id
+            );
+        END IF;
+
+        -- set page items
+        core.set_item('P100_CLIENT_ID',     v_client_id);
+        core.set_item('P100_PROJECT_ID',    v_project_id);
+        core.set_item('P100_BOARD_ID',      v_board_id);
+        core.set_item('P100_SWIMLANE_ID',   v_swimlane_id);
 
         -- get board header
         FOR c IN (
@@ -16,7 +37,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             FROM tsk_boards b
             JOIN tsk_projects p
                 ON b.project_id = p.project_id
-            WHERE b.board_id    = in_board_id
+            WHERE b.board_id    = v_board_id
         ) LOOP
             core.set_item('P100_HEADER', c.name);
         END LOOP;
@@ -33,7 +54,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             SELECT 'Y' AS is_favorite
             FROM tsk_user_fav_boards b
             WHERE b.user_id     = core.get_user_id()
-                AND b.board_id  = in_board_id
+                AND b.board_id  = v_board_id
         ) LOOP
             core.set_item('P100_IS_FAVORITE', c.is_favorite);
         END LOOP;
