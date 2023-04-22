@@ -1013,7 +1013,8 @@ CREATE OR REPLACE PACKAGE BODY core AS
         END IF;
         --
         v_message := SUBSTR(
-            RTRIM(in_action_name ||
+            RTRIM(
+                COALESCE(in_action_name, SQLERRM) ||
                 '|' || in_arg1 || '|' || in_arg2 || '|' || in_arg3 || '|' || in_arg4 ||
                 '|' || in_arg5 || '|' || in_arg6 || '|' || in_arg7 || '|' || in_arg8,
                 '|'
