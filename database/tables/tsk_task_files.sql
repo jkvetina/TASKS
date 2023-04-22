@@ -20,6 +20,7 @@ CREATE TABLE tsk_task_files (
     CONSTRAINT fk_tsk_task_files_task
         FOREIGN KEY (task_id)
         REFERENCES tsk_tasks (task_id)
+        DEFERRABLE INITIALLY DEFERRED
 );
 --
 COMMENT ON TABLE tsk_task_files IS '';

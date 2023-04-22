@@ -16,6 +16,7 @@ CREATE TABLE tsk_repos (
     CONSTRAINT fk_tsk_repos_project
         FOREIGN KEY (client_id, project_id)
         REFERENCES tsk_projects (client_id, project_id)
+        DEFERRABLE INITIALLY DEFERRED
 );
 --
 COMMENT ON TABLE tsk_repos IS '';

@@ -17,6 +17,7 @@ CREATE TABLE tsk_swimlanes (
     CONSTRAINT fk_tsk_swimlanes_project
         FOREIGN KEY (client_id, project_id)
         REFERENCES tsk_projects (client_id, project_id)
+        DEFERRABLE INITIALLY DEFERRED
 );
 --
 COMMENT ON TABLE tsk_swimlanes IS '';

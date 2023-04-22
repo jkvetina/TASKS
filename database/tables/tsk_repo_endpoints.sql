@@ -14,6 +14,7 @@ CREATE TABLE tsk_repo_endpoints (
     CONSTRAINT fk_tsk_repo_endpoint_repos
         FOREIGN KEY (repo_id, owner_id)
         REFERENCES tsk_repos (repo_id, owner_id)
+        DEFERRABLE INITIALLY DEFERRED
 );
 --
 COMMENT ON TABLE tsk_repo_endpoints IS '';

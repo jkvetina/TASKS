@@ -15,6 +15,7 @@ CREATE TABLE tsk_task_checklist (
     CONSTRAINT fk_tsk_checklist_task
         FOREIGN KEY (task_id)
         REFERENCES tsk_tasks (task_id)
+        DEFERRABLE INITIALLY DEFERRED
 );
 --
 COMMENT ON TABLE tsk_task_checklist IS '';

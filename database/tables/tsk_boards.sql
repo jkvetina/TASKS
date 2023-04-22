@@ -19,6 +19,7 @@ CREATE TABLE tsk_boards (
     CONSTRAINT fk_tsk_boards_project
         FOREIGN KEY (client_id, project_id)
         REFERENCES tsk_projects (client_id, project_id)
+        DEFERRABLE INITIALLY DEFERRED
 );
 --
 COMMENT ON TABLE tsk_boards IS '';

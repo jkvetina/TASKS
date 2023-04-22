@@ -16,15 +16,18 @@ CREATE TABLE tsk_tasks (
     --
     CONSTRAINT fk_tsk_tasks_board
         FOREIGN KEY (board_id)
-        REFERENCES tsk_boards (board_id),
+        REFERENCES tsk_boards (board_id)
+        DEFERRABLE INITIALLY DEFERRED,
     --
     CONSTRAINT fk_tsk_tasks_status
         FOREIGN KEY (client_id, project_id, status_id)
-        REFERENCES tsk_statuses (client_id, project_id, status_id),
+        REFERENCES tsk_statuses (client_id, project_id, status_id)
+        DEFERRABLE INITIALLY DEFERRED,
     --
     CONSTRAINT fk_tsk_tasks_swimlane
         FOREIGN KEY (client_id, project_id, swimlane_id)
         REFERENCES tsk_swimlanes (client_id, project_id, swimlane_id)
+        DEFERRABLE INITIALLY DEFERRED
 );
 --
 COMMENT ON TABLE tsk_tasks IS '';

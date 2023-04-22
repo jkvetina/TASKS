@@ -13,18 +13,19 @@ CREATE TABLE tsk_statuses (
     CONSTRAINT ch_tsk_statuses
         CHECK (is_active = 'Y' OR is_active IS NULL),
     --
+    CONSTRAINT pk_tsk_status
+        PRIMARY KEY (client_id, project_id, status_id),
+    --
     CONSTRAINT ch_tsk_statuses_default
         CHECK (is_default = 'Y' OR is_default IS NULL),
     --
     CONSTRAINT ch_tsk_statuses_name
         CHECK (is_named = 'Y' OR is_named IS NULL),
     --
-    CONSTRAINT pk_tsk_status
-        PRIMARY KEY (client_id, project_id, status_id),
-    --
     CONSTRAINT fk_tsk_status_project
         FOREIGN KEY (client_id, project_id)
         REFERENCES tsk_projects (client_id, project_id)
+        DEFERRABLE INITIALLY DEFERRED
 );
 --
 COMMENT ON TABLE tsk_statuses IS '';
@@ -34,5 +35,7 @@ COMMENT ON COLUMN tsk_statuses.status_name      IS '';
 COMMENT ON COLUMN tsk_statuses.client_id        IS '';
 COMMENT ON COLUMN tsk_statuses.project_id       IS '';
 COMMENT ON COLUMN tsk_statuses.is_active        IS '';
+COMMENT ON COLUMN tsk_statuses.is_default       IS '';
+COMMENT ON COLUMN tsk_statuses.is_named         IS '';
 COMMENT ON COLUMN tsk_statuses.order#           IS '';
 

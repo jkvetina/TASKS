@@ -9,11 +9,13 @@ CREATE TABLE tsk_user_fav_boards (
     --
     CONSTRAINT fk_tsk_user_fav_boards_board
         FOREIGN KEY (board_id)
-        REFERENCES tsk_boards (board_id),
+        REFERENCES tsk_boards (board_id)
+        DEFERRABLE INITIALLY DEFERRED,
     --
     CONSTRAINT fk_tsk_user_fav_boards_user
         FOREIGN KEY (user_id)
         REFERENCES tsk_users (user_id)
+        DEFERRABLE INITIALLY DEFERRED
 );
 --
 COMMENT ON TABLE tsk_user_fav_boards IS '';
