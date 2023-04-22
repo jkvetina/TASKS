@@ -69,18 +69,13 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
 
     PROCEDURE generate_board
     AS
-        in_client_id        tsk_boards.client_id%TYPE;
-        in_project_id       tsk_boards.project_id%TYPE;
-        in_board_id         tsk_boards.board_id%TYPE;
-        in_swimlane_id      tsk_swimlanes.swimlane_id%TYPE;
+        in_client_id        CONSTANT tsk_tasks.client_id%TYPE       := tsk_app.get_client_id();
+        in_project_id       CONSTANT tsk_tasks.project_id%TYPE      := tsk_app.get_project_id();
+        in_board_id         CONSTANT tsk_tasks.board_id%TYPE        := tsk_app.get_board_id();
+        in_swimlane_id      CONSTANT tsk_tasks.swimlane_id%TYPE     := tsk_app.get_swimlane_id();
         --
         v_statuses          PLS_INTEGER;
     BEGIN
-        in_client_id        := tsk_app.get_client_id();
-        in_project_id       := tsk_app.get_project_id();
-        in_board_id         := tsk_app.get_board_id();
-        in_swimlane_id      := tsk_app.get_swimlane_id();
-
         -- calculate number of columns
         SELECT COUNT(s.status_id)
         INTO v_statuses
@@ -101,7 +96,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             FROM tsk_swimlanes w
             WHERE w.client_id       = in_client_id
                 AND w.project_id    = in_project_id
-                AND (w.swimlane_id  = in_swimlane_id OR in_swimlane_id IS NULL)
                 AND (
                     in_swimlane_id IS NULL
                     OR in_swimlane_id   = w.swimlane_id

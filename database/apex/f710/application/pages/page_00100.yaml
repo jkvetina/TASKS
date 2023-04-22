@@ -90,8 +90,8 @@ regions:
     pl/sql-code: tsk_p100.generate_board();
 
   layout: 
-    sequence: 40
-    parent-region: Tasks # 35122875520937003
+    sequence: 10
+    parent-region: TASKS # 45936953220991447
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -220,8 +220,8 @@ regions:
     include-rowid-column: false
 
   layout: 
-    sequence: 50
-    parent-region: Tasks # 35122875520937003
+    sequence: 20
+    parent-region: TASKS # 45936953220991447
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -823,6 +823,51 @@ regions:
       font-color: '#000000'
       alignment: center
 
+- # ====== Region: TASKS =======================================
+  id: 45936953220991447
+  identification: 
+    title: TASKS
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: Tasks # 35122875520937003
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P100_BOARD_ID
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
 page-items: 
 - # ====== Page Item: P100_CLIENT_ID ===========================
   id: 34905220916116348
@@ -1001,63 +1046,6 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P100_SWIMLANE_ID =========================
-  id: 34951490119065824
-  identification: 
-    name: P100_SWIMLANE_ID
-    type: Checkbox Group
-
-  label: 
-    label: Swimlane
-    alignment: Left
-
-  settings: 
-    number-of-columns: 1
-
-  layout: 
-    sequence: 30
-    region: Filters # 35123712321937012
-    position: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: true
-    column-span: 2
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating # 70967669576975668
-    template-options: 
-    - '#DEFAULT#'
-
-  validation: 
-    value-required: false
-
-  list-of-values: 
-    type: Shared Component
-    list-of-values: LOV_SWIMLANES # 34920402511183578
-    display-extra-values: true
-
-  advanced: 
-    warn-on-unsaved-changes: Ignore
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    storage: Per Session (Persistent)
-
-  server-side-condition: 
-    type: Never
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    escape-special-characters: true
-    restricted-characters: All characters can be saved.
-
 - # ====== Page Item: P100_HEADER ==============================
   id: 35124240356937017
   identification: 
@@ -1079,6 +1067,10 @@ page-items:
     type: Null
     used: Only when current value in session state is null
 
+  default: 
+    type: Static
+    static-value: Tasks
+
   session-state: 
     data-type: VARCHAR2
     storage: Per Session (Persistent)
@@ -1088,14 +1080,14 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P100_BOARD_TYPE ==========================
+- # ====== Page Item: P100_SWIMLANE_ID =========================
   id: 35127554191937050
   identification: 
-    name: P100_BOARD_TYPE
+    name: P100_SWIMLANE_ID
     type: Select List
 
   label: 
-    label: Board Type
+    label: Swimlane
     alignment: Left
 
   settings: 
@@ -1592,49 +1584,13 @@ buttons:
     item: P100_IS_FAVORITE
 
 dynamic-actions: 
-- # ====== Dynamic Action: CHANGED_FILTERS =====================
-  id: 34906414430118509
+- # ====== Dynamic Action: OPEN_DETAIL =========================
+  id: 44173741419914744
   identification: 
-    name: CHANGED_FILTERS
+    name: OPEN_DETAIL
 
   execution: 
     sequence: 40
-
-  when: 
-    event: EVENT.EVENT.BROWSER.CHANGE
-    selection-type: Item(s)
-    item(s): 
-    - P100_CLIENT_ID
-    - P100_PROJECT_ID
-    - P100_BOARD_ID
-    - P100_BOARD_TYPE
-
-  execution: 
-    event-scope: Static
-    type: Immediate
-
-  actions: 
-  - # ====== Action: Submit Page =================================
-    id: 34906818783118510
-    identification: 
-      action: Submit Page
-
-    settings: 
-      show-processing: true
-
-    execution: 
-      sequence: 10
-      event: CHANGED_FILTERS # 34906414430118509
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-- # ====== Dynamic Action: SHOW_DETAIL =========================
-  id: 44173741419914744
-  identification: 
-    name: SHOW_DETAIL
-
-  execution: 
-    sequence: 100
 
   when: 
     event: EVENT.EVENT.BROWSER.READY
@@ -1659,7 +1615,7 @@ dynamic-actions:
 
     execution: 
       sequence: 10
-      event: SHOW_DETAIL # 44173741419914744
+      event: OPEN_DETAIL # 44173741419914744
       fire-when-event-result-is: True
       fire-on-initialization: false
 
@@ -1669,7 +1625,7 @@ dynamic-actions:
     name: DIALOG_CLOSED
 
   execution: 
-    sequence: 110
+    sequence: 50
 
   when: 
     event: EVENT.EVENT.FAMEWORK.APEXAFTERCLOSEDIALOG
@@ -1695,6 +1651,295 @@ dynamic-actions:
     execution: 
       sequence: 10
       event: DIALOG_CLOSED # 45518772288836027
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: CHANGED_CLIENT ======================
+  id: 45937211710991450
+  identification: 
+    name: CHANGED_CLIENT
+
+  execution: 
+    sequence: 20
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P100_CLIENT_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Hide ========================================
+    id: 45935123076991429
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: TASKS # 45936953220991447
+
+    execution: 
+      sequence: 10
+      event: CHANGED_CLIENT # 45937211710991450
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Execute Server-side Code ====================
+    id: 45935398558991431
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: NULL;
+      items-to-submit: 
+      - P100_CLIENT_ID
+      - P100_PROJECT_ID
+      - P100_BOARD_ID
+      - P100_SWIMLANE_ID
+
+    execution: 
+      sequence: 30
+      event: CHANGED_CLIENT # 45937211710991450
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Refresh =====================================
+    id: 46170354209326303
+    identification: 
+      action: Refresh
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P100_PROJECT_ID
+
+    execution: 
+      sequence: 40
+      event: CHANGED_CLIENT # 45937211710991450
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Set Value ===================================
+    id: 46170989263326309
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: Static Assignment
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P100_PROJECT_ID
+      - P100_BOARD_ID
+
+    execution: 
+      sequence: 30
+      event: CHANGED_CLIENT # 45937211710991450
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+- # ====== Dynamic Action: CHANGED_PROJECT =====================
+  id: 46170447652326304
+  identification: 
+    name: CHANGED_PROJECT
+
+  execution: 
+    sequence: 30
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P100_PROJECT_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 46170509231326305
+    identification: 
+      action: Refresh
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P100_BOARD_ID
+
+    execution: 
+      sequence: 40
+      event: CHANGED_PROJECT # 46170447652326304
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Hide ========================================
+    id: 46170647099326306
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: TASKS # 45936953220991447
+
+    execution: 
+      sequence: 10
+      event: CHANGED_PROJECT # 46170447652326304
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Execute Server-side Code ====================
+    id: 46170780727326307
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: NULL;
+      items-to-submit: 
+      - P100_CLIENT_ID
+      - P100_PROJECT_ID
+      - P100_BOARD_ID
+      - P100_SWIMLANE_ID
+
+    execution: 
+      sequence: 20
+      event: CHANGED_PROJECT # 46170447652326304
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Set Value ===================================
+    id: 46170855535326308
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: Static Assignment
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P100_BOARD_ID
+
+    execution: 
+      sequence: 30
+      event: CHANGED_PROJECT # 46170447652326304
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+- # ====== Dynamic Action: CHANGED_BOARD =======================
+  id: 46171072403326310
+  identification: 
+    name: CHANGED_BOARD
+
+  execution: 
+    sequence: 60
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P100_BOARD_ID
+
+  client-side-condition: 
+    type: Item is not null
+    item: P100_BOARD_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 46171110635326311
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 20
+      event: CHANGED_BOARD # 46171072403326310
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Hide ========================================
+    id: 46171565212326315
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: TASKS # 45936953220991447
+
+    execution: 
+      sequence: 10
+      event: CHANGED_BOARD # 46171072403326310
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: CHANGED_SWIMLANE ====================
+  id: 46171269811326312
+  identification: 
+    name: CHANGED_SWIMLANE
+
+  execution: 
+    sequence: 70
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P100_SWIMLANE_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 46171370001326313
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 20
+      event: CHANGED_SWIMLANE # 46171269811326312
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Hide ========================================
+    id: 46171488226326314
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: TASKS # 45936953220991447
+
+    execution: 
+      sequence: 10
+      event: CHANGED_SWIMLANE # 46171269811326312
       fire-when-event-result-is: True
       fire-on-initialization: false
 
@@ -1724,7 +1969,14 @@ processes:
   source: 
     location: Local Database
     language: PL/SQL
-    pl/sql-code: tsk_app.save_user_preferences();
+    pl/sql-code: |
+      tsk_app.set_user_preferences (
+          in_user_id          => core.get_user_id(),
+          in_client_id        => :P100_CLIENT_ID,
+          in_project_id       => :P100_PROJECT_ID,
+          in_board_id         => :P100_BOARD_ID,
+          in_swimlane_id      => :P100_SWIMLANE_ID
+      );
 
   execution: 
     sequence: 10

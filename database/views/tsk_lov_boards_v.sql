@@ -1,8 +1,8 @@
 CREATE OR REPLACE FORCE VIEW tsk_lov_boards_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        tsk_app.get_client_id()     AS client_id,
-        tsk_app.get_project_id()    AS project_id
+        COALESCE(CASE WHEN core.get_page_id() = 100 THEN core.get_item('P100_CLIENT_ID')  END, tsk_app.get_client_id())  AS client_id,
+        COALESCE(CASE WHEN core.get_page_id() = 100 THEN core.get_item('P100_PROJECT_ID') END, tsk_app.get_project_id()) AS project_id
     FROM DUAL
 )
 SELECT
