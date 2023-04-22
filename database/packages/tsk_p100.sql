@@ -8,14 +8,27 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         v_swimlane_id       tsk_tasks.swimlane_id%TYPE  := tsk_app.get_swimlane_id();
         v_task_id           tsk_tasks.task_id%TYPE;
     BEGIN
-        v_task_id           := core.get_item('P100_TASK_ID');
+        -- check if specific task was requested
+        v_task_id := core.get_item('P100_TASK_ID');
+        --
+        IF v_task_id IS NOT NULL THEN
+            BEGIN
+                SELECT
+                    t.client_id,
+                    t.project_id,
+                    t.board_id
+                INTO
+                    v_client_id,
+                    v_project_id,
+                    v_board_id
+                FROM tsk_tasks t
+                WHERE t.task_id = v_task_id;
+            EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                core.raise_error('INVALID_TASK');
+            END;
 
-        -- overwrite settings if new are passed in url
-        IF core.get_request_url() LIKE '%p100_board_id=%' THEN
-            v_client_id     := core.get_item('P100_CLIENT_ID');
-            v_project_id    := core.get_item('P100_PROJECT_ID');
-            v_board_id      := core.get_item('P100_BOARD_ID');
-            --
+            -- update also board below task detail
             tsk_app.set_user_preferences (
                 in_user_id          => core.get_user_id(),
                 in_client_id        => v_client_id,
@@ -23,6 +36,27 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                 in_board_id         => v_board_id,
                 in_swimlane_id      => v_swimlane_id
             );
+
+            -- generate task link
+            IF v_task_id IS NOT NULL THEN
+                core.set_item('P100_TASK_LINK', tsk_app.get_task_link(v_task_id));
+            END IF;
+            --
+        ELSE
+            -- overwrite settings if new are passed in url
+            IF core.get_request_url() LIKE '%p100_board_id=%' THEN
+                v_client_id     := core.get_item('P100_CLIENT_ID');
+                v_project_id    := core.get_item('P100_PROJECT_ID');
+                v_board_id      := core.get_item('P100_BOARD_ID');
+                --
+                tsk_app.set_user_preferences (
+                    in_user_id          => core.get_user_id(),
+                    in_client_id        => v_client_id,
+                    in_project_id       => v_project_id,
+                    in_board_id         => v_board_id,
+                    in_swimlane_id      => v_swimlane_id
+                );
+            END IF;
         END IF;
 
         -- set page items
@@ -30,6 +64,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         core.set_item('P100_PROJECT_ID',    v_project_id);
         core.set_item('P100_BOARD_ID',      v_board_id);
         core.set_item('P100_SWIMLANE_ID',   v_swimlane_id);
+        core.set_item('P100_TASKS_LINK',    core.get_page_url(100));
 
         -- get board header
         FOR c IN (
@@ -41,13 +76,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         ) LOOP
             core.set_item('P100_HEADER', c.name);
         END LOOP;
-
-        -- generate task link
-        IF v_task_id IS NOT NULL THEN
-            core.set_item('P100_TASK_LINK', tsk_app.get_task_link(v_task_id));
-        END IF;
-        --
-        core.set_item('P100_TASKS_LINK', core.get_page_url(100));
 
         -- check favorite status
         FOR c IN (

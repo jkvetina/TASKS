@@ -1875,7 +1875,7 @@ dynamic-actions:
       show-processing: true
 
     execution: 
-      sequence: 20
+      sequence: 30
       event: CHANGED_BOARD # 46171072403326310
       fire-when-event-result-is: True
       fire-on-initialization: false
@@ -1894,6 +1894,28 @@ dynamic-actions:
       event: CHANGED_BOARD # 46171072403326310
       fire-when-event-result-is: True
       fire-on-initialization: false
+
+  - # ====== Action: Set Value ===================================
+    id: 46171866904326318
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: Static Assignment
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P100_TASK_ID
+
+    execution: 
+      sequence: 20
+      event: CHANGED_BOARD # 46171072403326310
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
 
 - # ====== Dynamic Action: CHANGED_SWIMLANE ====================
   id: 46171269811326312
@@ -1923,7 +1945,7 @@ dynamic-actions:
       show-processing: true
 
     execution: 
-      sequence: 20
+      sequence: 30
       event: CHANGED_SWIMLANE # 46171269811326312
       fire-when-event-result-is: True
       fire-on-initialization: false
@@ -1942,6 +1964,28 @@ dynamic-actions:
       event: CHANGED_SWIMLANE # 46171269811326312
       fire-when-event-result-is: True
       fire-on-initialization: false
+
+  - # ====== Action: Set Value ===================================
+    id: 46171912616326319
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: Static Assignment
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P100_TASK_ID
+
+    execution: 
+      sequence: 20
+      event: CHANGED_SWIMLANE # 46171269811326312
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
 
 processes: 
 - # ====== Process: UPDATE_TASK ================================
