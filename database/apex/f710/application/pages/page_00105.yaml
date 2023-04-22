@@ -3101,32 +3101,6 @@ processes:
   error: 
     display-location: Inline in Notification
 
-- # ====== Process: SAVE_FILTERS ===============================
-  id: 34956155001097869
-  identification: 
-    name: SAVE_FILTERS
-    type: Execute Code
-
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: |
-      tsk_app.set_user_preferences (
-          in_user_id          => core.get_user_id(),
-          in_client_id        => :P105_CLIENT_ID,
-          in_project_id       => :P105_PROJECT_ID,
-          in_board_id         => :P105_BOARD_ID,
-          in_swimlane_id      => :P105_SWIMLANE_ID
-      );
-
-  execution: 
-    sequence: 30
-    point: After Submit
-    run-process: Once Per Page Visit (default)
-
-  error: 
-    display-location: Inline in Notification
-
 - # ====== Process: CLOSE_DIALOG_UPDATE ========================
   id: 44090282159578005
   identification: 

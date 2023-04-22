@@ -1393,23 +1393,6 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sql_clob=>'tsk_p105.ajax_delete_comment();'
 ,p_process_clob_language=>'PLSQL'
 );
-wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(34956155001097869)
-,p_process_sequence=>30
-,p_process_point=>'ON_SUBMIT_BEFORE_COMPUTATION'
-,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'SAVE_FILTERS'
-,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'tsk_app.set_user_preferences (',
-'    in_user_id          => core.get_user_id(),',
-'    in_client_id        => :P105_CLIENT_ID,',
-'    in_project_id       => :P105_PROJECT_ID,',
-'    in_board_id         => :P105_BOARD_ID,',
-'    in_swimlane_id      => :P105_SWIMLANE_ID',
-');'))
-,p_process_clob_language=>'PLSQL'
-,p_error_display_location=>'INLINE_IN_NOTIFICATION'
-);
 wwv_flow_imp.component_end;
 end;
 /
