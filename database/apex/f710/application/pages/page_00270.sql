@@ -1,7 +1,7 @@
-prompt --application/pages/page_00440
+prompt --application/pages/page_00270
 begin
 --   Manifest
---     PAGE: 00440
+--     PAGE: 00270
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2022.10.07'
@@ -12,7 +12,7 @@ wwv_flow_imp.component_begin (
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_page.create_page(
- p_id=>440
+ p_id=>270
 ,p_name=>'Sequences'
 ,p_alias=>'SEQUENCES'
 ,p_step_title=>'Sequences'
@@ -26,7 +26,7 @@ wwv_flow_imp_page.create_page(
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
 wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(137886341623528625)
+ p_id=>wwv_flow_imp.id(183891978484318546)
 ,p_plug_name=>'Sequences'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70864195177975601)
