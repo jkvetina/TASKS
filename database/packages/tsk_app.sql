@@ -211,18 +211,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
             SELECT
                 t.client_id,
                 t.project_id,
-                t.board_id,
-                s.swimlane_id
+                t.board_id
             INTO
                 io_client_id,
                 io_project_id,
-                io_board_id,
-                io_swimlane_id
+                io_board_id
             FROM tsk_boards t
-            LEFT JOIN tsk_swimlanes s
-                ON s.client_id      = t.client_id
-                AND s.project_id    = t.project_id
-                AND s.swimlane_id   = io_swimlane_id
             WHERE t.board_id        = io_board_id
                 AND io_board_id     IS NOT NULL;
         EXCEPTION
@@ -231,17 +225,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
             BEGIN
                 SELECT
                     t.client_id,
-                    t.project_id,
-                    s.swimlane_id
+                    t.project_id
                 INTO
                     io_client_id,
-                    io_project_id,
-                    io_swimlane_id
+                    io_project_id
                 FROM tsk_projects t
-                LEFT JOIN tsk_swimlanes s
-                    ON s.client_id      = t.client_id
-                    AND s.project_id    = t.project_id
-                    AND s.swimlane_id   = io_swimlane_id
                 WHERE t.project_id      = io_project_id
                     AND io_project_id   IS NOT NULL;
             EXCEPTION
