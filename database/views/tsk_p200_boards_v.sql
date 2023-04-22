@@ -2,7 +2,7 @@ CREATE OR REPLACE FORCE VIEW tsk_p200_boards_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
         tsk_app.get_client_id()     AS client_id,
-        tsk_app.get_client_id()     AS project_id,
+        tsk_app.get_project_id()    AS project_id,
         tsk_app.get_board_id()      AS board_id,
         core.get_user_id()          AS user_id
     FROM DUAL
