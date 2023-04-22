@@ -225,6 +225,87 @@ regions:
         alias: 347276
 
   columns: 
+  - # ====== Column: PK_CLIENT_ID ================================
+    id: 45934296027991420
+    identification: 
+      column-name: PK_CLIENT_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 40
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: PK_CLIENT_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: COUNT_TASKS =================================
+    id: 45934309095991421
+    identification: 
+      column-name: COUNT_TASKS
+      type: Display Only
+
+    heading: 
+      heading: Count Tasks
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 80
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_TASKS
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   - # ====== Column: APEX$ROW_ACTION =============================
     id: 70536567143958861
     identification: 
@@ -297,7 +378,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 40
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -313,7 +394,7 @@ regions:
       database-column: CLIENT_ID
       data-type: VARCHAR2
       query-only: false
-      primary-key: true
+      primary-key: false
 
     default: 
       duplicate-copies-existing-value: true
@@ -352,7 +433,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -407,7 +488,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: center
       stretch: Use Report Setting
 
@@ -632,7 +713,7 @@ processes:
     target-type: PL/SQL Code
     pl/sql-code-to-insert/update/delete: |
       tsk_p400.save_clients (
-          io_client_id        => :CLIENT_ID
+          io_client_id        => :PK_CLIENT_ID
       );
     prevent-lost-updates: true
     lock-row: No
