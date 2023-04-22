@@ -9,7 +9,8 @@ SELECT
     t.status_id,
     t.status_name,
     t.is_default,
-    t.is_with_name,
+    t.is_named,
+    --
     ROW_NUMBER() OVER (ORDER BY t.order# NULLS LAST, t.status_id) AS order#
     --
 FROM tsk_statuses t

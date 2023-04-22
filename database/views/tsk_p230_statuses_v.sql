@@ -27,7 +27,7 @@ SELECT
     t.order#,
     t.is_active,
     t.is_default,
-    t.is_with_name,
+    t.is_named,
     --
     c.count_board,
     c.count_project,
