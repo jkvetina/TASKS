@@ -47,6 +47,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         ) LOOP
             core.set_item('P100_IS_FAVORITE', c.is_favorite);
         END LOOP;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -159,6 +164,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         END LOOP;
         --
         HTP.P('</div>');
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -189,6 +199,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             -- message for app
             HTP.P('Task ' || c_task_prefix || APEX_APPLICATION.G_X01 || ' updated');
         END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -212,6 +227,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         WHEN DUP_VAL_ON_INDEX THEN
             NULL;
         END;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -231,6 +251,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             AND b.board_id  = rec.board_id;
         --
         core.set_item('P100_IS_FAVORITE', '');
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 END;
