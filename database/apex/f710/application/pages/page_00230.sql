@@ -111,7 +111,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_DISPLAY_ONLY'
 ,p_heading=>'Client'
 ,p_heading_alignment=>'RIGHT'
-,p_display_sequence=>150
+,p_display_sequence=>140
 ,p_value_alignment=>'RIGHT'
 ,p_group_id=>wwv_flow_imp.id(45933904072991417)
 ,p_use_group_for=>'BOTH'
@@ -138,7 +138,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_DISPLAY_ONLY'
 ,p_heading=>'Project'
 ,p_heading_alignment=>'RIGHT'
-,p_display_sequence=>140
+,p_display_sequence=>130
 ,p_value_alignment=>'RIGHT'
 ,p_group_id=>wwv_flow_imp.id(45933904072991417)
 ,p_use_group_for=>'BOTH'
@@ -165,7 +165,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_DISPLAY_ONLY'
 ,p_heading=>'Board'
 ,p_heading_alignment=>'RIGHT'
-,p_display_sequence=>130
+,p_display_sequence=>120
 ,p_value_alignment=>'RIGHT'
 ,p_group_id=>wwv_flow_imp.id(45933904072991417)
 ,p_use_group_for=>'BOTH'
@@ -230,10 +230,10 @@ wwv_flow_imp_page.create_region_column(
 ,p_include_in_export=>true
 );
 wwv_flow_imp_page.create_region_column(
- p_id=>wwv_flow_imp.id(45933279848991410)
-,p_name=>'IS_WITH_NAME'
+ p_id=>wwv_flow_imp.id(45935963128991437)
+,p_name=>'IS_NAMED'
 ,p_source_type=>'DB_COLUMN'
-,p_source_expression=>'IS_WITH_NAME'
+,p_source_expression=>'IS_NAMED'
 ,p_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_SINGLE_CHECKBOX'
@@ -243,8 +243,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_value_alignment=>'CENTER'
 ,p_group_id=>wwv_flow_imp.id(45933876784991416)
 ,p_use_group_for=>'BOTH'
-,p_attribute_01=>'N'
-,p_attribute_02=>'Y'
+,p_attribute_01=>'Y'
 ,p_is_required=>false
 ,p_enable_filter=>true
 ,p_filter_operators=>'C:S:CASE_INSENSITIVE:REGEXP'
@@ -546,10 +545,10 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_width=>90
 );
 wwv_flow_imp_page.create_ig_report_column(
- p_id=>wwv_flow_imp.id(45981172723284781)
+ p_id=>wwv_flow_imp.id(46040937739151936)
 ,p_view_id=>wwv_flow_imp.id(150829201438289917)
 ,p_display_seq=>9
-,p_column_id=>wwv_flow_imp.id(45933279848991410)
+,p_column_id=>wwv_flow_imp.id(45935963128991437)
 ,p_is_visible=>true
 ,p_is_frozen=>false
 ,p_width=>90

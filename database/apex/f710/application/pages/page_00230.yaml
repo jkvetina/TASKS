@@ -251,7 +251,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 150
+      sequence: 140
       column-alignment: end
       group: Counts # 45933904072991417
       use-group-for: Both
@@ -297,7 +297,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 140
+      sequence: 130
       column-alignment: end
       group: Counts # 45933904072991417
       use-group-for: Both
@@ -343,7 +343,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 130
+      sequence: 120
       column-alignment: end
       group: Counts # 45933904072991417
       use-group-for: Both
@@ -464,10 +464,10 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: IS_WITH_NAME ================================
-    id: 45933279848991410
+  - # ====== Column: IS_NAMED ====================================
+    id: 45935963128991437
     identification: 
-      column-name: IS_WITH_NAME
+      column-name: IS_NAMED
       type: Checkbox
 
     heading: 
@@ -475,8 +475,7 @@ regions:
       alignment: center
 
     settings: 
-      use-defaults: false
-      checked-value: Y
+      use-defaults: true
 
     layout: 
       sequence: 110
@@ -493,7 +492,7 @@ regions:
 
     source: 
       type: Database Column
-      database-column: IS_WITH_NAME
+      database-column: IS_NAMED
       data-type: VARCHAR2
       query-only: false
       primary-key: false
