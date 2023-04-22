@@ -3,12 +3,37 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
     PROCEDURE init_defaults
     AS
     BEGIN
+        -- calculate page header
         FOR c IN (
             SELECT p.project_name || ' - Projects' AS name
             FROM tsk_projects p
             WHERE p.project_id = tsk_app.get_project_id()
         ) LOOP
             core.set_item('P200_HEADER', c.name);
+        END LOOP;
+
+        -- calculate dynamic header
+        FOR c IN (
+            SELECT
+                s.status_name_1,
+                s.status_name_2,
+                s.status_name_3,
+                s.status_name_4,
+                s.status_name_5,
+                s.status_name_6,
+                s.status_name_7,
+                s.status_name_8
+            FROM tsk_p200_boards_v s
+            WHERE ROWNUM = 1
+        ) LOOP
+            core.set_item('P200_STATUS_1', c.status_name_1);
+            core.set_item('P200_STATUS_2', c.status_name_2);
+            core.set_item('P200_STATUS_3', c.status_name_3);
+            core.set_item('P200_STATUS_4', c.status_name_4);
+            core.set_item('P200_STATUS_5', c.status_name_5);
+            core.set_item('P200_STATUS_6', c.status_name_6);
+            core.set_item('P200_STATUS_7', c.status_name_7);
+            core.set_item('P200_STATUS_8', c.status_name_8);
         END LOOP;
     EXCEPTION
     WHEN core.app_exception THEN

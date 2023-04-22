@@ -132,7 +132,7 @@ regions:
       - Update Row
       - Delete Row
       lost-update-type: Row Values
-      add-row-if-empty: true
+      add-row-if-empty: false
 
     performance: 
       lazy-loading: false
@@ -182,6 +182,17 @@ regions:
       identification: 
         name: Primary Report
         alias: 457399
+
+  column-groups: 
+  - # ====== Column Group: Counts ================================
+    id: 46172688825326326
+    heading: 
+      heading: Counts
+
+  - # ====== Column Group: Flags =================================
+    id: 46173548673326335
+    heading: 
+      heading: Flags
 
   columns: 
   - # ====== Column: BOARD_ID ====================================
@@ -403,6 +414,8 @@ regions:
     layout: 
       sequence: 100
       column-alignment: center
+      group: Flags # 46173548673326335
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -458,6 +471,8 @@ regions:
     layout: 
       sequence: 80
       column-alignment: center
+      group: Flags # 46173548673326335
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -509,6 +524,8 @@ regions:
     layout: 
       sequence: 90
       column-alignment: center
+      group: Flags # 46173548673326335
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -605,14 +622,14 @@ regions:
     layout: 
       sequence: 20
 
-  - # ====== Column: COUNT_TASKS =================================
-    id: 45895702272541637
+  - # ====== Column: COUNT_STATUS_1 ==============================
+    id: 45896215047541642
     identification: 
-      column-name: COUNT_TASKS
+      column-name: COUNT_STATUS_1
       type: Display Only
 
     heading: 
-      heading: Tasks
+      heading: '&P200_STATUS_1.'
       alignment: end
 
     settings: 
@@ -620,8 +637,10 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 190
+      sequence: 110
       column-alignment: end
+      group: Counts # 46172688825326326
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -629,60 +648,13 @@ regions:
 
     source: 
       type: Database Column
-      database-column: COUNT_TASKS
+      database-column: COUNT_STATUS_1
       data-type: NUMBER
       query-only: true
       primary-key: false
 
     session-state: 
       data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: COUNT_STATUS_1 ==============================
-    id: 45896215047541642
-    identification: 
-      column-name: COUNT_STATUS_1
-      type: Number Field
-
-    heading: 
-      heading: '&P200_STATUS_1.'
-      alignment: end
-
-    settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
-
-    layout: 
-      sequence: 110
-      column-alignment: end
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-
-    source: 
-      type: Database Column
-      database-column: COUNT_STATUS_1
-      data-type: NUMBER
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
 
     column-filter: 
       enabled: true
@@ -704,36 +676,35 @@ regions:
     id: 45896396054541643
     identification: 
       column-name: COUNT_STATUS_2
-      type: Number Field
+      type: Display Only
 
     heading: 
       heading: '&P200_STATUS_2.'
       alignment: end
 
     settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
+      format: Plain Text
+      based-on: Item Value
 
     layout: 
       sequence: 120
       column-alignment: end
+      group: Counts # 46172688825326326
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
 
-    validation: 
-      value-required: false
-
     source: 
       type: Database Column
       database-column: COUNT_STATUS_2
       data-type: NUMBER
-      query-only: false
+      query-only: true
       primary-key: false
 
-    default: 
-      duplicate-copies-existing-value: true
+    session-state: 
+      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
@@ -755,36 +726,35 @@ regions:
     id: 45896400625541644
     identification: 
       column-name: COUNT_STATUS_3
-      type: Number Field
+      type: Display Only
 
     heading: 
       heading: '&P200_STATUS_3.'
       alignment: end
 
     settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
+      format: Plain Text
+      based-on: Item Value
 
     layout: 
       sequence: 130
       column-alignment: end
+      group: Counts # 46172688825326326
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
 
-    validation: 
-      value-required: false
-
     source: 
       type: Database Column
       database-column: COUNT_STATUS_3
       data-type: NUMBER
-      query-only: false
+      query-only: true
       primary-key: false
 
-    default: 
-      duplicate-copies-existing-value: true
+    session-state: 
+      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
@@ -806,36 +776,35 @@ regions:
     id: 45896512353541645
     identification: 
       column-name: COUNT_STATUS_4
-      type: Number Field
+      type: Display Only
 
     heading: 
       heading: '&P200_STATUS_4.'
       alignment: end
 
     settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
+      format: Plain Text
+      based-on: Item Value
 
     layout: 
       sequence: 140
       column-alignment: end
+      group: Counts # 46172688825326326
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
 
-    validation: 
-      value-required: false
-
     source: 
       type: Database Column
       database-column: COUNT_STATUS_4
       data-type: NUMBER
-      query-only: false
+      query-only: true
       primary-key: false
 
-    default: 
-      duplicate-copies-existing-value: true
+    session-state: 
+      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
@@ -857,36 +826,35 @@ regions:
     id: 45896699244541646
     identification: 
       column-name: COUNT_STATUS_5
-      type: Number Field
+      type: Display Only
 
     heading: 
       heading: '&P200_STATUS_5.'
       alignment: end
 
     settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
+      format: Plain Text
+      based-on: Item Value
 
     layout: 
       sequence: 150
       column-alignment: end
+      group: Counts # 46172688825326326
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
 
-    validation: 
-      value-required: false
-
     source: 
       type: Database Column
       database-column: COUNT_STATUS_5
       data-type: NUMBER
-      query-only: false
+      query-only: true
       primary-key: false
 
-    default: 
-      duplicate-copies-existing-value: true
+    session-state: 
+      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
@@ -908,36 +876,35 @@ regions:
     id: 45896770603541647
     identification: 
       column-name: COUNT_STATUS_6
-      type: Number Field
+      type: Display Only
 
     heading: 
       heading: '&P200_STATUS_6.'
       alignment: end
 
     settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
+      format: Plain Text
+      based-on: Item Value
 
     layout: 
       sequence: 160
       column-alignment: end
+      group: Counts # 46172688825326326
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
 
-    validation: 
-      value-required: false
-
     source: 
       type: Database Column
       database-column: COUNT_STATUS_6
       data-type: NUMBER
-      query-only: false
+      query-only: true
       primary-key: false
 
-    default: 
-      duplicate-copies-existing-value: true
+    session-state: 
+      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
@@ -959,36 +926,35 @@ regions:
     id: 45896827868541648
     identification: 
       column-name: COUNT_STATUS_7
-      type: Number Field
+      type: Display Only
 
     heading: 
       heading: '&P200_STATUS_7.'
       alignment: end
 
     settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
+      format: Plain Text
+      based-on: Item Value
 
     layout: 
       sequence: 170
       column-alignment: end
+      group: Counts # 46172688825326326
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
 
-    validation: 
-      value-required: false
-
     source: 
       type: Database Column
       database-column: COUNT_STATUS_7
       data-type: NUMBER
-      query-only: false
+      query-only: true
       primary-key: false
 
-    default: 
-      duplicate-copies-existing-value: true
+    session-state: 
+      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
@@ -1010,36 +976,35 @@ regions:
     id: 45896909022541649
     identification: 
       column-name: COUNT_STATUS_8
-      type: Number Field
+      type: Display Only
 
     heading: 
       heading: '&P200_STATUS_8.'
       alignment: end
 
     settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
+      format: Plain Text
+      based-on: Item Value
 
     layout: 
       sequence: 180
       column-alignment: end
+      group: Counts # 46172688825326326
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
 
-    validation: 
-      value-required: false
-
     source: 
       type: Database Column
       database-column: COUNT_STATUS_8
       data-type: NUMBER
-      query-only: false
+      query-only: true
       primary-key: false
 
-    default: 
-      duplicate-copies-existing-value: true
+    session-state: 
+      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
@@ -1056,6 +1021,346 @@ regions:
     server-side-condition: 
       type: Item is NOT NULL
       item: P200_STATUS_8
+
+  - # ====== Column: COUNT_INACTIVE ==============================
+    id: 46172460347326324
+    identification: 
+      column-name: COUNT_INACTIVE
+      type: Display Only
+
+    heading: 
+      heading: Not Active
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 190
+      column-alignment: end
+      group: Counts # 46172688825326326
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_INACTIVE
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_TOTAL =================================
+    id: 46172562210326325
+    identification: 
+      column-name: COUNT_TOTAL
+      type: Display Only
+
+    heading: 
+      heading: Total
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 200
+      column-alignment: end
+      group: Counts # 46172688825326326
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_TOTAL
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: STATUS_NAME_1 ===============================
+    id: 46172730668326327
+    identification: 
+      column-name: STATUS_NAME_1
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 210
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_1
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_2 ===============================
+    id: 46172850950326328
+    identification: 
+      column-name: STATUS_NAME_2
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 220
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_2
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_3 ===============================
+    id: 46172955667326329
+    identification: 
+      column-name: STATUS_NAME_3
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 230
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_3
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_4 ===============================
+    id: 46173097306326330
+    identification: 
+      column-name: STATUS_NAME_4
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 240
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_4
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_5 ===============================
+    id: 46173154635326331
+    identification: 
+      column-name: STATUS_NAME_5
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 250
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_5
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_6 ===============================
+    id: 46173272190326332
+    identification: 
+      column-name: STATUS_NAME_6
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 260
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_6
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_7 ===============================
+    id: 46173342084326333
+    identification: 
+      column-name: STATUS_NAME_7
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 270
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_7
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_8 ===============================
+    id: 46173431880326334
+    identification: 
+      column-name: STATUS_NAME_8
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 280
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_8
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
 
   printing: 
     page: 
