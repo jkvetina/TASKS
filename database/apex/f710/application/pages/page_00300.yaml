@@ -225,6 +225,84 @@ regions:
         alias: 347283
 
   columns: 
+  - # ====== Column: COUNT_TASKS =================================
+    id: 45934033034991418
+    identification: 
+      column-name: COUNT_TASKS
+      type: Display Only
+
+    heading: 
+      heading: Count Tasks
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 90
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_TASKS
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: PK_PROJECT_ID ===============================
+    id: 45934127462991419
+    identification: 
+      column-name: PK_PROJECT_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 40
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: PK_PROJECT_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
   - # ====== Column: APEX$ROW_ACTION =============================
     id: 70449303000945050
     identification: 
@@ -293,7 +371,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 40
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -314,7 +392,7 @@ regions:
       database-column: CLIENT_ID
       data-type: VARCHAR2
       query-only: false
-      primary-key: true
+      primary-key: false
 
     default: 
       type: Item
@@ -355,7 +433,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -410,7 +488,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: start
       stretch: Use Report Setting
 
@@ -465,7 +543,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 70
+      sequence: 80
       column-alignment: center
       stretch: Use Report Setting
 
@@ -721,7 +799,7 @@ processes:
     target-type: PL/SQL Code
     pl/sql-code-to-insert/update/delete: |
       tsk_p300.save_projects (
-          io_project_id       => :PROJECT_ID
+          io_project_id       => :PK_PROJECT_ID
       );
     prevent-lost-updates: true
     lock-row: No
