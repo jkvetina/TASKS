@@ -47,13 +47,13 @@ regions:
 
   layout: 
     sequence: 10
-    parent-region: No Parent
-    position: BODY
+    parent-region: User Profile # 45933693135991414
+    position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
     column: Automatic
     new-column: true
-    column-span: 6
+    column-span: Automatic
 
   appearance: 
     template: Hero # 70864195177975601
@@ -66,7 +66,7 @@ regions:
     landmark-type: Template Default
 
   advanced: 
-    region-display-selector: true
+    region-display-selector: false
     exclude-title-from-translation: false
 
   server-cache: 
@@ -95,18 +95,62 @@ regions:
 
   layout: 
     sequence: 20
-    parent-region: No Parent
-    position: BODY
+    parent-region: User Profile # 45933693135991414
+    position: SUB_REGIONS
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
-    new-column: false
+    new-column: true
     column-span: Automatic
 
   appearance: 
     template: Blank with Attributes # 70831193948975578
     template-options: 
     - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Update Row
+      lost-update-type: Row Values
+
+- # ====== Region: TABS ========================================
+  id: 45933341140991411
+  identification: 
+    title: TABS
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 6
+
+  appearance: 
+    template: Tabs Container # 70907050579975626
+    template-options: 
+    - '#DEFAULT#'
+    - t-TabsRegion-mod--simple
     render-components: Above Content
 
   accessibility: 
@@ -124,11 +168,173 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    edit: 
-      enabled: true
-      allowed-operations: 
-      - Update Row
-      lost-update-type: Row Values
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Roles =======================================
+  id: 45933427596991412
+  identification: 
+    title: Roles
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: TABS # 45933341140991411
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Roles =======================================
+  id: 45933575356991413
+  identification: 
+    title: Roles
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: Roles # 45933427596991412
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: User Profile ================================
+  id: 45933693135991414
+  identification: 
+    title: User Profile
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: TABS # 45933341140991411
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Roles [CARDS] ===============================
+  id: 45933785127991415
+  identification: 
+    title: Roles [CARDS]
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: Roles # 45933427596991412
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
 
 page-items: 
 - # ====== Page Item: P900_USER_ID =============================
@@ -353,10 +559,10 @@ processes:
     point: Before Header
     run-process: Once Per Page Visit (default)
 
-- # ====== Process: SAVE_CHANGES ===============================
+- # ====== Process: SAVE_PROFILE_CHANGES =======================
   id: 45895680453541636
   identification: 
-    name: SAVE_CHANGES
+    name: SAVE_PROFILE_CHANGES
     type: Form - Automatic Row Processing (DML)
     form-region: User Profile [FORM] # 45894908819541629
 
