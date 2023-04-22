@@ -98,12 +98,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                 SELECT
                     s.status_id,
                     s.status_name,
-                    s.is_with_name
+                    s.is_named
                 FROM tsk_lov_statuses_v s
                 ORDER BY s.order#
             ) LOOP
                 HTP.P('<div class="TARGET_LIKE">');
-                HTP.P('<h3>' || s.status_name || CASE WHEN s.is_with_name = 'Y' THEN NULLIF(' @' || w.swimlane_name, ' @-') END || '</h3>');
+                HTP.P('<h3>' || s.status_name || CASE WHEN s.is_named = 'Y' THEN NULLIF(' @' || w.swimlane_name, ' @-') END || '</h3>');
                 HTP.P('</div>');
             END LOOP;
 

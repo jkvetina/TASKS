@@ -224,6 +224,17 @@ regions:
         name: Primary Report
         alias: 347675
 
+  column-groups: 
+  - # ====== Column Group: Flags =================================
+    id: 45933876784991416
+    heading: 
+      heading: Flags
+
+  - # ====== Column Group: Counts ================================
+    id: 45933904072991417
+    heading: 
+      heading: Counts
+
   columns: 
   - # ====== Column: COUNT_CLIENT ================================
     id: 45517489443836014
@@ -232,7 +243,7 @@ regions:
       type: Display Only
 
     heading: 
-      heading: Count Client
+      heading: Client
       alignment: end
 
     settings: 
@@ -240,8 +251,10 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 140
+      sequence: 150
       column-alignment: end
+      group: Counts # 45933904072991417
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -276,7 +289,7 @@ regions:
       type: Display Only
 
     heading: 
-      heading: Count Project
+      heading: Project
       alignment: end
 
     settings: 
@@ -284,8 +297,10 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 130
+      sequence: 140
       column-alignment: end
+      group: Counts # 45933904072991417
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -320,7 +335,7 @@ regions:
       type: Display Only
 
     heading: 
-      heading: Count Board
+      heading: Board
       alignment: end
 
     settings: 
@@ -328,8 +343,10 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 120
+      sequence: 130
       column-alignment: end
+      group: Counts # 45933904072991417
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -398,7 +415,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: Is Default
+      heading: Default
       alignment: center
 
     settings: 
@@ -406,8 +423,10 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 90
+      sequence: 100
       column-alignment: center
+      group: Flags # 45933876784991416
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -452,7 +471,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: Is With Name
+      heading: Named
       alignment: center
 
     settings: 
@@ -460,8 +479,10 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 100
+      sequence: 110
       column-alignment: center
+      group: Flags # 45933876784991416
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -645,7 +666,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: Is Active
+      heading: Active
       alignment: center
 
     settings: 
@@ -653,8 +674,10 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 80
+      sequence: 90
       column-alignment: center
+      group: Flags # 45933876784991416
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -819,7 +842,7 @@ regions:
       virtual-keyboard: Decimal
 
     layout: 
-      sequence: 110
+      sequence: 80
       column-alignment: end
       stretch: Use Report Setting
 

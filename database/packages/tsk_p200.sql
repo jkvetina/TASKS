@@ -83,7 +83,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.status_name     := APEX_UTIL.GET_SESSION_STATE('STATUS_NAME');
         rec.is_active       := APEX_UTIL.GET_SESSION_STATE('IS_ACTIVE');
         rec.is_default      := APEX_UTIL.GET_SESSION_STATE('IS_DEFAULT');
-        rec.is_with_name    := APEX_UTIL.GET_SESSION_STATE('IS_WITH_NAME');
+        rec.is_named        := APEX_UTIL.GET_SESSION_STATE('IS_NAMED');
         rec.order#          := APEX_UTIL.GET_SESSION_STATE('ORDER#');
         --
         rec.updated_by      := core.get_user_id();
