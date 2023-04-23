@@ -8,7 +8,10 @@ WITH x AS (
 c AS (
     SELECT /*+ MATERIALIZE */
         t.project_id,
-        COUNT(*) AS count_tasks
+        --
+        COUNT(DISTINCT t.board_id)  AS count_boards,
+        COUNT(*)                    AS count_tasks
+        --
     FROM tsk_tasks t
     JOIN x
         ON x.client_id  = t.client_id
@@ -21,16 +24,22 @@ SELECT
     t.client_id,
     t.project_id,
     t.project_name,
+    --
+    CASE WHEN t.project_id = x.project_id
+        THEN '<span class="fa fa-check-square"></span>'
+        ELSE '<a href="' ||
+            core.get_page_url (
+                in_page_id      => 100,
+                in_app_id       => core.get_app_id(),
+                in_names        => 'P100_CLIENT_ID,P100_PROJECT_ID,P100_BOARD_ID',
+                in_values       => t.client_id || ',' || t.project_id || ',',
+                in_reset        => 'Y'
+            ) || '">SET</a>'
+        END AS is_current,
+    --
     t.is_active,
     --
-    core.get_page_url (
-        in_page_id      => 100,
-        in_app_id       => core.get_app_id(),
-        in_names        => 'P100_CLIENT_ID,P100_PROJECT_ID,P100_BOARD_ID',
-        in_values       => t.client_id || ',' || t.project_id || ',',
-        in_reset        => 'Y'
-    ) AS activate_url,
-    --
+    c.count_boards,
     c.count_tasks
     --
 FROM tsk_projects t

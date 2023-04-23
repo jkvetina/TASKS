@@ -224,6 +224,17 @@ regions:
         name: Primary Report
         alias: 347283
 
+  column-groups: 
+  - # ====== Column Group: Flags =================================
+    id: 46262074649307837
+    heading: 
+      heading: Flags
+
+  - # ====== Column Group: Counts ================================
+    id: 46262172638307838
+    heading: 
+      heading: Counts
+
   columns: 
   - # ====== Column: COUNT_TASKS =================================
     id: 45934033034991418
@@ -232,7 +243,7 @@ regions:
       type: Display Only
 
     heading: 
-      heading: Count Tasks
+      heading: Tasks
       alignment: end
 
     settings: 
@@ -240,8 +251,10 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 90
+      sequence: 110
       column-alignment: end
+      group: Counts # 46262172638307838
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -303,42 +316,38 @@ regions:
     enable-users-to: 
       sort: false
 
-  - # ====== Column: APEX$ROW_ACTION =============================
-    id: 70449303000945050
+  - # ====== Column: IS_CURRENT ==================================
+    id: 46261922267307836
     identification: 
-      column-name: APEX$ROW_ACTION
-      type: Actions Menu
-
-    layout: 
-      sequence: 20
-
-  - # ====== Column: ACTIVATE_URL ================================
-    id: 70451117745945068
-    identification: 
-      column-name: ACTIVATE_URL
-      type: Link
+      column-name: IS_CURRENT
+      type: Display Only
 
     heading: 
+      heading: Current
       alignment: center
 
+    settings: 
+      format: HTML
+
     layout: 
-      sequence: 30
+      sequence: 80
       column-alignment: center
+      group: Flags # 46262074649307837
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
 
-    link: 
-      target: '&ACTIVATE_URL.'
-      link-text: ACTIVATE
-
     source: 
       type: Database Column
-      database-column: ACTIVATE_URL
+      database-column: IS_CURRENT
       data-type: VARCHAR2
       query-only: true
       primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
@@ -357,8 +366,60 @@ regions:
       sort: false
       hide: true
 
-    security: 
-      escape-special-characters: true
+  - # ====== Column: COUNT_BOARDS ================================
+    id: 46262268119307839
+    identification: 
+      column-name: COUNT_BOARDS
+      type: Display Only
+
+    heading: 
+      heading: Boards
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 100
+      column-alignment: end
+      group: Counts # 46262172638307838
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_BOARDS
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 70449303000945050
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
 
   - # ====== Column: CLIENT_ID ===================================
     id: 104324277063905493
@@ -533,7 +594,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: Is Active
+      heading: Active
       alignment: center
 
     settings: 
@@ -541,8 +602,10 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 80
+      sequence: 90
       column-alignment: center
+      group: Flags # 46262074649307837
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
