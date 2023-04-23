@@ -528,20 +528,6 @@ regions:
     layout: 
       sequence: 20
 
-  - # ====== Column: APEX$ROW_SELECTOR ===========================
-    id: 116014240464128112
-    identification: 
-      column-name: APEX$ROW_SELECTOR
-      type: Row Selector
-
-    settings: 
-      enable-multi-select: true
-      show-select-all: true
-      hide-control: false
-
-    layout: 
-      sequence: 10
-
   - # ====== Column: CLIENT_ID ===================================
     id: 150806789378116939
     identification: 

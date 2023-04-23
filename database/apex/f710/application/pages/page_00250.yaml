@@ -400,20 +400,6 @@ regions:
     layout: 
       sequence: 20
 
-  - # ====== Column: APEX$ROW_SELECTOR ===========================
-    id: 116033119612130740
-    identification: 
-      column-name: APEX$ROW_SELECTOR
-      type: Row Selector
-
-    settings: 
-      enable-multi-select: true
-      show-select-all: true
-      hide-control: false
-
-    layout: 
-      sequence: 10
-
   - # ====== Column: SWIMLANE_ID =================================
     id: 150831133380120317
     identification: 

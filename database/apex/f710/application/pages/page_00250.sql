@@ -193,16 +193,6 @@ wwv_flow_imp_page.create_region_column(
 ,p_display_sequence=>20
 );
 wwv_flow_imp_page.create_region_column(
- p_id=>wwv_flow_imp.id(116033119612130740)
-,p_name=>'APEX$ROW_SELECTOR'
-,p_session_state_data_type=>'VARCHAR2'
-,p_item_type=>'NATIVE_ROW_SELECTOR'
-,p_display_sequence=>10
-,p_attribute_01=>'Y'
-,p_attribute_02=>'Y'
-,p_attribute_03=>'N'
-);
-wwv_flow_imp_page.create_region_column(
  p_id=>wwv_flow_imp.id(150831133380120317)
 ,p_name=>'SWIMLANE_ID'
 ,p_source_type=>'DB_COLUMN'
@@ -502,7 +492,7 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(150863735672293322)
 ,p_view_id=>wwv_flow_imp.id(150853428504293288)
-,p_display_seq=>6
+,p_display_seq=>7
 ,p_column_id=>wwv_flow_imp.id(150831558329120321)
 ,p_is_visible=>true
 ,p_is_frozen=>false
@@ -511,7 +501,7 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(151010836175928269)
 ,p_view_id=>wwv_flow_imp.id(150853428504293288)
-,p_display_seq=>7
+,p_display_seq=>6
 ,p_column_id=>wwv_flow_imp.id(150883481467423618)
 ,p_is_visible=>true
 ,p_is_frozen=>false
