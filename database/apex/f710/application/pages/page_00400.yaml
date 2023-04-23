@@ -94,7 +94,7 @@ regions:
     start-new-row: true
     column: Automatic
     new-column: true
-    column-span: 6
+    column-span: 8
 
   appearance: 
     template: Hero # 70864195177975601
