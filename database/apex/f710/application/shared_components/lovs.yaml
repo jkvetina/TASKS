@@ -173,6 +173,44 @@
     group: IS_ACTIVE
     group-sort-direction: Ascending (Nulls Last)
 
+- # ====== List of Values: LOV_ROLES_ALL =======================
+  id: 46494426434427342
+  identification: 
+    name: LOV_ROLES_ALL
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_LOV_ROLES_V
+
+  column-mapping: 
+    return: ROLE_ID
+    display: ROLE_NAME
+    default-sort: ROLE_NAME
+    sort-direction: Ascending (Nulls Last)
+    group: IS_ACTIVE
+    group-sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: LOV_USERS_ALL =======================
+  id: 46494875558442406
+  identification: 
+    name: LOV_USERS_ALL
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_LOV_USERS_V
+
+  column-mapping: 
+    return: USER_ID
+    display: USER_NAME
+    default-sort: USER_NAME
+    sort-direction: Ascending (Nulls Last)
+    group: IS_ACTIVE
+    group-sort-direction: Ascending (Nulls Last)
+
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
   id: 54624749962706655
   identification: 

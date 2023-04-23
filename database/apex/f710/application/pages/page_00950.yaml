@@ -1,10 +1,10 @@
 ---
-# ====== Page: Users & Roles =================================
+# ====== Page: Roles & Users =================================
 id: 950
 identification: 
-  name: Users & Roles
-  alias: USERS-ROLES
-  title: Users & Roles
+  name: Roles & Users
+  alias: ROLES
+  title: Roles & Users
   page-group: ADMIN # 78950012693576929
 
 appearance: 
@@ -774,15 +774,11 @@ regions:
     id: 46401573688929024
     identification: 
       column-name: ROLE_ID
-      type: Text Field
+      type: Select List
 
     heading: 
       heading: Role
       alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
 
     layout: 
       sequence: 50
@@ -794,7 +790,12 @@ regions:
 
     validation: 
       value-required: true
-      maximum-length: 64
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_ROLES_ALL # 46494426434427342
+      display-extra-values: true
+      display-null-value: true
 
     source: 
       type: Database Column
@@ -814,7 +815,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 
@@ -974,7 +975,8 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
+      maximum-length: 64
 
     source: 
       type: Database Column
@@ -1292,17 +1294,23 @@ regions:
   attributes: 
     id: 46403970745929048
     edit: 
-      enabled: false
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+      add-row-if-empty: false
 
     performance: 
       lazy-loading: false
 
     appearance: 
-      select-first-row: true
+      select-first-row: false
       fixed-row-height: true
 
     pagination: 
-      type: Scroll
+      type: Page
       show-total-row-count: true
 
     toolbar: 
@@ -1311,7 +1319,6 @@ regions:
       - Search Column Selection
       - Search Field
       - Actions Menu
-      - Reset Button
       - Save Button
 
     enable-users-to: 
@@ -1349,18 +1356,14 @@ regions:
     id: 46404089867929049
     identification: 
       column-name: ROLE_ID
-      type: Text Field
+      type: Select List
 
     heading: 
       heading: Role
       alignment: start
 
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
     layout: 
-      sequence: 10
+      sequence: 30
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1368,7 +1371,13 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_ROLES_ALL # 46494426434427342
+      display-extra-values: true
+      display-null-value: true
 
     source: 
       type: Database Column
@@ -1388,7 +1397,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 
@@ -1413,7 +1422,7 @@ regions:
       virtual-keyboard: Decimal
 
     layout: 
-      sequence: 20
+      sequence: 40
       column-alignment: end
       stretch: Use Report Setting
 
@@ -1421,7 +1430,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
 
     source: 
       type: Database Column
@@ -1459,7 +1468,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 30
+      sequence: 50
       column-alignment: center
       stretch: Use Report Setting
 
@@ -1477,6 +1486,8 @@ regions:
       primary-key: false
 
     default: 
+      type: Static
+      static-value: Y
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -1508,7 +1519,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 40
+      sequence: 60
 
     accessibility: 
       value-identifies-row: false
@@ -1539,7 +1550,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 50
+      sequence: 70
 
     accessibility: 
       value-identifies-row: false
@@ -1559,6 +1570,29 @@ regions:
 
     enable-users-to: 
       sort: false
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 46461976803360414
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
+  - # ====== Column: APEX$ROW_SELECTOR ===========================
+    id: 46462036167360415
+    identification: 
+      column-name: APEX$ROW_SELECTOR
+      type: Row Selector
+
+    settings: 
+      enable-multi-select: true
+      show-select-all: true
+      hide-control: false
+
+    layout: 
+      sequence: 10
 
   printing: 
     page: 
@@ -1657,7 +1691,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Blank with Attributes # 70831193948975578
+    template: Hero # 70864195177975601
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -1727,17 +1761,23 @@ regions:
   attributes: 
     id: 46461262424360407
     edit: 
-      enabled: false
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+      add-row-if-empty: false
 
     performance: 
       lazy-loading: false
 
     appearance: 
-      select-first-row: true
+      select-first-row: false
       fixed-row-height: true
 
     pagination: 
-      type: Scroll
+      type: Page
       show-total-row-count: true
 
     toolbar: 
@@ -1746,7 +1786,6 @@ regions:
       - Search Column Selection
       - Search Field
       - Actions Menu
-      - Reset Button
       - Save Button
 
     enable-users-to: 
@@ -1784,18 +1823,14 @@ regions:
     id: 46461382180360408
     identification: 
       column-name: CLIENT_ID
-      type: Text Field
+      type: Select List
 
     heading: 
       heading: Client
       alignment: start
 
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
     layout: 
-      sequence: 10
+      sequence: 30
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1803,7 +1838,13 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_CLIENTS # 34762829880497308
+      display-extra-values: true
+      display-null-value: true
 
     source: 
       type: Database Column
@@ -1823,7 +1864,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 
@@ -1837,18 +1878,14 @@ regions:
     id: 46461450684360409
     identification: 
       column-name: USER_ID
-      type: Text Field
+      type: Select List
 
     heading: 
       heading: User
       alignment: start
 
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
     layout: 
-      sequence: 20
+      sequence: 40
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1856,7 +1893,13 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_USERS_ALL # 46494875558442406
+      display-extra-values: true
+      display-null-value: true
 
     source: 
       type: Database Column
@@ -1876,7 +1919,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 
@@ -1890,18 +1933,14 @@ regions:
     id: 46461566216360410
     identification: 
       column-name: ROLE_ID
-      type: Text Field
+      type: Select List
 
     heading: 
       heading: Role
       alignment: start
 
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
     layout: 
-      sequence: 30
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1909,7 +1948,13 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: false
+      value-required: true
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_ROLES_ALL # 46494426434427342
+      display-extra-values: true
+      display-null-value: true
 
     source: 
       type: Database Column
@@ -1929,7 +1974,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 
@@ -1954,7 +1999,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 40
+      sequence: 60
       column-alignment: center
       stretch: Use Report Setting
 
@@ -1972,6 +2017,8 @@ regions:
       primary-key: false
 
     default: 
+      type: Static
+      static-value: Y
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -2003,7 +2050,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 50
+      sequence: 70
 
     accessibility: 
       value-identifies-row: false
@@ -2034,7 +2081,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 60
+      sequence: 80
 
     accessibility: 
       value-identifies-row: false
@@ -2054,6 +2101,29 @@ regions:
 
     enable-users-to: 
       sort: false
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 46462214196360417
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
+  - # ====== Column: APEX$ROW_SELECTOR ===========================
+    id: 46462397491360418
+    identification: 
+      column-name: APEX$ROW_SELECTOR
+      type: Row Selector
+
+    settings: 
+      enable-multi-select: true
+      show-select-all: true
+      hide-control: false
+
+    layout: 
+      sequence: 10
 
   printing: 
     page: 
@@ -2633,10 +2703,10 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
-- # ====== Process: SAVE_ROLES_MAP =============================
+- # ====== Process: SAVE_MAP_TABLES ============================
   id: 46403074114929039
   identification: 
-    name: SAVE_ROLES_MAP
+    name: SAVE_MAP_TABLES
     type: Interactive Grid - Automatic Row Processing (DML)
     editable-region: Map Tables [GRID] # 46400938542929018
 
@@ -2672,6 +2742,54 @@ processes:
 
   execution: 
     sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+
+- # ====== Process: SAVE_MAP_PAGES =============================
+  id: 46462104131360416
+  identification: 
+    name: SAVE_MAP_PAGES
+    type: Interactive Grid - Automatic Row Processing (DML)
+    editable-region: Map Pages [GRID] # 46401192778929020
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: No
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 40
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+
+- # ====== Process: SAVE_MAP_USERS =============================
+  id: 46462402473360419
+  identification: 
+    name: SAVE_MAP_USERS
+    type: Interactive Grid - Automatic Row Processing (DML)
+    editable-region: Map Users [GRID] # 46461101126360406
+
+  settings: 
+    target-type: Region Source
+    prevent-lost-updates: true
+    lock-row: No
+    return-primary-key(s)-after-insert: true
+
+  execution: 
+    sequence: 50
     point: Processing
     run-process: Once Per Page Visit (default)
 
