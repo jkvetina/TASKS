@@ -404,7 +404,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: Is Active
+      heading: Active
       alignment: center
 
     settings: 
@@ -462,7 +462,7 @@ regions:
       type: Display Only
 
     heading: 
-      heading: Is Current
+      heading: Current
       alignment: center
 
     settings: 
@@ -514,7 +514,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: Is Favorite
+      heading: Favorite
       alignment: center
 
     settings: 
