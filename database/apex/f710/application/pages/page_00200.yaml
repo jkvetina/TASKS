@@ -128,11 +128,8 @@ regions:
     edit: 
       enabled: true
       allowed-operations: 
-      - Add Row
       - Update Row
-      - Delete Row
       lost-update-type: Row Values
-      add-row-if-empty: false
 
     performance: 
       lazy-loading: false
@@ -194,6 +191,11 @@ regions:
     heading: 
       heading: Flags
 
+  - # ====== Column Group: Board Info ============================
+    id: 46261748334307834
+    heading: 
+      heading: Board Info
+
   columns: 
   - # ====== Column: BOARD_ID ====================================
     id: 45519793673836037
@@ -247,6 +249,8 @@ regions:
     layout: 
       sequence: 70
       column-alignment: start
+      group: Board Info # 46261748334307834
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -298,6 +302,8 @@ regions:
     layout: 
       sequence: 40
       column-alignment: start
+      group: Board Info # 46261748334307834
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -354,6 +360,8 @@ regions:
     layout: 
       sequence: 50
       column-alignment: start
+      group: Board Info # 46261748334307834
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -412,7 +420,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 100
+      sequence: 110
       column-alignment: center
       group: Flags # 46173548673326335
       use-group-for: Both
@@ -469,7 +477,7 @@ regions:
       format: HTML
 
     layout: 
-      sequence: 80
+      sequence: 90
       column-alignment: center
       group: Flags # 46173548673326335
       use-group-for: Both
@@ -522,7 +530,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 90
+      sequence: 100
       column-alignment: center
       group: Flags # 46173548673326335
       use-group-for: Both
@@ -613,15 +621,6 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: APEX$ROW_ACTION =============================
-    id: 45763028414794048
-    identification: 
-      column-name: APEX$ROW_ACTION
-      type: Actions Menu
-
-    layout: 
-      sequence: 20
-
   - # ====== Column: COUNT_STATUS_1 ==============================
     id: 45896215047541642
     identification: 
@@ -637,7 +636,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 110
+      sequence: 120
       column-alignment: end
       group: Counts # 46172688825326326
       use-group-for: Both
@@ -687,7 +686,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 120
+      sequence: 130
       column-alignment: end
       group: Counts # 46172688825326326
       use-group-for: Both
@@ -737,7 +736,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 130
+      sequence: 140
       column-alignment: end
       group: Counts # 46172688825326326
       use-group-for: Both
@@ -787,7 +786,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 140
+      sequence: 150
       column-alignment: end
       group: Counts # 46172688825326326
       use-group-for: Both
@@ -837,7 +836,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 150
+      sequence: 160
       column-alignment: end
       group: Counts # 46172688825326326
       use-group-for: Both
@@ -887,7 +886,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 160
+      sequence: 170
       column-alignment: end
       group: Counts # 46172688825326326
       use-group-for: Both
@@ -937,7 +936,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 170
+      sequence: 180
       column-alignment: end
       group: Counts # 46172688825326326
       use-group-for: Both
@@ -987,7 +986,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 180
+      sequence: 190
       column-alignment: end
       group: Counts # 46172688825326326
       use-group-for: Both
@@ -1037,7 +1036,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 190
+      sequence: 200
       column-alignment: end
       group: Counts # 46172688825326326
       use-group-for: Both
@@ -1083,7 +1082,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 200
+      sequence: 210
       column-alignment: end
       group: Counts # 46172688825326326
       use-group-for: Both
@@ -1124,7 +1123,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 210
+      sequence: 220
 
     accessibility: 
       value-identifies-row: false
@@ -1155,7 +1154,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 220
+      sequence: 230
 
     accessibility: 
       value-identifies-row: false
@@ -1186,7 +1185,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 230
+      sequence: 240
 
     accessibility: 
       value-identifies-row: false
@@ -1217,7 +1216,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 240
+      sequence: 250
 
     accessibility: 
       value-identifies-row: false
@@ -1248,7 +1247,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 250
+      sequence: 260
 
     accessibility: 
       value-identifies-row: false
@@ -1279,7 +1278,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 260
+      sequence: 270
 
     accessibility: 
       value-identifies-row: false
@@ -1310,7 +1309,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 270
+      sequence: 280
 
     accessibility: 
       value-identifies-row: false
@@ -1341,7 +1340,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 280
+      sequence: 290
 
     accessibility: 
       value-identifies-row: false
@@ -1361,6 +1360,55 @@ regions:
 
     enable-users-to: 
       sort: false
+
+  - # ====== Column: ORDER# ======================================
+    id: 46261818462307835
+    identification: 
+      column-name: ORDER#
+      type: Number Field
+
+    heading: 
+      heading: Order#
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 80
+      column-alignment: end
+      group: Board Info # 46261748334307834
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ORDER#
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
 
   printing: 
     page: 
