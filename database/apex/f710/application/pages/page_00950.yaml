@@ -956,15 +956,11 @@ regions:
     id: 46403518646929044
     identification: 
       column-name: TABLE_NAME
-      type: Text Field
+      type: Select List
 
     heading: 
       heading: Table Name
       alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
 
     layout: 
       sequence: 60
@@ -976,7 +972,12 @@ regions:
 
     validation: 
       value-required: true
-      maximum-length: 64
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_APP_TABLES # 46514006412586236
+      display-extra-values: true
+      display-null-value: true
 
     source: 
       type: Database Column
@@ -996,7 +997,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 
@@ -1411,19 +1412,15 @@ regions:
     id: 46404129540929050
     identification: 
       column-name: PAGE_ID
-      type: Number Field
+      type: Select List
 
     heading: 
       heading: Page
-      alignment: end
-
-    settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
+      alignment: start
 
     layout: 
       sequence: 40
-      column-alignment: end
+      column-alignment: start
       stretch: Use Report Setting
 
     accessibility: 
@@ -1431,6 +1428,12 @@ regions:
 
     validation: 
       value-required: true
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_APP_PAGES # 46513847178582916
+      display-extra-values: true
+      display-null-value: true
 
     source: 
       type: Database Column
@@ -1444,7 +1447,14 @@ regions:
 
     column-filter: 
       enabled: true
-      lov-type: None
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
 
     export-/-printing: 
       include-in-export-/-print: false
