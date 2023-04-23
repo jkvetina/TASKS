@@ -57,7 +57,24 @@ javascript:
     const region_id = 'CHECKLIST';
     $('#' + region_id + ' .a-GV').on('keydown', 'input', function(event) {
         if (event.which === 13) {
-            apex.region(region_id).widget().interactiveGrid('getActions').invoke('selection-add-row');
+            // add new line below current line
+            var $widget = apex.region(region_id).widget();
+            $widget.interactiveGrid('getActions').invoke('selection-add-row');
+    
+            // focus nearest .CHECKLIST_ITEM
+            // it does not exists yet
+            /*
+            var view$ = $widget.interactiveGrid('getViews').grid.view$;
+            var selectedRecords = view$.grid('getSelection');
+            $.each(selectedRecords, function(index, record) {
+                console.log('SEL', index, record, record.hasClass('is-active'));
+                if (record.hasClass('is-active')) {
+                    record.find('.CHECKLIST_ITEM').focus();
+                    alert('FOCUS');
+                }
+            });
+            */
+            //
             event.stopPropagation();
         }
     });
@@ -1169,10 +1186,8 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_TASK_CHECKLIST
+    table-name: TSK_P105_CHECKLIST_V
     include-rowid-column: false
-    where-clause: 'task_id = :P105_TASK_ID'
-    order-by-clause: CHECKLIST_DONE NULLS LAST, CHECKLIST_ITEM
 
   layout: 
     sequence: 10
@@ -1480,74 +1495,6 @@ regions:
 
     session-state: 
       data-type: VARCHAR2
-
-  - # ====== Column: UPDATED_BY ==================================
-    id: 46261582967307832
-    identification: 
-      column-name: UPDATED_BY
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 70
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_BY
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 46261694161307833
-    identification: 
-      column-name: UPDATED_AT
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 80
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_AT
-      data-type: DATE
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
 
 - # ====== Region: &P105_HEADER. ===============================
   id: 63213380867844590
@@ -3126,41 +3073,6 @@ dynamic-actions:
     execution: 
       sequence: 10
       event: COPY_TO_CLIPBOARD # 44172926343914736
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-- # ====== Dynamic Action: MAKE_GRID_EDITABLE ==================
-  id: 46258439025307801
-  identification: 
-    name: MAKE_GRID_EDITABLE
-
-  execution: 
-    sequence: 10
-
-  when: 
-    event: EVENT.EVENT.BROWSER.READY
-
-  execution: 
-    event-scope: Static
-
-  security: 
-    authorization-scheme: MASTER - NOBODY # 64431223403362138
-
-  actions: 
-  - # ====== Action: Execute JavaScript Code =====================
-    id: 46258570829307802
-    identification: 
-      action: Execute JavaScript Code
-
-    settings: 
-      code: |
-        //apex.region('CHECKLIST').call('getActions').set('edit', true);
-        //apex.region('CHECKLIST').widget().interactiveGrid('getActions').invoke('insert-record');
-        
-
-    execution: 
-      sequence: 10
-      event: MAKE_GRID_EDITABLE # 46258439025307801
       fire-when-event-result-is: True
       fire-on-initialization: false
 

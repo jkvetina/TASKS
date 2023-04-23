@@ -16,7 +16,7 @@ UNION ALL
 --
 SELECT
     x.task_id,
-    NULL        AS checklist_id,
+    -1          AS checklist_id,
     NULL        AS checklist_item,
     NULL        AS checklist_done
 FROM x

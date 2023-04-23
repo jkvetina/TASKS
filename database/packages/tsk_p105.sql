@@ -154,11 +154,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
     PROCEDURE save_checklist
     AS
-        v_action            CHAR;
         rec                 tsk_task_checklist%ROWTYPE;
     BEGIN
-        v_action            := core.get_grid_action();
-        --
         rec.task_id         := core.get_grid_data('TASK_ID');
         rec.checklist_id    := core.get_grid_data('CHECKLIST_ID');
         rec.checklist_item  := NULLIF(LTRIM(RTRIM(core.get_grid_data('CHECKLIST_ITEM'))), '-');
@@ -178,11 +175,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             WHERE t.task_id = rec.task_id;
         EXCEPTION
         WHEN NO_DATA_FOUND THEN
-            RETURN;
+            core.raise_error('INVALID_TASK');
         END;
 
         -- proceed
-        IF (v_action = 'D' OR rec.checklist_item IS NULL) THEN
+        IF (core.get_grid_action() = 'D' OR rec.checklist_item IS NULL) THEN
             DELETE FROM tsk_task_checklist t
             WHERE t.task_id         = rec.task_id
                 AND t.checklist_id  = rec.checklist_id;
@@ -190,7 +187,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             RETURN;
         END IF;
         --
-        IF rec.checklist_id IS NOT NULL THEN
+        IF rec.checklist_id > 0 THEN
             UPDATE tsk_task_checklist t
             SET ROW = rec
             WHERE t.task_id         = rec.task_id

@@ -52,7 +52,24 @@ wwv_flow_imp_page.create_page(
 'const region_id = ''CHECKLIST'';',
 '$(''#'' + region_id + '' .a-GV'').on(''keydown'', ''input'', function(event) {',
 '    if (event.which === 13) {',
-'        apex.region(region_id).widget().interactiveGrid(''getActions'').invoke(''selection-add-row'');',
+'        // add new line below current line',
+'        var $widget = apex.region(region_id).widget();',
+'        $widget.interactiveGrid(''getActions'').invoke(''selection-add-row'');',
+'',
+'        // focus nearest .CHECKLIST_ITEM',
+'        // it does not exists yet',
+'        /*',
+'        var view$ = $widget.interactiveGrid(''getViews'').grid.view$;',
+'        var selectedRecords = view$.grid(''getSelection'');',
+'        $.each(selectedRecords, function(index, record) {',
+'            console.log(''SEL'', index, record, record.hasClass(''is-active''));',
+'            if (record.hasClass(''is-active'')) {',
+'                record.find(''.CHECKLIST_ITEM'').focus();',
+'                alert(''FOCUS'');',
+'            }',
+'        });',
+'        */',
+'        //',
 '        event.stopPropagation();',
 '    }',
 '});',
@@ -409,10 +426,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_sequence=>10
 ,p_plug_display_point=>'SUB_REGIONS'
 ,p_query_type=>'TABLE'
-,p_query_table=>'TSK_TASK_CHECKLIST'
-,p_query_where=>'task_id = :P105_TASK_ID'
-,p_query_order_by_type=>'STATIC'
-,p_query_order_by=>'CHECKLIST_DONE NULLS LAST, CHECKLIST_ITEM'
+,p_query_table=>'TSK_P105_CHECKLIST_V'
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -557,42 +571,6 @@ wwv_flow_imp_page.create_region_column(
 ,p_attribute_01=>'Y'
 ,p_use_as_row_header=>false
 );
-wwv_flow_imp_page.create_region_column(
- p_id=>wwv_flow_imp.id(46261582967307832)
-,p_name=>'UPDATED_BY'
-,p_source_type=>'DB_COLUMN'
-,p_source_expression=>'UPDATED_BY'
-,p_data_type=>'VARCHAR2'
-,p_session_state_data_type=>'VARCHAR2'
-,p_is_query_only=>false
-,p_item_type=>'NATIVE_HIDDEN'
-,p_display_sequence=>70
-,p_attribute_01=>'Y'
-,p_filter_is_required=>false
-,p_use_as_row_header=>false
-,p_enable_sort_group=>false
-,p_is_primary_key=>false
-,p_duplicate_value=>true
-,p_include_in_export=>false
-);
-wwv_flow_imp_page.create_region_column(
- p_id=>wwv_flow_imp.id(46261694161307833)
-,p_name=>'UPDATED_AT'
-,p_source_type=>'DB_COLUMN'
-,p_source_expression=>'UPDATED_AT'
-,p_data_type=>'DATE'
-,p_session_state_data_type=>'VARCHAR2'
-,p_is_query_only=>false
-,p_item_type=>'NATIVE_HIDDEN'
-,p_display_sequence=>80
-,p_attribute_01=>'Y'
-,p_filter_is_required=>false
-,p_use_as_row_header=>false
-,p_enable_sort_group=>false
-,p_is_primary_key=>false
-,p_duplicate_value=>true
-,p_include_in_export=>false
-);
 wwv_flow_imp_page.create_interactive_grid(
  p_id=>wwv_flow_imp.id(46260533323307822)
 ,p_internal_uid=>46260533323307822
@@ -683,22 +661,6 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_view_id=>wwv_flow_imp.id(46300269916624106)
 ,p_display_seq=>1
 ,p_column_id=>wwv_flow_imp.id(46261201078307829)
-,p_is_visible=>true
-,p_is_frozen=>false
-);
-wwv_flow_imp_page.create_ig_report_column(
- p_id=>wwv_flow_imp.id(46316505798665289)
-,p_view_id=>wwv_flow_imp.id(46300269916624106)
-,p_display_seq=>9
-,p_column_id=>wwv_flow_imp.id(46261582967307832)
-,p_is_visible=>true
-,p_is_frozen=>false
-);
-wwv_flow_imp_page.create_ig_report_column(
- p_id=>wwv_flow_imp.id(46317488950665292)
-,p_view_id=>wwv_flow_imp.id(46300269916624106)
-,p_display_seq=>10
-,p_column_id=>wwv_flow_imp.id(46261694161307833)
 ,p_is_visible=>true
 ,p_is_frozen=>false
 );
@@ -992,18 +954,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.10.07'
-,p_release=>'22.2.4'
-,p_default_workspace_id=>8506563800894011
-,p_default_application_id=>710
-,p_default_id_offset=>84847035874187356
-,p_default_owner=>'APPS'
-);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34799148806743642)
 ,p_name=>'P105_TASK_DESC'
@@ -1021,6 +971,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'MARKDOWN'
 ,p_attribute_04=>'300'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.10.07'
+,p_release=>'22.2.4'
+,p_default_workspace_id=>8506563800894011
+,p_default_application_id=>710
+,p_default_id_offset=>84847035874187356
+,p_default_owner=>'APPS'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34799227459743643)
@@ -1338,26 +1300,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
-);
-wwv_flow_imp_page.create_page_da_event(
- p_id=>wwv_flow_imp.id(46258439025307801)
-,p_name=>'MAKE_GRID_EDITABLE'
-,p_event_sequence=>10
-,p_bind_type=>'bind'
-,p_bind_event_type=>'ready'
-,p_security_scheme=>wwv_flow_imp.id(64431223403362138)  -- MASTER - NOBODY
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(46258570829307802)
-,p_event_id=>wwv_flow_imp.id(46258439025307801)
-,p_event_result=>'TRUE'
-,p_action_sequence=>10
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_JAVASCRIPT_CODE'
-,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'//apex.region(''CHECKLIST'').call(''getActions'').set(''edit'', true);',
-'//apex.region(''CHECKLIST'').widget().interactiveGrid(''getActions'').invoke(''insert-record'');',
-''))
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(63213674749844593)
