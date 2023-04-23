@@ -616,7 +616,7 @@ page-items:
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_SWIMLANES # 34920402511183578
-    display-extra-values: true
+    display-extra-values: false
     display-null-value: false
 
   advanced: 
