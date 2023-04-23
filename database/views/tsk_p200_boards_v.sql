@@ -91,6 +91,7 @@ SELECT
     CASE WHEN f.board_id IS NOT NULL THEN 'Y' END AS is_favorite,
     --
     t.is_active,
+    t.order#,
     --
     '<a href="' ||
         core.get_page_url (

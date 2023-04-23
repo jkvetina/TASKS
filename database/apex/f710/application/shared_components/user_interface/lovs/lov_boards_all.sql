@@ -21,29 +21,8 @@ wwv_flow_imp_shared.create_list_of_values(
 ,p_return_column_name=>'BOARD_ID'
 ,p_display_column_name=>'BOARD_NAME'
 ,p_group_sort_direction=>'ASC'
+,p_default_sort_column_name=>'ORDER#'
 ,p_default_sort_direction=>'ASC'
-);
-wwv_flow_imp_shared.create_list_of_values_cols(
- p_id=>wwv_flow_imp.id(45362608558130983)
-,p_query_column_name=>'BOARD_ID'
-,p_display_sequence=>10
-,p_data_type=>'NUMBER'
-,p_is_visible=>'N'
-,p_is_searchable=>'N'
-);
-wwv_flow_imp_shared.create_list_of_values_cols(
- p_id=>wwv_flow_imp.id(45363091779130984)
-,p_query_column_name=>'BOARD_NAME'
-,p_heading=>'Board Name'
-,p_display_sequence=>20
-,p_data_type=>'VARCHAR2'
-);
-wwv_flow_imp_shared.create_list_of_values_cols(
- p_id=>wwv_flow_imp.id(45363436605130984)
-,p_query_column_name=>'IS_ACTIVE'
-,p_heading=>'Is Active'
-,p_display_sequence=>30
-,p_data_type=>'VARCHAR2'
 );
 wwv_flow_imp.component_end;
 end;

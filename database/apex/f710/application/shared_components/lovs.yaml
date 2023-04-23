@@ -45,7 +45,8 @@
   column-mapping: 
     return: BOARD_ID
     display: BOARD_NAME
-    default-sort: Use Order By from Query
+    default-sort: ORDER#
+    sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: LOV_SWIMLANES =======================
   id: 34920402511183578
@@ -112,59 +113,8 @@
   column-mapping: 
     return: BOARD_ID
     display: BOARD_NAME
-    default-sort: Use Order By from Query
-
-  columns: 
-  - # ====== Column: BOARD_ID ====================================
-    id: 45362608558130983
-    identification: 
-      column-name: BOARD_ID
-      show: false
-
-    layout: 
-      sequence: 10
-
-    source: 
-      data-type: NUMBER
-
-    advanced: 
-      searchable: false
-
-  - # ====== Column: BOARD_NAME ==================================
-    id: 45363091779130984
-    identification: 
-      column-name: BOARD_NAME
-      show: true
-
-    heading: 
-      heading: Board Name
-
-    layout: 
-      sequence: 20
-
-    source: 
-      data-type: VARCHAR2
-
-    advanced: 
-      searchable: true
-
-  - # ====== Column: IS_ACTIVE ===================================
-    id: 45363436605130984
-    identification: 
-      column-name: IS_ACTIVE
-      show: true
-
-    heading: 
-      heading: Is Active
-
-    layout: 
-      sequence: 30
-
-    source: 
-      data-type: VARCHAR2
-
-    advanced: 
-      searchable: true
+    default-sort: ORDER#
+    sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: LOV_CLIENTS_ALL =====================
   id: 45359037932027195

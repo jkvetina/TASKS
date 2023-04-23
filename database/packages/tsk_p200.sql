@@ -56,6 +56,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.board_id        := core.get_grid_data('BOARD_ID');
         rec.board_name      := core.get_grid_data('BOARD_NAME');
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
+        rec.order#          := core.get_grid_data('ORDER#');
         --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;

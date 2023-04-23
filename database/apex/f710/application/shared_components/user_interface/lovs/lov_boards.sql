@@ -21,6 +21,7 @@ wwv_flow_imp_shared.create_list_of_values(
 ,p_return_column_name=>'BOARD_ID'
 ,p_display_column_name=>'BOARD_NAME'
 ,p_group_sort_direction=>'ASC'
+,p_default_sort_column_name=>'ORDER#'
 ,p_default_sort_direction=>'ASC'
 );
 wwv_flow_imp.component_end;
