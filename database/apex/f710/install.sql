@@ -26,7 +26,6 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_boards_all.sql
 @@application/shared_components/user_interface/lovs/lov_board_types.sql
 @@application/shared_components/user_interface/lovs/lov_clients.sql
-@@application/shared_components/user_interface/lovs/lov_clients_all.sql
 @@application/shared_components/user_interface/lovs/lov_projects.sql
 @@application/shared_components/user_interface/lovs/lov_projects_all.sql
 @@application/shared_components/user_interface/lovs/lov_statuses.sql

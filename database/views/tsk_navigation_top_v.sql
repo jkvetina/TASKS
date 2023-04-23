@@ -220,7 +220,6 @@ JOIN tsk_projects p
     AND p.is_active     = 'Y'
 JOIN tsk_clients c
     ON c.client_id      = b.client_id
-    AND c.is_active     = 'Y'
 JOIN curr
     ON curr.user_id     = f.user_id;
 --

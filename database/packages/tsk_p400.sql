@@ -21,7 +21,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p400 AS
     BEGIN
         rec.client_id       := core.get_grid_data('CLIENT_ID');
         rec.client_name     := core.get_grid_data('CLIENT_NAME');
-        rec.is_active       := core.get_grid_data('IS_ACTIVE');
         --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;

@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW tsk_p400_clients_v AS
+CREATE OR REPLACE FORCE VIEW tsk_p400_clients_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
         tsk_app.get_client_id()     AS client_id
@@ -33,8 +33,6 @@ SELECT
                 in_reset        => 'Y'
             ) || '">SET</a>'
         END AS is_current,
-    --
-    t.is_active,
     --
     c.count_projects,
     c.count_boards,
