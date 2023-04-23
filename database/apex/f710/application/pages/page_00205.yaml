@@ -3,7 +3,7 @@
 id: 205
 identification: 
   name: Add/Edit Board
-  alias: ADD-EDIT-BOARD
+  alias: BOARD
   title: Add/Edit Board
   page-group: MAIN # 78949836938576475
 
@@ -14,13 +14,14 @@ appearance:
   - '#DEFAULT#'
 
 dialog: 
-  chained: true
+  width: 800
+  chained: false
 
 navigation-menu: 
   override-user-interface-level: false
 
 navigation: 
-  cursor-focus: Do not focus cursor
+  cursor-focus: First item on page
   warn-on-unsaved-changes: true
 
 security: 
@@ -42,51 +43,10 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Board -------- missing modal features =======
-  id: 116186632059763389
+- # ====== Region: Add/Edit Board [FORM] =======================
+  id: 135380799354520693
   identification: 
-    title: Board -------- missing modal features
-    type: Static Content
-
-  layout: 
-    sequence: 10
-    parent-region: No Parent
-    position: BODY
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Hero # 70864195177975601
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: Board [FORM] ================================
-  id: 150067804509724697
-  identification: 
-    title: Board [FORM]
+    title: Add/Edit Board [FORM]
     type: Form
 
   source: 
@@ -97,17 +57,17 @@ regions:
     include-rowid-column: false
 
   layout: 
-    sequence: 20
+    sequence: 30
     parent-region: No Parent
     position: BODY
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
-    new-column: false
+    new-column: true
     column-span: Automatic
 
   appearance: 
-    template: Interactive Report # 70887424081975615
+    template: Blank with Attributes # 70831193948975578
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -117,7 +77,7 @@ regions:
     landmark-type: Template Default
 
   advanced: 
-    region-display-selector: false
+    region-display-selector: true
     exclude-title-from-translation: false
 
   server-cache: 
@@ -135,111 +95,67 @@ regions:
       - Delete Row
       lost-update-type: Row Values
 
-page-items: 
-- # ====== Page Item: P205_UPDATED_BY ==========================
-  id: 45760951945794027
+- # ====== Region: Add/Edit Board ==============================
+  id: 199484558172036249
   identification: 
-    name: P205_UPDATED_BY
-    type: Hidden
-
-  settings: 
-    value-protected: true
+    title: Add/Edit Board
+    type: Static Content
 
   layout: 
-    sequence: 70
-    region: Board [FORM] # 150067804509724697
+    sequence: 20
+    parent-region: No Parent
     position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    form-region: Board [FORM] # 150067804509724697
-    column: UPDATED_BY
-    data-type: VARCHAR2
-    query-only: false
-    primary-key: false
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Request (Memory Only)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P205_UPDATED_AT ==========================
-  id: 45761074626794028
-  identification: 
-    name: P205_UPDATED_AT
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 80
-    region: Board [FORM] # 150067804509724697
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    form-region: Board [FORM] # 150067804509724697
-    column: UPDATED_AT
-    data-type: DATE
-    query-only: false
-    primary-key: false
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Request (Memory Only)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P205_BOARD_ID ============================
-  id: 45805054572938108
-  identification: 
-    name: P205_BOARD_ID
-    type: Display Only
-
-  label: 
-    label: Board Id
-    alignment: Left
-
-  settings: 
-    format: Plain Text
-    based-on: Item Value
-    show-line-breaks: true
-    send-on-page-submit: true
-
-  layout: 
-    sequence: 10
-    region: Board [FORM] # 150067804509724697
-    position: BODY
-    alignment: Left
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
     column-span: Automatic
-    label-column-span: Page Template Default
 
   appearance: 
-    template: Optional - Floating # 70967669576975668
+    template: Hero # 70864195177975601
     template-options: 
     - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P205_BOARD_ID ============================
+  id: 45761776737794035
+  identification: 
+    name: P205_BOARD_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Add/Edit Board [FORM] # 135380799354520693
+    position: BODY
 
   advanced: 
     warn-on-unsaved-changes: Page Default
 
   source: 
-    form-region: Board [FORM] # 150067804509724697
+    form-region: Add/Edit Board [FORM] # 135380799354520693
     column: BOARD_ID
     data-type: NUMBER
     query-only: false
@@ -255,7 +171,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P205_BOARD_NAME ==========================
-  id: 45805455775938109
+  id: 45761800958794036
   identification: 
     name: P205_BOARD_NAME
     type: Text Field
@@ -273,11 +189,11 @@ page-items:
 
   layout: 
     sequence: 20
-    region: Board [FORM] # 150067804509724697
+    region: Add/Edit Board [FORM] # 135380799354520693
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -297,7 +213,7 @@ page-items:
     warn-on-unsaved-changes: Page Default
 
   source: 
-    form-region: Board [FORM] # 150067804509724697
+    form-region: Add/Edit Board [FORM] # 135380799354520693
     column: BOARD_NAME
     data-type: VARCHAR2
     query-only: false
@@ -315,13 +231,13 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P205_CLIENT_ID ===========================
-  id: 45805814947938109
+  id: 45761984031794037
   identification: 
     name: P205_CLIENT_ID
     type: Select List
 
   label: 
-    label: Client Id
+    label: Client
     alignment: Left
 
   settings: 
@@ -330,7 +246,7 @@ page-items:
 
   layout: 
     sequence: 30
-    region: Board [FORM] # 150067804509724697
+    region: Add/Edit Board [FORM] # 135380799354520693
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -353,13 +269,13 @@ page-items:
     type: Shared Component
     list-of-values: LOV_CLIENTS_ALL # 45359037932027195
     display-extra-values: true
-    display-null-value: true
+    display-null-value: false
 
   advanced: 
     warn-on-unsaved-changes: Page Default
 
   source: 
-    form-region: Board [FORM] # 150067804509724697
+    form-region: Add/Edit Board [FORM] # 135380799354520693
     column: CLIENT_ID
     data-type: VARCHAR2
     query-only: false
@@ -377,13 +293,13 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P205_PROJECT_ID ==========================
-  id: 45806223207938109
+  id: 45762085329794038
   identification: 
     name: P205_PROJECT_ID
     type: Select List
 
   label: 
-    label: Project Id
+    label: Project
     alignment: Left
 
   settings: 
@@ -392,7 +308,7 @@ page-items:
 
   layout: 
     sequence: 40
-    region: Board [FORM] # 150067804509724697
+    region: Add/Edit Board [FORM] # 135380799354520693
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -415,13 +331,13 @@ page-items:
     type: Shared Component
     list-of-values: LOV_PROJECTS_ALL # 45510330697215422
     display-extra-values: true
-    display-null-value: true
+    display-null-value: false
 
   advanced: 
     warn-on-unsaved-changes: Page Default
 
   source: 
-    form-region: Board [FORM] # 150067804509724697
+    form-region: Add/Edit Board [FORM] # 135380799354520693
     column: PROJECT_ID
     data-type: VARCHAR2
     query-only: false
@@ -439,7 +355,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P205_IS_ACTIVE ===========================
-  id: 45806684010938109
+  id: 45762119926794039
   identification: 
     name: P205_IS_ACTIVE
     type: Checkbox
@@ -449,12 +365,11 @@ page-items:
     alignment: Left
 
   settings: 
-    use-defaults: false
-    checked-value: Y
+    use-defaults: true
 
   layout: 
     sequence: 50
-    region: Board [FORM] # 150067804509724697
+    region: Add/Edit Board [FORM] # 135380799354520693
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -476,7 +391,7 @@ page-items:
     warn-on-unsaved-changes: Page Default
 
   source: 
-    form-region: Board [FORM] # 150067804509724697
+    form-region: Add/Edit Board [FORM] # 135380799354520693
     column: IS_ACTIVE
     data-type: VARCHAR2
     query-only: false
@@ -490,16 +405,112 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-buttons: 
-- # ====== Button: SAVE_AND_ACTIVATE ===========================
-  id: 45761490116794032
+- # ====== Page Item: P205_UPDATED_BY ==========================
+  id: 45762275375794040
   identification: 
-    button-name: SAVE_AND_ACTIVATE
-    label: Save and Activate
+    name: P205_UPDATED_BY
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 70
+    region: Add/Edit Board [FORM] # 135380799354520693
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Add/Edit Board [FORM] # 135380799354520693
+    column: UPDATED_BY
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P205_UPDATED_AT ==========================
+  id: 45762381208794041
+  identification: 
+    name: P205_UPDATED_AT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 80
+    region: Add/Edit Board [FORM] # 135380799354520693
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: Add/Edit Board [FORM] # 135380799354520693
+    column: UPDATED_AT
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P205_HEADER ==============================
+  id: 45762611555794044
+  identification: 
+    name: P205_HEADER
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Add/Edit Board # 199484558172036249
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: SAVE_CHANGES ================================
+  id: 45762579595794043
+  identification: 
+    button-name: SAVE_CHANGES
+    label: Save Changes
 
   layout: 
     sequence: 60
-    region: Board [FORM] # 150067804509724697
+    region: Add/Edit Board [FORM] # 135380799354520693
     position: BODY
     start-new-layout: false
     start-new-row: false
@@ -520,67 +531,91 @@ buttons:
     action: Submit Page
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
-    database-action: SQL UPDATE action
 
-- # ====== Button: SAVE_CHANGES ================================
-  id: 45804637193938107
+- # ====== Button: CLOSE_DIALOG ================================
+  id: 45855917038837365
   identification: 
-    button-name: SAVE_CHANGES
-    label: Save Changes
+    button-name: CLOSE_DIALOG
+    label: Close Dialog
 
   layout: 
-    sequence: 90
-    region: Board [FORM] # 150067804509724697
-    position: BODY
+    sequence: 10
+    region: Add/Edit Board # 199484558172036249
+    position: RIGHT_OF_TITLE
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
-    new-column: false
+    new-column: true
     column-span: Automatic
-    alignment: Left center
 
   appearance: 
-    button-template: Text # 70970074101975671
+    button-template: Icon # 70969417180975670
     hot: false
     template-options: 
     - '#DEFAULT#'
     css-classes: 
     - u-pullRight
+    icon: fa-times
 
   behavior: 
-    action: Submit Page
-    execute-validations: true
-    warn-on-unsaved-changes: Do Not Check
-    database-action: SQL UPDATE action
+    action: Defined by Dynamic Action
+    execute-validations: false
+
+dynamic-actions: 
+- # ====== Dynamic Action: CLOSE_DIALOG ========================
+  id: 45856395278837370
+  identification: 
+    name: CLOSE_DIALOG
+
+  execution: 
+    sequence: 10
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CLICK
+    selection-type: Button
+    button: CLOSE_DIALOG # 45855917038837365
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Cancel Dialog ===============================
+    id: 45856803414837371
+    identification: 
+      action: Cancel Dialog
+
+    execution: 
+      sequence: 10
+      event: CLOSE_DIALOG # 45856395278837370
+      fire-when-event-result-is: True
+      fire-on-initialization: false
 
 processes: 
 - # ====== Process: INIT_FORM ==================================
-  id: 45809678615938113
+  id: 45761635362794034
   identification: 
     name: INIT_FORM
     type: Form - Initialization
-    form-region: Board [FORM] # 150067804509724697
+    form-region: Add/Edit Board [FORM] # 135380799354520693
 
   execution: 
     sequence: 10
     point: Before Header
     run-process: Once Per Page Visit (default)
 
-- # ====== Process: SAVE_BOARDS ================================
-  id: 45810051481938113
+- # ====== Process: SAVE_CHANGES ===============================
+  id: 45762414133794042
   identification: 
-    name: SAVE_BOARDS
+    name: SAVE_CHANGES
     type: Form - Automatic Row Processing (DML)
-    form-region: Board [FORM] # 150067804509724697
+    form-region: Add/Edit Board [FORM] # 135380799354520693
 
   settings: 
-    target-type: PL/SQL Code
-    pl/sql-code-to-insert/update/delete: |
-      tsk_p200.save_boards (
-          io_board_id         => :P205_BOARD_ID
-      );
+    target-type: Region Source
     prevent-lost-updates: true
     lock-row: No
+    return-primary-key(s)-after-insert: true
 
   execution: 
     sequence: 10
