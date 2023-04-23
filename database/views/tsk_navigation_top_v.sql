@@ -176,7 +176,53 @@ SELECT
     n.auth_scheme,
     n.label__,
     n.order#
-FROM n;
+FROM n
+UNION ALL
+--
+SELECT
+    2 AS lvl,
+    p.project_name || ' - ' || b.board_name AS label,
+    --
+    APEX_PAGE.GET_URL (
+        p_application       => curr.app_id,
+        p_page              => 100,--curr.page_id,
+        p_clear_cache       => 100,
+        p_items             => 'P100_CLIENT_ID,P100_PROJECT_ID,P100_BOARD_ID',
+        p_values            => '' || b.client_id || ',' || b.project_id || ',' || b.board_id
+    ) AS target,
+    --
+    NULL AS is_current_list_entry,
+    NULL AS image,
+    NULL AS image_attribute,
+    NULL AS image_alt_attribute,
+    NULL AS attribute01,
+    NULL AS attribute02,
+    NULL AS attribute03,
+    NULL AS attribute04,
+    NULL AS attribute05,
+    --'<span class="fa fa-heart-o"></span> &' || 'nbsp;'
+    NULL AS attribute06,
+    NULL AS attribute07,
+    NULL AS attribute08,
+    NULL AS attribute09,
+    NULL AS attribute10,
+    NULL AS page_id,
+    NULL AS parent_id,
+    NULL AS auth_scheme,
+    NULL AS label__,
+    '/100.100/' || b.board_id AS order#
+FROM tsk_user_fav_boards f
+JOIN tsk_boards b
+    ON b.board_id       = f.board_id
+    AND b.is_active     = 'Y'
+JOIN tsk_projects p
+    ON p.project_id     = b.project_id
+    AND p.is_active     = 'Y'
+JOIN tsk_clients c
+    ON c.client_id      = b.client_id
+    AND c.is_active     = 'Y'
+JOIN curr
+    ON curr.user_id     = f.user_id;
 --
 COMMENT ON TABLE tsk_navigation_top_v IS '';
 
