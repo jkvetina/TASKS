@@ -34,6 +34,8 @@ SELECT
             ) || '">SET</a>'
         END AS is_current,
     --
+    t.is_active,
+    --
     c.count_projects,
     c.count_boards,
     c.count_tasks
