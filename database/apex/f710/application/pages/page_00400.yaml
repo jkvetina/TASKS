@@ -224,6 +224,17 @@ regions:
         name: Primary Report
         alias: 347276
 
+  column-groups: 
+  - # ====== Column Group: Flags =================================
+    id: 46262618502307843
+    heading: 
+      heading: Flags
+
+  - # ====== Column Group: Counts ================================
+    id: 46262781333307844
+    heading: 
+      heading: Counts
+
   columns: 
   - # ====== Column: PK_CLIENT_ID ================================
     id: 45934296027991420
@@ -266,7 +277,7 @@ regions:
       type: Display Only
 
     heading: 
-      heading: Count Tasks
+      heading: Tasks
       alignment: end
 
     settings: 
@@ -274,8 +285,10 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 80
+      sequence: 110
       column-alignment: end
+      group: Counts # 46262781333307844
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -285,11 +298,150 @@ regions:
       type: Database Column
       database-column: COUNT_TASKS
       data-type: NUMBER
-      query-only: false
+      query-only: true
       primary-key: false
 
-    default: 
-      duplicate-copies-existing-value: true
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_CURRENT ==================================
+    id: 46262321884307840
+    identification: 
+      column-name: IS_CURRENT
+      type: Display Only
+
+    heading: 
+      heading: Current
+      alignment: center
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 70
+      column-alignment: center
+      group: Flags # 46262618502307843
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: IS_CURRENT
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: COUNT_PROJECTS ==============================
+    id: 46262499733307841
+    identification: 
+      column-name: COUNT_PROJECTS
+      type: Display Only
+
+    heading: 
+      heading: Projects
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 90
+      column-alignment: end
+      group: Counts # 46262781333307844
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_PROJECTS
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_BOARDS ================================
+    id: 46262541757307842
+    identification: 
+      column-name: COUNT_BOARDS
+      type: Display Only
+
+    heading: 
+      heading: Boards
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 100
+      column-alignment: end
+      group: Counts # 46262781333307844
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_BOARDS
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
 
     session-state: 
       data-type: VARCHAR2
@@ -314,54 +466,6 @@ regions:
 
     layout: 
       sequence: 20
-
-  - # ====== Column: ACTIVATE_URL ================================
-    id: 70538787699958883
-    identification: 
-      column-name: ACTIVATE_URL
-      type: Link
-
-    heading: 
-      alignment: center
-
-    layout: 
-      sequence: 30
-      column-alignment: center
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    link: 
-      target: '&ACTIVATE_URL.'
-      link-text: ACTIVATE
-
-    source: 
-      type: Database Column
-      database-column: ACTIVATE_URL
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: false
-      hide: true
-
-    security: 
-      escape-special-characters: true
 
   - # ====== Column: CLIENT_ID ===================================
     id: 139230605501906109
@@ -480,7 +584,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: Is Active
+      heading: Active
       alignment: center
 
     settings: 
@@ -488,8 +592,10 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 70
+      sequence: 80
       column-alignment: center
+      group: Flags # 46262618502307843
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
