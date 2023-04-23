@@ -3,8 +3,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
     PROCEDURE init_defaults
     AS
     BEGIN
+        -- calculate page header
         FOR c IN (
-            SELECT c.client_name || ' - Projects' AS name
+            SELECT 'Projects for ' || c.client_name AS name
             FROM tsk_clients c
             WHERE c.client_id = tsk_app.get_client_id()
         ) LOOP

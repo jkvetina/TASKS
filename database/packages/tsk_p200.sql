@@ -5,7 +5,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
     BEGIN
         -- calculate page header
         FOR c IN (
-            SELECT p.project_name || ' - Projects' AS name
+            SELECT 'Boards for ' || p.project_name AS name
             FROM tsk_projects p
             WHERE p.project_id = tsk_app.get_project_id()
         ) LOOP

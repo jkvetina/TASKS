@@ -66,9 +66,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         core.set_item('P100_SWIMLANE_ID',   v_swimlane_id);
         core.set_item('P100_TASKS_LINK',    core.get_page_url(100));
 
-        -- get board header
+        -- calculate page header
         FOR c IN (
-            SELECT p.project_name || ' - ' || b.board_name AS name
+            SELECT 'Tasks for ' || p.project_name || ' - ' || b.board_name AS name
             FROM tsk_boards b
             JOIN tsk_projects p
                 ON b.project_id = p.project_id
