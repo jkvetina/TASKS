@@ -227,6 +227,8 @@
     display: PAGE_NAME
     default-sort: PAGE_NAME
     sort-direction: Ascending (Nulls Last)
+    group: PAGE_GROUP
+    group-sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: LOV_APP_TABLES ======================
   id: 46514006412586236
