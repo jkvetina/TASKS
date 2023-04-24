@@ -551,7 +551,7 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 40
+    sequence: 20
     parent-region: TABS # 92807834105244301
     position: SUB_REGIONS
     start-new-layout: false
@@ -1634,14 +1634,14 @@ regions:
       font-color: '#000000'
       alignment: center
 
-- # ====== Region: Map Roles ===================================
+- # ====== Region: Map Users ===================================
   id: 93007416965296875
   identification: 
-    title: Map Roles
+    title: Map Users
     type: Static Content
 
   layout: 
-    sequence: 20
+    sequence: 40
     parent-region: TABS # 92807834105244301
     position: SUB_REGIONS
     start-new-layout: false
@@ -1675,15 +1675,15 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Map Roles ===================================
+- # ====== Region: Map Users ===================================
   id: 93007546888296876
   identification: 
-    title: Map Roles
+    title: Map Users
     type: Static Content
 
   layout: 
     sequence: 10
-    parent-region: Map Roles # 93007416965296875
+    parent-region: Map Users # 93007416965296875
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -1716,10 +1716,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Map Roles [GRID] ============================
+- # ====== Region: Map Users [GRID] ============================
   id: 93007646415296877
   identification: 
-    title: Map Roles [GRID]
+    title: Map Users [GRID]
     type: Interactive Grid
 
   source: 
@@ -1731,7 +1731,7 @@ regions:
 
   layout: 
     sequence: 30
-    parent-region: Map Roles # 93007416965296875
+    parent-region: Map Users # 93007416965296875
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -2137,7 +2137,7 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
-      page-header-text: Map Roles [GRID]
+      page-header-text: Map Users [GRID]
 
     column-headings: 
       font: Helvetica
@@ -2168,7 +2168,7 @@ regions:
 
   layout: 
     sequence: 20
-    parent-region: Map Roles # 93007416965296875
+    parent-region: Map Users # 93007416965296875
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -2434,7 +2434,7 @@ processes:
   identification: 
     name: SAVE_MAP_ROLES
     type: Interactive Grid - Automatic Row Processing (DML)
-    editable-region: Map Roles [GRID] # 93007646415296877
+    editable-region: Map Users [GRID] # 93007646415296877
 
   settings: 
     target-type: Region Source

@@ -21,6 +21,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(71258399003174376)  -- MASTER - IS_ADMIN
 ,p_protection_level=>'C'
+,p_page_component_map=>'21'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
@@ -337,7 +338,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_parent_plug_id=>wwv_flow_imp.id(92807834105244301)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70831193948975578)
-,p_plug_display_sequence=>40
+,p_plug_display_sequence=>20
 ,p_plug_display_point=>'SUB_REGIONS'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
@@ -1056,11 +1057,11 @@ wwv_flow_imp_page.create_ig_report_column(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(93007416965296875)
-,p_plug_name=>'Map Roles'
+,p_plug_name=>'Map Users'
 ,p_parent_plug_id=>wwv_flow_imp.id(92807834105244301)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70831193948975578)
-,p_plug_display_sequence=>20
+,p_plug_display_sequence=>40
 ,p_plug_display_point=>'SUB_REGIONS'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
@@ -1068,7 +1069,7 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(93007546888296876)
-,p_plug_name=>'Map Roles'
+,p_plug_name=>'Map Users'
 ,p_parent_plug_id=>wwv_flow_imp.id(93007416965296875)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70864195177975601)
@@ -1092,7 +1093,7 @@ wwv_flow_imp.component_begin (
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(93007646415296877)
-,p_plug_name=>'Map Roles [GRID]'
+,p_plug_name=>'Map Users [GRID]'
 ,p_parent_plug_id=>wwv_flow_imp.id(93007416965296875)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_component_template_options=>'#DEFAULT#'
@@ -1104,12 +1105,13 @@ wwv_flow_imp_page.create_page_plug(
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_prn_content_disposition=>'ATTACHMENT'
 ,p_prn_units=>'INCHES'
 ,p_prn_paper_size=>'LETTER'
 ,p_prn_width=>11
 ,p_prn_height=>8.5
 ,p_prn_orientation=>'HORIZONTAL'
-,p_prn_page_header=>'Map Roles [GRID]'
+,p_prn_page_header=>'Map Users [GRID]'
 ,p_prn_page_header_font_color=>'#000000'
 ,p_prn_page_header_font_family=>'Helvetica'
 ,p_prn_page_header_font_weight=>'normal'
