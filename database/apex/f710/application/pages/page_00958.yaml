@@ -1,10 +1,10 @@
 ---
-# ====== Page: Users =========================================
-id: 950
+# ====== Page: Map Roles =====================================
+id: 958
 identification: 
-  name: Users
-  alias: USERS
-  title: Users
+  name: Map Roles
+  alias: MAP-ROLES
+  title: Map Roles
   page-group: ADMIN # 78950012693576929
 
 appearance: 
@@ -39,10 +39,10 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Users =======================================
-  id: 116928724958881958
+- # ====== Region: Map Roles ===================================
+  id: 140037357366888413
   identification: 
-    title: Users
+    title: Map Roles
     type: Static Content
 
   layout: 
@@ -80,15 +80,15 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Users =======================================
-  id: 116928811065881959
+- # ====== Region: Map Roles ===================================
+  id: 140037400636888414
   identification: 
-    title: Users
+    title: Map Roles
     type: Static Content
 
   layout: 
     sequence: 10
-    parent-region: Users # 116928724958881958
+    parent-region: Map Roles # 140037357366888413
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -121,22 +121,22 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Users [GRID] ================================
-  id: 185622990032829208
+- # ====== Region: Map Roles [GRID] ============================
+  id: 233232761213973117
   identification: 
-    title: Users [GRID]
+    title: Map Roles [GRID]
     type: Interactive Grid
 
   source: 
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_USERS
+    table-name: TSK_AUTH_ROLES
     include-rowid-column: false
 
   layout: 
     sequence: 20
-    parent-region: Users # 116928724958881958
+    parent-region: Map Roles # 140037357366888413
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -165,7 +165,7 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 185623126847829209
+    id: 233232900843973118
     edit: 
       enabled: true
       allowed-operations: 
@@ -219,25 +219,21 @@ regions:
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
-      id: 186515866584845004
+      id: 233288888602394651
       identification: 
         name: Primary Report
-        alias: 347276
+        alias: 465189
 
   columns: 
-  - # ====== Column: USER_ID =====================================
-    id: 46263119303307848
+  - # ====== Column: CLIENT_ID ===================================
+    id: 233232957439973119
     identification: 
-      column-name: USER_ID
-      type: Text Field
+      column-name: CLIENT_ID
+      type: Select List
 
     heading: 
-      heading: User Id
+      heading: Client
       alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
 
     layout: 
       sequence: 30
@@ -249,7 +245,68 @@ regions:
 
     validation: 
       value-required: true
-      maximum-length: 128
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_CLIENTS # 34762829880497308
+      display-extra-values: true
+      display-null-value: true
+
+    source: 
+      type: Database Column
+      database-column: CLIENT_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: USER_ID =====================================
+    id: 233233072587973120
+    identification: 
+      column-name: USER_ID
+      type: Select List
+
+    heading: 
+      heading: User
+      alignment: start
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_USERS_ALL # 46494875558442406
+      display-extra-values: true
+      display-null-value: true
 
     source: 
       type: Database Column
@@ -269,191 +326,11 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 
       include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: USER_NAME ===================================
-    id: 46263268591307849
-    identification: 
-      column-name: USER_NAME
-      type: Text Field
-
-    heading: 
-      heading: User Name
-      alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
-    layout: 
-      sequence: 40
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-      maximum-length: 64
-
-    source: 
-      type: Database Column
-      database-column: USER_NAME
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: UPDATED_BY ==================================
-    id: 46263391338307850
-    identification: 
-      column-name: UPDATED_BY
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 70
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_BY
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 46399255606928901
-    identification: 
-      column-name: UPDATED_AT
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 80
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_AT
-      data-type: DATE
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: APEX$ROW_ACTION =============================
-    id: 46401935709929028
-    identification: 
-      column-name: APEX$ROW_ACTION
-      type: Actions Menu
-
-    layout: 
-      sequence: 20
-
-  - # ====== Column: USER_MAIL ===================================
-    id: 46403478991929043
-    identification: 
-      column-name: USER_MAIL
-      type: Text Field
-
-    heading: 
-      heading: User Mail
-      alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
-    layout: 
-      sequence: 50
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-      maximum-length: 128
-
-    source: 
-      type: Database Column
-      database-column: USER_MAIL
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
 
     enable-users-to: 
       sort: true
@@ -461,7 +338,7 @@ regions:
       hide: true
 
   - # ====== Column: IS_ACTIVE ===================================
-    id: 92655371644230946
+    id: 233233169399973121
     identification: 
       column-name: IS_ACTIVE
       type: Checkbox
@@ -516,6 +393,139 @@ regions:
       control-break/aggregate: true
       hide: true
 
+  - # ====== Column: UPDATED_BY ==================================
+    id: 233233228686973122
+    identification: 
+      column-name: UPDATED_BY
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 70
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: UPDATED_BY
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: UPDATED_AT ==================================
+    id: 233233334394973123
+    identification: 
+      column-name: UPDATED_AT
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 80
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: UPDATED_AT
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 233233477375973124
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
+  - # ====== Column: ROLE_ID =====================================
+    id: 233233717639973127
+    identification: 
+      column-name: ROLE_ID
+      type: Select List
+
+    heading: 
+      heading: Role
+      alignment: start
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_ROLES_ALL # 46494426434427342
+      display-extra-values: true
+      display-null-value: true
+
+    source: 
+      type: Database Column
+      database-column: ROLE_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   printing: 
     page: 
       size: Letter
@@ -532,7 +542,7 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
-      page-header-text: Users [GRID]
+      page-header-text: Map Roles [GRID]
 
     column-headings: 
       font: Helvetica
@@ -554,57 +564,4 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
-
-buttons: 
-- # ====== Button: ADD_USER_WIZARD =============================
-  id: 46664603162363813
-  identification: 
-    button-name: ADD_USER_WIZARD
-    label: Add User Wizard
-
-  layout: 
-    sequence: 10
-    region: Users # 116928811065881959
-    position: RIGHT_OF_TITLE
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    button-template: Text # 70970074101975671
-    hot: true
-    template-options: 
-    - '#DEFAULT#'
-    icon: fa-plus
-
-  behavior: 
-    action: Defined by Dynamic Action
-    execute-validations: true
-
-processes: 
-- # ====== Process: SAVE_USERS =================================
-  id: 46402190201929030
-  identification: 
-    name: SAVE_USERS
-    type: Interactive Grid - Automatic Row Processing (DML)
-    editable-region: Users [GRID] # 185622990032829208
-
-  settings: 
-    target-type: Region Source
-    prevent-lost-updates: true
-    lock-row: No
-    return-primary-key(s)-after-insert: true
-
-  execution: 
-    sequence: 10
-    point: Processing
-    run-process: Once Per Page Visit (default)
-
-  error: 
-    display-location: Inline in Notification
-
-  server-side-condition: 
-    execution-scope: For Created and Modified Rows
 
