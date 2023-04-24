@@ -20,6 +20,7 @@ USING (
     SELECT 400 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 400 AS order# FROM DUAL UNION ALL
     SELECT 500 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 500 AS order# FROM DUAL UNION ALL
     SELECT 510 AS page_id, 500 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 10 AS order# FROM DUAL UNION ALL
+    SELECT 515 AS page_id, 500 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 20 AS order# FROM DUAL UNION ALL
     SELECT 900 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 900 AS order# FROM DUAL UNION ALL
     SELECT 950 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 650 AS order# FROM DUAL UNION ALL
     SELECT 952 AS page_id, 950 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 10 AS order# FROM DUAL UNION ALL

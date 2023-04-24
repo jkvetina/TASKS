@@ -1,10 +1,10 @@
 ---
-# ====== Page: Map Repositories ==============================
-id: 510
+# ====== Page: Map Endpoints =================================
+id: 515
 identification: 
-  name: Map Repositories
-  alias: MAP-REPOSITORIES
-  title: Map Repositories
+  name: Map Endpoints
+  alias: MAP-ENDPOINTS
+  title: Map Endpoints
   page-group: MAIN # 78949836938576475
 
 appearance: 
@@ -39,10 +39,10 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Repositories ================================
-  id: 90946040128861063
+- # ====== Region: Endpoints ===================================
+  id: 137873488298399491
   identification: 
-    title: Repositories
+    title: Endpoints
     type: Static Content
 
   layout: 
@@ -80,15 +80,15 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Repositories ================================
-  id: 90946209771861064
+- # ====== Region: Endpoints ===================================
+  id: 137873618130399492
   identification: 
-    title: Repositories
+    title: Endpoints
     type: Static Content
 
   layout: 
     sequence: 10
-    parent-region: Repositories # 90946040128861063
+    parent-region: Endpoints # 137873488298399491
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -100,8 +100,6 @@ regions:
     template: Hero # 70864195177975601
     template-options: 
     - '#DEFAULT#'
-    css-classes: 
-    - FILTERS
     render-components: Above Content
 
   accessibility: 
@@ -123,22 +121,22 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Repositories [GRID] =========================
-  id: 90946239838861065
+- # ====== Region: Endpoints [GRID] ============================
+  id: 137873748848399493
   identification: 
-    title: Repositories [GRID]
+    title: Endpoints [GRID]
     type: Interactive Grid
 
   source: 
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_P510_REPOSITORIES_V
+    table-name: TSK_P510_ENDPOINTS_V
     include-rowid-column: false
 
   layout: 
     sequence: 20
-    parent-region: Repositories # 90946040128861063
+    parent-region: Endpoints # 137873488298399491
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -167,7 +165,7 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 90946401263861066
+    id: 137873776450399494
     edit: 
       enabled: true
       allowed-operations: 
@@ -221,126 +219,25 @@ regions:
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
-      id: 90952749809887503
+      id: 137980527229233797
       identification: 
         name: Primary Report
-        alias: 454191
+        alias: 455232
+
+  column-groups: 
+  - # ====== Column Group: Endpoint ==============================
+    id: 137973660593229854
+    heading: 
+      heading: Endpoint
+
+  - # ====== Column Group: Repository ============================
+    id: 137973715912229855
+    heading: 
+      heading: Repository
 
   columns: 
-  - # ====== Column: CLIENT_ID ===================================
-    id: 90946466211861067
-    identification: 
-      column-name: CLIENT_ID
-      type: Select List
-
-    heading: 
-      heading: Client Id
-      alignment: start
-
-    layout: 
-      sequence: 30
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-
-    list-of-values: 
-      type: Shared Component
-      list-of-values: LOV_CLIENTS # 34762829880497308
-      display-extra-values: true
-      display-null-value: true
-
-    source: 
-      type: Database Column
-      database-column: CLIENT_ID
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Use List of Values
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: PROJECT_ID ==================================
-    id: 90946623865861068
-    identification: 
-      column-name: PROJECT_ID
-      type: Select List
-
-    heading: 
-      heading: Project Id
-      alignment: start
-
-    layout: 
-      sequence: 40
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-
-    list-of-values: 
-      type: Shared Component
-      list-of-values: LOV_PROJECTS_ALL # 45510330697215422
-      display-extra-values: true
-      display-null-value: true
-
-    source: 
-      type: Database Column
-      database-column: PROJECT_ID
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
   - # ====== Column: REPO_ID =====================================
-    id: 90946698857861069
+    id: 137873943064399495
     identification: 
       column-name: REPO_ID
       type: Text Field
@@ -354,8 +251,10 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 50
+      sequence: 30
       column-alignment: start
+      group: Repository # 137973715912229855
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -395,7 +294,7 @@ regions:
       hide: true
 
   - # ====== Column: OWNER_ID ====================================
-    id: 90946787537861070
+    id: 137874057387399496
     identification: 
       column-name: OWNER_ID
       type: Text Field
@@ -409,8 +308,10 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 60
+      sequence: 40
       column-alignment: start
+      group: Repository # 137973715912229855
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -449,14 +350,14 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: BRANCH_ID ===================================
-    id: 90946847932861071
+  - # ====== Column: ENDPOINT_ID =================================
+    id: 137874106318399497
     identification: 
-      column-name: BRANCH_ID
+      column-name: ENDPOINT_ID
       type: Text Field
 
     heading: 
-      heading: Branch Id
+      heading: Endpoint Id
       alignment: start
 
     settings: 
@@ -464,8 +365,67 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 70
+      sequence: 50
       column-alignment: start
+      group: Endpoint # 137973660593229854
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 32
+
+    source: 
+      type: Database Column
+      database-column: ENDPOINT_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ENDPOINT_URL ================================
+    id: 137874233885399498
+    identification: 
+      column-name: ENDPOINT_URL
+      type: Text Field
+
+    heading: 
+      heading: Url
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      group: Endpoint # 137973660593229854
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -473,11 +433,11 @@ regions:
 
     validation: 
       value-required: false
-      maximum-length: 128
+      maximum-length: 256
 
     source: 
       type: Database Column
-      database-column: BRANCH_ID
+      database-column: ENDPOINT_URL
       data-type: VARCHAR2
       query-only: false
       primary-key: false
@@ -499,18 +459,72 @@ regions:
       include-in-export-/-print: true
 
     enable-users-to: 
-      sort: true
-      control-break/aggregate: true
+      sort: false
       hide: true
 
-  - # ====== Column: API_TYPE ====================================
-    id: 90947006780861072
+  - # ====== Column: ENDPOINT_BODY ===============================
+    id: 137874334706399499
     identification: 
-      column-name: API_TYPE
+      column-name: ENDPOINT_BODY
       type: Text Field
 
     heading: 
-      heading: Api Type
+      heading: Body
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 70
+      column-alignment: start
+      group: Endpoint # 137973660593229854
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 2000
+
+    source: 
+      type: Database Column
+      database-column: ENDPOINT_BODY
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: ENDPOINT_METHOD =============================
+    id: 137874459239399500
+    identification: 
+      column-name: ENDPOINT_METHOD
+      type: Text Field
+
+    heading: 
+      heading: Method
       alignment: start
 
     settings: 
@@ -520,18 +534,20 @@ regions:
     layout: 
       sequence: 80
       column-alignment: start
+      group: Endpoint # 137973660593229854
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
 
     validation: 
-      value-required: true
-      maximum-length: 16
+      value-required: false
+      maximum-length: 8
 
     source: 
       type: Database Column
-      database-column: API_TYPE
+      database-column: ENDPOINT_METHOD
       data-type: VARCHAR2
       query-only: false
       primary-key: false
@@ -558,117 +574,8 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: API_TOKEN ===================================
-    id: 90947075484861073
-    identification: 
-      column-name: API_TOKEN
-      type: Text Field
-
-    heading: 
-      heading: Api Token
-      alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
-    layout: 
-      sequence: 90
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-      maximum-length: 128
-
-    source: 
-      type: Database Column
-      database-column: API_TOKEN
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: false
-      hide: true
-
-  - # ====== Column: LAST_SYNCED_AT ==============================
-    id: 90947225489861074
-    identification: 
-      column-name: LAST_SYNCED_AT
-      type: Date Picker
-
-    heading: 
-      heading: Last Synced At
-      alignment: center
-
-    settings: 
-      show-time: false
-      display-as: Popup
-      minimum-date: None
-      maximum-date: None
-      multiple-months: No
-      use-defaults: true
-
-    layout: 
-      sequence: 100
-      column-alignment: center
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-
-    source: 
-      type: Database Column
-      database-column: LAST_SYNCED_AT
-      data-type: DATE
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      lov-type: Distinct Column
-      date-ranges: All
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-    read-only: 
-      type: Always
-      execute: Once
-
   - # ====== Column: APEX$ROW_ACTION =============================
-    id: 90947243782861075
+    id: 137874483000399501
     identification: 
       column-name: APEX$ROW_ACTION
       type: Actions Menu
@@ -692,7 +599,7 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
-      page-header-text: Repositories [GRID]
+      page-header-text: Endpoints [GRID]
 
     column-headings: 
       font: Helvetica
@@ -715,199 +622,24 @@ regions:
       font-color: '#000000'
       alignment: center
 
-page-items: 
-- # ====== Page Item: P510_CLIENT_ID ===========================
-  id: 46665616392363823
-  identification: 
-    name: P510_CLIENT_ID
-    type: Select List
-
-  label: 
-    label: Client Id
-    alignment: Left
-
-  settings: 
-    page-action-on-selection: None
-    allow-multi-selection: false
-
-  layout: 
-    sequence: 10
-    region: Repositories # 90946209771861064
-    position: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: 2
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating # 70967669576975668
-    template-options: 
-    - '#DEFAULT#'
-    height: 1
-
-  validation: 
-    value-required: false
-
-  list-of-values: 
-    type: Shared Component
-    list-of-values: LOV_CLIENTS # 34762829880497308
-    display-extra-values: true
-    display-null-value: true
-
-  advanced: 
-    warn-on-unsaved-changes: Ignore
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    storage: Per Session (Persistent)
-
-  quick-picks: 
-    show-quick-picks: false
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P510_PROJECT_ID ==========================
-  id: 46665731250363824
-  identification: 
-    name: P510_PROJECT_ID
-    type: Select List
-
-  label: 
-    label: Project
-    alignment: Left
-
-  settings: 
-    page-action-on-selection: None
-    allow-multi-selection: false
-
-  layout: 
-    sequence: 20
-    region: Repositories # 90946209771861064
-    position: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: true
-    column-span: 2
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating # 70967669576975668
-    template-options: 
-    - '#DEFAULT#'
-    height: 1
-
-  validation: 
-    value-required: false
-
-  list-of-values: 
-    type: Shared Component
-    list-of-values: LOV_PROJECTS # 34763034913500105
-    display-extra-values: true
-    display-null-value: true
-
-  cascading-list-of-values: 
-    parent-item(s): 
-    - P510_CLIENT_ID
-    items-to-submit: 
-    - P510_CLIENT_ID
-    parent-required: true
-
-  advanced: 
-    warn-on-unsaved-changes: Ignore
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    storage: Per Session (Persistent)
-
-  quick-picks: 
-    show-quick-picks: false
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
-    restricted-characters: All characters can be saved.
-
-dynamic-actions: 
-- # ====== Dynamic Action: CHANGED_PROJECT =====================
-  id: 46665829129363825
-  identification: 
-    name: CHANGED_PROJECT
-
-  execution: 
-    sequence: 10
-
-  when: 
-    event: EVENT.EVENT.BROWSER.CHANGE
-    selection-type: Item(s)
-    item(s): 
-    - P510_PROJECT_ID
-
-  execution: 
-    event-scope: Static
-    type: Immediate
-
-  actions: 
-  - # ====== Action: Hide ========================================
-    id: 46665930909363826
-    identification: 
-      action: Hide
-
-    affected-elements: 
-      selection-type: Region
-      region: Repositories [GRID] # 90946239838861065
-
-    execution: 
-      sequence: 10
-      event: CHANGED_PROJECT # 46665829129363825
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-  - # ====== Action: Submit Page =================================
-    id: 46666020569363827
-    identification: 
-      action: Submit Page
-
-    settings: 
-      show-processing: true
-
-    execution: 
-      sequence: 20
-      event: CHANGED_PROJECT # 46665829129363825
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
 processes: 
-- # ====== Process: SAVE_REPOSITORIES ==========================
-  id: 45539601613855490
+- # ====== Process: SAVE_ENDPOINTS =============================
+  id: 46935060196538405
   identification: 
-    name: SAVE_REPOSITORIES
+    name: SAVE_ENDPOINTS
     type: Interactive Grid - Automatic Row Processing (DML)
-    editable-region: Repositories [GRID] # 90946239838861065
+    editable-region: Endpoints [GRID] # 137873748848399493
 
   settings: 
     target-type: Table / View
     table-owner: PARSING SCHEMA
-    table-name: TSK_REPOS
+    table-name: TSK_REPO_ENDPOINTS
     prevent-lost-updates: true
     lock-row: No
     return-primary-key(s)-after-insert: true
 
   execution: 
-    sequence: 30
+    sequence: 40
     point: Processing
     run-process: Once Per Page Visit (default)
 
