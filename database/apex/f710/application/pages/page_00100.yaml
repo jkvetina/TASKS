@@ -59,6 +59,8 @@ regions:
     template: Hero # 70864195177975601
     template-options: 
     - '#DEFAULT#'
+    css-classes: 
+    - FILTERS
     render-components: Above Content
 
   accessibility: 
@@ -143,48 +145,6 @@ regions:
     template: Blank with Attributes # 70831193948975578
     template-options: 
     - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: Filters =====================================
-  id: 35123712321937012
-  identification: 
-    title: Filters
-    type: Static Content
-
-  layout: 
-    sequence: 20
-    parent-region: Tasks # 35122875520937003
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Blank with Attributes # 70831193948975578
-    template-options: 
-    - '#DEFAULT#'
-    - margin-bottom-md
     render-components: Above Content
 
   accessibility: 
@@ -830,7 +790,7 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 30
+    sequence: 20
     parent-region: Tasks # 35122875520937003
     position: SUB_REGIONS
     start-new-layout: false
@@ -885,7 +845,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: Filters # 35123712321937012
+    region: '&P100_HEADER.' # 34744374076440316
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -943,8 +903,8 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 10
-    region: Filters # 35123712321937012
+    sequence: 20
+    region: '&P100_HEADER.' # 34744374076440316
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1002,8 +962,8 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 10
-    region: Filters # 35123712321937012
+    sequence: 30
+    region: '&P100_HEADER.' # 34744374076440316
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1056,7 +1016,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 10
+    sequence: 70
     region: '&P100_HEADER.' # 34744374076440316
     position: BODY
 
@@ -1095,8 +1055,8 @@ page-items:
     allow-multi-selection: false
 
   layout: 
-    sequence: 20
-    region: Filters # 35123712321937012
+    sequence: 40
+    region: '&P100_HEADER.' # 34744374076440316
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1149,7 +1109,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 20
+    sequence: 80
     region: '&P100_HEADER.' # 34744374076440316
     position: BODY
 
@@ -1187,8 +1147,8 @@ page-items:
     disabled: false
 
   layout: 
-    sequence: 40
-    region: Filters # 35123712321937012
+    sequence: 50
+    region: '&P100_HEADER.' # 34744374076440316
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1235,7 +1195,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 40
+    sequence: 90
     region: '&P100_HEADER.' # 34744374076440316
     position: BODY
 
@@ -1265,7 +1225,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 50
+    sequence: 100
     region: '&P100_HEADER.' # 34744374076440316
     position: BODY
 
@@ -1295,7 +1255,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 60
+    sequence: 110
     region: '&P100_HEADER.' # 34744374076440316
     position: BODY
 

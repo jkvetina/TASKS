@@ -54,7 +54,7 @@ regions:
     where-clause: 'client_id = :P952_CLIENT_ID'
 
   layout: 
-    sequence: 30
+    sequence: 20
     parent-region: Map Clients # 93360843161566645
     position: SUB_REGIONS
     start-new-layout: false
@@ -442,6 +442,8 @@ regions:
     template: Hero # 70864195177975601
     template-options: 
     - '#DEFAULT#'
+    css-classes: 
+    - FILTERS
     render-components: Above Content
 
   accessibility: 
@@ -504,48 +506,6 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Filters =====================================
-  id: 93361075041566647
-  identification: 
-    title: Filters
-    type: Static Content
-
-  layout: 
-    sequence: 20
-    parent-region: Map Clients # 93360843161566645
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: false
-    column-span: Automatic
-
-  appearance: 
-    template: Blank with Attributes # 70831193948975578
-    template-options: 
-    - '#DEFAULT#'
-    - margin-bottom-md
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
 page-items: 
 - # ====== Page Item: P952_CLIENT_ID ===========================
   id: 46706714867202860
@@ -563,7 +523,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: Filters # 93361075041566647
+    region: Map Clients # 93161659842563281
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -585,7 +545,7 @@ page-items:
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_CLIENTS # 34762829880497308
-    display-extra-values: true
+    display-extra-values: false
     display-null-value: true
 
   advanced: 
@@ -608,108 +568,10 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P952_SEARCH_USER =========================
-  id: 46707121769202862
-  identification: 
-    name: P952_SEARCH_USER
-    type: Text Field with autocomplete
-
-  label: 
-    label: Search User
-    alignment: Left
-
-  settings: 
-    search: Contains & Ignore Case
-    fetch-on-type: true
-    cache: true
-    maximum-values-in-list: 20
-    minimum-search: 1
-
-  layout: 
-    sequence: 20
-    region: Filters # 93361075041566647
-    position: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: true
-    column-span: 2
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating # 70967669576975668
-    template-options: 
-    - '#DEFAULT#'
-    width: 30
-
-  validation: 
-    value-required: false
-
-  list-of-values: 
-    type: Shared Component
-    list-of-values: LOV_USERS_ALL # 46494875558442406
-    display-extra-values: true
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    storage: Per Session (Persistent)
-
-  server-side-condition: 
-    type: Never
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
-    escape-special-characters: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 buttons: 
-- # ====== Button: SEARCH_USERS ================================
-  id: 46706380778202860
-  identification: 
-    button-name: SEARCH_USERS
-    label: Search Users
-
-  layout: 
-    sequence: 30
-    region: Filters # 93361075041566647
-    position: BODY
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: true
-    column-span: 2
-    alignment: Left center
-
-  appearance: 
-    button-template: Text # 70970074101975671
-    hot: true
-    template-options: 
-    - '#DEFAULT#'
-
-  behavior: 
-    action: Submit Page
-    execute-validations: true
-    warn-on-unsaved-changes: Do Not Check
-
-  advanced: 
-    custom-attributes: 
-    - 'style="margin-top:'
-    - 0.8rem;"
-
-  server-side-condition: 
-    type: Never
-
 - # ====== Button: SHOW_ALL_USERS ==============================
   id: 46707814523202863
   identification: 
