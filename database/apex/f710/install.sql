@@ -147,6 +147,8 @@ prompt --install
 @@application/pages/page_00956.sql
 @@application/pages/page_00958.sql
 @@application/pages/page_00960.sql
+@@application/pages/page_00962.sql
+@@application/pages/page_00964.sql
 @@application/pages/page_00980.sql
 @@application/pages/page_09999.sql
 @@application/deployment/definition.sql

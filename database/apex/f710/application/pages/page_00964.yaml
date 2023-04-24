@@ -1,10 +1,10 @@
 ---
-# ====== Page: Roles =========================================
-id: 960
+# ====== Page: Map Tables ====================================
+id: 964
 identification: 
-  name: Roles
-  alias: ROLES
-  title: Roles
+  name: Map Tables
+  alias: MAP-TABLES
+  title: Map Tables
   page-group: ADMIN # 78950012693576929
 
 appearance: 
@@ -39,10 +39,10 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Roles =======================================
-  id: 92944558771865460
+- # ====== Region: Map Tables ==================================
+  id: 186611141430659379
   identification: 
-    title: Roles
+    title: Map Tables
     type: Static Content
 
   layout: 
@@ -80,15 +80,15 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Roles =======================================
-  id: 92944636943865461
+- # ====== Region: Map Tables ==================================
+  id: 186611933286659387
   identification: 
-    title: Roles
+    title: Map Tables
     type: Static Content
 
   layout: 
     sequence: 10
-    parent-region: Roles # 92944558771865460
+    parent-region: Map Tables # 186611141430659379
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -121,22 +121,22 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Roles [GRID] ================================
-  id: 92944735956865462
+- # ====== Region: Map Tables [GRID] ===========================
+  id: 186612068275659388
   identification: 
-    title: Roles [GRID]
+    title: Map Tables [GRID]
     type: Interactive Grid
 
   source: 
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_ROLES
+    table-name: TSK_AUTH_TABLES
     include-rowid-column: false
 
   layout: 
     sequence: 20
-    parent-region: Roles # 92944558771865460
+    parent-region: Map Tables # 186611141430659379
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -165,7 +165,7 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 92945170052865466
+    id: 186612418737659391
     edit: 
       enabled: true
       allowed-operations: 
@@ -219,28 +219,24 @@ regions:
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
-      id: 92971572672058617
+      id: 186638465789852534
       identification: 
         name: Primary Report
-        alias: 464267
+        alias: 464274
 
   columns: 
   - # ====== Column: ROLE_ID =====================================
-    id: 92945231888865467
+    id: 186612703421659394
     identification: 
       column-name: ROLE_ID
-      type: Text Field
+      type: Select List
 
     heading: 
       heading: Role
       alignment: start
 
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
     layout: 
-      sequence: 30
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -249,7 +245,12 @@ regions:
 
     validation: 
       value-required: true
-      maximum-length: 64
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_ROLES_ALL # 46494426434427342
+      display-extra-values: true
+      display-null-value: true
 
     source: 
       type: Database Column
@@ -269,7 +270,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 
@@ -280,63 +281,8 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: ROLE_NAME ===================================
-    id: 92945334906865468
-    identification: 
-      column-name: ROLE_NAME
-      type: Text Field
-
-    heading: 
-      heading: Role Name
-      alignment: start
-
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
-    layout: 
-      sequence: 40
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-      maximum-length: 64
-
-    source: 
-      type: Database Column
-      database-column: ROLE_NAME
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
   - # ====== Column: IS_ACTIVE ===================================
-    id: 92945448440865469
+    id: 186612788850659395
     identification: 
       column-name: IS_ACTIVE
       type: Checkbox
@@ -350,7 +296,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 50
+      sequence: 100
       column-alignment: center
       stretch: Use Report Setting
 
@@ -392,7 +338,7 @@ regions:
       hide: true
 
   - # ====== Column: UPDATED_BY ==================================
-    id: 92945533464865470
+    id: 186612844226659396
     identification: 
       column-name: UPDATED_BY
       type: Hidden
@@ -401,7 +347,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 60
+      sequence: 110
 
     accessibility: 
       value-identifies-row: false
@@ -423,7 +369,7 @@ regions:
       sort: false
 
   - # ====== Column: UPDATED_AT ==================================
-    id: 92945657751865471
+    id: 186612977822659397
     identification: 
       column-name: UPDATED_AT
       type: Hidden
@@ -432,7 +378,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 70
+      sequence: 120
 
     accessibility: 
       value-identifies-row: false
@@ -454,13 +400,231 @@ regions:
       sort: false
 
   - # ====== Column: APEX$ROW_ACTION =============================
-    id: 92948048673865495
+    id: 186614007882659407
     identification: 
       column-name: APEX$ROW_ACTION
       type: Actions Menu
 
     layout: 
       sequence: 20
+
+  - # ====== Column: TABLE_NAME ==================================
+    id: 186614648379659414
+    identification: 
+      column-name: TABLE_NAME
+      type: Select List
+
+    heading: 
+      heading: Table Name
+      alignment: start
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_APP_TABLES # 46514006412586236
+      display-extra-values: true
+      display-null-value: true
+
+    source: 
+      type: Database Column
+      database-column: TABLE_NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_ALLOWED_CREATE ===========================
+    id: 186614780111659415
+    identification: 
+      column-name: IS_ALLOWED_CREATE
+      type: Checkbox
+
+    heading: 
+      heading: Create
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 70
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_ALLOWED_CREATE
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_ALLOWED_UPDATE ===========================
+    id: 186614920284659416
+    identification: 
+      column-name: IS_ALLOWED_UPDATE
+      type: Checkbox
+
+    heading: 
+      heading: Update
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 80
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_ALLOWED_UPDATE
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_ALLOWED_DELETE ===========================
+    id: 186614930855659417
+    identification: 
+      column-name: IS_ALLOWED_DELETE
+      type: Checkbox
+
+    heading: 
+      heading: Delete
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 90
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_ALLOWED_DELETE
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
 
   printing: 
     page: 
@@ -478,7 +642,7 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
-      page-header-text: Roles [GRID]
+      page-header-text: Map Tables [GRID]
 
     column-headings: 
       font: Helvetica
@@ -501,37 +665,9 @@ regions:
       font-color: '#000000'
       alignment: center
 
-buttons: 
-- # ====== Button: ADD_ROLE_WIZARD =============================
-  id: 46681691523104310
-  identification: 
-    button-name: ADD_ROLE_WIZARD
-    label: Add Role Wizard
-
-  layout: 
-    sequence: 10
-    region: Roles # 92944636943865461
-    position: RIGHT_OF_TITLE
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    button-template: Text # 70970074101975671
-    hot: true
-    template-options: 
-    - '#DEFAULT#'
-    icon: fa-plus
-
-  behavior: 
-    action: Defined by Dynamic Action
-    execute-validations: true
-
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGE_FILTERS ======================
-  id: 46574890151936493
+  id: 46863308383414646
   identification: 
     name: CHANGE_FILTERS
 
@@ -542,8 +678,8 @@ dynamic-actions:
     event: EVENT.EVENT.BROWSER.CHANGE
     selection-type: Item(s)
     item(s): 
-    - P960_CLIENT_ID
-    - P960_ROLE_ID
+    - P964_CLIENT_ID
+    - P964_ROLE_ID
 
   execution: 
     event-scope: Static
@@ -551,7 +687,7 @@ dynamic-actions:
 
   actions: 
   - # ====== Action: Submit Page =================================
-    id: 46575370057936495
+    id: 46863870702414646
     identification: 
       action: Submit Page
 
@@ -560,17 +696,17 @@ dynamic-actions:
 
     execution: 
       sequence: 10
-      event: CHANGE_FILTERS # 46574890151936493
+      event: CHANGE_FILTERS # 46863308383414646
       fire-when-event-result-is: True
       fire-on-initialization: false
 
 processes: 
-- # ====== Process: SAVE_ROLES =================================
-  id: 46564247311936481
+- # ====== Process: SAVE_MAP_TABLES ============================
+  id: 46852649265414636
   identification: 
-    name: SAVE_ROLES
+    name: SAVE_MAP_TABLES
     type: Interactive Grid - Automatic Row Processing (DML)
-    editable-region: Roles [GRID] # 92944735956865462
+    editable-region: Map Tables [GRID] # 186612068275659388
 
   settings: 
     target-type: Region Source
@@ -579,7 +715,7 @@ processes:
     return-primary-key(s)-after-insert: true
 
   execution: 
-    sequence: 20
+    sequence: 50
     point: Processing
     run-process: Once Per Page Visit (default)
 
