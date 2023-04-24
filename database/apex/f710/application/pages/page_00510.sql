@@ -469,11 +469,11 @@ wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(46666393692363830)
 ,p_button_sequence=>30
 ,p_button_plug_id=>wwv_flow_imp.id(90946209771861064)
-,p_button_name=>'SHOW_REPOS'
+,p_button_name=>'SHOW_ENDPOINTS'
 ,p_button_action=>'REDIRECT_PAGE'
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(70970074101975671)
-,p_button_image_alt=>'Show Repos'
+,p_button_image_alt=>'Show Endpoints'
 ,p_button_position=>'RIGHT_OF_TITLE'
 ,p_button_redirect_url=>'f?p=&APP_ID.:515:&SESSION.::&DEBUG.:515:P515_CLIENT_ID,P515_PROJECT_ID:&P510_CLIENT_ID.,&P510_PROJECT_ID.'
 ,p_button_condition=>'P510_CLIENT_ID'
