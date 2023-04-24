@@ -1,7 +1,7 @@
 CREATE OR REPLACE FORCE VIEW tsk_lov_projects_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        COALESCE(CASE WHEN core.get_page_id() = 100 THEN core.get_item('P100_CLIENT_ID') END, tsk_app.get_client_id()) AS client_id
+        COALESCE(core.get_item('$CLIENT_ID'), tsk_app.get_client_id()) AS client_id
     FROM DUAL
 )
 SELECT
