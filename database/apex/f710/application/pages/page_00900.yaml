@@ -1,8 +1,8 @@
 ---
-# ====== Page: &APP_USER. &nbsp;<span class="fa fa-user-arrow-
+# ====== Page: &APP_USER. ====================================
 id: 900
 identification: 
-  name: '&APP_USER. &nbsp;<span class="fa fa-user-arrow-down"></span>'
+  name: '&APP_USER.'
   alias: USER-PROFILE
   title: User Profile
   page-group: USER_PROFILE # 44075748371802774
