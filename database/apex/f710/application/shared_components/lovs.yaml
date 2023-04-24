@@ -247,6 +247,42 @@
     default-sort: TABLE_NAME
     sort-direction: Ascending (Nulls Last)
 
+- # ====== List of Values: LOV_REPO_OWNERS =====================
+  id: 46963602040858567
+  identification: 
+    name: LOV_REPO_OWNERS
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_LOV_REPO_OWNERS_V
+
+  column-mapping: 
+    return: OWNER_ID
+    display: OWNER_ID
+    default-sort: OWNER_ID
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: LOV_REPOS ===========================
+  id: 46964058460863294
+  identification: 
+    name: LOV_REPOS
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_LOV_REPOS_V
+
+  column-mapping: 
+    return: REPO_ID
+    display: REPO_ID
+    default-sort: REPO_ID
+    sort-direction: Ascending (Nulls Last)
+    group: OWNER_ID
+    group-sort-direction: Ascending (Nulls Last)
+
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
   id: 54624749962706655
   identification: 

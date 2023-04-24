@@ -100,6 +100,8 @@ regions:
     template: Hero # 70864195177975601
     template-options: 
     - '#DEFAULT#'
+    css-classes: 
+    - FILTERS
     render-components: Above Content
 
   accessibility: 
@@ -131,7 +133,7 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_P510_ENDPOINTS_V
+    table-name: TSK_P515_ENDPOINTS_V
     include-rowid-column: false
 
   layout: 
@@ -621,6 +623,336 @@ regions:
       font-size: 12
       font-color: '#000000'
       alignment: center
+
+page-items: 
+- # ====== Page Item: P515_OWNER_ID ============================
+  id: 46666150269363828
+  identification: 
+    name: P515_OWNER_ID
+    type: Select List
+
+  label: 
+    label: Owner
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 30
+    region: Endpoints # 137873618130399492
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_REPO_OWNERS # 46963602040858567
+    display-extra-values: false
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P515_PROJECT_ID
+    items-to-submit: 
+    - P515_CLIENT_ID
+    - P515_PROJECT_ID
+    parent-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_project_id()
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P515_REPO_ID =============================
+  id: 46666210044363829
+  identification: 
+    name: P515_REPO_ID
+    type: Select List
+
+  label: 
+    label: Repo
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 40
+    region: Endpoints # 137873618130399492
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_REPOS # 46964058460863294
+    display-extra-values: false
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P515_OWNER_ID
+    items-to-submit: 
+    - P515_CLIENT_ID
+    - P515_PROJECT_ID
+    - P515_OWNER_ID
+    parent-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_project_id()
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P515_CLIENT_ID ===========================
+  id: 46961454575773185
+  identification: 
+    name: P515_CLIENT_ID
+    type: Select List
+
+  label: 
+    label: Client
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 10
+    region: Endpoints # 137873618130399492
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_CLIENTS # 34762829880497308
+    display-extra-values: false
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_client_id()
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P515_PROJECT_ID ==========================
+  id: 46961773645775119
+  identification: 
+    name: P515_PROJECT_ID
+    type: Select List
+
+  label: 
+    label: Project
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 20
+    region: Endpoints # 137873618130399492
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_PROJECTS # 34763034913500105
+    display-extra-values: false
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P515_CLIENT_ID
+    items-to-submit: 
+    - P515_CLIENT_ID
+    parent-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_project_id()
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: CHANGED_REPO ========================
+  id: 46666451662363831
+  identification: 
+    name: CHANGED_REPO
+
+  execution: 
+    sequence: 10
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P515_REPO_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Hide ========================================
+    id: 46666582850363832
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: Endpoints [GRID] # 137873748848399493
+
+    execution: 
+      sequence: 10
+      event: CHANGED_REPO # 46666451662363831
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Submit Page =================================
+    id: 46666657242363833
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 20
+      event: CHANGED_REPO # 46666451662363831
+      fire-when-event-result-is: True
+      fire-on-initialization: false
 
 processes: 
 - # ====== Process: SAVE_ENDPOINTS =============================

@@ -30,6 +30,8 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_clients.sql
 @@application/shared_components/user_interface/lovs/lov_projects.sql
 @@application/shared_components/user_interface/lovs/lov_projects_all.sql
+@@application/shared_components/user_interface/lovs/lov_repos.sql
+@@application/shared_components/user_interface/lovs/lov_repo_owners.sql
 @@application/shared_components/user_interface/lovs/lov_roles_all.sql
 @@application/shared_components/user_interface/lovs/lov_statuses.sql
 @@application/shared_components/user_interface/lovs/lov_statuses_all.sql
