@@ -399,9 +399,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P515_OWNER_ID'
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_imp.id(137873618130399492)
-,p_item_default=>'tsk_app.get_project_id()'
-,p_item_default_type=>'EXPRESSION'
-,p_item_default_language=>'PLSQL'
 ,p_prompt=>'Owner'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_REPO_OWNERS'
@@ -425,9 +422,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P515_REPO_ID'
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(137873618130399492)
-,p_item_default=>'tsk_app.get_project_id()'
-,p_item_default_type=>'EXPRESSION'
-,p_item_default_language=>'PLSQL'
 ,p_prompt=>'Repo'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_REPOS'
@@ -451,9 +445,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P515_CLIENT_ID'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(137873618130399492)
-,p_item_default=>'tsk_app.get_client_id()'
-,p_item_default_type=>'EXPRESSION'
-,p_item_default_language=>'PLSQL'
 ,p_prompt=>'Client'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_CLIENTS'
@@ -473,9 +464,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P515_PROJECT_ID'
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_imp.id(137873618130399492)
-,p_item_default=>'tsk_app.get_project_id()'
-,p_item_default_type=>'EXPRESSION'
-,p_item_default_language=>'PLSQL'
 ,p_prompt=>'Project'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_PROJECTS'
