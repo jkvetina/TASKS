@@ -637,6 +637,9 @@ regions:
     accessibility: 
       value-identifies-row: false
 
+    appearance: 
+      format-mask: 'YYYY-MM-DD HH24:MI'
+
     validation: 
       value-required: false
 
@@ -723,7 +726,7 @@ page-items:
     type: Select List
 
   label: 
-    label: Client Id
+    label: Client
     alignment: Left
 
   settings: 
@@ -754,7 +757,7 @@ page-items:
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_CLIENTS # 34762829880497308
-    display-extra-values: true
+    display-extra-values: false
     display-null-value: true
 
   advanced: 
@@ -764,6 +767,11 @@ page-items:
     type: Null
     used: Only when current value in session state is null
 
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_client_id()
+
   session-state: 
     storage: Per Session (Persistent)
 
@@ -772,7 +780,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P510_PROJECT_ID ==========================
@@ -813,7 +821,7 @@ page-items:
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_PROJECTS # 34763034913500105
-    display-extra-values: true
+    display-extra-values: false
     display-null-value: true
 
   cascading-list-of-values: 
@@ -830,6 +838,11 @@ page-items:
     type: Null
     used: Only when current value in session state is null
 
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_project_id()
+
   session-state: 
     storage: Per Session (Persistent)
 
@@ -838,8 +851,47 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: SHOW_REPOS ==================================
+  id: 46666393692363830
+  identification: 
+    button-name: SHOW_REPOS
+    label: Show Repos
+
+  layout: 
+    sequence: 30
+    region: Repositories # 90946209771861064
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:515:&SESSION.::&DEBUG.:515:P515_CLIENT_ID,P515_PROJECT_ID:&P510_CLIENT_ID.,&P510_PROJECT_ID.'
+      page: 515 # Map Endpoints
+      clear-cache: 515
+      values: 
+        p515_client_id: '&P510_CLIENT_ID.'
+        p515_project_id: '&P510_PROJECT_ID.'
+
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P510_CLIENT_ID
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_PROJECT =====================

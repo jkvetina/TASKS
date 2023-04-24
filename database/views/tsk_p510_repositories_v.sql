@@ -20,8 +20,8 @@ JOIN x
     --AND x.project_id    = t.project_id
 ORDER BY
     t.owner_id,
-    t.project_id,
-    t.repo_id;
+    t.repo_id,
+    t.project_id;
 --
 COMMENT ON TABLE tsk_p510_repositories_v IS '';
 
