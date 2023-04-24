@@ -130,63 +130,21 @@ regions:
       - Update Row
       lost-update-type: Row Values
 
-- # ====== Region: TABS ========================================
-  id: 45933341140991411
+- # ====== Region: Project Roles ===============================
+  id: 45933427596991412
   identification: 
-    title: TABS
+    title: Project Roles
     type: Static Content
 
   layout: 
-    sequence: 30
+    sequence: 20
     parent-region: No Parent
     position: BODY
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
-    column-span: 6
-
-  appearance: 
-    template: Tabs Container # 70907050579975626
-    template-options: 
-    - '#DEFAULT#'
-    - t-TabsRegion-mod--simple
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: true
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: Roles =======================================
-  id: 45933427596991412
-  identification: 
-    title: Roles
-    type: Static Content
-
-  layout: 
-    sequence: 40
-    parent-region: TABS # 45933341140991411
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
+    column-span: 4
 
   appearance: 
     template: Blank with Attributes # 70831193948975578
@@ -213,15 +171,15 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Roles =======================================
+- # ====== Region: Project Roles ===============================
   id: 45933575356991413
   identification: 
-    title: Roles
+    title: Project Roles
     type: Static Content
 
   layout: 
     sequence: 10
-    parent-region: Roles # 45933427596991412
+    parent-region: Project Roles # 45933427596991412
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -262,13 +220,13 @@ regions:
 
   layout: 
     sequence: 10
-    parent-region: TABS # 45933341140991411
-    position: SUB_REGIONS
+    parent-region: No Parent
+    position: BODY
     start-new-layout: false
     start-new-row: true
     column: Automatic
     new-column: true
-    column-span: Automatic
+    column-span: 4
 
   appearance: 
     template: Blank with Attributes # 70831193948975578
@@ -295,15 +253,26 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Roles [CARDS] ===============================
+- # ====== Region: Project Roles [CARDS] =======================
   id: 45933785127991415
   identification: 
-    title: Roles [CARDS]
-    type: Static Content
+    title: Project Roles [CARDS]
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_AUTH_ROLES
+    include-rowid-column: false
+    where-clause: user_id = core.get_user_id()
+
+  order-by: 
+    type: None
 
   layout: 
     sequence: 20
-    parent-region: Roles # 45933427596991412
+    parent-region: Project Roles # 45933427596991412
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -312,7 +281,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Blank with Attributes # 70831193948975578
+    template: Cards Container # 70838329605975585
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -332,9 +301,42 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
+    id: 46464941221360444
+    appearance: 
+      layout: Grid
+      grid-columns: Auto
+
+    card: 
+      primary-key-column-1: ROLE_ID
+
+    title: 
+      advanced-formatting: false
+      column: ROLE_ID
+
+    subtitle: 
+      advanced-formatting: false
+      column: CLIENT_ID
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+
+    icon-and-badge: 
+      icon-source: No Icon
+      badge-column: IS_ACTIVE
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-row-count: false
 
 page-items: 
 - # ====== Page Item: P900_USER_ID =============================
@@ -412,7 +414,7 @@ page-items:
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -459,7 +461,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 30
+    sequence: 60
     region: User Profile [FORM] # 45894908819541629
     position: BODY
 
@@ -492,7 +494,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 40
+    sequence: 80
     region: User Profile [FORM] # 45894908819541629
     position: BODY
 
@@ -515,6 +517,99 @@ page-items:
     store-value-encrypted-in-session-state: true
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P900_USER_MAIL ===========================
+  id: 46464738041360442
+  identification: 
+    name: P900_USER_MAIL
+    type: Text Field
+
+  label: 
+    label: User Mail
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 30
+    region: User Profile [FORM] # 45894908819541629
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+    maximum-length: 128
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: User Profile [FORM] # 45894908819541629
+    column: USER_MAIL
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P900_IS_ACTIVE ===========================
+  id: 46464887335360443
+  identification: 
+    name: P900_IS_ACTIVE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: User Profile [FORM] # 45894908819541629
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: User Profile [FORM] # 45894908819541629
+    column: IS_ACTIVE
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
 buttons: 
 - # ====== Button: UPDATE_PROFILE ==============================
   id: 45895581026541635
@@ -523,7 +618,7 @@ buttons:
     label: Update Profile
 
   layout: 
-    sequence: 50
+    sequence: 10
     region: User Profile [FORM] # 45894908819541629
     position: NEXT
     start-new-layout: false
