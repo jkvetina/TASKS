@@ -8,9 +8,12 @@ WITH curr AS (
         n.parent_id,
         NULL                            AS root_id,
         core.get_page_group(n.page_id)  AS page_group,
-        core.get_user_id()              AS user_id
+        core.get_user_id()              AS user_id,
+        u.user_name
     FROM tsk_navigation n
-    WHERE n.page_id = core.get_page_id()
+    LEFT JOIN tsk_users u
+        ON u.user_id    = core.get_user_id()
+    WHERE n.page_id     = core.get_page_id()
 ),
 s AS (
     SELECT /*+ MATERIALIZE */
@@ -60,6 +63,7 @@ t AS (
     SELECT /*+ MATERIALIZE */
         curr.app_id     AS app_id,
         curr.app_id     AS curr_app_id,
+        curr.user_name  AS user_name,
         --
         n.page_id,
         n.parent_id,
@@ -81,6 +85,7 @@ t AS (
     SELECT              -- append launchpad icon
         700             AS app_id,
         curr.app_id     AS curr_app_id,
+        curr.user_name  AS user_name,
         --
         100             AS page_id,
         NULL            AS parent_id,
@@ -100,7 +105,7 @@ n AS (
         CASE
             WHEN t.page_id = 9999   THEN 'Logout'
             WHEN t.page_id = 0      THEN '</li></ul><ul class="empty"></ul><ul><li>'
-            ELSE t.page_name
+            ELSE REPLACE(t.page_name, '&' || 'APP_USER.', t.user_name)
             END AS label,
         CASE
             WHEN t.page_id = 9999   THEN '&' || 'LOGOUT_URL.'
