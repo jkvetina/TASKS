@@ -36,7 +36,7 @@ body {
 
 /* HERO REGION */
 .t-HeroRegion {
-    padding             : 2.25rem 0.5rem 1.5rem;
+    padding             : 1.5rem 0.5rem 1.5rem;
 }
 .t-HeroRegion.SHORTER {
     padding-bottom      : 1rem;
@@ -74,7 +74,7 @@ h1.t-HeroRegion-title button:first-child {
 
 /* FIX HERO FOR MODAL DIALOGS */
 body.t-Dialog-page .t-HeroRegion-top {
-    margin-top          : -3rem !important;
+    margin-top          : -2.25rem !important;
     margin-bottom       : -0.5rem !important;
 }
 body.t-Dialog-page .t-HeroRegion {

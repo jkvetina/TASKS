@@ -51,7 +51,7 @@ wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(35123712321937012)
 ,p_plug_name=>'Filters'
 ,p_parent_plug_id=>wwv_flow_imp.id(35122875520937003)
-,p_region_template_options=>'#DEFAULT#'
+,p_region_template_options=>'#DEFAULT#:margin-bottom-md'
 ,p_plug_template=>wwv_flow_imp.id(70831193948975578)
 ,p_plug_display_sequence=>20
 ,p_plug_display_point=>'SUB_REGIONS'
@@ -77,7 +77,7 @@ wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(34744427648440317)
 ,p_plug_name=>'Tasks [CONTENT]'
 ,p_parent_plug_id=>wwv_flow_imp.id(45936953220991447)
-,p_region_template_options=>'#DEFAULT#:margin-top-md'
+,p_region_template_options=>'#DEFAULT#'
 ,p_component_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70831193948975578)
 ,p_plug_display_sequence=>10

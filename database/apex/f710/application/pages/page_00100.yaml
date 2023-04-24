@@ -103,7 +103,6 @@ regions:
     template: Blank with Attributes # 70831193948975578
     template-options: 
     - '#DEFAULT#'
-    - margin-top-md
     render-components: Above Content
 
   accessibility: 
@@ -185,6 +184,7 @@ regions:
     template: Blank with Attributes # 70831193948975578
     template-options: 
     - '#DEFAULT#'
+    - margin-bottom-md
     render-components: Above Content
 
   accessibility: 
