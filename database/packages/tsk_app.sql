@@ -159,7 +159,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         in_client_id        tsk_clients.client_id%TYPE,
         in_project_id       tsk_projects.project_id%TYPE,
         in_board_id         tsk_boards.board_id%TYPE,
-        in_swimlane_id      tsk_swimlanes.swimlane_id%TYPE
+        in_swimlane_id      tsk_swimlanes.swimlane_id%TYPE      := NULL
     )
     AS
         rec                 tsk_tasks%ROWTYPE;  -- used just for validations
@@ -181,7 +181,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         APEX_UTIL.SET_PREFERENCE('CLIENT_ID',   rec.client_id);
         APEX_UTIL.SET_PREFERENCE('PROJECT_ID',  rec.project_id);
         APEX_UTIL.SET_PREFERENCE('BOARD_ID',    rec.board_id);
-        APEX_UTIL.SET_PREFERENCE('SWIMLANE_ID', rec.swimlane_id);
+        --
+        IF in_swimlane_id IS NOT NULL THEN
+            APEX_UTIL.SET_PREFERENCE('SWIMLANE_ID', rec.swimlane_id);
+        END IF;
     EXCEPTION
     WHEN OTHERS THEN
         core.raise_error();

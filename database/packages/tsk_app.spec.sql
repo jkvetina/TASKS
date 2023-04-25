@@ -51,7 +51,7 @@ CREATE OR REPLACE PACKAGE tsk_app AS
         in_client_id        tsk_clients.client_id%TYPE,
         in_project_id       tsk_projects.project_id%TYPE,
         in_board_id         tsk_boards.board_id%TYPE,
-        in_swimlane_id      tsk_swimlanes.swimlane_id%TYPE
+        in_swimlane_id      tsk_swimlanes.swimlane_id%TYPE      := NULL
     );
 
 
