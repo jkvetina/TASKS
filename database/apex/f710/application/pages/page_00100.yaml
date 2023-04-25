@@ -1310,6 +1310,10 @@ buttons:
 
     warn-on-unsaved-changes: Do Not Check
 
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P100_BOARD_ID
+
 - # ====== Button: REFRESH_TASKS ===============================
   id: 34952422242065834
   identification: 
@@ -1341,6 +1345,10 @@ buttons:
       clear-cache: 100
 
     warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P100_BOARD_ID
 
 - # ====== Button: SHOW_LIST ===================================
   id: 44092751910578030
@@ -1376,8 +1384,11 @@ buttons:
     warn-on-unsaved-changes: Do Not Check
 
   server-side-condition: 
-    type: Item is NULL
-    item: P100_SHOW_GRID
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: |
+      :P100_SHOW_GRID IS NULL
+      AND :P100_BOARD_ID IS NOT NULL
 
 - # ====== Button: SHOW_COLUMNS ================================
   id: 44092855926578031
@@ -1412,8 +1423,11 @@ buttons:
     warn-on-unsaved-changes: Do Not Check
 
   server-side-condition: 
-    type: Item is NOT NULL
-    item: P100_SHOW_GRID
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: |
+      :P100_SHOW_GRID IS NOT NULL
+      AND :P100_BOARD_ID IS NOT NULL
 
 - # ====== Button: SEARCH ======================================
   id: 44285202572494704
@@ -1447,6 +1461,10 @@ buttons:
 
     warn-on-unsaved-changes: Do Not Check
 
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P100_BOARD_ID
+
 - # ====== Button: BULK_OPERATIONS =============================
   id: 44285362883494705
   identification: 
@@ -1479,6 +1497,10 @@ buttons:
 
     warn-on-unsaved-changes: Do Not Check
 
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P100_BOARD_ID
+
 - # ====== Button: ADD_TO_FAVORITES ============================
   id: 45517331940836013
   identification: 
@@ -1508,8 +1530,11 @@ buttons:
     warn-on-unsaved-changes: Do Not Check
 
   server-side-condition: 
-    type: Item is NULL
-    item: P100_IS_FAVORITE
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: |
+      :P100_IS_FAVORITE IS NULL
+      AND :P100_BOARD_ID IS NOT NULL
 
 - # ====== Button: REMOVE_FROM_FAVORITES =======================
   id: 45892186832541601
@@ -1540,8 +1565,11 @@ buttons:
     warn-on-unsaved-changes: Do Not Check
 
   server-side-condition: 
-    type: Item is NOT NULL
-    item: P100_IS_FAVORITE
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: |
+      :P100_IS_FAVORITE IS NOT NULL
+      AND :P100_BOARD_ID IS NOT NULL
 
 dynamic-actions: 
 - # ====== Dynamic Action: OPEN_DETAIL =========================

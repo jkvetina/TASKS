@@ -161,6 +161,10 @@ page-items:
     query-only: false
     primary-key: true
 
+  default: 
+    type: Sequence
+    sequence: TSK_BOARD_ID
+
   session-state: 
     data-type: VARCHAR2
     storage: Per Request (Memory Only)
@@ -281,6 +285,11 @@ page-items:
     query-only: false
     primary-key: false
 
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_client_id()
+
   session-state: 
     storage: Per Request (Memory Only)
 
@@ -343,6 +352,11 @@ page-items:
     query-only: false
     primary-key: false
 
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_project_id()
+
   session-state: 
     storage: Per Request (Memory Only)
 
@@ -396,6 +410,10 @@ page-items:
     data-type: VARCHAR2
     query-only: false
     primary-key: false
+
+  default: 
+    type: Static
+    static-value: Y
 
   session-state: 
     storage: Per Request (Memory Only)
@@ -531,6 +549,7 @@ buttons:
     action: Submit Page
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
 
 - # ====== Button: CLOSE_DIALOG ================================
   id: 45855917038837365

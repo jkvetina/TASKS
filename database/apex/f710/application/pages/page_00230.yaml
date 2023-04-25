@@ -475,7 +475,8 @@ regions:
       alignment: center
 
     settings: 
-      use-defaults: true
+      use-defaults: false
+      checked-value: Y
 
     layout: 
       sequence: 110
