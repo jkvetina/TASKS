@@ -248,7 +248,7 @@ regions:
 
     list-of-values: 
       type: Shared Component
-      list-of-values: LOV_ROLES_ALL # 46494426434427342
+      list-of-values: LOV_ROLES # 46494426434427342
       display-extra-values: true
       display-null-value: true
 

@@ -243,7 +243,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_value_alignment=>'LEFT'
 ,p_is_required=>false
 ,p_lov_type=>'SHARED'
-,p_lov_id=>wwv_flow_imp.id(46494426434427342)  -- LOV_ROLES_ALL
+,p_lov_id=>wwv_flow_imp.id(46494426434427342)  -- LOV_ROLES
 ,p_lov_display_extra=>true
 ,p_lov_display_null=>true
 ,p_enable_filter=>true
