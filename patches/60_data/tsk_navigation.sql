@@ -24,7 +24,6 @@ USING (
     SELECT 900 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 900 AS order# FROM DUAL UNION ALL
     SELECT 950 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 650 AS order# FROM DUAL UNION ALL
     SELECT 952 AS page_id, 950 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 10 AS order# FROM DUAL UNION ALL
-    SELECT 956 AS page_id, 950 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 20 AS order# FROM DUAL UNION ALL
     SELECT 958 AS page_id, 950 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 30 AS order# FROM DUAL UNION ALL
     SELECT 960 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 660 AS order# FROM DUAL UNION ALL
     SELECT 962 AS page_id, 960 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 10 AS order# FROM DUAL UNION ALL
