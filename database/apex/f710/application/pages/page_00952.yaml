@@ -87,11 +87,8 @@ regions:
     edit: 
       enabled: true
       allowed-operations: 
-      - Add Row
       - Update Row
-      - Delete Row
       lost-update-type: Row Values
-      add-row-if-empty: false
 
     performance: 
       lazy-loading: false
@@ -683,6 +680,10 @@ buttons:
 
     warn-on-unsaved-changes: Do Not Check
 
+  server-side-condition: 
+    type: Item is NULL
+    item: P952_SHOW_ALL
+
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_CLIENT ======================
   id: 46718284296202876
@@ -732,21 +733,72 @@ dynamic-actions:
       fire-when-event-result-is: True
       fire-on-initialization: false
 
+- # ====== Dynamic Action: CORRECT_VIEW_REFRESH ================
+  id: 47077788633134338
+  identification: 
+    name: CORRECT_VIEW_REFRESH
+
+  execution: 
+    sequence: 20
+
+  when: 
+    event: NATIVE_IG|REGION TYPE|interactivegridsave
+    selection-type: Region
+    region: Map Clients [GRID] # 93157202664563237
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 47077896406134339
+    identification: 
+      action: Refresh
+
+    affected-elements: 
+      selection-type: Region
+      region: Map Clients [GRID] # 93157202664563237
+
+    execution: 
+      sequence: 20
+      event: CORRECT_VIEW_REFRESH # 47077788633134338
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Execute Server-side Code ====================
+    id: 47077996664134340
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: NULL;
+      items-to-submit: 
+      - P952_CLIENT_ID
+      - P952_SHOW_ALL
+
+    execution: 
+      sequence: 10
+      event: CORRECT_VIEW_REFRESH # 47077788633134338
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
 processes: 
-- # ====== Process: SAVE_MAP_USERS =============================
+- # ====== Process: SAVE_USERS =================================
   id: 46705645323202859
   identification: 
-    name: SAVE_MAP_USERS
+    name: SAVE_USERS
     type: Interactive Grid - Automatic Row Processing (DML)
     editable-region: Map Clients [GRID] # 93157202664563237
 
   settings: 
-    target-type: Table / View
-    table-owner: PARSING SCHEMA
-    table-name: TSK_AUTH_USERS
+    target-type: PL/SQL Code
+    pl/sql-code-to-insert/update/delete: tsk_p952.save_users();
     prevent-lost-updates: true
     lock-row: No
-    return-primary-key(s)-after-insert: true
 
   execution: 
     sequence: 30

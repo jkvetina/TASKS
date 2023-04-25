@@ -18,6 +18,7 @@ LEFT JOIN tsk_auth_users a
     ON a.client_id      = x.client_id
     AND a.user_id       = t.user_id
 WHERE 1 = 1
+    AND t.is_active     = 'Y'
     AND (
         x.show_all      IS NOT NULL
         OR a.user_id    IS NOT NULL

@@ -61,29 +61,24 @@ CREATE OR REPLACE PACKAGE BODY tsk_p962 AS
         -- go through pivoted columns
         FOR i IN 1 .. c_dynamic_roles LOOP
             -- get role_id and is_active flag based on column position
-            BEGIN
-                rec.role_id     := get_role_id(i);
-                rec.is_active   := core.get_grid_data('ROLE_' || i);
+            rec.role_id     := get_role_id(i);
+            rec.is_active   := core.get_grid_data('ROLE_' || i);
 
-                -- delete or insert new record
-                IF rec.is_active IS NULL THEN
-                    DELETE FROM tsk_auth_pages t
-                    WHERE t.role_id     = rec.role_id
-                        AND t.page_id   = rec.page_id
-                        AND t.is_active = 'Y';
-                ELSE
-                    BEGIN
-                        INSERT INTO tsk_auth_pages
-                        VALUES rec;
-                    EXCEPTION
-                    WHEN DUP_VAL_ON_INDEX THEN
-                        NULL;
-                    END;
-                END IF;
-            EXCEPTION
-            WHEN NO_DATA_FOUND THEN
-                NULL;
-            END;
+            -- delete or insert new record
+            IF rec.is_active IS NULL THEN
+                DELETE FROM tsk_auth_pages t
+                WHERE t.role_id     = rec.role_id
+                    AND t.page_id   = rec.page_id
+                    AND t.is_active = 'Y';
+            ELSE
+                BEGIN
+                    INSERT INTO tsk_auth_pages
+                    VALUES rec;
+                EXCEPTION
+                WHEN DUP_VAL_ON_INDEX THEN
+                    NULL;
+                END;
+            END IF;
         END LOOP;
     EXCEPTION
     WHEN core.app_exception THEN
