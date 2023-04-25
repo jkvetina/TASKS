@@ -1,0 +1,5 @@
+"role_id";"role_name";"role_group";"role_desc";"is_active";"order#"
+"BOARDS_MANAGER";"Boards Manager";"MANAGEMENT";"Create/update/delete Boards";"Y";10
+"DEFAULT_USER";"Default User";"TASKS";"Needed so user can access and use the app (create/update tasks)";"Y";10
+"PROJECT_MANAGER";"Project Manager";"MANAGEMENT";"Create/update/delete Projects, Statuses, Swimlanes, Sequences";"Y";10
+"USERS_MANAGER";"Users Manager";"MANAGEMENT";"Can add Users to Customers, assign Roles to them";"Y";""
