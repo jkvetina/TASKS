@@ -674,6 +674,33 @@ regions:
       font-color: '#000000'
       alignment: center
 
+buttons: 
+- # ====== Button: ADD_CLIENT_WIZARD ===========================
+  id: 47074927607134310
+  identification: 
+    button-name: ADD_CLIENT_WIZARD
+    label: Add Client Wizard
+
+  layout: 
+    sequence: 10
+    region: Clients # 70536273648958858
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
 processes: 
 - # ====== Process: SAVE_CLIENTS ===============================
   id: 35416321768021848

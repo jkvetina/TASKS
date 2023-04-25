@@ -456,6 +456,18 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_is_frozen=>false
 ,p_width=>90
 );
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(47075069952134311)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(70448427208945042)
+,p_button_name=>'ADD_PROJECT_WIZARD'
+,p_button_action=>'DEFINED_BY_DA'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70970074101975671)
+,p_button_image_alt=>'Add Project Wizard'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_warn_on_unsaved_changes=>null
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(45895835728541638)
 ,p_name=>'P300_HEADER'

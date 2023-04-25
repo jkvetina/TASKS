@@ -614,7 +614,7 @@ buttons:
 
   appearance: 
     button-template: Text # 70970074101975671
-    hot: true
+    hot: false
     template-options: 
     - '#DEFAULT#'
     icon: fa-plus

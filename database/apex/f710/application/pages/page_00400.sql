@@ -449,6 +449,18 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_is_visible=>true
 ,p_is_frozen=>false
 );
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(47074927607134310)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(70536273648958858)
+,p_button_name=>'ADD_CLIENT_WIZARD'
+,p_button_action=>'DEFINED_BY_DA'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70970074101975671)
+,p_button_image_alt=>'Add Client Wizard'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_warn_on_unsaved_changes=>null
+);
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(35416321768021848)
 ,p_process_sequence=>10

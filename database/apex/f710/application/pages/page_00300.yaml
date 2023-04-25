@@ -718,6 +718,33 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+buttons: 
+- # ====== Button: ADD_PROJECT_WIZARD ==========================
+  id: 47075069952134311
+  identification: 
+    button-name: ADD_PROJECT_WIZARD
+    label: Add Project Wizard
+
+  layout: 
+    sequence: 10
+    region: '&P300_HEADER.' # 70448427208945042
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: true
+
 processes: 
 - # ====== Process: SAVE_PROJECTS ==============================
   id: 35338344188008044
