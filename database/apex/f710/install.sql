@@ -32,7 +32,8 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_projects_all.sql
 @@application/shared_components/user_interface/lovs/lov_repos.sql
 @@application/shared_components/user_interface/lovs/lov_repo_owners.sql
-@@application/shared_components/user_interface/lovs/lov_roles_all.sql
+@@application/shared_components/user_interface/lovs/lov_roles.sql
+@@application/shared_components/user_interface/lovs/lov_role_groups.sql
 @@application/shared_components/user_interface/lovs/lov_statuses.sql
 @@application/shared_components/user_interface/lovs/lov_statuses_all.sql
 @@application/shared_components/user_interface/lovs/lov_swimlanes.sql
@@ -129,6 +130,7 @@ prompt --install
 @@application/shared_components/security/authentications/master_open_door_testing_only.sql
 @@application/user_interfaces/combined_files.sql
 @@application/pages/page_00000.sql
+@@application/pages/page_00002.sql
 @@application/pages/page_00100.sql
 @@application/pages/page_00105.sql
 @@application/pages/page_00106.sql

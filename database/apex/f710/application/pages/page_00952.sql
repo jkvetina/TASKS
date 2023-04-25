@@ -163,6 +163,9 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_control_break=>true
 ,p_enable_hide=>true
 ,p_is_primary_key=>true
+,p_default_type=>'EXPRESSION'
+,p_default_language=>'PLSQL'
+,p_default_expression=>'tsk_app.get_client_id()'
 ,p_duplicate_value=>true
 ,p_include_in_export=>false
 );
@@ -433,7 +436,8 @@ wwv_flow_imp_page.create_page_process(
 ,p_region_id=>wwv_flow_imp.id(93157202664563237)
 ,p_process_type=>'NATIVE_IG_DML'
 ,p_process_name=>'SAVE_MAP_USERS'
-,p_attribute_01=>'REGION_SOURCE'
+,p_attribute_01=>'TABLE'
+,p_attribute_03=>'TSK_AUTH_USERS'
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
