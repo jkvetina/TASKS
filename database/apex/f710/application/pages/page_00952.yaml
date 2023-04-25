@@ -49,9 +49,8 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_AUTH_USERS
+    table-name: TSK_P952_MAP_USERS_V
     include-rowid-column: false
-    where-clause: 'client_id = :P952_CLIENT_ID'
 
   layout: 
     sequence: 20
@@ -144,6 +143,106 @@ regions:
         alias: 464882
 
   columns: 
+  - # ====== Column: USER_NAME ===================================
+    id: 46668265549363849
+    identification: 
+      column-name: USER_NAME
+      type: Display Only
+
+    heading: 
+      heading: User Name
+      alignment: start
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: USER_NAME
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: USER_MAIL ===================================
+    id: 46668349504363850
+    identification: 
+      column-name: USER_MAIL
+      type: Display Only
+
+    heading: 
+      heading: User Mail
+      alignment: start
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: USER_MAIL
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
   - # ====== Column: CLIENT_ID ===================================
     id: 93157483718563239
     identification: 
@@ -163,7 +262,7 @@ regions:
       value-identifies-row: false
 
     validation: 
-      value-required: true
+      value-required: false
 
     list-of-values: 
       type: Shared Component
@@ -204,11 +303,18 @@ regions:
     id: 93157552222563240
     identification: 
       column-name: USER_ID
-      type: Select List
+      type: Text Field with autocomplete
 
     heading: 
-      heading: User
+      heading: User Id
       alignment: start
+
+    settings: 
+      search: Contains & Ignore Case
+      fetch-on-type: true
+      cache: true
+      maximum-values-in-list: 7
+      minimum-search: 1
 
     layout: 
       sequence: 40
@@ -225,7 +331,6 @@ regions:
       type: Shared Component
       list-of-values: LOV_USERS_ALL # 46494875558442406
       display-extra-values: true
-      display-null-value: true
 
     source: 
       type: Database Column
@@ -256,6 +361,9 @@ regions:
       control-break/aggregate: true
       hide: true
 
+    security: 
+      escape-special-characters: true
+
   - # ====== Column: IS_ACTIVE ===================================
     id: 93157740072563242
     identification: 
@@ -271,7 +379,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: center
       stretch: Use Report Setting
 
@@ -311,68 +419,6 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
-
-  - # ====== Column: UPDATED_BY ==================================
-    id: 93157830044563243
-    identification: 
-      column-name: UPDATED_BY
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 70
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_BY
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 93157924643563244
-    identification: 
-      column-name: UPDATED_AT
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 80
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_AT
-      data-type: DATE
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
 
   - # ====== Column: APEX$ROW_ACTION =============================
     id: 93158315734563248
@@ -507,6 +553,36 @@ regions:
       expand-shortcuts: false
 
 page-items: 
+- # ====== Page Item: P952_SHOW_ALL ============================
+  id: 46668142843363848
+  identification: 
+    name: P952_SHOW_ALL
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: Map Clients # 93161659842563281
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 - # ====== Page Item: P952_CLIENT_ID ===========================
   id: 46706714867202860
   identification: 
@@ -595,8 +671,13 @@ buttons:
     - '#DEFAULT#'
 
   behavior: 
-    action: Submit Page
-    execute-validations: true
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:952:&SESSION.::&DEBUG.::P952_SHOW_ALL:Y'
+      page: 952 # Map Clients
+      values: 
+        p952_show_all: Y
+
     warn-on-unsaved-changes: Do Not Check
 
 dynamic-actions: 
