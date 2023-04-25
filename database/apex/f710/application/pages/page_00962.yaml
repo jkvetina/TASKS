@@ -171,11 +171,8 @@ regions:
     edit: 
       enabled: true
       allowed-operations: 
-      - Add Row
       - Update Row
-      - Delete Row
       lost-update-type: Row Values
-      add-row-if-empty: false
 
     performance: 
       lazy-loading: false
@@ -238,8 +235,7 @@ regions:
       alignment: start
 
     settings: 
-      format: Plain Text
-      based-on: Item Value
+      format: HTML
 
     layout: 
       sequence: 50
