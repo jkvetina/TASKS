@@ -50,8 +50,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
     AS
         rec                 tsk_boards%ROWTYPE;
     BEGIN
-        rec.client_id       := tsk_app.get_client_id();
-        rec.project_id      := tsk_app.get_project_id();
+        rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'),    tsk_app.get_client_id());
+        rec.project_id      := COALESCE(core.get_grid_data('PROJECT_ID'),   tsk_app.get_project_id());
         --
         rec.board_id        := core.get_grid_data('BOARD_ID');
         rec.board_name      := core.get_grid_data('BOARD_NAME');
@@ -96,8 +96,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
     AS
         rec                 tsk_statuses%ROWTYPE;
     BEGIN
-        rec.client_id       := tsk_app.get_client_id();
-        rec.project_id      := tsk_app.get_project_id();
+        rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'),    tsk_app.get_client_id());
+        rec.project_id      := COALESCE(core.get_grid_data('PROJECT_ID'),   tsk_app.get_project_id());
         --
         rec.status_id       := core.get_grid_data('STATUS_ID');        -- new key
         rec.status_name     := core.get_grid_data('STATUS_NAME');
@@ -171,8 +171,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
     AS
         rec                 tsk_swimlanes%ROWTYPE;
     BEGIN
-        rec.client_id       := tsk_app.get_client_id();
-        rec.project_id      := tsk_app.get_project_id();
+        rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'),    tsk_app.get_client_id());
+        rec.project_id      := COALESCE(core.get_grid_data('PROJECT_ID'),   tsk_app.get_project_id());
         --
         rec.swimlane_id     := core.get_grid_data('SWIMLANE_ID');
         rec.swimlane_name   := core.get_grid_data('SWIMLANE_NAME');

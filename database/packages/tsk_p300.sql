@@ -26,7 +26,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
     AS
         rec                 tsk_projects%ROWTYPE;
     BEGIN
-        rec.client_id       := tsk_app.get_client_id();
+        rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'), tsk_app.get_client_id());
         --
         rec.project_id      := core.get_grid_data('PROJECT_ID');
         rec.project_name    := core.get_grid_data('PROJECT_NAME');

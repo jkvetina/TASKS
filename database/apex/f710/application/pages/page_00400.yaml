@@ -493,6 +493,8 @@ regions:
       primary-key: false
 
     default: 
+      type: Static
+      static-value: Y
       duplicate-copies-existing-value: true
 
     column-filter: 

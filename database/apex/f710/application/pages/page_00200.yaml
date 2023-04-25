@@ -98,9 +98,9 @@ regions:
     parent-region: Project Boards # 45519167778836031
     position: SUB_REGIONS
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
-    new-column: false
+    new-column: true
     column-span: Automatic
 
   appearance: 
@@ -128,8 +128,11 @@ regions:
     edit: 
       enabled: true
       allowed-operations: 
+      - Add Row
       - Update Row
+      - Delete Row
       lost-update-type: Row Values
+      add-row-if-empty: false
 
     performance: 
       lazy-loading: false
@@ -1410,6 +1413,15 @@ regions:
       control-break/aggregate: true
       hide: true
 
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 47005037548134550
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
   printing: 
     page: 
       size: Letter
@@ -1463,7 +1475,7 @@ regions:
     start-new-row: true
     column: Automatic
     new-column: true
-    column-span: 8
+    column-span: Automatic
 
   appearance: 
     template: Hero # 70864195177975601
@@ -1796,7 +1808,7 @@ buttons:
 
 processes: 
 - # ====== Process: SAVE_BOARDS ================================
-  id: 45763203861794050
+  id: 47074173317134302
   identification: 
     name: SAVE_BOARDS
     type: Interactive Grid - Automatic Row Processing (DML)
