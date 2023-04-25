@@ -131,7 +131,7 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_ROLES
+    table-name: TSK_P960_ROLES_V
     include-rowid-column: false
 
   layout: 
@@ -225,6 +225,162 @@ regions:
         alias: 464267
 
   columns: 
+  - # ====== Column: ROLE_GROUP ==================================
+    id: 47000126970134501
+    identification: 
+      column-name: ROLE_GROUP
+      type: Text Field
+
+    heading: 
+      heading: Role Group
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 64
+
+    source: 
+      type: Database Column
+      database-column: ROLE_GROUP
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ROLE_DESC ===================================
+    id: 47000290580134502
+    identification: 
+      column-name: ROLE_DESC
+      type: Text Field
+
+    heading: 
+      heading: Role Desc
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 512
+
+    source: 
+      type: Database Column
+      database-column: ROLE_DESC
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ORDER# ======================================
+    id: 47000375216134503
+    identification: 
+      column-name: ORDER#
+      type: Number Field
+
+    heading: 
+      heading: Order#
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 90
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ORDER#
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   - # ====== Column: ROLE_ID =====================================
     id: 92945231888865467
     identification: 
@@ -350,7 +506,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 50
+      sequence: 70
       column-alignment: center
       stretch: Use Report Setting
 
@@ -390,68 +546,6 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
-
-  - # ====== Column: UPDATED_BY ==================================
-    id: 92945533464865470
-    identification: 
-      column-name: UPDATED_BY
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 60
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_BY
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 92945657751865471
-    identification: 
-      column-name: UPDATED_AT
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 70
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_AT
-      data-type: DATE
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
 
   - # ====== Column: APEX$ROW_ACTION =============================
     id: 92948048673865495
@@ -573,7 +667,9 @@ processes:
     editable-region: Roles [GRID] # 92944735956865462
 
   settings: 
-    target-type: Region Source
+    target-type: Table / View
+    table-owner: PARSING SCHEMA
+    table-name: TSK_ROLES
     prevent-lost-updates: true
     lock-row: No
     return-primary-key(s)-after-insert: true
