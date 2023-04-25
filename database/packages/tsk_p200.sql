@@ -79,6 +79,16 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
         -- update keys to APEX
         io_board_id         := TO_CHAR(rec.board_id);
+
+        -- for new records overwrite user settings
+        IF core.get_grid_action() = 'C' THEN
+            tsk_app.set_user_preferences (
+                in_user_id          => core.get_user_id(),
+                in_client_id        => rec.client_id,
+                in_project_id       => rec.project_id,
+                in_board_id         => rec.board_id
+            );
+        END IF;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
