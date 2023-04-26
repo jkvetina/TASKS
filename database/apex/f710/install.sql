@@ -13,9 +13,6 @@ prompt --install
 @@application/shared_components/files/icons_app_icon_192_png.sql
 @@application/shared_components/files/icons_app_icon_512_png.sql
 @@application/plugin_settings.sql
-@@application/shared_components/security/authorizations/master_nobody.sql
-@@application/shared_components/security/authorizations/master_is_admin.sql
-@@application/shared_components/security/authorizations/master_is_user.sql
 @@application/shared_components/navigation/navigation_bar.sql
 @@application/shared_components/logic/application_processes/after_auth.sql
 @@application/shared_components/logic/application_processes/init_defaults.sql
