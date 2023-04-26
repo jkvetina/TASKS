@@ -1,65 +1,23 @@
 CREATE OR REPLACE FORCE VIEW tsk_navigation_top_v AS
 WITH curr AS (
+    -- current context
     SELECT /*+ MATERIALIZE */
-        SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA') AS app_schema,
-        --
         core.get_app_id()               AS app_id,
         n.page_id,
         n.parent_id,
-        NULL                            AS root_id,
         core.get_page_group(n.page_id)  AS page_group,
-        core.get_user_id()              AS user_id,
-        u.user_name
+        u.user_id,
+        u.user_name,
+        tsk_app.get_client_id()         AS client_id,
+        tsk_app.get_project_id()        AS project_id
     FROM tsk_navigation n
     LEFT JOIN tsk_users u
-        ON u.user_id    = core.get_user_id()
-    WHERE n.page_id     = core.get_page_id()
-),
-s AS (
-    SELECT /*+ MATERIALIZE */
-        a.application_id            AS app_id,
-        a.page_id,
-        a.page_alias,
-        a.page_name,
-        --
-        NULLIF(MIN(s.owner || '.' || s.object_name || '.' || s.procedure_name), '..') AS procedure_,
-        --
-        a.authorization_scheme      AS auth_scheme,
-        --
-        MIN(CASE WHEN a.position = 0 THEN a.pls_type END)       AS data_type,
-        MIN(CASE WHEN a.position = 1 THEN a.argument_name END)  AS page_argument
-        --
-    FROM apex_application_pages a
-    JOIN curr
-        ON curr.app_id              = a.application_id
-    LEFT JOIN all_procedures s
-        ON s.owner                  = curr.app_schema
-        AND s.object_name           = 'AUTH'
-        AND s.procedure_name        = a.authorization_scheme
-    LEFT JOIN all_arguments a
-        ON a.owner                  = s.owner
-        AND a.object_name           = s.procedure_name
-        AND a.package_name          = s.object_name
-        AND a.overload              IS NULL
-        AND ((
-                a.position          = 0
-                AND a.argument_name IS NULL
-                AND a.in_out        = 'OUT'
-            )
-            OR (
-                a.position          = 1
-                AND a.data_type     = 'NUMBER'
-                AND a.in_out        = 'IN'
-            )
-        )
-    GROUP BY
-        a.application_id,
-        a.page_id,
-        a.page_alias,
-        a.page_name,
-        a.authorization_scheme
+        ON u.user_id        = core.get_user_id()
+        AND u.is_active     = 'Y'
+    WHERE n.page_id         = core.get_page_id()
 ),
 t AS (
+    -- available pages
     SELECT /*+ MATERIALIZE */
         curr.app_id     AS app_id,
         curr.app_id     AS curr_app_id,
@@ -69,20 +27,28 @@ t AS (
         n.parent_id,
         --
         s.page_alias,
-        s.page_name,        -- core.get_page_name(t.page_id)
+        s.page_name,        -- core.get_page_name(t.page_id)    -- #icons
         s.auth_scheme,
         n.is_reset,
         n.order#
     FROM tsk_navigation n
     CROSS JOIN curr
-    JOIN s
-        ON s.page_id        = n.page_id
-    WHERE n.is_hidden       IS NULL
-        --
-        --AND 'Y' = core.check_auth(s.auth_scheme, s.app_id, s.page_id, s.procedure_, s.data_type, s.page_argument)
+    JOIN tsk_navigation_map_mv s
+        ON s.app_id         = curr.app_id
+        AND s.page_id       = n.page_id
+        AND n.is_hidden     IS NULL
+    WHERE
+        'Y' = tsk_auth.is_page_available (
+            in_user_id          => curr.user_id,
+            in_page_id          => s.page_id,
+            in_client_id        => curr.client_id,
+            in_project_id       => curr.project_id,
+            in_auth_scheme      => s.auth_scheme,
+            in_procedure_name   => s.procedure_name
+        )
     --
     UNION ALL
-    SELECT              -- append launchpad icon
+    SELECT              -- append launchpad icon/link
         700             AS app_id,
         curr.app_id     AS curr_app_id,
         curr.user_name  AS user_name,
@@ -99,6 +65,7 @@ t AS (
     FROM curr
 ),
 n AS (
+    -- build the tree
     SELECT /*+ MATERIALIZE */
         CASE WHEN t.parent_id IS NULL THEN 1 ELSE 2 END AS lvl,
         --
@@ -120,7 +87,6 @@ n AS (
         CASE
             WHEN t.app_id = t.curr_app_id AND t.page_id = (SELECT page_id   FROM curr)  THEN 'YES'
             WHEN t.app_id = t.curr_app_id AND t.page_id = (SELECT parent_id FROM curr)  THEN 'YES'
-            WHEN t.app_id = t.curr_app_id AND t.page_id = (SELECT root_id   FROM curr)  THEN 'YES'
             END AS is_current_list_entry,
         --
         NULL                    AS image,
@@ -184,7 +150,7 @@ SELECT
 FROM n
 UNION ALL
 --
-SELECT
+SELECT                      -- append favorite boards
     2 AS lvl,
     p.project_name || ' - ' || b.board_name AS label,
     --
