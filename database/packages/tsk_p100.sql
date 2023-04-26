@@ -63,7 +63,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         core.set_item('P100_CLIENT_ID',     v_client_id);
         core.set_item('P100_PROJECT_ID',    v_project_id);
         core.set_item('P100_BOARD_ID',      v_board_id);
-        core.set_item('P100_SWIMLANE_ID',   v_swimlane_id);
         core.set_item('P100_TASKS_LINK',    core.get_page_url(100));
 
         -- calculate page header
@@ -102,7 +101,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         in_client_id        CONSTANT tsk_tasks.client_id%TYPE       := tsk_app.get_client_id();
         in_project_id       CONSTANT tsk_tasks.project_id%TYPE      := tsk_app.get_project_id();
         in_board_id         CONSTANT tsk_tasks.board_id%TYPE        := tsk_app.get_board_id();
-        in_swimlane_id      CONSTANT tsk_tasks.swimlane_id%TYPE     := tsk_app.get_swimlane_id();
+        in_swimlane_id      CONSTANT tsk_tasks.swimlane_id%TYPE     := core.get_item('P100_SWIMLANE_ID');
         --
         v_statuses          PLS_INTEGER;
     BEGIN
