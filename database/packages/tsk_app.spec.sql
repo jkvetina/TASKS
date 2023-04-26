@@ -31,12 +31,6 @@ CREATE OR REPLACE PACKAGE tsk_app AS
 
 
 
-    PROCEDURE after_auth (
-        in_user_id          VARCHAR2
-    );
-
-
-
     PROCEDURE init_defaults;
 
 
