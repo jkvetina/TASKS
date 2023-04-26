@@ -11,8 +11,8 @@ MERGE INTO tsk_roles t
 USING (
     SELECT 'BOARDS_MANAGER' AS role_id, 'Boards Manager' AS role_name, 'MANAGEMENT' AS role_group, 'Create/update/delete Boards' AS role_desc, 'Y' AS is_active, 10 AS order# FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 'Default User' AS role_name, 'TASKS' AS role_group, 'Needed so user can access and use the app (create/update tasks)' AS role_desc, 'Y' AS is_active, 10 AS order# FROM DUAL UNION ALL
-    SELECT 'PROJECT_MANAGER' AS role_id, 'Project Manager' AS role_name, 'MANAGEMENT' AS role_group, 'Create/update/delete Projects, Statuses, Swimlanes, Sequences' AS role_desc, 'Y' AS is_active, 10 AS order# FROM DUAL UNION ALL
-    SELECT 'USERS_MANAGER' AS role_id, 'Users Manager' AS role_name, 'MANAGEMENT' AS role_group, 'Can add Users to Customers, assign Roles to them' AS role_desc, 'Y' AS is_active, NULL AS order# FROM DUAL
+    SELECT 'PROJECT_MANAGER' AS role_id, 'Project Manager' AS role_name, 'MANAGEMENT' AS role_group, 'Create/update/delete any Projects, Statuses, Swimlanes, Sequences for specific Client' AS role_desc, 'Y' AS is_active, 20 AS order# FROM DUAL UNION ALL
+    SELECT 'USERS_MANAGER' AS role_id, 'Users Manager' AS role_name, 'MANAGEMENT' AS role_group, 'Can add/remove any Users for specific Client and assign/remove Roles to them' AS role_desc, 'Y' AS is_active, 30 AS order# FROM DUAL
 ) s
 ON (
     t.role_id = s.role_id

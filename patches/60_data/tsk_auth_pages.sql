@@ -33,6 +33,7 @@ USING (
     SELECT 'USERS_MANAGER' AS role_id, 400 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'USERS_MANAGER' AS role_id, 950 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'USERS_MANAGER' AS role_id, 952 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'USERS_MANAGER' AS role_id, 955 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'USERS_MANAGER' AS role_id, 958 AS page_id, 'Y' AS is_active FROM DUAL
 ) s
 ON (
