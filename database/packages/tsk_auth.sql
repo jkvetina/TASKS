@@ -1,5 +1,34 @@
 CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
+    PROCEDURE after_auth (
+        in_user_id          VARCHAR2
+    )
+    AS
+        rec                 tsk_users%ROWTYPE;
+    BEGIN
+        -- create user record
+        rec.user_id         := core.get_user_id();
+        rec.user_name       := rec.user_id;
+        --
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
+        --
+        BEGIN
+            INSERT INTO tsk_users VALUES rec;
+        EXCEPTION
+        WHEN DUP_VAL_ON_INDEX THEN
+            UPDATE tsk_users u
+            SET u.updated_by    = rec.updated_by,
+                u.updated_at    = rec.updated_at
+            WHERE u.user_id     = rec.user_id;
+        END;
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
     FUNCTION is_user (
         in_user_id          tsk_auth_roles.user_id%TYPE,
         in_page_id          tsk_auth_pages.page_id%TYPE,

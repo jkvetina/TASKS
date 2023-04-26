@@ -17,7 +17,7 @@ wwv_flow_imp_shared.create_flow_process(
 ,p_process_point=>'AFTER_LOGIN'
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'AFTER_AUTH'
-,p_process_sql_clob=>'tsk_app.after_auth(:APP_USER);'
+,p_process_sql_clob=>'tsk_auth.after_auth(:APP_USER);'
 ,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp.component_end;

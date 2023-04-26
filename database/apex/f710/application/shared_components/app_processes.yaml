@@ -8,7 +8,7 @@
   source: 
     location: Local Database
     language: PL/SQL
-    pl/sql-code: 'tsk_app.after_auth(:APP_USER);'
+    pl/sql-code: 'tsk_auth.after_auth(:APP_USER);'
 
   execution: 
     sequence: 1

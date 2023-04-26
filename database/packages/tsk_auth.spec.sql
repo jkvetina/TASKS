@@ -1,5 +1,11 @@
 CREATE OR REPLACE PACKAGE tsk_auth AS
 
+    PROCEDURE after_auth (
+        in_user_id          VARCHAR2
+    );
+
+
+
     FUNCTION is_user (
         in_user_id          tsk_auth_roles.user_id%TYPE,
         in_page_id          tsk_auth_pages.page_id%TYPE,
