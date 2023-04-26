@@ -34,29 +34,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             -- calculate tab badges
             FOR c IN (
                 SELECT
-                    'P105_BADGE_CHECKLIST'              AS item_name,
-                    tsk_p105.get_badge_icon(COUNT(*))   AS badge
-                FROM tsk_task_checklist c
-                WHERE c.task_id             = rec.task_id
-                    AND c.checklist_done    IS NULL
-                UNION ALL
-                SELECT
-                    'P105_BADGE_COMMENTS'               AS item_name,
-                    tsk_p105.get_badge_icon(COUNT(*))   AS badge
-                FROM tsk_task_comments c
-                WHERE c.task_id             = rec.task_id
-                UNION ALL
-                SELECT
-                    'P105_BADGE_COMMITS'                AS item_name,
-                    tsk_p105.get_badge_icon(COUNT(*))   AS badge
-                FROM tsk_task_commits c
-                WHERE c.task_id             = rec.task_id
-                UNION ALL
-                SELECT
-                    'P105_BADGE_FILES'                  AS item_name,
-                    tsk_p105.get_badge_icon(COUNT(*))   AS badge
-                FROM tsk_task_files c
-                WHERE c.task_id             = rec.task_id
+                    b.item_name,
+                    b.badge
+                FROM tsk_p105_badges_v b
             ) LOOP
                 core.set_item(c.item_name, c.badge);
 
