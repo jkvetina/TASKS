@@ -14,7 +14,8 @@ SELECT
 FROM tsk_roles r
 JOIN x
     ON (x.role_group    = r.role_group  OR x.role_group IS NULL)
-    AND (x.role_id      = r.role_id     OR x.role_id IS NULL);
+    AND (x.role_id      = r.role_id     OR x.role_id IS NULL)
+    AND r.is_active     = 'Y';
 --
 COMMENT ON TABLE tsk_p962_map_pages_cols_v IS '';
 
