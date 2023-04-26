@@ -138,13 +138,13 @@ regions:
 
   layout: 
     sequence: 20
-    parent-region: No Parent
-    position: BODY
+    parent-region: Roles [TABS] # 45933575356991413
+    position: SUB_REGIONS
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
     new-column: true
-    column-span: 4
+    column-span: Automatic
 
   appearance: 
     template: Blank with Attributes # 70831193948975578
@@ -171,26 +171,27 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Project Roles ===============================
+- # ====== Region: Roles [TABS] ================================
   id: 45933575356991413
   identification: 
-    title: Project Roles
+    title: Roles [TABS]
     type: Static Content
 
   layout: 
-    sequence: 10
-    parent-region: Project Roles # 45933427596991412
-    position: SUB_REGIONS
+    sequence: 30
+    parent-region: No Parent
+    position: BODY
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
-    new-column: true
+    new-column: false
     column-span: Automatic
 
   appearance: 
-    template: Hero # 70864195177975601
+    template: Tabs Container # 70907050579975626
     template-options: 
     - '#DEFAULT#'
+    - t-TabsRegion-mod--simple
     render-components: Above Content
 
   accessibility: 
@@ -263,9 +264,8 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_AUTH_ROLES
+    table-name: TSK_P900_USER_ROLES_V
     include-rowid-column: false
-    where-clause: user_id = core.get_user_id()
 
   order-by: 
     type: None
@@ -304,28 +304,196 @@ regions:
     id: 46464941221360444
     appearance: 
       layout: Grid
-      grid-columns: Auto
+      grid-columns: 3 Columns
 
     card: 
       primary-key-column-1: ROLE_ID
 
     title: 
       advanced-formatting: false
-      column: ROLE_ID
+      column: ROLE_NAME
 
     subtitle: 
       advanced-formatting: false
-      column: CLIENT_ID
+      column: ROLE_DESC
 
     body: 
       advanced-formatting: false
 
     secondary-body: 
       advanced-formatting: false
+      column: ROLE_DESC
 
     icon-and-badge: 
       icon-source: No Icon
-      badge-column: IS_ACTIVE
+
+    media: 
+      advanced-formatting: false
+      source: No Media
+
+    performance: 
+      lazy-loading: false
+
+    pagination: 
+      type: Scroll
+      show-total-row-count: false
+
+- # ====== Region: User Roles ==================================
+  id: 47217946498950913
+  identification: 
+    title: User Roles
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: 7
+    new-column: true
+    column-span: 6
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - FILTERS
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Client Roles ================================
+  id: 47218119696950915
+  identification: 
+    title: Client Roles
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: Roles [TABS] # 45933575356991413
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Client Roles [CARDS] ========================
+  id: 47218225934950916
+  identification: 
+    title: Client Roles [CARDS]
+    type: Cards
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_P900_USER_ROLES_V
+    include-rowid-column: false
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 10
+    parent-region: Client Roles # 47218119696950915
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Cards Container # 70838329605975585
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 47218336992950917
+    appearance: 
+      layout: Grid
+      grid-columns: 3 Columns
+
+    card: 
+      primary-key-column-1: ROLE_ID
+
+    title: 
+      advanced-formatting: false
+      column: ROLE_NAME
+
+    subtitle: 
+      advanced-formatting: false
+      column: ROLE_DESC
+
+    body: 
+      advanced-formatting: false
+
+    secondary-body: 
+      advanced-formatting: false
+      column: ROLE_DESC
+
+    icon-and-badge: 
+      icon-source: No Icon
 
     media: 
       advanced-formatting: false
@@ -540,7 +708,7 @@ page-items:
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -610,6 +778,141 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P900_CLIENT_ID ===========================
+  id: 47078131334134342
+  identification: 
+    name: P900_CLIENT_ID
+    type: Select List
+
+  label: 
+    label: Client
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 10
+    region: User Roles # 47217946498950913
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 4
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_CLIENTS # 34762829880497308
+    display-extra-values: true
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_client_id()
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P900_PROJECT_ID ==========================
+  id: 47078596180134346
+  identification: 
+    name: P900_PROJECT_ID
+    type: Select List
+
+  label: 
+    label: Project
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 10
+    region: User Roles # 47217946498950913
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 4
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_PROJECTS # 34763034913500105
+    display-extra-values: true
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P900_CLIENT_ID
+    items-to-submit: 
+    - P900_CLIENT_ID
+    parent-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_project_id()
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 buttons: 
 - # ====== Button: UPDATE_PROFILE ==============================
   id: 45895581026541635
@@ -640,6 +943,55 @@ buttons:
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
     database-action: SQL UPDATE action
+
+dynamic-actions: 
+- # ====== Dynamic Action: CHANGED_PROJECT =====================
+  id: 47078259227134343
+  identification: 
+    name: CHANGED_PROJECT
+
+  execution: 
+    sequence: 10
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P900_PROJECT_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Hide ========================================
+    id: 47078397530134344
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: Project Roles [CARDS] # 45933785127991415
+
+    execution: 
+      sequence: 10
+      event: CHANGED_PROJECT # 47078259227134343
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Submit Page =================================
+    id: 47078433770134345
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 20
+      event: CHANGED_PROJECT # 47078259227134343
+      fire-when-event-result-is: True
+      fire-on-initialization: false
 
 processes: 
 - # ====== Process: INIT_FORM ==================================
