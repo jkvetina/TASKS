@@ -1020,7 +1020,7 @@ CREATE OR REPLACE PACKAGE BODY core AS
                 '|'
             ) ||
             '|' || core.get_caller_name(3) ||
-            CASE WHEN in_traceback THEN '|' || DBMS_UTILITY.FORMAT_ERROR_BACKTRACE END,
+            CASE WHEN in_traceback OR core.is_developer() THEN '|' || DBMS_UTILITY.FORMAT_ERROR_BACKTRACE END,
             1, 4000);
         --
         RAISE_APPLICATION_ERROR(core.app_exception_code, v_message, TRUE);
