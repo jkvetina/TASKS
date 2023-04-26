@@ -21,7 +21,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
-  authorization-scheme: MASTER - IS_ADMIN # 71258399003174376
+  authorization-scheme: IS_USER # 47196033359190547
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum

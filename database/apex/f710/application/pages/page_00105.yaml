@@ -101,7 +101,7 @@ css:
     
 
 security: 
-  authorization-scheme: MASTER - IS_USER # 71258645843174377
+  authorization-scheme: IS_USER # 47196033359190547
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum

@@ -19,7 +19,7 @@ wwv_flow_imp_page.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(44075748371802774)  -- USER_PROFILE
 ,p_page_template_options=>'#DEFAULT#'
-,p_required_role=>wwv_flow_imp.id(71258645843174377)  -- MASTER - IS_USER
+,p_required_role=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 ,p_protection_level=>'C'
 ,p_page_component_map=>'02'
 ,p_last_updated_by=>'DEV'
