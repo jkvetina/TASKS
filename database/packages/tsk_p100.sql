@@ -78,6 +78,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         END LOOP;
 
         -- check favorite status
+        core.set_item('P100_IS_FAVORITE', '');
+        --
         FOR c IN (
             SELECT 'Y' AS is_favorite
             FROM tsk_user_fav_boards b
