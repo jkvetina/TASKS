@@ -169,10 +169,19 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                             p_values        => '' || t.task_id || ',100'
                         ) AS task_link,
                         --
-                        NULLIF(SUM(CASE WHEN l.checklist_done = 'Y' THEN 1 ELSE 0 END) || '/' || COUNT(l.checklist_id), '0/0') AS task_progress
+                        NULLIF(SUM(CASE WHEN l.checklist_done = 'Y' THEN 1 ELSE 0 END) || '/' || COUNT(l.checklist_id), '0/0') AS task_progress,
+                        --
+                        MAX(g.color_bg)     AS color_bg
+                        --
                     FROM tsk_tasks t
                     LEFT JOIN tsk_task_checklist l
                         ON l.task_id        = t.task_id
+                    LEFT JOIN tsk_categories g
+                        ON g.category_id    = t.category_id
+                        AND g.client_id     = t.client_id
+                        AND g.project_id    = t.project_id
+                        AND g.color_bg      IS NOT NULL
+                        AND g.is_active     = 'Y'
                     WHERE t.client_id       = in_client_id
                         AND t.project_id    = in_project_id
                         AND t.board_id      = in_board_id
@@ -185,7 +194,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                     ORDER BY t.order# NULLS LAST, t.task_id
                 ) LOOP
                     HTP.P(
-                        '<div class="TASK" draggable="true" id="TASK_' || t.task_id || '">' ||
+                        '<div class="TASK" draggable="true" id="TASK_' || t.task_id || CASE WHEN t.color_bg IS NOT NULL THEN '" style="border-left: 5px solid ' || t.color_bg || ';' END || '">' ||
                         '<a href="' || t.task_link || '">' ||
                         CASE WHEN t.task_progress IS NOT NULL
                             THEN '<span style="float: right;">' || t.task_progress || '</span>'
