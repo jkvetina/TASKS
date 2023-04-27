@@ -39,6 +39,1646 @@ server-cache:
   caching: Disabled
 
 regions: 
+- # ====== Region: Map Tables [GRID] ===========================
+  id: 47412748283554624
+  identification: 
+    title: Map Tables [GRID]
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_P965_MAP_TABLES_V
+    include-rowid-column: false
+
+  layout: 
+    sequence: 20
+    parent-region: Map Tables # 233718813694237344
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report # 70887424081975615
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 47412866390554625
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Update Row
+      lost-update-type: Row Values
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      select-first-row: false
+      fixed-row-height: true
+
+    pagination: 
+      type: Page
+      show-total-row-count: true
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+      - Save Button
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 47485198374859515
+      identification: 
+        name: Primary Report
+        alias: 474852
+
+  column-groups: 
+  - # ====== Column Group: &P965_ROLE_1. =========================
+    id: 47508692815863704
+    heading: 
+      heading: '&P965_ROLE_1.'
+
+  - # ====== Column Group: &P965_ROLE_2. =========================
+    id: 47508775165863705
+    heading: 
+      heading: '&P965_ROLE_2.'
+
+  - # ====== Column Group: &P965_ROLE_3. =========================
+    id: 47508854175863706
+    heading: 
+      heading: '&P965_ROLE_3.'
+
+  - # ====== Column Group: &P965_ROLE_4. =========================
+    id: 47508923151863707
+    heading: 
+      heading: '&P965_ROLE_4.'
+
+  columns: 
+  - # ====== Column: TABLE_NAME ==================================
+    id: 47412992172554626
+    identification: 
+      column-name: TABLE_NAME
+      type: Text Field
+
+    heading: 
+      heading: Table Name
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 30
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 128
+
+    source: 
+      type: Database Column
+      database-column: TABLE_NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ROLE_1C =====================================
+    id: 47413052429554627
+    identification: 
+      column-name: ROLE_1C
+      type: Checkbox
+
+    heading: 
+      heading: C
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 40
+      column-alignment: center
+      group: '&P965_ROLE_1.' # 47508692815863704
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_1C
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_1
+
+  - # ====== Column: ROLE_1U =====================================
+    id: 47413122830554628
+    identification: 
+      column-name: ROLE_1U
+      type: Checkbox
+
+    heading: 
+      heading: U
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 50
+      column-alignment: center
+      group: '&P965_ROLE_1.' # 47508692815863704
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_1U
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_1
+
+  - # ====== Column: ROLE_1D =====================================
+    id: 47413237905554629
+    identification: 
+      column-name: ROLE_1D
+      type: Checkbox
+
+    heading: 
+      heading: D
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 60
+      column-alignment: center
+      group: '&P965_ROLE_1.' # 47508692815863704
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_1D
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_1
+
+  - # ====== Column: ROLE_2C =====================================
+    id: 47413340418554630
+    identification: 
+      column-name: ROLE_2C
+      type: Checkbox
+
+    heading: 
+      heading: C
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 70
+      column-alignment: center
+      group: '&P965_ROLE_2.' # 47508775165863705
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_2C
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_2
+
+  - # ====== Column: ROLE_2U =====================================
+    id: 47413476905554631
+    identification: 
+      column-name: ROLE_2U
+      type: Checkbox
+
+    heading: 
+      heading: U
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 80
+      column-alignment: center
+      group: '&P965_ROLE_2.' # 47508775165863705
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_2U
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_2
+
+  - # ====== Column: ROLE_2D =====================================
+    id: 47413555791554632
+    identification: 
+      column-name: ROLE_2D
+      type: Checkbox
+
+    heading: 
+      heading: D
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 90
+      column-alignment: center
+      group: '&P965_ROLE_2.' # 47508775165863705
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_2D
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_2
+
+  - # ====== Column: ROLE_3C =====================================
+    id: 47413639882554633
+    identification: 
+      column-name: ROLE_3C
+      type: Checkbox
+
+    heading: 
+      heading: C
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 100
+      column-alignment: center
+      group: '&P965_ROLE_3.' # 47508854175863706
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_3C
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_3
+
+  - # ====== Column: ROLE_3U =====================================
+    id: 47413707405554634
+    identification: 
+      column-name: ROLE_3U
+      type: Checkbox
+
+    heading: 
+      heading: U
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 110
+      column-alignment: center
+      group: '&P965_ROLE_3.' # 47508854175863706
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_3U
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_3
+
+  - # ====== Column: ROLE_3D =====================================
+    id: 47413816806554635
+    identification: 
+      column-name: ROLE_3D
+      type: Checkbox
+
+    heading: 
+      heading: D
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 120
+      column-alignment: center
+      group: '&P965_ROLE_3.' # 47508854175863706
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_3D
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_3
+
+  - # ====== Column: ROLE_4C =====================================
+    id: 47413937650554636
+    identification: 
+      column-name: ROLE_4C
+      type: Checkbox
+
+    heading: 
+      heading: C
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 130
+      column-alignment: center
+      group: '&P965_ROLE_4.' # 47508923151863707
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_4C
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_4
+
+  - # ====== Column: ROLE_4U =====================================
+    id: 47414058311554637
+    identification: 
+      column-name: ROLE_4U
+      type: Checkbox
+
+    heading: 
+      heading: U
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 140
+      column-alignment: center
+      group: '&P965_ROLE_4.' # 47508923151863707
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_4U
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_4
+
+  - # ====== Column: ROLE_4D =====================================
+    id: 47414187874554638
+    identification: 
+      column-name: ROLE_4D
+      type: Checkbox
+
+    heading: 
+      heading: D
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 150
+      column-alignment: center
+      group: '&P965_ROLE_4.' # 47508923151863707
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_4D
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_4
+
+  - # ====== Column: ROLE_5C =====================================
+    id: 47414289261554639
+    identification: 
+      column-name: ROLE_5C
+      type: Checkbox
+
+    heading: 
+      heading: C
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 160
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_5C
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_5
+
+  - # ====== Column: ROLE_5U =====================================
+    id: 47414363393554640
+    identification: 
+      column-name: ROLE_5U
+      type: Checkbox
+
+    heading: 
+      heading: U
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 170
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_5U
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_5
+
+  - # ====== Column: ROLE_5D =====================================
+    id: 47414422703554641
+    identification: 
+      column-name: ROLE_5D
+      type: Checkbox
+
+    heading: 
+      heading: D
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 180
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_5D
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_5
+
+  - # ====== Column: ROLE_6C =====================================
+    id: 47414506940554642
+    identification: 
+      column-name: ROLE_6C
+      type: Checkbox
+
+    heading: 
+      heading: C
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 190
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_6C
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_6
+
+  - # ====== Column: ROLE_6U =====================================
+    id: 47414618485554643
+    identification: 
+      column-name: ROLE_6U
+      type: Checkbox
+
+    heading: 
+      heading: U
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 200
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_6U
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_6
+
+  - # ====== Column: ROLE_6D =====================================
+    id: 47414791496554644
+    identification: 
+      column-name: ROLE_6D
+      type: Checkbox
+
+    heading: 
+      heading: D
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 210
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_6D
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_6
+
+  - # ====== Column: ROLE_7C =====================================
+    id: 47414824474554645
+    identification: 
+      column-name: ROLE_7C
+      type: Checkbox
+
+    heading: 
+      heading: C
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 220
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_7C
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_7
+
+  - # ====== Column: ROLE_7U =====================================
+    id: 47414900578554646
+    identification: 
+      column-name: ROLE_7U
+      type: Checkbox
+
+    heading: 
+      heading: U
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 230
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_7U
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_7
+
+  - # ====== Column: ROLE_7D =====================================
+    id: 47415031045554647
+    identification: 
+      column-name: ROLE_7D
+      type: Checkbox
+
+    heading: 
+      heading: D
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 240
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_7D
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_7
+
+  - # ====== Column: ROLE_8C =====================================
+    id: 47415104642554648
+    identification: 
+      column-name: ROLE_8C
+      type: Checkbox
+
+    heading: 
+      heading: C
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 250
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_8C
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_8
+
+  - # ====== Column: ROLE_8U =====================================
+    id: 47415298969554649
+    identification: 
+      column-name: ROLE_8U
+      type: Checkbox
+
+    heading: 
+      heading: U
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 260
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_8U
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_8
+
+  - # ====== Column: ROLE_8D =====================================
+    id: 47415314394554650
+    identification: 
+      column-name: ROLE_8D
+      type: Checkbox
+
+    heading: 
+      heading: D
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 270
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ROLE_8D
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    server-side-condition: 
+      type: Item is NOT NULL
+      item: P965_ROLE_8
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 47508305216863701
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+      page-header-text: Map Tables [GRID]
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Bold
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#EEEEEE'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#FFFFFF'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
 - # ====== Region: Map Tables ==================================
   id: 233718813694237344
   identification: 
@@ -121,601 +1761,263 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Map Tables [GRID] ===========================
-  id: 233719740539237353
+page-items: 
+- # ====== Page Item: P965_ROLE_1 ==============================
+  id: 47411148417554608
   identification: 
-    title: Map Tables [GRID]
-    type: Interactive Grid
+    name: P965_ROLE_1
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Map Tables # 233719605550237352
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
 
   source: 
-    location: Local Database
-    type: Table / View
-    table-owner: Parsing Schema
-    table-name: TSK_AUTH_TABLES
-    include-rowid-column: false
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P965_ROLE_2 ==============================
+  id: 47411349765554610
+  identification: 
+    name: P965_ROLE_2
+    type: Hidden
+
+  settings: 
+    value-protected: true
 
   layout: 
     sequence: 20
-    parent-region: Map Tables # 233718813694237344
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Interactive Report # 70887424081975615
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
+    region: Map Tables # 233719605550237352
+    position: BODY
 
   advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    id: 233720091001237356
-    edit: 
-      enabled: true
-      allowed-operations: 
-      - Add Row
-      - Update Row
-      - Delete Row
-      lost-update-type: Row Values
-      add-row-if-empty: false
-
-    performance: 
-      lazy-loading: false
-
-    appearance: 
-      select-first-row: false
-      fixed-row-height: true
-
-    pagination: 
-      type: Page
-      show-total-row-count: true
-
-    toolbar: 
-      show: true
-      controls: 
-      - Search Column Selection
-      - Search Field
-      - Actions Menu
-      - Save Button
-
-    enable-users-to: 
-      save-public-report: false
-      flashback: true
-      define-chart-view: true
-      download: true
-
-    download: 
-      formats: 
-      - CSV
-      - HTML
-      - Excel
-      - PDF
-      send-as-email: true
-
-    heading: 
-      fixed-to: Page
-
-    icon-view: 
-      show: false
-
-    detail-view: 
-      show: false
-
-    saved-reports: 
-    - # ====== Saved Report: Primary Report ========================
-      id: 233746138053430499
-      identification: 
-        name: Primary Report
-        alias: 464274
-
-  columns: 
-  - # ====== Column: ROLE_ID =====================================
-    id: 233720375685237359
-    identification: 
-      column-name: ROLE_ID
-      type: Select List
-
-    heading: 
-      heading: Role
-      alignment: start
-
-    layout: 
-      sequence: 50
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-
-    list-of-values: 
-      type: Shared Component
-      list-of-values: LOV_ROLES # 46494426434427342
-      display-extra-values: true
-      display-null-value: true
-
-    source: 
-      type: Database Column
-      database-column: ROLE_ID
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: true
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Use List of Values
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: IS_ACTIVE ===================================
-    id: 233720461114237360
-    identification: 
-      column-name: IS_ACTIVE
-      type: Checkbox
-
-    heading: 
-      heading: Active
-      alignment: center
-
-    settings: 
-      use-defaults: false
-      checked-value: Y
-
-    layout: 
-      sequence: 100
-      column-alignment: center
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-
-    source: 
-      type: Database Column
-      database-column: IS_ACTIVE
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      type: Static
-      static-value: Y
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: UPDATED_BY ==================================
-    id: 233720516490237361
-    identification: 
-      column-name: UPDATED_BY
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 110
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_BY
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 233720650086237362
-    identification: 
-      column-name: UPDATED_AT
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 120
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_AT
-      data-type: DATE
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: APEX$ROW_ACTION =============================
-    id: 233721680146237372
-    identification: 
-      column-name: APEX$ROW_ACTION
-      type: Actions Menu
-
-    layout: 
-      sequence: 20
-
-  - # ====== Column: TABLE_NAME ==================================
-    id: 233722320643237379
-    identification: 
-      column-name: TABLE_NAME
-      type: Select List
-
-    heading: 
-      heading: Table Name
-      alignment: start
-
-    layout: 
-      sequence: 60
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-
-    list-of-values: 
-      type: Shared Component
-      list-of-values: LOV_APP_TABLES # 46514006412586236
-      display-extra-values: true
-      display-null-value: true
-
-    source: 
-      type: Database Column
-      database-column: TABLE_NAME
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: true
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Use List of Values
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: IS_ALLOWED_CREATE ===========================
-    id: 233722452375237380
-    identification: 
-      column-name: IS_ALLOWED_CREATE
-      type: Checkbox
-
-    heading: 
-      heading: Create
-      alignment: center
-
-    settings: 
-      use-defaults: false
-      checked-value: Y
-
-    layout: 
-      sequence: 70
-      column-alignment: center
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-
-    source: 
-      type: Database Column
-      database-column: IS_ALLOWED_CREATE
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: IS_ALLOWED_UPDATE ===========================
-    id: 233722592548237381
-    identification: 
-      column-name: IS_ALLOWED_UPDATE
-      type: Checkbox
-
-    heading: 
-      heading: Update
-      alignment: center
-
-    settings: 
-      use-defaults: false
-      checked-value: Y
-
-    layout: 
-      sequence: 80
-      column-alignment: center
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-
-    source: 
-      type: Database Column
-      database-column: IS_ALLOWED_UPDATE
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: IS_ALLOWED_DELETE ===========================
-    id: 233722603119237382
-    identification: 
-      column-name: IS_ALLOWED_DELETE
-      type: Checkbox
-
-    heading: 
-      heading: Delete
-      alignment: center
-
-    settings: 
-      use-defaults: false
-      checked-value: Y
-
-    layout: 
-      sequence: 90
-      column-alignment: center
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-
-    source: 
-      type: Database Column
-      database-column: IS_ALLOWED_DELETE
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  printing: 
-    page: 
-      size: Letter
-      orientation: Landscape
-      units: Inches
-      width: 11
-      height: 8.5
-      border-width: 0.5
-      border-color: '#666666'
-
-    page-header: 
-      font: Helvetica
-      font-weight: Normal
-      font-size: 12
-      font-color: '#000000'
-      alignment: center
-      page-header-text: Map Tables [GRID]
-
-    column-headings: 
-      font: Helvetica
-      font-weight: Bold
-      font-size: 10
-      font-color: '#000000'
-      background-color: '#EEEEEE'
-
-    columns: 
-      font: Helvetica
-      font-weight: Normal
-      font-size: 10
-      font-color: '#000000'
-      background-color: '#FFFFFF'
-
-    page-footer: 
-      font: Helvetica
-      font-weight: Normal
-      font-size: 12
-      font-color: '#000000'
-      alignment: center
-
-dynamic-actions: 
-- # ====== Dynamic Action: CHANGE_FILTERS ======================
-  id: 47113571895577973
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P965_ROLE_3 ==============================
+  id: 47411432198554611
   identification: 
-    name: CHANGE_FILTERS
-
-  execution: 
-    sequence: 10
-
-  when: 
-    event: EVENT.EVENT.BROWSER.CHANGE
-    selection-type: Item(s)
-    item(s): 
-    - P965_CLIENT_ID
-    - P965_ROLE_ID
-
-  execution: 
-    event-scope: Static
-    type: Immediate
-
-  actions: 
-  - # ====== Action: Submit Page =================================
-    id: 47114019471577974
-    identification: 
-      action: Submit Page
-
-    settings: 
-      show-processing: true
-
-    execution: 
-      sequence: 10
-      event: CHANGE_FILTERS # 47113571895577973
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-processes: 
-- # ====== Process: SAVE_MAP_TABLES ============================
-  id: 47113101945577972
-  identification: 
-    name: SAVE_MAP_TABLES
-    type: Interactive Grid - Automatic Row Processing (DML)
-    editable-region: Map Tables [GRID] # 233719740539237353
+    name: P965_ROLE_3
+    type: Hidden
 
   settings: 
-    target-type: Region Source
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: Map Tables # 233719605550237352
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P965_ROLE_4 ==============================
+  id: 47411551581554612
+  identification: 
+    name: P965_ROLE_4
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: Map Tables # 233719605550237352
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P965_ROLE_5 ==============================
+  id: 47411644566554613
+  identification: 
+    name: P965_ROLE_5
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: Map Tables # 233719605550237352
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P965_ROLE_8 ==============================
+  id: 47411716251554614
+  identification: 
+    name: P965_ROLE_8
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 80
+    region: Map Tables # 233719605550237352
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P965_ROLE_7 ==============================
+  id: 47411882317554615
+  identification: 
+    name: P965_ROLE_7
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 70
+    region: Map Tables # 233719605550237352
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P965_ROLE_6 ==============================
+  id: 47411987677554616
+  identification: 
+    name: P965_ROLE_6
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 60
+    region: Map Tables # 233719605550237352
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+processes: 
+- # ====== Process: SAVE_TABLES ================================
+  id: 47508553836863703
+  identification: 
+    name: SAVE_TABLES
+    type: Interactive Grid - Automatic Row Processing (DML)
+    editable-region: Map Tables [GRID] # 47412748283554624
+
+  settings: 
+    target-type: PL/SQL Code
+    pl/sql-code-to-insert/update/delete: tsk_p965.save_tables();
     prevent-lost-updates: true
     lock-row: No
-    return-primary-key(s)-after-insert: true
 
   execution: 
-    sequence: 50
+    sequence: 60
     point: Processing
     run-process: Once Per Page Visit (default)
 
