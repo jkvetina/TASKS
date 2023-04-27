@@ -854,25 +854,6 @@ buttons:
     warn-on-unsaved-changes: Do Not Check
 
 processes: 
-- # ====== Process: REFRESH_MV =================================
-  id: 47219314650950927
-  identification: 
-    name: REFRESH_MV
-    type: Execute Code
-
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p962.refresh_mv();
-
-  execution: 
-    sequence: 30
-    point: Processing
-    run-process: Once Per Page Visit (default)
-
-  error: 
-    display-location: Inline in Notification
-
 - # ====== Process: SAVE_CATEGORIES ============================
   id: 47381311707872509
   identification: 
@@ -916,7 +897,7 @@ processes:
       
 
   execution: 
-    sequence: 40
+    sequence: 30
     point: Processing
     run-process: Once Per Page Visit (default)
 

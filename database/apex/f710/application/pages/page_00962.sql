@@ -624,6 +624,18 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_is_visible=>true
 ,p_is_frozen=>true
 );
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(47219705769950931)
+,p_button_sequence=>110
+,p_button_plug_id=>wwv_flow_imp.id(139765312485244761)
+,p_button_name=>'REFRESH_MV'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
+,p_button_image_alt=>'Refresh MV'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_icon_css_classes=>'fa-cloud-upload'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(47000440051134504)
 ,p_name=>'P962_ROLE_GROUP'
@@ -769,7 +781,7 @@ wwv_flow_imp_page.create_page_da_action(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(46823989540379294)
-,p_process_sequence=>60
+,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(139765471013244762)
 ,p_process_type=>'NATIVE_IG_DML'
@@ -778,6 +790,16 @@ wwv_flow_imp_page.create_page_process(
 ,p_attribute_04=>'tsk_p962.save_pages();'
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(47405677838201653)
+,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'REFRESH_MV'
+,p_process_sql_clob=>'tsk_p962.refresh_mv();'
+,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp.component_end;

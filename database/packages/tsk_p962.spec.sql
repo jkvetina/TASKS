@@ -4,6 +4,10 @@ CREATE OR REPLACE PACKAGE tsk_p962 AS
 
 
 
+    PROCEDURE refresh_mv;
+
+
+
     FUNCTION get_role_id (
         in_column       NUMBER
     )

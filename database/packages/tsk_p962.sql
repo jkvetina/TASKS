@@ -30,6 +30,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_p962 AS
 
 
 
+    PROCEDURE refresh_mv
+    AS
+    BEGIN
+        DBMS_MVIEW.REFRESH('TSK_NAVIGATION_MAP_MV', method => 'C');
+    END;
+
+
+
     FUNCTION get_role_id (
         in_column       NUMBER
     )
