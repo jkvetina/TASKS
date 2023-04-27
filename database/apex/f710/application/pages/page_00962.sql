@@ -420,6 +420,22 @@ wwv_flow_imp_page.create_region_column(
 ,p_display_condition=>'P962_ROLE_NAME_8'
 );
 wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(47219827755950932)
+,p_name=>'DML_ACTIONS'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'DML_ACTIONS'
+,p_data_type=>'VARCHAR2'
+,p_session_state_data_type=>'VARCHAR2'
+,p_is_query_only=>true
+,p_item_type=>'NATIVE_HIDDEN'
+,p_display_sequence=>160
+,p_attribute_01=>'Y'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>false
+,p_is_primary_key=>false
+,p_include_in_export=>false
+);
+wwv_flow_imp_page.create_region_column(
  p_id=>wwv_flow_imp.id(139768407775244792)
 ,p_name=>'PAGE_ID'
 ,p_source_type=>'DB_COLUMN'
@@ -463,6 +479,7 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_internal_uid=>139768248980244790
 ,p_is_editable=>true
 ,p_edit_operations=>'u'
+,p_edit_row_operations_column=>'DML_ACTIONS'
 ,p_lost_update_check_type=>'VALUES'
 ,p_submit_checked_rows=>false
 ,p_lazy_loading=>false
@@ -603,6 +620,14 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_is_visible=>true
 ,p_is_frozen=>false
 ,p_width=>120
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(47409145946347972)
+,p_view_id=>wwv_flow_imp.id(139833116175683127)
+,p_display_seq=>14
+,p_column_id=>wwv_flow_imp.id(47219827755950932)
+,p_is_visible=>true
+,p_is_frozen=>false
 );
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(139840139064683168)

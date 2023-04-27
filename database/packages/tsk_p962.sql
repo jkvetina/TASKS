@@ -70,6 +70,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p962 AS
         FOR i IN 1 .. c_dynamic_roles LOOP
             -- get role_id and is_active flag based on column position
             rec.role_id     := get_role_id(i);
+            --
+            CONTINUE WHEN rec.role_id IS NULL;
+            --
             rec.is_active   := core.get_grid_data('ROLE_' || i);
 
             -- delete or insert new record

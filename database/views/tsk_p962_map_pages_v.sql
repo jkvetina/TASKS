@@ -17,7 +17,9 @@ SELECT
     MAX(CASE WHEN r.r# = 5 THEN p.is_active END) AS role_5,
     MAX(CASE WHEN r.r# = 6 THEN p.is_active END) AS role_6,
     MAX(CASE WHEN r.r# = 7 THEN p.is_active END) AS role_7,
-    MAX(CASE WHEN r.r# = 8 THEN p.is_active END) AS role_8
+    MAX(CASE WHEN r.r# = 8 THEN p.is_active END) AS role_8,
+    --
+    CASE WHEN a.authorization_scheme = 'IS_USER' THEN 'U' END AS dml_actions
     --
 FROM apex_application_pages a
 JOIN x
