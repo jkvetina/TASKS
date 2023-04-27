@@ -244,6 +244,82 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
 
 
+    PROCEDURE save_task_categories (
+        io_client_id        IN OUT NOCOPY   tsk_categories.client_id%TYPE,
+        io_project_id       IN OUT NOCOPY   tsk_categories.project_id%TYPE,
+        io_category_id      IN OUT NOCOPY   tsk_categories.category_id%TYPE     -- old key
+    )
+    AS
+        rec                 tsk_categories%ROWTYPE;
+    BEGIN
+        rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'),    tsk_app.get_client_id());
+        rec.project_id      := COALESCE(core.get_grid_data('PROJECT_ID'),   tsk_app.get_project_id());
+        --
+        rec.category_id     := core.get_grid_data('CATEGORY_ID');       -- new key
+        rec.category_name   := core.get_grid_data('CATEGORY_NAME');
+        rec.color_bg        := core.get_grid_data('COLOR_BG');
+        rec.color_fg        := core.get_grid_data('COLOR_FG');
+        rec.is_active       := core.get_grid_data('IS_ACTIVE');
+        rec.is_default      := core.get_grid_data('IS_DEFAULT');
+        rec.order#          := core.get_grid_data('ORDER#');
+        --
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
+
+        -- are we deleting the status?
+        IF core.get_grid_action() = 'D' THEN
+            DELETE FROM tsk_categories t
+            WHERE t.category_id     = io_category_id        -- old key
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
+            --
+            RETURN;
+        END IF;
+
+        -- are we renaming the primary key?
+        IF rec.category_id != io_category_id AND core.get_grid_action() = 'U' THEN
+            -- create new status
+            INSERT INTO tsk_categories
+            VALUES rec;
+
+            -- move old lines to the new status
+            UPDATE tsk_tasks t
+            SET t.category_id       = rec.category_id       -- new key
+            WHERE t.category_id     = io_category_id        -- old key
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
+            --
+            DELETE FROM tsk_categories t
+            WHERE t.category_id     = io_category_id        -- old key
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
+        ELSE
+            -- proceed with update or insert
+            UPDATE tsk_categories t
+            SET ROW = rec
+            WHERE t.category_id     = io_category_id
+                AND t.client_id     = io_client_id
+                AND t.project_id    = io_project_id;
+            --
+            IF SQL%ROWCOUNT = 0 THEN
+                INSERT INTO tsk_categories
+                VALUES rec;
+            END IF;
+        END IF;
+
+        -- update keys to APEX
+        io_client_id        := rec.client_id;
+        io_project_id       := rec.project_id;
+        io_category_id      := rec.category_id;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
     PROCEDURE reorder_task_statuses
     AS
         in_client_id        CONSTANT tsk_statuses.client_id%TYPE    := tsk_app.get_client_id();

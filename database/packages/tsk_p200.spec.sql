@@ -26,6 +26,14 @@ CREATE OR REPLACE PACKAGE tsk_p200 AS
 
 
 
+    PROCEDURE save_task_categories (
+        io_client_id        IN OUT NOCOPY   tsk_categories.client_id%TYPE,
+        io_project_id       IN OUT NOCOPY   tsk_categories.project_id%TYPE,
+        io_category_id      IN OUT NOCOPY   tsk_categories.category_id%TYPE
+    );
+
+
+
     PROCEDURE reorder_task_statuses;
 
 
