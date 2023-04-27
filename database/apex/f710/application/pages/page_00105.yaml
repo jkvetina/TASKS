@@ -2093,7 +2093,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 100
+    sequence: 110
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -2133,12 +2133,12 @@ page-items:
     send-on-page-submit: true
 
   layout: 
-    sequence: 80
+    sequence: 90
     region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: false
+    start-new-row: true
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -2175,7 +2175,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 90
+    sequence: 100
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -2618,7 +2618,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 110
+    sequence: 120
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -2635,6 +2635,68 @@ page-items:
   session-state: 
     data-type: VARCHAR2
     storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_CATEGORY_ID =========================
+  id: 47219619685950930
+  identification: 
+    name: P105_CATEGORY_ID
+    type: Select List
+
+  label: 
+    label: Category
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 80
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_CATEGORIES # 47404717652144341
+    display-extra-values: false
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: CATEGORY_ID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
 
   security: 
     session-state-protection: Unrestricted
