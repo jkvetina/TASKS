@@ -27,6 +27,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_boards.sql
 @@application/shared_components/user_interface/lovs/lov_boards_all.sql
 @@application/shared_components/user_interface/lovs/lov_board_types.sql
+@@application/shared_components/user_interface/lovs/lov_categories.sql
 @@application/shared_components/user_interface/lovs/lov_clients.sql
 @@application/shared_components/user_interface/lovs/lov_projects.sql
 @@application/shared_components/user_interface/lovs/lov_projects_all.sql
@@ -138,6 +139,7 @@ prompt --install
 @@application/pages/page_00115.sql
 @@application/pages/page_00200.sql
 @@application/pages/page_00205.sql
+@@application/pages/page_00220.sql
 @@application/pages/page_00230.sql
 @@application/pages/page_00250.sql
 @@application/pages/page_00270.sql

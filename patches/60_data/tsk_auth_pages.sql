@@ -17,12 +17,14 @@ USING (
     SELECT 'DEFAULT_USER' AS role_id, 110 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 115 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 200 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'DEFAULT_USER' AS role_id, 220 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 300 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 500 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 900 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 980 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'PROJECT_MANAGER' AS role_id, 200 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'PROJECT_MANAGER' AS role_id, 205 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'PROJECT_MANAGER' AS role_id, 220 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'PROJECT_MANAGER' AS role_id, 230 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'PROJECT_MANAGER' AS role_id, 250 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'PROJECT_MANAGER' AS role_id, 270 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL

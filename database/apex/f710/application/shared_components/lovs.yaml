@@ -300,6 +300,23 @@
     default-sort: ORDER#
     sort-direction: Ascending (Nulls Last)
 
+- # ====== List of Values: LOV_CATEGORIES ======================
+  id: 47404717652144341
+  identification: 
+    name: LOV_CATEGORIES
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_LOV_CATEGORIES_V
+
+  column-mapping: 
+    return: CATEGORY_ID
+    display: CATEGORY_NAME
+    default-sort: ORDER#
+    sort-direction: Ascending (Nulls Last)
+
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
   id: 54624749962706655
   identification: 

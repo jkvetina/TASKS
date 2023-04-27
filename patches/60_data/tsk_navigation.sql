@@ -13,9 +13,10 @@ USING (
     SELECT 100 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 100 AS order# FROM DUAL UNION ALL
     SELECT 105 AS page_id, 100 AS parent_id, 'Y' AS is_hidden, 'Y' AS is_reset, 10 AS order# FROM DUAL UNION ALL
     SELECT 200 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 200 AS order# FROM DUAL UNION ALL
-    SELECT 230 AS page_id, 200 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 10 AS order# FROM DUAL UNION ALL
-    SELECT 250 AS page_id, 200 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 20 AS order# FROM DUAL UNION ALL
-    SELECT 270 AS page_id, 200 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 30 AS order# FROM DUAL UNION ALL
+    SELECT 220 AS page_id, 200 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 20 AS order# FROM DUAL UNION ALL
+    SELECT 230 AS page_id, 200 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 30 AS order# FROM DUAL UNION ALL
+    SELECT 250 AS page_id, 200 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 50 AS order# FROM DUAL UNION ALL
+    SELECT 270 AS page_id, 200 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 70 AS order# FROM DUAL UNION ALL
     SELECT 300 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 300 AS order# FROM DUAL UNION ALL
     SELECT 400 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 400 AS order# FROM DUAL UNION ALL
     SELECT 500 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 500 AS order# FROM DUAL UNION ALL
