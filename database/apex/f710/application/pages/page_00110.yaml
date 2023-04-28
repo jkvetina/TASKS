@@ -1273,10 +1273,10 @@ dynamic-actions:
     type: Immediate
 
   actions: 
-  - # ====== Action: Cancel Dialog ===============================
+  - # ====== Action: Close Dialog ================================
     id: 45209849904165757
     identification: 
-      action: Cancel Dialog
+      action: Close Dialog
 
     execution: 
       sequence: 10
