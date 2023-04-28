@@ -181,7 +181,7 @@ SELECT                      -- append favorite boards
     NULL AS parent_id,
     NULL AS auth_scheme,
     NULL AS label__,
-    '/100.100/' || b.board_id AS order#
+    '/100.100/' || b.updated_at || b.board_id AS order#
 FROM tsk_user_fav_boards f
 JOIN tsk_boards b
     ON b.board_id       = f.board_id
