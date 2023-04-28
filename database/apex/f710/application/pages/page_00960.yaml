@@ -224,6 +224,22 @@ regions:
         name: Primary Report
         alias: 464267
 
+  column-groups: 
+  - # ====== Column Group: Counters ==============================
+    id: 47575757836232109
+    heading: 
+      heading: Counters
+
+  - # ====== Column Group: Flags =================================
+    id: 47575880927232110
+    heading: 
+      heading: Flags
+
+  - # ====== Column Group: Role Info =============================
+    id: 47575963184232111
+    heading: 
+      heading: Role Info
+
   columns: 
   - # ====== Column: ROLE_GROUP ==================================
     id: 47000126970134501
@@ -242,6 +258,8 @@ regions:
     layout: 
       sequence: 50
       column-alignment: start
+      group: Role Info # 47575963184232111
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -297,6 +315,8 @@ regions:
     layout: 
       sequence: 60
       column-alignment: start
+      group: Role Info # 47575963184232111
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -351,6 +371,8 @@ regions:
     layout: 
       sequence: 90
       column-alignment: end
+      group: Role Info # 47575963184232111
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -381,6 +403,144 @@ regions:
       control-break/aggregate: true
       hide: true
 
+  - # ====== Column: COUNT_PAGES =================================
+    id: 47575406358232106
+    identification: 
+      column-name: COUNT_PAGES
+      type: Display Only
+
+    heading: 
+      heading: Pages
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 100
+      column-alignment: end
+      group: Counters # 47575757836232109
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_PAGES
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_TABLES ================================
+    id: 47575526126232107
+    identification: 
+      column-name: COUNT_TABLES
+      type: Display Only
+
+    heading: 
+      heading: Tables
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 110
+      column-alignment: end
+      group: Counters # 47575757836232109
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_TABLES
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_USERS =================================
+    id: 47575634265232108
+    identification: 
+      column-name: COUNT_USERS
+      type: Display Only
+
+    heading: 
+      heading: Users
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 120
+      column-alignment: end
+      group: Counters # 47575757836232109
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_USERS
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   - # ====== Column: ROLE_ID =====================================
     id: 92945231888865467
     identification: 
@@ -398,6 +558,8 @@ regions:
     layout: 
       sequence: 30
       column-alignment: start
+      group: Role Info # 47575963184232111
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -453,6 +615,8 @@ regions:
     layout: 
       sequence: 40
       column-alignment: start
+      group: Role Info # 47575963184232111
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -508,6 +672,8 @@ regions:
     layout: 
       sequence: 70
       column-alignment: center
+      group: Flags # 47575880927232110
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 

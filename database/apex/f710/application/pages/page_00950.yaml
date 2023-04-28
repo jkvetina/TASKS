@@ -131,7 +131,7 @@ regions:
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
-    table-name: TSK_USERS
+    table-name: TSK_P950_USERS_V
     include-rowid-column: false
 
   layout: 
@@ -224,6 +224,22 @@ regions:
         name: Primary Report
         alias: 347276
 
+  column-groups: 
+  - # ====== Column Group: Flags =================================
+    id: 47576056522232112
+    heading: 
+      heading: Flags
+
+  - # ====== Column Group: Counters ==============================
+    id: 47576194518232113
+    heading: 
+      heading: Counters
+
+  - # ====== Column Group: User Info =============================
+    id: 47576205812232114
+    heading: 
+      heading: User Info
+
   columns: 
   - # ====== Column: USER_ID =====================================
     id: 46263119303307848
@@ -242,6 +258,8 @@ regions:
     layout: 
       sequence: 30
       column-alignment: start
+      group: User Info # 47576205812232114
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -297,6 +315,8 @@ regions:
     layout: 
       sequence: 40
       column-alignment: start
+      group: User Info # 47576205812232114
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -335,68 +355,6 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: UPDATED_BY ==================================
-    id: 46263391338307850
-    identification: 
-      column-name: UPDATED_BY
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 70
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_BY
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: UPDATED_AT ==================================
-    id: 46399255606928901
-    identification: 
-      column-name: UPDATED_AT
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 80
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: UPDATED_AT
-      data-type: DATE
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
   - # ====== Column: APEX$ROW_ACTION =============================
     id: 46401935709929028
     identification: 
@@ -423,6 +381,8 @@ regions:
     layout: 
       sequence: 50
       column-alignment: start
+      group: User Info # 47576205812232114
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -460,6 +420,144 @@ regions:
       control-break/aggregate: true
       hide: true
 
+  - # ====== Column: COUNT_CLIENTS ===============================
+    id: 47576390839232115
+    identification: 
+      column-name: COUNT_CLIENTS
+      type: Display Only
+
+    heading: 
+      heading: Clients
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 70
+      column-alignment: end
+      group: Counters # 47576194518232113
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_CLIENTS
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_PROJECTS ==============================
+    id: 47576419762232116
+    identification: 
+      column-name: COUNT_PROJECTS
+      type: Display Only
+
+    heading: 
+      heading: Projects
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 80
+      column-alignment: end
+      group: Counters # 47576194518232113
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_PROJECTS
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_ROLES =================================
+    id: 47576506711232117
+    identification: 
+      column-name: COUNT_ROLES
+      type: Display Only
+
+    heading: 
+      heading: Roles
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 90
+      column-alignment: end
+      group: Counters # 47576194518232113
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_ROLES
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   - # ====== Column: IS_ACTIVE ===================================
     id: 92655371644230946
     identification: 
@@ -477,6 +575,8 @@ regions:
     layout: 
       sequence: 60
       column-alignment: center
+      group: Flags # 47576056522232112
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
