@@ -57,8 +57,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.board_name      := core.get_grid_data('BOARD_NAME');
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
         rec.order#          := core.get_grid_data('ORDER#');
-        rec.updated_by      := core.get_user_id();
-        rec.updated_at      := SYSDATE;
         --
         tsk_tapi.boards (rec, v_action,
             old_board_id    => io_board_id
@@ -100,8 +98,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.is_default      := core.get_grid_data('IS_DEFAULT');
         rec.is_named        := core.get_grid_data('IS_NAMED');
         rec.order#          := core.get_grid_data('ORDER#');
-        rec.updated_by      := core.get_user_id();
-        rec.updated_at      := SYSDATE;
         --
         tsk_tapi.statuses (rec, v_action,
             old_client_id       => io_client_id,
@@ -133,8 +129,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.swimlane_name   := core.get_grid_data('SWIMLANE_NAME');
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
         rec.order#          := core.get_grid_data('ORDER#');
-        rec.updated_by      := core.get_user_id();
-        rec.updated_at      := SYSDATE;
         --
         tsk_tapi.swimlanes (rec, v_action,
             old_client_id       => io_client_id,
