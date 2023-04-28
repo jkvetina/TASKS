@@ -231,7 +231,8 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: None
+      lov-type: Distinct Column
+      exact-match: true
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -288,7 +289,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Use List of Values
+      lov-type: Distinct Column
       exact-match: true
 
     export-/-printing: 
@@ -350,7 +351,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Use List of Values
+      lov-type: Distinct Column
       exact-match: true
 
     export-/-printing: 
