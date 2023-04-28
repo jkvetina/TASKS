@@ -31,7 +31,7 @@ JOIN tsk_auth_roles p
 JOIN tsk_roles r
     ON r.role_id        = p.role_id
     AND r.is_active     = 'Y'
-JOIN tsk_projects n
+LEFT JOIN tsk_projects n
     ON n.project_id     = p.project_id
     AND n.is_active     = 'Y'
 WHERE t.user_id         = x.user_id

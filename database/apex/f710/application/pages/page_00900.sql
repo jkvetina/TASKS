@@ -26,107 +26,6 @@ wwv_flow_imp_page.create_page(
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
 wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(45933575356991413)
-,p_plug_name=>'Roles [TABS]'
-,p_region_template_options=>'#DEFAULT#:t-TabsRegion-mod--simple'
-,p_plug_template=>wwv_flow_imp.id(70907050579975626)
-,p_plug_display_sequence=>30
-,p_plug_new_grid_row=>false
-,p_plug_new_grid_column=>false
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
-wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(45933427596991412)
-,p_plug_name=>'Project Roles'
-,p_parent_plug_id=>wwv_flow_imp.id(45933575356991413)
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_imp.id(70831193948975578)
-,p_plug_display_sequence=>20
-,p_plug_display_point=>'SUB_REGIONS'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
-wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(45933785127991415)
-,p_plug_name=>'Project Roles [CARDS]'
-,p_parent_plug_id=>wwv_flow_imp.id(45933427596991412)
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_imp.id(70838329605975585)
-,p_plug_display_sequence=>20
-,p_plug_display_point=>'SUB_REGIONS'
-,p_query_type=>'TABLE'
-,p_query_table=>'TSK_P900_USER_ROLES_V'
-,p_include_rowid_column=>false
-,p_lazy_loading=>false
-,p_plug_source_type=>'NATIVE_CARDS'
-,p_plug_query_num_rows_type=>'SCROLL'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_show_total_row_count=>false
-);
-wwv_flow_imp_page.create_card(
- p_id=>wwv_flow_imp.id(46464941221360444)
-,p_region_id=>wwv_flow_imp.id(45933785127991415)
-,p_layout_type=>'GRID'
-,p_grid_column_count=>3
-,p_title_adv_formatting=>false
-,p_title_column_name=>'ROLE_NAME'
-,p_sub_title_adv_formatting=>false
-,p_sub_title_column_name=>'ROLE_DESC'
-,p_body_adv_formatting=>false
-,p_second_body_adv_formatting=>false
-,p_second_body_column_name=>'ROLE_DESC'
-,p_media_adv_formatting=>false
-,p_pk1_column_name=>'ROLE_ID'
-);
-wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(47218119696950915)
-,p_plug_name=>'Client Roles'
-,p_parent_plug_id=>wwv_flow_imp.id(45933575356991413)
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_imp.id(70831193948975578)
-,p_plug_display_sequence=>10
-,p_plug_display_point=>'SUB_REGIONS'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
-wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(47218225934950916)
-,p_plug_name=>'Client Roles [CARDS]'
-,p_parent_plug_id=>wwv_flow_imp.id(47218119696950915)
-,p_region_template_options=>'#DEFAULT#'
-,p_component_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_imp.id(70838329605975585)
-,p_plug_display_sequence=>10
-,p_plug_display_point=>'SUB_REGIONS'
-,p_query_type=>'TABLE'
-,p_query_table=>'TSK_P900_USER_ROLES_V'
-,p_include_rowid_column=>false
-,p_lazy_loading=>false
-,p_plug_source_type=>'NATIVE_CARDS'
-,p_plug_query_num_rows_type=>'SCROLL'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
-,p_show_total_row_count=>false
-);
-wwv_flow_imp_page.create_card(
- p_id=>wwv_flow_imp.id(47218336992950917)
-,p_region_id=>wwv_flow_imp.id(47218225934950916)
-,p_layout_type=>'GRID'
-,p_grid_column_count=>3
-,p_title_adv_formatting=>false
-,p_title_column_name=>'ROLE_NAME'
-,p_sub_title_adv_formatting=>false
-,p_sub_title_column_name=>'ROLE_DESC'
-,p_body_adv_formatting=>false
-,p_second_body_adv_formatting=>false
-,p_second_body_column_name=>'ROLE_DESC'
-,p_media_adv_formatting=>false
-,p_pk1_column_name=>'ROLE_ID'
-);
-wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(45933693135991414)
 ,p_plug_name=>'User Profile'
 ,p_region_template_options=>'#DEFAULT#'
@@ -179,6 +78,39 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(47218225934950916)
+,p_plug_name=>'User Roles [CARDS]'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(70838329605975585)
+,p_plug_display_sequence=>30
+,p_plug_new_grid_row=>false
+,p_plug_new_grid_column=>false
+,p_query_type=>'TABLE'
+,p_query_table=>'TSK_P900_USER_ROLES_V'
+,p_query_where=>'project_id IS NULL OR :P900_PROJECT_ID IS NOT NULL'
+,p_include_rowid_column=>false
+,p_lazy_loading=>false
+,p_plug_source_type=>'NATIVE_CARDS'
+,p_plug_query_num_rows_type=>'SCROLL'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_show_total_row_count=>false
+);
+wwv_flow_imp_page.create_card(
+ p_id=>wwv_flow_imp.id(47218336992950917)
+,p_region_id=>wwv_flow_imp.id(47218225934950916)
+,p_layout_type=>'GRID'
+,p_grid_column_count=>3
+,p_title_adv_formatting=>false
+,p_title_column_name=>'ROLE_NAME'
+,p_sub_title_adv_formatting=>false
+,p_sub_title_column_name=>'ROLE_DESC'
+,p_body_adv_formatting=>false
+,p_second_body_adv_formatting=>false
+,p_media_adv_formatting=>false
+,p_pk1_column_name=>'ROLE_ID'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(45895581026541635)
@@ -322,7 +254,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_colspan=>4
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
-,p_lov_display_extra=>'YES'
+,p_lov_display_extra=>'NO'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
@@ -332,9 +264,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P900_PROJECT_ID'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(47217946498950913)
-,p_item_default=>'tsk_app.get_project_id()'
-,p_item_default_type=>'EXPRESSION'
-,p_item_default_language=>'PLSQL'
 ,p_prompt=>'Project'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_PROJECTS'
@@ -347,7 +276,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_colspan=>4
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
-,p_lov_display_extra=>'YES'
+,p_lov_display_extra=>'NO'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
@@ -361,16 +290,6 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_bind_type=>'bind'
 ,p_execution_type=>'IMMEDIATE'
 ,p_bind_event_type=>'change'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(47078397530134344)
-,p_event_id=>wwv_flow_imp.id(47078259227134343)
-,p_event_result=>'TRUE'
-,p_action_sequence=>10
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_HIDE'
-,p_affected_elements_type=>'REGION'
-,p_affected_region_id=>wwv_flow_imp.id(45933785127991415)
 );
 wwv_flow_imp_page.create_page_da_action(
  p_id=>wwv_flow_imp.id(47078433770134345)

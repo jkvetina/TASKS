@@ -130,89 +130,6 @@ regions:
       - Update Row
       lost-update-type: Row Values
 
-- # ====== Region: Project Roles ===============================
-  id: 45933427596991412
-  identification: 
-    title: Project Roles
-    type: Static Content
-
-  layout: 
-    sequence: 20
-    parent-region: Roles [TABS] # 45933575356991413
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Blank with Attributes # 70831193948975578
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: Roles [TABS] ================================
-  id: 45933575356991413
-  identification: 
-    title: Roles [TABS]
-    type: Static Content
-
-  layout: 
-    sequence: 30
-    parent-region: No Parent
-    position: BODY
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: false
-    column-span: Automatic
-
-  appearance: 
-    template: Tabs Container # 70907050579975626
-    template-options: 
-    - '#DEFAULT#'
-    - t-TabsRegion-mod--simple
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
 - # ====== Region: User Profile ================================
   id: 45933693135991414
   identification: 
@@ -253,90 +170,6 @@ regions:
     settings: 
       output-as: HTML
       expand-shortcuts: false
-
-- # ====== Region: Project Roles [CARDS] =======================
-  id: 45933785127991415
-  identification: 
-    title: Project Roles [CARDS]
-    type: Cards
-
-  source: 
-    location: Local Database
-    type: Table / View
-    table-owner: Parsing Schema
-    table-name: TSK_P900_USER_ROLES_V
-    include-rowid-column: false
-
-  order-by: 
-    type: None
-
-  layout: 
-    sequence: 20
-    parent-region: Project Roles # 45933427596991412
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Cards Container # 70838329605975585
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    id: 46464941221360444
-    appearance: 
-      layout: Grid
-      grid-columns: 3 Columns
-
-    card: 
-      primary-key-column-1: ROLE_ID
-
-    title: 
-      advanced-formatting: false
-      column: ROLE_NAME
-
-    subtitle: 
-      advanced-formatting: false
-      column: ROLE_DESC
-
-    body: 
-      advanced-formatting: false
-
-    secondary-body: 
-      advanced-formatting: false
-      column: ROLE_DESC
-
-    icon-and-badge: 
-      icon-source: No Icon
-
-    media: 
-      advanced-formatting: false
-      source: No Media
-
-    performance: 
-      lazy-loading: false
-
-    pagination: 
-      type: Scroll
-      show-total-row-count: false
 
 - # ====== Region: User Roles ==================================
   id: 47217946498950913
@@ -381,51 +214,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Client Roles ================================
-  id: 47218119696950915
-  identification: 
-    title: Client Roles
-    type: Static Content
-
-  layout: 
-    sequence: 10
-    parent-region: Roles [TABS] # 45933575356991413
-    position: SUB_REGIONS
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    template: Blank with Attributes # 70831193948975578
-    template-options: 
-    - '#DEFAULT#'
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
-
-  advanced: 
-    region-display-selector: false
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: Client Roles [CARDS] ========================
+- # ====== Region: User Roles [CARDS] ==========================
   id: 47218225934950916
   identification: 
-    title: Client Roles [CARDS]
+    title: User Roles [CARDS]
     type: Cards
 
   source: 
@@ -434,18 +226,19 @@ regions:
     table-owner: Parsing Schema
     table-name: TSK_P900_USER_ROLES_V
     include-rowid-column: false
+    where-clause: 'project_id IS NULL OR :P900_PROJECT_ID IS NOT NULL'
 
   order-by: 
     type: None
 
   layout: 
-    sequence: 10
-    parent-region: Client Roles # 47218119696950915
-    position: SUB_REGIONS
+    sequence: 30
+    parent-region: No Parent
+    position: BODY
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
-    new-column: true
+    new-column: false
     column-span: Automatic
 
   appearance: 
@@ -490,7 +283,6 @@ regions:
 
     secondary-body: 
       advanced-formatting: false
-      column: ROLE_DESC
 
     icon-and-badge: 
       icon-source: No Icon
@@ -816,7 +608,7 @@ page-items:
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_CLIENTS # 34762829880497308
-    display-extra-values: true
+    display-extra-values: false
     display-null-value: true
 
   advanced: 
@@ -880,7 +672,7 @@ page-items:
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_PROJECTS # 34763034913500105
-    display-extra-values: true
+    display-extra-values: false
     display-null-value: true
 
   cascading-list-of-values: 
@@ -896,11 +688,6 @@ page-items:
   source: 
     type: Null
     used: Only when current value in session state is null
-
-  default: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: tsk_app.get_project_id()
 
   session-state: 
     storage: Per Session (Persistent)
@@ -964,21 +751,6 @@ dynamic-actions:
     type: Immediate
 
   actions: 
-  - # ====== Action: Hide ========================================
-    id: 47078397530134344
-    identification: 
-      action: Hide
-
-    affected-elements: 
-      selection-type: Region
-      region: Project Roles [CARDS] # 45933785127991415
-
-    execution: 
-      sequence: 10
-      event: CHANGED_PROJECT # 47078259227134343
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
   - # ====== Action: Submit Page =================================
     id: 47078433770134345
     identification: 
