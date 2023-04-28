@@ -484,6 +484,9 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P510_CLIENT_ID'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(90946209771861064)
+,p_item_default=>'tsk_app.get_client_id()'
+,p_item_default_type=>'EXPRESSION'
+,p_item_default_language=>'PLSQL'
 ,p_prompt=>'Client'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_CLIENTS'

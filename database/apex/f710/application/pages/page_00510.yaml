@@ -767,6 +767,11 @@ page-items:
     type: Null
     used: Only when current value in session state is null
 
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_client_id()
+
   session-state: 
     storage: Per Session (Persistent)
 
