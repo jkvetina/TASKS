@@ -9,7 +9,8 @@ WITH curr AS (
         u.user_id,
         u.user_name,
         tsk_app.get_client_id()         AS client_id,
-        tsk_app.get_project_id()        AS project_id
+        tsk_app.get_project_id()        AS project_id,
+        tsk_app.get_swimlane_id()       AS swimlane_id
     FROM tsk_navigation n
     LEFT JOIN tsk_users u
         ON u.user_id        = core.get_user_id()
@@ -158,8 +159,8 @@ SELECT                      -- append favorite boards
         p_application       => curr.app_id,
         p_page              => 100,--curr.page_id,
         p_clear_cache       => 100,
-        p_items             => 'P100_CLIENT_ID,P100_PROJECT_ID,P100_BOARD_ID',
-        p_values            => '' || b.client_id || ',' || b.project_id || ',' || b.board_id
+        p_items             => 'P100_CLIENT_ID,P100_PROJECT_ID,P100_BOARD_ID,P100_SWIMLANE_ID',
+        p_values            => '' || b.client_id || ',' || b.project_id || ',' || b.board_id || ',' || curr.swimlane_id
     ) AS target,
     --
     NULL AS is_current_list_entry,
