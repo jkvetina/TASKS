@@ -131,6 +131,7 @@ regions:
       - Add Row
       - Update Row
       - Delete Row
+      allowed-row-operations-column: DML_ACTIONS
       lost-update-type: Row Values
       add-row-if-empty: false
 
@@ -1427,6 +1428,37 @@ regions:
 
     layout: 
       sequence: 20
+
+  - # ====== Column: DML_ACTIONS =================================
+    id: 47577301378232125
+    identification: 
+      column-name: DML_ACTIONS
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 300
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: DML_ACTIONS
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
 
   printing: 
     page: 

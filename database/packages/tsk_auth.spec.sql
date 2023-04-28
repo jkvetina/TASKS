@@ -38,6 +38,27 @@ CREATE OR REPLACE PACKAGE tsk_auth AS
     RETURN CHAR;
     --RESULT_CACHE
 
+
+
+    PROCEDURE check_allowed_dml (
+        in_table_name       tsk_auth_tables.table_name%TYPE,
+        in_action           CHAR,
+        in_user_id          tsk_auth_roles.user_id%TYPE,
+        in_client_id        tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id       tsk_auth_roles.project_id%TYPE      := NULL
+    );
+
+
+
+    FUNCTION is_allowed_dml (
+        in_table_name       tsk_auth_tables.table_name%TYPE,
+        in_action           CHAR,
+        in_user_id          tsk_auth_roles.user_id%TYPE,
+        in_client_id        tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id       tsk_auth_roles.project_id%TYPE      := NULL
+    )
+    RETURN VARCHAR2;
+
 END;
 /
 

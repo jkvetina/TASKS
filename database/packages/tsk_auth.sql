@@ -125,6 +125,73 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         RETURN NVL(out_result, 'N');
     END;
 
+
+
+    PROCEDURE check_allowed_dml (
+        in_table_name       tsk_auth_tables.table_name%TYPE,
+        in_action           CHAR,
+        in_user_id          tsk_auth_roles.user_id%TYPE,
+        in_client_id        tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id       tsk_auth_roles.project_id%TYPE      := NULL
+    )
+    AS
+    BEGIN
+        IF tsk_auth.is_allowed_dml (
+                in_table_name       => in_table_name,
+                in_action           => in_action,
+                in_user_id          => in_user_id,
+                in_client_id        => in_client_id,
+                in_project_id       => in_project_id
+            ) IS NULL
+        THEN
+            core.raise_error('NOT_AUTH_DML_' || in_action || '_ON_' || in_table_name);
+        END IF;
+    END;
+
+
+
+    FUNCTION is_allowed_dml (
+        in_table_name       tsk_auth_tables.table_name%TYPE,
+        in_action           CHAR,
+        in_user_id          tsk_auth_roles.user_id%TYPE,
+        in_client_id        tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id       tsk_auth_roles.project_id%TYPE      := NULL
+    )
+    RETURN VARCHAR2
+    AS
+        v_authorized        VARCHAR2(4);
+    BEGIN
+        SELECT
+            MAX(CASE WHEN t.is_allowed_create = 'Y' THEN 'C' END) ||
+            MAX(CASE WHEN t.is_allowed_update = 'Y' THEN 'U' END) ||
+            MAX(CASE WHEN t.is_allowed_delete = 'Y' THEN 'D' END)
+        INTO v_authorized
+        FROM tsk_lov_app_tables_v m
+        JOIN tsk_auth_tables t
+            ON t.table_name     = m.table_name
+            AND (
+                (t.is_allowed_create = 'Y' AND NULLIF(in_action, 'C') IS NULL) OR
+                (t.is_allowed_update = 'Y' AND NULLIF(in_action, 'U') IS NULL) OR
+                (t.is_allowed_delete = 'Y' AND NULLIF(in_action, 'D') IS NULL)
+            )
+            AND t.is_active     = 'Y'
+        JOIN tsk_auth_roles r
+            ON r.client_id      = in_client_id
+            AND (r.project_id   = in_project_id OR r.project_id IS NULL)
+            AND r.user_id       = in_user_id
+            AND r.role_id       = t.role_id
+            AND r.is_active     = 'Y'
+        JOIN tsk_auth_users a
+            ON a.user_id        = r.user_id
+            AND a.is_active     = 'Y'
+        JOIN tsk_users u
+            ON u.user_id        = r.user_id
+            AND u.is_active     = 'Y'
+        WHERE m.table_name      = in_table_name;
+        --
+        RETURN v_authorized;
+    END;
+
 END;
 /
 
