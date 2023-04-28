@@ -40,21 +40,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     AS
         v_authorized    CHAR(1);
     BEGIN
-        BEGIN
-            SELECT 'Y' INTO v_authorized
-            FROM tsk_navigation_auth_v n
-            WHERE n.client_id       = in_client_id
-                AND n.project_id    = in_project_id
-                AND n.user_id       = in_user_id
-                AND n.page_id       = in_page_id;
-            --
-            RETURN v_authorized;
-        EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-            NULL;
-        END;
+        SELECT MAX('Y') INTO v_authorized
+        FROM tsk_navigation_auth_v n
+        WHERE n.client_id       = in_client_id
+            AND (n.project_id   = in_project_id OR n.project_id IS NULL)
+            AND n.user_id       = in_user_id
+            AND n.page_id       = in_page_id;
         --
-        RETURN 'N';
+        RETURN v_authorized;
     END;
 
 
