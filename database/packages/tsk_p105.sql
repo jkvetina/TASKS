@@ -61,6 +61,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             ) LOOP
                 core.set_item('P105_STATUS_ID', rec.status_id);
             END LOOP;
+            --
+            FOR c IN (
+                SELECT s.category_id AS category_id
+                FROM tsk_lov_categories_v s
+                WHERE s.is_default = 'Y'
+            ) LOOP
+                core.set_item('P105_CATEGORY_ID', c.category_id);
+            END LOOP;
         END IF;
 
         -- overwrite some page items
