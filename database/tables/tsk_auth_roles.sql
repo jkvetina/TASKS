@@ -1,6 +1,6 @@
 CREATE TABLE tsk_auth_roles (
     client_id                       VARCHAR2(32)    CONSTRAINT nn_tsk_auth_roles_client NOT NULL,
-    project_id                      VARCHAR2(32)    CONSTRAINT nn_tsk_auth_roles_project NOT NULL,
+    project_id                      VARCHAR2(32),
     user_id                         VARCHAR2(128)   CONSTRAINT nn_tsk_auth_roles_user NOT NULL,
     role_id                         VARCHAR2(64)    CONSTRAINT nn_tsk_auth_roles_role NOT NULL,
     is_active                       CHAR(1),
@@ -10,8 +10,8 @@ CREATE TABLE tsk_auth_roles (
     CONSTRAINT ch_tsk_auth_roles_active
         CHECK (is_active = 'Y' OR is_active IS NULL),
     --
-    CONSTRAINT pk_tsk_auth_roles
-        PRIMARY KEY (client_id, project_id, user_id, role_id),
+    CONSTRAINT uq_tsk_auth_roles
+        UNIQUE (client_id, project_id, user_id, role_id),
     --
     CONSTRAINT fk_tsk_auth_roles_project
         FOREIGN KEY (client_id, project_id)

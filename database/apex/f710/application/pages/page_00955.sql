@@ -107,7 +107,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_is_required=>false
 ,p_lov_type=>'SHARED'
 ,p_lov_id=>wwv_flow_imp.id(34763034913500105)  -- LOV_PROJECTS
-,p_lov_display_extra=>true
+,p_lov_display_extra=>false
 ,p_lov_display_null=>true
 ,p_enable_filter=>true
 ,p_filter_operators=>'C:S:CASE_INSENSITIVE:REGEXP'
@@ -436,15 +436,6 @@ wwv_flow_imp_page.create_region_column(
 ,p_display_sequence=>20
 );
 wwv_flow_imp_page.create_region_column(
- p_id=>wwv_flow_imp.id(47076447317134325)
-,p_name=>'APEX$ROW_SELECTOR'
-,p_item_type=>'NATIVE_ROW_SELECTOR'
-,p_display_sequence=>10
-,p_attribute_01=>'Y'
-,p_attribute_02=>'Y'
-,p_attribute_03=>'N'
-);
-wwv_flow_imp_page.create_region_column(
  p_id=>wwv_flow_imp.id(280334384476543860)
 ,p_name=>'CLIENT_ID'
 ,p_source_type=>'DB_COLUMN'
@@ -459,7 +450,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_is_required=>false
 ,p_lov_type=>'SHARED'
 ,p_lov_id=>wwv_flow_imp.id(34762829880497308)  -- LOV_CLIENTS
-,p_lov_display_extra=>true
+,p_lov_display_extra=>false
 ,p_lov_display_null=>true
 ,p_enable_filter=>true
 ,p_filter_operators=>'C:S:CASE_INSENSITIVE:REGEXP'
@@ -697,9 +688,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P955_PROJECT_ID'
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_imp.id(187138827673459155)
-,p_item_default=>'tsk_app.get_project_id()'
-,p_item_default_type=>'EXPRESSION'
-,p_item_default_language=>'PLSQL'
 ,p_prompt=>'Project'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_PROJECTS'

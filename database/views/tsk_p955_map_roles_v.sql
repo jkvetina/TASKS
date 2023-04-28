@@ -31,7 +31,7 @@ JOIN tsk_auth_users a
     AND a.is_active     = 'Y'
 LEFT JOIN tsk_auth_roles p
     ON p.client_id      = x.client_id
-    AND p.project_id    = x.project_id
+    AND (p.project_id   = x.project_id OR (p.project_id IS NULL AND x.project_id IS NULL))
     AND p.user_id       = t.user_id
     AND p.role_id       = r.role_id
 WHERE 1 = 1

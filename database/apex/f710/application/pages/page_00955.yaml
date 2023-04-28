@@ -248,7 +248,7 @@ regions:
     list-of-values: 
       type: Shared Component
       list-of-values: LOV_PROJECTS # 34763034913500105
-      display-extra-values: true
+      display-extra-values: false
       display-null-value: true
 
     source: 
@@ -857,20 +857,6 @@ regions:
     layout: 
       sequence: 20
 
-  - # ====== Column: APEX$ROW_SELECTOR ===========================
-    id: 47076447317134325
-    identification: 
-      column-name: APEX$ROW_SELECTOR
-      type: Row Selector
-
-    settings: 
-      enable-multi-select: true
-      show-select-all: true
-      hide-control: false
-
-    layout: 
-      sequence: 10
-
   - # ====== Column: CLIENT_ID ===================================
     id: 280334384476543860
     identification: 
@@ -895,7 +881,7 @@ regions:
     list-of-values: 
       type: Shared Component
       list-of-values: LOV_CLIENTS # 34762829880497308
-      display-extra-values: true
+      display-extra-values: false
       display-null-value: true
 
     source: 
@@ -1078,11 +1064,6 @@ page-items:
   source: 
     type: Null
     used: Only when current value in session state is null
-
-  default: 
-    type: Expression
-    language: PL/SQL
-    pl/sql-expression: tsk_app.get_project_id()
 
   session-state: 
     storage: Per Session (Persistent)

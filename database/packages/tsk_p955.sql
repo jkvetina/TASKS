@@ -34,9 +34,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p955 AS
     AS
         rec                 tsk_auth_roles%ROWTYPE;
     BEGIN
-        rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'),    tsk_app.get_client_id());
-        rec.project_id      := COALESCE(core.get_grid_data('PROJECT_ID'),   tsk_app.get_project_id());
-        --
+        rec.client_id       := core.get_grid_data('CLIENT_ID');
+        rec.project_id      := core.get_grid_data('PROJECT_ID');
         rec.user_id         := core.get_grid_data('USER_ID');
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
