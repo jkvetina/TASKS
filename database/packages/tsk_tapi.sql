@@ -42,7 +42,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         END IF;
 
         -- update keys to APEX
-        old_board_id     := TO_CHAR(rec.board_id);
+        old_board_id    := TO_CHAR(rec.board_id);
     END;
 
 
@@ -110,9 +110,79 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         END IF;
 
         -- update keys to APEX
-        old_client_id        := rec.client_id;
-        old_project_id       := rec.project_id;
-        old_status_id        := rec.status_id;
+        old_client_id       := rec.client_id;
+        old_project_id      := rec.project_id;
+        old_status_id       := rec.status_id;
+    END;
+
+
+
+    PROCEDURE swimlanes (
+        rec                     IN OUT NOCOPY   tsk_swimlanes%ROWTYPE,
+        in_action                               CHAR                                := NULL,
+        old_client_id           IN OUT NOCOPY   tsk_swimlanes.client_id%TYPE,
+        old_project_id          IN OUT NOCOPY   tsk_swimlanes.project_id%TYPE,
+        old_swimlane_id         IN OUT NOCOPY   tsk_swimlanes.swimlane_id%TYPE      -- old key
+    )
+    AS
+    BEGIN
+        tsk_auth.check_allowed_dml (
+            in_table_name       => REGEXP_REPLACE(core.get_caller_name(2), '[^\.]+\.', 'TSK_'),
+            in_action           => in_action,
+            in_user_id          => core.get_user_id,
+            in_client_id        => rec.client_id,       -- lets check against new values
+            in_project_id       => rec.project_id
+        );
+
+        -- delete record
+        IF in_action = 'D' THEN
+            DELETE FROM tsk_swimlanes t
+            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
+                AND t.project_id    = NVL(old_project_id,    rec.project_id)
+                AND t.swimlane_id   = NVL(old_swimlane_id,   rec.swimlane_id);
+            --
+            RETURN;
+        END IF;
+
+        -- overwrite some values
+        rec.updated_by := core.get_user_id();
+        rec.updated_at := SYSDATE;
+
+        -- are we renaming the primary key?
+        IF rec.swimlane_id != old_swimlane_id AND in_action = 'U' THEN
+            -- create new status
+            INSERT INTO tsk_swimlanes
+            VALUES rec;
+
+            -- move old lines to the new status
+            UPDATE tsk_tasks t
+            SET t.swimlane_id         = rec.swimlane_id
+            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
+                AND t.project_id    = NVL(old_project_id,    rec.project_id)
+                AND t.swimlane_id   = NVL(old_swimlane_id,   rec.swimlane_id);
+            --
+            DELETE FROM tsk_swimlanes t
+            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
+                AND t.project_id    = NVL(old_project_id,    rec.project_id)
+                AND t.swimlane_id   = NVL(old_swimlane_id,   rec.swimlane_id);
+        ELSE
+            -- proceed with update or insert
+            UPDATE tsk_swimlanes t
+            SET ROW = rec
+            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
+                AND t.project_id    = NVL(old_project_id,    rec.project_id)
+                AND t.swimlane_id   = NVL(old_swimlane_id,   rec.swimlane_id);
+            --
+            IF SQL%ROWCOUNT = 0 THEN
+                INSERT INTO tsk_swimlanes
+                VALUES rec;
+            END IF;
+        END IF;
+
+        -- update keys to APEX
+        old_client_id       := rec.client_id;
+        old_project_id      := rec.project_id;
+        old_swimlane_id     := rec.swimlane_id;
     END;
 
 END;
