@@ -77,12 +77,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
         v_source.board_id       := core.get_item('P110_SOURCE_BOARD');
         v_source.status_id      := core.get_item('P110_SOURCE_STATUS');
         v_source.swimlane_id    := core.get_item('P110_SOURCE_SWIMLANE');
+        v_source.category_id    := core.get_item('P110_SOURCE_CATEGORY');
         --
         v_target.client_id      := core.get_item('P110_CLIENT_ID');
         v_target.project_id     := core.get_item('P110_PROJECT_ID');
         v_target.board_id       := core.get_item('P110_BOARD_ID');
         v_target.status_id      := core.get_item('P110_STATUS_ID');
         v_target.swimlane_id    := core.get_item('P110_SWIMLANE_ID');
+        v_target.category_id    := core.get_item('P110_CATEGORY');
         --
         v_target.updated_by     := core.get_user_id();
         v_target.updated_at     := SYSDATE;
@@ -94,6 +96,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
             t.board_id          = v_target.board_id,
             t.status_id         = v_target.status_id,
             t.swimlane_id       = v_target.swimlane_id,
+            t.category_id       = CASE WHEN COALESCE(v_source.category_id, v_target.category_id) IS NOT NULL THEN v_target.category_id ELSE t.category_id END,
             t.updated_by        = v_target.updated_by,
             t.updated_at        = v_target.updated_at,
             t.order#            = t.order# + 1000
@@ -103,6 +106,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
             AND t.board_id      = v_source.board_id
             AND t.status_id     = v_source.status_id
             AND t.swimlane_id   = v_source.swimlane_id
+            AND (t.category_id  = v_source.category_id OR v_source.category_id IS NULL)
             AND t.task_id NOT IN (
                 SELECT
                     c.c001 AS task_id
