@@ -225,7 +225,8 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: None
+      lov-type: Distinct Column
+      exact-match: true
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -250,7 +251,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 40
+      sequence: 50
       column-alignment: center
       group: '&P965_ROLE_1.' # 47508692815863704
       use-group-for: Both
@@ -280,8 +281,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -310,7 +310,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: center
       group: '&P965_ROLE_1.' # 47508692815863704
       use-group-for: Both
@@ -340,8 +340,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -370,7 +369,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: center
       group: '&P965_ROLE_1.' # 47508692815863704
       use-group-for: Both
@@ -400,8 +399,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -430,7 +428,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 70
+      sequence: 80
       column-alignment: center
       group: '&P965_ROLE_2.' # 47576813522232120
       use-group-for: Both
@@ -460,8 +458,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -490,7 +487,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 80
+      sequence: 90
       column-alignment: center
       group: '&P965_ROLE_2.' # 47576813522232120
       use-group-for: Both
@@ -520,8 +517,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -550,7 +546,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 90
+      sequence: 100
       column-alignment: center
       group: '&P965_ROLE_2.' # 47576813522232120
       use-group-for: Both
@@ -580,8 +576,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -610,7 +605,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 100
+      sequence: 110
       column-alignment: center
       group: '&P965_ROLE_3.' # 47508775165863705
       use-group-for: Both
@@ -640,8 +635,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -670,7 +664,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 110
+      sequence: 120
       column-alignment: center
       group: '&P965_ROLE_3.' # 47508775165863705
       use-group-for: Both
@@ -700,8 +694,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -730,7 +723,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 120
+      sequence: 130
       column-alignment: center
       group: '&P965_ROLE_3.' # 47508775165863705
       use-group-for: Both
@@ -760,8 +753,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -790,7 +782,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 130
+      sequence: 140
       column-alignment: center
       group: '&P965_ROLE_4.' # 47576953205232121
       use-group-for: Both
@@ -820,8 +812,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -850,7 +841,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 140
+      sequence: 150
       column-alignment: center
       group: '&P965_ROLE_4.' # 47576953205232121
       use-group-for: Both
@@ -880,8 +871,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -910,7 +900,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 150
+      sequence: 160
       column-alignment: center
       group: '&P965_ROLE_4.' # 47576953205232121
       use-group-for: Both
@@ -940,8 +930,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -970,7 +959,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 160
+      sequence: 170
       column-alignment: center
       group: '&P965_ROLE_5.' # 47508854175863706
       use-group-for: Both
@@ -1000,8 +989,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1030,7 +1018,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 170
+      sequence: 180
       column-alignment: center
       group: '&P965_ROLE_5.' # 47508854175863706
       use-group-for: Both
@@ -1060,8 +1048,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1090,7 +1077,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 180
+      sequence: 190
       column-alignment: center
       group: '&P965_ROLE_5.' # 47508854175863706
       use-group-for: Both
@@ -1120,8 +1107,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1150,7 +1136,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 190
+      sequence: 200
       column-alignment: center
       group: '&P965_ROLE_6.' # 47577016998232122
       use-group-for: Both
@@ -1180,8 +1166,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1210,7 +1195,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 200
+      sequence: 210
       column-alignment: center
       group: '&P965_ROLE_6.' # 47577016998232122
       use-group-for: Both
@@ -1240,8 +1225,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1270,7 +1254,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 210
+      sequence: 220
       column-alignment: center
       group: '&P965_ROLE_6.' # 47577016998232122
       use-group-for: Both
@@ -1300,8 +1284,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1330,7 +1313,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 220
+      sequence: 230
       column-alignment: center
       group: '&P965_ROLE_7.' # 47508923151863707
       use-group-for: Both
@@ -1360,8 +1343,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1390,7 +1372,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 230
+      sequence: 240
       column-alignment: center
       group: '&P965_ROLE_7.' # 47508923151863707
       use-group-for: Both
@@ -1420,8 +1402,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1450,7 +1431,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 240
+      sequence: 250
       column-alignment: center
       group: '&P965_ROLE_7.' # 47508923151863707
       use-group-for: Both
@@ -1480,8 +1461,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1510,7 +1490,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 250
+      sequence: 260
       column-alignment: center
       group: '&P965_ROLE_8.' # 47577186599232123
       use-group-for: Both
@@ -1540,8 +1520,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1570,7 +1549,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 260
+      sequence: 270
       column-alignment: center
       group: '&P965_ROLE_8.' # 47577186599232123
       use-group-for: Both
@@ -1600,8 +1579,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1630,7 +1608,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 270
+      sequence: 280
       column-alignment: center
       group: '&P965_ROLE_8.' # 47577186599232123
       use-group-for: Both
@@ -1660,8 +1638,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
@@ -1683,6 +1660,57 @@ regions:
 
     layout: 
       sequence: 20
+
+  - # ====== Column: PROCEDURE_NAME ==============================
+    id: 47577262461232124
+    identification: 
+      column-name: PROCEDURE_NAME
+      type: Display Only
+
+    heading: 
+      heading: Procedure Name
+      alignment: start
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: PROCEDURE_NAME
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
 
   printing: 
     page: 

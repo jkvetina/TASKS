@@ -1,6 +1,7 @@
 CREATE OR REPLACE FORCE VIEW tsk_p965_map_tables_v AS
 SELECT
     t.table_name,
+    t.procedure_name,
     --
     MAX(CASE WHEN r.r# = 1 THEN a.is_allowed_create END) AS role_1c,
     MAX(CASE WHEN r.r# = 1 THEN a.is_allowed_update END) AS role_1u,
@@ -34,17 +35,14 @@ SELECT
     MAX(CASE WHEN r.r# = 8 THEN a.is_allowed_update END) AS role_8u,
     MAX(CASE WHEN r.r# = 8 THEN a.is_allowed_delete END) AS role_8d
     --
-FROM all_tables t
+FROM tsk_lov_app_tables_v t
 CROSS JOIN tsk_p962_map_pages_cols_v r
 LEFT JOIN tsk_auth_tables a
     ON a.role_id        = r.role_id
     AND a.table_name    = t.table_name
-WHERE 1 = 1
-    AND t.owner         = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')
-    AND t.table_name    LIKE 'TSK\_%' ESCAPE '\'
 GROUP BY
-    t.table_name
-ORDER BY 1;
+    t.table_name,
+    t.procedure_name;
 --
 COMMENT ON TABLE tsk_p965_map_tables_v IS '';
 
