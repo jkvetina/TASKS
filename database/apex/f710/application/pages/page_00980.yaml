@@ -39,8 +39,64 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Help ========================================
+- # ====== Region: Setup new Project ===========================
   id: 45933040311991408
+  identification: 
+    title: Setup new Project
+    type: Static Content
+
+  source: 
+    html-code: |
+      <ol>
+          <li>create Client</li>
+          <li>create Project</li>
+          <li>create Board</li>
+          <li>create Statuses</li>
+          <li>create Swimlanes</li>
+          <li>start creating Tasks</li>
+      </ol>
+      
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 2
+
+  appearance: 
+    template: Standard # 70897202010975620
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Help ========================================
+  id: 47575019438232102
   identification: 
     title: Help
     type: Static Content
@@ -59,6 +115,111 @@ regions:
     template: Hero # 70864195177975601
     template-options: 
     - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Add Users ===================================
+  id: 47575260260232104
+  identification: 
+    title: Add Users
+    type: Static Content
+
+  source: 
+    html-code: |
+      <ol>
+          <li>create user in Users</li>
+          <li>assign user to Client under Map Clients</li>
+          <li>assign Roles to the user under Map Roles</li>
+      </ol>
+      
+      If you want manage Client/Project users, you have to select that Client/Project first.
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+
+  appearance: 
+    template: Standard # 70897202010975620
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - t-Region--noUI
+    - t-Region--scrollBody
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Context =====================================
+  id: 47575329419232105
+  identification: 
+    title: Context
+    type: Static Content
+
+  source: 
+    html-code: |
+      <ol>
+          <li>if you want to change Board/Project/Client, you have to select it first</li>
+      </ol>
+      
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+
+  appearance: 
+    template: Standard # 70897202010975620
+    template-options: 
+    - '#DEFAULT#'
+    - t-Region--noPadding
+    - t-Region--noUI
+    - t-Region--scrollBody
     render-components: Above Content
 
   accessibility: 
