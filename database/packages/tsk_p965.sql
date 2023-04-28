@@ -50,23 +50,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_p965 AS
             rec.is_allowed_update   := core.get_grid_data('ROLE_' || i || 'U');
             rec.is_allowed_delete   := core.get_grid_data('ROLE_' || i || 'D');
             rec.is_active           := 'Y';
-
-            -- delete or insert new record
-            IF COALESCE(rec.is_allowed_create, rec.is_allowed_update, rec.is_allowed_delete) IS NULL THEN
-                DELETE FROM tsk_auth_tables t
-                WHERE t.role_id         = rec.role_id
-                    AND t.table_name    = rec.table_name;
-            ELSE
-                BEGIN
-                    INSERT INTO tsk_auth_tables
-                    VALUES rec;
-                EXCEPTION
-                WHEN DUP_VAL_ON_INDEX THEN
-                    NULL;
-                when others then
-            core.raise_error('X', i, rec.table_name, rec.role_id, tsk_p962.get_role_id(i), rec.is_allowed_create, rec.is_allowed_update, rec.is_allowed_delete);
-                END;
-            END IF;
+            --
+            DELETE FROM tsk_auth_tables t
+            WHERE t.role_id         = rec.role_id
+                AND t.table_name    = rec.table_name;
+            --
+            BEGIN
+                INSERT INTO tsk_auth_tables
+                VALUES rec;
+            EXCEPTION
+            WHEN DUP_VAL_ON_INDEX THEN
+                NULL;
+            END;
         END LOOP;
     EXCEPTION
     WHEN core.app_exception THEN

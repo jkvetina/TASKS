@@ -145,20 +145,40 @@ regions:
     heading: 
       heading: '&P965_ROLE_1.'
 
-  - # ====== Column Group: &P965_ROLE_2. =========================
-    id: 47508775165863705
-    heading: 
-      heading: '&P965_ROLE_2.'
-
   - # ====== Column Group: &P965_ROLE_3. =========================
-    id: 47508854175863706
+    id: 47508775165863705
     heading: 
       heading: '&P965_ROLE_3.'
 
-  - # ====== Column Group: &P965_ROLE_4. =========================
+  - # ====== Column Group: &P965_ROLE_5. =========================
+    id: 47508854175863706
+    heading: 
+      heading: '&P965_ROLE_5.'
+
+  - # ====== Column Group: &P965_ROLE_7. =========================
     id: 47508923151863707
     heading: 
+      heading: '&P965_ROLE_7.'
+
+  - # ====== Column Group: &P965_ROLE_2. =========================
+    id: 47576813522232120
+    heading: 
+      heading: '&P965_ROLE_2.'
+
+  - # ====== Column Group: &P965_ROLE_4. =========================
+    id: 47576953205232121
+    heading: 
       heading: '&P965_ROLE_4.'
+
+  - # ====== Column Group: &P965_ROLE_6. =========================
+    id: 47577016998232122
+    heading: 
+      heading: '&P965_ROLE_6.'
+
+  - # ====== Column Group: &P965_ROLE_8. =========================
+    id: 47577186599232123
+    heading: 
+      heading: '&P965_ROLE_8.'
 
   columns: 
   - # ====== Column: TABLE_NAME ==================================
@@ -412,7 +432,7 @@ regions:
     layout: 
       sequence: 70
       column-alignment: center
-      group: '&P965_ROLE_2.' # 47508775165863705
+      group: '&P965_ROLE_2.' # 47576813522232120
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -472,7 +492,7 @@ regions:
     layout: 
       sequence: 80
       column-alignment: center
-      group: '&P965_ROLE_2.' # 47508775165863705
+      group: '&P965_ROLE_2.' # 47576813522232120
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -532,7 +552,7 @@ regions:
     layout: 
       sequence: 90
       column-alignment: center
-      group: '&P965_ROLE_2.' # 47508775165863705
+      group: '&P965_ROLE_2.' # 47576813522232120
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -592,7 +612,7 @@ regions:
     layout: 
       sequence: 100
       column-alignment: center
-      group: '&P965_ROLE_3.' # 47508854175863706
+      group: '&P965_ROLE_3.' # 47508775165863705
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -652,7 +672,7 @@ regions:
     layout: 
       sequence: 110
       column-alignment: center
-      group: '&P965_ROLE_3.' # 47508854175863706
+      group: '&P965_ROLE_3.' # 47508775165863705
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -712,7 +732,7 @@ regions:
     layout: 
       sequence: 120
       column-alignment: center
-      group: '&P965_ROLE_3.' # 47508854175863706
+      group: '&P965_ROLE_3.' # 47508775165863705
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -772,7 +792,7 @@ regions:
     layout: 
       sequence: 130
       column-alignment: center
-      group: '&P965_ROLE_4.' # 47508923151863707
+      group: '&P965_ROLE_4.' # 47576953205232121
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -832,7 +852,7 @@ regions:
     layout: 
       sequence: 140
       column-alignment: center
-      group: '&P965_ROLE_4.' # 47508923151863707
+      group: '&P965_ROLE_4.' # 47576953205232121
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -892,7 +912,7 @@ regions:
     layout: 
       sequence: 150
       column-alignment: center
-      group: '&P965_ROLE_4.' # 47508923151863707
+      group: '&P965_ROLE_4.' # 47576953205232121
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -952,6 +972,8 @@ regions:
     layout: 
       sequence: 160
       column-alignment: center
+      group: '&P965_ROLE_5.' # 47508854175863706
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1010,6 +1032,8 @@ regions:
     layout: 
       sequence: 170
       column-alignment: center
+      group: '&P965_ROLE_5.' # 47508854175863706
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1068,6 +1092,8 @@ regions:
     layout: 
       sequence: 180
       column-alignment: center
+      group: '&P965_ROLE_5.' # 47508854175863706
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1126,6 +1152,8 @@ regions:
     layout: 
       sequence: 190
       column-alignment: center
+      group: '&P965_ROLE_6.' # 47577016998232122
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1184,6 +1212,8 @@ regions:
     layout: 
       sequence: 200
       column-alignment: center
+      group: '&P965_ROLE_6.' # 47577016998232122
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1242,6 +1272,8 @@ regions:
     layout: 
       sequence: 210
       column-alignment: center
+      group: '&P965_ROLE_6.' # 47577016998232122
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1300,6 +1332,8 @@ regions:
     layout: 
       sequence: 220
       column-alignment: center
+      group: '&P965_ROLE_7.' # 47508923151863707
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1358,6 +1392,8 @@ regions:
     layout: 
       sequence: 230
       column-alignment: center
+      group: '&P965_ROLE_7.' # 47508923151863707
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1416,6 +1452,8 @@ regions:
     layout: 
       sequence: 240
       column-alignment: center
+      group: '&P965_ROLE_7.' # 47508923151863707
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1474,6 +1512,8 @@ regions:
     layout: 
       sequence: 250
       column-alignment: center
+      group: '&P965_ROLE_8.' # 47577186599232123
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1532,6 +1572,8 @@ regions:
     layout: 
       sequence: 260
       column-alignment: center
+      group: '&P965_ROLE_8.' # 47577186599232123
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1590,6 +1632,8 @@ regions:
     layout: 
       sequence: 270
       column-alignment: center
+      group: '&P965_ROLE_8.' # 47577186599232123
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
