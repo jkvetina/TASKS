@@ -49,7 +49,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
     )
     AS
         rec                 tsk_boards%ROWTYPE;
-        v_action            CONSTANT CHAR := core.get_grid_action();
+        v_action            CONSTANT CHAR   := core.get_grid_action();
     BEGIN
         rec.client_id       := core.get_grid_data('CLIENT_ID');
         rec.project_id      := core.get_grid_data('PROJECT_ID');
@@ -60,21 +60,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
         --
-        tsk_tapi.boards(rec, v_action, in_old_board_id => io_board_id);
-        --
-        IF v_action != 'D' THEN
-            -- update keys to APEX
-            io_board_id     := TO_CHAR(rec.board_id);
+        tsk_tapi.boards(rec, v_action,
+            old_board_id    => io_board_id
+        );
 
-            -- for new records overwrite user settings
-            IF v_action = 'C' THEN
-                tsk_app.set_user_preferences (
-                    in_user_id          => core.get_user_id(),
-                    in_client_id        => rec.client_id,
-                    in_project_id       => rec.project_id,
-                    in_board_id         => rec.board_id
-                );
-            END IF;
+        -- for new records overwrite user settings
+        IF v_action = 'C' THEN
+            tsk_app.set_user_preferences (
+                in_user_id          => core.get_user_id(),
+                in_client_id        => rec.client_id,
+                in_project_id       => rec.project_id,
+                in_board_id         => rec.board_id
+            );
         END IF;
     EXCEPTION
     WHEN core.app_exception THEN
@@ -92,6 +89,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
     )
     AS
         rec                 tsk_statuses%ROWTYPE;
+        v_action            CONSTANT CHAR   := core.get_grid_action();
     BEGIN
         rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'),    tsk_app.get_client_id());
         rec.project_id      := COALESCE(core.get_grid_data('PROJECT_ID'),   tsk_app.get_project_id());
@@ -102,55 +100,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.is_default      := core.get_grid_data('IS_DEFAULT');
         rec.is_named        := core.get_grid_data('IS_NAMED');
         rec.order#          := core.get_grid_data('ORDER#');
-        --
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
-
-        -- are we deleting the status?
-        IF core.get_grid_action() = 'D' THEN
-            DELETE FROM tsk_statuses t
-            WHERE t.status_id       = io_status_id          -- old key
-                AND t.client_id     = io_client_id
-                AND t.project_id    = io_project_id;
-            --
-            RETURN;
-        END IF;
-
-        -- are we renaming the primary key?
-        IF rec.status_id != io_status_id AND core.get_grid_action() = 'U' THEN
-            -- create new status
-            INSERT INTO tsk_statuses
-            VALUES rec;
-
-            -- move old lines to the new status
-            UPDATE tsk_tasks t
-            SET t.status_id         = rec.status_id         -- new key
-            WHERE t.status_id       = io_status_id          -- old key
-                AND t.client_id     = io_client_id
-                AND t.project_id    = io_project_id;
-            --
-            DELETE FROM tsk_statuses t
-            WHERE t.status_id       = io_status_id          -- old key
-                AND t.client_id     = io_client_id
-                AND t.project_id    = io_project_id;
-        ELSE
-            -- proceed with update or insert
-            UPDATE tsk_statuses t
-            SET ROW = rec
-            WHERE t.status_id       = io_status_id
-                AND t.client_id     = io_client_id
-                AND t.project_id    = io_project_id;
-            --
-            IF SQL%ROWCOUNT = 0 THEN
-                INSERT INTO tsk_statuses
-                VALUES rec;
-            END IF;
-        END IF;
-
-        -- update keys to APEX
-        io_client_id        := rec.client_id;
-        io_project_id       := rec.project_id;
-        io_status_id        := rec.status_id;
+        --
+        tsk_tapi.statuses(rec, v_action,
+            old_client_id       => io_client_id,
+            old_project_id      => io_project_id,
+            old_status_id       => io_status_id
+        );
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
