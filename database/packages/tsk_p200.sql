@@ -60,7 +60,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
         --
-        tsk_tapi.boards(rec, v_action, io_board_id);
+        tsk_tapi.boards(rec, v_action, in_old_board_id => io_board_id);
         --
         IF v_action != 'D' THEN
             -- update keys to APEX
