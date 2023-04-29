@@ -452,7 +452,8 @@ wwv_flow_imp_page.create_page_process(
 ,p_region_id=>wwv_flow_imp.id(185622990032829208)
 ,p_process_type=>'NATIVE_IG_DML'
 ,p_process_name=>'SAVE_USERS'
-,p_attribute_01=>'REGION_SOURCE'
+,p_attribute_01=>'TABLE'
+,p_attribute_03=>'TSK_USERS'
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'

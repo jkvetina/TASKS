@@ -693,7 +693,9 @@ processes:
     editable-region: Users [GRID] # 185622990032829208
 
   settings: 
-    target-type: Region Source
+    target-type: Table / View
+    table-owner: PARSING SCHEMA
+    table-name: TSK_USERS
     prevent-lost-updates: true
     lock-row: No
     return-primary-key(s)-after-insert: true
