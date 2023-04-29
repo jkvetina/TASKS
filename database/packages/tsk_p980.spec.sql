@@ -1,0 +1,7 @@
+CREATE OR REPLACE PACKAGE tsk_p980 AS
+
+    PROCEDURE init_defaults;
+
+END;
+/
+

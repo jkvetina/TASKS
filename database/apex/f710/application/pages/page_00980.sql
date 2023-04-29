@@ -31,7 +31,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 ,p_protection_level=>'C'
-,p_page_component_map=>'11'
+,p_page_component_map=>'17'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
@@ -111,7 +111,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_new_grid_row=>false
 ,p_plug_new_grid_column=>false
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'<p>You can use the <a href="&P980_PROJECT_WIZARD.">Project wizard</a>, or go through individual steps:</p>',
+'<p>You can use the <a href="&P980_PROJECT_WIZARD.">Project Wizard</a>, or go through individual steps:</p>',
 '',
 '<ol>',
 '    <li>create <a href="&P980_CLIENT_ADD.">Client</a></li>',
@@ -137,12 +137,12 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_new_grid_row=>false
 ,p_plug_new_grid_column=>false
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'<p>You can use the <a href="&P980_USER_WIZARD.">User wizard</a>, or go through individual steps:</p>',
+'<p>You can use the <a href="&P980_USER_WIZARD.">User Wizard</a>, or go through individual steps:</p>',
 '',
 '<ol>',
-'    <li>create user in <a hred="&P980_USER_ADD.">Users</a></li>',
-'    <li>assign user to Client under <a hred="&P980_MAP_CLIENT.">Map Clients</a></li>',
-'    <li>assign Roles to the user under <a hred="&P980_MAP_ROLES.">Map Roles</a></li>',
+'    <li>create user in <a href="&P980_USER_ADD.">Users</a></li>',
+'    <li>assign user to Client under <a href="&P980_MAP_CLIENTS.">Map Clients</a></li>',
+'    <li>assign Roles to the user under <a href="&P980_MAP_ROLES.">Map Roles</a></li>',
 '    <li>you can set Roles for Client (all Projects) or just specific Project</li>',
 '</ol>',
 ''))
@@ -268,7 +268,7 @@ wwv_flow_imp_page.create_page_item(
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(47578905782232141)
-,p_name=>'P980_MAP_USERS'
+,p_name=>'P980_MAP_CLIENTS'
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_imp.id(47578019339232132)
 ,p_display_as=>'NATIVE_HIDDEN'

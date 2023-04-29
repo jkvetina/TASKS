@@ -228,7 +228,7 @@ regions:
 
   source: 
     html-code: |
-      <p>You can use the <a href="&P980_PROJECT_WIZARD.">Project wizard</a>, or go through individual steps:</p>
+      <p>You can use the <a href="&P980_PROJECT_WIZARD.">Project Wizard</a>, or go through individual steps:</p>
       
       <ol>
           <li>create <a href="&P980_CLIENT_ADD.">Client</a></li>
@@ -289,12 +289,12 @@ regions:
 
   source: 
     html-code: |
-      <p>You can use the <a href="&P980_USER_WIZARD.">User wizard</a>, or go through individual steps:</p>
+      <p>You can use the <a href="&P980_USER_WIZARD.">User Wizard</a>, or go through individual steps:</p>
       
       <ol>
-          <li>create user in <a hred="&P980_USER_ADD.">Users</a></li>
-          <li>assign user to Client under <a hred="&P980_MAP_CLIENT.">Map Clients</a></li>
-          <li>assign Roles to the user under <a hred="&P980_MAP_ROLES.">Map Roles</a></li>
+          <li>create user in <a href="&P980_USER_ADD.">Users</a></li>
+          <li>assign user to Client under <a href="&P980_MAP_CLIENTS.">Map Clients</a></li>
+          <li>assign Roles to the user under <a href="&P980_MAP_ROLES.">Map Roles</a></li>
           <li>you can set Roles for Client (all Projects) or just specific Project</li>
       </ol>
       
@@ -745,10 +745,10 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P980_MAP_USERS ===========================
+- # ====== Page Item: P980_MAP_CLIENTS =========================
   id: 47578905782232141
   identification: 
-    name: P980_MAP_USERS
+    name: P980_MAP_CLIENTS
     type: Hidden
 
   settings: 
