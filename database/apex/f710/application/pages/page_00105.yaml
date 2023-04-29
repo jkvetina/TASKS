@@ -1496,6 +1496,110 @@ regions:
     session-state: 
       data-type: VARCHAR2
 
+- # ====== Region: Tags &P105_BADGE_TAGS. ======================
+  id: 47739135794626901
+  identification: 
+    title: Tags &P105_BADGE_TAGS.
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: '[TABS_RIGHT]' # 44093969062578042
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 70831193948975578
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Tasks with same tags [LIST] =================
+  id: 47739270988626902
+  identification: 
+    title: Tasks with same tags [LIST]
+    type: List View
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_P105_TAGS_V
+    include-rowid-column: false
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 10
+    parent-region: Tags &P105_BADGE_TAGS. # 47739135794626901
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    column-attributes: 
+    - 'style="margin-top:'
+    - 0.5rem;"
+
+  appearance: 
+    template: Cards Container # 70838329605975585
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  security: 
+    escape-special-characters: true
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      text-column: LIST_TEXT
+      supplemental-information-column: LIST_SUPPLEMENTAL
+      counter-column: LIST_COUNTER
+      link-target: '&LIST_LINK.'
+
+    layout: 
+      number-of-rows-type: Static Value
+      number-of-rows: 15
+
 - # ====== Region: &P105_HEADER. ===============================
   id: 63213380867844590
   identification: 
@@ -2446,7 +2550,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 90
+    sequence: 100
     region: '&P105_HEADER.' # 63213380867844590
     position: BODY
 
@@ -2476,7 +2580,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 100
+    sequence: 110
     region: '&P105_HEADER.' # 63213380867844590
     position: BODY
 
@@ -2878,6 +2982,36 @@ page-items:
 
   quick-picks: 
     show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_BADGE_TAGS ==========================
+  id: 47739376821626903
+  identification: 
+    name: P105_BADGE_TAGS
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 90
+    region: '&P105_HEADER.' # 63213380867844590
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
 
   security: 
     session-state-protection: Unrestricted
@@ -3347,6 +3481,21 @@ dynamic-actions:
       event: CLOSE_DIALOG # 63213674749844593
       fire-when-event-result-is: True
       fire-on-initialization: false
+
+computations: 
+- # ====== Computation: P105_TAGS ==============================
+  id: 47739499141626904
+  identification: 
+    item-name: P105_TAGS
+
+  execution: 
+    sequence: 10
+    point: After Header
+
+  computation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: "LTRIM(RTRIM(REPLACE(:P105_TAGS, ':', ' ')))"
 
 processes: 
 - # ====== Process: INIT_FORM ==================================

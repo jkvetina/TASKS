@@ -21,6 +21,13 @@ SELECT
     --
     t.status_id,
     t.swimlane_id,
+    t.category_id,
+    t.owner_id,
+    t.deadline_at,
+    t.tags,
+    t.updated_by,
+    t.updated_at,
+    --
     w.order#            AS swimlane_order#,
     s.order#            AS status_order#,
     t.order#            AS task_order#,
@@ -59,6 +66,12 @@ GROUP BY
     t.task_name,
     t.status_id,
     t.swimlane_id,
+    t.category_id,
+    t.owner_id,
+    t.deadline_at,
+    t.tags,
+    t.updated_by,
+    t.updated_at,
     w.order#,
     s.order#,
     t.order#;

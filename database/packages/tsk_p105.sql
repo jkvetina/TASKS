@@ -75,6 +75,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         -- overwrite some page items
         core.set_item('P105_TASK_LINK',     tsk_app.get_task_link(rec.task_id, 'EXTERNAL'));
         core.set_item('P105_AUDIT',         TO_CHAR(rec.updated_at, 'YYYY-MM-DD HH24:MI') || ' ' || rec.updated_by);
+        core.set_item('P105_TAGS',          LTRIM(RTRIM(REPLACE(rec.tags, ':', ' '))));
 
         -- calculate page header
         core.set_item('P105_HEADER', CASE WHEN rec.task_id IS NOT NULL THEN 'Update Task ' || tsk_p100.c_task_prefix || rec.task_id ELSE core.get_page_name(105) END);
@@ -105,7 +106,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         rec.category_id     := core.get_item('P105_CATEGORY_ID');
         rec.owner_id        := core.get_item('P105_OWNER_ID');
         rec.deadline_at     := core.get_date_item('P105_DEADLINE_AT');
-        rec.tags            := SUBSTR(core.get_item('P105_TAGS'), 1, 256);
+        rec.tags            := NULLIF(':' || SUBSTR(REGEXP_REPLACE(LOWER(core.get_item('P105_TAGS')), '[^a-z0-9]+', ':'), 1, 256) || ':', '::');
         rec.order#          := core.get_item('P105_ORDER');
         --
         rec.updated_by      := core.get_user_id();

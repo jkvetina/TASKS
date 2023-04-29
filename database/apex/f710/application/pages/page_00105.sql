@@ -697,6 +697,39 @@ wwv_flow_imp_page.create_page_plug(
 ,p_attribute_16=>'javascript: { window.open(''&COMMIT_URL.'', ''_blank''); }'
 );
 wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(47739135794626901)
+,p_plug_name=>'Tags &P105_BADGE_TAGS.'
+,p_parent_plug_id=>wwv_flow_imp.id(44093969062578042)
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(70831193948975578)
+,p_plug_display_sequence=>40
+,p_plug_display_point=>'SUB_REGIONS'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(47739270988626902)
+,p_plug_name=>'Tasks with same tags [LIST]'
+,p_parent_plug_id=>wwv_flow_imp.id(47739135794626901)
+,p_region_template_options=>'#DEFAULT#'
+,p_escape_on_http_output=>'Y'
+,p_plug_template=>wwv_flow_imp.id(70838329605975585)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'SUB_REGIONS'
+,p_query_type=>'TABLE'
+,p_query_table=>'TSK_P105_TAGS_V'
+,p_include_rowid_column=>false
+,p_plug_source_type=>'NATIVE_JQM_LIST_VIEW'
+,p_plug_query_num_rows=>15
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_column_width=>'style="margin-top: 0.5rem;"'
+,p_attribute_02=>'LIST_TEXT'
+,p_attribute_06=>'LIST_SUPPLEMENTAL'
+,p_attribute_08=>'LIST_COUNTER'
+,p_attribute_16=>'&LIST_LINK.'
+);
+wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(63213380867844590)
 ,p_plug_name=>'&P105_HEADER.'
 ,p_region_template_options=>'#DEFAULT#'
@@ -954,6 +987,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_04=>'TEXT'
 ,p_attribute_05=>'BOTH'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.10.07'
+,p_release=>'22.2.4'
+,p_default_workspace_id=>8506563800894011
+,p_default_application_id=>710
+,p_default_id_offset=>84847035874187356
+,p_default_owner=>'APPS'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34799148806743642)
 ,p_name=>'P105_TASK_DESC'
@@ -971,18 +1016,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'MARKDOWN'
 ,p_attribute_04=>'300'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.10.07'
-,p_release=>'22.2.4'
-,p_default_workspace_id=>8506563800894011
-,p_default_application_id=>710
-,p_default_id_offset=>84847035874187356
-,p_default_owner=>'APPS'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(34799227459743643)
@@ -1229,7 +1262,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44172311455914730)
 ,p_name=>'P105_PREV_TASK_ID'
-,p_item_sequence=>90
+,p_item_sequence=>100
 ,p_item_plug_id=>wwv_flow_imp.id(63213380867844590)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1238,7 +1271,7 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(44172478726914731)
 ,p_name=>'P105_NEXT_TASK_ID'
-,p_item_sequence=>100
+,p_item_sequence=>110
 ,p_item_plug_id=>wwv_flow_imp.id(63213380867844590)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
@@ -1384,6 +1417,15 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(47739376821626903)
+,p_name=>'P105_BADGE_TAGS'
+,p_item_sequence=>90
+,p_item_plug_id=>wwv_flow_imp.id(63213380867844590)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(63213944180844595)
 ,p_name=>'P105_HEADER'
 ,p_item_sequence=>20
@@ -1391,6 +1433,15 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
+);
+wwv_flow_imp_page.create_page_computation(
+ p_id=>wwv_flow_imp.id(47739499141626904)
+,p_computation_sequence=>10
+,p_computation_item=>'P105_TAGS'
+,p_computation_point=>'AFTER_HEADER'
+,p_computation_type=>'EXPRESSION'
+,p_computation_language=>'PLSQL'
+,p_computation=>'LTRIM(RTRIM(REPLACE(:P105_TAGS, '':'', '' '')))'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(63213674749844593)

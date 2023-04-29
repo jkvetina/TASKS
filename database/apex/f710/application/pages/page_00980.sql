@@ -51,7 +51,8 @@ wwv_flow_imp_page.create_page_plug(
 '<p>There is a hierarchy present: Client - Project(s) - Board(s) - Task(s). In a nutshell that is all you need. You create a task, you add checklists (things needed to achieve the task or also acceptance criteria) and you can move tasks by drag and dr'
 ||'op in between status columns (and swimlanes).</p>',
 '',
-'</p>You can add comments, attach files and description to the tasks if needed. You can also assign commits done to specific tasks. You can also do a bulk operations on group of tasks.</p>',
+'</p>You can add description, attach files, add comments to the tasks if needed. You can also assign commits done to specific tasks (manually on Commits page or automatically by using task_id on commit message).',
+'With Tags you can link related tasks together. And you can also do a bulk operations on group of tasks.</p>',
 '',
 '<p>You can define your own statuses, swimlanes, task categories and colors for each project.</p>',
 ''))
