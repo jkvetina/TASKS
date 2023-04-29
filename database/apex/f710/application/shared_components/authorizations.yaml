@@ -50,3 +50,72 @@
   error: 
     error-message: ACCESS_DENIED
 
+- # ====== Authorization: IS_USER_C ============================
+  id: 47696452253028618
+  identification: 
+    name: IS_USER_C
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: |
+      RETURN tsk_auth.is_user(
+          in_component_id     => :APP_COMPONENT_ID,
+          in_component_type   => :APP_COMPONENT_TYPE,
+          in_component_name   => :APP_COMPONENT_NAME,
+          in_action           => 'C'
+      ) = 'Y';
+
+  server-cache: 
+    evaluation-point: Once per Component
+
+  error: 
+    error-message: ACCESS_DENIED|IS_USER_C
+
+- # ====== Authorization: IS_USER_U ============================
+  id: 47696708662034140
+  identification: 
+    name: IS_USER_U
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: |
+      RETURN tsk_auth.is_user(
+          in_component_id     => :APP_COMPONENT_ID,
+          in_component_type   => :APP_COMPONENT_TYPE,
+          in_component_name   => :APP_COMPONENT_NAME,
+          in_action           => 'U'
+      ) = 'Y';
+
+  server-cache: 
+    evaluation-point: Once per Component
+
+  error: 
+    error-message: ACCESS_DENIED|IS_USER_U
+
+- # ====== Authorization: IS_USER_D ============================
+  id: 47697042010037770
+  identification: 
+    name: IS_USER_D
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: |
+      RETURN tsk_auth.is_user(
+          in_component_id     => :APP_COMPONENT_ID,
+          in_component_type   => :APP_COMPONENT_TYPE,
+          in_component_name   => :APP_COMPONENT_NAME,
+          in_action           => 'D'
+      ) = 'Y';
+
+  server-cache: 
+    evaluation-point: Once per Component
+
+  error: 
+    error-message: ACCESS_DENIED|IS_USER_D
+

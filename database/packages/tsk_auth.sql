@@ -30,10 +30,15 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
 
     FUNCTION is_user (
-        in_user_id          tsk_auth_roles.user_id%TYPE,
-        in_page_id          tsk_auth_pages.page_id%TYPE,
-        in_client_id        tsk_auth_roles.client_id%TYPE,
-        in_project_id       tsk_auth_roles.project_id%TYPE
+        in_user_id              tsk_auth_roles.user_id%TYPE,
+        in_page_id              tsk_auth_pages.page_id%TYPE,
+        in_client_id            tsk_auth_roles.client_id%TYPE,
+        in_project_id           tsk_auth_roles.project_id%TYPE,
+        --
+        in_component_id         NUMBER      := NULL,
+        in_component_type       VARCHAR2    := NULL,
+        in_component_name       VARCHAR2    := NULL,
+        in_action               CHAR        := NULL
     )
     RETURN CHAR
     --RESULT_CACHE
@@ -52,15 +57,28 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
 
 
-    FUNCTION is_user
+    FUNCTION is_user (
+        in_component_id         NUMBER      := NULL,
+        in_component_type       VARCHAR2    := NULL,
+        in_component_name       VARCHAR2    := NULL,
+        in_action               CHAR        := NULL
+    )
     RETURN CHAR
     AS
     BEGIN
+        IF core.is_developer() THEN
+            RETURN 'Y';
+        END IF;
+        --
         RETURN tsk_auth.is_user (
             in_user_id          => core.get_user_id(),
             in_page_id          => core.get_page_id(),
             in_client_id        => COALESCE(core.get_item('$CLIENT_ID'),   tsk_app.get_client_id()),
-            in_project_id       => COALESCE(core.get_item('$PROJECT_ID'),  tsk_app.get_project_id())
+            in_project_id       => COALESCE(core.get_item('$PROJECT_ID'),  tsk_app.get_project_id()),
+            in_component_id     => in_component_id,
+            in_component_type   => in_component_type,
+            in_component_name   => in_component_name,
+            in_action           => in_action
         );
     END;
 
