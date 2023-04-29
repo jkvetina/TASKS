@@ -312,6 +312,34 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
 
 
+    PROCEDURE save_merge_checklist
+    AS
+        v_source_task_id    tsk_tasks.task_id%TYPE;
+        v_target_task_id    tsk_tasks.task_id%TYPE;
+    BEGIN
+        v_source_task_id    := core.get_item('$TASK_ID');
+        v_target_task_id    := core.get_item('$TARGET_TASK_ID');
+        --
+        UPDATE tsk_task_checklist t
+        SET t.task_id       = v_target_task_id
+        WHERE t.task_id     = v_source_task_id;
+        --
+        -- @TODO: move description, attachements, comments, commits, tags...
+        --
+        DELETE FROM tsk_tasks t
+        WHERE t.task_id     = v_source_task_id;
+        --
+        -- and now we should redirect user to the target task
+        --
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
     PROCEDURE save_attachements
     AS
         rec         tsk_task_files%ROWTYPE;
