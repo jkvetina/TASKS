@@ -20,6 +20,18 @@ navigation:
   cursor-focus: Do not focus cursor
   warn-on-unsaved-changes: true
 
+css: 
+  inline: |
+    ul li,
+    ol li {
+        font-size: 100%;
+        line-height: 140%;
+        margin-bottom: 0.25rem;
+    }
+    p {
+        line-height: 140%;
+    }
+
 security: 
   authorization-scheme: IS_USER # 47196033359190547
   authentication: Page Requires Authentication
@@ -39,22 +51,21 @@ server-cache:
   caching: Disabled
 
 regions: 
-- # ====== Region: Setup new Project ===========================
+- # ====== Region: About this Application ======================
   id: 45933040311991408
   identification: 
-    title: Setup new Project
+    title: About this Application
     type: Static Content
 
   source: 
     html-code: |
-      <ol>
-          <li>create Client</li>
-          <li>create Project</li>
-          <li>create Board</li>
-          <li>create Statuses</li>
-          <li>create Swimlanes</li>
-          <li>start creating Tasks</li>
-      </ol>
+      <p>This application was designed to easily track project tasks on Kanban style board. You can do sprints, but you dont have to. You can track everything on 1 board if you want to.</p>
+      
+      <p>There is a hierarchy present: Client - Project(s) - Board(s) - Task(s). In a nutshell that is all you need. You create a task, you add checklists (things needed to achieve the task or also acceptance criteria) and you can move tasks by drag and drop in between status columns (and swimlanes).</p>
+      
+      </p>You can add comments, attach files and description to the tasks if needed. You can also assign commits done to specific tasks. You can also do a bulk operations on group of tasks.</p>
+      
+      <p>You can define your own statuses, swimlanes, task categories and colors for each project.</p>
       
 
   layout: 
@@ -62,18 +73,15 @@ regions:
     parent-region: No Parent
     position: BODY
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
-    new-column: true
-    column-span: 2
+    new-column: false
+    column-span: Automatic
 
   appearance: 
-    template: Standard # 70897202010975620
+    template: Blank with Attributes (No Grid) # 70832601486975579
     template-options: 
     - '#DEFAULT#'
-    - t-Region--noPadding
-    - t-Region--noUI
-    - t-Region--scrollBody
     render-components: Above Content
 
   accessibility: 
@@ -81,6 +89,12 @@ regions:
     landmark-type: Template Default
 
   advanced: 
+    custom-attributes: 
+    - 'style="padding:'
+    - 0
+    - 1.5rem
+    - 0
+    - 0.5rem;"
     region-display-selector: true
     exclude-title-from-translation: false
 
@@ -95,10 +109,241 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Help ========================================
-  id: 47575019438232102
+- # ====== Region: About Security ==============================
+  id: 47575260260232104
   identification: 
-    title: Help
+    title: About Security
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>This application has security based on roles with quite extensive setup. As an administrator you can create new role (or manage existing roles) and map:</p>
+      
+      <ul>
+          <li>Pages accessible to the specific roles (per project)</li>
+          <li>Database tables with Create/Update/Delete actions</li>
+          <li>Database procedures you can run</li>
+          <li>Components (regions, buttons...) you can see on page</li>
+      </ul>
+      
+      <p>You have a global list of users and you have to assign users to the clients. Then you can specify what roles will user have on specific client or project (you have both levels). If project role is not found, then the client role is checked.</p>
+      
+
+  layout: 
+    sequence: 70
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid) # 70832601486975579
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    custom-attributes: 
+    - 'style="padding:'
+    - 0
+    - 1.5rem
+    - 0
+    - 0.5rem;"
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: About Context ===============================
+  id: 47575329419232105
+  identification: 
+    title: About Context
+    type: Static Content
+
+  source: 
+    html-code: <p>Most of the pages (and data you will see) are based on a Board/Project/Client combination which you can change on homepage.</p>
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid) # 70832601486975579
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    custom-attributes: 
+    - 'style="padding:'
+    - 0
+    - 1.5rem
+    - 0
+    - 0.5rem;"
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Creating new Project ========================
+  id: 47577984530232131
+  identification: 
+    title: Creating new Project
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>You can use the <a href="&P980_PROJECT_WIZARD.">Project wizard</a>, or go through individual steps:</p>
+      
+      <ol>
+          <li>create <a href="&P980_CLIENT_ADD.">Client</a></li>
+          <li>create <a href="&P980_PROJECT_ADD.">Project</a></li>
+          <li>create <a href="&P980_BOARD_ADD.">Board</a></li>
+          <li>create <a href="&P980_STATUS_ADD.">Statuses</a></li>
+          <li>create <a href="&P980_SWIMLANE_ADD.">Swimlanes</a></li>
+          <li>start creating <a href="&P980_TASK_ADD.">Tasks</a></li>
+      </ol>
+      
+
+  layout: 
+    sequence: 50
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid) # 70832601486975579
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    custom-attributes: 
+    - 'style="padding:'
+    - 0
+    - 1.5rem
+    - 0
+    - 0.5rem;"
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Creating new User ===========================
+  id: 47578019339232132
+  identification: 
+    title: Creating new User
+    type: Static Content
+
+  source: 
+    html-code: |
+      <p>You can use the <a href="&P980_USER_WIZARD.">User wizard</a>, or go through individual steps:</p>
+      
+      <ol>
+          <li>create user in <a hred="&P980_USER_ADD.">Users</a></li>
+          <li>assign user to Client under <a hred="&P980_MAP_CLIENT.">Map Clients</a></li>
+          <li>assign Roles to the user under <a hred="&P980_MAP_ROLES.">Map Roles</a></li>
+          <li>you can set Roles for Client (all Projects) or just specific Project</li>
+      </ol>
+      
+
+  layout: 
+    sequence: 100
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes (No Grid) # 70832601486975579
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    custom-attributes: 
+    - 'style="padding:'
+    - 0
+    - 1.5rem
+    - 0
+    - 0.5rem;"
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: About this Application ======================
+  id: 47579167303232143
+  identification: 
+    title: About this Application
     type: Static Content
 
   layout: 
@@ -107,6 +352,47 @@ regions:
     position: BODY
     start-new-layout: false
     start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 3
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Creating new Project ========================
+  id: 47579266113232144
+  identification: 
+    title: Creating new Project
+    type: Static Content
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -122,7 +408,7 @@ regions:
     landmark-type: Template Default
 
   advanced: 
-    region-display-selector: true
+    region-display-selector: false
     exclude-title-from-translation: false
 
   server-cache: 
@@ -136,108 +422,416 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Add Users ===================================
-  id: 47575260260232104
+- # ====== Region: About Security ==============================
+  id: 47579316466232145
   identification: 
-    title: Add Users
+    title: About Security
     type: Static Content
 
+  layout: 
+    sequence: 60
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Creating new User ===========================
+  id: 47579417214232146
+  identification: 
+    title: Creating new User
+    type: Static Content
+
+  layout: 
+    sequence: 90
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 70864195177975601
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P980_PROJECT_WIZARD ======================
+  id: 47578140696232133
+  identification: 
+    name: P980_PROJECT_WIZARD
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Creating new Project # 47577984530232131
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
   source: 
-    html-code: |
-      <ol>
-          <li>create user in Users</li>
-          <li>assign user to Client under Map Clients</li>
-          <li>assign Roles to the user under Map Roles</li>
-      </ol>
-      
-      If you want manage Client/Project users, you have to select that Client/Project first.
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P980_CLIENT_ADD ==========================
+  id: 47578216785232134
+  identification: 
+    name: P980_CLIENT_ADD
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: Creating new Project # 47577984530232131
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P980_PROJECT_ADD =========================
+  id: 47578305002232135
+  identification: 
+    name: P980_PROJECT_ADD
+    type: Hidden
+
+  settings: 
+    value-protected: true
 
   layout: 
     sequence: 30
-    parent-region: No Parent
+    region: Creating new Project # 47577984530232131
     position: BODY
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: true
-    column-span: 2
-
-  appearance: 
-    template: Standard # 70897202010975620
-    template-options: 
-    - '#DEFAULT#'
-    - t-Region--noPadding
-    - t-Region--noUI
-    - t-Region--scrollBody
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
 
   advanced: 
-    region-display-selector: true
-    exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
-
-  customization: 
-    customizable: Not Customizable By End Users
-
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
-
-- # ====== Region: Context =====================================
-  id: 47575329419232105
-  identification: 
-    title: Context
-    type: Static Content
+    warn-on-unsaved-changes: Page Default
 
   source: 
-    html-code: |
-      <ol>
-          <li>if you want to change Board/Project/Client, you have to select it first</li>
-      </ol>
-      
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P980_BOARD_ADD ===========================
+  id: 47578424565232136
+  identification: 
+    name: P980_BOARD_ADD
+    type: Hidden
+
+  settings: 
+    value-protected: true
 
   layout: 
     sequence: 40
-    parent-region: No Parent
+    region: Creating new Project # 47577984530232131
     position: BODY
-    start-new-layout: false
-    start-new-row: false
-    column: Automatic
-    new-column: true
-    column-span: 2
-
-  appearance: 
-    template: Standard # 70897202010975620
-    template-options: 
-    - '#DEFAULT#'
-    - t-Region--noPadding
-    - t-Region--noUI
-    - t-Region--scrollBody
-    render-components: Above Content
-
-  accessibility: 
-    use-landmark: true
-    landmark-type: Template Default
 
   advanced: 
-    region-display-selector: true
-    exclude-title-from-translation: false
+    warn-on-unsaved-changes: Page Default
 
-  server-cache: 
-    caching: Disabled
+  source: 
+    type: Null
+    used: Only when current value in session state is null
 
-  customization: 
-    customizable: Not Customizable By End Users
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
 
-  attributes: 
-    settings: 
-      output-as: HTML
-      expand-shortcuts: false
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P980_STATUS_ADD ==========================
+  id: 47578518283232137
+  identification: 
+    name: P980_STATUS_ADD
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: Creating new Project # 47577984530232131
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P980_SWIMLANE_ADD ========================
+  id: 47578691108232138
+  identification: 
+    name: P980_SWIMLANE_ADD
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 60
+    region: Creating new Project # 47577984530232131
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P980_TASK_ADD ============================
+  id: 47578744411232139
+  identification: 
+    name: P980_TASK_ADD
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 70
+    region: Creating new Project # 47577984530232131
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P980_MAP_ROLES ===========================
+  id: 47578830472232140
+  identification: 
+    name: P980_MAP_ROLES
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: Creating new User # 47578019339232132
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P980_MAP_USERS ===========================
+  id: 47578905782232141
+  identification: 
+    name: P980_MAP_USERS
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: Creating new User # 47578019339232132
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P980_USER_ADD ============================
+  id: 47579037285232142
+  identification: 
+    name: P980_USER_ADD
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: Creating new User # 47578019339232132
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P980_USER_WIZARD =========================
+  id: 47579509425232147
+  identification: 
+    name: P980_USER_WIZARD
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Creating new User # 47578019339232132
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
 
