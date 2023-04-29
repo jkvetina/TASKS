@@ -53,6 +53,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             core.set_item('P105_CLIENT_ID',     tsk_app.get_client_id());
             core.set_item('P105_PROJECT_ID',    tsk_app.get_project_id());
             core.set_item('P105_BOARD_ID',      tsk_app.get_board_id());
+            core.set_item('P105_OWNER_ID',      core.get_user_id());
             --
             FOR c IN (
                 SELECT s.status_id
@@ -102,6 +103,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         rec.status_id       := core.get_item('P105_STATUS_ID');
         rec.swimlane_id     := core.get_item('P105_SWIMLANE_ID');
         rec.category_id     := core.get_item('P105_CATEGORY_ID');
+        rec.owner_id        := core.get_item('P105_OWNER_ID');
+        rec.deadline_at     := core.get_date_item('P105_DEADLINE_AT');
+        rec.tags            := SUBSTR(core.get_item('P105_TAGS'), 1, 256);
         rec.order#          := core.get_item('P105_ORDER');
         --
         rec.updated_by      := core.get_user_id();

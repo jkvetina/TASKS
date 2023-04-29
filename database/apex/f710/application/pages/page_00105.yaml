@@ -2093,7 +2093,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 110
+    sequence: 150
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -2133,12 +2133,12 @@ page-items:
     send-on-page-submit: true
 
   layout: 
-    sequence: 90
+    sequence: 120
     region: '[FORM]' # 63213536180844591
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -2175,7 +2175,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 100
+    sequence: 140
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -2283,7 +2283,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P105_BADGE_DESC ==========================
@@ -2618,7 +2618,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 120
+    sequence: 160
     region: '[FORM]' # 63213536180844591
     position: BODY
 
@@ -2688,6 +2688,187 @@ page-items:
   source: 
     form-region: '[FORM]' # 63213536180844591
     column: CATEGORY_ID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_OWNER_ID ============================
+  id: 47579677587232148
+  identification: 
+    name: P105_OWNER_ID
+    type: Select List
+
+  label: 
+    label: Owner
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 90
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_USERS # 46494875558442406
+    display-extra-values: false
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: OWNER_ID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_DEADLINE_AT =========================
+  id: 47579772674232149
+  identification: 
+    name: P105_DEADLINE_AT
+    type: Date Picker
+
+  label: 
+    label: Deadline At
+    alignment: Left
+
+  settings: 
+    show-time: false
+    display-as: Native HTML
+    minimum-date: None
+    maximum-date: None
+
+  layout: 
+    sequence: 100
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: YYYY-MM-DD
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: DEADLINE_AT
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_TAGS ================================
+  id: 47579807341232150
+  identification: 
+    name: P105_TAGS
+    type: Text Field
+
+  label: 
+    label: Tags
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 110
+    region: '[FORM]' # 63213536180844591
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+    maximum-length: 256
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 63213536180844591
+    column: TAGS
     data-type: VARCHAR2
     query-only: false
     primary-key: false

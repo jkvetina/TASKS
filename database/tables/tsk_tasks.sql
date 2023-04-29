@@ -8,6 +8,9 @@ CREATE TABLE tsk_tasks (
     status_id                       VARCHAR2(32)    CONSTRAINT nn_tsk_tasks_status NOT NULL,
     swimlane_id                     VARCHAR2(32)    CONSTRAINT nn_tsk_tasks_swimlane NOT NULL,
     category_id                     VARCHAR2(32),
+    owner_id                        VARCHAR2(128),
+    deadline_at                     DATE,
+    tags                            VARCHAR2(256),
     order#                          NUMBER(10,0),
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
@@ -33,6 +36,11 @@ CREATE TABLE tsk_tasks (
     CONSTRAINT fk_tsk_tasks_category
         FOREIGN KEY (client_id, project_id, category_id)
         REFERENCES tsk_categories (client_id, project_id, category_id)
+        DEFERRABLE INITIALLY DEFERRED,
+    --
+    CONSTRAINT fk_tsk_tasks_owner
+        FOREIGN KEY (owner_id)
+        REFERENCES tsk_users (user_id)
         DEFERRABLE INITIALLY DEFERRED
 );
 --
@@ -47,5 +55,8 @@ COMMENT ON COLUMN tsk_tasks.board_id        IS '';
 COMMENT ON COLUMN tsk_tasks.status_id       IS '';
 COMMENT ON COLUMN tsk_tasks.swimlane_id     IS '';
 COMMENT ON COLUMN tsk_tasks.category_id     IS '';
+COMMENT ON COLUMN tsk_tasks.owner_id        IS '';
+COMMENT ON COLUMN tsk_tasks.deadline_at     IS '';
+COMMENT ON COLUMN tsk_tasks.tags            IS '';
 COMMENT ON COLUMN tsk_tasks.order#          IS '';
 
