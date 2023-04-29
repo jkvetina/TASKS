@@ -843,7 +843,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_redirect_url=>'f?p=&APP_ID.:108:&SESSION.::&DEBUG.:108:P108_TASK_ID:&P105_TASK_ID.'
 ,p_button_condition=>'P105_SHOW_SPLIT'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
-,p_icon_css_classes=>'fa-accessor-more fa-rotate-180'
+,p_icon_css_classes=>'fa-accessor-more fa-flip-horizontal'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(34949592599065805)

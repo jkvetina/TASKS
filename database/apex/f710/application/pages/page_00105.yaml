@@ -3409,7 +3409,7 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
-    icon: fa-accessor-more fa-rotate-180
+    icon: fa-accessor-more fa-flip-horizontal
 
   behavior: 
     action: Redirect to Page in this Application
