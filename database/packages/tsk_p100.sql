@@ -161,6 +161,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                     SELECT
                         t.task_id,
                         t.task_name,
+                        t.deadline_at,
                         --
                         APEX_PAGE.GET_URL (
                             p_page          => 105,
@@ -190,11 +191,15 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                     GROUP BY
                         t.task_id,
                         t.task_name,
+                        t.deadline_at,
                         t.order#
                     ORDER BY t.order# NULLS LAST, t.task_id
                 ) LOOP
                     HTP.P(
-                        '<div class="TASK" draggable="true" id="TASK_' || t.task_id || CASE WHEN t.color_bg IS NOT NULL THEN '" style="border-left: 5px solid ' || t.color_bg || ';' END || '">' ||
+                        '<div class="TASK" draggable="true" id="TASK_' || t.task_id || '" style="' ||
+                            CASE WHEN t.color_bg IS NOT NULL            THEN 'border-left: 5px solid ' || t.color_bg || '; ' END ||
+                            CASE WHEN t.deadline_at <= TRUNC(SYSDATE)   THEN 'border-left: 5px solid ' || '#111' || '; ' END ||
+                            '">' ||
                         '<a href="' || t.task_link || '">' ||
                         CASE WHEN t.task_progress IS NOT NULL
                             THEN '<span style="float: right;">' || t.task_progress || '</span>'
