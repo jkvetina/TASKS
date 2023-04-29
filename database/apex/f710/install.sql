@@ -42,6 +42,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_statuses_all.sql
 @@application/shared_components/user_interface/lovs/lov_swimlanes.sql
 @@application/shared_components/user_interface/lovs/lov_swimlanes_all.sql
+@@application/shared_components/user_interface/lovs/lov_users.sql
 @@application/shared_components/user_interface/lovs/lov_users_all.sql
 @@application/shared_components/user_interface/lovs/master_lov_applications.sql
 @@application/shared_components/user_interface/lovs/master_lov_users.sql
