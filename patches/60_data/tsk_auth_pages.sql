@@ -11,24 +11,22 @@ MERGE INTO tsk_auth_pages t
 USING (
     SELECT 'BOARDS_MANAGER' AS role_id, 200 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'BOARDS_MANAGER' AS role_id, 205 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'BOARDS_MANAGER' AS role_id, 220 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'BOARDS_MANAGER' AS role_id, 230 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'BOARDS_MANAGER' AS role_id, 250 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'BOARDS_MANAGER' AS role_id, 270 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 100 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 105 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 106 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 110 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 115 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 200 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'DEFAULT_USER' AS role_id, 220 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'DEFAULT_USER' AS role_id, 300 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 500 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 900 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'DEFAULT_USER' AS role_id, 980 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'PROJECT_MANAGER' AS role_id, 200 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'PROJECT_MANAGER' AS role_id, 205 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'PROJECT_MANAGER' AS role_id, 220 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'PROJECT_MANAGER' AS role_id, 230 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'PROJECT_MANAGER' AS role_id, 250 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'PROJECT_MANAGER' AS role_id, 270 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'PROJECT_MANAGER' AS role_id, 300 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'PROJECT_MANAGER' AS role_id, 400 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'PROJECT_MANAGER' AS role_id, 500 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'PROJECT_MANAGER' AS role_id, 510 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'PROJECT_MANAGER' AS role_id, 515 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'USERS_MANAGER' AS role_id, 300 AS page_id, 'Y' AS is_active FROM DUAL UNION ALL
