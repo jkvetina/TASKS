@@ -251,7 +251,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 140
+      sequence: 150
       column-alignment: end
       group: Counts # 45933904072991417
       use-group-for: Both
@@ -297,7 +297,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 130
+      sequence: 140
       column-alignment: end
       group: Counts # 45933904072991417
       use-group-for: Both
@@ -343,7 +343,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 120
+      sequence: 130
       column-alignment: end
       group: Counts # 45933904072991417
       use-group-for: Both
@@ -494,6 +494,62 @@ regions:
     source: 
       type: Database Column
       database-column: IS_NAMED
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_COLORED ==================================
+    id: 47742579533626935
+    identification: 
+      column-name: IS_COLORED
+      type: Checkbox
+
+    heading: 
+      heading: Colored
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 120
+      column-alignment: center
+      group: Flags # 45933876784991416
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_COLORED
       data-type: VARCHAR2
       query-only: false
       primary-key: false
