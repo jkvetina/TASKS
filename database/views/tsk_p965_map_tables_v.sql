@@ -36,7 +36,7 @@ SELECT
     MAX(CASE WHEN r.r# = 8 THEN a.is_allowed_delete END) AS role_8d
     --
 FROM tsk_lov_app_tables_v t
-CROSS JOIN tsk_p962_map_pages_cols_v r
+CROSS JOIN tsk_p960_roles_columns_v r
 LEFT JOIN tsk_auth_tables a
     ON a.role_id        = r.role_id
     AND a.table_name    = t.table_name

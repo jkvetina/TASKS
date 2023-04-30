@@ -16,7 +16,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p962 AS
                 FROM DUAL
                 CONNECT BY LEVEL <= c_dynamic_roles
             ) d
-            LEFT JOIN tsk_p962_map_pages_cols_v r
+            LEFT JOIN tsk_p960_roles_columns_v r
                 ON r.r# = d.r#
         ) LOOP
             core.set_item('P962_ROLE_NAME_' || c.r#, c.role_name);
@@ -47,7 +47,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p962 AS
     BEGIN
         SELECT c.role_id
         INTO out_role_id
-        FROM tsk_p962_map_pages_cols_v c
+        FROM tsk_p960_roles_columns_v c
         WHERE c.r# = in_column;
         --
         RETURN out_role_id;

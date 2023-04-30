@@ -24,7 +24,7 @@ SELECT
     --
 FROM tsk_users t
 CROSS JOIN x
-CROSS JOIN tsk_p962_map_pages_cols_v r
+CROSS JOIN tsk_p960_roles_columns_v r
 JOIN tsk_auth_users a
     ON a.client_id      = x.client_id
     AND a.user_id       = t.user_id

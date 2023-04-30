@@ -25,7 +25,7 @@ FROM apex_application_pages a
 JOIN x
     ON a.application_id     = x.app_id
     AND a.page_id           NOT IN (0, 9999)
-CROSS JOIN tsk_p962_map_pages_cols_v r
+CROSS JOIN tsk_p960_roles_columns_v r
 LEFT JOIN tsk_auth_pages p
     ON p.role_id        = r.role_id
     AND p.page_id       = a.page_id

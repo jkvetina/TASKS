@@ -1,4 +1,4 @@
-CREATE OR REPLACE FORCE VIEW tsk_p962_map_pages_cols_v AS
+CREATE OR REPLACE FORCE VIEW tsk_p960_roles_columns_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
         core.get_item('$ROLE_GROUP')    AS role_group,
@@ -17,5 +17,5 @@ JOIN x
     AND (x.role_id      = r.role_id     OR x.role_id IS NULL)
     AND r.is_active     = 'Y';
 --
-COMMENT ON TABLE tsk_p962_map_pages_cols_v IS '';
+COMMENT ON TABLE tsk_p960_roles_columns_v IS '';
 

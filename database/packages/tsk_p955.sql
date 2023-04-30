@@ -16,7 +16,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p955 AS
                 FROM DUAL
                 CONNECT BY LEVEL <= c_dynamic_roles
             ) d
-            LEFT JOIN tsk_p962_map_pages_cols_v r
+            LEFT JOIN tsk_p960_roles_columns_v r
                 ON r.r# = d.r#
         ) LOOP
             core.set_item('P955_ROLE_NAME_' || c.r#, c.role_name);
