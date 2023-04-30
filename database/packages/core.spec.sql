@@ -186,7 +186,8 @@ CREATE OR REPLACE PACKAGE core AS
         in_values               VARCHAR2    := NULL,
         in_overload             VARCHAR2    := NULL,    -- JSON object to overload passed items/values
         in_session_id           NUMBER      := NULL,
-        in_reset                CHAR        := 'Y'      -- reset page items
+        in_reset                CHAR        := 'Y',     -- reset page items
+        in_plain                CHAR        := 'Y'      -- remove JS
     )
     RETURN VARCHAR2;
 

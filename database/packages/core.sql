@@ -403,7 +403,8 @@ CREATE OR REPLACE PACKAGE BODY core AS
         in_values               VARCHAR2    := NULL,
         in_overload             VARCHAR2    := NULL,    -- JSON object to overload passed items/values
         in_session_id           NUMBER      := NULL,
-        in_reset                CHAR        := 'Y'      -- reset page items
+        in_reset                CHAR        := 'Y',     -- reset page items
+        in_plain                CHAR        := 'Y'      -- remove JS
     )
     RETURN VARCHAR2
     AS
@@ -432,7 +433,7 @@ CREATE OR REPLACE PACKAGE BODY core AS
             p_page              => COALESCE(in_page_id, core.get_page_id()),
             p_clear_cache       => CASE WHEN in_reset = 'Y' THEN COALESCE(in_page_id, core.get_page_id()) END,
             p_items             => out_names,
-            p_values            => NULLIF(out_values, 'NULL')
+            p_values            => NULLIF(out_values, 'NULL'),
             /*
             p_request            IN VARCHAR2 DEFAULT NULL,
             p_debug              IN VARCHAR2 DEFAULT NULL,
@@ -441,6 +442,7 @@ CREATE OR REPLACE PACKAGE BODY core AS
             p_triggering_element IN VARCHAR2 DEFAULT 'this',
             p_plain_url          IN BOOLEAN DEFAULT FALSE
             */
+            p_plain_url         => (in_plain = 'Y')
         );
     EXCEPTION
     WHEN core.app_exception THEN

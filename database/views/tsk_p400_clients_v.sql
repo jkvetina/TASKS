@@ -29,8 +29,7 @@ SELECT
                 in_page_id      => 100,
                 in_app_id       => core.get_app_id(),
                 in_names        => 'P100_CLIENT_ID,P100_PROJECT_ID,P100_BOARD_ID',
-                in_values       => t.client_id || ',,',
-                in_reset        => 'Y'
+                in_values       => t.client_id || ',,'
             ) || '">SET</a>'
         END AS is_current,
     --
