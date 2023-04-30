@@ -152,6 +152,17 @@ div.a-Toolbar-group [data-action="edit"] {
 
 
 
+/* GRID CONTROL BREAK */
+.a-GV-controlBreak .a-GV-controlBreakLabel {
+    font-size           : 120%;
+    color               : #333;
+}
+.a-GV-controlBreak .a-GV-controlBreakLabel .a-GV-breakValue {
+    font-weight         : bold;
+}
+
+
+
 /* BORDERLESS COLORFUL CELL IN IG/IR */
 .COLOR_CELL,
 .COLOR_CELL_LEFT {
