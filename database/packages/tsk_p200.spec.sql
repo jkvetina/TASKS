@@ -40,6 +40,10 @@ CREATE OR REPLACE PACKAGE tsk_p200 AS
 
     PROCEDURE reorder_task_swimlanes;
 
+
+
+    PROCEDURE reorder_categories;
+
 END;
 /
 

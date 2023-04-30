@@ -892,9 +892,7 @@ processes:
   source: 
     location: Local Database
     language: PL/SQL
-    pl/sql-code: |
-      tsk_p200.reorder_task_statuses();
-      
+    pl/sql-code: tsk_p200.reorder_categories();
 
   execution: 
     sequence: 30

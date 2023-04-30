@@ -180,11 +180,15 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
     PROCEDURE reorder_task_statuses
     AS
-        in_client_id        CONSTANT tsk_statuses.client_id%TYPE    := tsk_app.get_client_id();
-        in_project_id       CONSTANT tsk_statuses.project_id%TYPE   := tsk_app.get_project_id();
+        in_client_id            CONSTANT tsk_tasks.client_id%TYPE   := tsk_app.get_client_id();
+        in_project_id           CONSTANT tsk_tasks.project_id%TYPE  := tsk_app.get_project_id();
     BEGIN
-        --
-        -- @TODO: we should check if we can update
+        tsk_auth.check_executable (
+            in_procedure_name   => core.get_caller_name(2),
+            in_user_id          => core.get_user_id(),
+            in_client_id        => in_client_id,
+            in_project_id       => in_project_id
+        );
         --
         FOR s IN (
             SELECT
@@ -216,11 +220,15 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
     PROCEDURE reorder_task_swimlanes
     AS
-        in_client_id        CONSTANT tsk_statuses.client_id%TYPE    := tsk_app.get_client_id();
-        in_project_id       CONSTANT tsk_statuses.project_id%TYPE   := tsk_app.get_project_id();
+        in_client_id            CONSTANT tsk_tasks.client_id%TYPE   := tsk_app.get_client_id();
+        in_project_id           CONSTANT tsk_tasks.project_id%TYPE  := tsk_app.get_project_id();
     BEGIN
-        --
-        -- @TODO: we should check if we can update
+        tsk_auth.check_executable (
+            in_procedure_name   => core.get_caller_name(2),
+            in_user_id          => core.get_user_id(),
+            in_client_id        => in_client_id,
+            in_project_id       => in_project_id
+        );
         --
         FOR s IN (
             SELECT
@@ -237,6 +245,46 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
             UPDATE tsk_swimlanes t
             SET t.order#            = s.order#
             WHERE t.swimlane_id     = s.swimlane_id
+                AND t.client_id     = s.client_id
+                AND t.project_id    = s.project_id
+                AND (t.order#       != s.order# OR t.order# IS NULL);
+        END LOOP;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE reorder_categories
+    AS
+        in_client_id            CONSTANT tsk_tasks.client_id%TYPE   := tsk_app.get_client_id();
+        in_project_id           CONSTANT tsk_tasks.project_id%TYPE  := tsk_app.get_project_id();
+    BEGIN
+        tsk_auth.check_executable (
+            in_procedure_name   => core.get_caller_name(2),
+            in_user_id          => core.get_user_id(),
+            in_client_id        => in_client_id,
+            in_project_id       => in_project_id
+        );
+        --
+        FOR s IN (
+            SELECT
+                t.category_id,
+                t.client_id,
+                t.project_id,
+                --
+                ROW_NUMBER() OVER (PARTITION BY t.client_id, t.project_id ORDER BY t.order# NULLS LAST, t.category_name, t.category_id) * 10 AS order#
+            FROM tsk_categories t
+            WHERE 1 = 1
+                AND (t.client_id    = in_client_id  OR in_client_id  IS NULL)
+                AND (t.project_id   = in_project_id OR in_project_id IS NULL)
+        ) LOOP
+            UPDATE tsk_categories t
+            SET t.order#            = s.order#
+            WHERE t.category_id     = s.category_id
                 AND t.client_id     = s.client_id
                 AND t.project_id    = s.project_id
                 AND (t.order#       != s.order# OR t.order# IS NULL);
