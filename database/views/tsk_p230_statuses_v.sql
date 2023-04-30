@@ -17,6 +17,7 @@ SELECT
     t.is_active,
     t.is_default,
     t.is_named,
+    t.is_colored,
     --
     c.count_board,
     c.count_project,

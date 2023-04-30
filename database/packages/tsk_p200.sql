@@ -97,6 +97,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
         rec.is_default      := core.get_grid_data('IS_DEFAULT');
         rec.is_named        := core.get_grid_data('IS_NAMED');
+        rec.is_colored      := core.get_grid_data('IS_COLORED');
         rec.order#          := core.get_grid_data('ORDER#');
         --
         tsk_tapi.statuses (rec, v_action,

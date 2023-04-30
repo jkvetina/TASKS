@@ -6,6 +6,7 @@ CREATE TABLE tsk_statuses (
     is_active                       CHAR(1),
     is_default                      CHAR(1),
     is_named                        CHAR(1),
+    is_colored                      CHAR(1),
     order#                          NUMBER(4,0),
     updated_by                      VARCHAR2(128),
     updated_at                      DATE,
@@ -22,6 +23,9 @@ CREATE TABLE tsk_statuses (
     CONSTRAINT ch_tsk_statuses_name
         CHECK (is_named = 'Y' OR is_named IS NULL),
     --
+    CONSTRAINT ch_tsk_statuses_color
+        CHECK (is_colored = 'Y' OR is_colored IS NULL),
+    --
     CONSTRAINT fk_tsk_status_project
         FOREIGN KEY (client_id, project_id)
         REFERENCES tsk_projects (client_id, project_id)
@@ -37,5 +41,6 @@ COMMENT ON COLUMN tsk_statuses.project_id       IS '';
 COMMENT ON COLUMN tsk_statuses.is_active        IS '';
 COMMENT ON COLUMN tsk_statuses.is_default       IS '';
 COMMENT ON COLUMN tsk_statuses.is_named         IS '';
+COMMENT ON COLUMN tsk_statuses.is_colored       IS '';
 COMMENT ON COLUMN tsk_statuses.order#           IS '';
 

@@ -10,6 +10,7 @@ SELECT
     t.status_name,
     t.is_default,
     t.is_named,
+    t.is_colored,
     --
     ROW_NUMBER() OVER (ORDER BY t.order# NULLS LAST, t.status_id) AS order#
     --

@@ -151,7 +151,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             -- create swimlanes
             FOR s IN (
                 SELECT
-                    s.status_id
+                    s.status_id,
+                    s.is_colored
                 FROM tsk_lov_statuses_v s
                 ORDER BY s.order#
             ) LOOP
@@ -200,8 +201,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                 ) LOOP
                     HTP.P(
                         '<div class="TASK" draggable="true" id="TASK_' || t.task_id || '" style="' ||
-                            CASE WHEN t.color_bg IS NOT NULL            THEN 'border-left: 5px solid ' || t.color_bg || '; ' END ||
-                            CASE WHEN t.deadline_at <= TRUNC(SYSDATE)   THEN 'border-left: 5px solid ' || '#111' || '; ' END ||
+                            CASE WHEN s.is_colored = 'Y' AND t.color_bg IS NOT NULL             THEN 'border-left: 5px solid ' || t.color_bg || '; ' END ||
+                            CASE WHEN s.is_colored = 'Y' AND t.deadline_at <= TRUNC(SYSDATE)    THEN 'border-left: 5px solid ' || '#111' || '; ' END ||
                             '">' ||
                         '<a href="' || t.task_link || '">' ||
                         CASE WHEN t.task_progress IS NOT NULL
