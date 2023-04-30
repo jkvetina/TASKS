@@ -17,7 +17,7 @@
       ) = 'Y';
 
   server-cache: 
-    evaluation-point: Once per Component
+    evaluation-point: Always (No Caching)
 
   error: 
     error-message: ACCESS_DENIED|IS_USER

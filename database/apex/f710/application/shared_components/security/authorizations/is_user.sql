@@ -23,7 +23,7 @@ wwv_flow_imp_shared.create_security_scheme(
 '    in_action           => NULL',
 ') = ''Y'';'))
 ,p_error_message=>'ACCESS_DENIED|IS_USER'
-,p_caching=>'BY_COMPONENT'
+,p_caching=>'NOCACHE'
 );
 wwv_flow_imp.component_end;
 end;
