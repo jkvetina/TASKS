@@ -95,19 +95,44 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             AND n.user_id       = in_user_id
             AND n.page_id       = in_page_id;
         --
-        IF v_authorized IS NULL THEN
-            RETURN NULL;
+        IF (v_authorized IS NULL
+            OR in_component_type IN (
+                'APEX_APPLICATION_PAGES'  -- dont track pages
+            )
+        ) THEN
+            RETURN v_authorized;
         END IF;
 
         -- check access to the component
         IF in_component_id IS NOT NULL THEN
-            tsk_auth.mark_component (
-                in_user_id          => in_user_id,
-                in_page_id          => in_page_id,
-                in_component_id     => in_component_id,
-                in_component_type   => in_component_type,
-                in_component_name   => in_component_name
-            );
+            -- check access to page component for users roles
+            SELECT MAX('Y') INTO v_authorized
+            FROM tsk_auth_components t
+            JOIN tsk_auth_roles r
+                ON r.client_id      = in_client_id
+                AND (r.project_id   = in_project_id OR r.project_id IS NULL)
+                AND r.user_id       = in_user_id
+                AND r.role_id       = t.role_id
+                AND r.is_active     = 'Y'
+            JOIN tsk_auth_users a
+                ON a.user_id        = r.user_id
+                AND a.is_active     = 'Y'
+            JOIN tsk_users u
+                ON u.user_id        = r.user_id
+                AND u.is_active     = 'Y'
+            WHERE t.component_id    = in_component_id
+                AND t.is_active     = 'Y';
+
+            -- on failure add component to the list
+            IF v_authorized IS NULL THEN
+                tsk_auth.mark_component (
+                    in_user_id          => in_user_id,
+                    in_page_id          => in_page_id,
+                    in_component_id     => in_component_id,
+                    in_component_type   => in_component_type,
+                    in_component_name   => in_component_name
+                );
+            END IF;
         END IF;
         --
         RETURN v_authorized;
