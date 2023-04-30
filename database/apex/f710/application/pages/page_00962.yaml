@@ -384,7 +384,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_NAME_1.'
+      heading: '&P962_ROLE_1.'
       alignment: center
 
     settings: 
@@ -432,7 +432,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_NAME_1
+      item: P962_ROLE_1
 
   - # ====== Column: ROLE_2 ======================================
     id: 47001354825134513
@@ -441,7 +441,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_NAME_2.'
+      heading: '&P962_ROLE_2.'
       alignment: center
 
     settings: 
@@ -489,7 +489,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_NAME_2
+      item: P962_ROLE_2
 
   - # ====== Column: ROLE_3 ======================================
     id: 47001408415134514
@@ -498,7 +498,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_NAME_3.'
+      heading: '&P962_ROLE_3.'
       alignment: center
 
     settings: 
@@ -546,7 +546,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_NAME_3
+      item: P962_ROLE_3
 
   - # ====== Column: ROLE_4 ======================================
     id: 47001552602134515
@@ -555,7 +555,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_NAME_4.'
+      heading: '&P962_ROLE_4.'
       alignment: center
 
     settings: 
@@ -603,7 +603,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_NAME_4
+      item: P962_ROLE_4
 
   - # ====== Column: ROLE_5 ======================================
     id: 47002828036134528
@@ -612,7 +612,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_NAME_5.'
+      heading: '&P962_ROLE_5.'
       alignment: center
 
     settings: 
@@ -660,7 +660,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_NAME_5
+      item: P962_ROLE_5
 
   - # ====== Column: ROLE_6 ======================================
     id: 47002958155134529
@@ -669,7 +669,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_NAME_6.'
+      heading: '&P962_ROLE_6.'
       alignment: center
 
     settings: 
@@ -717,7 +717,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_NAME_6
+      item: P962_ROLE_6
 
   - # ====== Column: ROLE_7 ======================================
     id: 47003034400134530
@@ -726,7 +726,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_NAME_7.'
+      heading: '&P962_ROLE_7.'
       alignment: center
 
     settings: 
@@ -774,7 +774,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_NAME_7
+      item: P962_ROLE_7
 
   - # ====== Column: ROLE_8 ======================================
     id: 47003186705134531
@@ -783,7 +783,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_NAME_8.'
+      heading: '&P962_ROLE_8.'
       alignment: center
 
     settings: 
@@ -831,7 +831,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_NAME_8
+      item: P962_ROLE_8
 
   - # ====== Column: DML_ACTIONS =================================
     id: 47219827755950932
@@ -1097,10 +1097,10 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P962_ROLE_NAME_1 =========================
+- # ====== Page Item: P962_ROLE_1 ==============================
   id: 47002014138134520
   identification: 
-    name: P962_ROLE_NAME_1
+    name: P962_ROLE_1
     type: Hidden
 
   settings: 
@@ -1127,10 +1127,10 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P962_ROLE_NAME_2 =========================
+- # ====== Page Item: P962_ROLE_2 ==============================
   id: 47002182738134521
   identification: 
-    name: P962_ROLE_NAME_2
+    name: P962_ROLE_2
     type: Hidden
 
   settings: 
@@ -1157,10 +1157,10 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P962_ROLE_NAME_3 =========================
+- # ====== Page Item: P962_ROLE_3 ==============================
   id: 47002208421134522
   identification: 
-    name: P962_ROLE_NAME_3
+    name: P962_ROLE_3
     type: Hidden
 
   settings: 
@@ -1187,10 +1187,10 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P962_ROLE_NAME_4 =========================
+- # ====== Page Item: P962_ROLE_4 ==============================
   id: 47002378416134523
   identification: 
-    name: P962_ROLE_NAME_4
+    name: P962_ROLE_4
     type: Hidden
 
   settings: 
@@ -1217,10 +1217,10 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P962_ROLE_NAME_6 =========================
+- # ====== Page Item: P962_ROLE_6 ==============================
   id: 47003925324134539
   identification: 
-    name: P962_ROLE_NAME_6
+    name: P962_ROLE_6
     type: Hidden
 
   settings: 
@@ -1247,10 +1247,10 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P962_ROLE_NAME_5 =========================
+- # ====== Page Item: P962_ROLE_5 ==============================
   id: 47004084642134540
   identification: 
-    name: P962_ROLE_NAME_5
+    name: P962_ROLE_5
     type: Hidden
 
   settings: 
@@ -1277,10 +1277,10 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P962_ROLE_NAME_8 =========================
+- # ====== Page Item: P962_ROLE_8 ==============================
   id: 47004178297134541
   identification: 
-    name: P962_ROLE_NAME_8
+    name: P962_ROLE_8
     type: Hidden
 
   settings: 
@@ -1307,10 +1307,10 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P962_ROLE_NAME_7 =========================
+- # ====== Page Item: P962_ROLE_7 ==============================
   id: 47004226309134542
   identification: 
-    name: P962_ROLE_NAME_7
+    name: P962_ROLE_7
     type: Hidden
 
   settings: 
@@ -1379,7 +1379,6 @@ dynamic-actions:
     event: EVENT.EVENT.BROWSER.CHANGE
     selection-type: Item(s)
     item(s): 
-    - P962_CLIENT_ID
     - P962_ROLE_ID
 
   execution: 
