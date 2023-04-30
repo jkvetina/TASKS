@@ -43,7 +43,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p955 AS
         -- go through pivoted columns
         FOR i IN 1 .. c_dynamic_roles LOOP
             -- get role_id and is_active flag based on column position
-            rec.role_id     := tsk_p962.get_role_id(i);
+            rec.role_id     := tsk_p960.get_role_id(i);
             rec.is_active   := core.get_grid_data('ROLE_' || i);
 
             -- delete or insert new record

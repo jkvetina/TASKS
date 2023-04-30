@@ -1,5 +1,25 @@
 CREATE OR REPLACE PACKAGE BODY tsk_p960 AS
 
+    FUNCTION get_role_id (
+        in_column       NUMBER
+    )
+    RETURN tsk_auth_pages.role_id%TYPE
+    AS
+        out_role_id     tsk_auth_pages.role_id%TYPE;
+    BEGIN
+        SELECT c.role_id
+        INTO out_role_id
+        FROM tsk_p960_roles_columns_v c
+        WHERE c.r# = in_column;
+        --
+        RETURN out_role_id;
+    EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+    END;
+
+
+
     PROCEDURE set_role_names
     AS
     BEGIN

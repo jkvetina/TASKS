@@ -4,6 +4,13 @@ CREATE OR REPLACE PACKAGE tsk_p960 AS
 
 
 
+    FUNCTION get_role_id (
+        in_column       NUMBER
+    )
+    RETURN tsk_auth_pages.role_id%TYPE;
+
+
+
     PROCEDURE set_role_names;
 
 END;

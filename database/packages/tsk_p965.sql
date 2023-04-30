@@ -24,14 +24,13 @@ CREATE OR REPLACE PACKAGE BODY tsk_p965 AS
         -- go through pivoted columns
         FOR i IN 1 .. tsk_p960.c_dynamic_roles LOOP
             -- get role_id and is_active flag based on column position
-            rec.role_id             := tsk_p962.get_role_id(i);
-            --
-            CONTINUE WHEN rec.role_id IS NULL;
-            --
+            rec.role_id             := tsk_p960.get_role_id(i);
             rec.is_allowed_create   := core.get_grid_data('ROLE_' || i || 'C');
             rec.is_allowed_update   := core.get_grid_data('ROLE_' || i || 'U');
             rec.is_allowed_delete   := core.get_grid_data('ROLE_' || i || 'D');
             rec.is_active           := 'Y';
+            --
+            CONTINUE WHEN rec.role_id IS NULL;
             --
             DELETE FROM tsk_auth_tables t
             WHERE t.role_id         = rec.role_id
