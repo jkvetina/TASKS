@@ -12,6 +12,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
             EXECUTE IMMEDIATE 'BEGIN ' || v_procedure_name || '(); END;';
         END IF;
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -39,6 +41,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
             ));
         --
         RETURN out_procedure;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -83,6 +90,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         --
         RETURN NULL;
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -157,6 +166,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
             APEX_UTIL.SET_PREFERENCE('SWIMLANE_ID', rec.swimlane_id);
         END IF;
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -220,6 +231,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
                 END;
             END;
         END;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 END;

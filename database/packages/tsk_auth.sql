@@ -23,6 +23,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             WHERE u.user_id     = rec.user_id;
         END;
     EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         core.raise_error();
     END;
@@ -53,6 +55,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             AND n.page_id       = in_page_id;
         --
         RETURN v_authorized;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -80,6 +87,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             in_component_name   => in_component_name,
             in_action           => in_action
         );
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -141,6 +153,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         END IF;
         --
         RETURN NVL(out_result, 'N');
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -164,6 +181,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         THEN
             core.raise_error('NOT_AUTH_DML_' || in_action || '_ON_' || in_table_name);
         END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -206,6 +228,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             );
         --
         RETURN v_authorized;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -228,6 +255,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         THEN
             core.raise_error('NOT_AUTH_PROC_' || in_procedure_name);
         END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -262,6 +294,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             AND t.is_active         = 'Y';
         --
         RETURN v_authorized;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 END;
