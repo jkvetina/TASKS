@@ -1,26 +1,9 @@
 CREATE OR REPLACE PACKAGE BODY tsk_p962 AS
 
-    c_dynamic_roles         CONSTANT PLS_INTEGER := 8;
-
-
-
     PROCEDURE init_defaults
     AS
     BEGIN
-        FOR c IN (
-            SELECT
-                d.r#,
-                r.role_name
-            FROM (
-                SELECT LEVEL AS r#
-                FROM DUAL
-                CONNECT BY LEVEL <= c_dynamic_roles
-            ) d
-            LEFT JOIN tsk_p960_roles_columns_v r
-                ON r.r# = d.r#
-        ) LOOP
-            core.set_item('P962_ROLE_NAME_' || c.r#, c.role_name);
-        END LOOP;
+        tsk_p960.set_role_names();
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
@@ -67,7 +50,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p962 AS
         rec.updated_at      := SYSDATE;
 
         -- go through pivoted columns
-        FOR i IN 1 .. c_dynamic_roles LOOP
+        FOR i IN 1 .. tsk_p960.c_dynamic_roles LOOP
             -- get role_id and is_active flag based on column position
             rec.role_id     := get_role_id(i);
             --
