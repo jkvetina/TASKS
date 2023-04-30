@@ -1,17 +1,17 @@
 CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
     PROCEDURE after_auth (
-        in_user_id          VARCHAR2
+        in_user_id              VARCHAR2
     )
     AS
-        rec                 tsk_users%ROWTYPE;
+        rec                     tsk_users%ROWTYPE;
     BEGIN
         -- create user record
-        rec.user_id         := core.get_user_id();
-        rec.user_name       := rec.user_id;
+        rec.user_id             := core.get_user_id();
+        rec.user_name           := rec.user_id;
         --
-        rec.updated_by      := core.get_user_id();
-        rec.updated_at      := SYSDATE;
+        rec.updated_by          := core.get_user_id();
+        rec.updated_at          := SYSDATE;
         --
         BEGIN
             INSERT INTO tsk_users VALUES rec;
@@ -43,7 +43,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     RETURN CHAR
     --RESULT_CACHE
     AS
-        v_authorized    CHAR(1);
+        v_authorized            CHAR;
     BEGIN
         SELECT MAX('Y') INTO v_authorized
         FROM tsk_navigation_auth_v n
@@ -146,11 +146,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
 
     PROCEDURE check_allowed_dml (
-        in_table_name       tsk_auth_tables.table_name%TYPE,
-        in_action           CHAR,
-        in_user_id          tsk_auth_roles.user_id%TYPE,
-        in_client_id        tsk_auth_roles.client_id%TYPE       := NULL,
-        in_project_id       tsk_auth_roles.project_id%TYPE      := NULL
+        in_table_name           tsk_auth_tables.table_name%TYPE,
+        in_action               CHAR,
+        in_user_id              tsk_auth_roles.user_id%TYPE,
+        in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
     )
     AS
     BEGIN
@@ -169,30 +169,22 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
 
     FUNCTION is_allowed_dml (
-        in_table_name       tsk_auth_tables.table_name%TYPE,
-        in_action           CHAR,
-        in_user_id          tsk_auth_roles.user_id%TYPE,
-        in_client_id        tsk_auth_roles.client_id%TYPE       := NULL,
-        in_project_id       tsk_auth_roles.project_id%TYPE      := NULL
+        in_table_name           tsk_auth_tables.table_name%TYPE,
+        in_action               CHAR,
+        in_user_id              tsk_auth_roles.user_id%TYPE,
+        in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
     )
     RETURN VARCHAR2
     AS
-        v_authorized        VARCHAR2(4);
+        v_authorized            VARCHAR2(4);
     BEGIN
         SELECT
             MAX(CASE WHEN t.is_allowed_create = 'Y' THEN 'C' END) ||
             MAX(CASE WHEN t.is_allowed_update = 'Y' THEN 'U' END) ||
             MAX(CASE WHEN t.is_allowed_delete = 'Y' THEN 'D' END)
         INTO v_authorized
-        FROM tsk_lov_app_tables_v m
-        JOIN tsk_auth_tables t
-            ON t.table_name     = m.table_name
-            AND (
-                (t.is_allowed_create = 'Y' AND NULLIF(in_action, 'C') IS NULL) OR
-                (t.is_allowed_update = 'Y' AND NULLIF(in_action, 'U') IS NULL) OR
-                (t.is_allowed_delete = 'Y' AND NULLIF(in_action, 'D') IS NULL)
-            )
-            AND t.is_active     = 'Y'
+        FROM tsk_auth_tables t
         JOIN tsk_auth_roles r
             ON r.client_id      = in_client_id
             AND (r.project_id   = in_project_id OR r.project_id IS NULL)
@@ -205,7 +197,69 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         JOIN tsk_users u
             ON u.user_id        = r.user_id
             AND u.is_active     = 'Y'
-        WHERE m.table_name      = in_table_name;
+        WHERE t.table_name      = in_table_name
+            AND t.is_active     = 'Y'
+            AND (
+                (t.is_allowed_create = 'Y' AND NULLIF(in_action, 'C') IS NULL) OR
+                (t.is_allowed_update = 'Y' AND NULLIF(in_action, 'U') IS NULL) OR
+                (t.is_allowed_delete = 'Y' AND NULLIF(in_action, 'D') IS NULL)
+            );
+        --
+        RETURN v_authorized;
+    END;
+
+
+
+    PROCEDURE check_executable (
+        in_procedure_name       VARCHAR2,
+        in_user_id              tsk_auth_roles.user_id%TYPE,
+        in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
+    )
+    AS
+    BEGIN
+        IF tsk_auth.is_executable (
+                in_object_name          => SUBSTR(in_procedure_name, 1, INSTR(in_procedure_name, '.') - 1),
+                in_procedure_name       => SUBSTR(in_procedure_name, INSTR(in_procedure_name, '.') + 1),
+                in_user_id              => in_user_id,
+                in_client_id            => in_client_id,
+                in_project_id           => in_project_id
+            ) IS NULL
+        THEN
+            core.raise_error('NOT_AUTH_PROC_' || in_procedure_name);
+        END IF;
+    END;
+
+
+
+    FUNCTION is_executable (
+        in_object_name          tsk_auth_procedures.object_name%TYPE,
+        in_procedure_name       tsk_auth_procedures.object_name%TYPE,
+        in_user_id              tsk_auth_roles.user_id%TYPE,
+        in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
+    )
+    RETURN CHAR
+    AS
+        v_authorized            CHAR;
+    BEGIN
+        SELECT MAX('Y') INTO v_authorized
+        FROM tsk_auth_procedures t
+        JOIN tsk_auth_roles r
+            ON r.client_id      = in_client_id
+            AND (r.project_id   = in_project_id OR r.project_id IS NULL)
+            AND r.user_id       = in_user_id
+            AND r.role_id       = t.role_id
+            AND r.is_active     = 'Y'
+        JOIN tsk_auth_users a
+            ON a.user_id        = r.user_id
+            AND a.is_active     = 'Y'
+        JOIN tsk_users u
+            ON u.user_id            = r.user_id
+            AND u.is_active         = 'Y'
+        WHERE t.object_name         = in_object_name
+            AND t.procedure_name    = in_procedure_name
+            AND t.is_active         = 'Y';
         --
         RETURN v_authorized;
     END;

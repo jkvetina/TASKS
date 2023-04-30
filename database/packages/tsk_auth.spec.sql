@@ -1,7 +1,7 @@
 CREATE OR REPLACE PACKAGE tsk_auth AS
 
     PROCEDURE after_auth (
-        in_user_id          VARCHAR2
+        in_user_id              VARCHAR2
     );
 
 
@@ -51,23 +51,43 @@ CREATE OR REPLACE PACKAGE tsk_auth AS
 
 
     PROCEDURE check_allowed_dml (
-        in_table_name       tsk_auth_tables.table_name%TYPE,
-        in_action           CHAR,
-        in_user_id          tsk_auth_roles.user_id%TYPE,
-        in_client_id        tsk_auth_roles.client_id%TYPE       := NULL,
-        in_project_id       tsk_auth_roles.project_id%TYPE      := NULL
+        in_table_name           tsk_auth_tables.table_name%TYPE,
+        in_action               CHAR,
+        in_user_id              tsk_auth_roles.user_id%TYPE,
+        in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
     );
 
 
 
     FUNCTION is_allowed_dml (
-        in_table_name       tsk_auth_tables.table_name%TYPE,
-        in_action           CHAR,
-        in_user_id          tsk_auth_roles.user_id%TYPE,
-        in_client_id        tsk_auth_roles.client_id%TYPE       := NULL,
-        in_project_id       tsk_auth_roles.project_id%TYPE      := NULL
+        in_table_name           tsk_auth_tables.table_name%TYPE,
+        in_action               CHAR,
+        in_user_id              tsk_auth_roles.user_id%TYPE,
+        in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
     )
     RETURN VARCHAR2;
+
+
+
+    PROCEDURE check_executable (
+        in_procedure_name       VARCHAR2,
+        in_user_id              tsk_auth_roles.user_id%TYPE,
+        in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
+    );
+
+
+
+    FUNCTION is_executable (
+        in_object_name          tsk_auth_procedures.object_name%TYPE,
+        in_procedure_name       tsk_auth_procedures.object_name%TYPE,
+        in_user_id              tsk_auth_roles.user_id%TYPE,
+        in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
+        in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
+    )
+    RETURN CHAR;
 
 END;
 /
