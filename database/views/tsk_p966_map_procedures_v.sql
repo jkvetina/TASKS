@@ -17,6 +17,7 @@ CROSS JOIN tsk_p960_roles_columns_v r
 LEFT JOIN tsk_auth_procedures a
     ON a.object_name        = p.object_name
     AND a.procedure_name    = p.procedure_name
+    AND a.role_id           = r.role_id
 GROUP BY
     p.object_name,
     p.procedure_name;
