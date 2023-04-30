@@ -6,6 +6,17 @@ CREATE OR REPLACE PACKAGE tsk_auth AS
 
 
 
+    PROCEDURE mark_component (
+        in_user_id              tsk_auth_roles.user_id%TYPE,
+        in_page_id              tsk_auth_pages.page_id%TYPE,
+        --
+        in_component_id         NUMBER      := NULL,
+        in_component_type       VARCHAR2    := NULL,
+        in_component_name       VARCHAR2    := NULL
+    );
+
+
+
     FUNCTION is_user (
         in_user_id              tsk_auth_roles.user_id%TYPE,
         in_page_id              tsk_auth_pages.page_id%TYPE,

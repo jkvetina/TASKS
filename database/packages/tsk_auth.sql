@@ -31,6 +31,46 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
 
 
+    PROCEDURE mark_component (
+        in_user_id              tsk_auth_roles.user_id%TYPE,
+        in_page_id              tsk_auth_pages.page_id%TYPE,
+        --
+        in_component_id         NUMBER      := NULL,
+        in_component_type       VARCHAR2    := NULL,
+        in_component_name       VARCHAR2    := NULL
+    )
+    AS
+        PRAGMA AUTONOMOUS_TRANSACTION;
+        --
+        rec                     tsk_auth_components%ROWTYPE;
+    BEGIN
+        IF in_component_type IN (
+            'APEX_APPLICATION_PAGES'  -- dont track pages
+        )
+        THEN
+            RETURN;
+        END IF;
+        --
+        rec.component_id        := in_component_id;
+        rec.component_type      := in_component_type;
+        rec.component_name      := in_component_name;
+        rec.page_id             := in_page_id;
+        rec.updated_by          := in_user_id;
+        rec.updated_at          := SYSDATE;
+        --
+        INSERT INTO tsk_auth_components VALUES rec;
+        --
+        COMMIT;
+    EXCEPTION
+    WHEN DUP_VAL_ON_INDEX THEN
+        ROLLBACK;
+    WHEN OTHERS THEN
+        ROLLBACK;
+        core.raise_error();
+    END;
+
+
+
     FUNCTION is_user (
         in_user_id              tsk_auth_roles.user_id%TYPE,
         in_page_id              tsk_auth_pages.page_id%TYPE,
@@ -47,12 +87,28 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     AS
         v_authorized            CHAR;
     BEGIN
+        -- check access to the page
         SELECT MAX('Y') INTO v_authorized
         FROM tsk_navigation_auth_v n
         WHERE n.client_id       = in_client_id
             AND (n.project_id   = in_project_id OR n.project_id IS NULL)
             AND n.user_id       = in_user_id
             AND n.page_id       = in_page_id;
+        --
+        IF v_authorized IS NULL THEN
+            RETURN NULL;
+        END IF;
+
+        -- check access to the component
+        IF in_component_id IS NOT NULL THEN
+            tsk_auth.mark_component (
+                in_user_id          => in_user_id,
+                in_page_id          => in_page_id,
+                in_component_id     => in_component_id,
+                in_component_type   => in_component_type,
+                in_component_name   => in_component_name
+            );
+        END IF;
         --
         RETURN v_authorized;
     EXCEPTION
@@ -73,9 +129,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     RETURN CHAR
     AS
     BEGIN
-        IF core.is_developer() THEN
-            RETURN 'Y';
-        END IF;
+        --IF core.is_developer() THEN
+        --    RETURN 'Y';
+        --END IF;
         --
         RETURN tsk_auth.is_user (
             in_user_id          => core.get_user_id(),
