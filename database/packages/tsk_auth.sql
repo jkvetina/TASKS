@@ -6,22 +6,54 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     AS
         rec                     tsk_users%ROWTYPE;
     BEGIN
-        -- create user record
-        rec.user_id             := core.get_user_id();
-        rec.user_name           := rec.user_id;
-        --
-        rec.updated_by          := core.get_user_id();
-        rec.updated_at          := SYSDATE;
-        --
+        -- convert email address to the login if needed
         BEGIN
-            INSERT INTO tsk_users VALUES rec;
+            SELECT u.* INTO rec
+            FROM tsk_users u
+            WHERE u.user_mail = LOWER(in_user_id);--SYS_CONTEXT('APEX$SESSION', 'APP_USER'));
+
+            -- check if account is active
+            IF rec.is_active IS NULL THEN
+                core.raise_error('ACCOUNT_DISABLED');
+            END IF;
+
+            -- change user_mail to user_id
+            IF rec.user_id != rec.user_mail THEN
+                APEX_CUSTOM_AUTH.SET_USER (
+                    p_user => rec.user_id
+                );
+            END IF;
         EXCEPTION
-        WHEN DUP_VAL_ON_INDEX THEN
-            UPDATE tsk_users u
-            SET u.updated_by    = rec.updated_by,
-                u.updated_at    = rec.updated_at
-            WHERE u.user_id     = rec.user_id;
+        WHEN NO_DATA_FOUND THEN
+            --
+            -- @TODO: check if we can auto create new account
+            -- we should not allow everyone in
+            --
+
+            -- create user record
+            rec.user_id         := core.get_user_id();
+            rec.user_name       := rec.user_id;
+            rec.user_mail       := rec.user_id;
+            rec.is_active       := 'Y';
+            rec.updated_by      := rec.user_id;
+            rec.updated_at      := SYSDATE;
+            --
+            BEGIN
+                INSERT INTO tsk_users VALUES rec;
+            EXCEPTION
+            WHEN DUP_VAL_ON_INDEX THEN
+                NULL;
+            END;
         END;
+
+        -- update account
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
+        --
+        UPDATE tsk_users u
+        SET u.updated_by    = rec.updated_by,
+            u.updated_at    = rec.updated_at
+        WHERE u.user_id     = rec.user_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
@@ -95,10 +127,20 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             AND n.user_id       = in_user_id
             AND n.page_id       = in_page_id;
         --
-        IF (v_authorized IS NULL
-            OR in_component_type IN (
-                'APEX_APPLICATION_PAGES'  -- dont track pages
-            )
+        IF v_authorized IS NULL THEN
+            APEX_DEBUG.WARN ('NOT_AUTHORIZED|IS_USER',
+                in_user_id,
+                in_page_id,
+                in_client_id,
+                in_project_id,
+                in_component_id
+            );
+            --
+            RETURN v_authorized;
+        END IF;
+        --
+        IF in_component_type IN (
+            'APEX_APPLICATION_PAGES'  -- dont track pages
         ) THEN
             RETURN v_authorized;
         END IF;
@@ -133,6 +175,16 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
                     in_component_name   => in_component_name
                 );
             END IF;
+        END IF;
+        --
+        IF v_authorized IS NULL THEN
+            APEX_DEBUG.WARN ('NOT_AUTHORIZED|IS_USER',
+                in_user_id,
+                in_page_id,
+                in_client_id,
+                in_project_id,
+                in_component_id
+            );
         END IF;
         --
         RETURN v_authorized;

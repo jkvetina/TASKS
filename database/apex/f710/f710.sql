@@ -28,7 +28,7 @@ prompt APPLICATION 710 - Tasks
 -- Application Export:
 --   Application:     710
 --   Name:            Tasks
---   Date and Time:   20:30 Neděle Duben 30, 2023
+--   Date and Time:   22:30 Neděle Duben 30, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -45,7 +45,7 @@ prompt APPLICATION 710 - Tasks
 --       Navigation:
 --         Lists:                  1
 --       Security:
---         Authentication:         2
+--         Authentication:         3
 --         Authorization:          6
 --       User Interface:
 --         Themes:                 1
@@ -99,14 +99,14 @@ wwv_flow_imp.create_flow(
 'Created by Jan Kvetina, 2/2022',
 'www.jankvetina.cz'))
 ,p_authentication=>'PLUGIN'
-,p_authentication_id=>wwv_flow_imp.id(71254896610086700)
+,p_authentication_id=>wwv_flow_imp.id(48132635231854310)
 ,p_application_tab_set=>1
 ,p_logo_type=>'T'
 ,p_logo_text=>'&APP_NAME.'
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-04-30'
+,p_flow_version=>'2023-05-01'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -153,6 +153,17 @@ wwv_flow_imp_shared.create_user_interface(
 ,p_nav_bar_list_id=>wwv_flow_imp.id(35451863240367303)
 ,p_nav_bar_list_template_id=>wwv_flow_imp.id(36169612602377518)
 ,p_nav_bar_template_options=>'#DEFAULT#'
+);
+end;
+/
+prompt --workspace/credentials/sso_google
+begin
+wwv_imp_workspace.create_credential(
+ p_id=>wwv_flow_imp.id(48132362808845792)
+,p_name=>'SSO_GOOGLE'
+,p_static_id=>'SSO_GOOGLE'
+,p_authentication_type=>'OAUTH2_CLIENT_CREDENTIALS'
+,p_prompt_on_install=>true
 );
 end;
 /
@@ -15480,6 +15491,27 @@ begin
 null;
 end;
 /
+prompt --application/shared_components/security/authentications/google
+begin
+wwv_flow_imp_shared.create_authentication(
+ p_id=>wwv_flow_imp.id(48132635231854310)
+,p_name=>'GOOGLE'
+,p_scheme_type=>'NATIVE_SOCIAL'
+,p_attribute_01=>wwv_flow_imp.id(48132362808845792)
+,p_attribute_02=>'GOOGLE'
+,p_attribute_07=>'profile,email'
+,p_attribute_09=>'#email#'
+,p_attribute_10=>'email,name'
+,p_attribute_11=>'N'
+,p_attribute_13=>'Y'
+,p_invalid_session_type=>'LOGIN'
+,p_logout_url=>'https://www.google.com/accounts/Logout'
+,p_cookie_name=>'&WORKSPACE_COOKIE.'
+,p_use_secure_cookie_yn=>'N'
+,p_ras_mode=>0
+);
+end;
+/
 prompt --application/shared_components/security/authentications/master_apex_accounts
 begin
 wwv_flow_imp_shared.create_authentication(
@@ -22196,7 +22228,7 @@ wwv_flow_imp_page.create_ig_report_view(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(45703233934516070)
 ,p_view_id=>wwv_flow_imp.id(150829201438289917)
-,p_display_seq=>13
+,p_display_seq=>14
 ,p_column_id=>wwv_flow_imp.id(45517489443836014)
 ,p_is_visible=>true
 ,p_is_frozen=>false
@@ -22205,7 +22237,7 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(45704127321516073)
 ,p_view_id=>wwv_flow_imp.id(150829201438289917)
-,p_display_seq=>12
+,p_display_seq=>13
 ,p_column_id=>wwv_flow_imp.id(45517561289836015)
 ,p_is_visible=>true
 ,p_is_frozen=>false
@@ -22214,7 +22246,7 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(45705090873516076)
 ,p_view_id=>wwv_flow_imp.id(150829201438289917)
-,p_display_seq=>10
+,p_display_seq=>12
 ,p_column_id=>wwv_flow_imp.id(45517626732836016)
 ,p_is_visible=>true
 ,p_is_frozen=>false
@@ -22249,10 +22281,11 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(48032919755704454)
 ,p_view_id=>wwv_flow_imp.id(150829201438289917)
-,p_display_seq=>14
+,p_display_seq=>10
 ,p_column_id=>wwv_flow_imp.id(47742579533626935)
 ,p_is_visible=>true
 ,p_is_frozen=>false
+,p_width=>90
 );
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(116088334177693057)
@@ -32008,10 +32041,10 @@ wwv_flow_imp_page.create_page_plug(
 '<p>This application has security based on roles with quite extensive setup. As an administrator you can create new role (or manage existing roles) and map:</p>',
 '',
 '<ul>',
-'    <li>Pages accessible to the specific roles (per project)</li>',
-'    <li>Database tables with Create/Update/Delete actions</li>',
+'    <li>Pages accessible to the specific roles (ans as everything per client and project)</li>',
+'    <li>Database tables (form & grid) with create, update, delete actions mapped to IS_USER_C|U|D authz. schemes</li>',
 '    <li>Database procedures you can run</li>',
-'    <li>Components (regions, buttons...) you can see on page</li>',
+'    <li>Components (regions, buttons, columns, items...) you can see or use on page</li>',
 '</ul>',
 '',
 '<p>You have a global list of users and you have to assign users to the clients. Then you can specify what roles will user have on specific client or project (you have both levels). If project role is not found, then the client role is checked.</p>',

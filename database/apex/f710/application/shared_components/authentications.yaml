@@ -1,4 +1,31 @@
 ---
+- # ====== Authentication: GOOGLE ==============================
+  id: 48132635231854310
+  identification: 
+    name: GOOGLE
+
+  settings: 
+    type: Social Sign-In
+    credential-store: 48132362808845792
+    authentication-provider: Google
+    scope: profile,email
+    username: '#email#'
+    convert-username-to-upper-case: false
+    additional-user-attributes: email,name
+    verify-attributes: true
+
+  session-not-valid: 
+    redirect-to: Login Page
+
+  login-processing: 
+    switch-in-session: false
+
+  post-logout-url: 
+    post-logout-url: 'https://www.google.com/accounts/Logout'
+
+  real-application-security: 
+    ras-mode: Disabled
+
 - # ====== Authentication: MASTER - APEX_ACCOUNTS ==============
   id: 71254896610086700
   identification: 
