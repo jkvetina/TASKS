@@ -183,6 +183,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         in_client_id        CONSTANT tsk_statuses.client_id%TYPE    := tsk_app.get_client_id();
         in_project_id       CONSTANT tsk_statuses.project_id%TYPE   := tsk_app.get_project_id();
     BEGIN
+        --
+        -- @TODO: we should check if we can update
+        --
         FOR s IN (
             SELECT
                 t.status_id,
@@ -216,6 +219,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         in_client_id        CONSTANT tsk_statuses.client_id%TYPE    := tsk_app.get_client_id();
         in_project_id       CONSTANT tsk_statuses.project_id%TYPE   := tsk_app.get_project_id();
     BEGIN
+        --
+        -- @TODO: we should check if we can update
+        --
         FOR s IN (
             SELECT
                 t.swimlane_id,

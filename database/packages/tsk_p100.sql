@@ -158,6 +158,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                 HTP.P('<div class="TARGET" id="STATUS_' || s.status_id || '_SWIMLANE_' || w.swimlane_id || '">');
                 --
                 FOR t IN (
+                    --
+                    -- @TODO: use the p100_grid view instead
+                    --
                     SELECT
                         t.task_id,
                         t.task_name,
