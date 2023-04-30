@@ -1,6 +1,6 @@
 CREATE TABLE tsk_auth_tables (
-    role_id                         VARCHAR2(64)    CONSTRAINT nn_tsk_auth_tables_role NOT NULL,
     table_name                      VARCHAR2(64)    CONSTRAINT nn_tsk_auth_tables_name NOT NULL,
+    role_id                         VARCHAR2(64)    CONSTRAINT nn_tsk_auth_tables_role NOT NULL,
     is_active                       CHAR(1),
     is_allowed_create               CHAR(1),
     is_allowed_update               CHAR(1),
@@ -21,7 +21,7 @@ CREATE TABLE tsk_auth_tables (
         CHECK (is_allowed_delete = 'Y' OR is_allowed_delete IS NULL),
     --
     CONSTRAINT pk_tsk_auth_tables
-        PRIMARY KEY (role_id, table_name),
+        PRIMARY KEY (table_name, role_id),
     --
     CONSTRAINT fk_tsk_auth_tables_role
         FOREIGN KEY (role_id)
@@ -31,8 +31,8 @@ CREATE TABLE tsk_auth_tables (
 --
 COMMENT ON TABLE tsk_auth_tables IS '';
 --
-COMMENT ON COLUMN tsk_auth_tables.role_id               IS '';
 COMMENT ON COLUMN tsk_auth_tables.table_name            IS '';
+COMMENT ON COLUMN tsk_auth_tables.role_id               IS '';
 COMMENT ON COLUMN tsk_auth_tables.is_active             IS '';
 COMMENT ON COLUMN tsk_auth_tables.is_allowed_create     IS '';
 COMMENT ON COLUMN tsk_auth_tables.is_allowed_update     IS '';

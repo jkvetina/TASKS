@@ -19,8 +19,8 @@ CREATE TABLE tsk_auth_roles (
         DEFERRABLE INITIALLY DEFERRED,
     --
     CONSTRAINT fk_tsk_auth_roles_user
-        FOREIGN KEY (client_id, user_id)
-        REFERENCES tsk_auth_users (client_id, user_id)
+        FOREIGN KEY (user_id, client_id)
+        REFERENCES tsk_auth_users (user_id, client_id)
         DEFERRABLE INITIALLY DEFERRED
 );
 --
