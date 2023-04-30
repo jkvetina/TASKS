@@ -16,7 +16,7 @@ wwv_flow_imp_shared.create_security_scheme(
 ,p_name=>'IS_USER_C'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
 ,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'RETURN tsk_auth.is_user(',
+'RETURN tsk_auth.is_user (',
 '    in_component_id     => :APP_COMPONENT_ID,',
 '    in_component_type   => :APP_COMPONENT_TYPE,',
 '    in_component_name   => :APP_COMPONENT_NAME,',

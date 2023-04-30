@@ -8,10 +8,16 @@
     type: PL/SQL Function Returning Boolean
 
   settings: 
-    pl/sql-function-body: RETURN tsk_auth.is_user() = 'Y';
+    pl/sql-function-body: |
+      RETURN tsk_auth.is_user (
+          in_component_id     => :APP_COMPONENT_ID,
+          in_component_type   => :APP_COMPONENT_TYPE,
+          in_component_name   => :APP_COMPONENT_NAME,
+          in_action           => NULL
+      ) = 'Y';
 
   server-cache: 
-    evaluation-point: Once per Page View
+    evaluation-point: Once per Component
 
   error: 
     error-message: ACCESS_DENIED|IS_USER
@@ -60,7 +66,7 @@
 
   settings: 
     pl/sql-function-body: |
-      RETURN tsk_auth.is_user(
+      RETURN tsk_auth.is_user (
           in_component_id     => :APP_COMPONENT_ID,
           in_component_type   => :APP_COMPONENT_TYPE,
           in_component_name   => :APP_COMPONENT_NAME,
@@ -83,7 +89,7 @@
 
   settings: 
     pl/sql-function-body: |
-      RETURN tsk_auth.is_user(
+      RETURN tsk_auth.is_user (
           in_component_id     => :APP_COMPONENT_ID,
           in_component_type   => :APP_COMPONENT_TYPE,
           in_component_name   => :APP_COMPONENT_NAME,
@@ -106,7 +112,7 @@
 
   settings: 
     pl/sql-function-body: |
-      RETURN tsk_auth.is_user(
+      RETURN tsk_auth.is_user (
           in_component_id     => :APP_COMPONENT_ID,
           in_component_type   => :APP_COMPONENT_TYPE,
           in_component_name   => :APP_COMPONENT_NAME,

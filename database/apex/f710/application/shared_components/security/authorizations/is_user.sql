@@ -15,9 +15,15 @@ wwv_flow_imp_shared.create_security_scheme(
  p_id=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 ,p_name=>'IS_USER'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
-,p_attribute_01=>'RETURN tsk_auth.is_user() = ''Y'';'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'RETURN tsk_auth.is_user (',
+'    in_component_id     => :APP_COMPONENT_ID,',
+'    in_component_type   => :APP_COMPONENT_TYPE,',
+'    in_component_name   => :APP_COMPONENT_NAME,',
+'    in_action           => NULL',
+') = ''Y'';'))
 ,p_error_message=>'ACCESS_DENIED|IS_USER'
-,p_caching=>'BY_USER_BY_PAGE_VIEW'
+,p_caching=>'BY_COMPONENT'
 );
 wwv_flow_imp.component_end;
 end;
