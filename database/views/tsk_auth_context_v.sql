@@ -19,19 +19,25 @@ SELECT
     x.user_id,
     x.app_id,
     x.page_id,
-    c.client_id,
-    p.project_id,
-    d.client_id         AS page_client_id,
-    j.project_id        AS page_project_id
+    --
+    MAX(c.client_id)    AS client_id,
+    MAX(p.project_id)   AS project_id,
+    --
+    MAX(d.client_id)    AS page_client_id,
+    MAX(j.project_id)   AS page_project_id
 FROM x
 LEFT JOIN tsk_auth_available_projects_v c
     ON c.client_id      = x.client_id
-LEFT JOIN tsk_auth_available_projects_v d
-    ON d.client_id      = x.page_client_id
 LEFT JOIN tsk_auth_available_projects_v p
     ON p.project_id     = x.project_id
+LEFT JOIN tsk_auth_available_projects_v d
+    ON d.client_id      = x.page_client_id
 LEFT JOIN tsk_auth_available_projects_v j
-    ON j.project_id     = x.page_project_id;
+    ON j.project_id     = x.page_project_id
+GROUP BY
+    x.user_id,
+    x.app_id,
+    x.page_id;
 --
 COMMENT ON TABLE tsk_auth_context_v IS '';
 

@@ -455,7 +455,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_default_language=>'PLSQL'
 ,p_prompt=>'Client'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_CLIENTS'
+,p_named_lov=>'LOV_CLIENTS #ALL'
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_colspan=>2
@@ -474,7 +474,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(137873618130399492)
 ,p_prompt=>'Project'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_PROJECTS'
+,p_named_lov=>'LOV_PROJECTS #USER_SETTINGS'
 ,p_lov_display_null=>'YES'
 ,p_lov_cascade_parent_items=>'P515_CLIENT_ID'
 ,p_ajax_items_to_submit=>'P515_CLIENT_ID'

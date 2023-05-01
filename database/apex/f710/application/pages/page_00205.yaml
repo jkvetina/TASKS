@@ -271,7 +271,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_CLIENTS # 34762829880497308
+    list-of-values: 'LOV_CLIENTS #ALL' # 34762829880497308
     display-extra-values: true
     display-null-value: false
 
@@ -338,7 +338,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_PROJECTS_ALL # 45510330697215422
+    list-of-values: 'LOV_PROJECTS #PAGE_ITEMS' # 45510330697215422
     display-extra-values: true
     display-null-value: false
 

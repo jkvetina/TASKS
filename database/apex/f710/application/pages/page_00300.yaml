@@ -444,7 +444,7 @@ regions:
 
     list-of-values: 
       type: Shared Component
-      list-of-values: LOV_CLIENTS # 34762829880497308
+      list-of-values: 'LOV_CLIENTS #ALL' # 34762829880497308
       display-extra-values: true
       display-null-value: true
 

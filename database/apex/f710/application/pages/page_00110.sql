@@ -382,7 +382,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(44286090683494712)
 ,p_prompt=>'Source Client'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_CLIENTS'
+,p_named_lov=>'LOV_CLIENTS #ALL'
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_read_only_when_type=>'ALWAYS'
@@ -401,7 +401,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(44286090683494712)
 ,p_prompt=>'Source Project'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_PROJECTS'
+,p_named_lov=>'LOV_PROJECTS #USER_SETTINGS'
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_read_only_when_type=>'ALWAYS'
@@ -440,7 +440,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_prompt=>'Target Client'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_CLIENTS'
+,p_named_lov=>'LOV_CLIENTS #ALL'
 ,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
@@ -459,7 +459,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(44286194908494713)
 ,p_prompt=>'Target Project'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_PROJECTS_ALL'
+,p_named_lov=>'LOV_PROJECTS #PAGE_ITEMS'
 ,p_lov_display_null=>'YES'
 ,p_lov_cascade_parent_items=>'P110_CLIENT_ID'
 ,p_ajax_items_to_submit=>'P110_CLIENT_ID'
