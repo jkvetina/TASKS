@@ -60,7 +60,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
                 FROM tsk_lov_statuses_v s
                 WHERE s.is_default = 'Y'
             ) LOOP
-                core.set_item('P105_STATUS_ID', rec.status_id);
+                core.set_item('P105_STATUS_ID', c.status_id);
             END LOOP;
             --
             FOR c IN (
