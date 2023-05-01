@@ -5,6 +5,13 @@ WITH x AS (
         tsk_app.get_project_id()    AS project_id,
         tsk_app.get_board_id()      AS board_id
     FROM DUAL
+),
+l AS (
+    SELECT /*+ MATERIALIZE */
+        l.task_id,
+        NULLIF(SUM(CASE WHEN l.checklist_done = 'Y' THEN 1 ELSE 0 END) || '/' || COUNT(l.checklist_id), '0/0') AS task_progress
+    FROM tsk_task_checklist l
+    GROUP BY l.task_id
 )
 SELECT
     t.task_id,
@@ -17,7 +24,11 @@ SELECT
         p_values        => '' || t.task_id || ',100'
     ) AS task_link,
     --
-    NULLIF(SUM(CASE WHEN l.checklist_done = 'Y' THEN 1 ELSE 0 END) || '/' || COUNT(l.checklist_id), '0/0') AS task_progress,
+    l.task_progress,
+    --
+    t.client_id,
+    t.project_id,
+    t.board_id,
     --
     t.status_id,
     t.swimlane_id,
@@ -25,12 +36,9 @@ SELECT
     t.owner_id,
     t.deadline_at,
     t.tags,
+    g.color_bg,
     t.updated_by,
     t.updated_at,
-    --
-    w.order#            AS swimlane_order#,
-    s.order#            AS status_order#,
-    t.order#            AS task_order#,
     --
     LAG(t.task_id) OVER (
         PARTITION BY t.client_id, t.project_id, t.board_id
@@ -40,7 +48,13 @@ SELECT
     LEAD(t.task_id) OVER (
         PARTITION BY t.client_id, t.project_id, t.board_id
         ORDER BY w.order# NULLS LAST, s.order# NULLS LAST, t.order# NULLS LAST
-    ) AS next_task
+    ) AS next_task,
+    --
+    w.order#            AS swimlane_order#,
+    s.order#            AS status_order#,
+    t.order#            AS task_order#,
+    --
+    ROW_NUMBER() OVER (ORDER BY t.order# NULLS LAST, t.task_id) AS order#
     --
 FROM tsk_tasks t
 JOIN x
@@ -55,26 +69,14 @@ JOIN tsk_swimlanes w
     ON w.swimlane_id    = t.swimlane_id
     AND w.client_id     = t.client_id
     AND W.project_id    = t.project_id
-LEFT JOIN tsk_task_checklist l
-    ON l.task_id        = t.task_id
-    --AND t.swimlane_id   = w.swimlane_id
-GROUP BY
-    t.client_id,
-    t.project_id,
-    t.board_id,
-    t.task_id,
-    t.task_name,
-    t.status_id,
-    t.swimlane_id,
-    t.category_id,
-    t.owner_id,
-    t.deadline_at,
-    t.tags,
-    t.updated_by,
-    t.updated_at,
-    w.order#,
-    s.order#,
-    t.order#;
+LEFT JOIN tsk_categories g
+    ON g.category_id    = t.category_id
+    AND g.client_id     = t.client_id
+    AND g.project_id    = t.project_id
+    AND g.color_bg      IS NOT NULL
+    AND g.is_active     = 'Y'
+LEFT JOIN l
+    ON l.task_id        = t.task_id;
 --
 COMMENT ON TABLE tsk_p100_tasks_grid_v IS '';
 

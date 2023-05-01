@@ -159,45 +159,20 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                 HTP.P('<div class="TARGET" id="STATUS_' || s.status_id || '_SWIMLANE_' || w.swimlane_id || '">');
                 --
                 FOR t IN (
-                    --
-                    -- @TODO: use the p100_grid view instead
-                    --
                     SELECT
                         t.task_id,
                         t.task_name,
                         t.deadline_at,
-                        --
-                        APEX_PAGE.GET_URL (
-                            p_page          => 105,
-                            p_clear_cache   => 105,
-                            p_items         => 'P105_TASK_ID,P105_SOURCE_PAGE',
-                            p_values        => '' || t.task_id || ',100'
-                        ) AS task_link,
-                        --
-                        NULLIF(SUM(CASE WHEN l.checklist_done = 'Y' THEN 1 ELSE 0 END) || '/' || COUNT(l.checklist_id), '0/0') AS task_progress,
-                        --
-                        MAX(g.color_bg)     AS color_bg
-                        --
-                    FROM tsk_tasks t
-                    LEFT JOIN tsk_task_checklist l
-                        ON l.task_id        = t.task_id
-                    LEFT JOIN tsk_categories g
-                        ON g.category_id    = t.category_id
-                        AND g.client_id     = t.client_id
-                        AND g.project_id    = t.project_id
-                        AND g.color_bg      IS NOT NULL
-                        AND g.is_active     = 'Y'
+                        t.task_link,
+                        t.task_progress,
+                        t.color_bg
+                    FROM tsk_p100_tasks_grid_v t
                     WHERE t.client_id       = in_client_id
                         AND t.project_id    = in_project_id
                         AND t.board_id      = in_board_id
                         AND t.status_id     = s.status_id
                         AND t.swimlane_id   = w.swimlane_id
-                    GROUP BY
-                        t.task_id,
-                        t.task_name,
-                        t.deadline_at,
-                        t.order#
-                    ORDER BY t.order# NULLS LAST, t.task_id
+                    ORDER BY t.order#
                 ) LOOP
                     HTP.P(
                         '<div class="TASK" draggable="true" id="TASK_' || t.task_id || '" style="' ||
