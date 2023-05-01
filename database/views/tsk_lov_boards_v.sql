@@ -1,21 +1,24 @@
 CREATE OR REPLACE FORCE VIEW tsk_lov_boards_v AS
-WITH x AS (
-    SELECT /*+ MATERIALIZE */
-        COALESCE(CASE WHEN core.get_page_id() = 100 THEN core.get_item('P100_CLIENT_ID')  END, tsk_app.get_client_id())  AS client_id,
-        COALESCE(CASE WHEN core.get_page_id() = 100 THEN core.get_item('P100_PROJECT_ID') END, tsk_app.get_project_id()) AS project_id
-    FROM DUAL
-)
 SELECT
+    p.client_id,
+    p.client_name,
+    p.project_id,
+    p.project_name,
     t.board_id,
     t.board_name,
     --
-    ROW_NUMBER() OVER (ORDER BY t.order# NULLS LAST, t.board_id) AS order#
+    p.client_r#,
+    p.project_r#,
+    ROW_NUMBER() OVER (ORDER BY t.order#, t.board_id) AS board_r#
     --
 FROM tsk_boards t
-JOIN x
-    ON x.client_id      = t.client_id
-    AND x.project_id    = t.project_id
-WHERE t.is_active       = 'Y';
+CROSS JOIN tsk_auth_context_v z
+JOIN tsk_lov_projects_v p
+    ON p.client_id          = t.client_id
+    AND p.project_id        = t.project_id
+WHERE t.is_active           = 'Y'
+    AND p.is_page_client    = 'Y'
+    AND p.is_page_project   = 'Y';
 --
 COMMENT ON TABLE tsk_lov_boards_v IS '';
 

@@ -1044,7 +1044,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_source=>'BOARD_ID'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_BOARDS_ALL'
+,p_named_lov=>'LOV_BOARDS #PAGE_ITEMS'
 ,p_lov_cascade_parent_items=>'P105_PROJECT_ID'
 ,p_ajax_items_to_submit=>'P105_CLIENT_ID,P105_PROJECT_ID'
 ,p_ajax_optimize_refresh=>'Y'
@@ -1070,7 +1070,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_CLIENTS #ALL'
-,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
@@ -1093,7 +1092,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_PROJECTS #PAGE_ITEMS'
-,p_lov_display_null=>'YES'
 ,p_lov_cascade_parent_items=>'P105_CLIENT_ID'
 ,p_ajax_items_to_submit=>'P105_CLIENT_ID'
 ,p_ajax_optimize_refresh=>'Y'

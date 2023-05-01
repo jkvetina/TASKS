@@ -27,8 +27,7 @@ prompt --install
 @@application/shared_components/navigation/tabs/parent.sql
 @@application/shared_components/user_interface/lovs/lov_app_pages.sql
 @@application/shared_components/user_interface/lovs/lov_app_tables.sql
-@@application/shared_components/user_interface/lovs/lov_boards.sql
-@@application/shared_components/user_interface/lovs/lov_boards_all.sql
+@@application/shared_components/user_interface/lovs/lov_boards_page_items.sql
 @@application/shared_components/user_interface/lovs/lov_board_types.sql
 @@application/shared_components/user_interface/lovs/lov_categories.sql
 @@application/shared_components/user_interface/lovs/lov_clients_all.sql
@@ -45,7 +44,6 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_users.sql
 @@application/shared_components/user_interface/lovs/lov_users_all.sql
 @@application/shared_components/user_interface/lovs/master_lov_applications.sql
-@@application/shared_components/user_interface/lovs/master_lov_users.sql
 @@application/pages/page_groups.sql
 @@application/comments.sql
 @@application/shared_components/navigation/breadcrumbentry.sql

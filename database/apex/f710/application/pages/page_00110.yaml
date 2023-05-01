@@ -808,7 +808,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_BOARDS # 34763544164505098
+    list-of-values: 'LOV_BOARDS #PAGE_ITEMS' # 34763544164505098
     display-extra-values: true
     display-null-value: true
 
@@ -995,7 +995,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_BOARDS_ALL # 45358569306027190
+    list-of-values: 'LOV_BOARDS #PAGE_ITEMS' # 34763544164505098
     display-extra-values: true
     display-null-value: true
 

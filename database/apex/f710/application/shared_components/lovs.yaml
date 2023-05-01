@@ -36,10 +36,10 @@
     group: CLIENT_NAME
     group-sort-direction: Ascending (Nulls Last)
 
-- # ====== List of Values: LOV_BOARDS ==========================
+- # ====== List of Values: LOV_BOARDS #PAGE_ITEMS ==============
   id: 34763544164505098
   identification: 
-    name: LOV_BOARDS
+    name: 'LOV_BOARDS #PAGE_ITEMS'
 
   source: 
     location: Local Database
@@ -50,8 +50,10 @@
   column-mapping: 
     return: BOARD_ID
     display: BOARD_NAME
-    default-sort: ORDER#
+    default-sort: BOARD_R#
     sort-direction: Ascending (Nulls Last)
+    group: PROJECT_NAME
+    group-sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: LOV_SWIMLANES =======================
   id: 34920402511183578
@@ -101,23 +103,6 @@
   column-mapping: 
     return: ID
     display: NAME
-    default-sort: ORDER#
-    sort-direction: Ascending (Nulls Last)
-
-- # ====== List of Values: LOV_BOARDS_ALL ======================
-  id: 45358569306027190
-  identification: 
-    name: LOV_BOARDS_ALL
-
-  source: 
-    location: Local Database
-    type: Table / View
-    table-owner: Parsing Schema
-    table-name: TSK_LOV_BOARDS_ALL_V
-
-  column-mapping: 
-    return: BOARD_ID
-    display: BOARD_NAME
     default-sort: ORDER#
     sort-direction: Ascending (Nulls Last)
 
@@ -361,27 +346,5 @@
     return: APP_ID
     display: APPLICATION_NAME
     default-sort: APPLICATION_NAME
-    sort-direction: Ascending (Nulls Last)
-
-- # ====== List of Values: MASTER - LOV_USERS ==================
-  id: 54625088629706656
-  identification: 
-    name: MASTER - LOV_USERS
-
-  subscription: 
-    master: 
-      app: 705 # MASTER
-      referenced-id: 18781697091885858 # LOV_USERS
-
-  source: 
-    location: Local Database
-    type: Table / View
-    table-owner: Parsing Schema
-    table-name: INT_USERS
-
-  column-mapping: 
-    return: USER_ID
-    display: USER_NAME
-    default-sort: USER_NAME
     sort-direction: Ascending (Nulls Last)
 

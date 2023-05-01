@@ -1881,7 +1881,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_BOARDS_ALL # 45358569306027190
+    list-of-values: 'LOV_BOARDS #PAGE_ITEMS' # 34763544164505098
     display-extra-values: true
     display-null-value: false
 
@@ -1953,7 +1953,7 @@ page-items:
     type: Shared Component
     list-of-values: 'LOV_CLIENTS #ALL' # 34762829880497308
     display-extra-values: true
-    display-null-value: true
+    display-null-value: false
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -2015,7 +2015,7 @@ page-items:
     type: Shared Component
     list-of-values: 'LOV_PROJECTS #PAGE_ITEMS' # 45510330697215422
     display-extra-values: true
-    display-null-value: true
+    display-null-value: false
 
   cascading-list-of-values: 
     parent-item(s): 
