@@ -5,7 +5,8 @@ WITH x AS (
         core.get_item('P110_SOURCE_PROJECT')    AS project_id,
         core.get_item('P110_SOURCE_BOARD')      AS board_id,
         core.get_item('P110_SOURCE_STATUS')     AS status_id,
-        core.get_item('P110_SOURCE_SWIMLANE')   AS swimlane_id
+        core.get_item('P110_SOURCE_SWIMLANE')   AS swimlane_id,
+        core.get_item('P110_SOURCE_CATEGORY')   AS category_id
     FROM DUAL
 )
 SELECT
@@ -35,8 +36,9 @@ LEFT JOIN tsk_task_checklist l
 WHERE t.client_id       = x.client_id
     AND t.project_id    = x.project_id
     AND t.board_id      = x.board_id
-    AND t.status_id     = x.status_id
-    AND t.swimlane_id   = x.swimlane_id
+    AND (t.status_id    = x.status_id       OR x.status_id IS NULL)
+    AND (t.swimlane_id  = x.swimlane_id     OR x.swimlane_id IS NULL)
+    AND (t.category_id  = x.category_id     OR x.category_id IS NULL)
 GROUP BY
     t.task_id,
     t.task_name,

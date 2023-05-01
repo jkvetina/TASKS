@@ -556,9 +556,18 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_STATUSES # 34920754342188100
+    list-of-values: LOV_STATUSES_ALL # 45514224857289669
     display-extra-values: true
     display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P110_SOURCE_BOARD
+    items-to-submit: 
+    - P110_SOURCE_CLIENT_ID
+    - P110_SOURCE_PROJECT_ID
+    - P110_SOURCE_BOARD_ID
+    parent-required: true
 
   advanced: 
     warn-on-unsaved-changes: Ignore

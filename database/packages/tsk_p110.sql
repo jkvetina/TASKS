@@ -104,9 +104,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p110 AS
             AND t.client_id     = v_source.client_id
             AND t.project_id    = v_source.project_id
             AND t.board_id      = v_source.board_id
-            AND t.status_id     = v_source.status_id
-            AND t.swimlane_id   = v_source.swimlane_id
-            AND (t.category_id  = v_source.category_id OR v_source.category_id IS NULL)
+            AND (t.status_id    = v_source.status_id    OR v_source.status_id IS NULL)
+            AND (t.swimlane_id  = v_source.swimlane_id  OR v_source.swimlane_id IS NULL)
+            AND (t.category_id  = v_source.category_id  OR v_source.category_id IS NULL)
             AND t.task_id NOT IN (
                 SELECT
                     c.c001 AS task_id

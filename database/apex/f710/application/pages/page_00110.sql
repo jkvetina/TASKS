@@ -343,8 +343,11 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(44286090683494712)
 ,p_prompt=>'Source Status'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_STATUSES'
+,p_named_lov=>'LOV_STATUSES_ALL'
 ,p_lov_display_null=>'YES'
+,p_lov_cascade_parent_items=>'P110_SOURCE_BOARD'
+,p_ajax_items_to_submit=>'P110_SOURCE_CLIENT_ID,P110_SOURCE_PROJECT_ID,P110_SOURCE_BOARD_ID'
+,p_ajax_optimize_refresh=>'Y'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
