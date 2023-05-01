@@ -184,6 +184,7 @@ regions:
     - P110_SOURCE_BOARD
     - P110_SOURCE_STATUS
     - P110_SOURCE_SWIMLANE
+    - P110_SOURCE_CATEGORY
 
   layout: 
     sequence: 30
@@ -557,7 +558,7 @@ page-items:
   list-of-values: 
     type: Shared Component
     list-of-values: LOV_STATUSES_ALL # 45514224857289669
-    display-extra-values: true
+    display-extra-values: false
     display-null-value: true
 
   cascading-list-of-values: 
@@ -626,7 +627,7 @@ page-items:
     type: Shared Component
     list-of-values: LOV_SWIMLANES # 34920402511183578
     display-extra-values: false
-    display-null-value: false
+    display-null-value: true
 
   advanced: 
     warn-on-unsaved-changes: Ignore
@@ -1361,6 +1362,7 @@ dynamic-actions:
     - P110_SOURCE_BOARD
     - P110_SOURCE_STATUS
     - P110_SOURCE_SWIMLANE
+    - P110_SOURCE_CATEGORY
 
   execution: 
     event-scope: Static

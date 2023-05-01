@@ -82,7 +82,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_query_table=>'TSK_P110_TASKS_V'
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
-,p_ajax_items_to_submit=>'P110_SOURCE_CLIENT,P110_SOURCE_PROJECT,P110_SOURCE_BOARD,P110_SOURCE_STATUS,P110_SOURCE_SWIMLANE'
+,p_ajax_items_to_submit=>'P110_SOURCE_CLIENT,P110_SOURCE_PROJECT,P110_SOURCE_BOARD,P110_SOURCE_STATUS,P110_SOURCE_SWIMLANE,P110_SOURCE_CATEGORY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_prn_units=>'INCHES'
 ,p_prn_paper_size=>'LETTER'
@@ -352,7 +352,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_warn_on_unsaved_changes=>'I'
-,p_lov_display_extra=>'YES'
+,p_lov_display_extra=>'NO'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
@@ -365,6 +365,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_prompt=>'Source Swimlane'
 ,p_display_as=>'NATIVE_SELECT_LIST'
 ,p_named_lov=>'LOV_SWIMLANES'
+,p_lov_display_null=>'YES'
 ,p_cHeight=>1
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
@@ -596,7 +597,7 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_name=>'SOURCE_CHANGED'
 ,p_event_sequence=>20
 ,p_triggering_element_type=>'ITEM'
-,p_triggering_element=>'P110_SOURCE_CLIENT,P110_SOURCE_PROJECT,P110_SOURCE_BOARD,P110_SOURCE_STATUS,P110_SOURCE_SWIMLANE'
+,p_triggering_element=>'P110_SOURCE_CLIENT,P110_SOURCE_PROJECT,P110_SOURCE_BOARD,P110_SOURCE_STATUS,P110_SOURCE_SWIMLANE,P110_SOURCE_CATEGORY'
 ,p_bind_type=>'bind'
 ,p_execution_type=>'IMMEDIATE'
 ,p_bind_event_type=>'change'
