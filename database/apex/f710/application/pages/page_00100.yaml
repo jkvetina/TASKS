@@ -119,6 +119,9 @@ regions:
     type: Item is NULL
     item: P100_SHOW_GRID
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
   server-cache: 
     caching: Disabled
 
@@ -206,6 +209,9 @@ regions:
   server-side-condition: 
     type: Item is NOT NULL
     item: P100_SHOW_GRID
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
   server-cache: 
     caching: Disabled
@@ -946,6 +952,7 @@ page-items:
     show-quick-picks: false
 
   security: 
+    authorization-scheme: IS_USER # 47196033359190547
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
@@ -1005,6 +1012,7 @@ page-items:
     show-quick-picks: false
 
   security: 
+    authorization-scheme: IS_USER # 47196033359190547
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
@@ -1064,6 +1072,7 @@ page-items:
     show-quick-picks: false
 
   security: 
+    authorization-scheme: IS_USER # 47196033359190547
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
@@ -1078,8 +1087,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 70
-    region: '&P100_HEADER.' # 34744374076440316
+    sequence: 10
+    region: Tasks # 35122875520937003
     position: BODY
 
   advanced: 
@@ -1157,6 +1166,7 @@ page-items:
     show-quick-picks: false
 
   security: 
+    authorization-scheme: IS_USER # 47196033359190547
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
@@ -1171,8 +1181,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 80
-    region: '&P100_HEADER.' # 34744374076440316
+    sequence: 10
+    region: Tasks # 35122875520937003
     position: BODY
 
   advanced: 
@@ -1243,6 +1253,7 @@ page-items:
     show-quick-picks: false
 
   security: 
+    authorization-scheme: IS_USER # 47196033359190547
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
@@ -1257,8 +1268,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 90
-    region: '&P100_HEADER.' # 34744374076440316
+    sequence: 10
+    region: Tasks # 35122875520937003
     position: BODY
 
   advanced: 
@@ -1287,8 +1298,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 100
-    region: '&P100_HEADER.' # 34744374076440316
+    sequence: 10
+    region: Tasks # 35122875520937003
     position: BODY
 
   advanced: 
@@ -1317,8 +1328,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 110
-    region: '&P100_HEADER.' # 34744374076440316
+    sequence: 10
+    region: Tasks # 35122875520937003
     position: BODY
 
   advanced: 
@@ -1376,6 +1387,9 @@ buttons:
     type: Item is NOT NULL
     item: P100_BOARD_ID
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Button: REFRESH_TASKS ===============================
   id: 34952422242065834
   identification: 
@@ -1411,6 +1425,9 @@ buttons:
   server-side-condition: 
     type: Item is NOT NULL
     item: P100_BOARD_ID
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 - # ====== Button: SHOW_LIST ===================================
   id: 44092751910578030
@@ -1452,6 +1469,9 @@ buttons:
       :P100_SHOW_GRID IS NULL
       AND :P100_BOARD_ID IS NOT NULL
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Button: SHOW_COLUMNS ================================
   id: 44092855926578031
   identification: 
@@ -1491,6 +1511,9 @@ buttons:
       :P100_SHOW_GRID IS NOT NULL
       AND :P100_BOARD_ID IS NOT NULL
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Button: SEARCH ======================================
   id: 44285202572494704
   identification: 
@@ -1526,6 +1549,9 @@ buttons:
   server-side-condition: 
     type: Item is NOT NULL
     item: P100_BOARD_ID
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 - # ====== Button: BULK_OPERATIONS =============================
   id: 44285362883494705
@@ -1563,6 +1589,9 @@ buttons:
     type: Item is NOT NULL
     item: P100_BOARD_ID
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Button: ADD_TO_FAVORITES ============================
   id: 45517331940836013
   identification: 
@@ -1598,6 +1627,9 @@ buttons:
       :P100_IS_FAVORITE IS NULL
       AND :P100_BOARD_ID IS NOT NULL
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Button: REMOVE_FROM_FAVORITES =======================
   id: 45892186832541601
   identification: 
@@ -1632,6 +1664,9 @@ buttons:
     pl/sql-expression: |
       :P100_IS_FAVORITE IS NOT NULL
       AND :P100_BOARD_ID IS NOT NULL
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 dynamic-actions: 
 - # ====== Dynamic Action: OPEN_DETAIL =========================

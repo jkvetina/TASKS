@@ -444,6 +444,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_id=>wwv_flow_imp.id(70970074101975671)
 ,p_button_image_alt=>'Sync GitHub'
 ,p_button_position=>'RIGHT_OF_TITLE'
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45414919622005627)

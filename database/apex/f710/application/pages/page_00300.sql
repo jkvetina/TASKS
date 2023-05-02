@@ -467,12 +467,13 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_image_alt=>'Add Project Wizard'
 ,p_button_position=>'RIGHT_OF_TITLE'
 ,p_warn_on_unsaved_changes=>null
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(45895835728541638)
 ,p_name=>'P300_HEADER'
 ,p_item_sequence=>10
-,p_item_plug_id=>wwv_flow_imp.id(70448427208945042)
+,p_item_plug_id=>wwv_flow_imp.id(70448343714945041)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'

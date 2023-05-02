@@ -688,6 +688,7 @@ page-items:
     show-quick-picks: false
 
   security: 
+    authorization-scheme: IS_USER # 47196033359190547
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
@@ -756,6 +757,7 @@ page-items:
     show-quick-picks: false
 
   security: 
+    authorization-scheme: IS_USER # 47196033359190547
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
@@ -820,6 +822,7 @@ page-items:
     show-quick-picks: false
 
   security: 
+    authorization-scheme: IS_USER # 47196033359190547
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
@@ -886,6 +889,7 @@ page-items:
     show-quick-picks: false
 
   security: 
+    authorization-scheme: IS_USER # 47196033359190547
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.

@@ -793,6 +793,9 @@ buttons:
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 processes: 
 - # ====== Process: SAVE_SWIMLANES =============================
   id: 45658357467305438

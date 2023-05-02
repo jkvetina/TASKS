@@ -233,6 +233,9 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
   server-cache: 
     caching: Disabled
 
@@ -273,6 +276,9 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
   server-cache: 
     caching: Disabled
@@ -358,6 +364,9 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
   server-cache: 
     caching: Disabled
 
@@ -398,6 +407,9 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
   server-cache: 
     caching: Disabled
@@ -441,6 +453,9 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
   server-cache: 
     caching: Disabled
 
@@ -481,6 +496,9 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
   server-cache: 
     caching: Disabled
@@ -1525,6 +1543,9 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
   server-cache: 
     caching: Disabled
@@ -3081,6 +3102,9 @@ buttons:
     type: Item is NULL
     item: P105_TASK_ID
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Button: UPDATE_ONLY =================================
   id: 34949339576065803
   identification: 
@@ -3115,6 +3139,9 @@ buttons:
   server-side-condition: 
     type: Item is NOT NULL
     item: P105_TASK_ID
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 - # ====== Button: DELETE_TASK =================================
   id: 34949592599065805
@@ -3153,6 +3180,9 @@ buttons:
     type: Item is NOT NULL
     item: P105_TASK_ID
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Button: UPDATE_AND_CLOSE ============================
   id: 44090106596578004
   identification: 
@@ -3185,6 +3215,9 @@ buttons:
     type: Item is NOT NULL
     item: P105_TASK_ID
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Button: CREATE_AND_CLOSE ============================
   id: 44090486634578007
   identification: 
@@ -3216,6 +3249,9 @@ buttons:
   server-side-condition: 
     type: Item is NULL
     item: P105_TASK_ID
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 - # ====== Button: CREATE_ANOTHER ==============================
   id: 44090573922578008
@@ -3250,6 +3286,9 @@ buttons:
   server-side-condition: 
     type: Item is NULL
     item: P105_TASK_ID
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 - # ====== Button: GOTO_NEXT_TASK ==============================
   id: 44172109399914728
@@ -3286,6 +3325,9 @@ buttons:
     type: Item is NOT NULL
     item: P105_NEXT_TASK_ID
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Button: GOTO_PREV_TASK ==============================
   id: 44172282401914729
   identification: 
@@ -3321,6 +3363,9 @@ buttons:
     type: Item is NOT NULL
     item: P105_PREV_TASK_ID
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Button: COPY_LINK ===================================
   id: 44172728522914734
   identification: 
@@ -3351,6 +3396,9 @@ buttons:
   server-side-condition: 
     type: Item is NOT NULL
     item: P105_TASK_ID
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 - # ====== Button: SPLIT_TASK ==================================
   id: 44285432437494706
@@ -3387,6 +3435,9 @@ buttons:
   server-side-condition: 
     type: Item is NOT NULL
     item: P105_SHOW_SPLIT
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 - # ====== Button: JOIN_TASK ===================================
   id: 47739587996626905
@@ -3425,6 +3476,9 @@ buttons:
   server-side-condition: 
     type: Item is NOT NULL
     item: P105_SHOW_SPLIT
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 - # ====== Button: CLOSE_DIALOG ================================
   id: 63213580209844592

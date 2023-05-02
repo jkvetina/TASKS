@@ -1554,8 +1554,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 20
-    region: '&P200_HEADER.' # 45520208745836042
+    sequence: 10
+    region: Project Boards # 45519167778836031
     position: BODY
 
   advanced: 
@@ -1584,8 +1584,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 60
-    region: '&P200_HEADER.' # 45520208745836042
+    sequence: 10
+    region: Project Boards # 45519167778836031
     position: BODY
 
   advanced: 
@@ -1614,8 +1614,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 80
-    region: '&P200_HEADER.' # 45520208745836042
+    sequence: 10
+    region: Project Boards # 45519167778836031
     position: BODY
 
   advanced: 
@@ -1644,8 +1644,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 90
-    region: '&P200_HEADER.' # 45520208745836042
+    sequence: 10
+    region: Project Boards # 45519167778836031
     position: BODY
 
   advanced: 
@@ -1674,8 +1674,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 30
-    region: '&P200_HEADER.' # 45520208745836042
+    sequence: 10
+    region: Project Boards # 45519167778836031
     position: BODY
 
   advanced: 
@@ -1704,8 +1704,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 40
-    region: '&P200_HEADER.' # 45520208745836042
+    sequence: 10
+    region: Project Boards # 45519167778836031
     position: BODY
 
   advanced: 
@@ -1734,8 +1734,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 50
-    region: '&P200_HEADER.' # 45520208745836042
+    sequence: 10
+    region: Project Boards # 45519167778836031
     position: BODY
 
   advanced: 
@@ -1764,8 +1764,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 70
-    region: '&P200_HEADER.' # 45520208745836042
+    sequence: 10
+    region: Project Boards # 45519167778836031
     position: BODY
 
   advanced: 
@@ -1816,6 +1816,9 @@ buttons:
       clear-cache: 205
 
     warn-on-unsaved-changes: Do Not Check
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 processes: 
 - # ====== Process: SAVE_BOARDS ================================

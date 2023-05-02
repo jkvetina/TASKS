@@ -680,6 +680,9 @@ buttons:
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 processes: 
 - # ====== Process: SAVE_COMMITS ===============================
   id: 45414919622005627

@@ -699,7 +699,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: '&P300_HEADER.' # 70448427208945042
+    region: Projects # 70448343714945041
     position: BODY
 
   advanced: 
@@ -744,6 +744,9 @@ buttons:
   behavior: 
     action: Defined by Dynamic Action
     execute-validations: true
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 processes: 
 - # ====== Process: SAVE_PROJECTS ==============================

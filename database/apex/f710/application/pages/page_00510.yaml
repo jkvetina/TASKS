@@ -779,6 +779,7 @@ page-items:
     show-quick-picks: false
 
   security: 
+    authorization-scheme: IS_USER # 47196033359190547
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
@@ -845,6 +846,7 @@ page-items:
     show-quick-picks: false
 
   security: 
+    authorization-scheme: IS_USER # 47196033359190547
     session-state-protection: Unrestricted
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
@@ -887,6 +889,9 @@ buttons:
   server-side-condition: 
     type: Item is NOT NULL
     item: P510_CLIENT_ID
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_PROJECT =====================
