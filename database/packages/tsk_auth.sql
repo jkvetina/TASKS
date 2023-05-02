@@ -128,12 +128,13 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             AND n.page_id       = in_page_id;
         --
         IF v_authorized IS NULL THEN
-            APEX_DEBUG.WARN ('NOT_AUTHORIZED|IS_USER',
-                in_user_id,
-                in_page_id,
-                in_client_id,
-                in_project_id,
-                in_component_id
+            APEX_DEBUG.WARN ('NOT_AUTHORIZED|IS_USER'
+                || '|' || in_user_id
+                || '|' || in_page_id
+                || '|' || in_client_id
+                || '|' || in_project_id
+                || '|' || in_component_id
+                || '|' || in_action
             );
             --
             RETURN v_authorized;
@@ -178,14 +179,21 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         END IF;
         --
         IF v_authorized IS NULL THEN
-            APEX_DEBUG.WARN ('NOT_AUTHORIZED|IS_USER',
-                in_user_id,
-                in_page_id,
-                in_client_id,
-                in_project_id,
-                in_component_id
+            APEX_DEBUG.WARN (RTRIM('NOT_AUTHORIZED|IS_USER_' || in_action, '_')
+                || '|' || in_user_id
+                || '|' || in_page_id
+                || '|' || in_client_id
+                || '|' || in_project_id
+                || '|' || in_component_id
             );
         END IF;
+
+        --
+        -- @TODO: authorize C|U|D for grids and forms
+        -- issue is, we know just the region_id=component_id
+        -- but we dont know what table is linked to that
+        --
+
         --
         RETURN v_authorized;
     EXCEPTION
