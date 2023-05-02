@@ -15,7 +15,9 @@ FROM tsk_roles r
 JOIN x
     ON (x.role_group    = r.role_group  OR x.role_group IS NULL)
     AND (x.role_id      = r.role_id     OR x.role_id IS NULL)
-    AND r.is_active     = 'Y';
+    AND r.is_active     = 'Y'
+    -- keep the order here, otherwise columns will break on various pages
+ORDER BY r#;
 --
 COMMENT ON TABLE tsk_p960_roles_columns_v IS '';
 

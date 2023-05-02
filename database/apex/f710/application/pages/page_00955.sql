@@ -775,8 +775,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(47119137234669475)
 ,p_name=>'P955_ROLE_NAME_1'
-,p_item_sequence=>60
-,p_item_plug_id=>wwv_flow_imp.id(187138827673459155)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(187138784403459154)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
@@ -784,8 +784,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(47119563243669475)
 ,p_name=>'P955_ROLE_NAME_2'
-,p_item_sequence=>70
-,p_item_plug_id=>wwv_flow_imp.id(187138827673459155)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(187138784403459154)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
@@ -793,8 +793,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(47119964795669481)
 ,p_name=>'P955_ROLE_NAME_3'
-,p_item_sequence=>80
-,p_item_plug_id=>wwv_flow_imp.id(187138827673459155)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(187138784403459154)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
@@ -802,8 +802,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(47120397937669481)
 ,p_name=>'P955_ROLE_NAME_4'
-,p_item_sequence=>90
-,p_item_plug_id=>wwv_flow_imp.id(187138827673459155)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(187138784403459154)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
@@ -811,8 +811,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(47120738367669482)
 ,p_name=>'P955_ROLE_NAME_5'
-,p_item_sequence=>100
-,p_item_plug_id=>wwv_flow_imp.id(187138827673459155)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(187138784403459154)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
@@ -820,8 +820,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(47121105911669482)
 ,p_name=>'P955_ROLE_NAME_6'
-,p_item_sequence=>110
-,p_item_plug_id=>wwv_flow_imp.id(187138827673459155)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(187138784403459154)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
@@ -829,8 +829,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(47121502435669482)
 ,p_name=>'P955_ROLE_NAME_7'
-,p_item_sequence=>120
-,p_item_plug_id=>wwv_flow_imp.id(187138827673459155)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(187138784403459154)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
@@ -838,8 +838,8 @@ wwv_flow_imp_page.create_page_item(
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(47121906648669482)
 ,p_name=>'P955_ROLE_NAME_8'
-,p_item_sequence=>130
-,p_item_plug_id=>wwv_flow_imp.id(187138827673459155)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(187138784403459154)
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'

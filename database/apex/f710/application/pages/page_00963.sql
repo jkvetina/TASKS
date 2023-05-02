@@ -606,7 +606,7 @@ wwv_flow_imp_page.create_ig_report_view(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(7077010049177)
 ,p_view_id=>wwv_flow_imp.id(187610603419860981)
-,p_display_seq=>14
+,p_display_seq=>10
 ,p_column_id=>wwv_flow_imp.id(47743780195626947)
 ,p_is_visible=>true
 ,p_is_frozen=>false
@@ -615,7 +615,7 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(8085095049180)
 ,p_view_id=>wwv_flow_imp.id(187610603419860981)
-,p_display_seq=>15
+,p_display_seq=>11
 ,p_column_id=>wwv_flow_imp.id(47743800310626948)
 ,p_is_visible=>true
 ,p_is_frozen=>false
@@ -624,7 +624,7 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(9112470049182)
 ,p_view_id=>wwv_flow_imp.id(187610603419860981)
-,p_display_seq=>16
+,p_display_seq=>12
 ,p_column_id=>wwv_flow_imp.id(47743959429626949)
 ,p_is_visible=>true
 ,p_is_frozen=>false
@@ -633,7 +633,7 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(10044091049185)
 ,p_view_id=>wwv_flow_imp.id(187610603419860981)
-,p_display_seq=>17
+,p_display_seq=>13
 ,p_column_id=>wwv_flow_imp.id(47744038440626950)
 ,p_is_visible=>true
 ,p_is_frozen=>false
@@ -642,7 +642,7 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(11061138049187)
 ,p_view_id=>wwv_flow_imp.id(187610603419860981)
-,p_display_seq=>10
+,p_display_seq=>14
 ,p_column_id=>wwv_flow_imp.id(48049764090927101)
 ,p_is_visible=>true
 ,p_is_frozen=>false
@@ -651,7 +651,7 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(12106109049190)
 ,p_view_id=>wwv_flow_imp.id(187610603419860981)
-,p_display_seq=>11
+,p_display_seq=>15
 ,p_column_id=>wwv_flow_imp.id(48049880161927102)
 ,p_is_visible=>true
 ,p_is_frozen=>false
@@ -660,7 +660,7 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(13122558049198)
 ,p_view_id=>wwv_flow_imp.id(187610603419860981)
-,p_display_seq=>12
+,p_display_seq=>16
 ,p_column_id=>wwv_flow_imp.id(48049989226927103)
 ,p_is_visible=>true
 ,p_is_frozen=>false
@@ -669,7 +669,7 @@ wwv_flow_imp_page.create_ig_report_column(
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(14041342049201)
 ,p_view_id=>wwv_flow_imp.id(187610603419860981)
-,p_display_seq=>13
+,p_display_seq=>17
 ,p_column_id=>wwv_flow_imp.id(48050017612927104)
 ,p_is_visible=>true
 ,p_is_frozen=>false

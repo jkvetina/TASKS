@@ -1298,8 +1298,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 60
-    region: Map Roles # 187138827673459155
+    sequence: 10
+    region: Map Roles # 187138784403459154
     position: BODY
 
   advanced: 
@@ -1328,8 +1328,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 70
-    region: Map Roles # 187138827673459155
+    sequence: 10
+    region: Map Roles # 187138784403459154
     position: BODY
 
   advanced: 
@@ -1358,8 +1358,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 80
-    region: Map Roles # 187138827673459155
+    sequence: 10
+    region: Map Roles # 187138784403459154
     position: BODY
 
   advanced: 
@@ -1388,8 +1388,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 90
-    region: Map Roles # 187138827673459155
+    sequence: 10
+    region: Map Roles # 187138784403459154
     position: BODY
 
   advanced: 
@@ -1418,8 +1418,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 100
-    region: Map Roles # 187138827673459155
+    sequence: 10
+    region: Map Roles # 187138784403459154
     position: BODY
 
   advanced: 
@@ -1448,8 +1448,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 110
-    region: Map Roles # 187138827673459155
+    sequence: 10
+    region: Map Roles # 187138784403459154
     position: BODY
 
   advanced: 
@@ -1478,8 +1478,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 120
-    region: Map Roles # 187138827673459155
+    sequence: 10
+    region: Map Roles # 187138784403459154
     position: BODY
 
   advanced: 
@@ -1508,8 +1508,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 130
-    region: Map Roles # 187138827673459155
+    sequence: 10
+    region: Map Roles # 187138784403459154
     position: BODY
 
   advanced: 
