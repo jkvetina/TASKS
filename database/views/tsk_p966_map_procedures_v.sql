@@ -2,6 +2,7 @@ CREATE OR REPLACE FORCE VIEW tsk_p966_map_procedures_v AS
 SELECT
     p.object_name,
     p.procedure_name,
+    MAX(t.table_name)       AS table_name,
     --
     MAX(CASE WHEN r.r# = 1 THEN a.is_active END) AS role_1,
     MAX(CASE WHEN r.r# = 2 THEN a.is_active END) AS role_2,
@@ -18,6 +19,10 @@ LEFT JOIN tsk_auth_procedures a
     ON a.object_name        = p.object_name
     AND a.procedure_name    = p.procedure_name
     AND a.role_id           = r.role_id
+LEFT JOIN tsk_auth_procedures t
+    ON t.object_name        = p.object_name
+    AND t.procedure_name    = p.procedure_name
+    AND t.table_name        IS NOT NULL
 GROUP BY
     p.object_name,
     p.procedure_name;

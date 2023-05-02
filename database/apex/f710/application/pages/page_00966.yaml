@@ -226,6 +226,12 @@ regions:
         name: Primary Report
         alias: 464687
 
+    - # ====== Saved Report: Grid/Form Handlers ====================
+      id: 283655392850911572
+      identification: 
+        name: Grid/Form Handlers
+        alias: 482429
+
   columns: 
   - # ====== Column: OBJECT_NAME =================================
     id: 47740434224626914
@@ -348,7 +354,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: center
       stretch: Use Report Setting
 
@@ -406,7 +412,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: center
       stretch: Use Report Setting
 
@@ -464,7 +470,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 70
+      sequence: 80
       column-alignment: center
       stretch: Use Report Setting
 
@@ -522,7 +528,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 80
+      sequence: 90
       column-alignment: center
       stretch: Use Report Setting
 
@@ -580,7 +586,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 90
+      sequence: 100
       column-alignment: center
       stretch: Use Report Setting
 
@@ -638,7 +644,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 100
+      sequence: 110
       column-alignment: center
       stretch: Use Report Setting
 
@@ -696,7 +702,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 110
+      sequence: 120
       column-alignment: center
       stretch: Use Report Setting
 
@@ -754,7 +760,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 120
+      sequence: 130
       column-alignment: center
       stretch: Use Report Setting
 
@@ -805,6 +811,62 @@ regions:
 
     layout: 
       sequence: 20
+
+  - # ====== Column: TABLE_NAME ==================================
+    id: 48052847546927132
+    identification: 
+      column-name: TABLE_NAME
+      type: Select List
+
+    heading: 
+      heading: Table Name
+      alignment: start
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_APP_TABLES # 46514006412586236
+      display-extra-values: true
+      display-null-value: true
+
+    source: 
+      type: Database Column
+      database-column: TABLE_NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
 
   printing: 
     page: 

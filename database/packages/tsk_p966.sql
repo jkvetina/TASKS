@@ -19,8 +19,28 @@ CREATE OR REPLACE PACKAGE BODY tsk_p966 AS
     BEGIN
         rec.object_name     := core.get_grid_data('OBJECT_NAME');
         rec.procedure_name  := core.get_grid_data('PROCEDURE_NAME');
+        rec.table_name      := core.get_grid_data('TABLE_NAME');
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
+
+        -- store assigned table name without role
+        IF rec.table_name IS NOT NULL THEN
+            BEGIN
+                rec.role_id     := NULL;
+                rec.is_active   := 'Y';
+                --
+                INSERT INTO tsk_auth_procedures
+                VALUES rec;
+            EXCEPTION
+            WHEN DUP_VAL_ON_INDEX THEN
+                UPDATE tsk_auth_procedures t
+                SET t.table_name            = rec.table_name
+                WHERE t.object_name         = rec.object_name
+                    AND t.procedure_name    = rec.procedure_name;
+            END;
+            --
+            rec.table_name  := NULL;
+        END IF;
 
         -- go through pivoted columns
         FOR i IN 1 .. tsk_p960.c_dynamic_roles LOOP
