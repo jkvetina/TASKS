@@ -370,6 +370,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_redirect_url=>'f?p=&APP_ID.:952:&SESSION.::&DEBUG.::P952_SHOW_ALL:Y'
 ,p_button_condition=>'P952_SHOW_ALL'
 ,p_button_condition_type=>'ITEM_IS_NULL'
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(46668142843363848)
@@ -398,6 +399,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'NO'
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'

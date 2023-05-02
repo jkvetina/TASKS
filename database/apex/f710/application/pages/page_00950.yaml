@@ -684,6 +684,9 @@ buttons:
     action: Defined by Dynamic Action
     execute-validations: true
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 processes: 
 - # ====== Process: SAVE_USERS =================================
   id: 46402190201929030

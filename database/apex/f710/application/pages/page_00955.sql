@@ -675,6 +675,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_redirect_url=>'f?p=&APP_ID.:955:&SESSION.::&DEBUG.::P955_SHOW_ALL:Y'
 ,p_button_condition=>'P955_SHOW_ALL'
 ,p_button_condition_type=>'ITEM_IS_NULL'
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(47075150734134312)

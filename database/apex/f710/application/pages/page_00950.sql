@@ -444,6 +444,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_position=>'RIGHT_OF_TITLE'
 ,p_warn_on_unsaved_changes=>null
 ,p_icon_css_classes=>'fa-plus'
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(46402190201929030)

@@ -1565,6 +1565,9 @@ buttons:
     type: Item is NULL
     item: P955_SHOW_ALL
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGED_PROJECT =====================
   id: 47076610189134327
