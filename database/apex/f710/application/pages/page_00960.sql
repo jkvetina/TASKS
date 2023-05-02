@@ -517,8 +517,20 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_is_frozen=>true
 );
 wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(46681691523104310)
+ p_id=>wwv_flow_imp.id(48280136987043204)
 ,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(92944636943865461)
+,p_button_name=>'REORDER_ROLES'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
+,p_button_image_alt=>'Reorder Roles'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_icon_css_classes=>'fa-list-ol'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(46681691523104310)
+,p_button_sequence=>20
 ,p_button_plug_id=>wwv_flow_imp.id(92944636943865461)
 ,p_button_name=>'ADD_ROLE_WIZARD'
 ,p_button_action=>'DEFINED_BY_DA'
@@ -550,7 +562,7 @@ wwv_flow_imp_page.create_page_da_action(
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(46564247311936481)
-,p_process_sequence=>20
+,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(92944735956865462)
 ,p_process_type=>'NATIVE_IG_DML'
@@ -561,6 +573,17 @@ wwv_flow_imp_page.create_page_process(
 ,p_attribute_06=>'N'
 ,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(48279797290040037)
+,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'REORDER_STATUSES'
+,p_process_sql_clob=>'tsk_p960.reorder_roles();'
+,p_process_clob_language=>'PLSQL'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_imp.id(48280136987043204)
 );
 wwv_flow_imp.component_end;
 end;

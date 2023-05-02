@@ -13,6 +13,10 @@ CREATE OR REPLACE PACKAGE tsk_p960 AS
 
     PROCEDURE set_role_names;
 
+
+
+    PROCEDURE reorder_roles;
+
 END;
 /
 
