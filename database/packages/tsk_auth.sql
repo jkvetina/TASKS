@@ -188,12 +188,35 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             );
         END IF;
 
-        --
-        -- @TODO: authorize C|U|D for grids and forms
-        -- issue is, we know just the region_id=component_id
-        -- but we dont know what table is linked to that
-        --
-
+        -- we can access page, we can access component, can we do requested operation too?
+        IF in_action IS NOT NULL THEN
+            FOR c IN (
+                SELECT
+                    p.process_name,
+                    a.procedure_name,
+                    a.table_name
+                FROM apex_application_page_proc p
+                JOIN tsk_auth_procedures a
+                    ON p.attribute_04           LIKE '%' || LOWER(a.object_name || '.' || a.procedure_name) || '%'
+                    AND a.table_name            IS NOT NULL
+                    AND a.is_active             = 'Y'
+                WHERE p.application_id          = core.get_app_id()
+                    AND p.page_id               = in_page_id
+                    AND p.region_id             = in_component_id
+                    AND p.process_type_code     = 'NATIVE_IG_DML'
+                    AND p.process_point_code    = 'AFTER_SUBMIT'
+                    AND p.attribute_01          = 'PLSQL_CODE'
+            ) LOOP
+                RETURN CASE WHEN INSTR(tsk_auth.is_allowed_dml (
+                        in_table_name       => c.table_name,
+                        in_action           => in_action,
+                        in_user_id          => in_user_id,
+                        in_client_id        => in_client_id,
+                        in_project_id       => in_project_id
+                    ), in_action) > 0
+                    THEN 'Y' END;
+            END LOOP;
+        END IF;
         --
         RETURN v_authorized;
     EXCEPTION
