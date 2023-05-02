@@ -17,6 +17,16 @@ CREATE OR REPLACE PACKAGE tsk_p960 AS
 
     PROCEDURE reorder_roles;
 
+
+
+    PROCEDURE delete_role_cascade (
+        in_role_id          tsk_roles.role_id%TYPE
+    );
+
+
+
+    PROCEDURE save_roles;
+
 END;
 /
 

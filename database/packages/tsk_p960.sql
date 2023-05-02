@@ -70,6 +70,39 @@ CREATE OR REPLACE PACKAGE BODY tsk_p960 AS
         core.raise_error();
     END;
 
+
+
+    PROCEDURE delete_role_cascade (
+        in_role_id          tsk_roles.role_id%TYPE
+    )
+    AS
+    BEGIN
+        DELETE FROM tsk_auth_pages          WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_components     WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_tables         WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_procedures     WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_roles          WHERE role_id = in_role_id;
+        DELETE FROM tsk_roles               WHERE role_id = in_role_id;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE save_roles
+    AS
+    BEGIN
+        NULL;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
 END;
 /
 
