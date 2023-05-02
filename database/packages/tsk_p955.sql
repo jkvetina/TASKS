@@ -50,7 +50,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p955 AS
             IF rec.is_active IS NULL THEN
                 DELETE FROM tsk_auth_roles t
                 WHERE t.client_id       = rec.client_id
-                    AND t.project_id    = rec.project_id
+                    AND (t.project_id   = rec.project_id OR rec.project_id IS NULL AND t.project_id IS NULL)
                     AND t.user_id       = rec.user_id
                     AND t.role_id       = rec.role_id
                     AND t.is_active     = 'Y';
