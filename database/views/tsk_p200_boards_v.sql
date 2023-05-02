@@ -1,22 +1,11 @@
 CREATE OR REPLACE FORCE VIEW tsk_p200_boards_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        x.*,
-        tsk_auth.is_allowed_dml (
-            in_table_name       => 'TSK_BOARDS',
-            in_action           => NULL,
-            in_user_id          => x.user_id,
-            in_client_id        => x.client_id,
-            in_project_id       => x.project_id
-        ) AS dml_actions
-    FROM (
-        SELECT /*+ MATERIALIZE */
-            tsk_app.get_client_id()     AS client_id,
-            tsk_app.get_project_id()    AS project_id,
-            tsk_app.get_board_id()      AS board_id,
-            core.get_user_id()          AS user_id
-        FROM DUAL
-    ) x
+        tsk_app.get_client_id()     AS client_id,
+        tsk_app.get_project_id()    AS project_id,
+        tsk_app.get_board_id()      AS board_id,
+        core.get_user_id()          AS user_id
+    FROM DUAL
 ),
 s AS (
     SELECT /*+ MATERIALIZE */
@@ -129,9 +118,7 @@ SELECT
     MAX(g.status_name_5) OVER() AS status_name_5,
     MAX(g.status_name_6) OVER() AS status_name_6,
     MAX(g.status_name_7) OVER() AS status_name_7,
-    MAX(g.status_name_8) OVER() AS status_name_8,
-    --
-    x.dml_actions
+    MAX(g.status_name_8) OVER() AS status_name_8
     --
 FROM tsk_boards t
 JOIN x

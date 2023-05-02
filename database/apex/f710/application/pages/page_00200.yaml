@@ -131,7 +131,6 @@ regions:
       - Add Row
       - Update Row
       - Delete Row
-      allowed-row-operations-column: DML_ACTIONS
       lost-update-type: Row Values
       add-row-if-empty: false
 
@@ -1128,254 +1127,6 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: STATUS_NAME_1 ===============================
-    id: 46172730668326327
-    identification: 
-      column-name: STATUS_NAME_1
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 220
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: STATUS_NAME_1
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: STATUS_NAME_2 ===============================
-    id: 46172850950326328
-    identification: 
-      column-name: STATUS_NAME_2
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 230
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: STATUS_NAME_2
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: STATUS_NAME_3 ===============================
-    id: 46172955667326329
-    identification: 
-      column-name: STATUS_NAME_3
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 240
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: STATUS_NAME_3
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: STATUS_NAME_4 ===============================
-    id: 46173097306326330
-    identification: 
-      column-name: STATUS_NAME_4
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 250
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: STATUS_NAME_4
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: STATUS_NAME_5 ===============================
-    id: 46173154635326331
-    identification: 
-      column-name: STATUS_NAME_5
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 260
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: STATUS_NAME_5
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: STATUS_NAME_6 ===============================
-    id: 46173272190326332
-    identification: 
-      column-name: STATUS_NAME_6
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 270
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: STATUS_NAME_6
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: STATUS_NAME_7 ===============================
-    id: 46173342084326333
-    identification: 
-      column-name: STATUS_NAME_7
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 280
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: STATUS_NAME_7
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
-  - # ====== Column: STATUS_NAME_8 ===============================
-    id: 46173431880326334
-    identification: 
-      column-name: STATUS_NAME_8
-      type: Hidden
-
-    settings: 
-      value-protected: true
-
-    layout: 
-      sequence: 290
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: STATUS_NAME_8
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    export-/-printing: 
-      include-in-export-/-print: false
-
-    enable-users-to: 
-      sort: false
-
   - # ====== Column: ORDER# ======================================
     id: 46261818462307835
     identification: 
@@ -1434,24 +1185,241 @@ regions:
     layout: 
       sequence: 20
 
-  - # ====== Column: DML_ACTIONS =================================
-    id: 47577301378232125
+  - # ====== Column: STATUS_NAME_1 ===============================
+    id: 48052099414927124
     identification: 
-      column-name: DML_ACTIONS
+      column-name: STATUS_NAME_1
       type: Hidden
 
     settings: 
       value-protected: true
 
     layout: 
-      sequence: 300
+      sequence: 220
 
     accessibility: 
       value-identifies-row: false
 
     source: 
       type: Database Column
-      database-column: DML_ACTIONS
+      database-column: STATUS_NAME_1
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_2 ===============================
+    id: 48052187278927125
+    identification: 
+      column-name: STATUS_NAME_2
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 230
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_2
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_3 ===============================
+    id: 48052268613927126
+    identification: 
+      column-name: STATUS_NAME_3
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 240
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_3
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_4 ===============================
+    id: 48052345982927127
+    identification: 
+      column-name: STATUS_NAME_4
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 250
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_4
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_5 ===============================
+    id: 48052473525927128
+    identification: 
+      column-name: STATUS_NAME_5
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 260
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_5
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_6 ===============================
+    id: 48052503057927129
+    identification: 
+      column-name: STATUS_NAME_6
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 270
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_6
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_7 ===============================
+    id: 48052623294927130
+    identification: 
+      column-name: STATUS_NAME_7
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 280
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_7
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: STATUS_NAME_8 ===============================
+    id: 48052766809927131
+    identification: 
+      column-name: STATUS_NAME_8
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 290
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: STATUS_NAME_8
       data-type: VARCHAR2
       query-only: true
       primary-key: false
