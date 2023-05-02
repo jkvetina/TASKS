@@ -185,15 +185,15 @@ regions:
     id: 47412992172554626
     identification: 
       column-name: TABLE_NAME
-      type: Text Field
+      type: Display Only
 
     heading: 
       heading: Table Name
       alignment: start
 
     settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
+      format: Plain Text
+      based-on: Item Value
 
     layout: 
       sequence: 30
@@ -202,10 +202,6 @@ regions:
 
     accessibility: 
       value-identifies-row: false
-
-    validation: 
-      value-required: true
-      maximum-length: 128
 
     source: 
       type: Database Column
@@ -216,6 +212,9 @@ regions:
 
     default: 
       duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
