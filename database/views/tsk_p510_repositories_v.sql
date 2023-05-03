@@ -21,6 +21,8 @@ JOIN x
     ON x.client_id      = t.client_id
     AND (x.project_id   = t.project_id  OR x.project_id IS NULL)
 ORDER BY
+    t.client_id,
+    t.project_id,
     t.owner_id,
     t.repo_id,
     t.project_id;

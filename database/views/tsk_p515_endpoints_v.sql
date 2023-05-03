@@ -8,6 +8,8 @@ WITH x AS (
     FROM DUAL
 )
 SELECT
+    r.client_id,
+    r.project_id,
     t.owner_id,
     t.repo_id,
     t.endpoint_id,
@@ -24,6 +26,8 @@ JOIN x
     AND (x.owner_id     = r.owner_id    OR x.owner_id IS NULL)
     AND (x.repo_id      = r.repo_id     OR x.repo_id IS NULL)
 ORDER BY
+    r.client_id,
+    r.project_id,
     t.owner_id,
     t.repo_id,
     t.endpoint_id;

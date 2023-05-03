@@ -226,18 +226,127 @@ regions:
         name: Primary Report
         alias: 455232
 
-  column-groups: 
-  - # ====== Column Group: Endpoint ==============================
-    id: 137973660593229854
-    heading: 
-      heading: Endpoint
-
-  - # ====== Column Group: Repository ============================
-    id: 137973715912229855
-    heading: 
-      heading: Repository
-
   columns: 
+  - # ====== Column: CLIENT_ID ===================================
+    id: 48357115060512103
+    identification: 
+      column-name: CLIENT_ID
+      type: Select List
+
+    heading: 
+      heading: Client Id
+      alignment: start
+
+    layout: 
+      sequence: 30
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: 'LOV_CLIENTS #ALL' # 34762829880497308
+      display-extra-values: true
+      display-null-value: true
+
+    source: 
+      type: Database Column
+      database-column: CLIENT_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    read-only: 
+      type: Always
+      execute: Once
+
+  - # ====== Column: PROJECT_ID ==================================
+    id: 48357227721512104
+    identification: 
+      column-name: PROJECT_ID
+      type: Select List
+
+    heading: 
+      heading: Project Id
+      alignment: start
+
+    layout: 
+      sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: 'LOV_PROJECTS #PAGE_ITEMS' # 45510330697215422
+      display-extra-values: true
+      display-null-value: true
+
+    source: 
+      type: Database Column
+      database-column: PROJECT_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    read-only: 
+      type: Always
+      execute: Once
+
   - # ====== Column: REPO_ID =====================================
     id: 137873943064399495
     identification: 
@@ -253,10 +362,8 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 30
+      sequence: 50
       column-alignment: start
-      group: Repository # 137973715912229855
-      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -310,10 +417,8 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 40
+      sequence: 60
       column-alignment: start
-      group: Repository # 137973715912229855
-      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -367,10 +472,8 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 50
+      sequence: 70
       column-alignment: start
-      group: Endpoint # 137973660593229854
-      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -424,10 +527,8 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 60
+      sequence: 80
       column-alignment: start
-      group: Endpoint # 137973660593229854
-      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -461,7 +562,8 @@ regions:
       include-in-export-/-print: true
 
     enable-users-to: 
-      sort: false
+      sort: true
+      control-break/aggregate: true
       hide: true
 
   - # ====== Column: ENDPOINT_BODY ===============================
@@ -479,10 +581,8 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 70
+      sequence: 90
       column-alignment: start
-      group: Endpoint # 137973660593229854
-      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -516,7 +616,8 @@ regions:
       include-in-export-/-print: true
 
     enable-users-to: 
-      sort: false
+      sort: true
+      control-break/aggregate: true
       hide: true
 
   - # ====== Column: ENDPOINT_METHOD =============================
@@ -527,17 +628,15 @@ regions:
 
     heading: 
       heading: Method
-      alignment: start
+      alignment: center
 
     settings: 
       trim-spaces: Leading and Trailing
       text-case: NO CHANGE
 
     layout: 
-      sequence: 80
-      column-alignment: start
-      group: Endpoint # 137973660593229854
-      use-group-for: Both
+      sequence: 100
+      column-alignment: center
       stretch: Use Report Setting
 
     accessibility: 
@@ -662,7 +761,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_REPO_OWNERS # 46963602040858567
+    list-of-values: 'LOV_REPO_OWNERS #PAGE_ITEMS' # 46963602040858567
     display-extra-values: false
     display-null-value: true
 
@@ -730,7 +829,7 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_REPOS # 46964058460863294
+    list-of-values: 'LOV_REPOS #PAGE_ITEMS' # 46964058460863294
     display-extra-values: false
     display-null-value: true
 
