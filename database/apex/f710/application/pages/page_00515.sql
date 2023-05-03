@@ -541,7 +541,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(137873618130399492)
 ,p_prompt=>'Project'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_PROJECTS #USER_SETTINGS'
+,p_named_lov=>'LOV_PROJECTS #PAGE_ITEMS'
 ,p_lov_display_null=>'YES'
 ,p_lov_cascade_parent_items=>'P515_CLIENT_ID'
 ,p_ajax_items_to_submit=>'P515_CLIENT_ID'
@@ -559,28 +559,27 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_02=>'N'
 );
 wwv_flow_imp_page.create_page_da_event(
- p_id=>wwv_flow_imp.id(46666451662363831)
-,p_name=>'CHANGED_REPO'
-,p_event_sequence=>10
+ p_id=>wwv_flow_imp.id(48389144496782553)
+,p_name=>'CHANGED_FILTERS'
+,p_event_sequence=>20
 ,p_triggering_element_type=>'ITEM'
-,p_triggering_element=>'P515_REPO_ID'
+,p_triggering_element=>'P515_CLIENT_ID,P515_PROJECT_ID,P515_OWNER_ID,P515_REPO_ID'
 ,p_bind_type=>'bind'
 ,p_execution_type=>'IMMEDIATE'
 ,p_bind_event_type=>'change'
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(46666582850363832)
-,p_event_id=>wwv_flow_imp.id(46666451662363831)
+ p_id=>wwv_flow_imp.id(48389516467782561)
+,p_event_id=>wwv_flow_imp.id(48389144496782553)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_HIDE'
 ,p_affected_elements_type=>'REGION'
-,p_affected_region_id=>wwv_flow_imp.id(137873748848399493)
 );
 wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(46666657242363833)
-,p_event_id=>wwv_flow_imp.id(46666451662363831)
+ p_id=>wwv_flow_imp.id(48390000989782562)
+,p_event_id=>wwv_flow_imp.id(48389144496782553)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>20
 ,p_execute_on_page_init=>'N'

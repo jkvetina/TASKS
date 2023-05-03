@@ -100,6 +100,8 @@ regions:
     template: Hero # 70864195177975601
     template-options: 
     - '#DEFAULT#'
+    css-classes: 
+    - FILTERS
     render-components: Above Content
 
   accessibility: 
@@ -652,6 +654,139 @@ regions:
       font-color: '#000000'
       alignment: center
 
+page-items: 
+- # ====== Page Item: P500_CLIENT_ID ===========================
+  id: 48387700539767257
+  identification: 
+    name: P500_CLIENT_ID
+    type: Select List
+
+  label: 
+    label: Client
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 10
+    region: Commits # 115968681835017731
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: 'LOV_CLIENTS #ALL' # 34762829880497308
+    display-extra-values: false
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_client_id()
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P500_PROJECT_ID ==========================
+  id: 48388072658768841
+  identification: 
+    name: P500_PROJECT_ID
+    type: Select List
+
+  label: 
+    label: Project
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 20
+    region: Commits # 115968681835017731
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: 'LOV_PROJECTS #PAGE_ITEMS' # 45510330697215422
+    display-extra-values: false
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P500_CLIENT_ID
+    items-to-submit: 
+    - P500_CLIENT_ID
+    parent-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 buttons: 
 - # ====== Button: SYNC_GITHUB =================================
   id: 45415049705005628
@@ -682,6 +817,55 @@ buttons:
 
   security: 
     authorization-scheme: IS_USER # 47196033359190547
+
+dynamic-actions: 
+- # ====== Dynamic Action: CHANGED_FILTERS =====================
+  id: 48392132839794501
+  identification: 
+    name: CHANGED_FILTERS
+
+  execution: 
+    sequence: 10
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P500_CLIENT_ID
+    - P500_PROJECT_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Hide ========================================
+    id: 48392508543794502
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+
+    execution: 
+      sequence: 10
+      event: CHANGED_FILTERS # 48392132839794501
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Submit Page =================================
+    id: 48393001092794502
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 20
+      event: CHANGED_FILTERS # 48392132839794501
+      fire-when-event-result-is: True
+      fire-on-initialization: false
 
 processes: 
 - # ====== Process: SAVE_COMMITS ===============================
@@ -733,4 +917,7 @@ processes:
 
   server-side-condition: 
     when-button-pressed: SYNC_GITHUB # 45415049705005628
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
