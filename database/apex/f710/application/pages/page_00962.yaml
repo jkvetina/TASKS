@@ -384,7 +384,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_1.'
+      heading: '&P0_ROLE_1.'
       alignment: center
 
     settings: 
@@ -432,7 +432,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_1
+      item: P0_ROLE_1
 
   - # ====== Column: ROLE_2 ======================================
     id: 47001354825134513
@@ -441,7 +441,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_2.'
+      heading: '&P0_ROLE_2.'
       alignment: center
 
     settings: 
@@ -489,7 +489,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_2
+      item: P0_ROLE_2
 
   - # ====== Column: ROLE_3 ======================================
     id: 47001408415134514
@@ -498,7 +498,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_3.'
+      heading: '&P0_ROLE_3.'
       alignment: center
 
     settings: 
@@ -546,7 +546,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_3
+      item: P0_ROLE_3
 
   - # ====== Column: ROLE_4 ======================================
     id: 47001552602134515
@@ -555,7 +555,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_4.'
+      heading: '&P0_ROLE_4.'
       alignment: center
 
     settings: 
@@ -603,7 +603,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_4
+      item: P0_ROLE_4
 
   - # ====== Column: ROLE_5 ======================================
     id: 47002828036134528
@@ -612,7 +612,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_5.'
+      heading: '&P0_ROLE_5.'
       alignment: center
 
     settings: 
@@ -660,7 +660,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_5
+      item: P0_ROLE_5
 
   - # ====== Column: ROLE_6 ======================================
     id: 47002958155134529
@@ -669,7 +669,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_6.'
+      heading: '&P0_ROLE_6.'
       alignment: center
 
     settings: 
@@ -717,7 +717,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_6
+      item: P0_ROLE_6
 
   - # ====== Column: ROLE_7 ======================================
     id: 47003034400134530
@@ -726,7 +726,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_7.'
+      heading: '&P0_ROLE_7.'
       alignment: center
 
     settings: 
@@ -774,7 +774,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_7
+      item: P0_ROLE_7
 
   - # ====== Column: ROLE_8 ======================================
     id: 47003186705134531
@@ -783,7 +783,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P962_ROLE_8.'
+      heading: '&P0_ROLE_8.'
       alignment: center
 
     settings: 
@@ -831,7 +831,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P962_ROLE_8
+      item: P0_ROLE_8
 
   - # ====== Column: DML_ACTIONS =================================
     id: 47219827755950932
@@ -1097,240 +1097,59 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
-- # ====== Page Item: P962_ROLE_1 ==============================
-  id: 47002014138134520
+- # ====== Page Item: P962_PAGE_GROUP ==========================
+  id: 48054045562927144
   identification: 
-    name: P962_ROLE_1
-    type: Hidden
+    name: P962_PAGE_GROUP
+    type: Select List
+
+  label: 
+    label: Page Group
+    alignment: Left
 
   settings: 
-    value-protected: true
+    page-action-on-selection: None
+    allow-multi-selection: false
 
   layout: 
     sequence: 30
     region: Map Pages # 139765312485244761
     position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_APP_PAGE_GROUPS # 48311582595505097
+    display-extra-values: false
+    display-null-value: true
 
   advanced: 
-    warn-on-unsaved-changes: Page Default
+    warn-on-unsaved-changes: Ignore
 
   source: 
     type: Null
     used: Only when current value in session state is null
 
   session-state: 
-    data-type: VARCHAR2
     storage: Per Session (Persistent)
 
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P962_ROLE_2 ==============================
-  id: 47002182738134521
-  identification: 
-    name: P962_ROLE_2
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 40
-    region: Map Pages # 139765312485244761
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P962_ROLE_3 ==============================
-  id: 47002208421134522
-  identification: 
-    name: P962_ROLE_3
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 50
-    region: Map Pages # 139765312485244761
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P962_ROLE_4 ==============================
-  id: 47002378416134523
-  identification: 
-    name: P962_ROLE_4
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 60
-    region: Map Pages # 139765312485244761
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P962_ROLE_6 ==============================
-  id: 47003925324134539
-  identification: 
-    name: P962_ROLE_6
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 80
-    region: Map Pages # 139765312485244761
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P962_ROLE_5 ==============================
-  id: 47004084642134540
-  identification: 
-    name: P962_ROLE_5
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 70
-    region: Map Pages # 139765312485244761
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P962_ROLE_8 ==============================
-  id: 47004178297134541
-  identification: 
-    name: P962_ROLE_8
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 100
-    region: Map Pages # 139765312485244761
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P962_ROLE_7 ==============================
-  id: 47004226309134542
-  identification: 
-    name: P962_ROLE_7
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 90
-    region: Map Pages # 139765312485244761
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
+  quick-picks: 
+    show-quick-picks: false
 
   security: 
     session-state-protection: Unrestricted
@@ -1380,6 +1199,7 @@ dynamic-actions:
     selection-type: Item(s)
     item(s): 
     - P962_ROLE_ID
+    - P962_PAGE_GROUP
 
   execution: 
     event-scope: Static

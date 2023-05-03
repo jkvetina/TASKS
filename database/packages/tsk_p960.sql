@@ -35,7 +35,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p960 AS
             LEFT JOIN tsk_p960_roles_columns_v r
                 ON r.r# = d.r#
         ) LOOP
-            core.set_item('$ROLE_' || c.r#, c.role_name);
+            core.set_item('P0_ROLE_' || c.r#, c.role_name);
         END LOOP;
     EXCEPTION
     WHEN core.app_exception THEN

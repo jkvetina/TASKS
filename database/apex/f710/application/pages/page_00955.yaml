@@ -392,7 +392,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P955_ROLE_NAME_1.'
+      heading: '&P0_ROLE_1.'
       alignment: center
 
     settings: 
@@ -440,7 +440,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P955_ROLE_NAME_1
+      item: P0_ROLE_1
 
   - # ====== Column: ROLE_2 ======================================
     id: 47075651076134317
@@ -449,7 +449,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P955_ROLE_NAME_2.'
+      heading: '&P0_ROLE_2.'
       alignment: center
 
     settings: 
@@ -497,7 +497,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P955_ROLE_NAME_2
+      item: P0_ROLE_2
 
   - # ====== Column: ROLE_3 ======================================
     id: 47075773994134318
@@ -506,7 +506,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P955_ROLE_NAME_3.'
+      heading: '&P0_ROLE_3.'
       alignment: center
 
     settings: 
@@ -554,7 +554,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P955_ROLE_NAME_3
+      item: P0_ROLE_3
 
   - # ====== Column: ROLE_4 ======================================
     id: 47075826397134319
@@ -563,7 +563,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P955_ROLE_NAME_4.'
+      heading: '&P0_ROLE_4.'
       alignment: center
 
     settings: 
@@ -611,7 +611,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P955_ROLE_NAME_4
+      item: P0_ROLE_4
 
   - # ====== Column: ROLE_5 ======================================
     id: 47075948088134320
@@ -620,7 +620,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P955_ROLE_NAME_5.'
+      heading: '&P0_ROLE_5.'
       alignment: center
 
     settings: 
@@ -668,7 +668,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P955_ROLE_NAME_5
+      item: P0_ROLE_5
 
   - # ====== Column: ROLE_6 ======================================
     id: 47076035111134321
@@ -677,7 +677,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P955_ROLE_NAME_6.'
+      heading: '&P0_ROLE_6.'
       alignment: center
 
     settings: 
@@ -725,7 +725,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P955_ROLE_NAME_6
+      item: P0_ROLE_6
 
   - # ====== Column: ROLE_7 ======================================
     id: 47076119653134322
@@ -734,7 +734,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P955_ROLE_NAME_7.'
+      heading: '&P0_ROLE_7.'
       alignment: center
 
     settings: 
@@ -782,7 +782,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P955_ROLE_NAME_7
+      item: P0_ROLE_7
 
   - # ====== Column: ROLE_8 ======================================
     id: 47076259931134323
@@ -791,7 +791,7 @@ regions:
       type: Checkbox
 
     heading: 
-      heading: '&P955_ROLE_NAME_8.'
+      heading: '&P0_ROLE_8.'
       alignment: center
 
     settings: 
@@ -839,7 +839,7 @@ regions:
 
     server-side-condition: 
       type: Item is NOT NULL
-      item: P955_ROLE_NAME_8
+      item: P0_ROLE_8
 
   - # ====== Column: APEX$ROW_ACTION =============================
     id: 47076335287134324
@@ -1282,246 +1282,6 @@ page-items:
 
   quick-picks: 
     show-quick-picks: false
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P955_ROLE_NAME_1 =========================
-  id: 47119137234669475
-  identification: 
-    name: P955_ROLE_NAME_1
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 10
-    region: Map Roles # 187138784403459154
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P955_ROLE_NAME_2 =========================
-  id: 47119563243669475
-  identification: 
-    name: P955_ROLE_NAME_2
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 10
-    region: Map Roles # 187138784403459154
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P955_ROLE_NAME_3 =========================
-  id: 47119964795669481
-  identification: 
-    name: P955_ROLE_NAME_3
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 10
-    region: Map Roles # 187138784403459154
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P955_ROLE_NAME_4 =========================
-  id: 47120397937669481
-  identification: 
-    name: P955_ROLE_NAME_4
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 10
-    region: Map Roles # 187138784403459154
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P955_ROLE_NAME_5 =========================
-  id: 47120738367669482
-  identification: 
-    name: P955_ROLE_NAME_5
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 10
-    region: Map Roles # 187138784403459154
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P955_ROLE_NAME_6 =========================
-  id: 47121105911669482
-  identification: 
-    name: P955_ROLE_NAME_6
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 10
-    region: Map Roles # 187138784403459154
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P955_ROLE_NAME_7 =========================
-  id: 47121502435669482
-  identification: 
-    name: P955_ROLE_NAME_7
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 10
-    region: Map Roles # 187138784403459154
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
-
-  security: 
-    session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: false
-    restricted-characters: All characters can be saved.
-
-- # ====== Page Item: P955_ROLE_NAME_8 =========================
-  id: 47121906648669482
-  identification: 
-    name: P955_ROLE_NAME_8
-    type: Hidden
-
-  settings: 
-    value-protected: true
-
-  layout: 
-    sequence: 10
-    region: Map Roles # 187138784403459154
-    position: BODY
-
-  advanced: 
-    warn-on-unsaved-changes: Page Default
-
-  source: 
-    type: Null
-    used: Only when current value in session state is null
-
-  session-state: 
-    data-type: VARCHAR2
-    storage: Per Session (Persistent)
 
   security: 
     session-state-protection: Unrestricted

@@ -7,20 +7,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p955 AS
     PROCEDURE init_defaults
     AS
     BEGIN
-        FOR c IN (
-            SELECT
-                d.r#,
-                r.role_name
-            FROM (
-                SELECT LEVEL AS r#
-                FROM DUAL
-                CONNECT BY LEVEL <= c_dynamic_roles
-            ) d
-            LEFT JOIN tsk_p960_roles_columns_v r
-                ON r.r# = d.r#
-        ) LOOP
-            core.set_item('P955_ROLE_NAME_' || c.r#, c.role_name);
-        END LOOP;
+        tsk_p960.set_role_names();
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
