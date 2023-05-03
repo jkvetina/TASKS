@@ -25,7 +25,9 @@ SELECT
     MAX(CASE WHEN r.r# = 5 THEN c.is_active END) AS role_5,
     MAX(CASE WHEN r.r# = 6 THEN c.is_active END) AS role_6,
     MAX(CASE WHEN r.r# = 7 THEN c.is_active END) AS role_7,
-    MAX(CASE WHEN r.r# = 8 THEN c.is_active END) AS role_8
+    MAX(CASE WHEN r.r# = 8 THEN c.is_active END) AS role_8,
+    --
+    MAX(c.is_active) AS is_used
     --
 FROM tsk_auth_components c
 JOIN tsk_lov_app_pages_v p

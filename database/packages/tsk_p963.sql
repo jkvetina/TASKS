@@ -2,8 +2,16 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
 
     PROCEDURE init_defaults
     AS
+        v_not_assigned          VARCHAR2(64);
     BEGIN
         tsk_p960.set_role_names();
+
+        -- notify for new components
+        SELECT NULLIF(' (' || COUNT(*) || ')', ' (0)') INTO v_not_assigned
+        FROM tsk_p963_map_components_v c
+        WHERE c.is_used IS NULL;
+        --
+        core.set_item('$NOT_ASSIGNED', v_not_assigned);
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

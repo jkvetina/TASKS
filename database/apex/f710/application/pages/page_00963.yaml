@@ -80,10 +80,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Map Components ==============================
+- # ====== Region: Map Components &P963_NOT_ASSIGNED. ==========
   id: 187542799729422615
   identification: 
-    title: Map Components
+    title: Map Components &P963_NOT_ASSIGNED.
     type: Static Content
 
   layout: 
@@ -222,6 +222,12 @@ regions:
       identification: 
         name: Primary Report
         alias: 464687
+
+    - # ====== Saved Report: Not Assigned ==========================
+      id: 235996572700505256
+      identification: 
+        name: Not Assigned
+        alias: 483863
 
   columns: 
   - # ====== Column: COMPONENT_ID ================================
@@ -1089,6 +1095,64 @@ regions:
       control-break/aggregate: true
       hide: true
 
+  - # ====== Column: IS_USED =====================================
+    id: 48357359709512105
+    identification: 
+      column-name: IS_USED
+      type: Checkbox
+
+    heading: 
+      heading: Is Used
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 210
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_USED
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    read-only: 
+      type: Always
+      execute: Once
+
   printing: 
     page: 
       size: Letter
@@ -1145,7 +1209,7 @@ page-items:
 
   layout: 
     sequence: 40
-    region: Map Components # 187542799729422615
+    region: Map Components &P963_NOT_ASSIGNED. # 187542799729422615
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1211,7 +1275,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: Map Components # 187542799729422615
+    region: Map Components &P963_NOT_ASSIGNED. # 187542799729422615
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1270,7 +1334,7 @@ page-items:
 
   layout: 
     sequence: 20
-    region: Map Components # 187542799729422615
+    region: Map Components &P963_NOT_ASSIGNED. # 187542799729422615
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1336,7 +1400,7 @@ page-items:
 
   layout: 
     sequence: 30
-    region: Map Components # 187542799729422615
+    region: Map Components &P963_NOT_ASSIGNED. # 187542799729422615
     position: BODY
     alignment: Left
     start-new-layout: false
@@ -1379,6 +1443,36 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P963_NOT_ASSIGNED ========================
+  id: 48357439729512106
+  identification: 
+    name: P963_NOT_ASSIGNED
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Map Components # 187541696974422604
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 buttons: 
 - # ====== Button: SYNC_REGIONS ================================
   id: 48050183510927105
@@ -1388,7 +1482,7 @@ buttons:
 
   layout: 
     sequence: 10
-    region: Map Components # 187542799729422615
+    region: Map Components &P963_NOT_ASSIGNED. # 187542799729422615
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
