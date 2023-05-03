@@ -28,7 +28,7 @@ prompt APPLICATION 710 - Tasks
 -- Application Export:
 --   Application:     710
 --   Name:            Tasks
---   Date and Time:   21:23 Úterý Květen 2, 2023
+--   Date and Time:   05:01 Středa Květen 3, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -109,7 +109,7 @@ wwv_flow_imp.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-05-02'
+,p_flow_version=>'2023-05-03'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -28224,11 +28224,13 @@ wwv_flow_imp_page.create_page_process(
 ,p_region_id=>wwv_flow_imp.id(92944735956865462)
 ,p_process_type=>'NATIVE_IG_DML'
 ,p_process_name=>'SAVE_ROLES'
-,p_attribute_01=>'TABLE'
-,p_attribute_03=>'TSK_ROLES'
+,p_attribute_01=>'PLSQL_CODE'
+,p_attribute_04=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'tsk_p960.save_roles (',
+'    io_role_id  => :ROLE_ID',
+');'))
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
-,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp_page.create_page_process(

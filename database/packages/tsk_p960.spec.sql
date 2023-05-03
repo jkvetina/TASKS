@@ -25,7 +25,9 @@ CREATE OR REPLACE PACKAGE tsk_p960 AS
 
 
 
-    PROCEDURE save_roles;
+    PROCEDURE save_roles (
+        io_role_id          IN OUT NOCOPY   tsk_roles.role_id%TYPE
+    );
 
 END;
 /

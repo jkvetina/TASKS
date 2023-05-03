@@ -92,10 +92,38 @@ CREATE OR REPLACE PACKAGE BODY tsk_p960 AS
 
 
 
-    PROCEDURE save_roles
+    PROCEDURE save_roles (
+        io_role_id          IN OUT NOCOPY   tsk_roles.role_id%TYPE
+    )
     AS
+        rec                 tsk_roles%ROWTYPE;
     BEGIN
-        NULL;
+        rec.role_id         := core.get_grid_data('ROLE_ID');
+        rec.role_name       := core.get_grid_data('ROLE_NAME');
+        rec.role_group      := core.get_grid_data('ROLE_GROUP');
+        rec.role_desc       := core.get_grid_data('ROLE_DESC');
+        rec.is_active       := core.get_grid_data('IS_ACTIVE');
+        rec.order#          := core.get_grid_data('ORDER#');
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
+        --
+        IF core.get_grid_action() = 'D' THEN
+            delete_role_cascade(io_role_id);
+            --
+            RETURN;
+        END IF;
+        --
+        UPDATE tsk_roles t
+        SET ROW = rec
+        WHERE t.role_id     = io_role_id;
+        --
+        IF SQL%ROWCOUNT = 0 THEN
+            INSERT INTO tsk_roles
+            VALUES rec;
+        END IF;
+
+        -- update keys to APEX
+        io_role_id      := rec.role_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

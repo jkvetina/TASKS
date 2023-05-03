@@ -861,12 +861,13 @@ processes:
     editable-region: Roles [GRID] # 92944735956865462
 
   settings: 
-    target-type: Table / View
-    table-owner: PARSING SCHEMA
-    table-name: TSK_ROLES
+    target-type: PL/SQL Code
+    pl/sql-code-to-insert/update/delete: |
+      tsk_p960.save_roles (
+          io_role_id  => :ROLE_ID
+      );
     prevent-lost-updates: true
     lock-row: No
-    return-primary-key(s)-after-insert: true
 
   execution: 
     sequence: 10

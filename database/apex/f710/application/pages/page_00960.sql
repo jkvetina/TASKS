@@ -567,11 +567,13 @@ wwv_flow_imp_page.create_page_process(
 ,p_region_id=>wwv_flow_imp.id(92944735956865462)
 ,p_process_type=>'NATIVE_IG_DML'
 ,p_process_name=>'SAVE_ROLES'
-,p_attribute_01=>'TABLE'
-,p_attribute_03=>'TSK_ROLES'
+,p_attribute_01=>'PLSQL_CODE'
+,p_attribute_04=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'tsk_p960.save_roles (',
+'    io_role_id  => :ROLE_ID',
+');'))
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
-,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp_page.create_page_process(
