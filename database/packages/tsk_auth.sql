@@ -192,12 +192,15 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         IF in_action IS NOT NULL THEN
             FOR c IN (
                 SELECT
-                    p.process_name,
-                    a.procedure_name,
-                    a.table_name
+                    COALESCE(a.table_name, p.attribute_03, r.table_name) AS table_name
                 FROM apex_application_page_proc p
-                JOIN tsk_auth_procedures a
-                    ON p.attribute_04           LIKE '%' || LOWER(a.object_name || '.' || a.procedure_name) || '%'
+                LEFT JOIN apex_application_page_regions r
+                    ON r.application_id         = p.application_id
+                    AND r.page_id               = p.page_id
+                    AND r.region_id             = p.region_id
+                    AND r.query_type_code       = 'TABLE'
+                LEFT JOIN tsk_auth_procedures a
+                    ON UPPER(p.attribute_04)    LIKE '%' || UPPER(a.object_name || '.' || a.procedure_name) || '%'
                     AND a.table_name            IS NOT NULL
                     AND a.is_active             = 'Y'
                 WHERE p.application_id          = core.get_app_id()
@@ -205,7 +208,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
                     AND p.region_id             = in_component_id
                     AND p.process_type_code     = 'NATIVE_IG_DML'
                     AND p.process_point_code    = 'AFTER_SUBMIT'
-                    AND p.attribute_01          = 'PLSQL_CODE'
+                    AND p.attribute_01          IN ('TABLE', 'REGION_SOURCE', 'PLSQL_CODE')
+                    AND p.process_point_code    = 'AFTER_SUBMIT'
             ) LOOP
                 RETURN CASE WHEN INSTR(tsk_auth.is_allowed_dml (
                         in_table_name       => c.table_name,
