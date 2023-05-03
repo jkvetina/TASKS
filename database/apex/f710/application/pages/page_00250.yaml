@@ -850,3 +850,6 @@ processes:
   server-side-condition: 
     when-button-pressed: REORDER_SWIMLANES # 45659035770305439
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+

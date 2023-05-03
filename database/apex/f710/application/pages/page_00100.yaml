@@ -2161,6 +2161,9 @@ processes:
   server-side-condition: 
     when-button-pressed: ADD_TO_FAVORITES # 45517331940836013
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Process: REMOVE_FROM_FAVORITES ======================
   id: 45892489830541604
   identification: 
@@ -2182,4 +2185,7 @@ processes:
 
   server-side-condition: 
     when-button-pressed: REMOVE_FROM_FAVORITES # 45892186832541601
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 

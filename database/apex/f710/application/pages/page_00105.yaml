@@ -3627,6 +3627,9 @@ processes:
   error: 
     display-location: Inline in Notification
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Process: CLOSE_DIALOG_UPDATE ========================
   id: 44090282159578005
   identification: 
@@ -3697,6 +3700,9 @@ processes:
   error: 
     display-location: Inline in Notification
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Process: DELETE_COMMENT =============================
   id: 45281736757457932
   identification: 
@@ -3712,6 +3718,9 @@ processes:
     sequence: 10
     point: Ajax Callback
     run-process: Once Per Page Visit (default)
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 - # ====== Process: SAVE_SPLIT_CHECKLIST =======================
   id: 45282249548457937
@@ -3734,6 +3743,9 @@ processes:
 
   server-side-condition: 
     when-button-pressed: SPLIT_TASK # 44285432437494706
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 - # ====== Process: SAVE_ATTACHEMENTS ==========================
   id: 45282650022457941
@@ -3758,6 +3770,9 @@ processes:
     type: Item is NOT NULL
     item: P105_ATTACHED_FILES
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Process: SAVE_CHECKLIST =============================
   id: 46261416534307831
   identification: 
@@ -3781,6 +3796,9 @@ processes:
 
   server-side-condition: 
     execution-scope: For Created and Modified Rows
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 branches: 
 - # ====== Branch: CREATE_ANOTHER ==============================

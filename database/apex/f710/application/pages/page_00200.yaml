@@ -635,6 +635,9 @@ regions:
       control-break/aggregate: true
       hide: true
 
+    security: 
+      authorization-scheme: IS_USER_U # 47696708662034140
+
   - # ====== Column: COUNT_STATUS_1 ==============================
     id: 45896215047541642
     identification: 

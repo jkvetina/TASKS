@@ -908,3 +908,6 @@ processes:
   server-side-condition: 
     when-button-pressed: REORDER_CATEGORIES # 47373931873872489
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+

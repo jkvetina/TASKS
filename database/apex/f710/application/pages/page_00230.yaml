@@ -1037,3 +1037,6 @@ processes:
   server-side-condition: 
     when-button-pressed: REORDER_STATUSES # 45641524596302836
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
