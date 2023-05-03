@@ -343,6 +343,23 @@
     default-sort: R#
     sort-direction: Ascending (Nulls Last)
 
+- # ====== List of Values: LOV_TASK_AUTOCOMPLETE ===============
+  id: 48393845499963613
+  identification: 
+    name: LOV_TASK_AUTOCOMPLETE
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_LOV_TASK_AUTOCOMPLETE_V
+
+  column-mapping: 
+    return: TASK_ID
+    display: TASK_NAME
+    default-sort: TASK_ID
+    sort-direction: Ascending (Nulls Last)
+
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
   id: 54624749962706655
   identification: 

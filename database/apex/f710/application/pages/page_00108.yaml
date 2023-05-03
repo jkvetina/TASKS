@@ -15,6 +15,7 @@ appearance:
 
 dialog: 
   width: 640
+  height: 480
   chained: false
 
 navigation-menu: 
@@ -136,7 +137,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 10
+    sequence: 40
     region: 'Merge #&P108_TASK_ID. into Task' # 156139685035151986
     position: BODY
 
@@ -160,18 +161,19 @@ page-items:
   id: 47739722447626907
   identification: 
     name: P108_TARGET_TASK_ID
-    type: Text Field
+    type: Popup LOV
 
   label: 
-    label: Target Task Id
+    label: Target Task
     alignment: Left
 
   settings: 
-    subtype: Text
-    trim-spaces: Leading and Trailing
-    text-case: NO CHANGE
-    submit-when-enter-pressed: true
-    disabled: false
+    display-as: Inline Popup
+    initial-fetch: Automatic with Current Value
+    multiple-values: false
+    manual-entry: false
+    search-as-you-type: true
+    minimum-characters: No minimum (0)
 
   layout: 
     sequence: 10
@@ -194,6 +196,21 @@ page-items:
   validation: 
     value-required: false
 
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_TASK_AUTOCOMPLETE # 48393845499963613
+    display-extra-values: true
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P108_BOARD_ID
+    items-to-submit: 
+    - P108_CLIENT_ID
+    - P108_PROJECT_ID
+    - P108_BOARD_ID
+    parent-required: true
+
   advanced: 
     warn-on-unsaved-changes: Page Default
 
@@ -206,6 +223,111 @@ page-items:
 
   quick-picks: 
     show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P108_CLIENT_ID ===========================
+  id: 48357516689512107
+  identification: 
+    name: P108_CLIENT_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: 'Merge #&P108_TASK_ID. into Task' # 156139685035151986
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_client_id()
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P108_PROJECT_ID ==========================
+  id: 48357665661512108
+  identification: 
+    name: P108_PROJECT_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: 'Merge #&P108_TASK_ID. into Task' # 156139685035151986
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_project_id()
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P108_BOARD_ID ============================
+  id: 48357700621512109
+  identification: 
+    name: P108_BOARD_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: 'Merge #&P108_TASK_ID. into Task' # 156139685035151986
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: tsk_app.get_board_id()
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
 
   security: 
     session-state-protection: Unrestricted
