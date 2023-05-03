@@ -34,8 +34,8 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_clients_all.sql
 @@application/shared_components/user_interface/lovs/lov_projects_page_items.sql
 @@application/shared_components/user_interface/lovs/lov_projects_user_settings.sql
-@@application/shared_components/user_interface/lovs/lov_repos.sql
-@@application/shared_components/user_interface/lovs/lov_repo_owners.sql
+@@application/shared_components/user_interface/lovs/lov_repos_page_items.sql
+@@application/shared_components/user_interface/lovs/lov_repo_owners_page_items.sql
 @@application/shared_components/user_interface/lovs/lov_roles.sql
 @@application/shared_components/user_interface/lovs/lov_role_groups.sql
 @@application/shared_components/user_interface/lovs/lov_statuses.sql

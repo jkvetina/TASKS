@@ -237,10 +237,10 @@
     default-sort: TABLE_NAME
     sort-direction: Ascending (Nulls Last)
 
-- # ====== List of Values: LOV_REPO_OWNERS =====================
+- # ====== List of Values: LOV_REPO_OWNERS #PAGE_ITEMS =========
   id: 46963602040858567
   identification: 
-    name: LOV_REPO_OWNERS
+    name: 'LOV_REPO_OWNERS #PAGE_ITEMS'
 
   source: 
     location: Local Database
@@ -254,10 +254,10 @@
     default-sort: OWNER_ID
     sort-direction: Ascending (Nulls Last)
 
-- # ====== List of Values: LOV_REPOS ===========================
+- # ====== List of Values: LOV_REPOS #PAGE_ITEMS ===============
   id: 46964058460863294
   identification: 
-    name: LOV_REPOS
+    name: 'LOV_REPOS #PAGE_ITEMS'
 
   source: 
     location: Local Database
