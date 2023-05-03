@@ -16,7 +16,8 @@ SELECT
 FROM tsk_projects t
 CROSS JOIN tsk_auth_context_v z
 JOIN tsk_auth_available_projects_v a
-    ON a.project_id     = t.project_id
+    ON a.client_id      = t.client_id
+    AND a.project_id    = t.project_id
 JOIN tsk_lov_clients_v c
     ON c.client_id      = t.client_id;
 --

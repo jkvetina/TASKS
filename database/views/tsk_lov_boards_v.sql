@@ -12,8 +12,7 @@ SELECT
     ROW_NUMBER() OVER (ORDER BY t.order#, t.board_id) AS board_r#
     --
 FROM tsk_boards t
-CROSS JOIN tsk_auth_context_v z
-JOIN tsk_lov_projects_v p
+JOIN tsk_lov_projects_v p   -- using tsk_auth_available_projects_v
     ON p.client_id          = t.client_id
     AND p.project_id        = t.project_id
 WHERE t.is_active           = 'Y'
