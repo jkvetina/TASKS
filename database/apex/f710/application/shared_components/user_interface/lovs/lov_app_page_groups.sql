@@ -1,7 +1,7 @@
-prompt --application/shared_components/user_interface/lovs/lov_app_pages
+prompt --application/shared_components/user_interface/lovs/lov_app_page_groups
 begin
 --   Manifest
---     LOV_APP_PAGES
+--     LOV_APP_PAGE_GROUPS
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2022.10.07'
@@ -12,17 +12,16 @@ wwv_flow_imp.component_begin (
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_list_of_values(
- p_id=>wwv_flow_imp.id(46513847178582916)  -- LOV_APP_PAGES
-,p_lov_name=>'LOV_APP_PAGES'
+ p_id=>wwv_flow_imp.id(48311582595505097)  -- LOV_APP_PAGE_GROUPS
+,p_lov_name=>'LOV_APP_PAGE_GROUPS'
 ,p_source_type=>'TABLE'
 ,p_location=>'LOCAL'
 ,p_use_local_sync_table=>false
-,p_query_table=>'TSK_LOV_APP_PAGES_V'
-,p_return_column_name=>'PAGE_ID'
-,p_display_column_name=>'PAGE'
-,p_group_column_name=>'PAGE_GROUP'
+,p_query_table=>'TSK_LOV_APP_PAGE_GROUPS_V'
+,p_return_column_name=>'PAGE_GROUP'
+,p_display_column_name=>'PAGE_GROUP'
 ,p_group_sort_direction=>'ASC'
-,p_default_sort_column_name=>'PAGE_ID'
+,p_default_sort_column_name=>'R#'
 ,p_default_sort_direction=>'ASC'
 );
 wwv_flow_imp.component_end;

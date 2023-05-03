@@ -214,8 +214,8 @@
 
   column-mapping: 
     return: PAGE_ID
-    display: PAGE_NAME
-    default-sort: PAGE_NAME
+    display: PAGE
+    default-sort: PAGE_ID
     sort-direction: Ascending (Nulls Last)
     group: PAGE_GROUP
     group-sort-direction: Ascending (Nulls Last)
@@ -325,6 +325,23 @@
     sort-direction: Ascending (Nulls Last)
     group: IS_ACTIVE
     group-sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: LOV_APP_PAGE_GROUPS =================
+  id: 48311582595505097
+  identification: 
+    name: LOV_APP_PAGE_GROUPS
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_LOV_APP_PAGE_GROUPS_V
+
+  column-mapping: 
+    return: PAGE_GROUP
+    display: PAGE_GROUP
+    default-sort: R#
+    sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
   id: 54624749962706655
