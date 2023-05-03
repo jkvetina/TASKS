@@ -407,6 +407,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
         in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
     )
+    --RESULT_CACHE
     AS
     BEGIN
         IF tsk_auth.is_executable (
@@ -418,6 +419,31 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             ) IS NULL
         THEN
             core.raise_error('NOT_AUTH_PROC_' || in_procedure_name);
+        END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE check_executable
+    AS
+        v_procedure_name        VARCHAR2(96);
+    BEGIN
+        v_procedure_name        := core.get_caller_name(3);
+        --
+        IF tsk_auth.is_executable (
+                in_object_name          => SUBSTR(v_procedure_name, 1, INSTR(v_procedure_name, '.') - 1),
+                in_procedure_name       => SUBSTR(v_procedure_name, INSTR(v_procedure_name, '.') + 1),
+                in_user_id              => core.get_user_id(),
+                in_client_id            => tsk_app.get_client_id(),
+                in_project_id           => tsk_app.get_project_id()
+            ) IS NULL
+        THEN
+            core.raise_error('NOT_AUTH_PROC_' || v_procedure_name);
         END IF;
     EXCEPTION
     WHEN core.app_exception THEN

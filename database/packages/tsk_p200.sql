@@ -184,12 +184,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         in_client_id            CONSTANT tsk_tasks.client_id%TYPE   := tsk_app.get_client_id();
         in_project_id           CONSTANT tsk_tasks.project_id%TYPE  := tsk_app.get_project_id();
     BEGIN
-        tsk_auth.check_executable (
-            in_procedure_name   => core.get_caller_name(2),
-            in_user_id          => core.get_user_id(),
-            in_client_id        => in_client_id,
-            in_project_id       => in_project_id
-        );
+        tsk_auth.check_executable();
         --
         FOR s IN (
             SELECT
@@ -224,12 +219,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         in_client_id            CONSTANT tsk_tasks.client_id%TYPE   := tsk_app.get_client_id();
         in_project_id           CONSTANT tsk_tasks.project_id%TYPE  := tsk_app.get_project_id();
     BEGIN
-        tsk_auth.check_executable (
-            in_procedure_name   => core.get_caller_name(2),
-            in_user_id          => core.get_user_id(),
-            in_client_id        => in_client_id,
-            in_project_id       => in_project_id
-        );
+        tsk_auth.check_executable();
         --
         FOR s IN (
             SELECT
@@ -264,12 +254,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         in_client_id            CONSTANT tsk_tasks.client_id%TYPE   := tsk_app.get_client_id();
         in_project_id           CONSTANT tsk_tasks.project_id%TYPE  := tsk_app.get_project_id();
     BEGIN
-        tsk_auth.check_executable (
-            in_procedure_name   => core.get_caller_name(2),
-            in_user_id          => core.get_user_id(),
-            in_client_id        => in_client_id,
-            in_project_id       => in_project_id
-        );
+        tsk_auth.check_executable();
         --
         FOR s IN (
             SELECT

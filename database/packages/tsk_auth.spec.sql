@@ -91,6 +91,10 @@ CREATE OR REPLACE PACKAGE tsk_auth AS
 
 
 
+    PROCEDURE check_executable;
+
+
+
     FUNCTION is_executable (
         in_object_name          tsk_auth_procedures.object_name%TYPE,
         in_procedure_name       tsk_auth_procedures.object_name%TYPE,
