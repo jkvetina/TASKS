@@ -1,7 +1,8 @@
 CREATE OR REPLACE FORCE VIEW tsk_p962_map_pages_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        core.get_app_id()   AS app_id
+        core.get_app_id()               AS app_id,
+        core.get_item('$PAGE_GROUP')    AS page_group
     FROM DUAL
 )
 SELECT
@@ -23,8 +24,9 @@ SELECT
     --
 FROM apex_application_pages a
 JOIN x
-    ON a.application_id     = x.app_id
-    AND a.page_id           NOT IN (0, 9999)
+    ON x.app_id         = a.application_id
+    AND (a.page_group   = x.page_group OR x.page_group IS NULL)
+    AND a.page_id       NOT IN (0, 9999)
 CROSS JOIN tsk_p960_roles_columns_v r
 LEFT JOIN tsk_auth_pages p
     ON p.role_id        = r.role_id

@@ -1,4 +1,9 @@
 CREATE OR REPLACE FORCE VIEW tsk_p966_map_procedures_v AS
+WITH x AS (
+    SELECT /*+ MATERIALIZE */
+        core.get_item('$PAGE_GROUP')    AS page_group
+    FROM DUAL
+)
 SELECT
     p.object_name,
     p.procedure_name,
@@ -14,6 +19,7 @@ SELECT
     MAX(CASE WHEN r.r# = 8 THEN a.is_active END) AS role_8
     --
 FROM tsk_lov_app_procedures_v p
+CROSS JOIN x
 CROSS JOIN tsk_p960_roles_columns_v r
 LEFT JOIN tsk_auth_procedures a
     ON a.object_name        = p.object_name
@@ -23,6 +29,8 @@ LEFT JOIN tsk_auth_procedures t
     ON t.object_name        = p.object_name
     AND t.procedure_name    = p.procedure_name
     AND t.table_name        IS NOT NULL
+WHERE 1 = 1
+    AND (x.page_group       = p.page_group OR x.page_group IS NULL)
 GROUP BY
     p.object_name,
     p.procedure_name;

@@ -1,11 +1,17 @@
 CREATE OR REPLACE FORCE VIEW tsk_p963_map_components_v AS
+WITH x AS (
+    SELECT /*+ MATERIALIZE */
+        core.get_item('$PAGE_GROUP')        AS page_group,
+        core.get_number_item('$PAGE_ID')    AS page_id
+    FROM DUAL
+)
 SELECT
     c.component_id,
     c.component_name,
     --
     REPLACE(c.component_type, 'APEX_APPLICATION_', '') AS component_type,
     --
-    p.page_name         AS page,
+    p.page,
     p.page_group,
     c.page_id,
     --
@@ -24,13 +30,16 @@ SELECT
 FROM tsk_auth_components c
 JOIN tsk_lov_app_pages_v p
     ON p.page_id        = c.page_id
+JOIN x
+    ON (x.page_id       = p.page_id     OR x.page_id IS NULL)
+    AND (x.page_group   = p.page_group  OR x.page_group IS NULL)
 LEFT JOIN tsk_p960_roles_columns_v r
     ON r.role_id        = c.role_id
 GROUP BY
     c.component_id,
     c.component_name,
     REPLACE(c.component_type, 'APEX_APPLICATION_', ''),
-    p.page_name,
+    p.page,
     p.page_group,
     c.page_id,
     c.region_id;
