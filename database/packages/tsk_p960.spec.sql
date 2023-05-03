@@ -25,6 +25,13 @@ CREATE OR REPLACE PACKAGE tsk_p960 AS
 
 
 
+    PROCEDURE rename_role_id (
+        in_old_role_id          tsk_roles.role_id%TYPE,
+        in_new_role_id          tsk_roles.role_id%TYPE
+    );
+
+
+
     PROCEDURE save_roles (
         io_role_id          IN OUT NOCOPY   tsk_roles.role_id%TYPE
     );
