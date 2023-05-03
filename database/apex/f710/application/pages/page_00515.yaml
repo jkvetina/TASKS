@@ -5,7 +5,7 @@ identification:
   name: Map Endpoints
   alias: MAP-ENDPOINTS
   title: Map Endpoints
-  page-group: MAIN # 78949836938576475
+  page-group: MAIN - COMMITS # 48317416017603440
 
 appearance: 
   page-mode: Normal

@@ -17,7 +17,7 @@ wwv_flow_imp_page.create_page(
 ,p_alias=>'MAP-REPOSITORIES'
 ,p_step_title=>'Map Repositories'
 ,p_autocomplete_on_off=>'OFF'
-,p_group_id=>wwv_flow_imp.id(78949836938576475)  -- MAIN
+,p_group_id=>wwv_flow_imp.id(48317416017603440)  -- MAIN - COMMITS
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 ,p_protection_level=>'C'

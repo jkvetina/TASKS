@@ -16,8 +16,24 @@ wwv_flow_imp_page.create_page_group(
 ,p_group_name=>'ADMIN'
 );
 wwv_flow_imp_page.create_page_group(
- p_id=>wwv_flow_imp.id(78949836938576475)  -- MAIN
-,p_group_name=>'MAIN'
+ p_id=>wwv_flow_imp.id(48313716242591318)  -- MAIN - BOARDS
+,p_group_name=>'MAIN - BOARDS'
+);
+wwv_flow_imp_page.create_page_group(
+ p_id=>wwv_flow_imp.id(48317416017603440)  -- MAIN - COMMITS
+,p_group_name=>'MAIN - COMMITS'
+);
+wwv_flow_imp_page.create_page_group(
+ p_id=>wwv_flow_imp.id(48314172391593638)  -- MAIN - PROJECTS & CLIENTS
+,p_group_name=>'MAIN - PROJECTS & CLIENTS'
+);
+wwv_flow_imp_page.create_page_group(
+ p_id=>wwv_flow_imp.id(78949836938576475)  -- MAIN - TASKS
+,p_group_name=>'MAIN - TASKS'
+);
+wwv_flow_imp_page.create_page_group(
+ p_id=>wwv_flow_imp.id(48314253704596369)  -- MAIN - USERS & ROLES
+,p_group_name=>'MAIN - USERS & ROLES'
 );
 wwv_flow_imp_page.create_page_group(
  p_id=>wwv_flow_imp.id(44075748371802774)  -- USER_PROFILE

@@ -5,7 +5,7 @@ identification:
   name: Tasks
   alias: HOME
   title: '&APP_NAME.'
-  page-group: MAIN # 78949836938576475
+  page-group: MAIN - TASKS # 78949836938576475
 
 appearance: 
   page-mode: Normal

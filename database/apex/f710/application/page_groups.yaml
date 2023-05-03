@@ -4,10 +4,30 @@
   identification: 
     name: USER_PROFILE
 
-- # ====== Page Group: MAIN ====================================
+- # ====== Page Group: MAIN - BOARDS ===========================
+  id: 48313716242591318
+  identification: 
+    name: MAIN - BOARDS
+
+- # ====== Page Group: MAIN - PROJECTS & CLIENTS ===============
+  id: 48314172391593638
+  identification: 
+    name: MAIN - PROJECTS & CLIENTS
+
+- # ====== Page Group: MAIN - USERS & ROLES ====================
+  id: 48314253704596369
+  identification: 
+    name: MAIN - USERS & ROLES
+
+- # ====== Page Group: MAIN - COMMITS ==========================
+  id: 48317416017603440
+  identification: 
+    name: MAIN - COMMITS
+
+- # ====== Page Group: MAIN - TASKS ============================
   id: 78949836938576475
   identification: 
-    name: MAIN
+    name: MAIN - TASKS
 
 - # ====== Page Group: ADMIN ===================================
   id: 78950012693576929
