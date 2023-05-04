@@ -24,7 +24,29 @@ CREATE OR REPLACE PACKAGE BODY tsk_p962 AS
     PROCEDURE save_pages
     AS
         rec                 tsk_auth_pages%ROWTYPE;
+        nav                 tsk_navigation%ROWTYPE;
     BEGIN
+        -- also update navigation
+        IF tsk_auth.is_admin() = 'Y' THEN
+            nav.page_id         := core.get_grid_data('PAGE_ID');
+            nav.parent_id       := core.get_grid_data('PARENT_ID');
+            nav.is_hidden       := core.get_grid_data('IS_HIDDEN');
+            nav.is_reset        := core.get_grid_data('IS_RESET');
+            nav.order#          := core.get_grid_data('ORDER#');
+            nav.updated_by      := core.get_user_id();
+            nav.updated_at      := SYSDATE;
+            --
+            UPDATE tsk_navigation n
+            SET ROW = nav
+            WHERE n.page_id     = nav.page_id;
+            --
+            IF SQL%ROWCOUNT = 0 THEN
+                INSERT INTO tsk_navigation
+                VALUES nav;
+            END IF;
+        END IF;
+
+        -- save roles
         rec.page_id         := core.get_grid_data('PAGE_ID');
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;

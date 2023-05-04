@@ -172,7 +172,6 @@ regions:
       enabled: true
       allowed-operations: 
       - Update Row
-      allowed-row-operations-column: DML_ACTIONS
       lost-update-type: Row Values
 
     performance: 
@@ -339,7 +338,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 70
+      sequence: 110
       column-alignment: start
       stretch: Use Report Setting
 
@@ -392,7 +391,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 80
+      sequence: 120
       column-alignment: center
       stretch: Use Report Setting
 
@@ -449,7 +448,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 90
+      sequence: 130
       column-alignment: center
       stretch: Use Report Setting
 
@@ -506,7 +505,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 100
+      sequence: 140
       column-alignment: center
       stretch: Use Report Setting
 
@@ -563,7 +562,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 110
+      sequence: 150
       column-alignment: center
       stretch: Use Report Setting
 
@@ -620,7 +619,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 120
+      sequence: 160
       column-alignment: center
       stretch: Use Report Setting
 
@@ -677,7 +676,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 130
+      sequence: 170
       column-alignment: center
       stretch: Use Report Setting
 
@@ -734,7 +733,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 140
+      sequence: 180
       column-alignment: center
       stretch: Use Report Setting
 
@@ -791,7 +790,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 150
+      sequence: 190
       column-alignment: center
       stretch: Use Report Setting
 
@@ -833,36 +832,216 @@ regions:
       type: Item is NOT NULL
       item: P0_ROLE_8
 
-  - # ====== Column: DML_ACTIONS =================================
-    id: 47219827755950932
+  - # ====== Column: PARENT_ID ===================================
+    id: 48358233167512114
     identification: 
-      column-name: DML_ACTIONS
-      type: Hidden
+      column-name: PARENT_ID
+      type: Select List
 
-    settings: 
-      value-protected: true
+    heading: 
+      heading: Parent Page
+      alignment: start
 
     layout: 
-      sequence: 160
+      sequence: 70
+      column-alignment: start
+      stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
 
+    validation: 
+      value-required: false
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_APP_PAGES # 46513847178582916
+      display-extra-values: true
+      display-null-value: true
+
     source: 
       type: Database Column
-      database-column: DML_ACTIONS
-      data-type: VARCHAR2
-      query-only: true
+      database-column: PARENT_ID
+      data-type: NUMBER
+      query-only: false
       primary-key: false
 
-    session-state: 
-      data-type: VARCHAR2
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
 
     export-/-printing: 
-      include-in-export-/-print: false
+      include-in-export-/-print: true
 
     enable-users-to: 
-      sort: false
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_HIDDEN ===================================
+    id: 48358361221512115
+    identification: 
+      column-name: IS_HIDDEN
+      type: Checkbox
+
+    heading: 
+      heading: Hidden
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 90
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_HIDDEN
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_RESET ====================================
+    id: 48358474688512116
+    identification: 
+      column-name: IS_RESET
+      type: Checkbox
+
+    heading: 
+      heading: Reset
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 100
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_RESET
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: ORDER# ======================================
+    id: 48358560863512117
+    identification: 
+      column-name: ORDER#
+      type: Number Field
+
+    heading: 
+      heading: Order#
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 80
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: ORDER#
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
 
   - # ====== Column: PAGE_ID =====================================
     id: 139768407775244792
