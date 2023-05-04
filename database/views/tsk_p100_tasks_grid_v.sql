@@ -1,12 +1,5 @@
 CREATE OR REPLACE FORCE VIEW tsk_p100_tasks_grid_v AS
-WITH x AS (
-    SELECT /*+ MATERIALIZE */
-        tsk_app.get_client_id()     AS client_id,
-        tsk_app.get_project_id()    AS project_id,
-        tsk_app.get_board_id()      AS board_id
-    FROM DUAL
-),
-l AS (
+WITH l AS (
     SELECT /*+ MATERIALIZE */
         l.task_id,
         NULLIF(SUM(CASE WHEN l.checklist_done = 'Y' THEN 1 ELSE 0 END) || '/' || COUNT(l.checklist_id), '0/0') AS task_progress
@@ -57,10 +50,14 @@ SELECT
     ROW_NUMBER() OVER (ORDER BY t.order# NULLS LAST, t.task_id) AS order#
     --
 FROM tsk_tasks t
-JOIN x
+JOIN tsk_auth_context_v x
     ON x.client_id      = t.client_id
     AND x.project_id    = t.project_id
     AND x.board_id      = t.board_id
+--JOIN tsk_auth_available_boards_v b
+--    ON b.client_id      = t.client_id
+--    AND b.project_id    = t.project_id
+--    AND b.board_id      = t.board_id
 JOIN tsk_statuses s
     ON s.status_id      = t.status_id
     AND s.client_id     = t.client_id
