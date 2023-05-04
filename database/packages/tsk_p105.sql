@@ -90,11 +90,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
     PROCEDURE save_task
     AS
-        v_action            VARCHAR2(64);
         rec                 tsk_tasks%ROWTYPE;
     BEGIN
-        v_action            := core.get_request();
-        --
         rec.task_id         := core.get_item('P105_TASK_ID');
         rec.task_name       := core.get_item('P105_TASK_NAME');
         rec.task_desc       := core.get_item('P105_TASK_DESC');
@@ -106,37 +103,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         rec.category_id     := core.get_item('P105_CATEGORY_ID');
         rec.owner_id        := core.get_item('P105_OWNER_ID');
         rec.deadline_at     := core.get_date_item('P105_DEADLINE_AT');
-        rec.tags            := NULLIF(':' || SUBSTR(REGEXP_REPLACE(LOWER(core.get_item('P105_TAGS')), '[^a-z0-9]+', ':'), 1, 256) || ':', '::');
+        rec.tags            := core.get_item('P105_TAGS');
         rec.order#          := core.get_item('P105_ORDER');
         --
-        rec.updated_by      := core.get_user_id();
-        rec.updated_at      := SYSDATE;
+        tsk_tapi.tasks(rec, SUBSTR(core.get_request(), 1, 1));
         --
-        IF v_action LIKE 'DELETE%' THEN
-            DELETE FROM tsk_task_comments t
-            WHERE t.task_id = rec.task_id;
-            --
-            DELETE FROM tsk_task_checklist t
-            WHERE t.task_id = rec.task_id;
-            --
-            DELETE FROM tsk_tasks t
-            WHERE t.task_id = rec.task_id;
-            --
-            RETURN;
-        END IF;
-        --
-        UPDATE tsk_tasks t
-        SET ROW = rec
-        WHERE t.task_id         = rec.task_id;
-        --
-        IF SQL%ROWCOUNT = 0 THEN
-            rec.task_id := tsk_task_id.NEXTVAL;
-            --
-            core.set_item('P105_TASK_ID', rec.task_id);
-            --
-            INSERT INTO tsk_tasks
-            VALUES rec;
-        END IF;
+        core.set_item('P105_TASK_ID', rec.task_id);
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

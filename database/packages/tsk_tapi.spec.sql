@@ -36,6 +36,19 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
         old_category_id         IN OUT NOCOPY   tsk_categories.category_id%TYPE     -- old key
     );
 
+
+
+    PROCEDURE tasks (
+        rec                     IN OUT NOCOPY   tsk_tasks%ROWTYPE,
+        in_action                               CHAR                                := NULL
+    );
+
+
+
+    PROCEDURE tasks_delete (
+        in_task_id              tsk_tasks.task_id%TYPE
+    );
+
 END;
 /
 

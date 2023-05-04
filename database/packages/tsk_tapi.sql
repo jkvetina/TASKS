@@ -275,6 +275,94 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         core.raise_error();
     END;
 
+
+
+    PROCEDURE tasks (
+        rec                     IN OUT NOCOPY   tsk_tasks%ROWTYPE,
+        in_action                               CHAR                                := NULL
+    )
+    AS
+    BEGIN
+        tsk_auth.check_allowed_dml (
+            in_table_name       => REGEXP_REPLACE(core.get_caller_name(2), '[^\.]+\.', 'TSK_'),
+            in_action           => in_action,
+            in_user_id          => core.get_user_id,
+            in_client_id        => rec.client_id,       -- lets check against new values
+            in_project_id       => rec.project_id
+        );
+
+        -- delete record
+        IF in_action = 'D' THEN
+            tasks_delete(rec.task_id);
+            --
+            RETURN;
+        END IF;
+
+        -- overwrite some values
+        rec.updated_by  := core.get_user_id();
+        rec.updated_at  := SYSDATE;
+        rec.tags        := NULLIF(':' || SUBSTR(REGEXP_REPLACE(LOWER(rec.tags), '[^a-z0-9]+', ':'), 1, 256) || ':', '::');
+
+        -- proceed with update or insert
+        IF rec.task_id IS NULL THEN
+            rec.task_id := tsk_task_id.NEXTVAL;
+            --
+            INSERT INTO tsk_tasks
+            VALUES rec;
+        ELSE
+            UPDATE tsk_tasks t
+            SET ROW = rec
+            WHERE t.task_id = rec.task_id;
+            --
+            IF SQL%ROWCOUNT = 0 THEN
+                core.raise_error('UPDATE_FAILED');
+            END IF;
+        END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE tasks_delete (
+        in_task_id              tsk_tasks.task_id%TYPE
+    )
+    AS
+    BEGIN
+        /*
+        -- keep here to quickly check if we are not missing any tables
+        SELECT c.table_name c
+        FROM user_tab_cols c
+        JOIN user_tables t
+            ON t.table_name = c.table_name
+        WHERE c.column_name = 'TASK_ID'
+        ORDER BY 1;
+        */
+
+        DELETE FROM tsk_task_comments t
+        WHERE t.task_id = in_task_id;
+        --
+        DELETE FROM tsk_task_commits t
+        WHERE t.task_id = in_task_id;
+        --
+        DELETE FROM tsk_task_checklist t
+        WHERE t.task_id = in_task_id;
+        --
+        DELETE FROM tsk_task_files t
+        WHERE t.task_id = in_task_id;
+        --
+        DELETE FROM tsk_tasks t
+        WHERE t.task_id = in_task_id;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
 END;
 /
 
