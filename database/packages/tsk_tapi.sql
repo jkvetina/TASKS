@@ -43,6 +43,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
         -- update keys to APEX
         old_board_id    := TO_CHAR(rec.board_id);
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -113,6 +118,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         old_client_id       := rec.client_id;
         old_project_id      := rec.project_id;
         old_status_id       := rec.status_id;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -183,6 +193,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         old_client_id       := rec.client_id;
         old_project_id      := rec.project_id;
         old_swimlane_id     := rec.swimlane_id;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 
@@ -253,6 +268,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         old_client_id       := rec.client_id;
         old_project_id      := rec.project_id;
         old_category_id     := rec.category_id;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 END;
