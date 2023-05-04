@@ -49,6 +49,13 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
         in_task_id              tsk_tasks.task_id%TYPE
     );
 
+
+
+    PROCEDURE user_fav_boards (
+        rec                     IN OUT NOCOPY   tsk_user_fav_boards%ROWTYPE,
+        in_action                               CHAR                                := NULL
+    );
+
 END;
 /
 

@@ -247,15 +247,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         rec.user_id         := COALESCE(in_user_id,     core.get_user_id());
         rec.board_id        := COALESCE(in_board_id,    tsk_app.get_board_id());
         --
-        rec.updated_by      := core.get_user_id();
-        rec.updated_at      := SYSDATE;
-        --
-        BEGIN
-            INSERT INTO tsk_user_fav_boards VALUES rec;
-        EXCEPTION
-        WHEN DUP_VAL_ON_INDEX THEN
-            NULL;
-        END;
+        tsk_tapi.user_fav_boards(rec, 'C');
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
@@ -275,9 +267,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         rec.user_id         := COALESCE(in_user_id,     core.get_user_id());
         rec.board_id        := COALESCE(in_board_id,    tsk_app.get_board_id());
         --
-        DELETE FROM tsk_user_fav_boards b
-        WHERE b.user_id     = rec.user_id
-            AND b.board_id  = rec.board_id;
+        tsk_tapi.user_fav_boards(rec, 'D');
         --
         core.set_item('P100_IS_FAVORITE', '');
     EXCEPTION

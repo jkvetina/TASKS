@@ -363,6 +363,49 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         core.raise_error();
     END;
 
+
+
+    PROCEDURE user_fav_boards (
+        rec                     IN OUT NOCOPY   tsk_user_fav_boards%ROWTYPE,
+        in_action                               CHAR                                := NULL
+    )
+    AS
+    BEGIN
+        tsk_auth.check_allowed_dml (
+            in_table_name       => REGEXP_REPLACE(core.get_caller_name(2), '[^\.]+\.', 'TSK_'),
+            in_action           => in_action,
+            in_user_id          => core.get_user_id,
+            in_client_id        => tsk_app.get_client_id(),     -- lets check against context
+            in_project_id       => tsk_app.get_project_id()
+        );
+
+        -- delete record
+        IF in_action = 'D' THEN
+            DELETE FROM tsk_user_fav_boards b
+            WHERE b.user_id     = rec.user_id
+                AND b.board_id  = rec.board_id;
+            --
+            RETURN;
+        END IF;
+
+        -- overwrite some values
+        rec.updated_by  := core.get_user_id();
+        rec.updated_at  := SYSDATE;
+
+        -- proceed with update or insert
+        BEGIN
+            INSERT INTO tsk_user_fav_boards VALUES rec;
+        EXCEPTION
+        WHEN DUP_VAL_ON_INDEX THEN
+            NULL;
+        END;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
 END;
 /
 
