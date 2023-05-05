@@ -19,7 +19,8 @@ wwv_flow_imp_shared.create_list_of_values(
 ,p_use_local_sync_table=>false
 ,p_query_table=>'TSK_LOV_APP_PAGE_GROUPS_V'
 ,p_return_column_name=>'PAGE_GROUP'
-,p_display_column_name=>'PAGE_GROUP'
+,p_display_column_name=>'PAGE_GROUP_NAME'
+,p_group_column_name=>'GROUP_NAME'
 ,p_group_sort_direction=>'ASC'
 ,p_default_sort_column_name=>'R#'
 ,p_default_sort_direction=>'ASC'

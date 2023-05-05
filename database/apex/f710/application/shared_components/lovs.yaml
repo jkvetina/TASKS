@@ -339,9 +339,11 @@
 
   column-mapping: 
     return: PAGE_GROUP
-    display: PAGE_GROUP
+    display: PAGE_GROUP_NAME
     default-sort: R#
     sort-direction: Ascending (Nulls Last)
+    group: GROUP_NAME
+    group-sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: LOV_TASK_AUTOCOMPLETE ===============
   id: 48393845499963613
