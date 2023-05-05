@@ -1,5 +1,9 @@
 CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
+    c_admin_role                CONSTANT tsk_roles.role_id%TYPE := 'ADMIN';
+
+
+
     PROCEDURE after_auth (
         in_user_id              VARCHAR2
     )
@@ -63,7 +67,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
 
 
-    PROCEDURE mark_component (
+    PROCEDURE discover_component (
         in_user_id              tsk_auth_roles.user_id%TYPE,
         in_page_id              tsk_auth_pages.page_id%TYPE,
         --
@@ -87,15 +91,33 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         rec.component_type      := in_component_type;
         rec.component_name      := in_component_name;
         rec.page_id             := in_page_id;
+        rec.is_active           := NULL;
         rec.updated_by          := in_user_id;
         rec.updated_at          := SYSDATE;
         --
-        INSERT INTO tsk_auth_components VALUES rec;
+        BEGIN
+            -- add component to the list
+            INSERT INTO tsk_auth_components VALUES rec;
+
+            -- mark it as accessible for administrators
+            rec.role_id         := c_admin_role;
+            rec.is_active       := 'Y';
+            --
+            BEGIN
+                INSERT INTO tsk_auth_components VALUES rec;
+            EXCEPTION
+            WHEN DUP_VAL_ON_INDEX THEN
+                NULL;
+            END;
+        EXCEPTION
+        WHEN DUP_VAL_ON_INDEX THEN
+            ROLLBACK;
+        END;
         --
         COMMIT;
     EXCEPTION
-    WHEN DUP_VAL_ON_INDEX THEN
-        ROLLBACK;
+    WHEN core.app_exception THEN
+        RAISE;
     WHEN OTHERS THEN
         ROLLBACK;
         core.raise_error();
@@ -168,7 +190,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
             -- on failure add component to the list
             IF v_authorized IS NULL THEN
-                tsk_auth.mark_component (
+                tsk_auth.discover_component (
                     in_user_id          => in_user_id,
                     in_page_id          => in_page_id,
                     in_component_id     => in_component_id,
@@ -241,10 +263,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     RETURN CHAR
     AS
     BEGIN
-        --IF core.is_developer() THEN
-        --    RETURN 'Y';
-        --END IF;
-        --
         RETURN tsk_auth.is_user (
             in_user_id          => core.get_user_id(),
             in_page_id          => core.get_page_id(),
@@ -301,10 +319,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
         -- check auth procedure
         IF in_procedure_name IS NULL THEN
-            IF core.is_developer() THEN  -- show in menu, allow access
-                RETURN 'Y';
-            END IF;
-            --
             RETURN 'N';  -- hide, auth function is set on page but missing in AUTH package
         END IF;
 
