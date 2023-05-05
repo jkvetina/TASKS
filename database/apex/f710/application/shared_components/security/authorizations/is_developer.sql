@@ -1,7 +1,7 @@
-prompt --application/shared_components/security/authorizations/nobody
+prompt --application/shared_components/security/authorizations/is_developer
 begin
 --   Manifest
---     SECURITY SCHEME: NOBODY
+--     SECURITY SCHEME: IS_DEVELOPER
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2022.10.07'
@@ -12,11 +12,11 @@ wwv_flow_imp.component_begin (
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_security_scheme(
- p_id=>wwv_flow_imp.id(47239313758285270)  -- NOBODY
-,p_name=>'NOBODY'
+ p_id=>wwv_flow_imp.id(48467912449659319)  -- IS_DEVELOPER
+,p_name=>'IS_DEVELOPER'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
-,p_attribute_01=>'RETURN FALSE;'
-,p_error_message=>'ACCESS_DENIED'
+,p_attribute_01=>'RETURN core.is_developer();'
+,p_error_message=>'ACCESS_DENIED|IS_DEVELOPER'
 ,p_caching=>'BY_USER_BY_SESSION'
 );
 wwv_flow_imp.component_end;

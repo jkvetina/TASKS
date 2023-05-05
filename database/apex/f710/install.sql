@@ -14,11 +14,10 @@ prompt --install
 @@application/shared_components/files/icons_app_icon_512_png.sql
 @@application/plugin_settings.sql
 @@application/shared_components/security/authorizations/is_user.sql
-@@application/shared_components/security/authorizations/is_admin.sql
-@@application/shared_components/security/authorizations/nobody.sql
 @@application/shared_components/security/authorizations/is_user_c.sql
 @@application/shared_components/security/authorizations/is_user_u.sql
 @@application/shared_components/security/authorizations/is_user_d.sql
+@@application/shared_components/security/authorizations/is_developer.sql
 @@application/shared_components/navigation/navigation_bar.sql
 @@application/shared_components/logic/application_processes/after_auth.sql
 @@application/shared_components/logic/application_processes/init_defaults.sql

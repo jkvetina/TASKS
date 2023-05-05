@@ -1,0 +1,16 @@
+---
+- # ====== Build Option: NEVER =================================
+  id: 48468460291668887
+  identification: 
+    name: NEVER
+
+  status: 
+    status: Exclude
+    default-on-export: Same as Current Status
+    on-upgrade-keep-status: true
+
+  comments: 
+    comments: |
+      Alternative for server side condition = NEVER
+      so we can keep what is set there
+

@@ -22,40 +22,6 @@
   error: 
     error-message: ACCESS_DENIED|IS_USER
 
-- # ====== Authorization: IS_ADMIN =============================
-  id: 47236933937694563
-  identification: 
-    name: IS_ADMIN
-
-  authorization-scheme: 
-    type: PL/SQL Function Returning Boolean
-
-  settings: 
-    pl/sql-function-body: RETURN tsk_auth.is_admin() = 'Y';
-
-  server-cache: 
-    evaluation-point: Once per Page View
-
-  error: 
-    error-message: ACCESS_DENIED|IS_ADMIN
-
-- # ====== Authorization: NOBODY ===============================
-  id: 47239313758285270
-  identification: 
-    name: NOBODY
-
-  authorization-scheme: 
-    type: PL/SQL Function Returning Boolean
-
-  settings: 
-    pl/sql-function-body: RETURN FALSE;
-
-  server-cache: 
-    evaluation-point: Once per Session
-
-  error: 
-    error-message: ACCESS_DENIED
-
 - # ====== Authorization: IS_USER_C ============================
   id: 47696452253028618
   identification: 
@@ -124,4 +90,21 @@
 
   error: 
     error-message: ACCESS_DENIED|IS_USER_D
+
+- # ====== Authorization: IS_DEVELOPER =========================
+  id: 48467912449659319
+  identification: 
+    name: IS_DEVELOPER
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: RETURN core.is_developer();
+
+  server-cache: 
+    evaluation-point: Once per Session
+
+  error: 
+    error-message: ACCESS_DENIED|IS_DEVELOPER
 
