@@ -1514,6 +1514,24 @@ wwv_flow_imp_page.create_page_da_action(
 'apex.message.showPageSuccess(''Link copied to clipboard'');',
 ''))
 );
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(48481374722495801)
+,p_name=>'ON_JOIN_TASK_CLOSE'
+,p_event_sequence=>30
+,p_triggering_element_type=>'BUTTON'
+,p_triggering_button_id=>wwv_flow_imp.id(47739587996626905)
+,p_bind_type=>'bind'
+,p_execution_type=>'IMMEDIATE'
+,p_bind_event_type=>'apexafterclosedialog'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(48481430820495802)
+,p_event_id=>wwv_flow_imp.id(48481374722495801)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_DIALOG_CLOSE'
+);
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34952570819065835)
 ,p_process_sequence=>10

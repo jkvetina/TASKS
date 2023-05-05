@@ -3545,6 +3545,35 @@ dynamic-actions:
       fire-when-event-result-is: True
       fire-on-initialization: false
 
+- # ====== Dynamic Action: ON_JOIN_TASK_CLOSE ==================
+  id: 48481374722495801
+  identification: 
+    name: ON_JOIN_TASK_CLOSE
+
+  execution: 
+    sequence: 30
+
+  when: 
+    event: EVENT.EVENT.FAMEWORK.APEXAFTERCLOSEDIALOG
+    selection-type: Button
+    button: JOIN_TASK # 47739587996626905
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Close Dialog ================================
+    id: 48481430820495802
+    identification: 
+      action: Close Dialog
+
+    execution: 
+      sequence: 10
+      event: ON_JOIN_TASK_CLOSE # 48481374722495801
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
 - # ====== Dynamic Action: CLOSE_DIALOG ========================
   id: 63213674749844593
   identification: 
