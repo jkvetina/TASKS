@@ -9,7 +9,7 @@ SELECT
     r.role_id,
     r.role_name,
     --
-    ROW_NUMBER() OVER (ORDER BY r.role_group, r.order# NULLS LAST, r.role_id) AS r#
+    ROW_NUMBER() OVER (ORDER BY r.order# NULLS LAST, r.role_group NULLS LAST, r.role_id) AS r#
     --
 FROM tsk_roles r
 JOIN x
