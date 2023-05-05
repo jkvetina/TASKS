@@ -17,9 +17,9 @@ wwv_flow_imp_page.create_page(
 ,p_alias=>'MAP-PROCEDURES'
 ,p_step_title=>'Map Procedures'
 ,p_autocomplete_on_off=>'OFF'
-,p_group_id=>wwv_flow_imp.id(48314253704596369)  -- MAIN - USERS & ROLES
+,p_group_id=>wwv_flow_imp.id(48314253704596369)  -- ADMIN - USERS & ROLES
 ,p_page_template_options=>'#DEFAULT#'
-,p_required_role=>wwv_flow_imp.id(47236933937694563)  -- IS_ADMIN
+,p_required_role=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 ,p_protection_level=>'C'
 ,p_page_component_map=>'21'
 ,p_last_updated_by=>'DEV'
@@ -832,6 +832,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp.component_end;
 end;

@@ -5,7 +5,7 @@ identification:
   name: Roles
   alias: ROLES
   title: Roles
-  page-group: MAIN - USERS & ROLES # 48314253704596369
+  page-group: ADMIN - USERS & ROLES # 48314253704596369
 
 appearance: 
   page-mode: Normal
@@ -21,7 +21,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
-  authorization-scheme: IS_ADMIN # 47236933937694563
+  authorization-scheme: IS_USER # 47196033359190547
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -789,6 +789,9 @@ buttons:
     action: Defined by Dynamic Action
     execute-validations: true
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Button: REORDER_ROLES ===============================
   id: 48280136987043204
   identification: 
@@ -816,6 +819,9 @@ buttons:
     action: Submit Page
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGE_FILTERS ======================
@@ -880,6 +886,9 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Process: REORDER_STATUSES ===========================
   id: 48279797290040037
   identification: 
@@ -901,4 +910,7 @@ processes:
 
   server-side-condition: 
     when-button-pressed: REORDER_ROLES # 48280136987043204
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 

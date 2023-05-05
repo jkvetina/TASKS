@@ -1,8 +1,8 @@
 ---
-- # ====== Page Group: USER_PROFILE ============================
+- # ====== Page Group: USER - PROFILE ==========================
   id: 44075748371802774
   identification: 
-    name: USER_PROFILE
+    name: USER - PROFILE
 
 - # ====== Page Group: MAIN - BOARDS ===========================
   id: 48313716242591318
@@ -14,10 +14,10 @@
   identification: 
     name: MAIN - PROJECTS & CLIENTS
 
-- # ====== Page Group: MAIN - USERS & ROLES ====================
+- # ====== Page Group: ADMIN - USERS & ROLES ===================
   id: 48314253704596369
   identification: 
-    name: MAIN - USERS & ROLES
+    name: ADMIN - USERS & ROLES
 
 - # ====== Page Group: MAIN - COMMITS ==========================
   id: 48317416017603440

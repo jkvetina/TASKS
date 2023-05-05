@@ -17,7 +17,7 @@ wwv_flow_imp_page.create_page(
 ,p_alias=>'HELP'
 ,p_step_title=>'Help'
 ,p_autocomplete_on_off=>'OFF'
-,p_group_id=>wwv_flow_imp.id(44075748371802774)  -- USER_PROFILE
+,p_group_id=>wwv_flow_imp.id(44075748371802774)  -- USER - PROFILE
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'ul li,',
 'ol li {',

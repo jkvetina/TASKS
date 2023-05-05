@@ -5,7 +5,7 @@ identification:
   name: Map Pages
   alias: MAP-PAGES
   title: Map Pages
-  page-group: MAIN - USERS & ROLES # 48314253704596369
+  page-group: ADMIN - USERS & ROLES # 48314253704596369
 
 appearance: 
   page-mode: Normal
@@ -21,7 +21,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
-  authorization-scheme: IS_ADMIN # 47236933937694563
+  authorization-scheme: IS_USER # 47196033359190547
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -930,7 +930,7 @@ regions:
       hide: true
 
     security: 
-      authorization-scheme: IS_ADMIN # 47236933937694563
+      authorization-scheme: IS_USER # 47196033359190547
 
   - # ====== Column: IS_HIDDEN ===================================
     id: 48358361221512115
@@ -989,7 +989,7 @@ regions:
       hide: true
 
     security: 
-      authorization-scheme: IS_ADMIN # 47236933937694563
+      authorization-scheme: IS_USER # 47196033359190547
 
   - # ====== Column: IS_RESET ====================================
     id: 48358474688512116
@@ -1048,7 +1048,7 @@ regions:
       hide: true
 
     security: 
-      authorization-scheme: IS_ADMIN # 47236933937694563
+      authorization-scheme: IS_USER # 47196033359190547
 
   - # ====== Column: ORDER# ======================================
     id: 48358560863512117
@@ -1100,7 +1100,7 @@ regions:
       hide: true
 
     security: 
-      authorization-scheme: IS_ADMIN # 47236933937694563
+      authorization-scheme: IS_USER # 47196033359190547
 
   - # ====== Column: PAGE_ID =====================================
     id: 139768407775244792
@@ -1425,6 +1425,9 @@ buttons:
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGE_FILTERS ======================
   id: 46840627339379310
@@ -1500,6 +1503,9 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Process: REFRESH_MV =================================
   id: 47405677838201653
   identification: 
@@ -1518,4 +1524,7 @@ processes:
 
   error: 
     display-location: Inline in Notification
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 

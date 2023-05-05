@@ -5,7 +5,7 @@ identification:
   name: <span class="fa fa-question-circle"></span>
   alias: HELP
   title: Help
-  page-group: USER_PROFILE # 44075748371802774
+  page-group: USER - PROFILE # 44075748371802774
 
 appearance: 
   page-mode: Normal

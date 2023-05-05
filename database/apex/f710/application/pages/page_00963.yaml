@@ -5,7 +5,7 @@ identification:
   name: Map Components
   alias: MAP-COMPONENTS
   title: Map Components
-  page-group: MAIN - USERS & ROLES # 48314253704596369
+  page-group: ADMIN - USERS & ROLES # 48314253704596369
 
 appearance: 
   page-mode: Normal
@@ -21,7 +21,7 @@ navigation:
   warn-on-unsaved-changes: true
 
 security: 
-  authorization-scheme: IS_ADMIN # 47236933937694563
+  authorization-scheme: IS_USER # 47196033359190547
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -1504,6 +1504,9 @@ buttons:
   server-side-condition: 
     type: Never
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGE_FILTERS ======================
   id: 48106267678558267
@@ -1579,6 +1582,9 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Process: SYNC_REGIONS ===============================
   id: 48051562080927119
   identification: 
@@ -1600,4 +1606,7 @@ processes:
 
   server-side-condition: 
     when-button-pressed: SYNC_REGIONS # 48050183510927105
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 

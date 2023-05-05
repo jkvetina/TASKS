@@ -5,7 +5,7 @@ identification:
   name: Users
   alias: USERS
   title: Users
-  page-group: MAIN - USERS & ROLES # 48314253704596369
+  page-group: ADMIN - USERS & ROLES # 48314253704596369
 
 appearance: 
   page-mode: Normal
