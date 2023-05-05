@@ -11,8 +11,13 @@ MERGE INTO tsk_navigation t
 USING (
     SELECT 0 AS page_id, NULL AS parent_id, NULL AS is_hidden, NULL AS is_reset, 666 AS order# FROM DUAL UNION ALL
     SELECT 100 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 100 AS order# FROM DUAL UNION ALL
-    SELECT 105 AS page_id, 100 AS parent_id, 'Y' AS is_hidden, 'Y' AS is_reset, 10 AS order# FROM DUAL UNION ALL
+    SELECT 105 AS page_id, 100 AS parent_id, 'Y' AS is_hidden, 'Y' AS is_reset, NULL AS order# FROM DUAL UNION ALL
+    SELECT 106 AS page_id, 100 AS parent_id, 'Y' AS is_hidden, 'Y' AS is_reset, NULL AS order# FROM DUAL UNION ALL
+    SELECT 108 AS page_id, 100 AS parent_id, 'Y' AS is_hidden, 'Y' AS is_reset, NULL AS order# FROM DUAL UNION ALL
+    SELECT 110 AS page_id, 100 AS parent_id, 'Y' AS is_hidden, 'Y' AS is_reset, NULL AS order# FROM DUAL UNION ALL
+    SELECT 115 AS page_id, 100 AS parent_id, 'Y' AS is_hidden, 'Y' AS is_reset, NULL AS order# FROM DUAL UNION ALL
     SELECT 200 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 200 AS order# FROM DUAL UNION ALL
+    SELECT 205 AS page_id, 200 AS parent_id, 'Y' AS is_hidden, 'Y' AS is_reset, NULL AS order# FROM DUAL UNION ALL
     SELECT 220 AS page_id, 200 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 20 AS order# FROM DUAL UNION ALL
     SELECT 230 AS page_id, 200 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 30 AS order# FROM DUAL UNION ALL
     SELECT 250 AS page_id, 200 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 50 AS order# FROM DUAL UNION ALL

@@ -25,6 +25,7 @@ USING (
     SELECT 'PDI' AS client_id, NULL AS project_id, 'SAI' AS user_id, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'PDI' AS client_id, NULL AS project_id, 'SAI' AS user_id, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'Q' AS client_id, 'TASX' AS project_id, 'JANK' AS user_id, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'Q' AS client_id, NULL AS project_id, 'JANK' AS user_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'Q' AS client_id, NULL AS project_id, 'JANK' AS user_id, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'Q' AS client_id, NULL AS project_id, 'JANK' AS user_id, 'PROJECT_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'Q' AS client_id, NULL AS project_id, 'JANK' AS user_id, 'USERS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL
