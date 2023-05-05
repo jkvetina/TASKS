@@ -11,12 +11,14 @@ a AS (
         a.page_id,
         a.page_name,
         a.page_group,
-        a.authorization_scheme  AS auth_scheme
+        CASE WHEN a.page_mode != 'Normal' THEN 'Y' END AS is_modal
     FROM apex_application_pages a
     JOIN x
         ON x.app_id         = a.application_id
         AND (a.page_group   = x.page_group OR x.page_group IS NULL)
         AND a.page_id       NOT IN (0, 9999)
+        --
+        AND a.authorization_scheme = 'IS_USER'
 ),
 g AS (
     -- order page groups
@@ -43,7 +45,9 @@ g AS (
 )
 SELECT
     a.page_id,
-    a.page_name,
+    a.is_modal,
+    --
+    CASE WHEN n.parent_id IS NOT NULL THEN '&' || 'nbsp; ' || '&' || 'nbsp; ' END || a.page_name AS page_name,
     --
     LPAD(' ', g.group_order#) || g.page_group AS page_group,
     --
@@ -52,8 +56,6 @@ SELECT
     n.is_hidden,
     n.is_reset,
     --
-    a.auth_scheme,
-    --
     MAX(CASE WHEN r.r# = 1 THEN p.is_active END) AS role_1,
     MAX(CASE WHEN r.r# = 2 THEN p.is_active END) AS role_2,
     MAX(CASE WHEN r.r# = 3 THEN p.is_active END) AS role_3,
@@ -61,7 +63,9 @@ SELECT
     MAX(CASE WHEN r.r# = 5 THEN p.is_active END) AS role_5,
     MAX(CASE WHEN r.r# = 6 THEN p.is_active END) AS role_6,
     MAX(CASE WHEN r.r# = 7 THEN p.is_active END) AS role_7,
-    MAX(CASE WHEN r.r# = 8 THEN p.is_active END) AS role_8
+    MAX(CASE WHEN r.r# = 8 THEN p.is_active END) AS role_8,
+    --
+    MAX(p.is_active) AS is_used
     --
 FROM a
 LEFT JOIN tsk_navigation n
@@ -74,13 +78,13 @@ LEFT JOIN g
     ON g.page_group     = a.page_group
 GROUP BY
     a.page_id,
+    a.is_modal,
     a.page_name,
     LPAD(' ', g.group_order#) || g.page_group,
     n.parent_id,
     n.order#,
     n.is_hidden,
-    n.is_reset,
-    a.auth_scheme;
+    n.is_reset;
 --
 COMMENT ON TABLE tsk_p962_map_pages_v IS '';
 
