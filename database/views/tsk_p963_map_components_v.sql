@@ -9,7 +9,7 @@ SELECT
     c.component_id,
     c.component_name,
     --
-    REPLACE(c.component_type, 'APEX_APPLICATION_', '') AS component_type,
+    REPLACE(REPLACE(c.component_type, 'APEX_APPLICATION_', ''), 'APEX_APPL_', '') AS component_type,
     --
     p.page,
     p.page_group,
