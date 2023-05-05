@@ -223,6 +223,22 @@ regions:
         name: Primary Report
         alias: 464687
 
+  column-groups: 
+  - # ====== Column Group: Page Info =============================
+    id: 48360617433512138
+    heading: 
+      heading: Page Info
+
+  - # ====== Column Group: Roles =================================
+    id: 48360741907512139
+    heading: 
+      heading: Roles
+
+  - # ====== Column Group: Navigation ============================
+    id: 48360816141512140
+    heading: 
+      heading: Navigation
+
   columns: 
   - # ====== Column: PAGE_NAME ===================================
     id: 47000955964134509
@@ -240,6 +256,8 @@ regions:
     layout: 
       sequence: 50
       column-alignment: start
+      group: Page Info # 48360617433512138
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -290,6 +308,8 @@ regions:
     layout: 
       sequence: 60
       column-alignment: start
+      group: Page Info # 48360617433512138
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -376,6 +396,9 @@ regions:
       control-break/aggregate: true
       hide: true
 
+    security: 
+      authorization-scheme: IS_ADMIN # 47236933937694563
+
   - # ====== Column: ROLE_1 ======================================
     id: 47001281825134512
     identification: 
@@ -393,6 +416,8 @@ regions:
     layout: 
       sequence: 120
       column-alignment: center
+      group: Roles # 48360741907512139
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -450,6 +475,8 @@ regions:
     layout: 
       sequence: 130
       column-alignment: center
+      group: Roles # 48360741907512139
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -507,6 +534,8 @@ regions:
     layout: 
       sequence: 140
       column-alignment: center
+      group: Roles # 48360741907512139
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -564,6 +593,8 @@ regions:
     layout: 
       sequence: 150
       column-alignment: center
+      group: Roles # 48360741907512139
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -621,6 +652,8 @@ regions:
     layout: 
       sequence: 160
       column-alignment: center
+      group: Roles # 48360741907512139
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -678,6 +711,8 @@ regions:
     layout: 
       sequence: 170
       column-alignment: center
+      group: Roles # 48360741907512139
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -735,6 +770,8 @@ regions:
     layout: 
       sequence: 180
       column-alignment: center
+      group: Roles # 48360741907512139
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -792,6 +829,8 @@ regions:
     layout: 
       sequence: 190
       column-alignment: center
+      group: Roles # 48360741907512139
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -845,6 +884,8 @@ regions:
     layout: 
       sequence: 70
       column-alignment: start
+      group: Navigation # 48360816141512140
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -888,6 +929,9 @@ regions:
       control-break/aggregate: true
       hide: true
 
+    security: 
+      authorization-scheme: IS_ADMIN # 47236933937694563
+
   - # ====== Column: IS_HIDDEN ===================================
     id: 48358361221512115
     identification: 
@@ -905,6 +949,8 @@ regions:
     layout: 
       sequence: 90
       column-alignment: center
+      group: Navigation # 48360816141512140
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -942,6 +988,9 @@ regions:
       control-break/aggregate: true
       hide: true
 
+    security: 
+      authorization-scheme: IS_ADMIN # 47236933937694563
+
   - # ====== Column: IS_RESET ====================================
     id: 48358474688512116
     identification: 
@@ -959,6 +1008,8 @@ regions:
     layout: 
       sequence: 100
       column-alignment: center
+      group: Navigation # 48360816141512140
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -996,6 +1047,9 @@ regions:
       control-break/aggregate: true
       hide: true
 
+    security: 
+      authorization-scheme: IS_ADMIN # 47236933937694563
+
   - # ====== Column: ORDER# ======================================
     id: 48358560863512117
     identification: 
@@ -1013,6 +1067,8 @@ regions:
     layout: 
       sequence: 80
       column-alignment: end
+      group: Navigation # 48360816141512140
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1043,6 +1099,9 @@ regions:
       control-break/aggregate: true
       hide: true
 
+    security: 
+      authorization-scheme: IS_ADMIN # 47236933937694563
+
   - # ====== Column: PAGE_ID =====================================
     id: 139768407775244792
     identification: 
@@ -1060,6 +1119,8 @@ regions:
     layout: 
       sequence: 40
       column-alignment: end
+      group: Page Info # 48360617433512138
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
