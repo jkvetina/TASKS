@@ -8,7 +8,8 @@ SELECT
     t.page_id,
     t.page_name,
     t.page_id       || ' - ' || REGEXP_REPLACE(t.page_name, '<.+?>')    AS page,
-    g.group_name    || ' - ' || g.page_group_name                       AS page_group
+    g.group_name    || ' - ' || g.page_group_name                       AS page_group,
+    t.page_group                                                        AS page_group_raw
     --
 FROM apex_application_pages t
 JOIN x

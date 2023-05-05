@@ -30,7 +30,7 @@ LEFT JOIN tsk_auth_procedures t
     AND t.procedure_name    = p.procedure_name
     AND t.table_name        IS NOT NULL
 WHERE 1 = 1
-    AND (x.page_group       = p.page_group OR x.page_group IS NULL)
+    AND (x.page_group       = p.page_group_raw OR x.page_group IS NULL)
 GROUP BY
     p.object_name,
     p.procedure_name;

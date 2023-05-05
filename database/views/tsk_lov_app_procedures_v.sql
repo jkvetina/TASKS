@@ -3,7 +3,8 @@ SELECT
     p.object_name,
     p.procedure_name,
     g.page_id,
-    g.page_group
+    g.page_group,
+    g.page_group_raw
     --
 FROM all_procedures p
 LEFT JOIN tsk_lov_app_pages_v g
