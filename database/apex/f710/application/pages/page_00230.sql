@@ -326,6 +326,9 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_control_break=>true
 ,p_enable_hide=>true
 ,p_is_primary_key=>false
+,p_default_type=>'EXPRESSION'
+,p_default_language=>'PLSQL'
+,p_default_expression=>'tsk_app.get_client_id()'
 ,p_duplicate_value=>true
 ,p_include_in_export=>false
 );
@@ -357,6 +360,9 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_control_break=>true
 ,p_enable_hide=>true
 ,p_is_primary_key=>false
+,p_default_type=>'EXPRESSION'
+,p_default_language=>'PLSQL'
+,p_default_expression=>'tsk_app.get_project_id()'
 ,p_duplicate_value=>true
 ,p_include_in_export=>false
 );

@@ -620,6 +620,9 @@ regions:
       primary-key: false
 
     default: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: tsk_app.get_client_id()
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -676,6 +679,9 @@ regions:
       primary-key: false
 
     default: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: tsk_app.get_project_id()
       duplicate-copies-existing-value: true
 
     column-filter: 
