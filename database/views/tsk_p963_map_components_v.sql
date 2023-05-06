@@ -33,8 +33,8 @@ FROM tsk_auth_components c
 JOIN tsk_lov_app_pages_v p
     ON p.page_id        = c.page_id
 JOIN x
-    ON (x.page_id       = p.page_id     OR x.page_id IS NULL)
-    AND (x.page_group   = p.page_group  OR x.page_group IS NULL)
+    ON (x.page_id       = p.page_id         OR x.page_id IS NULL)
+    AND (x.page_group   = p.page_group_raw  OR x.page_group IS NULL)
 LEFT JOIN tsk_p960_roles_columns_v r
     ON r.role_id        = c.role_id
 GROUP BY

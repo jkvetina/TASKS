@@ -35,7 +35,7 @@ FROM tsk_swimlanes t
 JOIN x
     ON x.client_id      = t.client_id
     AND x.project_id    = t.project_id
-JOIN c
+LEFT JOIN c
     ON c.swimlane_id    = t.swimlane_id;
 --
 COMMENT ON TABLE tsk_p250_swimlanes_v IS '';
