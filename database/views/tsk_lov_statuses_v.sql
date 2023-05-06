@@ -9,8 +9,9 @@ SELECT
     t.status_id,
     t.status_name,
     t.is_default,
-    t.is_named,
     t.is_colored,
+    t.is_show_user,
+    t.is_show_swimlane,
     --
     ROW_NUMBER() OVER (ORDER BY t.order# NULLS LAST, t.status_id) AS order#
     --

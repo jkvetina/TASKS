@@ -330,7 +330,7 @@ regions:
 
     list-of-values: 
       type: Shared Component
-      list-of-values: LOV_USERS # 46494875558442406
+      list-of-values: 'LOV_USERS #PAGE/#SETT' # 46494875558442406
       display-extra-values: true
 
     source: 

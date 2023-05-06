@@ -28,7 +28,6 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_app_page_groups.sql
 @@application/shared_components/user_interface/lovs/lov_app_tables.sql
 @@application/shared_components/user_interface/lovs/lov_boards_page_items.sql
-@@application/shared_components/user_interface/lovs/lov_board_types.sql
 @@application/shared_components/user_interface/lovs/lov_categories.sql
 @@application/shared_components/user_interface/lovs/lov_clients_all.sql
 @@application/shared_components/user_interface/lovs/lov_projects_page_items.sql
@@ -42,8 +41,9 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_swimlanes.sql
 @@application/shared_components/user_interface/lovs/lov_swimlanes_all.sql
 @@application/shared_components/user_interface/lovs/lov_task_autocomplete.sql
-@@application/shared_components/user_interface/lovs/lov_users.sql
+@@application/shared_components/user_interface/lovs/lov_users_page_sett.sql
 @@application/shared_components/user_interface/lovs/lov_users_all.sql
+@@application/shared_components/user_interface/lovs/lov_users_project_page_sett.sql
 @@application/shared_components/user_interface/lovs/master_lov_applications.sql
 @@application/pages/page_groups.sql
 @@application/comments.sql

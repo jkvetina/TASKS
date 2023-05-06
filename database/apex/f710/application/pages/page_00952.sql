@@ -189,7 +189,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_attribute_10=>'Y'
 ,p_is_required=>true
 ,p_lov_type=>'SHARED'
-,p_lov_id=>wwv_flow_imp.id(46494875558442406)  -- LOV_USERS
+,p_lov_id=>wwv_flow_imp.id(46494875558442406)  -- LOV_USERS #PAGE/#SETT
 ,p_lov_display_extra=>true
 ,p_enable_filter=>true
 ,p_filter_operators=>'C:S:CASE_INSENSITIVE:REGEXP'

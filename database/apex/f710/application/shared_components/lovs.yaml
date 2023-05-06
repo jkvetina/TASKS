@@ -89,23 +89,6 @@
     default-sort: ORDER#
     sort-direction: Ascending (Nulls Last)
 
-- # ====== List of Values: LOV_BOARD_TYPES =====================
-  id: 44164215535767295
-  identification: 
-    name: LOV_BOARD_TYPES
-
-  source: 
-    location: Local Database
-    type: Table / View
-    table-owner: Parsing Schema
-    table-name: TSK_LOV_BOARD_TYPES_V
-
-  column-mapping: 
-    return: ID
-    display: NAME
-    default-sort: ORDER#
-    sort-direction: Ascending (Nulls Last)
-
 - # ====== List of Values: LOV_PROJECTS #PAGE_ITEMS ============
   id: 45510330697215422
   identification: 
@@ -183,17 +166,16 @@
     group: ROLE_GROUP
     group-sort-direction: Ascending (Nulls Last)
 
-- # ====== List of Values: LOV_USERS ===========================
+- # ====== List of Values: LOV_USERS #PAGE/#SETT ===============
   id: 46494875558442406
   identification: 
-    name: LOV_USERS
+    name: 'LOV_USERS #PAGE/#SETT'
 
   source: 
     location: Local Database
     type: Table / View
     table-owner: Parsing Schema
     table-name: TSK_LOV_USERS_V
-    where-clause: 1 = 1
 
   column-mapping: 
     return: USER_ID
@@ -360,6 +342,23 @@
     return: TASK_ID
     display: TASK_NAME
     default-sort: TASK_ID
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: LOV_USERS_PROJECT #PAGE/SETT ========
+  id: 48554943377588044
+  identification: 
+    name: 'LOV_USERS_PROJECT #PAGE/SETT'
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_LOV_USERS_PROJECT_V
+
+  column-mapping: 
+    return: USER_ID
+    display: USER_NAME
+    default-sort: USER_NAME
     sort-direction: Ascending (Nulls Last)
 
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========

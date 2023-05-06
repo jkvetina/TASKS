@@ -6,7 +6,7 @@ WITH x AS (
 )
 SELECT
     t.user_id,
-    NVL(t.user_name, t.user_id) AS user_name
+    NVL(t.user_name, t.user_id) || ' (' || t.user_mail || ')' AS user_name
     --
 FROM tsk_users t
 JOIN tsk_auth_users u

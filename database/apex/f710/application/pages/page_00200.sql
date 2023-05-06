@@ -331,7 +331,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_hide=>true
 ,p_is_primary_key=>false
 ,p_include_in_export=>true
-,p_security_scheme=>wwv_flow_imp.id(47696708662034140)  -- IS_USER_U
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp_page.create_region_column(
  p_id=>wwv_flow_imp.id(45896215047541642)
