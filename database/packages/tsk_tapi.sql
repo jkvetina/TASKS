@@ -114,6 +114,16 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
             END IF;
         END IF;
 
+        -- keep just one is_default row
+        IF rec.is_default = 'Y' THEN
+            UPDATE tsk_statuses t
+            SET t.is_default        = NULL
+            WHERE t.client_id       = rec.client_id
+                AND t.project_id    = rec.project_id
+                AND t.status_id     != rec.status_id
+                AND t.is_default    = 'Y';
+        END IF;
+
         -- update keys to APEX
         old_client_id       := rec.client_id;
         old_project_id      := rec.project_id;
@@ -262,6 +272,16 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
                 INSERT INTO tsk_categories
                 VALUES rec;
             END IF;
+        END IF;
+
+        -- keep just one is_default row
+        IF rec.is_default = 'Y' THEN
+            UPDATE tsk_categories t
+            SET t.is_default        = NULL
+            WHERE t.client_id       = rec.client_id
+                AND t.project_id    = rec.project_id
+                AND t.category_id   != rec.category_id
+                AND t.is_default    = 'Y';
         END IF;
 
         -- update keys to APEX
