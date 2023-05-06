@@ -1,22 +1,43 @@
 CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
+    FUNCTION get_table_name
+    RETURN VARCHAR2
+    AS
+    BEGIN
+        RETURN REGEXP_REPLACE(core.get_caller_name(3), '[^\.]+\.', 'TSK_');
+    END;
+
+
+
+    FUNCTION get_action (
+        in_action               VARCHAR2 := NULL
+    )
+    RETURN CHAR
+    AS
+    BEGIN
+        RETURN COALESCE(in_action, core.get_grid_action(), SUBSTR(core.get_request(), 1, 1));
+    END;
+
+
+
     PROCEDURE boards (
         rec                     IN OUT NOCOPY   tsk_boards%ROWTYPE,
         in_action                               CHAR                                := NULL,
         old_board_id            IN OUT NOCOPY   VARCHAR2                            -- apex item is a string
     )
     AS
+        c_action                CONSTANT CHAR   := get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => REGEXP_REPLACE(core.get_caller_name(2), '[^\.]+\.', 'TSK_'),
-            in_action           => in_action,
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
             in_user_id          => core.get_user_id,
             in_client_id        => rec.client_id,       -- lets check against new values
             in_project_id       => rec.project_id
         );
 
         -- delete record
-        IF in_action = 'D' THEN
+        IF c_action = 'D' THEN
             DELETE FROM tsk_boards t
             WHERE t.board_id    = NVL(old_board_id, rec.board_id);
             --
@@ -24,7 +45,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         END IF;
 
         -- generate primary key if needed
-        IF in_action = 'C' AND rec.board_id IS NULL THEN
+        IF c_action = 'C' AND rec.board_id IS NULL THEN
             rec.board_id := tsk_board_id.NEXTVAL;
         END IF;
 
@@ -60,17 +81,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         old_status_id           IN OUT NOCOPY   tsk_statuses.status_id%TYPE     -- old key
     )
     AS
+        c_action                CONSTANT CHAR   := get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => REGEXP_REPLACE(core.get_caller_name(2), '[^\.]+\.', 'TSK_'),
-            in_action           => in_action,
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
             in_user_id          => core.get_user_id,
             in_client_id        => rec.client_id,       -- lets check against new values
             in_project_id       => rec.project_id
         );
 
         -- delete record
-        IF in_action = 'D' THEN
+        IF c_action = 'D' THEN
             DELETE FROM tsk_statuses t
             WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
                 AND t.project_id    = NVL(old_project_id,    rec.project_id)
@@ -84,7 +106,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         rec.updated_at := SYSDATE;
 
         -- are we renaming the primary key?
-        IF rec.status_id != old_status_id AND in_action = 'U' THEN
+        IF rec.status_id != old_status_id AND c_action = 'U' THEN
             -- create new status
             INSERT INTO tsk_statuses
             VALUES rec;
@@ -145,17 +167,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         old_swimlane_id         IN OUT NOCOPY   tsk_swimlanes.swimlane_id%TYPE      -- old key
     )
     AS
+        c_action                CONSTANT CHAR   := get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => REGEXP_REPLACE(core.get_caller_name(2), '[^\.]+\.', 'TSK_'),
-            in_action           => in_action,
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
             in_user_id          => core.get_user_id,
             in_client_id        => rec.client_id,       -- lets check against new values
             in_project_id       => rec.project_id
         );
 
         -- delete record
-        IF in_action = 'D' THEN
+        IF c_action = 'D' THEN
             DELETE FROM tsk_swimlanes t
             WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
                 AND t.project_id    = NVL(old_project_id,    rec.project_id)
@@ -169,7 +192,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         rec.updated_at := SYSDATE;
 
         -- are we renaming the primary key?
-        IF rec.swimlane_id != old_swimlane_id AND in_action = 'U' THEN
+        IF rec.swimlane_id != old_swimlane_id AND c_action = 'U' THEN
             -- create new status
             INSERT INTO tsk_swimlanes
             VALUES rec;
@@ -220,17 +243,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         old_category_id         IN OUT NOCOPY   tsk_categories.category_id%TYPE     -- old key
     )
     AS
+        c_action                CONSTANT CHAR   := get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => REGEXP_REPLACE(core.get_caller_name(2), '[^\.]+\.', 'TSK_'),
-            in_action           => in_action,
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
             in_user_id          => core.get_user_id,
             in_client_id        => rec.client_id,       -- lets check against new values
             in_project_id       => rec.project_id
         );
 
         -- delete record
-        IF in_action = 'D' THEN
+        IF c_action = 'D' THEN
             DELETE FROM tsk_categories t
             WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
                 AND t.project_id    = NVL(old_project_id,    rec.project_id)
@@ -244,7 +268,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         rec.updated_at := SYSDATE;
 
         -- are we renaming the primary key?
-        IF rec.category_id != old_category_id AND in_action = 'U' THEN
+        IF rec.category_id != old_category_id AND c_action = 'U' THEN
             -- create new status
             INSERT INTO tsk_categories
             VALUES rec;
@@ -302,17 +326,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_action                               CHAR                                := NULL
     )
     AS
+        c_action                CONSTANT CHAR   := get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => REGEXP_REPLACE(core.get_caller_name(2), '[^\.]+\.', 'TSK_'),
-            in_action           => in_action,
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
             in_user_id          => core.get_user_id,
             in_client_id        => rec.client_id,       -- lets check against new values
             in_project_id       => rec.project_id
         );
 
         -- delete record
-        IF in_action = 'D' THEN
+        IF c_action = 'D' THEN
             tasks_delete(rec.task_id);
             --
             RETURN;
@@ -390,17 +415,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_action                               CHAR                                := NULL
     )
     AS
+        c_action                CONSTANT CHAR   := get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => REGEXP_REPLACE(core.get_caller_name(2), '[^\.]+\.', 'TSK_'),
-            in_action           => in_action,
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
             in_user_id          => core.get_user_id,
             in_client_id        => tsk_app.get_client_id(),     -- lets check against context
             in_project_id       => tsk_app.get_project_id()
         );
 
         -- delete record
-        IF in_action = 'D' THEN
+        IF c_action = 'D' THEN
             DELETE FROM tsk_user_fav_boards b
             WHERE b.user_id     = rec.user_id
                 AND b.board_id  = rec.board_id;

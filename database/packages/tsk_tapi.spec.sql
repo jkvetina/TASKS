@@ -1,5 +1,17 @@
 CREATE OR REPLACE PACKAGE tsk_tapi AS
 
+    FUNCTION get_table_name
+    RETURN VARCHAR2;
+
+
+
+    FUNCTION get_action (
+        in_action               VARCHAR2 := NULL
+    )
+    RETURN CHAR;
+
+
+
     PROCEDURE boards (
         rec                     IN OUT NOCOPY   tsk_boards%ROWTYPE,
         in_action                               CHAR                                := NULL,
