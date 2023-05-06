@@ -54,6 +54,10 @@ JOIN tsk_auth_context_v x
     ON x.client_id      = t.client_id
     AND x.project_id    = t.project_id
     AND x.board_id      = t.board_id
+    --
+    AND (x.page_swimlane_id = t.swimlane_id OR x.page_swimlane_id IS NULL)
+    AND (x.page_owner_id    = t.owner_id    OR x.page_owner_id IS NULL)
+    --
 --JOIN tsk_auth_available_boards_v b
 --    ON b.client_id      = t.client_id
 --    AND b.project_id    = t.project_id
