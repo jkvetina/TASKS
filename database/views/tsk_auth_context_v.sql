@@ -11,7 +11,9 @@ WITH x AS (
         --
         core.get_item('$CLIENT_ID')     AS page_client_id,
         core.get_item('$PROJECT_ID')    AS page_project_id,
-        core.get_item('$BOARD_ID')      AS page_board_id
+        core.get_item('$BOARD_ID')      AS page_board_id,
+        core.get_item('$SWIMLANE_ID')   AS page_swimlane_id,
+        core.get_item('$OWNER_ID')      AS page_owner_id
         --
     FROM tsk_users u
     WHERE u.user_id         = core.get_user_id()
@@ -26,9 +28,11 @@ SELECT
     MAX(p.project_id)   AS project_id,
     MAX(b.board_id)     AS board_id,
     --
-    MAX(d.client_id)    AS page_client_id,
-    MAX(j.project_id)   AS page_project_id,
-    MAX(o.board_id)     AS page_board_id
+    MAX(d.client_id)            AS page_client_id,
+    MAX(j.project_id)           AS page_project_id,
+    MAX(o.board_id)             AS page_board_id,
+    MAX(x.page_swimlane_id)     AS page_swimlane_id,
+    MAX(x.page_owner_id)        AS page_owner_id
     --
 FROM x
 LEFT JOIN tsk_auth_available_projects_v c   ON c.client_id = x.client_id
