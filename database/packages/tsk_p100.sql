@@ -102,6 +102,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         in_project_id       CONSTANT tsk_tasks.project_id%TYPE      := tsk_app.get_project_id();
         in_board_id         CONSTANT tsk_tasks.board_id%TYPE        := tsk_app.get_board_id();
         in_swimlane_id      CONSTANT tsk_tasks.swimlane_id%TYPE     := core.get_item('P100_SWIMLANE_ID');
+        in_owner_id         CONSTANT tsk_tasks.owner_id%TYPE        := core.get_item('P100_OWNER_ID');
         --
         v_statuses          PLS_INTEGER;
     BEGIN
@@ -125,12 +126,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             FROM tsk_swimlanes w
             WHERE w.client_id       = in_client_id
                 AND w.project_id    = in_project_id
-                AND (
-                    in_swimlane_id IS NULL
-                    OR in_swimlane_id   = w.swimlane_id
-                    OR (in_swimlane_id  = 'MY'      AND w.swimlane_id IN (core.get_user_id()))
-                    OR (in_swimlane_id  = 'MY+'     AND w.swimlane_id IN (core.get_user_id(), '-'))
-                )
+                AND (w.swimlane_id  = in_swimlane_id OR in_swimlane_id IS NULL)
                 AND w.is_active     = 'Y'
             ORDER BY r#
         ) LOOP
@@ -139,12 +135,16 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                 SELECT
                     s.status_id,
                     s.status_name,
-                    s.is_named
+                    s.is_show_user,
+                    s.is_show_swimlane
                 FROM tsk_lov_statuses_v s
                 ORDER BY s.order#
             ) LOOP
                 HTP.P('<div class="TARGET_LIKE">');
-                HTP.P('<h3>' || s.status_name || CASE WHEN s.is_named = 'Y' THEN NULLIF(' @' || w.swimlane_name, ' @-') END || '</h3>');
+                HTP.P('<h3>' || s.status_name ||
+                    CASE WHEN s.is_show_user        = 'Y' THEN NULLIF(' @' || in_owner_id, ' @-') END ||
+                    CASE WHEN s.is_show_swimlane    = 'Y' THEN NULLIF(' @' || w.swimlane_name, ' @-') END ||
+                    '</h3>');
                 HTP.P('</div>');
             END LOOP;
 

@@ -235,6 +235,11 @@ regions:
     heading: 
       heading: Counts
 
+  - # ====== Column Group: Show ==================================
+    id: 48506205351203334
+    heading: 
+      heading: Show
+
   columns: 
   - # ====== Column: COUNT_CLIENT ================================
     id: 45517489443836014
@@ -464,62 +469,6 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: IS_NAMED ====================================
-    id: 45935963128991437
-    identification: 
-      column-name: IS_NAMED
-      type: Checkbox
-
-    heading: 
-      heading: Named
-      alignment: center
-
-    settings: 
-      use-defaults: false
-      checked-value: Y
-
-    layout: 
-      sequence: 110
-      column-alignment: center
-      group: Flags # 45933876784991416
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-
-    source: 
-      type: Database Column
-      database-column: IS_NAMED
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
   - # ====== Column: IS_COLORED ==================================
     id: 47742579533626935
     identification: 
@@ -550,6 +499,118 @@ regions:
     source: 
       type: Database Column
       database-column: IS_COLORED
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_SHOW_USER ================================
+    id: 48506089872203332
+    identification: 
+      column-name: IS_SHOW_USER
+      type: Checkbox
+
+    heading: 
+      heading: User
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 160
+      column-alignment: center
+      group: Show # 48506205351203334
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_SHOW_USER
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_SHOW_SWIMLANE ============================
+    id: 48506194966203333
+    identification: 
+      column-name: IS_SHOW_SWIMLANE
+      type: Checkbox
+
+    heading: 
+      heading: Swimlane
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 170
+      column-alignment: center
+      group: Show # 48506205351203334
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_SHOW_SWIMLANE
       data-type: VARCHAR2
       query-only: false
       primary-key: false
@@ -984,6 +1045,41 @@ buttons:
   behavior: 
     action: Submit Page
     execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
+- # ====== Button: COPY_STATUSES ===============================
+  id: 48503448101203306
+  identification: 
+    button-name: COPY_STATUSES
+    label: Copy Statuses
+
+  layout: 
+    sequence: 20
+    region: Statuses # 116014803885128117
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-wizard
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:235:&SESSION.::&DEBUG.:235::'
+      page: 235 # Copy Statuses
+      clear-cache: 235
+
     warn-on-unsaved-changes: Do Not Check
 
   security: 

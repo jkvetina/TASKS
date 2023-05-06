@@ -16,8 +16,9 @@ SELECT
     t.order#,
     t.is_active,
     t.is_default,
-    t.is_named,
     t.is_colored,
+    t.is_show_user,
+    t.is_show_swimlane,
     --
     c.count_board,
     c.count_project,

@@ -96,11 +96,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.status_name     := core.get_grid_data('STATUS_NAME');
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
         rec.is_default      := core.get_grid_data('IS_DEFAULT');
-        rec.is_named        := core.get_grid_data('IS_NAMED');
         rec.is_colored      := core.get_grid_data('IS_COLORED');
         rec.order#          := core.get_grid_data('ORDER#');
         --
         tsk_tapi.statuses (rec, v_action,
+        rec.is_show_user        := core.get_grid_data('IS_SHOW_USER');
+        rec.is_show_swimlane    := core.get_grid_data('IS_SHOW_SWIMLANE');
             old_client_id       => io_client_id,
             old_project_id      => io_project_id,
             old_status_id       => io_status_id
