@@ -2807,6 +2807,13 @@ page-items:
     display-extra-values: false
     display-null-value: true
 
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P105_CLIENT_ID
+    items-to-submit: 
+    - P105_CLIENT_ID
+    parent-required: true
+
   advanced: 
     warn-on-unsaved-changes: Page Default
 
@@ -2865,9 +2872,16 @@ page-items:
 
   list-of-values: 
     type: Shared Component
-    list-of-values: LOV_USERS # 46494875558442406
-    display-extra-values: false
+    list-of-values: 'LOV_USERS #PAGE/#SETT' # 46494875558442406
+    display-extra-values: true
     display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P105_CLIENT_ID
+    items-to-submit: 
+    - P105_CLIENT_ID
+    parent-required: true
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -2878,6 +2892,11 @@ page-items:
     data-type: VARCHAR2
     query-only: false
     primary-key: false
+
+  default: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: core.get_user_id()
 
   session-state: 
     storage: Per Request (Memory Only)

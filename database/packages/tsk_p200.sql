@@ -87,11 +87,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
     )
     AS
         rec                 tsk_statuses%ROWTYPE;
-        v_action            CONSTANT CHAR   := core.get_grid_action();
     BEGIN
-        rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'),    tsk_app.get_client_id());
-        rec.project_id      := COALESCE(core.get_grid_data('PROJECT_ID'),   tsk_app.get_project_id());
-        --
+        rec.client_id       := core.get_grid_data('CLIENT_ID');
+        rec.project_id      := core.get_grid_data('PROJECT_ID');
         rec.status_id       := core.get_grid_data('STATUS_ID');        -- new key
         rec.status_name     := core.get_grid_data('STATUS_NAME');
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
@@ -99,9 +97,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.is_colored      := core.get_grid_data('IS_COLORED');
         rec.order#          := core.get_grid_data('ORDER#');
         --
-        tsk_tapi.statuses (rec, v_action,
         rec.is_show_user        := core.get_grid_data('IS_SHOW_USER');
         rec.is_show_swimlane    := core.get_grid_data('IS_SHOW_SWIMLANE');
+        --
+        tsk_tapi.statuses (rec,
             old_client_id       => io_client_id,
             old_project_id      => io_project_id,
             old_status_id       => io_status_id
@@ -122,17 +121,15 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
     )
     AS
         rec                 tsk_swimlanes%ROWTYPE;
-        v_action            CONSTANT CHAR   := core.get_grid_action();
     BEGIN
-        rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'),    tsk_app.get_client_id());
-        rec.project_id      := COALESCE(core.get_grid_data('PROJECT_ID'),   tsk_app.get_project_id());
-        --
+        rec.client_id       := core.get_grid_data('CLIENT_ID');
+        rec.project_id      := core.get_grid_data('PROJECT_ID');
         rec.swimlane_id     := core.get_grid_data('SWIMLANE_ID');
         rec.swimlane_name   := core.get_grid_data('SWIMLANE_NAME');
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
         rec.order#          := core.get_grid_data('ORDER#');
         --
-        tsk_tapi.swimlanes (rec, v_action,
+        tsk_tapi.swimlanes (rec,
             old_client_id       => io_client_id,
             old_project_id      => io_project_id,
             old_swimlane_id     => io_swimlane_id
@@ -153,11 +150,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
     )
     AS
         rec                 tsk_categories%ROWTYPE;
-        v_action            CONSTANT CHAR   := core.get_grid_action();
     BEGIN
-        rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'),    tsk_app.get_client_id());
-        rec.project_id      := COALESCE(core.get_grid_data('PROJECT_ID'),   tsk_app.get_project_id());
-        --
+        rec.client_id       := core.get_grid_data('CLIENT_ID');
+        rec.project_id      := core.get_grid_data('PROJECT_ID');
         rec.category_id     := core.get_grid_data('CATEGORY_ID');       -- new key
         rec.category_name   := core.get_grid_data('CATEGORY_NAME');
         rec.color_bg        := core.get_grid_data('COLOR_BG');
@@ -166,7 +161,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
         rec.is_default      := core.get_grid_data('IS_DEFAULT');
         rec.order#          := core.get_grid_data('ORDER#');
         --
-        tsk_tapi.categories (rec, v_action,
+        tsk_tapi.categories (rec,
             old_client_id       => io_client_id,
             old_project_id      => io_project_id,
             old_category_id     => io_category_id
