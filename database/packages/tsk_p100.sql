@@ -64,30 +64,40 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         core.set_item('P100_PROJECT_ID',    v_project_id);
         core.set_item('P100_BOARD_ID',      v_board_id);
         core.set_item('P100_TASKS_LINK',    core.get_page_url(100));
-
-        -- calculate page header
-        FOR c IN (
-            SELECT 'Tasks for ' || p.project_name || ' - ' || b.board_name AS name
-            FROM tsk_boards b
-            JOIN tsk_projects p
-                ON b.project_id = p.project_id
-            WHERE b.board_id    = v_board_id
-        ) LOOP
-            core.set_item('P100_HEADER', c.name);
-        END LOOP;
-
-        -- check favorite status
-        core.set_item('P100_IS_FAVORITE', '');
         --
         FOR c IN (
-            SELECT 'Y' AS is_favorite
-            FROM tsk_user_fav_boards b
-            WHERE b.user_id         = core.get_user_id()
-                AND b.client_id     = v_client_id
-                AND b.project_id    = v_project_id
-                AND b.board_id      = v_board_id
+            WITH d AS (
+                SELECT 'HEADER'         AS item_name FROM DUAL UNION ALL
+                SELECT 'IS_FAVORITE'    AS item_name FROM DUAL
+            ),
+            t AS (
+                -- calculate page header
+                SELECT
+                    'HEADER'            AS item_name,
+                    'Tasks for ' || p.project_name || ' - ' || b.board_name AS item_value
+                FROM tsk_boards b
+                JOIN tsk_projects p
+                    ON b.project_id     = p.project_id
+                WHERE b.board_id        = v_board_id
+                UNION ALL
+                -- check favorite status
+                SELECT
+                    'IS_FAVORITE'       AS item_name,
+                    'Y'                 AS item_value
+                FROM tsk_user_fav_boards b
+                WHERE b.user_id         = core.get_user_id()
+                    AND b.client_id     = v_client_id
+                    AND b.project_id    = v_project_id
+                    AND b.board_id      = v_board_id
+            )
+            SELECT
+                d.item_name,
+                t.item_value
+            FROM d
+            LEFT JOIN t
+                ON t.item_name = d.item_name
         ) LOOP
-            core.set_item('P100_IS_FAVORITE', c.is_favorite);
+            core.set_item('P100_' || c.item_name, c.item_value);
         END LOOP;
     EXCEPTION
     WHEN core.app_exception THEN
