@@ -82,8 +82,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         FOR c IN (
             SELECT 'Y' AS is_favorite
             FROM tsk_user_fav_boards b
-            WHERE b.user_id     = core.get_user_id()
-                AND b.board_id  = v_board_id
+            WHERE b.user_id         = core.get_user_id()
+                AND b.client_id     = v_client_id
+                AND b.project_id    = v_project_id
+                AND b.board_id      = v_board_id
         ) LOOP
             core.set_item('P100_IS_FAVORITE', c.is_favorite);
         END LOOP;
@@ -237,15 +239,16 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
 
 
 
-    PROCEDURE add_to_favorites (
-        in_board_id         tsk_user_fav_boards.board_id%TYPE   := NULL,
-        in_user_id          tsk_user_fav_boards.user_id%TYPE    := NULL
-    )
+    PROCEDURE add_to_favorites
     AS
         rec                 tsk_user_fav_boards%ROWTYPE;
     BEGIN
-        rec.user_id         := COALESCE(in_user_id,     core.get_user_id());
-        rec.board_id        := COALESCE(in_board_id,    tsk_app.get_board_id());
+        rec.user_id         := core.get_user_id();
+        rec.client_id       := core.get_item('$CLIENT_ID');
+        rec.project_id      := core.get_item('$PROJECT_ID');
+        rec.board_id        := core.get_item('$BOARD_ID');
+        rec.swimlane_id     := core.get_item('$SWIMLANE_ID');
+        rec.owner_id        := core.get_item('$OWNER_ID');
         --
         tsk_tapi.user_fav_boards(rec, 'C');
     EXCEPTION
@@ -257,15 +260,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
 
 
 
-    PROCEDURE remove_from_favorites (
-        in_board_id         tsk_user_fav_boards.board_id%TYPE   := NULL,
-        in_user_id          tsk_user_fav_boards.user_id%TYPE    := NULL
-    )
+    PROCEDURE remove_from_favorites
     AS
         rec                 tsk_user_fav_boards%ROWTYPE;
     BEGIN
-        rec.user_id         := COALESCE(in_user_id,     core.get_user_id());
-        rec.board_id        := COALESCE(in_board_id,    tsk_app.get_board_id());
+        rec.user_id         := core.get_user_id();
+        rec.client_id       := core.get_item('$CLIENT_ID');
+        rec.project_id      := core.get_item('$PROJECT_ID');
+        rec.board_id        := core.get_item('$BOARD_ID');
         --
         tsk_tapi.user_fav_boards(rec, 'D');
         --

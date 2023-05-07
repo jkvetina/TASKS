@@ -130,6 +130,8 @@ LEFT JOIN g
     AND g.board_id      = t.board_id
 LEFT JOIN tsk_user_fav_boards f
     ON f.user_id        = x.user_id
+    AND f.client_id     = t.client_id
+    AND f.project_id    = t.project_id
     AND f.board_id      = t.board_id;
 --
 COMMENT ON TABLE tsk_p200_boards_v IS '';
