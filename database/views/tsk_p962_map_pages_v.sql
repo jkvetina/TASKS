@@ -47,7 +47,7 @@ SELECT
     a.page_id,
     a.is_modal,
     --
-    CASE WHEN n.parent_id IS NOT NULL THEN '&' || 'nbsp; ' || '&' || 'nbsp; ' END || a.page_name AS page_name,
+    CASE WHEN n.parent_id IS NOT NULL THEN REPLACE('   ', ' ', '&' || 'nbsp; ') END || a.page_name AS page_name,
     --
     LPAD(' ', g.group_order#) || g.page_group AS page_group,
     --
