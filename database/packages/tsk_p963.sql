@@ -15,6 +15,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
         core.set_item('$NOT_ASSIGNED', v_not_assigned);
 
         -- calculate prev/next pages
+        core.set_item('$PREV_PAGE', '');
+        core.set_item('$NEXT_PAGE', '');
+        core.set_item('$PREV_GROUP', '');
+        core.set_item('$NEXT_GROUP', '');
+        --
         IF core.get_item('$PAGE_ID') IS NOT NULL THEN
             FOR c IN (
                 SELECT
@@ -26,9 +31,20 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
                 core.set_item('$PREV_PAGE', c.prev_page);
                 core.set_item('$NEXT_PAGE', c.next_page);
             END LOOP;
-        ELSE
-            core.set_item('$PREV_PAGE', '');
-            core.set_item('$NEXT_PAGE', '');
+        END IF;
+
+        -- calculate prev/next groups
+        IF core.get_item('$PAGE_GROUP') IS NOT NULL THEN
+            FOR c IN (
+                SELECT
+                    p.prev_group,
+                    p.next_group
+                FROM tsk_lov_app_page_groups_v p
+                WHERE p.page_group = core.get_item('$PAGE_GROUP')
+            ) LOOP
+                core.set_item('$PREV_GROUP', c.prev_group);
+                core.set_item('$NEXT_GROUP', c.next_group);
+            END LOOP;
         END IF;
     EXCEPTION
     WHEN core.app_exception THEN

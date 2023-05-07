@@ -1517,6 +1517,66 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P963_PREV_GROUP ==========================
+  id: 48613397614365404
+  identification: 
+    name: P963_PREV_GROUP
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: Map Components # 187541696974422604
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P963_NEXT_GROUP ==========================
+  id: 48613491595365405
+  identification: 
+    name: P963_NEXT_GROUP
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 60
+    region: Map Components # 187541696974422604
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 buttons: 
 - # ====== Button: SYNC_REGIONS ================================
   id: 48050183510927105
@@ -1636,6 +1696,92 @@ buttons:
   server-side-condition: 
     type: Item is NOT NULL
     item: P963_NEXT_PAGE
+
+- # ====== Button: PREV_GROUP ==================================
+  id: 48613506902365406
+  identification: 
+    button-name: PREV_GROUP
+    label: Previous Group
+
+  layout: 
+    sequence: 70
+    region: Map Components &P963_NOT_ASSIGNED. # 187542799729422615
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-arrow-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:963:&SESSION.::&DEBUG.::P963_PAGE_GROUP:&P963_PREV_GROUP.'
+      page: 963 # Map Components
+      values: 
+        p963_page_group: '&P963_PREV_GROUP.'
+
+    warn-on-unsaved-changes: Do Not Check
+
+  advanced: 
+    custom-attributes: 
+    - 'style="margin-top:'
+    - 0.8rem;"
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P963_PREV_GROUP
+
+- # ====== Button: NEXT_GROUP ==================================
+  id: 48613672355365407
+  identification: 
+    button-name: NEXT_GROUP
+    label: Next Page
+
+  layout: 
+    sequence: 90
+    region: Map Components &P963_NOT_ASSIGNED. # 187542799729422615
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-arrow-right
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:963:&SESSION.::&DEBUG.::P963_PAGE_GROUP:&P963_NEXT_GROUP.'
+      page: 963 # Map Components
+      values: 
+        p963_page_group: '&P963_NEXT_GROUP.'
+
+    warn-on-unsaved-changes: Do Not Check
+
+  advanced: 
+    custom-attributes: 
+    - 'style="margin-top:'
+    - 0.8rem;"
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P963_NEXT_GROUP
 
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGE_FILTERS ======================

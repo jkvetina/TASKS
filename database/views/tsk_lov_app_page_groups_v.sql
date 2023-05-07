@@ -4,7 +4,10 @@ SELECT
     MIN(t.page_id) AS r#,
     --
     INITCAP(REGEXP_SUBSTR(t.page_group, '^([A-Za-z0-9_]+)\s[-\s]?(.*)$', 1, 1, NULL, 2))    AS page_group_name,
-    INITCAP(REGEXP_SUBSTR(t.page_group, '^([A-Za-z0-9_]+)\s', 1, 1, NULL, 1))               AS group_name
+    INITCAP(REGEXP_SUBSTR(t.page_group, '^([A-Za-z0-9_]+)\s', 1, 1, NULL, 1))               AS group_name,
+    --
+    LAG(t.page_group)   OVER (ORDER BY MIN(t.page_id)) AS prev_group,
+    LEAD(t.page_group)  OVER (ORDER BY MIN(t.page_id)) AS next_group
     --
 FROM apex_application_pages t
 WHERE t.application_id          = core.get_app_id()
