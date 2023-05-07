@@ -94,9 +94,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         rec.is_active           := NULL;
         rec.updated_by          := in_user_id;
         rec.updated_at          := SYSDATE;
-        --
+
+        -- cleanup types
+        rec.component_type := CASE rec.component_type
+            WHEN 'APEX_APPLICATION_PAGE_REGIONS'    THEN 'REGION'
+            WHEN 'APEX_APPLICATION_PAGE_PROCESS'    THEN 'PROCESS'
+            WHEN 'APEX_APPLICATION_BUTTONS'         THEN 'BUTTON'
+            WHEN 'APEX_APPLICATION_PAGE_ITEMS'      THEN 'ITEM'
+            WHEN 'APEX_APPL_PAGE_IG_COLUMNS'        THEN 'GRID_COLUMN'
+            ELSE rec.component_type END;
+
+        -- add component to the list
         BEGIN
-            -- add component to the list
             INSERT INTO tsk_auth_components VALUES rec;
 
             -- mark it as accessible for administrators
