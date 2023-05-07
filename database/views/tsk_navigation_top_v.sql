@@ -159,8 +159,8 @@ SELECT                      -- append favorite boards
         p_application       => curr.app_id,
         p_page              => 100,--curr.page_id,
         p_clear_cache       => 100,
-        p_items             => 'P100_CLIENT_ID,P100_PROJECT_ID,P100_BOARD_ID,P100_SWIMLANE_ID',
-        p_values            => '' || b.client_id || ',' || b.project_id || ',' || b.board_id || ',' || curr.swimlane_id
+        p_items             => 'P100_CLIENT_ID,P100_PROJECT_ID,P100_BOARD_ID,P100_SWIMLANE_ID,P100_OWNER_ID',
+        p_values            => f.client_id || ',' || f.project_id || ',' || f.board_id || ',' || f.swimlane_id || ',' || f.owner_id
     ) AS target,
     --
     NULL AS is_current_list_entry,
@@ -182,7 +182,7 @@ SELECT                      -- append favorite boards
     NULL AS parent_id,
     NULL AS auth_scheme,
     NULL AS label__,
-    '/100.100/' || b.updated_at || b.board_id AS order#
+    '/100.100/' || LPAD(ROW_NUMBER() OVER (ORDER BY f.updated_at DESC, f.board_id), 4, '0') AS order#
 FROM tsk_user_fav_boards f
 JOIN tsk_boards b
     ON b.board_id       = f.board_id
@@ -190,8 +190,6 @@ JOIN tsk_boards b
 JOIN tsk_projects p
     ON p.project_id     = b.project_id
     AND p.is_active     = 'Y'
-JOIN tsk_clients c
-    ON c.client_id      = b.client_id
 JOIN curr
     ON curr.user_id     = f.user_id;
 --
