@@ -361,7 +361,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
                 in_project_id       => in_project_id
             ) IS NULL
         THEN
-            core.raise_error('NOT_AUTH_DML_' || in_action || '_ON_' || in_table_name);
+            core.raise_error('NOT_AUTH', in_action, REPLACE(in_table_name, 'TSK_', ''), in_user_id, in_client_id, in_project_id);
         END IF;
     EXCEPTION
     WHEN core.app_exception THEN
