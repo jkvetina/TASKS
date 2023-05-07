@@ -1,4 +1,4 @@
-CREATE OR REPLACE FORCE VIEW tsk_app_regions_v AS
+CREATE OR REPLACE FORCE VIEW tsk_p963_regions_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
         core.get_app_id() AS app_id
@@ -99,7 +99,7 @@ SELECT
     r.region_id     AS component_id,
     'REGION'        AS component_type,
     --
-    REPLACE(LPAD(' ', (NVL(r.level_, 1) - 1) * 3, ' '), ' ', '&' || 'nbsp; ') || r.region_name AS component_name,
+    REPLACE(LPAD(' ', (NVL(r.level_, 1) - 1) * 3, ' '), ' ', '&' || 'nbsp; ') || r.region_name || ' &' || 'mdash; ' || r.template || '' AS component_name,
     --
     CASE WHEN c.component_id IS NOT NULL THEN 'U' END AS dml_actions
 FROM page_regions r
@@ -129,5 +129,5 @@ LEFT JOIN page_regions r
 WHERE 1 = 1
     AND c.component_type    NOT IN ('REGION', 'PAGE');
 --
-COMMENT ON TABLE tsk_app_regions_v IS '';
+COMMENT ON TABLE tsk_p963_regions_v IS '';
 

@@ -27,7 +27,7 @@ SELECT
     g.path_,
     g.dml_actions
     --
-FROM tsk_app_regions_v g
+FROM tsk_p963_regions_v g
 JOIN tsk_lov_app_pages_v p
     ON p.page_id        = g.page_id
 JOIN x
