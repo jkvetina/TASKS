@@ -416,6 +416,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_HIDDEN'
 ,p_display_sequence=>30
 ,p_attribute_01=>'Y'
+,p_filter_is_required=>false
 ,p_use_as_row_header=>false
 ,p_enable_sort_group=>false
 ,p_is_primary_key=>false
@@ -433,6 +434,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_HIDDEN'
 ,p_display_sequence=>40
 ,p_attribute_01=>'Y'
+,p_filter_is_required=>false
 ,p_use_as_row_header=>false
 ,p_enable_sort_group=>false
 ,p_is_primary_key=>false
@@ -1514,10 +1516,10 @@ wwv_flow_imp_page.create_page_process(
 ,p_region_id=>wwv_flow_imp.id(44091050489578013)
 ,p_process_type=>'NATIVE_IG_DML'
 ,p_process_name=>'SAVE_TASKS'
-,p_attribute_01=>'REGION_SOURCE'
-,p_attribute_05=>'Y'
+,p_attribute_01=>'PLSQL_CODE'
+,p_attribute_04=>'tsk_p105.save_task();'
+,p_attribute_05=>'N'
 ,p_attribute_06=>'N'
-,p_attribute_08=>'Y'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 );
 wwv_flow_imp_page.create_page_process(

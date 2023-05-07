@@ -28,7 +28,9 @@ SELECT
     t.category_id,
     t.owner_id,
     t.deadline_at,
-    t.tags,
+    --
+    LTRIM(RTRIM(REPLACE(t.tags, ':', ' '))) AS tags,
+    --
     g.color_bg,
     t.updated_by,
     t.updated_at,

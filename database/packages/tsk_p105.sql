@@ -91,22 +91,26 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
     PROCEDURE save_task
     AS
         rec                 tsk_tasks%ROWTYPE;
+        v_is_detail         CONSTANT BOOLEAN := core.get_page_id() = 105;
     BEGIN
-        rec.task_id         := core.get_item('P105_TASK_ID');
-        rec.task_name       := core.get_item('P105_TASK_NAME');
-        rec.task_desc       := core.get_item('P105_TASK_DESC');
-        rec.board_id        := core.get_item('P105_BOARD_ID');
-        rec.client_id       := core.get_item('P105_CLIENT_ID');
-        rec.project_id      := core.get_item('P105_PROJECT_ID');
-        rec.status_id       := core.get_item('P105_STATUS_ID');
-        rec.swimlane_id     := core.get_item('P105_SWIMLANE_ID');
-        rec.category_id     := core.get_item('P105_CATEGORY_ID');
-        rec.owner_id        := core.get_item('P105_OWNER_ID');
-        rec.deadline_at     := core.get_date_item('P105_DEADLINE_AT');
-        rec.tags            := core.get_item('P105_TAGS');
-        rec.order#          := core.get_item('P105_ORDER');
+        rec.task_id         := CASE WHEN v_is_detail THEN core.get_item('P105_TASK_ID')     ELSE core.get_grid_data('TASK_ID') END;
+        rec.task_name       := CASE WHEN v_is_detail THEN core.get_item('P105_TASK_NAME')   ELSE core.get_grid_data('TASK_NAME') END;
+        rec.task_desc       := CASE WHEN v_is_detail THEN core.get_item('P105_TASK_DESC')   END;
+        rec.board_id        := CASE WHEN v_is_detail THEN core.get_item('P105_BOARD_ID')    ELSE core.get_grid_data('BOARD_ID') END;
+        rec.client_id       := CASE WHEN v_is_detail THEN core.get_item('P105_CLIENT_ID')   ELSE core.get_grid_data('CLIENT_ID') END;
+        rec.project_id      := CASE WHEN v_is_detail THEN core.get_item('P105_PROJECT_ID')  ELSE core.get_grid_data('PROJECT_ID') END;
+        rec.status_id       := CASE WHEN v_is_detail THEN core.get_item('P105_STATUS_ID')   ELSE core.get_grid_data('STATUS_ID') END;
+        rec.swimlane_id     := CASE WHEN v_is_detail THEN core.get_item('P105_SWIMLANE_ID') ELSE core.get_grid_data('SWIMLANE_ID') END;
+        rec.category_id     := CASE WHEN v_is_detail THEN core.get_item('P105_CATEGORY_ID') ELSE core.get_grid_data('CATEGORY_ID') END;
+        rec.owner_id        := CASE WHEN v_is_detail THEN core.get_item('P105_OWNER_ID')    ELSE core.get_grid_data('OWNER_ID') END;
+        rec.tags            := CASE WHEN v_is_detail THEN core.get_item('P105_TAGS')        ELSE core.get_grid_data('TAGS') END;
+        rec.order#          := CASE WHEN v_is_detail THEN core.get_item('P105_ORDER')       ELSE core.get_grid_data('ORDER#') END;
         --
-        tsk_tapi.tasks(rec, SUBSTR(core.get_request(), 1, 1));
+        rec.deadline_at     := core.get_date(CASE WHEN v_is_detail THEN core.get_item('P105_DEADLINE_AT') ELSE core.get_grid_data('DEADLINE_AT') END);
+        --
+        tsk_tapi.tasks(rec,
+            in_action => CASE WHEN core.get_page_id() = 105 THEN SUBSTR(core.get_request(), 1, 1) END
+        );
         --
         core.set_item('P105_TASK_ID', rec.task_id);
     EXCEPTION

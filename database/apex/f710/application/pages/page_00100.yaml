@@ -2709,10 +2709,10 @@ processes:
     editable-region: Tasks [GRID] # 44091050489578013
 
   settings: 
-    target-type: Region Source
-    prevent-lost-updates: true
+    target-type: PL/SQL Code
+    pl/sql-code-to-insert/update/delete: tsk_p105.save_task();
+    prevent-lost-updates: false
     lock-row: No
-    return-primary-key(s)-after-insert: true
 
   execution: 
     sequence: 10
