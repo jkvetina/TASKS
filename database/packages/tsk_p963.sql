@@ -9,7 +9,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
         -- notify for new components
         SELECT NULLIF('(' || COUNT(*) || ')', '(0)') INTO v_not_assigned
         FROM tsk_p963_map_components_v c
-        WHERE c.is_used IS NULL;
+        WHERE c.is_used         IS NULL
+            AND c.dml_actions   IS NOT NULL;
         --
         core.set_item('$NOT_ASSIGNED', v_not_assigned);
     EXCEPTION

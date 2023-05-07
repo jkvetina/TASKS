@@ -172,6 +172,7 @@ regions:
       enabled: true
       allowed-operations: 
       - Update Row
+      allowed-row-operations-column: DML_ACTIONS
       lost-update-type: Row Values
 
     performance: 
@@ -339,8 +340,7 @@ regions:
       alignment: start
 
     settings: 
-      format: Plain Text
-      based-on: Item Value
+      format: HTML
 
     layout: 
       sequence: 50
@@ -419,52 +419,6 @@ regions:
 
     export-/-printing: 
       include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: REGION_ID ===================================
-    id: 47743430165626944
-    identification: 
-      column-name: REGION_ID
-      type: Display Only
-
-    heading: 
-      alignment: start
-
-    settings: 
-      format: Plain Text
-      based-on: Item Value
-
-    layout: 
-      sequence: 100
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: REGION_ID
-      data-type: NUMBER
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      lov-type: Distinct Column
-
-    export-/-printing: 
-      include-in-export-/-print: false
 
     enable-users-to: 
       sort: true
@@ -1044,57 +998,6 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: REGION ======================================
-    id: 48051816593927122
-    identification: 
-      column-name: REGION
-      type: Display Only
-
-    heading: 
-      heading: Region
-      alignment: start
-
-    settings: 
-      format: Plain Text
-      based-on: Item Value
-
-    layout: 
-      sequence: 110
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: REGION
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: Distinct Column
-      exact-match: true
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
   - # ====== Column: IS_USED =====================================
     id: 48357359709512105
     identification: 
@@ -1152,6 +1055,87 @@ regions:
     read-only: 
       type: Always
       execute: Once
+
+  - # ====== Column: PATH_ =======================================
+    id: 48506535830203337
+    identification: 
+      column-name: PATH_
+      type: Display Only
+
+    heading: 
+      heading: Path
+      alignment: start
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 220
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: PATH_
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: DML_ACTIONS =================================
+    id: 48506600964203338
+    identification: 
+      column-name: DML_ACTIONS
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 230
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: DML_ACTIONS
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
 
   printing: 
     page: 

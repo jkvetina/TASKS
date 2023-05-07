@@ -6,17 +6,12 @@ WITH x AS (
     FROM DUAL
 )
 SELECT
-    c.component_id,
-    c.component_name,
-    --
-    REPLACE(REPLACE(c.component_type, 'APEX_APPLICATION_', ''), 'APEX_APPL_', '') AS component_type,
-    --
+    g.component_id,
+    g.component_name,
+    g.component_type,
     p.page,
     p.page_group,
-    c.page_id,
-    --
-    c.region_id,
-    ''                  AS region,
+    g.page_id,
     --
     MAX(CASE WHEN r.r# = 1 THEN c.is_active END) AS role_1,
     MAX(CASE WHEN r.r# = 2 THEN c.is_active END) AS role_2,
@@ -27,24 +22,31 @@ SELECT
     MAX(CASE WHEN r.r# = 7 THEN c.is_active END) AS role_7,
     MAX(CASE WHEN r.r# = 8 THEN c.is_active END) AS role_8,
     --
-    MAX(c.is_active) AS is_used
+    MAX(c.is_active) AS is_used,
     --
-FROM tsk_auth_components c
+    g.path_,
+    g.dml_actions
+    --
+FROM tsk_app_regions_v g
 JOIN tsk_lov_app_pages_v p
-    ON p.page_id        = c.page_id
+    ON p.page_id        = g.page_id
 JOIN x
     ON (x.page_id       = p.page_id         OR x.page_id IS NULL)
     AND (x.page_group   = p.page_group_raw  OR x.page_group IS NULL)
+LEFT JOIN tsk_auth_components c
+    ON c.page_id        = g.page_id
+    AND c.component_id  = g.component_id
 LEFT JOIN tsk_p960_roles_columns_v r
     ON r.role_id        = c.role_id
 GROUP BY
-    c.component_id,
-    c.component_name,
-    REPLACE(c.component_type, 'APEX_APPLICATION_', ''),
+    g.component_id,
+    g.component_name,
+    g.component_type,
     p.page,
     p.page_group,
-    c.page_id,
-    c.region_id;
+    g.page_id,
+    g.path_,
+    g.dml_actions;
 --
 COMMENT ON TABLE tsk_p963_map_components_v IS '';
 
