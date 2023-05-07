@@ -9,7 +9,10 @@ SELECT
     t.page_name,
     t.page_id       || ' - ' || REGEXP_REPLACE(t.page_name, '<.+?>')    AS page,
     g.group_name    || ' - ' || g.page_group_name                       AS page_group,
-    t.page_group                                                        AS page_group_raw
+    t.page_group                                                        AS page_group_raw,
+    --
+    LAG(t.page_id)  OVER (ORDER BY t.page_id) AS prev_page,
+    LEAD(t.page_id) OVER (ORDER BY t.page_id) AS next_page
     --
 FROM apex_application_pages t
 JOIN x

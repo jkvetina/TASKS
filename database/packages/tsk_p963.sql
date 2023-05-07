@@ -13,6 +13,23 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
             AND c.dml_actions   IS NOT NULL;
         --
         core.set_item('$NOT_ASSIGNED', v_not_assigned);
+
+        -- calculate prev/next pages
+        IF core.get_item('$PAGE_ID') IS NOT NULL THEN
+            FOR c IN (
+                SELECT
+                    p.prev_page,
+                    p.next_page
+                FROM tsk_lov_app_pages_v p
+                WHERE p.page_id = core.get_number_item('$PAGE_ID')
+            ) LOOP
+                core.set_item('$PREV_PAGE', c.prev_page);
+                core.set_item('$NEXT_PAGE', c.next_page);
+            END LOOP;
+        ELSE
+            core.set_item('$PREV_PAGE', '');
+            core.set_item('$NEXT_PAGE', '');
+        END IF;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
