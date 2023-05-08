@@ -98,7 +98,7 @@ SELECT
     r.region_id     AS component_id,
     'REGION'        AS component_type,
     --
-    REPLACE(LPAD(' ', (NVL(r.level_, 1) - 1) * 3, ' '), ' ', '&' || 'nbsp; ') || r.region_name || ' &' || 'mdash; ' || r.template || '' AS component_name,
+    REPLACE(LPAD(' ', (NVL(r.level_, 1) - 1) * 3, ' '), ' ', '&' || 'nbsp; ') || r.region_name || ' <span style="color: #999;">&' || 'mdash; ' || r.template || '</span>' AS component_name,
     --
     ''              AS dml_actions
 FROM page_regions r
