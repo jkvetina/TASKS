@@ -6,6 +6,13 @@ CREATE OR REPLACE PACKAGE tsk_auth AS
 
 
 
+    FUNCTION get_component_type (
+        in_component_type       VARCHAR2
+    )
+    RETURN VARCHAR2;
+
+
+
     PROCEDURE discover_component (
         in_user_id              tsk_auth_roles.user_id%TYPE,
         in_page_id              tsk_auth_pages.page_id%TYPE,

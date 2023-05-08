@@ -67,6 +67,24 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
 
 
+    FUNCTION get_component_type (
+        in_component_type       VARCHAR2
+    )
+    RETURN VARCHAR2
+    AS
+    BEGIN
+        RETURN CASE in_component_type
+            WHEN 'APEX_APPLICATION_PAGES'           THEN 'PAGE'
+            WHEN 'APEX_APPLICATION_PAGE_REGIONS'    THEN 'REGION'
+            WHEN 'APEX_APPLICATION_PAGE_PROCESS'    THEN 'PROCESS'
+            WHEN 'APEX_APPLICATION_BUTTONS'         THEN 'BUTTON'
+            WHEN 'APEX_APPLICATION_PAGE_ITEMS'      THEN 'ITEM'
+            WHEN 'APEX_APPL_PAGE_IG_COLUMNS'        THEN 'GRID_COLUMN'
+            ELSE in_component_type END;
+    END;
+
+
+
     PROCEDURE discover_component (
         in_user_id              tsk_auth_roles.user_id%TYPE,
         in_page_id              tsk_auth_pages.page_id%TYPE,
@@ -88,21 +106,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         END IF;
         --
         rec.component_id        := in_component_id;
-        rec.component_type      := in_component_type;
+        rec.component_type      := get_component_type(in_component_type);
         rec.component_name      := in_component_name;
         rec.page_id             := in_page_id;
         rec.is_active           := NULL;
         rec.updated_by          := in_user_id;
         rec.updated_at          := SYSDATE;
-
-        -- cleanup types
-        rec.component_type := CASE rec.component_type
-            WHEN 'APEX_APPLICATION_PAGE_REGIONS'    THEN 'REGION'
-            WHEN 'APEX_APPLICATION_PAGE_PROCESS'    THEN 'PROCESS'
-            WHEN 'APEX_APPLICATION_BUTTONS'         THEN 'BUTTON'
-            WHEN 'APEX_APPLICATION_PAGE_ITEMS'      THEN 'ITEM'
-            WHEN 'APEX_APPL_PAGE_IG_COLUMNS'        THEN 'GRID_COLUMN'
-            ELSE rec.component_type END;
 
         -- add component to the list
         BEGIN
