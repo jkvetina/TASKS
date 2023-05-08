@@ -8,14 +8,13 @@ c AS (
     SELECT /*+ MATERIALIZE */
         c.page_id,
         c.component_id,
-        c.component_type,
-        c.component_name
+        c.component_type
     FROM tsk_auth_components c
+    WHERE c.is_active   = 'Y'
     GROUP BY
         c.page_id,
         c.component_id,
-        c.component_type,
-        c.component_name
+        c.component_type
 ),
 r AS (
     SELECT /*+ MATERIALIZE */
@@ -101,11 +100,13 @@ SELECT
     --
     REPLACE(LPAD(' ', (NVL(r.level_, 1) - 1) * 3, ' '), ' ', '&' || 'nbsp; ') || r.region_name || ' &' || 'mdash; ' || r.template || '' AS component_name,
     --
-    CASE WHEN c.component_id IS NOT NULL THEN 'U' END AS dml_actions
+    ''              AS dml_actions
 FROM page_regions r
-LEFT JOIN c
-    ON c.component_id       = r.region_id
-    AND c.component_type    = 'REGION'
+WHERE r.region_id NOT IN (
+    SELECT c.component_id
+    FROM c
+    WHERE c.component_type    = 'REGION'
+)
 UNION ALL
 --
 SELECT
