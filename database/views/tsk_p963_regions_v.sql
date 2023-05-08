@@ -121,7 +121,7 @@ SELECT
         || COALESCE (
             b.button_name,
             i.item_name,
-            p.process_name,
+            CASE WHEN p.process_name IS NOT NULL THEN '<span class="fa fa-play-circle" style="color: #555; margin: 0.125rem 0.5rem 0 0;"></span>' || p.process_name END,
             g.name,
             r.region_name,
             NULL            -- unknown component type
