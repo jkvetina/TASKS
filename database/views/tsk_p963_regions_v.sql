@@ -117,7 +117,15 @@ SELECT
     c.component_id,
     c.component_type,
     --
-    REPLACE(LPAD(' ', (NVL(r.level_, 1) - CASE WHEN c.component_type = 'PROCESS' THEN 1 ELSE 0 END) * 3, ' '), ' ', '&' || 'nbsp; ') || c.component_name AS component_name,
+    REPLACE(LPAD(' ', (NVL(r.level_, 1) - CASE WHEN c.component_type = 'PROCESS' THEN 1 ELSE 0 END) * 3, ' '), ' ', '&' || 'nbsp; ')
+        || COALESCE (
+            b.button_name,
+            i.item_name,
+            p.process_name,
+            g.name,
+            r.region_name,
+            NULL            -- unknown component type
+        ) AS component_name,
     --
     'U'         AS dml_actions
 FROM c
