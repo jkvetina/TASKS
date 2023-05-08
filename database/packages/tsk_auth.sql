@@ -158,108 +158,90 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     --RESULT_CACHE
     AS
         v_authorized            CHAR;
+        v_authorized_row#       PLS_INTEGER;
     BEGIN
         -- check access to the page
+        v_authorized_row# := $$PLSQL_LINE;
+        --
         SELECT MAX('Y') INTO v_authorized
         FROM tsk_navigation_auth_v n
         WHERE n.client_id       = in_client_id
             AND (n.project_id   = in_project_id OR n.project_id IS NULL)
             AND n.user_id       = in_user_id
             AND n.page_id       = in_page_id;
-        --
-        IF v_authorized IS NULL THEN
-            APEX_DEBUG.WARN ('NOT_AUTHORIZED|IS_USER'
-                || '|' || in_user_id
-                || '|' || in_page_id
-                || '|' || in_client_id
-                || '|' || in_project_id
-                || '|' || in_component_id
-                || '|' || in_action
-            );
-            --
-            RETURN v_authorized;
-        END IF;
-        --
-        IF in_component_type IN (
-            'APEX_APPLICATION_PAGES'  -- dont track pages
-        ) THEN
-            RETURN v_authorized;
-        END IF;
 
-        -- check access to the component
-        IF in_component_id IS NOT NULL THEN
-            -- check access to page component for users roles
-            SELECT MAX('Y') INTO v_authorized
-            FROM tsk_auth_components t
-            JOIN tsk_auth_roles r
-                ON r.client_id      = in_client_id
-                AND (r.project_id   = in_project_id OR r.project_id IS NULL)
-                AND r.user_id       = in_user_id
-                AND r.role_id       = t.role_id
-                AND r.is_active     = 'Y'
-            JOIN tsk_auth_users a
-                ON a.user_id        = r.user_id
-                AND a.is_active     = 'Y'
-            JOIN tsk_users u
-                ON u.user_id        = r.user_id
-                AND u.is_active     = 'Y'
-            WHERE t.component_id    = in_component_id
-                AND t.is_active     = 'Y';
+        -- access to page granted
+        IF v_authorized = 'Y' AND in_component_type NOT IN ('APEX_APPLICATION_PAGES') THEN
+            v_authorized_row# := $$PLSQL_LINE;
 
-            -- on failure add component to the list
-            IF v_authorized IS NULL THEN
-                tsk_auth.discover_component (
-                    in_user_id          => in_user_id,
-                    in_page_id          => in_page_id,
-                    in_component_id     => in_component_id,
-                    in_component_type   => in_component_type,
-                    in_component_name   => in_component_name
-                );
+            -- check access to the component
+            IF in_component_id IS NOT NULL THEN
+                v_authorized_row# := $$PLSQL_LINE;
+
+                -- check access to page component for users roles
+                SELECT MAX('Y') INTO v_authorized
+                FROM tsk_auth_components_v r
+                WHERE r.user_id         = in_user_id
+                    AND r.client_id     = in_client_id
+                    AND (r.project_id   = in_project_id OR r.project_id IS NULL)
+                    AND r.component_id  = in_component_id;
+                --
+                -- @TODO: if this fails, we could evaluate IS_USER_U action on the related component
+                -- so you can set IS_USER_U|D roles on grid columns
+                --
+
+                -- we can access page, we can access component
+                IF v_authorized = 'Y' THEN
+                    v_authorized_row# := $$PLSQL_LINE;
+
+                    -- can we do requested operation too?
+                    IF in_action IS NOT NULL THEN
+                        v_authorized := NULL;
+                        --
+                        FOR c IN (
+                            SELECT t.table_name
+                            FROM tsk_auth_region_tables_v t
+                            WHERE t.page_id         = in_page_id
+                                AND t.region_id     = in_component_id
+                        ) LOOP
+                            v_authorized_row# := $$PLSQL_LINE;
+                            v_authorized := CASE WHEN INSTR(tsk_auth.is_allowed_dml (
+                                    in_table_name       => c.table_name,
+                                    in_action           => in_action,
+                                    in_user_id          => in_user_id,
+                                    in_client_id        => in_client_id,
+                                    in_project_id       => in_project_id
+                                ), in_action) > 0       -- returns C|U|D string
+                                THEN 'Y' END;
+                            --
+                            IF v_authorized = 'Y' THEN
+                                EXIT;
+                            END IF;
+                        END LOOP;
+                    END IF;
+                ELSE
+                    -- on failure add component to the list
+                    tsk_auth.discover_component (
+                        in_user_id          => in_user_id,
+                        in_page_id          => in_page_id,
+                        in_component_id     => in_component_id,
+                        in_component_type   => in_component_type,
+                        in_component_name   => in_component_name
+                    );
+                END IF;
             END IF;
         END IF;
         --
-        IF v_authorized IS NULL THEN
-            APEX_DEBUG.WARN (RTRIM('NOT_AUTHORIZED|IS_USER_' || in_action, '_')
-                || '|' || in_user_id
-                || '|' || in_page_id
-                || '|' || in_client_id
-                || '|' || in_project_id
-                || '|' || in_component_id
+        IF in_component_type IS NOT NULL OR v_authorized IS NULL THEN
+            APEX_DEBUG.WARN (RTRIM(CASE WHEN v_authorized = 'Y' THEN 'IS_' ELSE 'NOT_' END || 'AUTHORIZED|IS_USER_' || in_action, '_')
+                || ' #' || v_authorized_row#
+                || ' |USER='     || in_user_id
+                || ' |PAGE='     || in_page_id
+                || ' |CLIENT='   || in_client_id
+                || ' |PROJECT='  || in_project_id
+                || CASE WHEN in_component_type IS NOT NULL
+                    THEN ' |' || get_component_type(in_component_type) || '=' || in_component_id || '=' || in_component_name END
             );
-        END IF;
-
-        -- we can access page, we can access component, can we do requested operation too?
-        IF in_action IS NOT NULL THEN
-            FOR c IN (
-                SELECT
-                    COALESCE(a.table_name, p.attribute_03, r.table_name) AS table_name
-                FROM apex_application_page_proc p
-                LEFT JOIN apex_application_page_regions r
-                    ON r.application_id         = p.application_id
-                    AND r.page_id               = p.page_id
-                    AND r.region_id             = p.region_id
-                    AND r.query_type_code       = 'TABLE'
-                LEFT JOIN tsk_auth_procedures a
-                    ON UPPER(p.attribute_04)    LIKE '%' || UPPER(a.object_name || '.' || a.procedure_name) || '%'
-                    AND a.table_name            IS NOT NULL
-                    AND a.is_active             = 'Y'
-                WHERE p.application_id          = core.get_app_id()
-                    AND p.page_id               = in_page_id
-                    AND p.region_id             = in_component_id
-                    AND p.process_type_code     = 'NATIVE_IG_DML'
-                    AND p.process_point_code    = 'AFTER_SUBMIT'
-                    AND p.attribute_01          IN ('TABLE', 'REGION_SOURCE', 'PLSQL_CODE')
-                    AND p.process_point_code    = 'AFTER_SUBMIT'
-            ) LOOP
-                RETURN CASE WHEN INSTR(tsk_auth.is_allowed_dml (
-                        in_table_name       => c.table_name,
-                        in_action           => in_action,
-                        in_user_id          => in_user_id,
-                        in_client_id        => in_client_id,
-                        in_project_id       => in_project_id
-                    ), in_action) > 0
-                    THEN 'Y' END;
-            END LOOP;
         END IF;
         --
         RETURN v_authorized;
@@ -341,7 +323,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         END IF;
 
         -- call procedure
-        IF in_auth_scheme = 'IS_USER' THEN
+        IF in_auth_scheme LIKE 'IS_USER%' THEN
             EXECUTE IMMEDIATE
                 'BEGIN :out_result := ' || in_procedure_name || '(:user_id, :page_id, :client_id, :project_id); END;'
                 USING OUT out_result,
@@ -415,6 +397,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             AND r.is_active     = 'Y'
         JOIN tsk_auth_users a
             ON a.user_id        = r.user_id
+            AND a.client_id     = r.client_id
             AND a.is_active     = 'Y'
         JOIN tsk_users u
             ON u.user_id        = r.user_id
