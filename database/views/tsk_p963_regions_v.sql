@@ -117,7 +117,7 @@ SELECT
     c.component_id,
     c.component_type,
     --
-    REPLACE(LPAD(' ', (NVL(r.level_, 1) - CASE WHEN c.component_type = 'PROCESS' THEN 1 ELSE 0 END) * 3, ' '), ' ', '&' || 'nbsp; ')
+    REPLACE(LPAD(' ', (NVL(r.level_, 1) - CASE WHEN c.component_type IN ('PROCESS', 'REGION') THEN 1 ELSE 0 END) * 3, ' '), ' ', '&' || 'nbsp; ')
         || COALESCE (
             b.button_name,
             i.item_name,
@@ -136,7 +136,7 @@ LEFT JOIN grid_columns g    ON g.column_id  = c.component_id
 LEFT JOIN page_regions r
     ON r.region_id          = COALESCE(b.region_id, i.region_id, p.region_id, g.region_id, c.component_id)
 WHERE 1 = 1
-    AND c.component_type    NOT IN ('REGION', 'PAGE');
+    AND c.component_type    NOT IN ('PAGE');
 --
 COMMENT ON TABLE tsk_p963_regions_v IS '';
 
