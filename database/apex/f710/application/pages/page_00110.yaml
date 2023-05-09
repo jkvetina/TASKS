@@ -1483,6 +1483,9 @@ processes:
   server-side-condition: 
     execution-scope: All Submitted Rows
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Process: PROCESS_BULK_REQUEST =======================
   id: 45281481702457929
   identification: 
@@ -1502,6 +1505,9 @@ processes:
   error: 
     display-location: Inline in Notification
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Process: PROCESS_BULK_INIT ==========================
   id: 45281519596457930
   identification: 
@@ -1520,4 +1526,7 @@ processes:
 
   error: 
     display-location: Inline in Notification
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 

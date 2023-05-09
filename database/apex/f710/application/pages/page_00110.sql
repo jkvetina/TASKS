@@ -652,6 +652,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sql_clob=>'tsk_p110.process_bulk_init();'
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45281063417457925)
@@ -666,6 +667,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_attribute_06=>'N'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_only_for_changed_rows=>'N'
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45281481702457929)
@@ -676,6 +678,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sql_clob=>'tsk_p110.process_bulk_request();'
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp.component_end;
 end;
