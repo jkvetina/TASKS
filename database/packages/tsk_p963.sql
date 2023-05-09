@@ -55,6 +55,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
 
 
 
+    PROCEDURE refresh_mv
+    AS
+    BEGIN
+        DBMS_MVIEW.REFRESH('TSK_P963_REGIONS_MV', method => 'C');
+    END;
+
+
+
     PROCEDURE save_components
     AS
         rec                 tsk_auth_components%ROWTYPE;
