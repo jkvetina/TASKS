@@ -488,6 +488,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_attribute_01=>'PLSQL_CODE'
 ,p_attribute_04=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'tsk_p300.save_projects (',
+'    io_client_id        => :CLIENT_ID,',
 '    io_project_id       => :PK_PROJECT_ID',
 ');'))
 ,p_attribute_05=>'Y'

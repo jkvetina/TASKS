@@ -760,6 +760,7 @@ processes:
     target-type: PL/SQL Code
     pl/sql-code-to-insert/update/delete: |
       tsk_p300.save_projects (
+          io_client_id        => :CLIENT_ID,
           io_project_id       => :PK_PROJECT_ID
       );
     prevent-lost-updates: true
