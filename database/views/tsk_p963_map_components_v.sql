@@ -7,8 +7,13 @@ WITH x AS (
 )
 SELECT
     g.component_id,
-    g.component_name,
     g.component_type,
+    --
+    g.component_name ||
+        CASE WHEN MAX(c.is_active) IS NULL AND g.dml_actions IS NOT NULL
+            THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;"></span>' END
+            AS component_name,
+    --
     p.page,
     p.page_group,
     g.page_id,
