@@ -1,7 +1,10 @@
 CREATE OR REPLACE FORCE VIEW tsk_p965_map_tables_v AS
 SELECT
     t.table_name,
-    t.procedure_name,
+    CASE WHEN t.procedure_name IS NULL
+        THEN '<span class="fa fa-warning" style="color: orange; margin-top: 0.125rem;"></span>'
+        ELSE t.procedure_name
+        END AS procedure_name,
     --
     MAX(CASE WHEN r.r# = 1 THEN a.is_allowed_create END) AS role_1c,
     MAX(CASE WHEN r.r# = 1 THEN a.is_allowed_update END) AS role_1u,
