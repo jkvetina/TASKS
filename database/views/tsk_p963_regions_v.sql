@@ -188,7 +188,7 @@ d AS (
     LEFT JOIN c
         ON c.component_id       = b.button_id
     WHERE c.component_id        IS NULL
-        AND b.button_name       NOT IN ('CLOSE_DIALOG')
+        AND b.button_name       NOT LIKE 'CLOSE_DIALOG%'
     UNION ALL
     --
     -- always show all processes, allow inserts only if they have IS_USER scheme set
