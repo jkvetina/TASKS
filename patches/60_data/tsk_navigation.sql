@@ -36,6 +36,7 @@ USING (
     SELECT 963 AS page_id, 960 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 20 AS order# FROM DUAL UNION ALL
     SELECT 965 AS page_id, 960 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 30 AS order# FROM DUAL UNION ALL
     SELECT 966 AS page_id, 960 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 40 AS order# FROM DUAL UNION ALL
+    SELECT 968 AS page_id, 960 AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 50 AS order# FROM DUAL UNION ALL
     SELECT 980 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 899 AS order# FROM DUAL UNION ALL
     SELECT 9999 AS page_id, 900 AS parent_id, NULL AS is_hidden, NULL AS is_reset, 90 AS order# FROM DUAL
 ) s

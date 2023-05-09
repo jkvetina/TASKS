@@ -50,8 +50,8 @@ SELECT
     CASE WHEN n.parent_id IS NOT NULL THEN REPLACE(LPAD(' ', 3, ' '), ' ', '&' || 'nbsp; ') END ||
         a.page_name ||
         CASE WHEN MAX(p.is_active) IS NULL
-            THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;"></span>' END
-        AS page_name,
+            THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;"></span>'
+            END AS page_name,
     --
     LPAD(' ', g.group_order#) || g.page_group AS page_group,
     --
