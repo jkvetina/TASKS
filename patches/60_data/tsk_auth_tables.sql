@@ -74,14 +74,14 @@ USING (
     SELECT 'TSK_ROLES' AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active, 'Y' AS is_allowed_create, 'Y' AS is_allowed_update, 'Y' AS is_allowed_delete FROM DUAL UNION ALL
     SELECT 'TSK_ROLES' AS table_name, 'USERS_MANAGER' AS role_id, 'Y' AS is_active, 'Y' AS is_allowed_create, 'Y' AS is_allowed_update, 'Y' AS is_allowed_delete FROM DUAL UNION ALL
     SELECT 'TSK_STATUSES' AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active, 'Y' AS is_allowed_create, 'Y' AS is_allowed_update, 'Y' AS is_allowed_delete FROM DUAL UNION ALL
-    SELECT 'TSK_STATUSES' AS table_name, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active, 'Y' AS is_allowed_create, 'Y' AS is_allowed_update, 'Y' AS is_allowed_delete FROM DUAL UNION ALL
+    SELECT 'TSK_STATUSES' AS table_name, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active, NULL AS is_allowed_create, NULL AS is_allowed_update, NULL AS is_allowed_delete FROM DUAL UNION ALL
     SELECT 'TSK_STATUSES' AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active, NULL AS is_allowed_create, NULL AS is_allowed_update, NULL AS is_allowed_delete FROM DUAL UNION ALL
     SELECT 'TSK_STATUSES' AS table_name, 'PROJECT_MANAGER' AS role_id, 'Y' AS is_active, NULL AS is_allowed_create, NULL AS is_allowed_update, NULL AS is_allowed_delete FROM DUAL UNION ALL
     SELECT 'TSK_STATUSES' AS table_name, 'USERS_MANAGER' AS role_id, 'Y' AS is_active, NULL AS is_allowed_create, NULL AS is_allowed_update, NULL AS is_allowed_delete FROM DUAL UNION ALL
     SELECT 'TSK_SWIMLANES' AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active, 'Y' AS is_allowed_create, 'Y' AS is_allowed_update, 'Y' AS is_allowed_delete FROM DUAL UNION ALL
     SELECT 'TSK_SWIMLANES' AS table_name, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active, 'Y' AS is_allowed_create, 'Y' AS is_allowed_update, 'Y' AS is_allowed_delete FROM DUAL UNION ALL
     SELECT 'TSK_SWIMLANES' AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active, NULL AS is_allowed_create, NULL AS is_allowed_update, NULL AS is_allowed_delete FROM DUAL UNION ALL
-    SELECT 'TSK_SWIMLANES' AS table_name, 'PROJECT_MANAGER' AS role_id, 'Y' AS is_active, NULL AS is_allowed_create, NULL AS is_allowed_update, NULL AS is_allowed_delete FROM DUAL UNION ALL
+    SELECT 'TSK_SWIMLANES' AS table_name, 'PROJECT_MANAGER' AS role_id, 'Y' AS is_active, 'Y' AS is_allowed_create, NULL AS is_allowed_update, NULL AS is_allowed_delete FROM DUAL UNION ALL
     SELECT 'TSK_SWIMLANES' AS table_name, 'USERS_MANAGER' AS role_id, 'Y' AS is_active, NULL AS is_allowed_create, NULL AS is_allowed_update, NULL AS is_allowed_delete FROM DUAL UNION ALL
     SELECT 'TSK_TASKS' AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active, 'Y' AS is_allowed_create, 'Y' AS is_allowed_update, 'Y' AS is_allowed_delete FROM DUAL UNION ALL
     SELECT 'TSK_TASKS' AS table_name, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active, NULL AS is_allowed_create, NULL AS is_allowed_update, NULL AS is_allowed_delete FROM DUAL UNION ALL

@@ -30,6 +30,8 @@ USING (
     SELECT 220 AS page_id, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 230 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 230 AS page_id, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 235 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 235 AS page_id, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 250 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 250 AS page_id, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 270 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
@@ -58,13 +60,11 @@ USING (
     SELECT 958 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 958 AS page_id, 'USERS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 960 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 960 AS page_id, 'USERS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 962 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 962 AS page_id, 'USERS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 963 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 963 AS page_id, 'USERS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 965 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 966 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 968 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 980 AS page_id, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 980 AS page_id, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL
 ) s
