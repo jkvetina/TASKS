@@ -668,6 +668,97 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         core.raise_error();
     END;
 
+
+
+    PROCEDURE commits (
+        rec                     IN OUT NOCOPY   tsk_commits%ROWTYPE,
+        in_action                               CHAR                                := NULL
+    )
+    AS
+        c_action                CONSTANT CHAR   := get_action(in_action);
+    BEGIN
+        tsk_auth.check_allowed_dml (
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
+            in_user_id          => core.get_user_id,
+            in_client_id        => NULL,
+            in_project_id       => NULL
+        );
+
+        -- delete record
+        IF c_action = 'D' THEN
+            DELETE FROM tsk_commits t
+            WHERE t.commit_id   = rec.commit_id;
+            --
+            RETURN;
+        END IF;
+
+        -- overwrite some values
+        rec.created_by := core.get_user_id();
+        rec.created_at := SYSDATE;
+        --
+        BEGIN
+            INSERT INTO tsk_commits VALUES rec;
+        EXCEPTION
+        WHEN DUP_VAL_ON_INDEX THEN
+            NULL;
+        END;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE task_commits (
+        rec                     IN OUT NOCOPY   tsk_task_commits%ROWTYPE,
+        in_action                               CHAR                                := NULL,
+        old_commit_id           IN OUT NOCOPY   tsk_task_commits.commit_id%TYPE,
+        old_task_id             IN OUT NOCOPY   tsk_task_commits.task_id%TYPE
+    )
+    AS
+        c_action                CONSTANT CHAR   := get_action(in_action);
+    BEGIN
+        tsk_auth.check_allowed_dml (
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
+            in_user_id          => core.get_user_id,
+            in_client_id        => NULL,
+            in_project_id       => NULL
+        );
+
+        -- delete record
+        IF c_action = 'D' THEN
+            DELETE FROM tsk_task_commits t
+            WHERE t.task_id         = NVL(old_commit_id,    rec.task_id)
+                AND t.commit_id     = NVL(old_task_id,      rec.commit_id);
+            --
+            RETURN;
+        END IF;
+
+        -- overwrite some values
+        rec.updated_by := core.get_user_id();
+        rec.updated_at := SYSDATE;
+        --
+        BEGIN
+            INSERT INTO tsk_task_commits VALUES rec;
+        EXCEPTION
+        WHEN DUP_VAL_ON_INDEX THEN
+            NULL;
+        END;
+
+        -- update keys to APEX
+        old_commit_id   := rec.commit_id;
+        old_task_id     := rec.task_id;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
 END;
 /
 

@@ -44,6 +44,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         v_response      CLOB;
         repo            tsk_repos%ROWTYPE;
         endpoint        tsk_repo_endpoints%ROWTYPE;
+        commits         tsk_task_commits%ROWTYPE;
     BEGIN
         -- get repo setting
         BEGIN
@@ -108,12 +109,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
                 )
             ) AS t
         ) LOOP
-            BEGIN
-                INSERT INTO tsk_commits VALUES c;
-            EXCEPTION
-            WHEN DUP_VAL_ON_INDEX THEN
-                NULL;
-            END;
+            tsk_tapi.commits(c);
 
             -- map commits to existing tasks if possible
             FOR t IN (
@@ -122,18 +118,13 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
                 WHERE t.project_id = in_project_id
                     AND REGEXP_LIKE(c.commit_message || ' ', '\#(' || TO_CHAR(t.task_id) || '\s)')
             ) LOOP
-                BEGIN
-                    INSERT INTO tsk_task_commits (task_id, commit_id, updated_by, updated_at)
-                    VALUES (
-                        t.task_id,
-                        c.commit_id,
-                        c.created_by,
-                        c.created_at
-                    );
-                EXCEPTION
-                WHEN DUP_VAL_ON_INDEX THEN
-                    NULL;
-                END;
+                commits.task_id     := t.task_id;
+                commits.commit_id   := c.commit_id;
+                --
+                tsk_tapi.task_commits(commits,
+                    old_commit_id   => commits.commit_id,
+                    old_task_id     => commits.task_id
+                );
             END LOOP;
         END LOOP;
 
@@ -186,8 +177,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
 
 
     PROCEDURE save_commits (
-        io_commit_id        IN OUT NOCOPY   VARCHAR2,
-        io_task_id          IN OUT NOCOPY   VARCHAR2
+        io_commit_id        IN OUT NOCOPY   tsk_task_commits.commit_id%TYPE,
+        io_task_id          IN OUT NOCOPY   tsk_task_commits.task_id%TYPE
     )
     AS
         rec                 tsk_task_commits%ROWTYPE;
@@ -195,28 +186,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         rec.commit_id       := core.get_grid_data('COMMIT_ID');
         rec.task_id         := core.get_grid_data('TASK_ID');
         --
-        rec.updated_by      := core.get_user_id();
-        rec.updated_at      := SYSDATE;
-        --
-        IF (core.get_grid_action() = 'D' OR rec.task_id IS NULL) THEN
-            DELETE FROM tsk_task_commits t
-            WHERE t.commit_id   = io_commit_id
-                AND t.task_id   = io_task_id;
-            --
-            RETURN;
-        END IF;
-        --
-        BEGIN
-            INSERT INTO tsk_task_commits
-            VALUES rec;
-        EXCEPTION
-        WHEN DUP_VAL_ON_INDEX THEN
-            NULL;
-        END;
-
-        -- update keys to APEX
-        io_commit_id        := rec.commit_id;
-        io_task_id          := rec.task_id;
+        tsk_tapi.task_commits(rec,
+            old_commit_id   => io_commit_id,
+            old_task_id     => io_task_id
+        );
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
