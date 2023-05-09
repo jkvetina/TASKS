@@ -1042,8 +1042,21 @@ wwv_flow_imp_page.create_page_button(
 ,p_grid_new_column=>'N'
 );
 wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(48050183510927105)
+ p_id=>wwv_flow_imp.id(48658486533689420)
 ,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(187542799729422615)
+,p_button_name=>'REFRESH_MV'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(70969417180975670)
+,p_button_image_alt=>'Refresh MV'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_icon_css_classes=>'fa-cloud-upload'
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(48050183510927105)
+,p_button_sequence=>20
 ,p_button_plug_id=>wwv_flow_imp.id(187542799729422615)
 ,p_button_name=>'SYNC_REGIONS'
 ,p_button_action=>'SUBMIT'
@@ -1077,6 +1090,18 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
 );
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2022.10.07'
+,p_release=>'22.2.4'
+,p_default_workspace_id=>8506563800894011
+,p_default_application_id=>710
+,p_default_id_offset=>84847035874187356
+,p_default_owner=>'APPS'
+);
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(48105703811554331)
 ,p_name=>'P963_ROLE_GROUP'
@@ -1095,18 +1120,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.10.07'
-,p_release=>'22.2.4'
-,p_default_workspace_id=>8506563800894011
-,p_default_application_id=>710
-,p_default_id_offset=>84847035874187356
-,p_default_owner=>'APPS'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(48106028893555839)
@@ -1248,6 +1261,18 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_imp.id(48050183510927105)
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(48658679601691008)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'REFRESH_MV'
+,p_process_sql_clob=>'tsk_p963.refresh_mv();'
+,p_process_clob_language=>'PLSQL'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_imp.id(48658486533689420)
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp.component_end;
