@@ -25,6 +25,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
     )
     AS
         rec                 tsk_projects%ROWTYPE;
+        rec_swim            tsk_swimlanes%ROWTYPE;
     BEGIN
         rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'), tsk_app.get_client_id());
         --
@@ -70,6 +71,22 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
 
         -- update keys to APEX
         io_project_id       := TO_CHAR(rec.project_id);
+
+        -- create default swimlane
+        IF core.get_grid_action() = 'C' THEN
+            rec_swim.client_id      := rec.client_id;
+            rec_swim.project_id     := rec.project_id;
+            rec_swim.swimlane_id    := '-';
+            rec_swim.swimlane_name  := '-';
+            rec_swim.is_active      := 'Y';
+            rec_swim.order#         := 100;
+            --
+            tsk_tapi.swimlanes (rec_swim,
+                old_client_id       => rec_swim.client_id,
+                old_project_id      => rec_swim.project_id,
+                old_swimlane_id     => rec_swim.swimlane_id
+            );
+        END IF;
 
         -- for new records overwrite user settings
         IF core.get_grid_action() = 'C' THEN
