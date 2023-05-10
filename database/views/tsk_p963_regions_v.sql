@@ -93,9 +93,10 @@ page_processes AS (
         p.page_id,
         p.region_id,                -- NULL
         p.process_id,
-        p.process_name,
+        p.process_name || CASE WHEN p.process_point LIKE 'Ajax%' THEN ' <span style="color: #999;">&' || 'mdash; AJAX Callback</span>' END AS process_name,
         p.authorization_scheme,
-        p.execution_sequence
+        p.execution_sequence,
+        p.when_button_pressed_id
     FROM apex_application_page_proc p
     JOIN x
         ON x.app_id = p.application_id
@@ -206,25 +207,54 @@ d AS (
     LEFT JOIN c
         ON c.component_id       = p.process_id
     WHERE c.component_id        IS NULL
+),
+t AS (
+    -- prepare the tree view
+    SELECT /*+ MATERIALIZE */
+        d.page_id,
+        d.region_id,
+        --
+        NVL(r.level_ - 1 + CASE WHEN d.component_type != 'REGION' THEN 1 ELSE 0 END, 0) AS level_,
+        r.path_ || CASE WHEN d.component_type != 'REGION' THEN '/' || d.component_type || '-' || LPAD(d.seq, 4, '0') || '-' || d.component_id END AS path_,
+        --
+        d.component_id,
+        d.component_type,
+        --
+        REPLACE(LPAD(' ', NVL(r.level_ - 1 + CASE WHEN d.component_type != 'REGION' THEN 1 ELSE 0 END, 0) * 3, ' '), ' ', '&' || 'nbsp; ') ||
+            CASE WHEN d.component_type = 'PROCESS' THEN '<span class="fa fa-play-circle" style="color: #555; margin: 0.125rem 0.5rem 0 0;"></span>' END ||
+            d.component_name AS component_name,
+        --
+        CASE WHEN d.authorization_scheme = 'IS_USER' THEN 'U' END AS dml_actions
+    FROM d
+    LEFT JOIN page_regions r
+        ON r.region_id = d.region_id
+),
+remap_processes AS (
+    -- fix processes, if they are mapped to buttons, show them under that button
+    SELECT /*+ MATERIALIZE */
+        p.process_id AS component_id,
+        REPLACE(LPAD(' ', (t.level_ + 1) * 3, ' '), ' ', '&' || 'nbsp; ') || n.component_name AS component_name,
+        t.path_ || '/PROCESS' || '-' || LPAD(p.execution_sequence, 4, '0') || '-' || p.process_id AS path_,
+        t.level_ + 1 AS level_
+    FROM page_processes p
+    JOIN t
+        ON t.component_type     = 'BUTTON'
+        AND t.component_id      = p.when_button_pressed_id
+    JOIN t n
+        ON n.component_id       = p.process_id
 )
 SELECT
-    d.page_id,
-    d.region_id,
-    --
-    NVL(r.level_ - 1 + CASE WHEN d.component_type != 'REGION' THEN 1 ELSE 0 END, 0) AS level_,
-    r.path_ || CASE WHEN d.component_type != 'REGION' THEN '/' || d.component_type || '-' || LPAD(d.seq, 4, '0') || '-' || d.component_id END AS path_,
-    --
-    d.component_id,
-    d.component_type,
-    --
-    REPLACE(LPAD(' ', NVL(r.level_ - 1 + CASE WHEN d.component_type != 'REGION' THEN 1 ELSE 0 END, 0) * 3, ' '), ' ', '&' || 'nbsp; ') ||
-        CASE WHEN d.component_type = 'PROCESS' THEN '<span class="fa fa-play-circle" style="color: #555; margin: 0.125rem 0.5rem 0 0;"></span>' END ||
-        d.component_name AS component_name,
-    --
-    CASE WHEN d.authorization_scheme = 'IS_USER' THEN 'U' END AS dml_actions
-FROM d
-LEFT JOIN page_regions r
-    ON r.region_id = d.region_id;
+    t.page_id,
+    t.region_id,
+    NVL(r.level_,   t.level_)   AS level_,
+    NVL(r.path_,    t.path_)    AS path_,
+    t.component_id,
+    t.component_type,
+    NVL(r.component_name, t.component_name) AS component_name,
+    t.dml_actions
+FROM t
+LEFT JOIN remap_processes r
+    ON r.component_id = t.component_id;
 --
 COMMENT ON TABLE tsk_p963_regions_v IS '';
 
