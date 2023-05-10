@@ -30,7 +30,7 @@ SELECT
     MAX(c.is_active) AS is_used,
     --
     g.path_,
-    g.dml_actions
+    g.dml_actions || CASE WHEN MAX(c.is_active) IS NOT NULL AND INSTR(g.dml_actions, 'D') IS NULL THEN 'D' END AS dml_actions
     --
 FROM tsk_p963_regions_mv g
 JOIN tsk_lov_app_pages_v p

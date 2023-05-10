@@ -74,6 +74,15 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
 
+        -- delete whole component
+        IF core.get_grid_action() = 'D' THEN
+            DELETE tsk_auth_components t
+            WHERE t.component_id    = rec.component_id;
+                --AND t.role_id       IS NOT NULL;
+            --
+            RETURN;
+        END IF;
+
         -- go through pivoted columns
         FOR i IN 1 .. tsk_p960.c_dynamic_roles LOOP
             rec.role_id     := tsk_p960.get_role_id(i);
