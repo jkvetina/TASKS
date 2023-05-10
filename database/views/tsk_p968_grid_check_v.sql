@@ -8,17 +8,41 @@ WITH x AS (
 SELECT
     p.page_id,
     s.page_group,
-    --
+    p.page_name,
     p.region_id,
     r.region_name,
     r.static_id,
+    p.process_id,
     p.process_name,
+    p.process_point_code,
     --
-    -- @TODO: process_name_check
+    CASE WHEN NOT REGEXP_LIKE(p.process_name, '^[A-Z0-9_-]+$')
+        OR p.attribute_06 = 'Y'
+        OR p.attribute_05 = 'N'
+        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="' ||
+            REGEXP_REPLACE (
+                CASE WHEN NOT REGEXP_LIKE(p.process_name, '^[A-Z0-9_-]+$') THEN 'Wrong process name' || CHR(10) END ||
+                CASE WHEN p.attribute_06 = 'Y' THEN 'Row lock enabled' || CHR(10) END ||
+                CASE WHEN p.attribute_05 = 'N' THEN 'Prevent lost updates disabled' || CHR(10) END,
+                --
+                -- @TODO: toolbar check, js init check...
+                --
+            '\s+$', '') ||
+            '"></span>'
+        END AS check_setup,
     --
-    -- @TODO: show region source, expect a view only
+    r.table_name        AS source_table,
+    p.attribute_01      AS target_type,
     --
-    -- @TODO: show handler, match to procedure
+    NVL(p.attribute_03, REGEXP_SUBSTR(UPPER(p.attribute_04), '^[A-Z0-9_]+\.?[A-Z0-9_]*')) AS target_name,     -- code to execute
+    --
+    CASE WHEN r.location_code != 'LOCAL' AND r.query_type_code != 'TABLE' AND r.table_name NOT LIKE '%\_V' ESCAPE '\'
+        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="Region source is not a view"></span>'
+        END AS check_source,
+    --
+    CASE WHEN p.attribute_04 IS NULL
+        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="PL/SQL handler is missing"></span>'
+        END AS check_handler,
     --
     -- @TODO: toolbar check, js init check...
     --
@@ -30,19 +54,17 @@ SELECT
         THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="Missing IS_USER on save process"></span>'
         END AS check_process,
     --
-    CASE WHEN g.is_editable = 'Yes' AND INSTR(g.edit_operations, 'i') > 0 AND NVL(g.add_authorization_scheme, '-')    != 'IS_USER_C'
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="Missing IS_USER_C on grid attributes"></span>'
-        END AS check_create,
-    --
-    CASE WHEN g.is_editable = 'Yes' AND INSTR(g.edit_operations, 'u') > 0 AND NVL(g.update_authorization_scheme, '-') != 'IS_USER_U'
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="Missing IS_USER_U on grid attributes"></span>'
-        END AS check_update,
-    --
-    CASE WHEN g.is_editable = 'Yes' AND INSTR(g.edit_operations, 'd') > 0 AND NVL(g.delete_authorization_scheme, '-') != 'IS_USER_D'
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="Missing IS_USER_D on grid attributes"></span>'
-        END AS check_delete
-    --
-    -- @TODO: toolbar check, js init check...
+    CASE WHEN (g.is_editable = 'Yes' AND INSTR(g.edit_operations, 'i') > 0 AND NVL(g.add_authorization_scheme, '-') != 'IS_USER_C')
+        OR (g.is_editable = 'Yes' AND INSTR(g.edit_operations, 'u') > 0 AND NVL(g.update_authorization_scheme, '-') != 'IS_USER_U')
+        OR (g.is_editable = 'Yes' AND INSTR(g.edit_operations, 'd') > 0 AND NVL(g.delete_authorization_scheme, '-') != 'IS_USER_D')
+        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="' ||
+            REGEXP_REPLACE (
+                CASE WHEN INSTR(g.edit_operations, 'i') > 0 AND NVL(g.add_authorization_scheme, '-') != 'IS_USER_C' THEN 'Missing IS_USER_C on grid attributes' || CHR(10) END ||
+                CASE WHEN INSTR(g.edit_operations, 'u') > 0 AND NVL(g.add_authorization_scheme, '-') != 'IS_USER_U' THEN 'Missing IS_USER_U on grid attributes' || CHR(10) END ||
+                CASE WHEN INSTR(g.edit_operations, 'd') > 0 AND NVL(g.add_authorization_scheme, '-') != 'IS_USER_D' THEN 'Missing IS_USER_D on grid attributes' || CHR(10) END,
+            '\s+$', '') ||
+            '"></span>'
+        END AS check_dml
     --
 FROM apex_application_page_proc p
 JOIN apex_application_page_regions r
