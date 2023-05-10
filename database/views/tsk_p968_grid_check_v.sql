@@ -36,7 +36,7 @@ SELECT
     --
     NVL(p.attribute_03, REGEXP_SUBSTR(UPPER(p.attribute_04), '^[A-Z0-9_]+\.?[A-Z0-9_]*')) AS target_name,     -- code to execute
     --
-    CASE WHEN r.location_code != 'LOCAL' AND r.query_type_code != 'TABLE' AND r.table_name NOT LIKE '%\_V' ESCAPE '\'
+    CASE WHEN (r.location_code != 'LOCAL' OR r.query_type_code != 'TABLE' OR r.table_name NOT LIKE '%\_V' ESCAPE '\')
         THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="Region source is not a view"></span>'
         END AS check_source,
     --
