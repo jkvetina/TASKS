@@ -172,8 +172,13 @@ regions:
       enabled: true
       allowed-operations: 
       - Update Row
+      - Delete Row
       allowed-row-operations-column: DML_ACTIONS
       lost-update-type: Row Values
+
+    edit-authorization: 
+      update: IS_USER_U # 47696708662034140
+      delete: IS_USER_D # 47697042010037770
 
     performance: 
       lazy-loading: false
@@ -1804,7 +1809,7 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
-    icon: fa-cloud-upload
+    icon: fa-cloud-arrow-down
 
   behavior: 
     action: Submit Page

@@ -1232,6 +1232,9 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
   server-cache: 
     caching: Disabled
 
@@ -1245,9 +1248,12 @@ regions:
       allowed-operations: 
       - Add Row
       - Update Row
-      - Delete Row
       lost-update-type: Row Values
       add-row-if-empty: false
+
+    edit-authorization: 
+      add: IS_USER_C # 47696452253028618
+      update: IS_USER_U # 47696708662034140
 
     performance: 
       lazy-loading: false
@@ -1280,6 +1286,9 @@ regions:
 
     detail-view: 
       show: false
+
+    help: 
+      help-text: '@Max, EDIT=TRUE here doesnt work either'
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
@@ -3590,6 +3599,35 @@ dynamic-actions:
     execution: 
       sequence: 10
       event: ON_JOIN_TASK_CLOSE # 48481374722495801
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: EDIT --- NOT WORKING @Max ===========
+  id: 48506315597203335
+  identification: 
+    name: EDIT --- NOT WORKING @Max
+
+  execution: 
+    sequence: 40
+
+  when: 
+    event: EVENT.EVENT.BROWSER.READY
+
+  execution: 
+    event-scope: Static
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 48506404665203336
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: apex.region('CHECKLIST').widget().interactiveGrid('getActions').set('edit', true);
+
+    execution: 
+      sequence: 10
+      event: EDIT --- NOT WORKING @Max # 48506315597203335
       fire-when-event-result-is: True
       fire-on-initialization: false
 

@@ -34,7 +34,7 @@ wwv_flow_imp.create_flow(
 ,p_direction_right_to_left=>'N'
 ,p_flow_image_prefix => nvl(wwv_flow_application_install.get_image_prefix,'')
 ,p_documentation_banner=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'Created by Jan Kvetina, 2/2022',
+'Created by Jan Kvetina, 4/2023',
 'www.jankvetina.cz'))
 ,p_authentication=>'PLUGIN'
 ,p_authentication_id=>wwv_flow_imp.id(48132635231854310)
@@ -44,7 +44,7 @@ wwv_flow_imp.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-05-05'
+,p_flow_version=>'2023-05-10'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'

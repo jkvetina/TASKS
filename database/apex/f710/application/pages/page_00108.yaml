@@ -447,6 +447,12 @@ processes:
   error: 
     display-location: Inline in Notification
 
+  server-side-condition: 
+    when-button-pressed: MERGE_TASK # 47750816880141749
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
 - # ====== Process: CLOSE_DIALOG ===============================
   id: 47740396652626913
   identification: 

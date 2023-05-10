@@ -435,6 +435,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_required_role=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 ,p_prn_units=>'INCHES'
 ,p_prn_paper_size=>'LETTER'
 ,p_prn_width=>11
@@ -580,7 +581,9 @@ wwv_flow_imp_page.create_interactive_grid(
  p_id=>wwv_flow_imp.id(46260533323307822)
 ,p_internal_uid=>46260533323307822
 ,p_is_editable=>true
-,p_edit_operations=>'i:u:d'
+,p_edit_operations=>'i:u'
+,p_add_authorization_scheme=>wwv_flow_imp.id(47696452253028618)  -- IS_USER_C
+,p_update_authorization_scheme=>wwv_flow_imp.id(47696708662034140)  -- IS_USER_U
 ,p_lost_update_check_type=>'VALUES'
 ,p_add_row_if_empty=>false
 ,p_submit_checked_rows=>false
@@ -601,6 +604,7 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_fixed_header=>'PAGE'
 ,p_show_icon_view=>false
 ,p_show_detail_view=>false
+,p_help_text=>'@Max, EDIT=TRUE here doesnt work either'
 );
 wwv_flow_imp_page.create_ig_report(
  p_id=>wwv_flow_imp.id(46300087236624105)
@@ -952,15 +956,6 @@ wwv_flow_imp_page.create_page_branch(
 ,p_branch_when_button_id=>wwv_flow_imp.id(44172282401914729)
 ,p_branch_sequence=>10
 );
-wwv_flow_imp_page.create_page_branch(
- p_id=>wwv_flow_imp.id(44174136087914748)
-,p_branch_name=>'GOTO_NEXT_TASK'
-,p_branch_action=>'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TASK_ID:&P105_NEXT_TASK_ID.&success_msg=#SUCCESS_MSG#'
-,p_branch_point=>'AFTER_PROCESSING'
-,p_branch_type=>'REDIRECT_URL'
-,p_branch_when_button_id=>wwv_flow_imp.id(44172109399914728)
-,p_branch_sequence=>20
-);
 wwv_flow_imp.component_end;
 end;
 /
@@ -972,6 +967,15 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>710
 ,p_default_id_offset=>84847035874187356
 ,p_default_owner=>'APPS'
+);
+wwv_flow_imp_page.create_page_branch(
+ p_id=>wwv_flow_imp.id(44174136087914748)
+,p_branch_name=>'GOTO_NEXT_TASK'
+,p_branch_action=>'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TASK_ID:&P105_NEXT_TASK_ID.&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'AFTER_PROCESSING'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_when_button_id=>wwv_flow_imp.id(44172109399914728)
+,p_branch_sequence=>20
 );
 wwv_flow_imp_page.create_page_branch(
  p_id=>wwv_flow_imp.id(44090980886578012)
@@ -1540,6 +1544,22 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action_sequence=>10
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_DIALOG_CLOSE'
+);
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(48506315597203335)
+,p_name=>'EDIT --- NOT WORKING @Max'
+,p_event_sequence=>40
+,p_bind_type=>'bind'
+,p_bind_event_type=>'ready'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(48506404665203336)
+,p_event_id=>wwv_flow_imp.id(48506315597203335)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>'apex.region(''CHECKLIST'').widget().interactiveGrid(''getActions'').set(''edit'', true);'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34952570819065835)
