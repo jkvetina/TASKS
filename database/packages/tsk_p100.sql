@@ -149,7 +149,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                     s.status_name,
                     s.is_show_user,
                     s.is_show_swimlane,
-                    u.user_name
+                    SUBSTR(u.user_name, 1, INSTR(u.user_name, ' ') - 1) AS user_name
                 FROM tsk_lov_statuses_v s
                 LEFT JOIN tsk_users u
                     ON u.user_id        = in_owner_id
