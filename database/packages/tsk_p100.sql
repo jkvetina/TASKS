@@ -148,14 +148,17 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                     s.status_id,
                     s.status_name,
                     s.is_show_user,
-                    s.is_show_swimlane
+                    s.is_show_swimlane,
+                    u.user_name
                 FROM tsk_lov_statuses_v s
+                LEFT JOIN tsk_users u
+                    ON u.user_id        = in_owner_id
                 ORDER BY s.order#
             ) LOOP
                 HTP.P('<div class="TARGET_LIKE">');
                 HTP.P('<h3>' || s.status_name ||
-                    CASE WHEN s.is_show_user        = 'Y' THEN NULLIF(' @' || in_owner_id, ' @-') END ||
-                    CASE WHEN s.is_show_swimlane    = 'Y' THEN NULLIF(' @' || w.swimlane_name, ' @-') END ||
+                    CASE WHEN s.is_show_user        = 'Y' THEN RTRIM(' @' || s.user_name, ' @') END ||
+                    CASE WHEN s.is_show_swimlane    = 'Y' THEN RTRIM(' @' || NULLIF(w.swimlane_name, '-'), ' @') END ||
                     '</h3>');
                 HTP.P('</div>');
             END LOOP;
