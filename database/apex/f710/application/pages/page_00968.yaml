@@ -295,17 +295,14 @@ regions:
     id: 48617336280365444
     identification: 
       column-name: PAGE_GROUP
-      type: Textarea
+      type: Display Only
 
     heading: 
       heading: Page Group
       alignment: start
 
     settings: 
-      resizable: true
-      auto-height: false
-      character-counter: false
-      trim-spaces: Leading and Trailing
+      format: HTML
 
     layout: 
       sequence: 40
@@ -316,10 +313,6 @@ regions:
 
     accessibility: 
       value-identifies-row: false
-
-    validation: 
-      value-required: false
-      maximum-length: 2043
 
     source: 
       type: Database Column
@@ -356,17 +349,14 @@ regions:
     id: 48617487732365445
     identification: 
       column-name: PAGE_NAME
-      type: Textarea
+      type: Display Only
 
     heading: 
       heading: Page Name
       alignment: start
 
     settings: 
-      resizable: true
-      auto-height: false
-      character-counter: false
-      trim-spaces: Leading and Trailing
+      format: HTML
 
     layout: 
       sequence: 50
@@ -377,10 +367,6 @@ regions:
 
     accessibility: 
       value-identifies-row: false
-
-    validation: 
-      value-required: true
-      maximum-length: 255
 
     source: 
       type: Database Column
@@ -466,17 +452,14 @@ regions:
     id: 48617637062365447
     identification: 
       column-name: REGION_NAME
-      type: Textarea
+      type: Display Only
 
     heading: 
       heading: Region Name
       alignment: start
 
     settings: 
-      resizable: true
-      auto-height: false
-      character-counter: false
-      trim-spaces: Leading and Trailing
+      format: HTML
 
     layout: 
       sequence: 70
@@ -487,10 +470,6 @@ regions:
 
     accessibility: 
       value-identifies-row: false
-
-    validation: 
-      value-required: true
-      maximum-length: 255
 
     source: 
       type: Database Column
@@ -527,17 +506,14 @@ regions:
     id: 48617710108365448
     identification: 
       column-name: STATIC_ID
-      type: Textarea
+      type: Display Only
 
     heading: 
       heading: Static Id
       alignment: start
 
     settings: 
-      resizable: true
-      auto-height: false
-      character-counter: false
-      trim-spaces: Leading and Trailing
+      format: HTML
 
     layout: 
       sequence: 80
@@ -548,10 +524,6 @@ regions:
 
     accessibility: 
       value-identifies-row: false
-
-    validation: 
-      value-required: false
-      maximum-length: 255
 
     source: 
       type: Database Column
@@ -588,17 +560,14 @@ regions:
     id: 48617897557365449
     identification: 
       column-name: PROCESS_NAME
-      type: Textarea
+      type: Display Only
 
     heading: 
       heading: Process Name
       alignment: start
 
     settings: 
-      resizable: true
-      auto-height: false
-      character-counter: false
-      trim-spaces: Leading and Trailing
+      format: HTML
 
     layout: 
       sequence: 90
@@ -609,10 +578,6 @@ regions:
 
     accessibility: 
       value-identifies-row: false
-
-    validation: 
-      value-required: true
-      maximum-length: 255
 
     source: 
       type: Database Column
@@ -698,17 +663,14 @@ regions:
     id: 48740026546148001
     identification: 
       column-name: PROCESS_POINT_CODE
-      type: Textarea
+      type: Display Only
 
     heading: 
       heading: Process Point Code
       alignment: start
 
     settings: 
-      resizable: true
-      auto-height: false
-      character-counter: false
-      trim-spaces: Leading and Trailing
+      format: HTML
 
     layout: 
       sequence: 110
@@ -719,10 +681,6 @@ regions:
 
     accessibility: 
       value-identifies-row: false
-
-    validation: 
-      value-required: false
-      maximum-length: 255
 
     source: 
       type: Database Column
@@ -810,17 +768,14 @@ regions:
     id: 48740469053148005
     identification: 
       column-name: SOURCE_TABLE
-      type: Textarea
+      type: Display Only
 
     heading: 
       heading: Source Table
       alignment: start
 
     settings: 
-      resizable: true
-      auto-height: false
-      character-counter: false
-      trim-spaces: Leading and Trailing
+      format: HTML
 
     layout: 
       sequence: 120
@@ -831,10 +786,6 @@ regions:
 
     accessibility: 
       value-identifies-row: false
-
-    validation: 
-      value-required: false
-      maximum-length: 128
 
     source: 
       type: Database Column
@@ -871,17 +822,14 @@ regions:
     id: 48740574801148006
     identification: 
       column-name: TARGET_TYPE
-      type: Textarea
+      type: Display Only
 
     heading: 
       heading: Target Type
       alignment: start
 
     settings: 
-      resizable: true
-      auto-height: false
-      character-counter: false
-      trim-spaces: Leading and Trailing
+      format: HTML
 
     layout: 
       sequence: 130
@@ -892,10 +840,6 @@ regions:
 
     accessibility: 
       value-identifies-row: false
-
-    validation: 
-      value-required: false
-      maximum-length: 4000
 
     source: 
       type: Database Column
@@ -932,17 +876,14 @@ regions:
     id: 48740686258148007
     identification: 
       column-name: TARGET_NAME
-      type: Textarea
+      type: Display Only
 
     heading: 
       heading: Target Name
       alignment: start
 
     settings: 
-      resizable: true
-      auto-height: false
-      character-counter: false
-      trim-spaces: Leading and Trailing
+      format: HTML
 
     layout: 
       sequence: 140
@@ -954,10 +895,6 @@ regions:
     accessibility: 
       value-identifies-row: false
 
-    validation: 
-      value-required: false
-      maximum-length: 16000
-
     source: 
       type: Database Column
       database-column: TARGET_NAME
@@ -967,108 +904,6 @@ regions:
 
     default: 
       duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: CHECK_SOURCE ================================
-    id: 48740827043148009
-    identification: 
-      column-name: CHECK_SOURCE
-      type: Display Only
-
-    heading: 
-      heading: Source
-      alignment: center
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 160
-      column-alignment: center
-      group: Checks # 48742028559148021
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: CHECK_SOURCE
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: CHECK_HANDLER ===============================
-    id: 48740952267148010
-    identification: 
-      column-name: CHECK_HANDLER
-      type: Display Only
-
-    heading: 
-      heading: Handler
-      alignment: center
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 170
-      column-alignment: center
-      group: Checks # 48742028559148021
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: CHECK_HANDLER
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
 
     session-state: 
       data-type: VARCHAR2

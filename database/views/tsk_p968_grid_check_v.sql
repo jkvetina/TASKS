@@ -13,15 +13,18 @@ SELECT
     r.region_name,
     r.static_id,
     p.process_id,
-    p.process_name,
-    p.process_point_code,
     --
     CASE WHEN NOT REGEXP_LIKE(p.process_name, '^[A-Z0-9_-]+$')
-        OR p.attribute_06 = 'Y'
-        OR p.attribute_05 = 'N'
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="' ||
+        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="Wrong process name"></span>'
+        END || p.process_name AS process_name,
+    --
+    p.process_point_code,
+    --
+    CASE
+        WHEN p.attribute_06 = 'Y'
+            OR p.attribute_05 = 'N'
+        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="' ||
             REGEXP_REPLACE (
-                CASE WHEN NOT REGEXP_LIKE(p.process_name, '^[A-Z0-9_-]+$') THEN 'Wrong process name' || CHR(10) END ||
                 CASE WHEN p.attribute_06 = 'Y' THEN 'Row lock enabled' || CHR(10) END ||
                 CASE WHEN p.attribute_05 = 'N' THEN 'Prevent lost updates disabled' || CHR(10) END,
                 --
@@ -31,18 +34,15 @@ SELECT
             '"></span>'
         END AS check_setup,
     --
-    r.table_name        AS source_table,
+    CASE WHEN (r.location_code != 'LOCAL' OR r.query_type_code != 'TABLE' OR r.table_name NOT LIKE '%\_V' ESCAPE '\')
+        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="Region source is not a view"></span>'
+        END || r.table_name AS source_table,
+    --
     p.attribute_01      AS target_type,
     --
-    NVL(p.attribute_03, REGEXP_SUBSTR(UPPER(p.attribute_04), '^[A-Z0-9_]+\.?[A-Z0-9_]*')) AS target_name,     -- code to execute
-    --
-    CASE WHEN (r.location_code != 'LOCAL' OR r.query_type_code != 'TABLE' OR r.table_name NOT LIKE '%\_V' ESCAPE '\')
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="Region source is not a view"></span>'
-        END AS check_source,
-    --
     CASE WHEN p.attribute_04 IS NULL
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="PL/SQL handler is missing"></span>'
-        END AS check_handler,
+        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="PL/SQL handler is missing"></span>'
+        END || NVL(p.attribute_03, REGEXP_SUBSTR(UPPER(p.attribute_04), '^[A-Z0-9_]+\.?[A-Z0-9_]*')) AS target_name,     -- code to execute
     --
     -- @TODO: toolbar check, js init check...
     --
