@@ -1022,10 +1022,14 @@ CREATE OR REPLACE PACKAGE BODY core AS
                 '|'
             ) ||
             '|' || core.get_caller_name(3) ||
-            CASE WHEN in_traceback OR core.is_developer() THEN '|' || DBMS_UTILITY.FORMAT_ERROR_BACKTRACE END,
             1, 4000);
         --
-        RAISE_APPLICATION_ERROR(core.app_exception_code, v_message, TRUE);
+        APEX_DEBUG.ERROR (
+            core.app_exception_code || ' ' || v_message ||
+            '|' || DBMS_UTILITY.FORMAT_ERROR_BACKTRACE
+        );
+        --
+        RAISE_APPLICATION_ERROR(core.app_exception_code, v_message || CASE WHEN in_traceback OR core.is_developer() THEN '|' || DBMS_UTILITY.FORMAT_ERROR_BACKTRACE END, TRUE);
     END;
 
 
