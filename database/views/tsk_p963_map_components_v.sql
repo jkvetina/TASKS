@@ -9,7 +9,8 @@ SELECT
     g.component_id,
     g.component_type,
     --
-    g.component_name ||
+    REPLACE(LPAD(' ', 1 * 3, ' '), ' ', '&' || 'nbsp; ') ||    -- compensate for added page_id
+        g.component_name ||
         CASE WHEN MAX(c.is_active) IS NULL AND g.dml_actions IS NOT NULL
             THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;"></span>'
             END AS component_name,
@@ -51,7 +52,30 @@ GROUP BY
     p.page_group,
     g.page_id,
     g.path_,
-    g.dml_actions;
+    g.dml_actions
+--
+UNION ALL
+SELECT
+    g.page_id,
+    'PAGE',
+    p.page_name,
+    p.page,
+    p.page_group,
+    g.page_id,
+    g.role_1,
+    g.role_2,
+    g.role_3,
+    g.role_4,
+    g.role_5,
+    g.role_6,
+    g.role_7,
+    g.role_8,
+    ''          AS is_used,
+    '/'         AS path_,
+    ''          AS dml_actions
+FROM tsk_p962_map_pages_v g
+JOIN tsk_lov_app_pages_v p
+    ON p.page_id        = g.page_id;
 --
 COMMENT ON TABLE tsk_p963_map_components_v IS '';
 
