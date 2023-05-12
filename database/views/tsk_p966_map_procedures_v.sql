@@ -6,11 +6,12 @@ WITH x AS (
 )
 SELECT
     p.object_name,
+    p.procedure_name,
     --
     CASE WHEN MAX(g.target_name) IS NOT NULL AND MAX(t.table_name) IS NULL
         THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="Grid handler is missing"></span>'
         END ||
-        p.procedure_name AS procedure_name,
+        p.procedure_name AS procedure_name_,
     --
     MAX(t.table_name) AS table_name,
     --

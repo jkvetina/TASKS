@@ -279,10 +279,10 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: PROCEDURE_NAME ==============================
+  - # ====== Column: PROCEDURE_NAME_ =============================
     id: 47740580343626915
     identification: 
-      column-name: PROCEDURE_NAME
+      column-name: PROCEDURE_NAME_
       type: Display Only
 
     heading: 
@@ -293,7 +293,7 @@ regions:
       format: HTML
 
     layout: 
-      sequence: 40
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -302,13 +302,10 @@ regions:
 
     source: 
       type: Database Column
-      database-column: PROCEDURE_NAME
+      database-column: PROCEDURE_NAME_
       data-type: VARCHAR2
-      query-only: false
-      primary-key: true
-
-    default: 
-      duplicate-copies-existing-value: true
+      query-only: true
+      primary-key: false
 
     session-state: 
       data-type: VARCHAR2
@@ -346,7 +343,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: center
       stretch: Use Report Setting
 
@@ -404,7 +401,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 70
+      sequence: 80
       column-alignment: center
       stretch: Use Report Setting
 
@@ -462,7 +459,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 80
+      sequence: 90
       column-alignment: center
       stretch: Use Report Setting
 
@@ -520,7 +517,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 90
+      sequence: 100
       column-alignment: center
       stretch: Use Report Setting
 
@@ -578,7 +575,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 100
+      sequence: 110
       column-alignment: center
       stretch: Use Report Setting
 
@@ -636,7 +633,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 110
+      sequence: 120
       column-alignment: center
       stretch: Use Report Setting
 
@@ -694,7 +691,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 120
+      sequence: 130
       column-alignment: center
       stretch: Use Report Setting
 
@@ -752,7 +749,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 130
+      sequence: 140
       column-alignment: center
       stretch: Use Report Setting
 
@@ -815,7 +812,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -859,6 +856,41 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
+
+  - # ====== Column: PROCEDURE_NAME ==============================
+    id: 48742479645148025
+    identification: 
+      column-name: PROCEDURE_NAME
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 40
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: PROCEDURE_NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
 
   printing: 
     page: 
