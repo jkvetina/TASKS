@@ -58,6 +58,17 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
     PROCEDURE refresh_mv
     AS
     BEGIN
+        -- remove components which dont exists on page anymore
+        DELETE FROM tsk_auth_components a
+        WHERE a.component_id IN (
+            SELECT a.component_id
+            FROM tsk_auth_components a
+            JOIN tsk_p963_map_components_v m
+                ON m.component_id   = a.component_id
+            WHERE m.dml_actions     NOT LIKE '%U%'
+        );
+
+        -- refresh regions
         DBMS_MVIEW.REFRESH('TSK_P963_REGIONS_MV', method => 'C');
     END;
 
