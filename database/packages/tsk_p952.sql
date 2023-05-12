@@ -19,7 +19,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p952 AS
     BEGIN
         rec.client_id       := COALESCE(core.get_grid_data('CLIENT_ID'),    tsk_app.get_client_id());
         --
-        rec.user_id         := core.get_grid_data('USER_ID');
+        rec.user_id         := UPPER(core.get_grid_data('USER_ID'));
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
