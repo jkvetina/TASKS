@@ -6,8 +6,13 @@ WITH x AS (
 )
 SELECT
     p.object_name,
-    p.procedure_name,
-    MAX(t.table_name)       AS table_name,
+    --
+    CASE WHEN MAX(g.target_name) IS NOT NULL AND MAX(t.table_name) IS NULL
+        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="Grid handler is missing"></span>'
+        END ||
+        p.procedure_name AS procedure_name,
+    --
+    MAX(t.table_name) AS table_name,
     --
     MAX(CASE WHEN r.r# = 1 THEN a.is_active END) AS role_1,
     MAX(CASE WHEN r.r# = 2 THEN a.is_active END) AS role_2,
@@ -29,6 +34,8 @@ LEFT JOIN tsk_auth_procedures t
     ON t.object_name        = p.object_name
     AND t.procedure_name    = p.procedure_name
     AND t.table_name        IS NOT NULL
+LEFT JOIN tsk_p968_grid_check_v g
+    ON g.target_name        = p.object_name || '.' || p.procedure_name
 WHERE 1 = 1
     AND (x.page_group       = p.page_group_raw OR x.page_group IS NULL)
 GROUP BY

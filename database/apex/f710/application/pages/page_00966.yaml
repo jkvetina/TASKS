@@ -238,8 +238,7 @@ regions:
       alignment: start
 
     settings: 
-      format: Plain Text
-      based-on: Item Value
+      format: HTML
 
     layout: 
       sequence: 30
@@ -291,8 +290,7 @@ regions:
       alignment: start
 
     settings: 
-      format: Plain Text
-      based-on: Item Value
+      format: HTML
 
     layout: 
       sequence: 40
