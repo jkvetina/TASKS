@@ -1,6 +1,6 @@
 "role_id";"role_name";"role_group";"role_desc";"is_active";"order#"
-"ADMIN";"Admin";"";"";"Y";99
-"BOARDS_MANAGER";"Boards Manager";"MANAGEMENT";"Create/update/delete Boards and Statuses, Swimlanes, Sequences, Categories";"Y";10
-"DEFAULT_USER";"Default User";"TASKS";"Needed so user can access and use the app (create/update tasks)";"Y";40
-"PROJECT_MANAGER";"Project Manager";"MANAGEMENT";"Create/update/delete any Projects for specific Client";"Y";20
-"USERS_MANAGER";"Users Manager";"MANAGEMENT";"Can add/remove any Users for specific Client and assign/remove Roles to them";"Y";30
+"ADMIN";"Admin";"Admin";"";"Y";99
+"BOARDS_MANAGER";"Boards Manager";"Management";"Create/update/delete Boards and Statuses, Swimlanes, Sequences, Categories";"Y";10
+"DEFAULT_USER";"Default User";"Main";"Needed so user can access and use the app (create/update tasks)";"Y";50
+"PROJECT_MANAGER";"Project Manager";"Management";"Create/update/delete any Projects for specific Client";"Y";20
+"USERS_MANAGER";"Users Manager";"Management";"Can add/remove any Users for specific Client and assign/remove Roles to them";"Y";30

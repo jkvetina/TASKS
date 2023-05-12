@@ -95,6 +95,7 @@ USING (
     SELECT 'TSK_P960' AS object_name, 'GET_ROLE_ID' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P960' AS object_name, 'RENAME_ROLE_ID' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P960' AS object_name, 'REORDER_ROLES' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P960' AS object_name, 'SAVE_ROLES' AS procedure_name, 'TSK_ROLES' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P960' AS object_name, 'SAVE_ROLES' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P960' AS object_name, 'SET_ROLE_NAMES' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P960' AS object_name, 'SET_ROLE_NAMES' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
