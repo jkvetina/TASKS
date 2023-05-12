@@ -78,8 +78,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     AS
         fav                     tsk_user_fav_boards%ROWTYPE;
     BEGIN
-        -- check users preferences, find project
-        SELECT MAX(u.client_id)
+        -- check users preferences, find recent project
+        SELECT MIN(u.client_id) KEEP (DENSE_RANK FIRST ORDER BY u.updated_at DESC)
         INTO fav.client_id
         FROM tsk_auth_users u
         JOIN tsk_clients c
@@ -88,7 +88,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             AND u.is_active     = 'Y'
             AND c.is_active     = 'Y';
         --
-        SELECT MAX(r.project_id)
+        SELECT MIN(r.project_id) KEEP (DENSE_RANK FIRST ORDER BY r.updated_at DESC)
         INTO fav.project_id
         FROM tsk_auth_roles r
         JOIN tsk_projects p
