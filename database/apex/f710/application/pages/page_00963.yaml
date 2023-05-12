@@ -1901,12 +1901,13 @@ processes:
   id: 48051562080927119
   identification: 
     name: SYNC_REGIONS
-    type: Execute Code
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p963.sync_regions();
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P963
+    procedure-or-function: SYNC_REGIONS
 
   execution: 
     sequence: 20
@@ -1926,12 +1927,13 @@ processes:
   id: 48658679601691008
   identification: 
     name: REFRESH_MV
-    type: Execute Code
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p963.refresh_mv();
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P963
+    procedure-or-function: REFRESH_MV
 
   execution: 
     sequence: 30
