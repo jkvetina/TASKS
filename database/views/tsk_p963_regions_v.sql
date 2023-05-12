@@ -80,7 +80,11 @@ page_items AS (
     SELECT /*+ MATERIALIZE */
         i.region_id,
         i.item_id,
-        i.item_name,
+        i.item_name
+            || CASE WHEN i.encrypt_session_state = 'Yes'
+                THEN '<span class="fa fa-lock" style="color: #555; margin: 0.125rem 0.5rem 0;"></span>' END
+            AS item_name,
+        --
         i.label,
         i.authorization_scheme,
         i.display_sequence
@@ -221,7 +225,8 @@ t AS (
         d.component_type,
         --
         REPLACE(LPAD(' ', NVL(r.level_ - 1 + CASE WHEN d.component_type != 'REGION' THEN 1 ELSE 0 END, 0) * 3, ' '), ' ', '&' || 'nbsp; ') ||
-            CASE WHEN d.component_type = 'PROCESS' THEN '<span class="fa fa-play-circle" style="color: #555; margin: 0.125rem 0.5rem 0 0;"></span>' END ||
+            CASE WHEN d.component_type = 'PROCESS'  THEN '<span class="fa fa-play-circle" style="color: #555; margin: 0.125rem 0.5rem 0 0;"></span>' END ||
+            CASE WHEN d.component_type = 'BUTTON'   THEN '<span class="fa fa-button" style="color: #555; margin: 0.125rem 0.5rem 0 0;"></span>' END ||
             d.component_name AS component_name,
         --
         CASE WHEN d.authorization_scheme = 'IS_USER' THEN 'U' END AS dml_actions
