@@ -64,6 +64,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_plug_required_role=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 ,p_prn_units=>'INCHES'
 ,p_prn_paper_size=>'LETTER'
 ,p_prn_width=>11
@@ -328,9 +329,9 @@ wwv_flow_imp_page.create_interactive_grid(
  p_id=>wwv_flow_imp.id(139230589430906108)
 ,p_internal_uid=>139230589430906108
 ,p_is_editable=>true
-,p_edit_operations=>'i:u:d'
+,p_edit_operations=>'u'
+,p_update_authorization_scheme=>wwv_flow_imp.id(47696708662034140)  -- IS_USER_U
 ,p_lost_update_check_type=>'VALUES'
-,p_add_row_if_empty=>false
 ,p_submit_checked_rows=>false
 ,p_lazy_loading=>false
 ,p_requires_filter=>false
@@ -477,6 +478,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_attribute_05=>'Y'
 ,p_attribute_06=>'N'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp.component_end;
 end;

@@ -158,6 +158,9 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
   server-cache: 
     caching: Disabled
 
@@ -169,11 +172,11 @@ regions:
     edit: 
       enabled: true
       allowed-operations: 
-      - Add Row
       - Update Row
-      - Delete Row
       lost-update-type: Row Values
-      add-row-if-empty: false
+
+    edit-authorization: 
+      update: IS_USER_U # 47696708662034140
 
     performance: 
       lazy-loading: false
@@ -731,4 +734,7 @@ processes:
 
   server-side-condition: 
     execution-scope: For Created and Modified Rows
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
