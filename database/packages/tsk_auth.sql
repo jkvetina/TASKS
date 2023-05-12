@@ -9,7 +9,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     )
     AS
         rec                     tsk_users%ROWTYPE;
-        fav                     tsk_user_fav_boards%ROWTYPE;
     BEGIN
         -- convert email address to the login if needed
         BEGIN
@@ -62,41 +61,58 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
 
         -- check users preferences, find project
         IF tsk_app.get_client_id() IS NULL THEN
-            SELECT MAX(u.client_id)
-            INTO fav.client_id
-            FROM tsk_auth_users u
-            JOIN tsk_clients c
-                ON c.client_id      = u.client_id
-            WHERE u.user_id         = rec.user_id
-                AND u.is_active     = 'Y'
-                AND c.is_active     = 'Y';
-            --
-            SELECT MAX(r.project_id)
-            INTO fav.project_id
-            FROM tsk_auth_roles r
-            JOIN tsk_projects p
-                ON p.client_id      = r.client_id
-                AND p.project_id    = r.project_id
-            WHERE r.client_id       = fav.client_id
-                AND r.user_id       = rec.user_id
-                AND r.is_active     = 'Y'
-                AND p.is_active     = 'Y';
-            --
-            SELECT MAX(b.board_id)
-            INTO fav.board_id
-            FROM tsk_boards b
-            WHERE b.client_id       = fav.client_id
-                AND b.project_id    = fav.project_id
-                AND b.is_active     = 'Y';
-            --
-            tsk_app.set_user_preferences (
-                in_user_id          => rec.user_id,
-                in_client_id        => fav.client_id,
-                in_project_id       => fav.project_id,
-                in_board_id         => fav.board_id,
-                in_swimlane_id      => fav.swimlane_id
-            );
+            preselect_recent_project(rec.user_id);
         END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE preselect_recent_project (
+        in_user_id              tsk_users.user_id%TYPE
+    )
+    AS
+        fav                     tsk_user_fav_boards%ROWTYPE;
+    BEGIN
+        -- check users preferences, find project
+        SELECT MAX(u.client_id)
+        INTO fav.client_id
+        FROM tsk_auth_users u
+        JOIN tsk_clients c
+            ON c.client_id      = u.client_id
+        WHERE u.user_id         = in_user_id
+            AND u.is_active     = 'Y'
+            AND c.is_active     = 'Y';
+        --
+        SELECT MAX(r.project_id)
+        INTO fav.project_id
+        FROM tsk_auth_roles r
+        JOIN tsk_projects p
+            ON p.client_id      = r.client_id
+            AND p.project_id    = r.project_id
+        WHERE r.client_id       = fav.client_id
+            AND r.user_id       = in_user_id
+            AND r.is_active     = 'Y'
+            AND p.is_active     = 'Y';
+        --
+        SELECT MAX(b.board_id)
+        INTO fav.board_id
+        FROM tsk_boards b
+        WHERE b.client_id       = fav.client_id
+            AND b.project_id    = fav.project_id
+            AND b.is_active     = 'Y';
+        --
+        tsk_app.set_user_preferences (
+            in_user_id          => in_user_id,
+            in_client_id        => fav.client_id,
+            in_project_id       => fav.project_id,
+            in_board_id         => fav.board_id,
+            in_swimlane_id      => fav.swimlane_id
+        );
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

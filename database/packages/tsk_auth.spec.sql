@@ -6,6 +6,12 @@ CREATE OR REPLACE PACKAGE tsk_auth AS
 
 
 
+    PROCEDURE preselect_recent_project (
+        in_user_id              tsk_users.user_id%TYPE
+    );
+
+
+
     FUNCTION get_component_type (
         in_component_type       VARCHAR2
     )
