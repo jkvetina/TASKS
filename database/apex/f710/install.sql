@@ -30,6 +30,7 @@ prompt --install
 @@application/shared_components/user_interface/lovs/lov_boards_page_items.sql
 @@application/shared_components/user_interface/lovs/lov_categories.sql
 @@application/shared_components/user_interface/lovs/lov_clients_all.sql
+@@application/shared_components/user_interface/lovs/lov_projects_all.sql
 @@application/shared_components/user_interface/lovs/lov_projects_page_items.sql
 @@application/shared_components/user_interface/lovs/lov_projects_user_settings.sql
 @@application/shared_components/user_interface/lovs/lov_repos_page_items.sql

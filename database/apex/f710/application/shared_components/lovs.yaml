@@ -361,6 +361,25 @@
     default-sort: USER_NAME
     sort-direction: Ascending (Nulls Last)
 
+- # ====== List of Values: LOV_PROJECTS #ALL ===================
+  id: 48853480002014970
+  identification: 
+    name: 'LOV_PROJECTS #ALL'
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_LOV_PROJECTS_ALL_V
+
+  column-mapping: 
+    return: PROJECT_ID
+    display: PROJECT_NAME
+    default-sort: PROJECT_R#
+    sort-direction: Ascending (Nulls Last)
+    group: CLIENT_NAME
+    group-sort-direction: Ascending (Nulls Last)
+
 - # ====== List of Values: MASTER - LOV_APPLICATIONS ===========
   id: 54624749962706655
   identification: 

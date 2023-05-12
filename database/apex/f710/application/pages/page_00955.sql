@@ -684,7 +684,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(187138827673459155)
 ,p_prompt=>'Project'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'LOV_PROJECTS #USER_SETTINGS'
+,p_named_lov=>'LOV_PROJECTS #ALL'
 ,p_lov_display_null=>'YES'
 ,p_lov_cascade_parent_items=>'P955_CLIENT_ID'
 ,p_ajax_items_to_submit=>'P955_CLIENT_ID'
