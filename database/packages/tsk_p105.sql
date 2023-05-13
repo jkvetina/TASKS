@@ -106,10 +106,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         rec.tags            := CASE WHEN v_is_detail THEN core.get_item('P105_TAGS')        ELSE core.get_grid_data('TAGS') END;
         rec.order#          := CASE WHEN v_is_detail THEN core.get_item('P105_ORDER')       ELSE core.get_grid_data('ORDER#') END;
         --
-        IF v_is_detail AND core.get_request() LIKE '%_ON_TOP' THEN
-            rec.order#      := 0;
-        END IF;
-        --
         rec.deadline_at     := core.get_date(CASE WHEN v_is_detail THEN core.get_item('P105_DEADLINE_AT') ELSE core.get_grid_data('DEADLINE_AT') END);
         --
         tsk_tapi.tasks(rec,
@@ -374,6 +370,22 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
             in_file_mime        => rec.file_mime,
             in_file_payload     => rec.file_payload
         );
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE move_task_to_top
+    AS
+    BEGIN
+        -- @TODO: check permissions for related project
+        UPDATE tsk_tasks t
+        SET t.order#        = 0
+        WHERE t.task_id     = COALESCE(core.get_item('$TASK_ID'), core.get_grid_data('TASK_ID'));
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

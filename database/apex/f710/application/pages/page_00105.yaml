@@ -27,7 +27,7 @@ navigation:
 javascript: 
   function-and-global-variable-declaration: |
     var delete_comment = function (task_id, comment_id) {
-        apex.server.process('DELETE_COMMENT',
+        apex.server.process('AJAX_DELETE_COMMENT',
             {
                 x01: task_id,
                 x02: comment_id
@@ -3140,7 +3140,7 @@ buttons:
     label: Update
 
   layout: 
-    sequence: 50
+    sequence: 40
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -3218,7 +3218,7 @@ buttons:
     label: Update and Close
 
   layout: 
-    sequence: 60
+    sequence: 50
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -3253,7 +3253,7 @@ buttons:
     label: Create and Close
 
   layout: 
-    sequence: 40
+    sequence: 30
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -3288,7 +3288,7 @@ buttons:
     label: Create and
 
   layout: 
-    sequence: 30
+    sequence: 20
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -3508,14 +3508,14 @@ buttons:
   security: 
     authorization-scheme: IS_USER # 47196033359190547
 
-- # ====== Button: CREATE_ON_TOP ===============================
+- # ====== Button: MOVE_TASK_TO_TOP ============================
   id: 48743550807148036
   identification: 
-    button-name: CREATE_ON_TOP
-    label: Create on Top
+    button-name: MOVE_TASK_TO_TOP
+    label: Move Task to Top
 
   layout: 
-    sequence: 20
+    sequence: 60
     region: '&P105_HEADER.' # 63213380867844590
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -3525,7 +3525,7 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Text # 70970074101975671
+    button-template: Icon # 70969417180975670
     hot: false
     template-options: 
     - '#DEFAULT#'
@@ -3535,10 +3535,10 @@ buttons:
     action: Submit Page
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
-    database-action: SQL INSERT action
+    database-action: SQL UPDATE action
 
   server-side-condition: 
-    type: Item is NULL
+    type: Item is NOT NULL
     item: P105_TASK_ID
 
   security: 
@@ -3609,13 +3609,13 @@ dynamic-actions:
       fire-when-event-result-is: True
       fire-on-initialization: false
 
-- # ====== Dynamic Action: ON_JOIN_TASK_CLOSE ==================
+- # ====== Dynamic Action: CLOSE_DIALOG_ON_JOIN ================
   id: 48481374722495801
   identification: 
-    name: ON_JOIN_TASK_CLOSE
+    name: CLOSE_DIALOG_ON_JOIN
 
   execution: 
-    sequence: 30
+    sequence: 40
 
   when: 
     event: EVENT.EVENT.FAMEWORK.APEXAFTERCLOSEDIALOG
@@ -3634,36 +3634,7 @@ dynamic-actions:
 
     execution: 
       sequence: 10
-      event: ON_JOIN_TASK_CLOSE # 48481374722495801
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-- # ====== Dynamic Action: EDIT --- NOT WORKING @Max ===========
-  id: 48506315597203335
-  identification: 
-    name: EDIT --- NOT WORKING @Max
-
-  execution: 
-    sequence: 40
-
-  when: 
-    event: EVENT.EVENT.BROWSER.READY
-
-  execution: 
-    event-scope: Static
-
-  actions: 
-  - # ====== Action: Execute JavaScript Code =====================
-    id: 48506404665203336
-    identification: 
-      action: Execute JavaScript Code
-
-    settings: 
-      code: apex.region('CHECKLIST').widget().interactiveGrid('getActions').set('edit', true);
-
-    execution: 
-      sequence: 10
-      event: EDIT --- NOT WORKING @Max # 48506315597203335
+      event: CLOSE_DIALOG_ON_JOIN # 48481374722495801
       fire-when-event-result-is: True
       fire-on-initialization: false
 
@@ -3759,7 +3730,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 70
+    sequence: 90
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -3776,7 +3747,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 80
+    sequence: 110
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -3793,7 +3764,7 @@ processes:
     type: Close Dialog
 
   execution: 
-    sequence: 60
+    sequence: 80
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -3825,10 +3796,10 @@ processes:
   security: 
     authorization-scheme: IS_USER # 47196033359190547
 
-- # ====== Process: DELETE_COMMENT =============================
+- # ====== Process: AJAX_DELETE_COMMENT ========================
   id: 45281736757457932
   identification: 
-    name: DELETE_COMMENT
+    name: AJAX_DELETE_COMMENT
     type: Execute Code
 
   source: 
@@ -3856,7 +3827,7 @@ processes:
     pl/sql-code: tsk_p105.save_split_checklist();
 
   execution: 
-    sequence: 40
+    sequence: 50
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -3881,7 +3852,7 @@ processes:
     pl/sql-code: tsk_p105.save_attachements();
 
   execution: 
-    sequence: 50
+    sequence: 40
     point: Processing
     run-process: Once Per Page Visit (default)
 
@@ -3921,6 +3892,49 @@ processes:
 
   security: 
     authorization-scheme: IS_USER # 47196033359190547
+
+- # ====== Process: UPDATE_AND_MOVE_TO_TOP =====================
+  id: 48743685405148037
+  identification: 
+    name: UPDATE_AND_MOVE_TO_TOP
+    type: Invoke API
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P105
+    procedure-or-function: MOVE_TASK_TO_TOP
+
+  execution: 
+    sequence: 60
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: MOVE_TASK_TO_TOP # 48743550807148036
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
+- # ====== Process: CLOSE_DIALOG_MOVE_TO_TOP ===================
+  id: 48744284986148043
+  identification: 
+    name: CLOSE_DIALOG_MOVE_TO_TOP
+    type: Close Dialog
+
+  execution: 
+    sequence: 100
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    when-button-pressed: MOVE_TASK_TO_TOP # 48743550807148036
 
 branches: 
 - # ====== Branch: CREATE_ANOTHER ==============================
