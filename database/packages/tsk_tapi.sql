@@ -255,9 +255,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
     PROCEDURE projects (
         rec                     IN OUT NOCOPY   tsk_projects%ROWTYPE,
-        in_action                               CHAR                                := NULL,
-        old_client_id           IN OUT NOCOPY   tsk_projects.client_id%TYPE,
-        old_project_id          IN OUT NOCOPY   tsk_projects.project_id%TYPE
+        --
+        in_action               CHAR                            := NULL,
+        in_client_id            tsk_projects.client_id%TYPE     := NULL,
+        in_project_id           tsk_projects.project_id%TYPE    := NULL
     )
     AS
         c_action                CONSTANT CHAR   := get_action(in_action);
@@ -291,19 +292,19 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         END IF;
 
         -- are we renaming the primary key?
-        IF rec.project_id != old_project_id AND c_action = 'U' THEN
+        IF rec.project_id != in_project_id AND c_action = 'U' THEN
             -- first create new record
             INSERT INTO tsk_projects
             VALUES rec;
             --
             rename_project_id (
-                in_old_project_id   => old_project_id,      -- old key
+                in_old_project_id   => in_project_id,       -- old key
                 in_new_project_id   => rec.project_id,      -- new key
                 in_client_id        => rec.client_id
             );
             --
             DELETE FROM tsk_projects t
-            WHERE t.project_id      = old_project_id;       -- old key
+            WHERE t.project_id      = in_project_id;        -- old key
         ELSE
             -- proceed with update or insert
             UPDATE tsk_projects t
@@ -315,10 +316,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
                 VALUES rec;
             END IF;
         END IF;
-
-        -- update keys to APEX
-        old_client_id       := rec.client_id;
-        old_project_id      := rec.project_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

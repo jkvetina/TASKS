@@ -62,6 +62,7 @@ u AS (
     JOIN tsk_auth_roles r
         ON r.client_id      = p.client_id
         AND (r.project_id   = p.project_id OR r.project_id IS NULL)
+        AND r.is_active     = 'Y'
     GROUP BY
         p.project_id
 )

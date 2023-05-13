@@ -22,28 +22,22 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
 
     PROCEDURE save_projects
     AS
-        old_client_id       tsk_projects.client_id%TYPE;
-        old_project_id      tsk_projects.project_id%TYPE;
         rec                 tsk_projects%ROWTYPE;
-        --
-        v_action            CONSTANT CHAR   := core.get_grid_action();
+        in_action           CONSTANT CHAR := core.get_grid_action();
     BEGIN
-        -- get primary key
-        old_client_id       := core.get_grid_data('OLD_CLIENT_ID');
-        old_project_id      := core.get_grid_data('OLD_PROJECT_ID');
-
         -- change record in table
         rec.client_id       := core.get_grid_data('CLIENT_ID');
         rec.project_id      := core.get_grid_data('PROJECT_ID');
         rec.project_name    := core.get_grid_data('PROJECT_NAME');
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
         --
-        tsk_tapi.projects (rec, v_action,
-            old_client_id   => old_client_id,
-            old_project_id  => old_project_id
+        tsk_tapi.projects (rec,
+            in_action       => in_action,
+            in_client_id    => core.get_grid_data('OLD_CLIENT_ID'),
+            in_project_id   => core.get_grid_data('OLD_PROJECT_ID')
         );
         --
-        IF v_action = 'D' THEN
+        IF in_action = 'D' THEN
             COMMIT;     -- commit to catch possible error here, because all foreign keys are deferred
             RETURN;     -- exit this procedure
         END IF;
@@ -53,7 +47,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
         core.set_grid_data('OLD_PROJECT_ID',    rec.project_id);
 
         -- just for the new records
-        IF v_action = 'C' THEN
+        IF in_action = 'C' THEN
             create_default_swimlane (
                 in_client_id        => rec.client_id,
                 in_project_id       => rec.project_id

@@ -60,9 +60,10 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
 
     PROCEDURE projects (
         rec                     IN OUT NOCOPY   tsk_projects%ROWTYPE,
-        in_action                               CHAR                                := NULL,
-        old_client_id           IN OUT NOCOPY   tsk_projects.client_id%TYPE,
-        old_project_id          IN OUT NOCOPY   tsk_projects.project_id%TYPE
+        --
+        in_action               CHAR                            := NULL,
+        in_client_id            tsk_projects.client_id%TYPE     := NULL,
+        in_project_id           tsk_projects.project_id%TYPE    := NULL
     );
 
 
