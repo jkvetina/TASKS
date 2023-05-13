@@ -146,6 +146,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
         -- delete record
         IF c_action = 'D' THEN
+            DELETE FROM tsk_swimlanes t
+            WHERE t.project_id      = rec.project_id;
+            --
+            DELETE FROM tsk_statuses t
+            WHERE t.project_id      = rec.project_id;
+            --
+            DELETE FROM tsk_boards t
+            WHERE t.project_id      = rec.project_id;
+            --
+            DELETE FROM tsk_auth_roles t
+            WHERE t.project_id      = rec.project_id;
+            --
             DELETE FROM tsk_projects t
             WHERE t.project_id      = rec.project_id;
             --

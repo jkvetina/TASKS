@@ -4,9 +4,13 @@ CREATE OR REPLACE PACKAGE tsk_p300 AS
 
 
 
-    PROCEDURE save_projects (
-        io_client_id        IN OUT NOCOPY   tsk_projects.client_id%TYPE,
-        io_project_id       IN OUT NOCOPY   tsk_projects.project_id%TYPE
+    PROCEDURE save_projects;
+
+
+
+    PROCEDURE create_default_swimlane (
+        in_client_id        tsk_projects.client_id%TYPE,
+        in_project_id       tsk_projects.project_id%TYPE
     );
 
 END;

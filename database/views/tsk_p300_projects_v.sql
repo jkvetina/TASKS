@@ -19,7 +19,8 @@ c AS (
         t.project_id
 )
 SELECT
-    t.project_id        AS pk_project_id,   -- to allow PK changes
+    t.project_id        AS old_project_id,      -- to allow PK changes
+    t.client_id         AS old_client_id,       -- to allow PK changes
     --
     t.client_id,
     t.project_id,
