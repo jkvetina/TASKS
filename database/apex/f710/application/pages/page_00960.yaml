@@ -158,6 +158,9 @@ regions:
     region-display-selector: false
     exclude-title-from-translation: false
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
   server-cache: 
     caching: Disabled
 
