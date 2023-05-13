@@ -87,7 +87,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_column_name          VARCHAR2,
         in_old_key              VARCHAR2,
         in_new_key              VARCHAR2,
-        in_merge                BOOLEAN         := FALSE
+        in_merge                BOOLEAN         := TRUE
     )
     AS
         v_query                 VARCHAR2(2000);
