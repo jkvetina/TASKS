@@ -6,16 +6,39 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
 
 
     FUNCTION get_action (
-        in_action               VARCHAR2 := NULL
+        in_action               VARCHAR2        := NULL
     )
     RETURN CHAR;
+
+
+
+    FUNCTION get_master_table (
+        in_column_name          VARCHAR2
+    )
+    RETURN VARCHAR2;
+
+
+
+    FUNCTION get_query (
+        in_template             VARCHAR2,
+        in_arg1                 VARCHAR2        := NULL,
+        in_arg2                 VARCHAR2        := NULL,
+        in_arg3                 VARCHAR2        := NULL,
+        in_arg4                 VARCHAR2        := NULL,
+        in_arg5                 VARCHAR2        := NULL,
+        in_arg6                 VARCHAR2        := NULL,
+        in_arg7                 VARCHAR2        := NULL,
+        in_arg8                 VARCHAR2        := NULL
+    )
+    RETURN VARCHAR2;
 
 
 
     PROCEDURE rename_primary_key (
         in_column_name          VARCHAR2,
         in_old_key              VARCHAR2,
-        in_new_key              VARCHAR2
+        in_new_key              VARCHAR2,
+        in_merge                BOOLEAN         := FALSE
     );
 
 

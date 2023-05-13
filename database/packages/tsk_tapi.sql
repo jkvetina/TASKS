@@ -10,7 +10,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
 
     FUNCTION get_action (
-        in_action               VARCHAR2 := NULL
+        in_action               VARCHAR2        := NULL
     )
     RETURN CHAR
     AS
@@ -20,12 +20,77 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
 
 
+    FUNCTION get_master_table (
+        in_column_name          VARCHAR2
+    )
+    RETURN VARCHAR2
+    AS
+        out_table_name          all_constraints.table_name%TYPE;
+    BEGIN
+        SELECT n.table_name
+        INTO out_table_name
+        FROM all_constraints n
+        JOIN all_cons_columns c
+            ON c.owner              = n.owner
+            AND c.constraint_name   = n.constraint_name
+        WHERE n.owner               = core.get_owner()
+            AND n.constraint_type   = 'P'
+            AND c.table_name        LIKE 'TSK\_%' ESCAPE '\'
+            AND c.column_name       = in_column_name
+            AND c.position          = 1;
+        --
+        RETURN out_table_name;
+    EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    FUNCTION get_query (
+        in_template             VARCHAR2,
+        in_arg1                 VARCHAR2        := NULL,
+        in_arg2                 VARCHAR2        := NULL,
+        in_arg3                 VARCHAR2        := NULL,
+        in_arg4                 VARCHAR2        := NULL,
+        in_arg5                 VARCHAR2        := NULL,
+        in_arg6                 VARCHAR2        := NULL,
+        in_arg7                 VARCHAR2        := NULL,
+        in_arg8                 VARCHAR2        := NULL
+    )
+    RETURN VARCHAR2
+    AS
+    BEGIN
+        -- @TODO: check missing args
+        RETURN TRIM(APEX_STRING.FORMAT(in_template,
+            in_arg1,            -- %0
+            in_arg2,            -- %1
+            in_arg3,            -- %2
+            in_arg4,            -- %3
+            in_arg5,            -- %4
+            in_arg6,            -- %5
+            in_arg7,            -- %6
+            in_arg8,            -- %7
+            p_prefix => '!'));
+    EXCEPTION
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
     PROCEDURE rename_primary_key (
         in_column_name          VARCHAR2,
         in_old_key              VARCHAR2,
-        in_new_key              VARCHAR2
+        in_new_key              VARCHAR2,
+        in_merge                BOOLEAN         := FALSE
     )
     AS
+        v_query                 VARCHAR2(2000);
     BEGIN
         -- rename in all related tables, need deferred foreign keys for this
         FOR c IN (
@@ -40,19 +105,34 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         ) LOOP
             -- @TODO: we should certainly log this
             BEGIN
-                EXECUTE IMMEDIATE
-                    TRIM(APEX_STRING.FORMAT(q'!
-                        !UPDATE %0
-                        !SET %1   = :NEW_KEY_ID
+                v_query := tsk_tapi.get_query(q'!
+                    !UPDATE %0
+                    !SET %1   = :NEW_KEY_ID
+                    !WHERE %1 = :OLD_KEY_ID
+                    !',
+                    c.table_name,           -- %0
+                    in_column_name          -- %1
+                );
+                --
+                EXECUTE IMMEDIATE v_query USING in_new_key, in_old_key;
+                --
+            EXCEPTION
+            WHEN DUP_VAL_ON_INDEX THEN
+                -- if this is the master table, we could remove the original row
+                IF in_merge AND c.table_name = tsk_tapi.get_master_table(in_column_name) THEN
+                    v_query := tsk_tapi.get_query(q'!
+                        !DELETE %0
                         !WHERE %1 = :OLD_KEY_ID
                         !',
                         c.table_name,           -- %0
-                        in_column_name,         -- %1
-                        p_prefix => '!'))
-                    USING
-                        in_new_key,
-                        in_old_key;
-            EXCEPTION
+                        in_column_name          -- %1
+                    );
+                    --
+                    EXECUTE IMMEDIATE v_query USING in_old_key;
+                    --
+                ELSE
+                    RAISE;
+                END IF;
             WHEN OTHERS THEN
                 core.raise_error(NULL, c.table_name, in_column_name, in_old_key, in_new_key);
             END;
