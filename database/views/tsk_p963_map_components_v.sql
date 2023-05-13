@@ -78,7 +78,10 @@ SELECT
     ''              AS dml_actions
 FROM tsk_p962_map_pages_v g
 JOIN tsk_lov_app_pages_v p
-    ON p.page_id        = g.page_id;
+    ON p.page_id        = g.page_id
+JOIN x
+    ON (x.page_id       = p.page_id         OR x.page_id IS NULL)
+    AND (x.page_group   = p.page_group_raw  OR x.page_group IS NULL);
 --
 COMMENT ON TABLE tsk_p963_map_components_v IS '';
 
