@@ -38,11 +38,15 @@ SELECT
         THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="Region source is not a view"></span>'
         END || r.table_name AS source_table,
     --
-    p.attribute_01      AS target_type,
+    p.process_type_code     AS process_type,
+    p.attribute_01          AS target_type,
     --
     CASE WHEN p.attribute_04 IS NULL
         THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="PL/SQL handler is missing"></span>'
-        END || NVL(p.attribute_03, REGEXP_SUBSTR(UPPER(p.attribute_04), '^[A-Z0-9_]+\.?[A-Z0-9_]*')) AS target_name,     -- code to execute
+        END || NVL(
+            LTRIM(p.attribute_03 || '.' || p.attribute_04, '.'),
+            REGEXP_SUBSTR(UPPER(p.attribute_04), '^[A-Z0-9_]+\.?[A-Z0-9_]*')
+        ) AS target_name,     -- code to execute
     --
     -- @TODO: toolbar check, js init check...
     --
@@ -82,7 +86,7 @@ JOIN tsk_lov_app_pages_v s
 WHERE p.application_id      = x.app_id
     --AND (x.page_id          = s.page_id         OR x.page_id IS NULL)
     AND (x.page_group       = s.page_group_raw  OR x.page_group IS NULL)
-    AND p.process_type_code = 'NATIVE_IG_DML';
+    AND p.process_type_code IN ('NATIVE_IG_DML', 'NATIVE_INVOKE_API');
 --
 COMMENT ON TABLE tsk_p968_grid_check_v IS '';
 
