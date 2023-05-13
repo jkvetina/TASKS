@@ -135,6 +135,12 @@ regions:
     table-owner: Parsing Schema
     table-name: TSK_P955_MAP_ROLES_V
     include-rowid-column: false
+    page-items-to-submit: 
+    - P955_CLIENT_ID
+    - P955_PROJECT_ID
+    - P955_ROLE_GROUP
+    - P955_ROLE_ID
+    - P955_SHOW_ALL
 
   layout: 
     sequence: 20
@@ -1424,62 +1430,6 @@ dynamic-actions:
       event: CHANGED_ROLE # 47076945743134330
       fire-when-event-result-is: True
       fire-on-initialization: false
-
-- # ====== Dynamic Action: CORRECT_VIEW_REFRESH ================
-  id: 47167027827467604
-  identification: 
-    name: CORRECT_VIEW_REFRESH
-
-  execution: 
-    sequence: 30
-
-  when: 
-    event: NATIVE_IG|REGION TYPE|interactivegridsave
-    selection-type: Region
-    region: Map Roles [GRID] # 280334188250543858
-
-  execution: 
-    event-scope: Static
-    type: Immediate
-
-  actions: 
-  - # ====== Action: Refresh =====================================
-    id: 47078054876134341
-    identification: 
-      action: Refresh
-
-    affected-elements: 
-      selection-type: Region
-      region: Map Roles [GRID] # 280334188250543858
-
-    execution: 
-      sequence: 20
-      event: CORRECT_VIEW_REFRESH # 47167027827467604
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-  - # ====== Action: Execute Server-side Code ====================
-    id: 47167900711467607
-    identification: 
-      action: Execute Server-side Code
-
-    settings: 
-      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
-      pl/sql-code: NULL;
-      items-to-submit: 
-      - P955_CLIENT_ID
-      - P955_PROJECT_ID
-      - P955_ROLE_GROUP
-      - P955_ROLE_ID
-      - P955_SHOW_ALL
-
-    execution: 
-      sequence: 10
-      event: CORRECT_VIEW_REFRESH # 47167027827467604
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-      stop-execution-on-error: true
-      wait-for-result: true
 
 processes: 
 - # ====== Process: SAVE_ROLES =================================

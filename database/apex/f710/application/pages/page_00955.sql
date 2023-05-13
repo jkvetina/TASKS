@@ -61,6 +61,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_query_table=>'TSK_P955_MAP_ROLES_V'
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
+,p_ajax_items_to_submit=>'P955_CLIENT_ID,P955_PROJECT_ID,P955_ROLE_GROUP,P955_ROLE_ID,P955_SHOW_ALL'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_prn_content_disposition=>'ATTACHMENT'
 ,p_prn_units=>'INCHES'
@@ -829,38 +830,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_SUBMIT_PAGE'
 ,p_attribute_02=>'Y'
-);
-wwv_flow_imp_page.create_page_da_event(
- p_id=>wwv_flow_imp.id(47167027827467604)
-,p_name=>'CORRECT_VIEW_REFRESH'
-,p_event_sequence=>30
-,p_triggering_element_type=>'REGION'
-,p_triggering_region_id=>wwv_flow_imp.id(280334188250543858)
-,p_bind_type=>'bind'
-,p_execution_type=>'IMMEDIATE'
-,p_bind_event_type=>'NATIVE_IG|REGION TYPE|interactivegridsave'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(47167900711467607)
-,p_event_id=>wwv_flow_imp.id(47167027827467604)
-,p_event_result=>'TRUE'
-,p_action_sequence=>10
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_EXECUTE_PLSQL_CODE'
-,p_attribute_01=>'NULL;'
-,p_attribute_02=>'P955_CLIENT_ID,P955_PROJECT_ID,P955_ROLE_GROUP,P955_ROLE_ID,P955_SHOW_ALL'
-,p_attribute_05=>'PLSQL'
-,p_wait_for_result=>'Y'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(47078054876134341)
-,p_event_id=>wwv_flow_imp.id(47167027827467604)
-,p_event_result=>'TRUE'
-,p_action_sequence=>20
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_REFRESH'
-,p_affected_elements_type=>'REGION'
-,p_affected_region_id=>wwv_flow_imp.id(280334188250543858)
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(47076565528134326)
