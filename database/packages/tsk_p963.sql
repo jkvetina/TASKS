@@ -46,6 +46,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
                 core.set_item('$NEXT_GROUP', c.next_group);
             END LOOP;
         END IF;
+
+        -- auto refresh mview
+        IF INSTR(core.get_request_url(in_arguments_only => TRUE), 'clear=' || core.get_page_id() || '&') IS NOT NULL THEN
+            tsk_p963.refresh_mv();
+        END IF;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
