@@ -493,6 +493,15 @@ CREATE OR REPLACE PACKAGE BODY core AS
 
 
 
+    FUNCTION get_grid_action
+    RETURN VARCHAR2
+    AS
+    BEGIN
+        RETURN APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
+    END;
+
+
+
     FUNCTION get_grid_data (
         in_column_name          VARCHAR2
     )
@@ -504,11 +513,17 @@ CREATE OR REPLACE PACKAGE BODY core AS
 
 
 
-    FUNCTION get_grid_action
-    RETURN VARCHAR2
+    PROCEDURE set_grid_data (
+        in_column_name          VARCHAR2,
+        in_value                VARCHAR2
+    )
     AS
     BEGIN
-        RETURN APEX_UTIL.GET_SESSION_STATE('APEX$ROW_STATUS');
+        APEX_UTIL.SET_SESSION_STATE (
+            p_name      => in_column_name,
+            p_value     => in_value,
+            p_commit    => FALSE
+        );
     END;
 
 

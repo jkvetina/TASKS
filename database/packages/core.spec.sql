@@ -213,6 +213,11 @@ CREATE OR REPLACE PACKAGE core AS
 
 
 
+    FUNCTION get_grid_action
+    RETURN VARCHAR2;
+
+
+
     FUNCTION get_grid_data (
         in_column_name          VARCHAR2
     )
@@ -220,8 +225,10 @@ CREATE OR REPLACE PACKAGE core AS
 
 
 
-    FUNCTION get_grid_action
-    RETURN VARCHAR2;
+    PROCEDURE set_grid_data (
+        in_column_name          VARCHAR2,
+        in_value                VARCHAR2
+    );
 
 
 
