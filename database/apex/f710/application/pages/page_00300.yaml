@@ -94,7 +94,7 @@ regions:
     start-new-row: true
     column: Automatic
     new-column: true
-    column-span: 8
+    column-span: Automatic
 
   appearance: 
     template: Hero # 70864195177975601
@@ -251,7 +251,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 110
+      sequence: 140
       column-alignment: end
       group: Counts # 46262172638307838
       use-group-for: Both
@@ -347,7 +347,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 100
+      sequence: 130
       column-alignment: end
       group: Counts # 46262172638307838
       use-group-for: Both
@@ -445,6 +445,144 @@ regions:
 
     enable-users-to: 
       sort: false
+
+  - # ====== Column: COUNT_CATEGORIES ============================
+    id: 48742960258148030
+    identification: 
+      column-name: COUNT_CATEGORIES
+      type: Display Only
+
+    heading: 
+      heading: Categories
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 100
+      column-alignment: end
+      group: Counts # 46262172638307838
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_CATEGORIES
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_STATUSES ==============================
+    id: 48743015704148031
+    identification: 
+      column-name: COUNT_STATUSES
+      type: Display Only
+
+    heading: 
+      heading: Statuses
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 110
+      column-alignment: end
+      group: Counts # 46262172638307838
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_STATUSES
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_SWIMLANES =============================
+    id: 48743171195148032
+    identification: 
+      column-name: COUNT_SWIMLANES
+      type: Display Only
+
+    heading: 
+      heading: Swimlanes
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 120
+      column-alignment: end
+      group: Counts # 46262172638307838
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_SWIMLANES
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
 
   - # ====== Column: APEX$ROW_ACTION =============================
     id: 70449303000945050
