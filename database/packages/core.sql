@@ -1030,7 +1030,7 @@ CREATE OR REPLACE PACKAGE BODY core AS
             ROLLBACK;
         END IF;
         --
-        v_message := SUBSTR (
+        v_message := SUBSTR(REPLACE(REPLACE(
             COALESCE(in_action_name, SQLERRM) ||
             RTRIM(
                 '|' || in_arg1 || '|' || in_arg2 || '|' || in_arg3 || '|' || in_arg4 ||
@@ -1038,9 +1038,10 @@ CREATE OR REPLACE PACKAGE BODY core AS
                 '|'
             ) ||
             '|' || core.get_caller_name(3),
+            '"', ''), '&' || 'quot;', ''),
             1, 4000);
         --
-        v_backtrace := SUBSTR(REPLACE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE, '"', ''), 1, 4000);
+        v_backtrace := SUBSTR(REPLACE(REPLACE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE, '"', ''), '&' || 'quot;', ''), 1, 4000);
         --
         APEX_DEBUG.ERROR(core.app_exception_code || ' ' || v_message || '|' || v_backtrace);
         --
