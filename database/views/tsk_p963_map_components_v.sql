@@ -8,6 +8,7 @@ WITH x AS (
 SELECT
     g.component_id,
     g.component_type,
+    g.component_name__,
     --
     REPLACE(LPAD(' ', 1 * 3, ' '), ' ', '&' || 'nbsp; ') ||    -- compensate for added page_id
         g.component_name ||
@@ -46,8 +47,9 @@ LEFT JOIN tsk_p960_roles_columns_v r
     ON r.role_id        = c.role_id
 GROUP BY
     g.component_id,
-    g.component_name,
     g.component_type,
+    g.component_name__,
+    g.component_name,
     p.page,
     p.page_group,
     g.page_id,
@@ -57,8 +59,9 @@ GROUP BY
 UNION ALL
 SELECT
     g.page_id,
-    'PAGE',
-    p.page_name,
+    'PAGE'          AS component_type,
+    p.page_name     AS component_name__,
+    p.page_name     AS component_name,
     p.page,
     p.page_group,
     g.page_id,
@@ -70,9 +73,9 @@ SELECT
     g.role_6,
     g.role_7,
     g.role_8,
-    ''          AS is_used,
-    '/'         AS path_,
-    ''          AS dml_actions
+    ''              AS is_used,
+    '/'             AS path_,
+    ''              AS dml_actions
 FROM tsk_p962_map_pages_v g
 JOIN tsk_lov_app_pages_v p
     ON p.page_id        = g.page_id;

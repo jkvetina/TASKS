@@ -348,7 +348,7 @@ regions:
       format: HTML
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -398,7 +398,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: end
       stretch: Use Report Setting
 
@@ -445,7 +445,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 130
+      sequence: 100
       column-alignment: center
       stretch: Use Report Setting
 
@@ -503,7 +503,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 140
+      sequence: 110
       column-alignment: center
       stretch: Use Report Setting
 
@@ -561,7 +561,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 150
+      sequence: 120
       column-alignment: center
       stretch: Use Report Setting
 
@@ -619,7 +619,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 160
+      sequence: 130
       column-alignment: center
       stretch: Use Report Setting
 
@@ -677,7 +677,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 170
+      sequence: 140
       column-alignment: center
       stretch: Use Report Setting
 
@@ -735,7 +735,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 180
+      sequence: 150
       column-alignment: center
       stretch: Use Report Setting
 
@@ -793,7 +793,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 190
+      sequence: 160
       column-alignment: center
       stretch: Use Report Setting
 
@@ -851,7 +851,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 200
+      sequence: 170
       column-alignment: center
       stretch: Use Report Setting
 
@@ -1018,7 +1018,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 210
+      sequence: 180
       column-alignment: center
       stretch: Use Report Setting
 
@@ -1076,7 +1076,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 220
+      sequence: 190
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1121,7 +1121,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 230
+      sequence: 200
 
     accessibility: 
       value-identifies-row: false
@@ -1132,6 +1132,40 @@ regions:
       data-type: VARCHAR2
       query-only: true
       primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: COMPONENT_NAME__ ============================
+    id: 48744401139148045
+    identification: 
+      column-name: COMPONENT_NAME__
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 50
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COMPONENT_NAME__
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
 
     session-state: 
       data-type: VARCHAR2

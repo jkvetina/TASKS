@@ -223,6 +223,7 @@ t AS (
         --
         d.component_id,
         d.component_type,
+        d.component_name AS component_name__,
         --
         REPLACE(LPAD(' ', NVL(r.level_ - 1 + CASE WHEN d.component_type != 'REGION' THEN 1 ELSE 0 END, 0) * 3, ' '), ' ', '&' || 'nbsp; ') ||
             CASE WHEN d.component_type = 'PROCESS'  THEN '<span class="fa fa-play-circle" style="color: #555; margin: 0.125rem 0.5rem 0 0;"></span>' END ||
@@ -255,6 +256,7 @@ SELECT
     NVL(r.path_,    t.path_)    AS path_,
     t.component_id,
     t.component_type,
+    t.component_name__,
     NVL(r.component_name, t.component_name) AS component_name,
     t.dml_actions
 FROM t

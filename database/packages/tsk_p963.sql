@@ -85,7 +85,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
     BEGIN
         rec.component_id    := core.get_grid_data('COMPONENT_ID');
         rec.component_type  := core.get_grid_data('COMPONENT_TYPE');
-        rec.component_name  := core.get_grid_data('COMPONENT_NAME');
+        rec.component_name  := NVL(core.get_grid_data('COMPONENT_NAME__'), '-');
         rec.page_id         := core.get_grid_data('PAGE_ID');
         rec.updated_by      := core.get_user_id();
         rec.updated_at      := SYSDATE;
