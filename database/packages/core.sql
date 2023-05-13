@@ -1009,27 +1009,27 @@ CREATE OR REPLACE PACKAGE BODY core AS
     )
     AS
         v_message               VARCHAR2(4000);
+        v_backtrace             VARCHAR2(4000);
     BEGIN
         IF in_rollback THEN
             ROLLBACK;
         END IF;
         --
-        v_message := SUBSTR(
+        v_message := SUBSTR (
+            COALESCE(in_action_name, SQLERRM) ||
             RTRIM(
-                COALESCE(in_action_name, SQLERRM) ||
                 '|' || in_arg1 || '|' || in_arg2 || '|' || in_arg3 || '|' || in_arg4 ||
                 '|' || in_arg5 || '|' || in_arg6 || '|' || in_arg7 || '|' || in_arg8,
                 '|'
             ) ||
-            '|' || core.get_caller_name(3) ||
+            '|' || core.get_caller_name(3),
             1, 4000);
         --
-        APEX_DEBUG.ERROR (
-            core.app_exception_code || ' ' || v_message ||
-            '|' || DBMS_UTILITY.FORMAT_ERROR_BACKTRACE
-        );
+        v_backtrace := SUBSTR(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE, 1, 4000);
         --
-        RAISE_APPLICATION_ERROR(core.app_exception_code, v_message || CASE WHEN in_traceback OR core.is_developer() THEN '|' || DBMS_UTILITY.FORMAT_ERROR_BACKTRACE END, TRUE);
+        APEX_DEBUG.ERROR(core.app_exception_code || ' ' || v_message || '|' || v_backtrace);
+        --
+        RAISE_APPLICATION_ERROR(core.app_exception_code, v_message || CASE WHEN in_traceback OR core.is_developer() THEN '|' || v_backtrace END, TRUE);
     END;
 
 
