@@ -20,6 +20,52 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
 
 
+    PROCEDURE rename_primary_key (
+        in_column_name          VARCHAR2,
+        in_old_key              VARCHAR2,
+        in_new_key              VARCHAR2
+    )
+    AS
+    BEGIN
+        -- rename in all related tables, need deferred foreign keys for this
+        FOR c IN (
+            SELECT c.table_name
+            FROM all_tab_cols c
+            JOIN all_tables t
+                ON t.owner          = c.owner
+                AND t.table_name    = c.table_name
+            WHERE c.owner           = core.get_owner()
+                AND c.table_name    LIKE 'TSK\_%' ESCAPE '\'
+                AND c.column_name   = in_column_name
+        ) LOOP
+            -- @TODO: we should certainly log this
+            BEGIN
+                EXECUTE IMMEDIATE
+                    TRIM(APEX_STRING.FORMAT(q'!
+                        !UPDATE %0
+                        !SET %1   = :NEW_KEY_ID
+                        !WHERE %1 = :OLD_KEY_ID
+                        !',
+                        c.table_name,           -- %0
+                        in_column_name,         -- %1
+                        p_prefix => '!'))
+                    USING
+                        in_new_key,
+                        in_old_key;
+            EXCEPTION
+            WHEN OTHERS THEN
+                core.raise_error(NULL, c.table_name, in_column_name, in_old_key, in_new_key);
+            END;
+        END LOOP;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
     PROCEDURE clients (
         rec                     IN OUT NOCOPY   tsk_clients%ROWTYPE,
         in_action                               CHAR                                := NULL,

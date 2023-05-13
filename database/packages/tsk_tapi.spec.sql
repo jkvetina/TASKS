@@ -12,6 +12,14 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
 
 
 
+    PROCEDURE rename_primary_key (
+        in_column_name          VARCHAR2,
+        in_old_key              VARCHAR2,
+        in_new_key              VARCHAR2
+    );
+
+
+
     PROCEDURE clients (
         rec                     IN OUT NOCOPY   tsk_clients%ROWTYPE,
         in_action                               CHAR                                := NULL,
