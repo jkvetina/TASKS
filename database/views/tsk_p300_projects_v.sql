@@ -50,6 +50,20 @@ c AS (
         ON x.client_id  = t.client_id
     GROUP BY
         t.project_id
+),
+u AS (
+    SELECT /*+ MATERIALIZE */
+        p.project_id,
+        --
+        COUNT(DISTINCT r.user_id) AS count_users
+    FROM tsk_projects p
+    JOIN x
+        ON x.client_id      = p.client_id
+    JOIN tsk_auth_roles r
+        ON r.client_id      = p.client_id
+        AND (r.project_id   = p.project_id OR r.project_id IS NULL)
+    GROUP BY
+        p.project_id
 )
 SELECT
     t.project_id        AS old_project_id,      -- to allow PK changes
@@ -76,7 +90,8 @@ SELECT
     s.count_statuses,
     w.count_swimlanes,
     b.count_boards,
-    b.count_tasks
+    b.count_tasks,
+    u.count_users
     --
 FROM tsk_projects t
 JOIN x
@@ -85,7 +100,8 @@ JOIN x
 LEFT JOIN b ON b.project_id = t.project_id
 LEFT JOIN s ON s.project_id = t.project_id
 LEFT JOIN w ON w.project_id = t.project_id
-LEFT JOIN c ON c.project_id = t.project_id;
+LEFT JOIN c ON c.project_id = t.project_id
+LEFT JOIN u ON u.project_id = t.project_id;
 --
 COMMENT ON TABLE tsk_p300_projects_v IS '';
 

@@ -584,6 +584,52 @@ regions:
       control-break/aggregate: true
       hide: true
 
+  - # ====== Column: COUNT_USERS =================================
+    id: 48743263112148033
+    identification: 
+      column-name: COUNT_USERS
+      type: Display Only
+
+    heading: 
+      heading: Users
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 150
+      column-alignment: end
+      group: Counts # 46262172638307838
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_USERS
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   - # ====== Column: APEX$ROW_ACTION =============================
     id: 70449303000945050
     identification: 
