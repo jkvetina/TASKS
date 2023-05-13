@@ -1025,7 +1025,7 @@ CREATE OR REPLACE PACKAGE BODY core AS
             '|' || core.get_caller_name(3),
             1, 4000);
         --
-        v_backtrace := SUBSTR(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE, 1, 4000);
+        v_backtrace := SUBSTR(REPLACE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE, '"', ''), 1, 4000);
         --
         APEX_DEBUG.ERROR(core.app_exception_code || ' ' || v_message || '|' || v_backtrace);
         --
