@@ -111,7 +111,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_TEXT_FIELD'
 ,p_heading=>'Role Group'
 ,p_heading_alignment=>'LEFT'
-,p_display_sequence=>50
+,p_display_sequence=>60
 ,p_value_alignment=>'LEFT'
 ,p_group_id=>wwv_flow_imp.id(47575963184232111)
 ,p_use_group_for=>'BOTH'
@@ -142,7 +142,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_TEXT_FIELD'
 ,p_heading=>'Role Desc'
 ,p_heading_alignment=>'LEFT'
-,p_display_sequence=>60
+,p_display_sequence=>70
 ,p_value_alignment=>'LEFT'
 ,p_group_id=>wwv_flow_imp.id(47575963184232111)
 ,p_use_group_for=>'BOTH'
@@ -272,6 +272,23 @@ wwv_flow_imp_page.create_region_column(
 ,p_include_in_export=>true
 );
 wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(48743394473148034)
+,p_name=>'OLD_ROLE_ID'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'OLD_ROLE_ID'
+,p_data_type=>'VARCHAR2'
+,p_session_state_data_type=>'VARCHAR2'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_HIDDEN'
+,p_display_sequence=>30
+,p_attribute_01=>'Y'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>false
+,p_is_primary_key=>true
+,p_duplicate_value=>true
+,p_include_in_export=>false
+);
+wwv_flow_imp_page.create_region_column(
  p_id=>wwv_flow_imp.id(92945231888865467)
 ,p_name=>'ROLE_ID'
 ,p_source_type=>'DB_COLUMN'
@@ -281,7 +298,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_TEXT_FIELD'
 ,p_heading=>'Role'
 ,p_heading_alignment=>'LEFT'
-,p_display_sequence=>30
+,p_display_sequence=>40
 ,p_value_alignment=>'LEFT'
 ,p_group_id=>wwv_flow_imp.id(47575963184232111)
 ,p_use_group_for=>'BOTH'
@@ -298,7 +315,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_enable_sort_group=>true
 ,p_enable_control_break=>true
 ,p_enable_hide=>true
-,p_is_primary_key=>true
+,p_is_primary_key=>false
 ,p_duplicate_value=>true
 ,p_include_in_export=>false
 );
@@ -312,7 +329,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_TEXT_FIELD'
 ,p_heading=>'Role Name'
 ,p_heading_alignment=>'LEFT'
-,p_display_sequence=>40
+,p_display_sequence=>50
 ,p_value_alignment=>'LEFT'
 ,p_group_id=>wwv_flow_imp.id(47575963184232111)
 ,p_use_group_for=>'BOTH'
@@ -343,7 +360,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_SINGLE_CHECKBOX'
 ,p_heading=>'Active'
 ,p_heading_alignment=>'CENTER'
-,p_display_sequence=>70
+,p_display_sequence=>80
 ,p_value_alignment=>'CENTER'
 ,p_group_id=>wwv_flow_imp.id(47575880927232110)
 ,p_use_group_for=>'BOTH'
@@ -479,6 +496,14 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_width=>90
 );
 wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(48890229195065795)
+,p_view_id=>wwv_flow_imp.id(92971771246058617)
+,p_display_seq=>11
+,p_column_id=>wwv_flow_imp.id(48743394473148034)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
+wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(92972983788058621)
 ,p_view_id=>wwv_flow_imp.id(92971771246058617)
 ,p_display_seq=>3
@@ -567,15 +592,11 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(92944735956865462)
-,p_process_type=>'NATIVE_IG_DML'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'SAVE_ROLES'
-,p_attribute_01=>'PLSQL_CODE'
-,p_attribute_04=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'tsk_p960.save_roles (',
-'    io_role_id  => :ROLE_ID',
-');'))
-,p_attribute_05=>'Y'
-,p_attribute_06=>'N'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P960'
+,p_attribute_04=>'SAVE_ROLES'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
@@ -583,10 +604,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(48279797290040037)
 ,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'REORDER_STATUSES'
-,p_process_sql_clob=>'tsk_p960.reorder_roles();'
-,p_process_clob_language=>'PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
+,p_process_name=>'REORDER_ROLES'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P960'
+,p_attribute_04=>'REORDER_ROLES'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_imp.id(48280136987043204)
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER

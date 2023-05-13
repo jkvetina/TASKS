@@ -146,6 +146,21 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
         old_task_id             IN OUT NOCOPY   tsk_task_commits.task_id%TYPE
     );
 
+
+
+    PROCEDURE roles_d (
+        in_role_id              tsk_roles.role_id%TYPE
+    );
+
+
+
+    PROCEDURE roles (
+        rec                     IN OUT NOCOPY tsk_roles%ROWTYPE,
+        --
+        in_action               CHAR                        := NULL,
+        in_role_id              tsk_roles.role_id%TYPE      := NULL
+    );
+
 END;
 /
 

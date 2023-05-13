@@ -27,6 +27,8 @@ r AS (
         r.role_id
 )
 SELECT
+    t.role_id       AS old_role_id,
+    --
     t.role_id,
     t.role_name,
     t.role_group,

@@ -72,117 +72,31 @@ CREATE OR REPLACE PACKAGE BODY tsk_p960 AS
 
 
 
-    PROCEDURE delete_role_cascade (
-        in_role_id          tsk_roles.role_id%TYPE
-    )
-    AS
-    BEGIN
-        DELETE FROM tsk_auth_pages          WHERE role_id = in_role_id;
-        DELETE FROM tsk_auth_components     WHERE role_id = in_role_id;
-        DELETE FROM tsk_auth_tables         WHERE role_id = in_role_id;
-        DELETE FROM tsk_auth_procedures     WHERE role_id = in_role_id;
-        DELETE FROM tsk_auth_roles          WHERE role_id = in_role_id;
-        DELETE FROM tsk_roles               WHERE role_id = in_role_id;
-    EXCEPTION
-    WHEN core.app_exception THEN
-        RAISE;
-    WHEN OTHERS THEN
-        core.raise_error();
-    END;
-
-
-
-    PROCEDURE rename_role_id (
-        in_old_role_id          tsk_roles.role_id%TYPE,
-        in_new_role_id          tsk_roles.role_id%TYPE
-    )
-    AS
-        in_table_name           user_tab_cols.table_name%TYPE   := 'TSK_ROLES';
-        in_column_name          user_tab_cols.column_name%TYPE  := 'ROLE_ID';
-    BEGIN
-        -- rename in all related tables, need deferred foreign keys for this
-        FOR c IN (
-            SELECT c.table_name
-            FROM all_tab_cols c
-            JOIN all_tables t
-                ON t.owner          = c.owner
-                AND t.table_name    = c.table_name
-            WHERE c.owner           = core.get_owner()
-                AND c.table_name    LIKE 'TSK\_%' ESCAPE '\'
-                AND c.column_name   = in_column_name
-                AND c.table_name    != in_table_name
-            ORDER BY 1
-        ) LOOP
-            BEGIN
-                EXECUTE IMMEDIATE
-                    'UPDATE ' || c.table_name               || CHR(10) ||
-                    'SET role_id        = :NEW_ROLE_ID'     || CHR(10) ||
-                    'WHERE role_id      = :OLD_ROLE_ID'
-                    USING
-                        in_new_role_id,
-                        in_old_role_id;
-            EXCEPTION
-            WHEN OTHERS THEN
-                core.raise_error(NULL, c.table_name, in_old_role_id, in_new_role_id);
-            END;
-        END LOOP;
-    EXCEPTION
-    WHEN core.app_exception THEN
-        RAISE;
-    WHEN OTHERS THEN
-        core.raise_error();
-    END;
-
-
-
-    PROCEDURE save_roles (
-        io_role_id          IN OUT NOCOPY   tsk_roles.role_id%TYPE
-    )
+    PROCEDURE save_roles
     AS
         rec                 tsk_roles%ROWTYPE;
+        in_action           CONSTANT CHAR := core.get_grid_action();
     BEGIN
+        -- change record in table
         rec.role_id         := core.get_grid_data('ROLE_ID');
         rec.role_name       := core.get_grid_data('ROLE_NAME');
         rec.role_group      := core.get_grid_data('ROLE_GROUP');
         rec.role_desc       := core.get_grid_data('ROLE_DESC');
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
         rec.order#          := core.get_grid_data('ORDER#');
-        rec.updated_by      := core.get_user_id();
-        rec.updated_at      := SYSDATE;
         --
-        IF core.get_grid_action() = 'D' THEN
-            delete_role_cascade(io_role_id);
-            --
-            RETURN;
+        tsk_tapi.roles (rec,
+            in_action       => in_action,
+            in_role_id      => core.get_grid_data('OLD_ROLE_ID')
+        );
+        --
+        IF in_action = 'D' THEN
+            COMMIT;     -- commit to catch possible error here, because all foreign keys are deferred
+            RETURN;     -- exit this procedure
         END IF;
 
-        -- are we renaming the primary key?
-        IF rec.role_id != io_role_id AND core.get_grid_action() = 'U' THEN
-            -- first create new record
-            INSERT INTO tsk_roles
-            VALUES rec;
-            --
-            rename_role_id (
-                in_old_role_id  => io_role_id,      -- old key
-                in_new_role_id  => rec.role_id      -- new key
-            );
-            --
-            DELETE FROM tsk_roles t
-            WHERE t.role_id     = io_role_id;       -- old key
-        ELSE
-            -- proceed with update or insert
-            UPDATE tsk_roles t
-            SET ROW = rec
-            WHERE t.role_id     = io_role_id;
-            --
-            IF SQL%ROWCOUNT = 0 THEN
-                INSERT INTO tsk_roles
-                VALUES rec;
-            END IF;
-        END IF;
-
-        -- update keys to APEX
-        io_role_id      := rec.role_id;
+        -- update primary key back to APEX grid for proper row refresh
+        core.set_grid_data('OLD_ROLE_ID', rec.role_id);
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

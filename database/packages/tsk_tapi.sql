@@ -850,6 +850,80 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         core.raise_error();
     END;
 
+
+
+    PROCEDURE roles_d (
+        in_role_id              tsk_roles.role_id%TYPE
+    )
+    AS
+    BEGIN
+        DELETE FROM tsk_auth_pages          WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_components     WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_tables         WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_procedures     WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_roles          WHERE role_id = in_role_id;
+        DELETE FROM tsk_roles               WHERE role_id = in_role_id;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE roles (
+        rec                     IN OUT NOCOPY tsk_roles%ROWTYPE,
+        --
+        in_action               CHAR                        := NULL,
+        in_role_id              tsk_roles.role_id%TYPE      := NULL
+    )
+    AS
+        c_action                CONSTANT CHAR   := get_action(in_action);
+    BEGIN
+        tsk_auth.check_allowed_dml (
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
+            in_user_id          => core.get_user_id,
+            in_client_id        => NULL,
+            in_project_id       => NULL
+        );
+
+        -- delete record
+        IF c_action = 'D' THEN
+            tsk_tapi.roles_d(NVL(in_role_id, rec.role_id));
+            --
+            RETURN;
+        END IF;
+
+        -- overwrite some values
+        rec.updated_by := core.get_user_id();
+        rec.updated_at := SYSDATE;
+
+        -- are we renaming the primary key?
+        IF c_action = 'U' AND in_role_id != rec.role_id THEN
+            tsk_tapi.rename_primary_key (
+                in_column_name  => 'ROLE_ID',
+                in_old_key      => in_role_id,
+                in_new_key      => rec.role_id
+            );
+        END IF;
+
+        -- upsert record
+        UPDATE tsk_roles t
+        SET ROW             = rec
+        WHERE t.role_id     = rec.role_id;
+        --
+        IF SQL%ROWCOUNT = 0 THEN
+            INSERT INTO tsk_roles VALUES rec;
+        END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
 END;
 /
 
