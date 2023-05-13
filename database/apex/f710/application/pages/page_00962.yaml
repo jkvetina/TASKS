@@ -1043,6 +1043,12 @@ regions:
       control-break/aggregate: true
       hide: true
 
+    read-only: 
+      type: Expression
+      language: PL/SQL
+      pl/sql-expression: ":IS_HIDDEN = 'Y'"
+      execute: For Each Row
+
     security: 
       authorization-scheme: IS_USER # 47196033359190547
 

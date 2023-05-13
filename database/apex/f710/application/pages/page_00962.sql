@@ -540,6 +540,10 @@ wwv_flow_imp_page.create_region_column(
 ,p_is_primary_key=>false
 ,p_duplicate_value=>true
 ,p_include_in_export=>true
+,p_readonly_condition_type=>'EXPRESSION'
+,p_readonly_condition=>':IS_HIDDEN = ''Y'''
+,p_readonly_condition2=>'PLSQL'
+,p_readonly_for_each_row=>true
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp_page.create_region_column(
