@@ -44,7 +44,7 @@ SELECT
     CASE WHEN p.attribute_04 IS NULL
         THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="PL/SQL handler is missing"></span>'
         END || NVL(
-            LTRIM(p.attribute_03 || '.' || p.attribute_04, '.'),
+            LTRIM(RTRIM(p.attribute_03 || '.' || p.attribute_04, '.'), '.'),
             REGEXP_SUBSTR(UPPER(p.attribute_04), '^[A-Z0-9_]+\.?[A-Z0-9_]*')
         ) AS target_name,     -- code to execute
     --

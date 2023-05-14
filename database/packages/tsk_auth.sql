@@ -254,22 +254,30 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
                         v_authorized := NULL;
                         --
                         FOR c IN (
+                            -- check if region is listed as grid and has valid auth setup
                             SELECT t.table_name
-                            FROM tsk_auth_region_tables_v t
+                            FROM tsk_auth_grids_v t
                             WHERE t.page_id         = in_page_id
                                 AND t.region_id     = in_component_id
+                                AND t.table_name    IS NOT NULL
+                                AND t.auth_process  = 'Y'
+                                AND (
+                                    (in_action = 'C' AND t.auth_c = 'Y') OR
+                                    (in_action = 'U' AND t.auth_u = 'Y') OR
+                                    (in_action = 'D' AND t.auth_d = 'Y')
+                                )
                         ) LOOP
+                            -- check if current user is allowed to do requested action
                             v_authorized_row# := $$PLSQL_LINE;
-                            v_authorized := CASE WHEN INSTR(tsk_auth.is_allowed_dml (
-                                    in_table_name       => c.table_name,
-                                    in_action           => in_action,
-                                    in_user_id          => in_user_id,
-                                    in_client_id        => in_client_id,
-                                    in_project_id       => in_project_id
-                                ), in_action) > 0       -- returns C|U|D string
-                                THEN 'Y' END;
-                            --
-                            IF v_authorized = 'Y' THEN
+                            IF tsk_auth.is_allowed_dml (
+                                in_table_name       => c.table_name,
+                                in_action           => in_action,
+                                in_user_id          => in_user_id,
+                                in_client_id        => in_client_id,
+                                in_project_id       => in_project_id
+                            )
+                            THEN
+                                v_authorized := 'Y';
                                 EXIT;
                             END IF;
                         END LOOP;
@@ -416,7 +424,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
                 in_project_id       => in_project_id
             ) IS NULL
         THEN
-            core.raise_error('NOT_AUTH', in_action, REPLACE(in_table_name, 'TSK_', ''), in_user_id, in_client_id, in_project_id);
+            core.raise_error('NOT_AUTH_' || in_action, REPLACE(in_table_name, 'TSK_', ''), in_user_id, in_client_id, in_project_id);
         END IF;
     EXCEPTION
     WHEN core.app_exception THEN
