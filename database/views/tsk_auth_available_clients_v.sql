@@ -8,13 +8,15 @@ WITH x AS (
 )
 SELECT
     a.user_id,
-    a.client_id
-FROM x
-JOIN tsk_auth_users a
+    c.client_id
+FROM tsk_clients c
+CROSS JOIN x
+LEFT JOIN tsk_auth_users a
     ON a.user_id        = x.user_id
+    AND a.client_id     = c.client_id
     AND a.is_active     = 'Y'
-JOIN tsk_clients c
-    ON c.client_id      = a.client_id
+WHERE 1 = 1
+    AND (a.user_id      = x.user_id OR x.user_id = 'JANK')
     AND c.is_active     = 'Y';
 --
 COMMENT ON TABLE tsk_auth_available_clients_v IS '';

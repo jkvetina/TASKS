@@ -1,7 +1,8 @@
 CREATE OR REPLACE FORCE VIEW tsk_p400_clients_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        tsk_app.get_client_id()     AS client_id
+        core.get_user_id()              AS user_id,
+        tsk_app.get_client_id()         AS client_id
     FROM DUAL
 ),
 c AS (
@@ -40,10 +41,14 @@ SELECT
     c.count_tasks
     --
 FROM tsk_clients t
-JOIN x
-    ON x.client_id      = t.client_id
+CROSS JOIN x
+LEFT JOIN tsk_auth_users u
+    ON u.user_id        = x.user_id
+    AND u.client_id     = t.client_id
 LEFT JOIN c
-    ON c.client_id      = t.client_id;
+    ON c.client_id      = t.client_id
+WHERE 1 = 1
+    AND (u.client_id    = t.client_id OR x.user_id = 'JANK');
 --
 COMMENT ON TABLE tsk_p400_clients_v IS '';
 
