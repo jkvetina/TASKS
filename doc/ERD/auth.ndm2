@@ -8804,8 +8804,8 @@
           "type": "table",
           "schemaName": "A224129",
           "tableName": "TSK_AUTH_ROLES",
-          "x": 693,
-          "y": 522,
+          "x": 376,
+          "y": 300,
           "width": 239,
           "height": 198,
           "isBold": false,
@@ -8836,8 +8836,8 @@
           "type": "table",
           "schemaName": "A224129",
           "tableName": "TSK_AUTH_USERS",
-          "x": 693,
-          "y": 773,
+          "x": 376,
+          "y": 766,
           "width": 239,
           "height": 156,
           "isBold": false,
@@ -8852,8 +8852,8 @@
           "type": "table",
           "schemaName": "A224129",
           "tableName": "TSK_CLIENTS",
-          "x": 13,
-          "y": 608,
+          "x": 695,
+          "y": 556,
           "width": 242,
           "height": 156,
           "isBold": false,
@@ -8884,8 +8884,8 @@
           "type": "table",
           "schemaName": "A224129",
           "tableName": "TSK_PROJECTS",
-          "x": 353,
-          "y": 486,
+          "x": 693,
+          "y": 327,
           "width": 249,
           "height": 177,
           "isBold": false,
@@ -8900,8 +8900,8 @@
           "type": "table",
           "schemaName": "A224129",
           "tableName": "TSK_ROLES",
-          "x": 693,
-          "y": 248,
+          "x": 697,
+          "y": 59,
           "width": 239,
           "height": 219,
           "isBold": false,
@@ -8916,8 +8916,8 @@
           "type": "table",
           "schemaName": "A224129",
           "tableName": "TSK_USERS",
-          "x": 360,
-          "y": 765,
+          "x": 694,
+          "y": 756,
           "width": 239,
           "height": 177,
           "isBold": false,
@@ -8939,17 +8939,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 823,
-              "y": 735
+              "x": 506,
+              "y": 513
             },
             {
-              "x": 823,
-              "y": 758
+              "x": 506,
+              "y": 751
             }
           ],
           "label": {
-            "x": 831,
-            "y": 725,
+            "x": 514,
+            "y": 503,
             "width": 204,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -9019,17 +9019,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 678,
-              "y": 585
+              "x": 630,
+              "y": 379
             },
             {
-              "x": 617,
-              "y": 585
+              "x": 678,
+              "y": 379
             }
           ],
           "label": {
-            "x": 694,
-            "y": 587,
+            "x": 626,
+            "y": 381,
             "width": 231,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -9053,25 +9053,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 338,
-              "y": 583
+              "x": 821,
+              "y": 519
             },
             {
-              "x": 306,
-              "y": 583
-            },
-            {
-              "x": 306,
-              "y": 656
-            },
-            {
-              "x": 270,
-              "y": 656
+              "x": 821,
+              "y": 541
             }
           ],
           "label": {
-            "x": 354,
-            "y": 585,
+            "x": 829,
+            "y": 509,
             "width": 198,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -9096,16 +9088,24 @@
           "vertices": [
             {
               "x": 1074,
-              "y": 347
+              "y": 293
             },
             {
-              "x": 947,
-              "y": 347
+              "x": 1057,
+              "y": 293
+            },
+            {
+              "x": 1057,
+              "y": 158
+            },
+            {
+              "x": 951,
+              "y": 158
             }
           ],
           "label": {
             "x": 1090,
-            "y": 349,
+            "y": 295,
             "width": 257,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -9133,16 +9133,8 @@
               "y": 114
             },
             {
-              "x": 998,
+              "x": 951,
               "y": 114
-            },
-            {
-              "x": 998,
-              "y": 303
-            },
-            {
-              "x": 947,
-              "y": 303
             }
           ],
           "label": {
@@ -9175,16 +9167,16 @@
               "y": 829
             },
             {
-              "x": 998,
+              "x": 980,
               "y": 829
             },
             {
-              "x": 998,
-              "y": 425
+              "x": 980,
+              "y": 236
             },
             {
-              "x": 947,
-              "y": 425
+              "x": 951,
+              "y": 236
             }
           ],
           "label": {
@@ -9213,17 +9205,21 @@
           "visible": true,
           "vertices": [
             {
-              "x": 823,
-              "y": 507
+              "x": 553,
+              "y": 285
             },
             {
-              "x": 823,
-              "y": 482
+              "x": 553,
+              "y": 106
+            },
+            {
+              "x": 682,
+              "y": 106
             }
           ],
           "label": {
-            "x": 831,
-            "y": 517,
+            "x": 561,
+            "y": 295,
             "width": 204,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -9251,16 +9247,16 @@
               "y": 564
             },
             {
-              "x": 1043,
+              "x": 1018,
               "y": 564
             },
             {
-              "x": 1043,
-              "y": 386
+              "x": 1018,
+              "y": 197
             },
             {
-              "x": 947,
-              "y": 386
+              "x": 951,
+              "y": 197
             }
           ],
           "label": {
@@ -9289,17 +9285,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 678,
-              "y": 841
+              "x": 630,
+              "y": 827
             },
             {
-              "x": 614,
-              "y": 841
+              "x": 679,
+              "y": 827
             }
           ],
           "label": {
-            "x": 694,
-            "y": 843,
+            "x": 626,
+            "y": 829,
             "width": 204,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -9357,25 +9353,21 @@
           "visible": true,
           "vertices": [
             {
-              "x": 678,
-              "y": 817
+              "x": 550,
+              "y": 751
             },
             {
-              "x": 651,
-              "y": 817
+              "x": 550,
+              "y": 633
             },
             {
-              "x": 651,
-              "y": 725
-            },
-            {
-              "x": 270,
-              "y": 725
+              "x": 680,
+              "y": 633
             }
           ],
           "label": {
-            "x": 638,
-            "y": 778,
+            "x": 502,
+            "y": 720,
             "width": 50,
             "height": 31,
             "fontName": "Arial Unicode MS",
@@ -9399,17 +9391,21 @@
           "visible": true,
           "vertices": [
             {
-              "x": 678,
-              "y": 690
+              "x": 551,
+              "y": 513
             },
             {
-              "x": 270,
-              "y": 690
+              "x": 551,
+              "y": 601
+            },
+            {
+              "x": 680,
+              "y": 601
             }
           ],
           "label": {
-            "x": 638,
-            "y": 651,
+            "x": 547,
+            "y": 462,
             "width": 50,
             "height": 31,
             "fontName": "Arial Unicode MS",
