@@ -14,6 +14,11 @@ CREATE TABLE tsk_auth_users (
     CONSTRAINT fk_tsk_auth_users_user
         FOREIGN KEY (user_id)
         REFERENCES tsk_users (user_id)
+        DEFERRABLE INITIALLY DEFERRED,
+    --
+    CONSTRAINT fk_tsk_auth_users_client
+        FOREIGN KEY (client_id)
+        REFERENCES tsk_clients (client_id)
         DEFERRABLE INITIALLY DEFERRED
 );
 --

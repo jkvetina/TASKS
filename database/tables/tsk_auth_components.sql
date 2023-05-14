@@ -17,6 +17,11 @@ CREATE TABLE tsk_auth_components (
     CONSTRAINT fk_tsk_auth_components_role
         FOREIGN KEY (role_id)
         REFERENCES tsk_roles (role_id)
+        DEFERRABLE INITIALLY DEFERRED,
+    --
+    CONSTRAINT fk_tsk_auth_components_page
+        FOREIGN KEY (page_id, role_id)
+        REFERENCES tsk_auth_pages (page_id, role_id)
         DEFERRABLE INITIALLY DEFERRED
 );
 --
