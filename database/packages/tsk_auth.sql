@@ -416,13 +416,13 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     )
     AS
     BEGIN
-        IF tsk_auth.is_allowed_dml (
+        IF NOT tsk_auth.is_allowed_dml (
                 in_table_name       => in_table_name,
                 in_action           => in_action,
                 in_user_id          => in_user_id,
                 in_client_id        => in_client_id,
                 in_project_id       => in_project_id
-            ) IS NULL
+            )
         THEN
             core.raise_error('NOT_AUTH_' || in_action, REPLACE(in_table_name, 'TSK_', ''), in_user_id, in_client_id, in_project_id);
         END IF;
@@ -442,14 +442,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
         in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
     )
-    RETURN VARCHAR2
+    RETURN BOOLEAN
     AS
-        v_authorized            VARCHAR2(4);
+        v_authorized            CHAR;
     BEGIN
-        SELECT
-            MAX(CASE WHEN t.is_allowed_create = 'Y' THEN 'C' END) ||
-            MAX(CASE WHEN t.is_allowed_update = 'Y' THEN 'U' END) ||
-            MAX(CASE WHEN t.is_allowed_delete = 'Y' THEN 'D' END)
+        SELECT MAX('Y')
         INTO v_authorized
         FROM tsk_auth_tables t
         JOIN tsk_auth_roles r
@@ -474,7 +471,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
                 (t.is_allowed_delete = 'Y' AND NULLIF(in_action, 'D') IS NULL)
             );
         --
-        RETURN v_authorized;
+        RETURN (v_authorized = 'Y');
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
@@ -493,13 +490,13 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     --RESULT_CACHE
     AS
     BEGIN
-        IF tsk_auth.is_executable (
+        IF NOT tsk_auth.is_executable (
                 in_object_name          => SUBSTR(in_procedure_name, 1, INSTR(in_procedure_name, '.') - 1),
                 in_procedure_name       => SUBSTR(in_procedure_name, INSTR(in_procedure_name, '.') + 1),
                 in_user_id              => in_user_id,
                 in_client_id            => in_client_id,
                 in_project_id           => in_project_id
-            ) IS NULL
+            )
         THEN
             core.raise_error('NOT_AUTH_PROC_' || in_procedure_name);
         END IF;
@@ -518,13 +515,13 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     BEGIN
         v_procedure_name        := core.get_caller_name(3);
         --
-        IF tsk_auth.is_executable (
+        IF NOT tsk_auth.is_executable (
                 in_object_name          => SUBSTR(v_procedure_name, 1, INSTR(v_procedure_name, '.') - 1),
                 in_procedure_name       => SUBSTR(v_procedure_name, INSTR(v_procedure_name, '.') + 1),
                 in_user_id              => core.get_user_id(),
                 in_client_id            => tsk_app.get_client_id(),
                 in_project_id           => tsk_app.get_project_id()
-            ) IS NULL
+            )
         THEN
             core.raise_error('NOT_AUTH_PROC_' || v_procedure_name);
         END IF;
@@ -544,11 +541,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
         in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
         in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
     )
-    RETURN CHAR
+    RETURN BOOLEAN
     AS
         v_authorized            CHAR;
     BEGIN
-        SELECT MAX('Y') INTO v_authorized
+        SELECT MAX('Y')
+        INTO v_authorized
         FROM tsk_auth_procedures t
         JOIN tsk_auth_roles r
             ON r.client_id      = in_client_id
@@ -566,7 +564,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             AND t.procedure_name    = in_procedure_name
             AND t.is_active         = 'Y';
         --
-        RETURN v_authorized;
+        RETURN (v_authorized = 'Y');
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

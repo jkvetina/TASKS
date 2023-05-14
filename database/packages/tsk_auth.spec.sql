@@ -91,7 +91,7 @@ CREATE OR REPLACE PACKAGE tsk_auth AS
         in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
         in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
     )
-    RETURN VARCHAR2;
+    RETURN BOOLEAN;
 
 
 
@@ -115,7 +115,7 @@ CREATE OR REPLACE PACKAGE tsk_auth AS
         in_client_id            tsk_auth_roles.client_id%TYPE       := NULL,
         in_project_id           tsk_auth_roles.project_id%TYPE      := NULL
     )
-    RETURN CHAR;
+    RETURN BOOLEAN;
 
 END;
 /
