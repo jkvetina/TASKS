@@ -349,7 +349,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
     RETURN CHAR
     AS
     BEGIN
-        RETURN 'Y';
+        RETURN CASE WHEN core.get_user_id() = 'JANK' THEN 'Y' END;
     END;
 
 
@@ -454,7 +454,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             AND (r.project_id   = in_project_id OR r.project_id IS NULL)
             AND r.user_id       = in_user_id
             AND r.role_id       = t.role_id
-            AND (r.role_id      != 'ADMIN' OR core.get_page_id() >= 900)
+            --AND (r.role_id      != c_admin_role OR core.get_page_id() >= 900)    -- to check pages and retain Admin role
             AND r.is_active     = 'Y'
         JOIN tsk_auth_users a
             ON a.user_id        = r.user_id

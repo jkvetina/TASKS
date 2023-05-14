@@ -47,8 +47,7 @@ LEFT JOIN tsk_auth_users u
     AND u.client_id     = t.client_id
 LEFT JOIN c
     ON c.client_id      = t.client_id
-WHERE 1 = 1
-    AND (u.client_id    = t.client_id OR x.user_id = 'JANK');
+WHERE (u.client_id      = t.client_id OR tsk_auth.is_admin() = 'Y');
 --
 COMMENT ON TABLE tsk_p400_clients_v IS '';
 

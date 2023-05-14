@@ -8,7 +8,7 @@ SELECT
 FROM tsk_auth_components t
 JOIN tsk_auth_roles r
     ON r.role_id        = t.role_id
-    AND (r.role_id      != 'ADMIN' OR core.get_page_id() >= 900)
+    --AND (r.role_id      != 'ADMIN' OR core.get_page_id() >= 900)
     AND r.is_active     = 'Y'
 JOIN tsk_auth_users a
     ON a.user_id        = r.user_id
