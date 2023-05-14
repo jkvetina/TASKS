@@ -24,6 +24,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_p962 AS
     PROCEDURE refresh_mv
     AS
     BEGIN
+        -- delete non existing pages from map
+        DELETE FROM tsk_auth_pages a
+        WHERE a.page_id NOT IN (
+            SELECT n.page_id
+            FROM tsk_navigation n
+        );
+
+        -- refresh MV
         DBMS_MVIEW.REFRESH('TSK_NAVIGATION_MAP_MV', method => 'C');
     END;
 
