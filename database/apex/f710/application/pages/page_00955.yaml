@@ -141,6 +141,8 @@ regions:
     - P955_ROLE_GROUP
     - P955_ROLE_ID
     - P955_SHOW_ALL
+    - P955_SHOW_PROJECTS
+    - P955_USER_ID
 
   layout: 
     sequence: 20
@@ -262,7 +264,7 @@ regions:
       database-column: PROJECT_ID
       data-type: VARCHAR2
       query-only: false
-      primary-key: true
+      primary-key: false
 
     default: 
       type: Expression
@@ -304,7 +306,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: start
       stretch: Use Report Setting
 
@@ -355,7 +357,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 70
+      sequence: 80
       column-alignment: start
       stretch: Use Report Setting
 
@@ -406,7 +408,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 80
+      sequence: 90
       column-alignment: center
       stretch: Use Report Setting
 
@@ -463,7 +465,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 90
+      sequence: 100
       column-alignment: center
       stretch: Use Report Setting
 
@@ -520,7 +522,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 100
+      sequence: 110
       column-alignment: center
       stretch: Use Report Setting
 
@@ -577,7 +579,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 110
+      sequence: 120
       column-alignment: center
       stretch: Use Report Setting
 
@@ -634,7 +636,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 120
+      sequence: 130
       column-alignment: center
       stretch: Use Report Setting
 
@@ -691,7 +693,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 130
+      sequence: 140
       column-alignment: center
       stretch: Use Report Setting
 
@@ -748,7 +750,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 140
+      sequence: 150
       column-alignment: center
       stretch: Use Report Setting
 
@@ -805,7 +807,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 150
+      sequence: 160
       column-alignment: center
       stretch: Use Report Setting
 
@@ -856,6 +858,57 @@ regions:
     layout: 
       sequence: 20
 
+  - # ====== Column: PROJECT__ ===================================
+    id: 48744804258148049
+    identification: 
+      column-name: PROJECT__
+      type: Display Only
+
+    heading: 
+      heading: Project
+      alignment: start
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: PROJECT__
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   - # ====== Column: CLIENT_ID ===================================
     id: 280334384476543860
     identification: 
@@ -888,7 +941,7 @@ regions:
       database-column: CLIENT_ID
       data-type: VARCHAR2
       query-only: false
-      primary-key: true
+      primary-key: false
 
     default: 
       type: Expression
@@ -930,7 +983,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1149,8 +1202,8 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 50
-    region: Map Roles # 187138827673459155
+    sequence: 10
+    region: Map Roles # 187138784403459154
     position: BODY
 
   advanced: 
@@ -1294,6 +1347,103 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P955_SHOW_PROJECTS =======================
+  id: 48744605243148047
+  identification: 
+    name: P955_SHOW_PROJECTS
+    type: Hidden
+
+  settings: 
+    value-protected: false
+
+  layout: 
+    sequence: 10
+    region: Map Roles # 187138784403459154
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P955_USER_ID =============================
+  id: 48744957120148050
+  identification: 
+    name: P955_USER_ID
+    type: Select List
+
+  label: 
+    label: User
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 50
+    region: Map Roles # 187138827673459155
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: 'LOV_USERS #PAGE/#SETT' # 46494875558442406
+    display-extra-values: false
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P955_PROJECT_ID
+    items-to-submit: 
+    - P955_CLIENT_ID
+    - P955_PROJECT_ID
+    parent-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 buttons: 
 - # ====== Button: SHOW_ALL_USERS ==============================
   id: 47116330648643693
@@ -1330,6 +1480,45 @@ buttons:
   server-side-condition: 
     type: Item is NULL
     item: P955_SHOW_ALL
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
+- # ====== Button: SHOW_ALL_PROJECTS ===========================
+  id: 48744554303148046
+  identification: 
+    button-name: SHOW_ALL_PROJECTS
+    label: Show All Projects
+
+  layout: 
+    sequence: 20
+    region: Map Roles # 187138827673459155
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 70970074101975671
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:955:&SESSION.::&DEBUG.::P955_SHOW_PROJECTS,P955_PROJECT_ID:Y,'
+      page: 955 # Map Roles
+      values: 
+        p955_show_projects: Y
+
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P955_SHOW_PROJECTS
 
   security: 
     authorization-scheme: IS_USER # 47196033359190547
@@ -1378,10 +1567,51 @@ dynamic-actions:
       show-processing: true
 
     execution: 
+      sequence: 40
+      event: CHANGED_PROJECT # 47076610189134327
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Set Value ===================================
+    id: 48955326709352004
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: Static Assignment
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P955_SHOW_PROJECTS
+
+    execution: 
       sequence: 20
       event: CHANGED_PROJECT # 47076610189134327
       fire-when-event-result-is: True
       fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
+
+  - # ====== Action: Execute Server-side Code ====================
+    id: 48955460727352005
+    identification: 
+      action: Execute Server-side Code
+
+    settings: 
+      language: PE.PROPERTY.SOURCE_SNIPPET_LANG.LOV.PLSQL.D
+      pl/sql-code: NULL;
+      items-to-submit: 
+      - P955_SHOW_PROJECTS
+
+    execution: 
+      sequence: 30
+      event: CHANGED_PROJECT # 47076610189134327
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
 
 - # ====== Dynamic Action: CHANGED_ROLE ========================
   id: 47076945743134330
@@ -1431,6 +1661,54 @@ dynamic-actions:
       fire-when-event-result-is: True
       fire-on-initialization: false
 
+- # ====== Dynamic Action: CHANGED_USER ========================
+  id: 48955009020352001
+  identification: 
+    name: CHANGED_USER
+
+  execution: 
+    sequence: 30
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P955_USER_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Hide ========================================
+    id: 48955194503352002
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: Map Roles [GRID] # 280334188250543858
+
+    execution: 
+      sequence: 10
+      event: CHANGED_USER # 48955009020352001
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Submit Page =================================
+    id: 48955250838352003
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 20
+      event: CHANGED_USER # 48955009020352001
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
 processes: 
 - # ====== Process: SAVE_ROLES =================================
   id: 47076565528134326
@@ -1455,4 +1733,7 @@ processes:
 
   server-side-condition: 
     execution-scope: For Created and Modified Rows
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
