@@ -18,7 +18,7 @@ c AS (
         t.client_id
 )
 SELECT
-    t.client_id         AS pk_client_id,    -- to allow PK changes
+    t.client_id         AS old_client_id,       -- to allow PK changes
     --
     t.client_id,
     t.client_name,

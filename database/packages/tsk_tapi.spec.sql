@@ -45,21 +45,15 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
 
     PROCEDURE clients (
         rec                     IN OUT NOCOPY   tsk_clients%ROWTYPE,
-        in_action                               CHAR                                := NULL,
-        old_client_id           IN OUT NOCOPY   tsk_clients.client_id%TYPE
+        --
+        in_action               CHAR                            := NULL,
+        in_client_id            tsk_clients.client_id%TYPE      := NULL
     );
 
 
 
-    PROCEDURE rename_client_id (
-        in_old_client_id        tsk_clients.client_id%TYPE,
-        in_new_client_id        tsk_clients.client_id%TYPE
-    );
-
-
-
-    PROCEDURE projects_d (
-        in_project_id           tsk_projects.project_id%TYPE
+    PROCEDURE clients_d (
+        in_client_id            tsk_clients.client_id%TYPE
     );
 
 
@@ -70,6 +64,12 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
         in_action               CHAR                            := NULL,
         in_client_id            tsk_projects.client_id%TYPE     := NULL,
         in_project_id           tsk_projects.project_id%TYPE    := NULL
+    );
+
+
+
+    PROCEDURE projects_d (
+        in_project_id           tsk_projects.project_id%TYPE
     );
 
 

@@ -13,23 +13,32 @@ CREATE OR REPLACE PACKAGE BODY tsk_p400 AS
 
 
 
-    PROCEDURE save_clients (
-        io_client_id        IN OUT NOCOPY   tsk_clients.client_id%TYPE
-    )
+    PROCEDURE save_clients
     AS
         rec                 tsk_clients%ROWTYPE;
-        v_action            CONSTANT CHAR   := core.get_grid_action();
+        in_action           CONSTANT CHAR := core.get_grid_action();
     BEGIN
+        -- change record in table
         rec.client_id       := core.get_grid_data('CLIENT_ID');
         rec.client_name     := core.get_grid_data('CLIENT_NAME');
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
         --
-        tsk_tapi.clients (rec, v_action,
-            old_client_id   => io_client_id
+        tsk_tapi.clients (rec,
+            in_action       => in_action,
+            in_client_id    => core.get_grid_data('OLD_CLIENT_ID')
         );
+        --
+        IF in_action = 'D' THEN
+            COMMIT;     -- commit to catch possible error here, because all foreign keys are deferred
+            RETURN;     -- exit this procedure
+        END IF;
 
-        -- for new records overwrite user settings
-        IF v_action = 'C' THEN
+        -- update primary key back to APEX grid for proper row refresh
+        core.set_grid_data('OLD_CLIENT_ID',     rec.client_id);
+
+        -- just for the new records
+        IF in_action = 'C' THEN
+            -- overwrite user settings
             tsk_app.set_user_preferences (
                 in_user_id          => core.get_user_id(),
                 in_client_id        => rec.client_id,

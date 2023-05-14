@@ -4,9 +4,7 @@ CREATE OR REPLACE PACKAGE tsk_p400 AS
 
 
 
-    PROCEDURE save_clients (
-        io_client_id        IN OUT NOCOPY   tsk_clients.client_id%TYPE
-    );
+    PROCEDURE save_clients;
 
 END;
 /
