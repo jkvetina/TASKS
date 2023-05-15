@@ -8,10 +8,12 @@ SELECT
     p.object_name,
     p.procedure_name,
     --
-    CASE WHEN MAX(g.target_name) IS NOT NULL AND MAX(t.table_name) IS NULL
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="Grid handler is missing"></span>'
-        END ||
-        p.procedure_name AS procedure_name_,
+    CASE
+        WHEN MAX(g.procedure_name) IS NOT NULL AND MAX(t.table_name) IS NULL
+            THEN tsk_app.get_icon_warning('Grid handler is missing')
+        WHEN MAX(g.procedure_name) IS NOT NULL AND MAX(t.table_name) IS NOT NULL
+            THEN tsk_app.get_icon_check()
+        END AS grid_handler,
     --
     MAX(t.table_name) AS table_name,
     --
@@ -36,7 +38,8 @@ LEFT JOIN tsk_auth_procedures t
     AND t.procedure_name    = p.procedure_name
     AND t.table_name        IS NOT NULL
 LEFT JOIN tsk_p968_grid_check_v g
-    ON g.target_name        = p.object_name || '.' || p.procedure_name
+    ON g.object_name        = p.object_name
+    AND g.procedure_name    = p.procedure_name
 WHERE 1 = 1
     AND (x.page_group       = p.page_group_raw OR x.page_group IS NULL)
 GROUP BY

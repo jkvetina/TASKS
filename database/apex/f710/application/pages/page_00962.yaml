@@ -1056,15 +1056,14 @@ regions:
     id: 48361002055512142
     identification: 
       column-name: IS_MODAL
-      type: Checkbox
+      type: Display Only
 
     heading: 
       heading: Modal
       alignment: center
 
     settings: 
-      use-defaults: false
-      checked-value: Y
+      format: HTML
 
     layout: 
       sequence: 50
@@ -1076,15 +1075,15 @@ regions:
     accessibility: 
       value-identifies-row: false
 
-    validation: 
-      value-required: false
-
     source: 
       type: Database Column
       database-column: IS_MODAL
       data-type: VARCHAR2
       query-only: true
       primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
 
     column-filter: 
       enabled: true
@@ -1104,10 +1103,6 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
-
-    read-only: 
-      type: Always
-      execute: Once
 
   - # ====== Column: IS_USED =====================================
     id: 48361165296512143

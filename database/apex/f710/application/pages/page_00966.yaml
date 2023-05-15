@@ -279,55 +279,6 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: PROCEDURE_NAME_ =============================
-    id: 47740580343626915
-    identification: 
-      column-name: PROCEDURE_NAME_
-      type: Display Only
-
-    heading: 
-      heading: Procedure Name
-      alignment: start
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 50
-      column-alignment: start
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: PROCEDURE_NAME_
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
   - # ====== Column: ROLE_1 ======================================
     id: 47740645583626916
     identification: 
@@ -861,13 +812,19 @@ regions:
     id: 48742479645148025
     identification: 
       column-name: PROCEDURE_NAME
-      type: Hidden
+      type: Display Only
+
+    heading: 
+      heading: Procedure Name
+      alignment: start
 
     settings: 
-      value-protected: true
+      format: HTML
 
     layout: 
       sequence: 40
+      column-alignment: start
+      stretch: Use Report Setting
 
     accessibility: 
       value-identifies-row: false
@@ -885,12 +842,76 @@ regions:
     session-state: 
       data-type: VARCHAR2
 
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
     export-/-printing: 
       include-in-export-/-print: false
 
     enable-users-to: 
       sort: true
       control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: GRID_HANDLER ================================
+    id: 48957013386352021
+    identification: 
+      column-name: GRID_HANDLER
+      type: Display Only
+
+    heading: 
+      heading: G
+      alignment: center
+      alternative-label: Grid Handler
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 50
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: GRID_HANDLER
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
 
   printing: 
     page: 

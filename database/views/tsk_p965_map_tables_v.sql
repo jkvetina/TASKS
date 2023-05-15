@@ -3,7 +3,7 @@ SELECT
     t.table_name,
     --
     CASE WHEN t.procedure_name IS NULL
-        THEN '<span class="fa fa-warning" style="color: orange; margin-top: 0.125rem;"></span>'
+        THEN tsk_app.get_icon_warning('TAPI procedure is missing')
         ELSE t.procedure_name
         END AS procedure_name,
     --

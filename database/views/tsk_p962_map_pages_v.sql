@@ -45,12 +45,12 @@ g AS (
 )
 SELECT
     a.page_id,
-    a.is_modal,
+    --
+    CASE WHEN a.is_modal = 'Y' THEN tsk_app.get_icon_check() END AS is_modal,
     --
     CASE WHEN n.parent_id IS NOT NULL THEN REPLACE(LPAD(' ', 3, ' '), ' ', '&' || 'nbsp; ') END ||
         a.page_name ||
-        CASE WHEN MAX(p.is_active) IS NULL
-            THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;"></span>'
+        CASE WHEN MAX(p.is_active) IS NULL THEN tsk_app.get_icon_warning('Page is unreachable')
             END AS page_name,
     --
     LPAD(' ', g.group_order#) || g.page_group AS page_group,
