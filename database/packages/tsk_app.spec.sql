@@ -89,6 +89,22 @@ CREATE OR REPLACE PACKAGE tsk_app AS
         io_swimlane_id      IN OUT NOCOPY   tsk_swimlanes.swimlane_id%TYPE
     );
 
+
+
+    FUNCTION get_icon_warning (
+        in_title                VARCHAR2    := NULL,
+        in_style                VARCHAR2    := NULL
+    )
+    RETURN VARCHAR2;
+
+
+
+    FUNCTION get_icon_check (
+        in_title                VARCHAR2    := NULL,
+        in_style                VARCHAR2    := NULL
+    )
+    RETURN VARCHAR2;
+
 END;
 /
 

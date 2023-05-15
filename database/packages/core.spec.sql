@@ -207,7 +207,8 @@ CREATE OR REPLACE PACKAGE core AS
 
     FUNCTION get_icon (
         in_name                 VARCHAR2,
-        in_title                VARCHAR2    := NULL
+        in_title                VARCHAR2    := NULL,
+        in_style                VARCHAR2    := NULL
     )
     RETURN VARCHAR2;
 

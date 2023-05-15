@@ -483,12 +483,13 @@ CREATE OR REPLACE PACKAGE BODY core AS
 
     FUNCTION get_icon (
         in_name                 VARCHAR2,
-        in_title                VARCHAR2    := NULL
+        in_title                VARCHAR2    := NULL,
+        in_style                VARCHAR2    := NULL
     )
     RETURN VARCHAR2
     AS
     BEGIN
-        RETURN '<span class="fa ' || in_name || '" title="' || in_title || '"></span>';
+        RETURN '<span class="fa ' || in_name || '" style="' || in_style || '" title="' || in_title || '"></span>';
     END;
 
 

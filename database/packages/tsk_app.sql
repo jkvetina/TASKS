@@ -187,7 +187,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
 
         -- check if you can access requested board/project/client
         --
-        -- @TODO: new AUTH table + procedure/fn
+        -- @TODO:
+        --      TSK_AUTH_AVAILABLE_BOARDS_V, TSK_AUTH_AVAILABLE_CLIENTS_V, TSK_AUTH_AVAILABLE_PROJECTS_V
         --
         NULL;
 
@@ -236,6 +237,30 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         RAISE;
     WHEN OTHERS THEN
         core.raise_error();
+    END;
+
+
+
+    FUNCTION get_icon_warning (
+        in_title                VARCHAR2    := NULL,
+        in_style                VARCHAR2    := NULL
+    )
+    RETURN VARCHAR2
+    AS
+    BEGIN
+        RETURN core.get_icon('fa-warning', in_title, 'color: orange; margin-right: 0.3rem;' || in_style);
+    END;
+
+
+
+    FUNCTION get_icon_check (
+        in_title                VARCHAR2    := NULL,
+        in_style                VARCHAR2    := NULL
+    )
+    RETURN VARCHAR2
+    AS
+    BEGIN
+        RETURN core.get_icon('fa-check', in_title, 'color: #333;' || in_style);
     END;
 
 END;
