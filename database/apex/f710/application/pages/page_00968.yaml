@@ -241,6 +241,16 @@ regions:
     heading: 
       heading: Region Info
 
+  - # ====== Column Group: Source ================================
+    id: 48956835338352019
+    heading: 
+      heading: Source
+
+  - # ====== Column Group: Target ================================
+    id: 48956924871352020
+    heading: 
+      heading: Target
+
   columns: 
   - # ====== Column: PAGE_ID =====================================
     id: 48617274572365443
@@ -345,21 +355,21 @@ regions:
       control-break/aggregate: true
       hide: true
 
-  - # ====== Column: PAGE_NAME ===================================
-    id: 48617487732365445
+  - # ====== Column: REGION_ID ===================================
+    id: 48617577625365446
     identification: 
-      column-name: PAGE_NAME
+      column-name: REGION_ID
       type: Display Only
 
     heading: 
-      heading: Page Name
+      heading: Region Id
       alignment: start
 
     settings: 
       format: HTML
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       group: Region Info # 48742117861148022
       use-group-for: Both
@@ -370,71 +380,13 @@ regions:
 
     source: 
       type: Database Column
-      database-column: PAGE_NAME
-      data-type: VARCHAR2
-      query-only: false
+      database-column: REGION_ID
+      data-type: NUMBER
+      query-only: true
       primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
 
     session-state: 
       data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: REGION_ID ===================================
-    id: 48617577625365446
-    identification: 
-      column-name: REGION_ID
-      type: Number Field
-
-    heading: 
-      heading: Region Id
-      alignment: end
-
-    settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
-
-    layout: 
-      sequence: 60
-      column-alignment: end
-      group: Region Info # 48742117861148022
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: false
-
-    source: 
-      type: Database Column
-      database-column: REGION_ID
-      data-type: NUMBER
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
 
     column-filter: 
       enabled: true
@@ -475,65 +427,8 @@ regions:
       type: Database Column
       database-column: REGION_NAME
       data-type: VARCHAR2
-      query-only: false
+      query-only: true
       primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: STATIC_ID ===================================
-    id: 48617710108365448
-    identification: 
-      column-name: STATIC_ID
-      type: Display Only
-
-    heading: 
-      heading: Static Id
-      alignment: start
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 80
-      column-alignment: start
-      group: Region Info # 48742117861148022
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: STATIC_ID
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
 
     session-state: 
       data-type: VARCHAR2
@@ -583,478 +478,6 @@ regions:
       type: Database Column
       database-column: PROCESS_NAME
       data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: PROCESS_ID ==================================
-    id: 48617984363365450
-    identification: 
-      column-name: PROCESS_ID
-      type: Number Field
-
-    heading: 
-      heading: Process Id
-      alignment: end
-
-    settings: 
-      number-alignment: Start
-      virtual-keyboard: Decimal
-
-    layout: 
-      sequence: 100
-      column-alignment: end
-      group: Process Info # 48741930505148020
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    validation: 
-      value-required: true
-
-    source: 
-      type: Database Column
-      database-column: PROCESS_ID
-      data-type: NUMBER
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    column-filter: 
-      enabled: true
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: PROCESS_POINT_CODE ==========================
-    id: 48740026546148001
-    identification: 
-      column-name: PROCESS_POINT_CODE
-      type: Display Only
-
-    heading: 
-      heading: Process Point Code
-      alignment: start
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 110
-      column-alignment: start
-      group: Process Info # 48741930505148020
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: PROCESS_POINT_CODE
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: CHECK_SETUP =================================
-    id: 48740139156148002
-    identification: 
-      column-name: CHECK_SETUP
-      type: Display Only
-
-    heading: 
-      heading: Setup
-      alignment: center
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 170
-      column-alignment: center
-      group: Checks # 48742028559148021
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: CHECK_SETUP
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: SOURCE_TABLE ================================
-    id: 48740469053148005
-    identification: 
-      column-name: SOURCE_TABLE
-      type: Display Only
-
-    heading: 
-      heading: Source Table
-      alignment: start
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 120
-      column-alignment: start
-      group: Process Info # 48741930505148020
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: SOURCE_TABLE
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: TARGET_TYPE =================================
-    id: 48740574801148006
-    identification: 
-      column-name: TARGET_TYPE
-      type: Display Only
-
-    heading: 
-      heading: Target Type
-      alignment: start
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 150
-      column-alignment: start
-      group: Process Info # 48741930505148020
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: TARGET_TYPE
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: TARGET_NAME =================================
-    id: 48740686258148007
-    identification: 
-      column-name: TARGET_NAME
-      type: Display Only
-
-    heading: 
-      heading: Target Name
-      alignment: start
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 160
-      column-alignment: start
-      group: Process Info # 48741930505148020
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: TARGET_NAME
-      data-type: VARCHAR2
-      query-only: false
-      primary-key: false
-
-    default: 
-      duplicate-copies-existing-value: true
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: CHECK_REGION ================================
-    id: 48741093781148011
-    identification: 
-      column-name: CHECK_REGION
-      type: Display Only
-
-    heading: 
-      heading: Region
-      alignment: center
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 180
-      column-alignment: center
-      group: Authorization # 48615516280365426
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: CHECK_REGION
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: CHECK_PROCESS ===============================
-    id: 48741125786148012
-    identification: 
-      column-name: CHECK_PROCESS
-      type: Display Only
-
-    heading: 
-      heading: Process
-      alignment: center
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 190
-      column-alignment: center
-      group: Authorization # 48615516280365426
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: CHECK_PROCESS
-      data-type: VARCHAR2
-      query-only: true
-      primary-key: false
-
-    session-state: 
-      data-type: VARCHAR2
-
-    column-filter: 
-      enabled: true
-      performance-impacting-operators: 
-      - Contains
-      - Starts With
-      - Case Insensitive
-      - Regular Expression
-      text-case: Mixed
-      lov-type: None
-
-    export-/-printing: 
-      include-in-export-/-print: true
-
-    enable-users-to: 
-      sort: true
-      control-break/aggregate: true
-      hide: true
-
-  - # ====== Column: CHECK_DML ===================================
-    id: 48741212211148013
-    identification: 
-      column-name: CHECK_DML
-      type: Display Only
-
-    heading: 
-      heading: DML
-      alignment: center
-
-    settings: 
-      format: HTML
-
-    layout: 
-      sequence: 200
-      column-alignment: center
-      group: Authorization # 48615516280365426
-      use-group-for: Both
-      stretch: Use Report Setting
-
-    accessibility: 
-      value-identifies-row: false
-
-    source: 
-      type: Database Column
-      database-column: CHECK_DML
-      data-type: VARCHAR2
       query-only: true
       primary-key: false
 
@@ -1086,16 +509,15 @@ regions:
       type: Display Only
 
     heading: 
-      heading: Process Type
-      alignment: start
+      heading: Type
+      alignment: center
 
     settings: 
-      format: Plain Text
-      based-on: Item Value
+      format: HTML
 
     layout: 
       sequence: 130
-      column-alignment: start
+      column-alignment: center
       group: Process Info # 48741930505148020
       use-group-for: Both
       stretch: Use Report Setting
@@ -1127,7 +549,571 @@ regions:
       include-in-export-/-print: true
 
     enable-users-to: 
-      sort: false
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: SOURCE_OBJECT ===============================
+    id: 48955744243352008
+    identification: 
+      column-name: SOURCE_OBJECT
+      type: Display Only
+
+    heading: 
+      heading: Source Object
+      alignment: start
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 140
+      column-alignment: start
+      group: Source # 48956835338352019
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: SOURCE_OBJECT
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: SOURCE_TYPE =================================
+    id: 48955856522352009
+    identification: 
+      column-name: SOURCE_TYPE
+      type: Display Only
+
+    heading: 
+      heading: Type
+      alignment: center
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 150
+      column-alignment: center
+      group: Source # 48956835338352019
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: SOURCE_TYPE
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: PROCESS_HANDLER =============================
+    id: 48955991428352010
+    identification: 
+      column-name: PROCESS_HANDLER
+      type: Display Only
+
+    heading: 
+      heading: Process Handler
+      alignment: start
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 160
+      column-alignment: start
+      group: Target # 48956924871352020
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: PROCESS_HANDLER
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: OBJECT_NAME =================================
+    id: 48956076090352011
+    identification: 
+      column-name: OBJECT_NAME
+      type: Display Only
+
+    heading: 
+      heading: Object Name
+      alignment: start
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 170
+      column-alignment: start
+      group: Target # 48956924871352020
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: OBJECT_NAME
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: PROCEDURE_NAME ==============================
+    id: 48956122054352012
+    identification: 
+      column-name: PROCEDURE_NAME
+      type: Display Only
+
+    heading: 
+      heading: Procedure Name
+      alignment: start
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 180
+      column-alignment: start
+      group: Target # 48956924871352020
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: PROCEDURE_NAME
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: TABLE_NAME ==================================
+    id: 48956270240352013
+    identification: 
+      column-name: TABLE_NAME
+      type: Display Only
+
+    heading: 
+      heading: Table Name
+      alignment: start
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 190
+      column-alignment: start
+      group: Target # 48956924871352020
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: TABLE_NAME
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: AUTH_REGION =================================
+    id: 48956359207352014
+    identification: 
+      column-name: AUTH_REGION
+      type: Display Only
+
+    heading: 
+      heading: Region
+      alignment: center
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 200
+      column-alignment: center
+      group: Authorization # 48615516280365426
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: AUTH_REGION
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: AUTH_PROCESS ================================
+    id: 48956477677352015
+    identification: 
+      column-name: AUTH_PROCESS
+      type: Display Only
+
+    heading: 
+      heading: Process
+      alignment: center
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 210
+      column-alignment: center
+      group: Authorization # 48615516280365426
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: AUTH_PROCESS
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: AUTH_C ======================================
+    id: 48956504907352016
+    identification: 
+      column-name: AUTH_C
+      type: Display Only
+
+    heading: 
+      heading: C
+      alignment: center
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 220
+      column-alignment: center
+      group: Authorization # 48615516280365426
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: AUTH_C
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: AUTH_U ======================================
+    id: 48956603654352017
+    identification: 
+      column-name: AUTH_U
+      type: Display Only
+
+    heading: 
+      heading: U
+      alignment: center
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 230
+      column-alignment: center
+      group: Authorization # 48615516280365426
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: AUTH_U
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: AUTH_D ======================================
+    id: 48956767214352018
+    identification: 
+      column-name: AUTH_D
+      type: Display Only
+
+    heading: 
+      heading: D
+      alignment: center
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 240
+      column-alignment: center
+      group: Authorization # 48615516280365426
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: AUTH_D
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
       hide: true
 
   printing: 

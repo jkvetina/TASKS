@@ -4,11 +4,11 @@ WITH t AS (
         p.page_id,
         p.region_id,
         --
-        r.region_name || CASE WHEN r.region_name NOT LIKE '% [GRID]' THEN ' [!]' END AS region_name,
+        CASE WHEN r.region_name NOT LIKE '% [GRID]' THEN '[!] ' END || r.region_name AS region_name,
         --
-        r.table_name || CASE WHEN r.where_clause IS NOT NULL THEN ' [!]' END AS region_source,
+        CASE WHEN r.where_clause IS NOT NULL THEN '[!] ' END || r.table_name AS source_object,
         --
-        CASE WHEN v.view_name IS NOT NULL THEN 'VIEW' ELSE r.query_type_code || ' [!]' END AS region_source_type,
+        CASE WHEN v.view_name IS NOT NULL THEN 'VIEW' ELSE '[!] ' || r.query_type_code END AS source_type,
         --
         p.process_name,
         p.process_type_code         AS process_handler,
@@ -72,13 +72,13 @@ SELECT
     t.page_id,
     t.region_id,
     t.region_name,
-    t.region_source,
-    t.region_source_type,
+    t.source_object,
+    t.source_type,
     --
-    t.process_name || CASE WHEN t.process_name != NVL(t.procedure_name, '-') THEN ' [!]' END AS process_name,
+    CASE WHEN t.process_name != NVL(t.procedure_name, '-') THEN '[!] ' END || t.process_name AS process_name,
     --
-    t.process_handler,
     t.process_type,
+    t.process_handler,
     t.object_name,
     t.procedure_name,
     --
@@ -89,6 +89,8 @@ SELECT
     t.auth_c,
     t.auth_u,
     t.auth_d
+    --attribute_05
+    --attribute_06
 FROM t
 LEFT JOIN tsk_auth_procedures a
     ON a.object_name        = t.object_name

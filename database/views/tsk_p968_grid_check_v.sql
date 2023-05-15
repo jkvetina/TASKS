@@ -1,92 +1,70 @@
 CREATE OR REPLACE FORCE VIEW tsk_p968_grid_check_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        core.get_app_id()               AS app_id,
-        core.get_item('$PAGE_GROUP')    AS page_group
+        core.get_app_id()                   AS app_id,
+        core.get_item('$PAGE_GROUP')        AS page_group,
+        core.get_number_item('$PAGE_ID')    AS page_id
     FROM DUAL
 )
 SELECT
-    p.page_id,
-    s.page_group,
-    p.page_name,
-    p.region_id,
-    r.region_name,
-    r.static_id,
-    p.process_id,
+    t.page_id,
+    p.page_group,
+    t.region_id,
     --
-    CASE WHEN NOT REGEXP_LIKE(p.process_name, '^[A-Z0-9_-]+$')
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="Wrong process name"></span>'
-        END || p.process_name AS process_name,
+    REPLACE(t.region_name,      '[!]', tsk_app.get_icon_warning('')) AS region_name,
+    REPLACE(t.source_object,    '[!]', tsk_app.get_icon_warning('')) AS source_object,
     --
-    p.process_point_code,
+    CASE t.source_type
+        WHEN 'TABLE'    THEN tsk_app.get_icon_warning('Don''t use tables directly')
+        WHEN 'VIEW'     THEN tsk_app.get_icon_check()
+        ELSE NULL
+        END AS source_type,
     --
-    CASE
-        WHEN p.attribute_06 = 'Y'
-            OR p.attribute_05 = 'N'
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="' ||
-            REGEXP_REPLACE (
-                CASE WHEN p.attribute_06 = 'Y' THEN 'Row lock enabled' || CHR(10) END ||
-                CASE WHEN p.attribute_05 = 'N' THEN 'Prevent lost updates disabled' || CHR(10) END,
-                --
-                -- @TODO: toolbar check, js init check...
-                --
-            '\s+$', '') ||
-            '"></span>'
-        END AS check_setup,
+    REPLACE(t.process_name,     '[!]', tsk_app.get_icon_warning('')) AS process_name,
     --
-    CASE WHEN (r.location_code != 'LOCAL' OR r.query_type_code != 'TABLE' OR r.table_name NOT LIKE '%\_V' ESCAPE '\')
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="Region source is not a view"></span>'
-        END || r.table_name AS source_table,
+    CASE t.process_type
+        WHEN 'REGION'           THEN tsk_app.get_icon_warning('Junior developer?')
+        WHEN 'TABLE'            THEN tsk_app.get_icon_warning('Don''t use tables directly')
+        WHEN 'PLSQL_CODE'       THEN tsk_app.get_icon_warning('Package is great, but Invoke API is better')
+        WHEN 'PLSQL_PACKAGE'    THEN tsk_app.get_icon_check()
+        ELSE NULL
+        END AS process_type,
     --
-    p.process_type_code     AS process_type,
-    p.attribute_01          AS target_type,
+    t.process_handler,
     --
-    CASE WHEN p.attribute_04 IS NULL
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0 0;" title="PL/SQL handler is missing"></span>'
-        END || NVL(
-            LTRIM(RTRIM(p.attribute_03 || '.' || p.attribute_04, '.'), '.'),
-            REGEXP_SUBSTR(UPPER(p.attribute_04), '^[A-Z0-9_]+\.?[A-Z0-9_]*')
-        ) AS target_name,     -- code to execute
+    CASE WHEN t.object_name != 'TSK_P' || t.page_id THEN tsk_app.get_icon_warning('') END || t.object_name AS object_name,
     --
-    -- @TODO: toolbar check, js init check...
+    REPLACE(t.procedure_name,   '[!]', tsk_app.get_icon_warning('')) AS procedure_name,
+    REPLACE(t.table_name,       '[!]', tsk_app.get_icon_warning('')) AS table_name,
     --
-    CASE WHEN NVL(r.authorization_scheme, '-') != 'IS_USER'
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="Missing IS_USER on region"></span>'
-        END AS check_region,
+    CASE WHEN t.auth_region     = 'Y' THEN tsk_app.get_icon_check() END AS auth_region,
+    CASE WHEN t.auth_process    = 'Y' THEN tsk_app.get_icon_check() END AS auth_process,
     --
-    CASE WHEN g.is_editable = 'Yes' AND NVL(p.authorization_scheme, '-') != 'IS_USER'
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="Missing IS_USER on save process"></span>'
-        END AS check_process,
+    CASE t.auth_c
+        WHEN '[!]'  THEN tsk_app.get_icon_warning('Create auth. scheme is missing or invalid')
+        WHEN 'Y'    THEN tsk_app.get_icon_check()
+        ELSE NULL
+        END AS auth_c,
     --
-    CASE WHEN (g.is_editable = 'Yes' AND INSTR(g.edit_operations, 'i') > 0 AND NVL(g.add_authorization_scheme, '-') != 'IS_USER_C')
-        OR (g.is_editable = 'Yes' AND INSTR(g.edit_operations, 'u') > 0 AND NVL(g.update_authorization_scheme, '-') != 'IS_USER_U')
-        OR (g.is_editable = 'Yes' AND INSTR(g.edit_operations, 'd') > 0 AND NVL(g.delete_authorization_scheme, '-') != 'IS_USER_D')
-        THEN '<span class="fa fa-warning" style="color: orange; margin: 0.125rem 0.5rem 0;" title="' ||
-            REGEXP_REPLACE (
-                CASE WHEN INSTR(g.edit_operations, 'i') > 0 AND NVL(g.add_authorization_scheme, '-') != 'IS_USER_C' THEN 'Missing IS_USER_C on grid attributes' || CHR(10) END ||
-                CASE WHEN INSTR(g.edit_operations, 'u') > 0 AND NVL(g.add_authorization_scheme, '-') != 'IS_USER_U' THEN 'Missing IS_USER_U on grid attributes' || CHR(10) END ||
-                CASE WHEN INSTR(g.edit_operations, 'd') > 0 AND NVL(g.add_authorization_scheme, '-') != 'IS_USER_D' THEN 'Missing IS_USER_D on grid attributes' || CHR(10) END,
-            '\s+$', '') ||
-            '"></span>'
-        END AS check_dml
+    CASE t.auth_u
+        WHEN '[!]'  THEN tsk_app.get_icon_warning('Update auth. scheme is missing or invalid')
+        WHEN 'Y'    THEN tsk_app.get_icon_check()
+        ELSE NULL
+        END AS auth_u,
     --
-FROM apex_application_page_proc p
-JOIN apex_application_page_regions r
-    ON r.application_id     = p.application_id
-    AND r.page_id           = p.page_id
-    AND r.region_id         = p.region_id
-    AND r.source_type_code  = 'NATIVE_IG'
-JOIN apex_appl_page_igs g
-    ON g.application_id     = p.application_id
-    AND g.page_id           = p.page_id
-    AND g.region_id         = p.region_id
+    CASE t.auth_d
+        WHEN '[!]'  THEN tsk_app.get_icon_warning('Delete auth. scheme is missing or invalid')
+        WHEN 'Y'    THEN tsk_app.get_icon_check()
+        ELSE NULL
+        END AS auth_d
+    --
+FROM tsk_auth_grids_v t
 CROSS JOIN x
-JOIN tsk_lov_app_pages_v s
-    ON s.page_id            = r.page_id
-WHERE p.application_id      = x.app_id
-    --AND (x.page_id          = s.page_id         OR x.page_id IS NULL)
-    AND (x.page_group       = s.page_group_raw  OR x.page_group IS NULL)
-    AND p.process_type_code IN ('NATIVE_IG_DML', 'NATIVE_INVOKE_API');
+JOIN tsk_lov_app_pages_v p
+    ON p.page_id            = t.page_id
+WHERE 1 = 1
+    AND (x.page_id          = p.page_id         OR x.page_id IS NULL)
+    AND (x.page_group       = p.page_group_raw  OR x.page_group IS NULL);
 --
 COMMENT ON TABLE tsk_p968_grid_check_v IS '';
 
