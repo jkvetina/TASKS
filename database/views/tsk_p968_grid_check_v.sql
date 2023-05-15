@@ -11,8 +11,8 @@ SELECT
     p.page_group,
     t.region_id,
     --
-    REPLACE(t.region_name,      '[!]', tsk_app.get_icon_warning('')) AS region_name,
-    REPLACE(t.source_object,    '[!]', tsk_app.get_icon_warning('')) AS source_object,
+    REPLACE(t.region_name,      '[!]', tsk_app.get_icon_warning('Region name should end with [GRID]')) AS region_name,
+    REPLACE(t.source_object,    '[!]', tsk_app.get_icon_warning('There should be no WHERE condition set on region')) AS source_object,
     --
     CASE t.source_type
         WHEN 'TABLE'    THEN tsk_app.get_icon_warning('Don''t use tables directly')
@@ -20,7 +20,7 @@ SELECT
         ELSE NULL
         END AS source_type,
     --
-    REPLACE(t.process_name,     '[!]', tsk_app.get_icon_warning('')) AS process_name,
+    REPLACE(t.process_name,     '[!]', tsk_app.get_icon_warning('Process name is different then procedure name')) AS process_name,
     --
     CASE t.process_type
         WHEN 'REGION'           THEN tsk_app.get_icon_warning('Junior developer?')
@@ -32,10 +32,10 @@ SELECT
     --
     t.process_handler,
     --
-    CASE WHEN t.object_name != 'TSK_P' || t.page_id THEN tsk_app.get_icon_warning('') END || t.object_name AS object_name,
+    CASE WHEN t.object_name != 'TSK_P' || t.page_id THEN tsk_app.get_icon_warning('Package name should be TSK_P' || t.page_id) END || t.object_name AS object_name,
     --
-    REPLACE(t.procedure_name,   '[!]', tsk_app.get_icon_warning('')) AS procedure_name,
-    REPLACE(t.table_name,       '[!]', tsk_app.get_icon_warning('')) AS table_name,
+    t.procedure_name,
+    REPLACE(t.table_name,       '[!]', tsk_app.get_icon_warning('Target table is not recognized')) AS table_name,
     --
     CASE WHEN t.auth_region     = 'Y' THEN tsk_app.get_icon_check() END AS auth_region,
     CASE WHEN t.auth_process    = 'Y' THEN tsk_app.get_icon_check() END AS auth_process,
