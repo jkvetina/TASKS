@@ -12,22 +12,25 @@ SELECT
     t.region_id,
     --
     REPLACE(t.region_name,      '[!]', tsk_app.get_icon_warning('Region name should end with [GRID]')) AS region_name,
-    REPLACE(t.source_object,    '[!]', tsk_app.get_icon_warning('There should be no WHERE condition set on region')) AS source_object,
+    --
+    CASE WHEN t.source_object NOT LIKE 'TSK\_P' || t.page_id || '%\_V' ESCAPE '\'
+        THEN tsk_app.get_icon_warning('Source view has a wrong name, should be TSK_P' || t.page_id || '..._V') || REPLACE(t.source_object,    '[!]', '')
+        ELSE REPLACE(t.source_object,    '[!]', tsk_app.get_icon_warning('There should be no WHERE condition set on region'))
+        END AS source_object,
     --
     CASE t.source_type
-        WHEN 'TABLE'    THEN tsk_app.get_icon_warning('Don''t use tables directly')
-        WHEN 'VIEW'     THEN tsk_app.get_icon_check()
-        ELSE NULL
+        WHEN 'VIEW' THEN tsk_app.get_icon_check()
+        ELSE tsk_app.get_icon_warning('Always use a view as source')
         END AS source_type,
     --
     REPLACE(t.process_name,     '[!]', tsk_app.get_icon_warning('Process name is different then procedure name')) AS process_name,
     --
     CASE t.process_type
-        WHEN 'REGION'           THEN tsk_app.get_icon_warning('Junior developer?')
+        WHEN 'REGION_SOURCE'    THEN tsk_app.get_icon_warning('Junior developer?')
         WHEN 'TABLE'            THEN tsk_app.get_icon_warning('Don''t use tables directly')
         WHEN 'PLSQL_CODE'       THEN tsk_app.get_icon_warning('Package is great, but Invoke API is better')
         WHEN 'PLSQL_PACKAGE'    THEN tsk_app.get_icon_check()
-        ELSE NULL
+        ELSE t.process_type
         END AS process_type,
     --
     t.process_handler,
