@@ -105,6 +105,13 @@ CREATE OR REPLACE PACKAGE tsk_app AS
     )
     RETURN VARCHAR2;
 
+
+
+    FUNCTION get_user_views_text (
+        in_view_name            user_views.view_name%TYPE
+    )
+    RETURN VARCHAR2;
+
 END;
 /
 

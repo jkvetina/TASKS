@@ -263,6 +263,23 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         RETURN core.get_icon('fa-check', in_title, 'color: #333;' || in_style);
     END;
 
+
+
+    FUNCTION get_user_views_text (
+        in_view_name            user_views.view_name%TYPE
+    )
+    RETURN VARCHAR2
+    AS
+        out_text                user_views.text%TYPE;
+    BEGIN
+        -- convert LONG to VARCHAR2
+        SELECT v.text INTO out_text
+        FROM user_views v
+        WHERE v.view_name       = in_view_name;
+        --
+        RETURN out_text;
+    END;
+
 END;
 /
 
