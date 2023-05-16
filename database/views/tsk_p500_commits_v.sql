@@ -1,8 +1,8 @@
 CREATE OR REPLACE FORCE VIEW tsk_p500_commits_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        tsk_app.get_client_id()     AS client_id,
-        tsk_app.get_project_id()    AS project_id
+        core.get_item('$CLIENT_ID')     AS client_id,
+        core.get_item('$PROJECT_ID')    AS project_id
     FROM DUAL
 ),
 d AS (
