@@ -251,6 +251,11 @@ regions:
     heading: 
       heading: Target
 
+  - # ====== Column Group: Counts ================================
+    id: 48957189664352022
+    heading: 
+      heading: Counts
+
   columns: 
   - # ====== Column: PAGE_ID =====================================
     id: 48617274572365443
@@ -509,8 +514,9 @@ regions:
       type: Display Only
 
     heading: 
-      heading: Type
+      heading: <span title="Process Type">T</span>
       alignment: center
+      alternative-label: Process Type
 
     settings: 
       format: HTML
@@ -611,8 +617,9 @@ regions:
       type: Display Only
 
     heading: 
-      heading: Type
+      heading: <span title="Source Type">T</span>
       alignment: center
+      alternative-label: Source Type
 
     settings: 
       format: HTML
@@ -669,7 +676,7 @@ regions:
       format: HTML
 
     layout: 
-      sequence: 160
+      sequence: 170
       column-alignment: start
       group: Target # 48956924871352020
       use-group-for: Both
@@ -720,7 +727,7 @@ regions:
       format: HTML
 
     layout: 
-      sequence: 170
+      sequence: 180
       column-alignment: start
       group: Target # 48956924871352020
       use-group-for: Both
@@ -771,7 +778,7 @@ regions:
       format: HTML
 
     layout: 
-      sequence: 180
+      sequence: 190
       column-alignment: start
       group: Target # 48956924871352020
       use-group-for: Both
@@ -822,7 +829,7 @@ regions:
       format: HTML
 
     layout: 
-      sequence: 190
+      sequence: 200
       column-alignment: start
       group: Target # 48956924871352020
       use-group-for: Both
@@ -866,14 +873,15 @@ regions:
       type: Display Only
 
     heading: 
-      heading: Region
+      heading: <span title="Region">R</span>
       alignment: center
+      alternative-label: Region
 
     settings: 
       format: HTML
 
     layout: 
-      sequence: 200
+      sequence: 210
       column-alignment: center
       group: Authorization # 48615516280365426
       use-group-for: Both
@@ -918,14 +926,15 @@ regions:
       type: Display Only
 
     heading: 
-      heading: Process
+      heading: <span title="Process">P</span>
       alignment: center
+      alternative-label: Process
 
     settings: 
       format: HTML
 
     layout: 
-      sequence: 210
+      sequence: 220
       column-alignment: center
       group: Authorization # 48615516280365426
       use-group-for: Both
@@ -970,14 +979,15 @@ regions:
       type: Display Only
 
     heading: 
-      heading: C
+      heading: <span title="Create">C</span>
       alignment: center
+      alternative-label: Create
 
     settings: 
       format: HTML
 
     layout: 
-      sequence: 220
+      sequence: 230
       column-alignment: center
       group: Authorization # 48615516280365426
       use-group-for: Both
@@ -1021,14 +1031,15 @@ regions:
       type: Display Only
 
     heading: 
-      heading: U
+      heading: <span title="Update">U</span>
       alignment: center
+      alternative-label: Update
 
     settings: 
       format: HTML
 
     layout: 
-      sequence: 230
+      sequence: 240
       column-alignment: center
       group: Authorization # 48615516280365426
       use-group-for: Both
@@ -1072,14 +1083,15 @@ regions:
       type: Display Only
 
     heading: 
-      heading: D
+      heading: <span title="Delete">D</span>
       alignment: center
+      alternative-label: Delete
 
     settings: 
       format: HTML
 
     layout: 
-      sequence: 240
+      sequence: 250
       column-alignment: center
       group: Authorization # 48615516280365426
       use-group-for: Both
@@ -1115,6 +1127,106 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
+
+  - # ====== Column: MISSING_ITEMS ===============================
+    id: 48957288195352023
+    identification: 
+      column-name: MISSING_ITEMS
+      type: Display Only
+
+    heading: 
+      heading: <span title="Missing Page Items">P</span>
+      alignment: center
+      alternative-label: Missing Page Items
+
+    settings: 
+      format: HTML
+
+    layout: 
+      sequence: 160
+      column-alignment: center
+      group: Source # 48956835338352019
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: MISSING_ITEMS
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: COUNT_DA ====================================
+    id: 48957390162352024
+    identification: 
+      column-name: COUNT_DA
+      type: Display Only
+
+    heading: 
+      heading: DA
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 270
+      column-alignment: end
+      group: Counts # 48957189664352022
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_DA
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+    configuration: 
+      build-option: NEVER # 48468460291668887
 
   printing: 
     page: 

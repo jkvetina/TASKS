@@ -23,6 +23,8 @@ SELECT
         ELSE tsk_app.get_icon_warning('Always use a view as source')
         END AS source_type,
     --
+    t.missing_items,
+    --
     REPLACE(t.process_name,     '[!]', tsk_app.get_icon_warning('Process name is different then procedure name')) AS process_name,
     --
     CASE t.process_type
@@ -59,7 +61,9 @@ SELECT
         WHEN '[!]'  THEN tsk_app.get_icon_warning('Delete auth. scheme is missing or invalid')
         WHEN 'Y'    THEN tsk_app.get_icon_check()
         ELSE NULL
-        END AS auth_d
+        END AS auth_d,
+    --
+    t.count_da
     --
 FROM tsk_auth_grids_v t
 CROSS JOIN x
