@@ -868,7 +868,7 @@ regions:
       type: Display Only
 
     heading: 
-      heading: G
+      heading: <span title="Grid Handler">G</span>
       alignment: center
       alternative-label: Grid Handler
 

@@ -439,7 +439,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_session_state_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
 ,p_item_type=>'NATIVE_DISPLAY_ONLY'
-,p_heading=>'G'
+,p_heading=>'<span title="Grid Handler">G</span>'
 ,p_label=>'Grid Handler'
 ,p_heading_alignment=>'CENTER'
 ,p_display_sequence=>50
