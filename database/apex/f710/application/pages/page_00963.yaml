@@ -135,6 +135,9 @@ regions:
     table-owner: Parsing Schema
     table-name: TSK_P963_MAP_COMPONENTS_V
     include-rowid-column: false
+    page-items-to-submit: 
+    - P963_PAGE_GROUP
+    - P963_PAGE_ID
 
   layout: 
     sequence: 20

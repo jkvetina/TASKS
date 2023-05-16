@@ -50,6 +50,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_query_table=>'TSK_P952_MAP_USERS_V'
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
+,p_ajax_items_to_submit=>'P952_CLIENT_ID,P952_SHOW_ALL'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_prn_content_disposition=>'ATTACHMENT'
 ,p_prn_units=>'INCHES'

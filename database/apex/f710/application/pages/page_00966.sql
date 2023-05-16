@@ -60,6 +60,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_query_table=>'TSK_P966_MAP_PROCEDURES_V'
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
+,p_ajax_items_to_submit=>'P966_PAGE_GROUP'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_prn_units=>'INCHES'
 ,p_prn_paper_size=>'LETTER'

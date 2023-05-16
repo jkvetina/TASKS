@@ -51,6 +51,9 @@ regions:
     table-owner: Parsing Schema
     table-name: TSK_P952_MAP_USERS_V
     include-rowid-column: false
+    page-items-to-submit: 
+    - P952_CLIENT_ID
+    - P952_SHOW_ALL
 
   layout: 
     sequence: 20

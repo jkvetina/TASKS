@@ -63,6 +63,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_query_table=>'TSK_P500_COMMITS_V'
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
+,p_ajax_items_to_submit=>'P500_CLIENT_ID,P500_PROJECT_ID'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_required_role=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 ,p_prn_units=>'INCHES'
