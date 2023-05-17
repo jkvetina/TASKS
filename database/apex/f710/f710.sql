@@ -28,7 +28,7 @@ prompt APPLICATION 710 - Tasks
 -- Application Export:
 --   Application:     710
 --   Name:            Tasks
---   Date and Time:   20:09 Úterý Květen 16, 2023
+--   Date and Time:   16:44 Středa Květen 17, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -110,7 +110,7 @@ wwv_flow_imp.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-05-16'
+,p_flow_version=>'2023-05-17'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -25569,7 +25569,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_NUMBER_FIELD'
 ,p_heading=>'Task Id'
 ,p_heading_alignment=>'RIGHT'
-,p_display_sequence=>30
+,p_display_sequence=>50
 ,p_value_alignment=>'RIGHT'
 ,p_attribute_03=>'left'
 ,p_attribute_04=>'decimal'
@@ -25599,7 +25599,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_LINK'
 ,p_heading=>'Commit Id'
 ,p_heading_alignment=>'LEFT'
-,p_display_sequence=>50
+,p_display_sequence=>70
 ,p_value_alignment=>'LEFT'
 ,p_link_target=>'javascript: { window.open(''&COMMIT_URL.'', ''_blank''); }'
 ,p_link_text=>'&COMMIT_SHORT.'
@@ -25628,7 +25628,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_TEXT_FIELD'
 ,p_heading=>'Commit Message'
 ,p_heading_alignment=>'LEFT'
-,p_display_sequence=>70
+,p_display_sequence=>80
 ,p_value_alignment=>'LEFT'
 ,p_attribute_05=>'BOTH'
 ,p_is_required=>false
@@ -25654,7 +25654,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_session_state_data_type=>'VARCHAR2'
 ,p_is_query_only=>true
 ,p_item_type=>'NATIVE_HIDDEN'
-,p_display_sequence=>80
+,p_display_sequence=>90
 ,p_attribute_01=>'Y'
 ,p_filter_is_required=>false
 ,p_use_as_row_header=>false
@@ -25673,7 +25673,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_DISPLAY_ONLY'
 ,p_heading=>'Created By'
 ,p_heading_alignment=>'LEFT'
-,p_display_sequence=>90
+,p_display_sequence=>100
 ,p_value_alignment=>'LEFT'
 ,p_attribute_02=>'VALUE'
 ,p_attribute_05=>'PLAIN'
@@ -25701,7 +25701,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_DISPLAY_ONLY'
 ,p_heading=>'Created At'
 ,p_heading_alignment=>'CENTER'
-,p_display_sequence=>100
+,p_display_sequence=>110
 ,p_value_alignment=>'CENTER'
 ,p_attribute_02=>'VALUE'
 ,p_attribute_05=>'PLAIN'
@@ -25728,7 +25728,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_item_type=>'NATIVE_TEXT_FIELD'
 ,p_heading=>'Today'
 ,p_heading_alignment=>'LEFT'
-,p_display_sequence=>110
+,p_display_sequence=>120
 ,p_value_alignment=>'LEFT'
 ,p_attribute_05=>'BOTH'
 ,p_is_required=>false
@@ -25757,6 +25757,41 @@ wwv_flow_imp_page.create_region_column(
 ,p_name=>'COMMIT_ID'
 ,p_source_type=>'DB_COLUMN'
 ,p_source_expression=>'COMMIT_ID'
+,p_data_type=>'VARCHAR2'
+,p_session_state_data_type=>'VARCHAR2'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_HIDDEN'
+,p_display_sequence=>60
+,p_attribute_01=>'Y'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>true
+,p_enable_control_break=>true
+,p_is_primary_key=>false
+,p_duplicate_value=>true
+,p_include_in_export=>false
+);
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(48957460962352025)
+,p_name=>'OLD_TASK_ID'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'OLD_TASK_ID'
+,p_data_type=>'VARCHAR2'
+,p_session_state_data_type=>'VARCHAR2'
+,p_is_query_only=>false
+,p_item_type=>'NATIVE_HIDDEN'
+,p_display_sequence=>30
+,p_attribute_01=>'Y'
+,p_use_as_row_header=>false
+,p_enable_sort_group=>false
+,p_is_primary_key=>false
+,p_duplicate_value=>true
+,p_include_in_export=>false
+);
+wwv_flow_imp_page.create_region_column(
+ p_id=>wwv_flow_imp.id(48957541585352026)
+,p_name=>'OLD_COMMIT_ID'
+,p_source_type=>'DB_COLUMN'
+,p_source_expression=>'OLD_COMMIT_ID'
 ,p_data_type=>'VARCHAR2'
 ,p_session_state_data_type=>'VARCHAR2'
 ,p_is_query_only=>false
@@ -25904,6 +25939,22 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_is_visible=>true
 ,p_is_frozen=>false
 );
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(49064154899650662)
+,p_view_id=>wwv_flow_imp.id(185555961372980776)
+,p_display_seq=>10
+,p_column_id=>wwv_flow_imp.id(48957460962352025)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(49065096867650668)
+,p_view_id=>wwv_flow_imp.id(185555961372980776)
+,p_display_seq=>11
+,p_column_id=>wwv_flow_imp.id(48957541585352026)
+,p_is_visible=>true
+,p_is_frozen=>false
+);
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(45415049705005628)
 ,p_button_sequence=>10
@@ -25996,16 +26047,11 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(184662860801964980)
-,p_process_type=>'NATIVE_IG_DML'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'SAVE_COMMITS'
-,p_attribute_01=>'PLSQL_CODE'
-,p_attribute_04=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'tsk_p500.save_commits (',
-'    io_commit_id    => :COMMIT_ID,',
-'    io_task_id      => :TASK_ID',
-');'))
-,p_attribute_05=>'Y'
-,p_attribute_06=>'N'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P500'
+,p_attribute_04=>'SAVE_COMMITS'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
@@ -26013,10 +26059,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45415190909005629)
 ,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'SYNC_GITHUB'
-,p_process_sql_clob=>'tsk_p500.sync_commits();'
-,p_process_clob_language=>'PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
+,p_process_name=>'SYNC_COMMITS'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P500'
+,p_attribute_04=>'SYNC_COMMITS'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_imp.id(45415049705005628)
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER

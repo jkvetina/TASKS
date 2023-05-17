@@ -975,16 +975,17 @@ processes:
   security: 
     authorization-scheme: IS_USER # 47196033359190547
 
-- # ====== Process: SYNC_GITHUB ================================
+- # ====== Process: SYNC_COMMITS ===============================
   id: 45415190909005629
   identification: 
-    name: SYNC_GITHUB
-    type: Execute Code
+    name: SYNC_COMMITS
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p500.sync_commits();
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P500
+    procedure-or-function: SYNC_COMMITS
 
   execution: 
     sequence: 20

@@ -595,10 +595,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45415190909005629)
 ,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'SYNC_GITHUB'
-,p_process_sql_clob=>'tsk_p500.sync_commits();'
-,p_process_clob_language=>'PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
+,p_process_name=>'SYNC_COMMITS'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P500'
+,p_attribute_04=>'SYNC_COMMITS'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_imp.id(45415049705005628)
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
