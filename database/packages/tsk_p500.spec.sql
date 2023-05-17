@@ -17,10 +17,7 @@ CREATE OR REPLACE PACKAGE tsk_p500 AS
 
 
 
-    PROCEDURE save_commits (
-        io_commit_id        IN OUT NOCOPY   tsk_task_commits.commit_id%TYPE,
-        io_task_id          IN OUT NOCOPY   tsk_task_commits.task_id%TYPE
-    );
+    PROCEDURE save_commits;
 
 END;
 /

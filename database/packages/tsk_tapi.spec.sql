@@ -134,16 +134,18 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
 
     PROCEDURE commits (
         rec                     IN OUT NOCOPY   tsk_commits%ROWTYPE,
-        in_action                               CHAR                                := NULL
+        --
+        in_action               CHAR                            := NULL
     );
 
 
 
     PROCEDURE task_commits (
         rec                     IN OUT NOCOPY   tsk_task_commits%ROWTYPE,
-        in_action                               CHAR                                := NULL,
-        old_commit_id           IN OUT NOCOPY   tsk_task_commits.commit_id%TYPE,
-        old_task_id             IN OUT NOCOPY   tsk_task_commits.task_id%TYPE
+        --
+        in_action               CHAR                            := NULL,
+        in_commit_id            tsk_task_commits.commit_id%TYPE := NULL,
+        in_task_id              tsk_task_commits.task_id%TYPE   := NULL
     );
 
 

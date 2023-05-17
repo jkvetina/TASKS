@@ -733,7 +733,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
     PROCEDURE commits (
         rec                     IN OUT NOCOPY   tsk_commits%ROWTYPE,
-        in_action                               CHAR                                := NULL
+        --
+        in_action               CHAR                            := NULL
     )
     AS
         c_action                CONSTANT CHAR   := get_action(in_action);
@@ -775,9 +776,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
     PROCEDURE task_commits (
         rec                     IN OUT NOCOPY   tsk_task_commits%ROWTYPE,
-        in_action                               CHAR                                := NULL,
-        old_commit_id           IN OUT NOCOPY   tsk_task_commits.commit_id%TYPE,
-        old_task_id             IN OUT NOCOPY   tsk_task_commits.task_id%TYPE
+        --
+        in_action               CHAR                            := NULL,
+        in_commit_id            tsk_task_commits.commit_id%TYPE := NULL,
+        in_task_id              tsk_task_commits.task_id%TYPE   := NULL
     )
     AS
         c_action                CONSTANT CHAR   := get_action(in_action);
@@ -793,8 +795,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         -- delete record
         IF c_action = 'D' THEN
             DELETE FROM tsk_task_commits t
-            WHERE t.task_id         = NVL(old_commit_id,    rec.task_id)
-                AND t.commit_id     = NVL(old_task_id,      rec.commit_id);
+            WHERE t.task_id         = NVL(in_task_id,       rec.task_id)
+                AND t.commit_id     = NVL(in_commit_id,     rec.commit_id);
             --
             RETURN;
         END IF;
@@ -802,17 +804,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         -- overwrite some values
         rec.updated_by := core.get_user_id();
         rec.updated_at := SYSDATE;
-        --
+
+        -- upsert record
         BEGIN
             INSERT INTO tsk_task_commits VALUES rec;
         EXCEPTION
         WHEN DUP_VAL_ON_INDEX THEN
             NULL;
         END;
-
-        -- update keys to APEX
-        old_commit_id   := rec.commit_id;
-        old_task_id     := rec.task_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

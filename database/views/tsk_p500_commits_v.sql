@@ -31,6 +31,9 @@ z AS (
     GROUP BY d.today
 )
 SELECT
+    d.task_id           AS old_task_id,
+    d.commit_id         AS old_commit_id,
+    --
     d.task_id,
     d.commit_id,
     d.commit_short,

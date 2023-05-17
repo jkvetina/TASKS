@@ -122,8 +122,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
                 commits.commit_id   := c.commit_id;
                 --
                 tsk_tapi.task_commits(commits,
-                    old_commit_id   => commits.commit_id,
-                    old_task_id     => commits.task_id
+                    in_commit_id    => commits.commit_id,
+                    in_task_id      => commits.task_id
                 );
             END LOOP;
         END LOOP;
@@ -176,20 +176,24 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
 
 
 
-    PROCEDURE save_commits (
-        io_commit_id        IN OUT NOCOPY   tsk_task_commits.commit_id%TYPE,
-        io_task_id          IN OUT NOCOPY   tsk_task_commits.task_id%TYPE
-    )
+    PROCEDURE save_commits
     AS
         rec                 tsk_task_commits%ROWTYPE;
+        in_action           CONSTANT CHAR := core.get_grid_action();
     BEGIN
+        -- change record in table
         rec.commit_id       := core.get_grid_data('COMMIT_ID');
         rec.task_id         := core.get_grid_data('TASK_ID');
         --
-        tsk_tapi.task_commits(rec,
-            old_commit_id   => io_commit_id,
-            old_task_id     => io_task_id
+        tsk_tapi.task_commits (rec,
+            in_action       => in_action,
+            in_commit_id    => core.get_grid_data('OLD_COMMIT_ID'),
+            in_task_id      => core.get_grid_data('OLD_TASK_ID')
         );
+
+        -- update primary key back to APEX grid for proper row refresh
+        core.set_grid_data('OLD_COMMIT_ID',     rec.commit_id);
+        core.set_grid_data('OLD_TASK_ID',       rec.task_id);
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
