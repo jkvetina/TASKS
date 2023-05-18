@@ -67,12 +67,14 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_name=>'Tasks [CONTENT]'
 ,p_parent_plug_id=>wwv_flow_imp.id(45936953220991447)
 ,p_region_template_options=>'#DEFAULT#'
-,p_component_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70831193948975578)
 ,p_plug_display_sequence=>10
 ,p_plug_display_point=>'SUB_REGIONS'
-,p_plug_source=>'tsk_p100.generate_board();'
-,p_plug_source_type=>'NATIVE_PLSQL'
+,p_function_body_language=>'PLSQL'
+,p_plug_source=>'RETURN tsk_p100.generate_board();'
+,p_lazy_loading=>false
+,p_plug_source_type=>'NATIVE_DYNAMIC_CONTENT'
+,p_ajax_items_to_submit=>'P100_CLIENT_ID,P100_PROJECT_ID,P100_BOARD_ID,P100_SWIMLANE_ID,P100_OWNER_ID'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_plug_required_role=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 ,p_plug_display_condition_type=>'ITEM_IS_NULL'

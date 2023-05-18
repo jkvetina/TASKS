@@ -8,7 +8,8 @@ CREATE OR REPLACE PACKAGE tsk_p100 AS
 
 
 
-    PROCEDURE generate_board;
+    FUNCTION generate_board
+    RETURN CLOB;
 
 
 

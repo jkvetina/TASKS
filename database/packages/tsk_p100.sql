@@ -108,7 +108,21 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
 
 
 
-    PROCEDURE generate_board
+    PROCEDURE clob_append (
+        io_clob             IN OUT NOCOPY   CLOB,
+        in_content                          VARCHAR2
+    )
+    AS
+    BEGIN
+        IF LENGTH(in_content) > 0 THEN
+            DBMS_LOB.WRITEAPPEND(io_clob, LENGTH(in_content), in_content);
+        END IF;
+    END;
+
+
+
+    FUNCTION generate_board
+    RETURN CLOB
     AS
         in_client_id        CONSTANT tsk_tasks.client_id%TYPE       := tsk_app.get_client_id();
         in_project_id       CONSTANT tsk_tasks.project_id%TYPE      := tsk_app.get_project_id();
@@ -117,7 +131,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         in_owner_id         CONSTANT tsk_tasks.owner_id%TYPE        := core.get_item('P100_OWNER_ID');
         --
         v_statuses          PLS_INTEGER;
+        out_clob            CLOB;
     BEGIN
+        DBMS_LOB.CREATETEMPORARY(out_clob, cache => TRUE);
+
         -- calculate number of columns
         SELECT COUNT(s.status_id)
         INTO v_statuses
@@ -126,7 +143,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
             AND s.project_id    = in_project_id
             AND s.is_active     = 'Y';
         --
-        HTP.P('<div class="BOARD" style="' ||
+        clob_append(out_clob,
+            '<div class="BOARD" style="' ||
             'grid-template-columns: repeat(' || v_statuses || ', minmax(300px, 1fr)); ' ||
             '">');
 
@@ -155,12 +173,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                     ON u.user_id        = in_owner_id
                 ORDER BY s.order#
             ) LOOP
-                HTP.P('<div class="TARGET_LIKE">');
-                HTP.P('<h3>' || s.status_name ||
+                clob_append(out_clob, '<div class="TARGET_LIKE">');
+                clob_append(out_clob, '<h3>' || s.status_name ||
                     CASE WHEN s.is_show_user        = 'Y' THEN RTRIM(' @' || s.user_name, ' @') END ||
                     CASE WHEN s.is_show_swimlane    = 'Y' THEN RTRIM(' @' || NULLIF(w.swimlane_name, '-'), ' @') END ||
                     '</h3>');
-                HTP.P('</div>');
+                clob_append(out_clob, '</div>');
             END LOOP;
 
             -- create swimlanes
@@ -171,7 +189,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                 FROM tsk_lov_statuses_v s
                 ORDER BY s.order#
             ) LOOP
-                HTP.P('<div class="TARGET" id="STATUS_' || s.status_id || '_SWIMLANE_' || w.swimlane_id || '">');
+                clob_append(out_clob, '<div class="TARGET" id="STATUS_' || s.status_id || '_SWIMLANE_' || w.swimlane_id || '">');
                 --
                 FOR t IN (
                     SELECT
@@ -189,7 +207,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                         AND t.swimlane_id   = w.swimlane_id
                     ORDER BY t.order#
                 ) LOOP
-                    HTP.P(
+                    clob_append(out_clob,
                         '<div class="TASK" draggable="true" id="TASK_' || t.task_id || '" style="' ||
                             CASE WHEN s.is_colored = 'Y' AND t.color_bg IS NOT NULL             THEN 'border-left: 5px solid ' || t.color_bg || '; ' END ||
                             CASE WHEN s.is_colored = 'Y' AND t.deadline_at <= TRUNC(SYSDATE)    THEN 'border-left: 5px solid ' || '#111' || '; ' END ||
@@ -203,11 +221,13 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
                     );
                 END LOOP;
                 --
-                HTP.P('</div>');
+                clob_append(out_clob, '</div>');
             END LOOP;
         END LOOP;
         --
-        HTP.P('</div>');
+        clob_append(out_clob, '</div>');
+        --
+        RETURN out_clob;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

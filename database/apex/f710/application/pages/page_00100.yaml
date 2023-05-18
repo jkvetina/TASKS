@@ -86,10 +86,17 @@ regions:
   id: 34744427648440317
   identification: 
     title: Tasks [CONTENT]
-    type: PL/SQL Dynamic Content [Legacy]
+    type: Dynamic Content
 
   source: 
-    pl/sql-code: tsk_p100.generate_board();
+    language: PL/SQL
+    pl/sql-function-body-returning-a-clob: RETURN tsk_p100.generate_board();
+    page-items-to-submit: 
+    - P100_CLIENT_ID
+    - P100_PROJECT_ID
+    - P100_BOARD_ID
+    - P100_SWIMLANE_ID
+    - P100_OWNER_ID
 
   layout: 
     sequence: 10
@@ -127,6 +134,10 @@ regions:
 
   customization: 
     customizable: Not Customizable By End Users
+
+  attributes: 
+    performance: 
+      lazy-loading: false
 
 - # ====== Region: Tasks =======================================
   id: 35122875520937003
