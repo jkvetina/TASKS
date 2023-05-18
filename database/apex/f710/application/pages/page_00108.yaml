@@ -432,12 +432,13 @@ processes:
   id: 47739813619626908
   identification: 
     name: MERGE_TASKS
-    type: Execute Code
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p105.save_merge_checklist();
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P105
+    procedure-or-function: SAVE_MERGE_CHECKLIST
 
   execution: 
     sequence: 10

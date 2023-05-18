@@ -2674,12 +2674,13 @@ processes:
   id: 34798564961743636
   identification: 
     name: UPDATE_TASK
-    type: Execute Code
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p100.ajax_update_task_on_drag();
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P100
+    procedure-or-function: AJAX_UPDATE_TASK_ON_DRAG
 
   execution: 
     sequence: 10
@@ -2716,14 +2717,14 @@ processes:
   id: 44093742632578040
   identification: 
     name: SAVE_TASKS
-    type: Interactive Grid - Automatic Row Processing (DML)
+    type: Invoke API
     editable-region: Tasks [GRID] # 44091050489578013
 
   settings: 
-    target-type: PL/SQL Code
-    pl/sql-code-to-insert/update/delete: tsk_p105.save_task();
-    prevent-lost-updates: false
-    lock-row: No
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P105
+    procedure-or-function: SAVE_TASK
 
   execution: 
     sequence: 10
@@ -2740,12 +2741,13 @@ processes:
   id: 45892317855541603
   identification: 
     name: ADD_TO_FAVORITES
-    type: Execute Code
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p100.add_to_favorites();
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P100
+    procedure-or-function: ADD_TO_FAVORITES
 
   execution: 
     sequence: 20
@@ -2765,12 +2767,13 @@ processes:
   id: 45892489830541604
   identification: 
     name: REMOVE_FROM_FAVORITES
-    type: Execute Code
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p100.remove_from_favorites();
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P100
+    procedure-or-function: REMOVE_FROM_FAVORITES
 
   execution: 
     sequence: 30

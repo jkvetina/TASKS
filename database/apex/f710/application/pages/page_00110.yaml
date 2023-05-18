@@ -1463,14 +1463,14 @@ processes:
   id: 45281063417457925
   identification: 
     name: PROCESS_BULK_TASK_FILTERS
-    type: Interactive Grid - Automatic Row Processing (DML)
+    type: Invoke API
     editable-region: FILTER_TASKS [GRID] # 44287803008494730
 
   settings: 
-    target-type: PL/SQL Code
-    pl/sql-code-to-insert/update/delete: tsk_p110.process_bulk_task_filters();
-    prevent-lost-updates: false
-    lock-row: No
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P110
+    procedure-or-function: PROCESS_BULK_TASK_FILTERS
 
   execution: 
     sequence: 20
@@ -1490,12 +1490,13 @@ processes:
   id: 45281481702457929
   identification: 
     name: PROCESS_BULK_REQUEST
-    type: Execute Code
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p110.process_bulk_request();
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P110
+    procedure-or-function: PROCESS_BULK_REQUEST
 
   execution: 
     sequence: 30
@@ -1512,12 +1513,13 @@ processes:
   id: 45281519596457930
   identification: 
     name: PROCESS_BULK_INIT
-    type: Execute Code
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p110.process_bulk_init();
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P110
+    procedure-or-function: PROCESS_BULK_INIT
 
   execution: 
     sequence: 10

@@ -551,12 +551,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45665498236305447)
 ,p_process_sequence=>50
 ,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'REORDER_SWIMLANES'
-,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'tsk_p200.reorder_task_swimlanes();',
-''))
-,p_process_clob_language=>'PLSQL'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P200'
+,p_attribute_04=>'REORDER_TASK_SWIMLANES'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_imp.id(45659035770305439)
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER

@@ -836,14 +836,13 @@ processes:
   id: 45665498236305447
   identification: 
     name: REORDER_SWIMLANES
-    type: Execute Code
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: |
-      tsk_p200.reorder_task_swimlanes();
-      
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P200
+    procedure-or-function: REORDER_TASK_SWIMLANES
 
   execution: 
     sequence: 50

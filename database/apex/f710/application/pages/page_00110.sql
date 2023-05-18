@@ -647,10 +647,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45281519596457930)
 ,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'PROCESS_BULK_INIT'
-,p_process_sql_clob=>'tsk_p110.process_bulk_init();'
-,p_process_clob_language=>'PLSQL'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P110'
+,p_attribute_04=>'PROCESS_BULK_INIT'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
@@ -659,12 +660,11 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(44287803008494730)
-,p_process_type=>'NATIVE_IG_DML'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'PROCESS_BULK_TASK_FILTERS'
-,p_attribute_01=>'PLSQL_CODE'
-,p_attribute_04=>'tsk_p110.process_bulk_task_filters();'
-,p_attribute_05=>'N'
-,p_attribute_06=>'N'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P110'
+,p_attribute_04=>'PROCESS_BULK_TASK_FILTERS'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_only_for_changed_rows=>'N'
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
@@ -673,10 +673,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45281481702457929)
 ,p_process_sequence=>30
 ,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'PROCESS_BULK_REQUEST'
-,p_process_sql_clob=>'tsk_p110.process_bulk_request();'
-,p_process_clob_language=>'PLSQL'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P110'
+,p_attribute_04=>'PROCESS_BULK_REQUEST'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );

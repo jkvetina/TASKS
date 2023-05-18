@@ -1581,12 +1581,11 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(46260417924307821)
-,p_process_type=>'NATIVE_IG_DML'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'SAVE_CHECKLIST'
-,p_attribute_01=>'PLSQL_CODE'
-,p_attribute_04=>'tsk_p105.save_checklist();'
-,p_attribute_05=>'N'
-,p_attribute_06=>'N'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P105'
+,p_attribute_04=>'SAVE_CHECKLIST'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
@@ -1594,10 +1593,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(44169642373914703)
 ,p_process_sequence=>30
 ,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'SAVE_COMMENT'
-,p_process_sql_clob=>'tsk_p105.save_comment();'
-,p_process_clob_language=>'PLSQL'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P105'
+,p_attribute_04=>'SAVE_COMMENT'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
@@ -1605,10 +1605,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45282650022457941)
 ,p_process_sequence=>40
 ,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'SAVE_ATTACHEMENTS'
-,p_process_sql_clob=>'tsk_p105.save_attachements();'
-,p_process_clob_language=>'PLSQL'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P105'
+,p_attribute_04=>'SAVE_ATTACHEMENTS'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when=>'P105_ATTACHED_FILES'
 ,p_process_when_type=>'ITEM_IS_NOT_NULL'
@@ -1618,10 +1619,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45282249548457937)
 ,p_process_sequence=>50
 ,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'SAVE_SPLIT_CHECKLIST'
-,p_process_sql_clob=>'tsk_p105.save_split_checklist();'
-,p_process_clob_language=>'PLSQL'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P105'
+,p_attribute_04=>'SAVE_SPLIT_CHECKLIST'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_imp.id(44285432437494706)
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
@@ -1689,10 +1691,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(45281736757457932)
 ,p_process_sequence=>10
 ,p_process_point=>'ON_DEMAND'
-,p_process_type=>'NATIVE_PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'AJAX_DELETE_COMMENT'
-,p_process_sql_clob=>'tsk_p105.ajax_delete_comment();'
-,p_process_clob_language=>'PLSQL'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P105'
+,p_attribute_04=>'AJAX_DELETE_COMMENT'
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
 wwv_flow_imp.component_end;

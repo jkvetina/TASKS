@@ -901,12 +901,13 @@ processes:
   id: 47381746804872511
   identification: 
     name: REORDER_CATEGORIES
-    type: Execute Code
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p200.reorder_categories();
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P200
+    procedure-or-function: REORDER_CATEGORIES
 
   execution: 
     sequence: 30

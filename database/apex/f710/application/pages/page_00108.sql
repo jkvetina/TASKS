@@ -26,7 +26,7 @@ wwv_flow_imp_page.create_page(
 ,p_dialog_width=>'640'
 ,p_dialog_chained=>'N'
 ,p_protection_level=>'C'
-,p_page_component_map=>'16'
+,p_page_component_map=>'17'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
@@ -182,10 +182,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(47739813619626908)
 ,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'MERGE_TASKS'
-,p_process_sql_clob=>'tsk_p105.save_merge_checklist();'
-,p_process_clob_language=>'PLSQL'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P105'
+,p_attribute_04=>'SAVE_MERGE_CHECKLIST'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_imp.id(47750816880141749)
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
