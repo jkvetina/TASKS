@@ -280,6 +280,29 @@ CREATE OR REPLACE PACKAGE BODY tsk_app AS
         RETURN out_text;
     END;
 
+
+
+    PROCEDURE set_prev_next_pages
+    AS
+    BEGIN
+        -- calculate prev/next pages
+        core.set_item('$PREV_PAGE', '');
+        core.set_item('$NEXT_PAGE', '');
+        --
+        IF core.get_item('$PAGE_ID') IS NOT NULL THEN
+            FOR c IN (
+                SELECT
+                    p.prev_page,
+                    p.next_page
+                FROM tsk_lov_app_pages_v p
+                WHERE p.page_id = core.get_number_item('$PAGE_ID')
+            ) LOOP
+                core.set_item('$PREV_PAGE', c.prev_page);
+                core.set_item('$NEXT_PAGE', c.next_page);
+            END LOOP;
+        END IF;
+    END;
+
 END;
 /
 

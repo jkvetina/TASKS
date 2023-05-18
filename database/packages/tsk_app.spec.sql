@@ -112,6 +112,10 @@ CREATE OR REPLACE PACKAGE tsk_app AS
     )
     RETURN VARCHAR2;
 
+
+
+    PROCEDURE set_prev_next_pages;
+
 END;
 /
 
