@@ -20,6 +20,13 @@ navigation:
   cursor-focus: Do not focus cursor
   warn-on-unsaved-changes: true
 
+css: 
+  inline: |
+    .is-readonly span.u-checkbox {
+        display: none !important;
+    }
+    
+
 security: 
   authorization-scheme: IS_USER # 47196033359190547
   authentication: Page Requires Authentication
