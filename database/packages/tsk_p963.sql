@@ -9,7 +9,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
         -- notify for new components
         SELECT NULLIF('(' || COUNT(*) || ')', '(0)') INTO v_not_assigned
         FROM tsk_p963_map_components_v c
-        WHERE c.is_used         IS NULL
+        WHERE c.component_type  != 'PAGE'
+            AND c.is_used       IS NULL
             AND c.dml_actions   IS NOT NULL;
         --
         core.set_item('$NOT_ASSIGNED', v_not_assigned);
@@ -94,7 +95,6 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
         IF core.get_grid_action() = 'D' THEN
             DELETE tsk_auth_components t
             WHERE t.component_id    = rec.component_id;
-                --AND t.role_id       IS NOT NULL;
             --
             RETURN;
         END IF;
@@ -106,20 +106,40 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
             --
             CONTINUE WHEN rec.role_id IS NULL;
             --
-            DELETE tsk_auth_components t
-            WHERE t.component_id    = rec.component_id
-                AND t.role_id       = rec.role_id
-                AND t.is_active     = 'Y';
-            --
-            IF rec.is_active = 'Y' THEN
-                UPDATE tsk_auth_components t
+            IF rec.component_type = 'PAGE' THEN
+                -- update page setup from here
+                UPDATE tsk_auth_pages t
                 SET t.is_active         = rec.is_active
-                WHERE t.component_id    = rec.component_id
+                WHERE t.page_id         = rec.page_id
                     AND t.role_id       = rec.role_id;
                 --
                 IF SQL%ROWCOUNT = 0 THEN
-                    INSERT INTO tsk_auth_components
-                    VALUES rec;
+                    INSERT INTO tsk_auth_pages (page_id, role_id, is_active, updated_by, updated_at)
+                    VALUES (
+                        rec.page_id,
+                        rec.role_id,
+                        rec.is_active,
+                        rec.updated_by,
+                        rec.updated_at
+                    );
+                END IF;
+            ELSE
+                -- page components
+                DELETE tsk_auth_components t
+                WHERE t.component_id    = rec.component_id
+                    AND t.role_id       = rec.role_id
+                    AND t.is_active     = 'Y';
+                --
+                IF rec.is_active = 'Y' THEN
+                    UPDATE tsk_auth_components t
+                    SET t.is_active         = rec.is_active
+                    WHERE t.component_id    = rec.component_id
+                        AND t.role_id       = rec.role_id;
+                    --
+                    IF SQL%ROWCOUNT = 0 THEN
+                        INSERT INTO tsk_auth_components
+                        VALUES rec;
+                    END IF;
                 END IF;
             END IF;
         END LOOP;

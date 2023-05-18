@@ -75,7 +75,7 @@ SELECT
     g.role_8,
     ''              AS is_used,
     '/'             AS path_,
-    ''              AS dml_actions
+    'U'             AS dml_actions
 FROM tsk_p962_map_pages_v g
 JOIN tsk_lov_app_pages_v p
     ON p.page_id        = g.page_id
