@@ -2674,13 +2674,12 @@ processes:
   id: 34798564961743636
   identification: 
     name: UPDATE_TASK
-    type: Invoke API
+    type: Execute Code
 
-  settings: 
-    type: PL/SQL Package
-    owner: PARSING SCHEMA
-    package: TSK_P100
-    procedure-or-function: AJAX_UPDATE_TASK_ON_DRAG
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: tsk_p100.ajax_update_task_on_drag();
 
   execution: 
     sequence: 10

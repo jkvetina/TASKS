@@ -1553,11 +1553,10 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34798564961743636)
 ,p_process_sequence=>10
 ,p_process_point=>'ON_DEMAND'
-,p_process_type=>'NATIVE_INVOKE_API'
+,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'UPDATE_TASK'
-,p_attribute_01=>'PLSQL_PACKAGE'
-,p_attribute_03=>'TSK_P100'
-,p_attribute_04=>'AJAX_UPDATE_TASK_ON_DRAG'
+,p_process_sql_clob=>'tsk_p100.ajax_update_task_on_drag();'
+,p_process_clob_language=>'PLSQL'
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(34907319414119830)
