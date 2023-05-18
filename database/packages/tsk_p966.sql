@@ -4,6 +4,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p966 AS
     AS
     BEGIN
         tsk_p960.set_role_names();
+
+        -- calculate prev/next pages
+        tsk_app.set_prev_next_pages();
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

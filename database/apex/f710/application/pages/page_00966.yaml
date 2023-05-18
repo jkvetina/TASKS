@@ -1139,6 +1139,219 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P966_NEXT_PAGE ===========================
+  id: 48957994918352030
+  identification: 
+    name: P966_NEXT_PAGE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: Map Procedures # 235343864849609931
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P966_PREV_PAGE ===========================
+  id: 48958061662352031
+  identification: 
+    name: P966_PREV_PAGE
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: Map Procedures # 235343864849609931
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P966_PAGE_ID =============================
+  id: 49086682558138163
+  identification: 
+    name: P966_PAGE_ID
+    type: Select List
+
+  label: 
+    label: Page
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 40
+    region: Map Procedures # 235344967604609942
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_APP_PAGES # 46513847178582916
+    display-extra-values: false
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P966_PAGE_GROUP
+    items-to-submit: 
+    - P966_PAGE_GROUP
+    parent-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: PREV_PAGE ===================================
+  id: 49088023114176473
+  identification: 
+    button-name: PREV_PAGE
+    label: Previous Page
+
+  layout: 
+    sequence: 50
+    region: Map Procedures # 235344967604609942
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-arrow-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:966:&SESSION.::&DEBUG.::P966_PAGE_ID:&P966_PREV_PAGE.'
+      page: 966 # Map Procedures
+      values: 
+        p966_page_id: '&P966_PREV_PAGE.'
+
+    warn-on-unsaved-changes: Do Not Check
+
+  advanced: 
+    custom-attributes: 
+    - 'style="margin-top:'
+    - 0.8rem;"
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P966_PREV_PAGE
+
+- # ====== Button: NEXT_PAGE ===================================
+  id: 49088361615177440
+  identification: 
+    button-name: NEXT_PAGE
+    label: Next Page
+
+  layout: 
+    sequence: 60
+    region: Map Procedures # 235344967604609942
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: false
+    column-span: Automatic
+    alignment: Left center
+
+  appearance: 
+    button-template: Icon # 70969417180975670
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-arrow-right
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:966:&SESSION.::&DEBUG.::P966_PAGE_ID:&P966_NEXT_PAGE.'
+      page: 966 # Map Procedures
+      values: 
+        p966_page_id: '&P966_NEXT_PAGE.'
+
+    warn-on-unsaved-changes: Do Not Check
+
+  advanced: 
+    custom-attributes: 
+    - 'style="margin-top:'
+    - 0.8rem;"
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P966_NEXT_PAGE
+
 dynamic-actions: 
 - # ====== Dynamic Action: CHANGE_FILTERS ======================
   id: 47806454934187333
@@ -1154,6 +1367,7 @@ dynamic-actions:
     item(s): 
     - P966_ROLE_ID
     - P966_PAGE_GROUP
+    - P966_PAGE_ID
 
   execution: 
     event-scope: Static

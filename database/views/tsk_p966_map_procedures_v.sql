@@ -1,7 +1,8 @@
 CREATE OR REPLACE FORCE VIEW tsk_p966_map_procedures_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
-        core.get_item('$PAGE_GROUP')    AS page_group
+        core.get_item('$PAGE_GROUP')    AS page_group,
+        core.get_item('$PAGE_ID')       AS page_id
     FROM DUAL
 )
 SELECT
@@ -41,7 +42,8 @@ LEFT JOIN tsk_p968_grid_check_v g
     ON g.object_name        = p.object_name
     AND g.procedure_name    = p.procedure_name
 WHERE 1 = 1
-    AND (x.page_group       = p.page_group_raw OR x.page_group IS NULL)
+    AND (x.page_group       = p.page_group_raw  OR x.page_group IS NULL)
+    AND (x.page_id          = p.page_id         OR x.page_id IS NULL)
 GROUP BY
     p.object_name,
     p.procedure_name;
