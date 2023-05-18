@@ -963,12 +963,11 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(139765471013244762)
-,p_process_type=>'NATIVE_IG_DML'
-,p_process_name=>'SAVE_MAP_PAGES'
-,p_attribute_01=>'PLSQL_CODE'
-,p_attribute_04=>'tsk_p962.save_pages();'
-,p_attribute_05=>'Y'
-,p_attribute_06=>'N'
+,p_process_type=>'NATIVE_INVOKE_API'
+,p_process_name=>'SAVE_PAGES'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P962'
+,p_attribute_04=>'SAVE_PAGES'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
@@ -976,10 +975,11 @@ wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(47405677838201653)
 ,p_process_sequence=>20
 ,p_process_point=>'AFTER_SUBMIT'
-,p_process_type=>'NATIVE_PLSQL'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'REFRESH_MV'
-,p_process_sql_clob=>'tsk_p962.refresh_mv();'
-,p_process_clob_language=>'PLSQL'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P962'
+,p_attribute_04=>'REFRESH_MV'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_imp.id(47219705769950931)
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER

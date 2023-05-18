@@ -1547,18 +1547,18 @@ dynamic-actions:
       fire-on-initialization: false
 
 processes: 
-- # ====== Process: SAVE_MAP_PAGES =============================
+- # ====== Process: SAVE_PAGES =================================
   id: 46823989540379294
   identification: 
-    name: SAVE_MAP_PAGES
-    type: Interactive Grid - Automatic Row Processing (DML)
+    name: SAVE_PAGES
+    type: Invoke API
     editable-region: Map Pages [GRID] # 139765471013244762
 
   settings: 
-    target-type: PL/SQL Code
-    pl/sql-code-to-insert/update/delete: tsk_p962.save_pages();
-    prevent-lost-updates: true
-    lock-row: No
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P962
+    procedure-or-function: SAVE_PAGES
 
   execution: 
     sequence: 10
@@ -1578,12 +1578,13 @@ processes:
   id: 47405677838201653
   identification: 
     name: REFRESH_MV
-    type: Execute Code
+    type: Invoke API
 
-  source: 
-    location: Local Database
-    language: PL/SQL
-    pl/sql-code: tsk_p962.refresh_mv();
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P962
+    procedure-or-function: REFRESH_MV
 
   execution: 
     sequence: 20

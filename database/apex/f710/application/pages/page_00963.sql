@@ -1270,12 +1270,11 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_region_id=>wwv_flow_imp.id(187542958257422616)
-,p_process_type=>'NATIVE_IG_DML'
+,p_process_type=>'NATIVE_INVOKE_API'
 ,p_process_name=>'SAVE_COMPONENTS'
-,p_attribute_01=>'PLSQL_CODE'
-,p_attribute_04=>'tsk_p963.save_components();'
-,p_attribute_05=>'Y'
-,p_attribute_06=>'N'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TSK_P963'
+,p_attribute_04=>'SAVE_COMPONENTS'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );

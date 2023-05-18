@@ -1714,14 +1714,14 @@ processes:
   id: 47076565528134326
   identification: 
     name: SAVE_ROLES
-    type: Interactive Grid - Automatic Row Processing (DML)
+    type: Invoke API
     editable-region: Map Roles [GRID] # 280334188250543858
 
   settings: 
-    target-type: PL/SQL Code
-    pl/sql-code-to-insert/update/delete: tsk_p955.save_roles();
-    prevent-lost-updates: true
-    lock-row: No
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P955
+    procedure-or-function: SAVE_ROLES
 
   execution: 
     sequence: 10

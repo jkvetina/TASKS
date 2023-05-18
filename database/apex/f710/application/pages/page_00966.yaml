@@ -1194,14 +1194,14 @@ processes:
   id: 47742418320626934
   identification: 
     name: SAVE_PROCEDURES
-    type: Interactive Grid - Automatic Row Processing (DML)
+    type: Invoke API
     editable-region: Map Procedures [GRID] # 235345126132609943
 
   settings: 
-    target-type: PL/SQL Code
-    pl/sql-code-to-insert/update/delete: tsk_p966.save_procedures();
-    prevent-lost-updates: true
-    lock-row: No
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P966
+    procedure-or-function: SAVE_PROCEDURES
 
   execution: 
     sequence: 10

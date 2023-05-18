@@ -1911,14 +1911,14 @@ processes:
   id: 48050530460927109
   identification: 
     name: SAVE_COMPONENTS
-    type: Interactive Grid - Automatic Row Processing (DML)
+    type: Invoke API
     editable-region: Map Components [GRID] # 187542958257422616
 
   settings: 
-    target-type: PL/SQL Code
-    pl/sql-code-to-insert/update/delete: tsk_p963.save_components();
-    prevent-lost-updates: true
-    lock-row: No
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P963
+    procedure-or-function: SAVE_COMPONENTS
 
   execution: 
     sequence: 10

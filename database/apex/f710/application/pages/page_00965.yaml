@@ -1836,14 +1836,14 @@ processes:
   id: 47508553836863703
   identification: 
     name: SAVE_TABLES
-    type: Interactive Grid - Automatic Row Processing (DML)
+    type: Invoke API
     editable-region: Map Tables [GRID] # 47412748283554624
 
   settings: 
-    target-type: PL/SQL Code
-    pl/sql-code-to-insert/update/delete: tsk_p965.save_tables();
-    prevent-lost-updates: true
-    lock-row: No
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P965
+    procedure-or-function: SAVE_TABLES
 
   execution: 
     sequence: 60

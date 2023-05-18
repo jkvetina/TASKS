@@ -799,14 +799,14 @@ processes:
   id: 46705645323202859
   identification: 
     name: SAVE_USERS
-    type: Interactive Grid - Automatic Row Processing (DML)
+    type: Invoke API
     editable-region: Map Clients [GRID] # 93157202664563237
 
   settings: 
-    target-type: PL/SQL Code
-    pl/sql-code-to-insert/update/delete: tsk_p952.save_users();
-    prevent-lost-updates: true
-    lock-row: No
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P952
+    procedure-or-function: SAVE_USERS
 
   execution: 
     sequence: 30
@@ -818,4 +818,7 @@ processes:
 
   server-side-condition: 
     execution-scope: For Created and Modified Rows
+
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
 
