@@ -63,7 +63,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p100 AS
         core.set_item('P100_CLIENT_ID',     v_client_id);
         core.set_item('P100_PROJECT_ID',    v_project_id);
         core.set_item('P100_BOARD_ID',      v_board_id);
-        core.set_item('P100_TASKS_LINK',    core.get_page_url(100));
+        core.set_item('P100_TASKS_LINK',    core.get_page_url(100, in_reset => NULL));
         --
         FOR c IN (
             WITH d AS (
