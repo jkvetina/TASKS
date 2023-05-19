@@ -1059,7 +1059,7 @@ CREATE OR REPLACE PACKAGE BODY core AS
         FOR c IN (
             SELECT m.mview_name
             FROM user_mviews m
-            WHERE (m.mview_name LIKE in_name_like OR in_name_like IS NULL)
+            WHERE (m.mview_name LIKE in_name_like ESCAPE '\' OR in_name_like IS NULL)
             ORDER BY 1
         ) LOOP
             DBMS_MVIEW.REFRESH(c.mview_name, 'C', parallelism => 1);
