@@ -1810,6 +1810,8 @@ regions:
     template: Hero # 70864195177975601
     template-options: 
     - '#DEFAULT#'
+    css-classes: 
+    - FILTERS
     render-components: Above Content
 
   accessibility: 
@@ -1830,6 +1832,182 @@ regions:
     settings: 
       output-as: HTML
       expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P965_ROLE_GROUP ==========================
+  id: 49102268177587364
+  identification: 
+    name: P965_ROLE_GROUP
+    type: Select List
+
+  label: 
+    label: Role Group
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 10
+    region: Map Tables # 233719605550237352
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_ROLE_GROUPS # 47013937673244274
+    display-extra-values: false
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P965_ROLE_ID =============================
+  id: 49102549358592229
+  identification: 
+    name: P965_ROLE_ID
+    type: Select List
+
+  label: 
+    label: Role
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 20
+    region: Map Tables # 233719605550237352
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: 2
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 70967669576975668
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: false
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_ROLES # 46494426434427342
+    display-extra-values: false
+    display-null-value: true
+
+  cascading-list-of-values: 
+    parent-item(s): 
+    - P965_ROLE_GROUP
+    items-to-submit: 
+    - P965_ROLE_GROUP
+    parent-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+dynamic-actions: 
+- # ====== Dynamic Action: CHANGE_FILTERS ======================
+  id: 49102764353595574
+  identification: 
+    name: CHANGE_FILTERS
+
+  execution: 
+    sequence: 10
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P965_ROLE_GROUP
+    - P965_ROLE_ID
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 49103124003595586
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 20
+      event: CHANGE_FILTERS # 49102764353595574
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Hide ========================================
+    id: 49103692971595588
+    identification: 
+      action: Hide
+
+    affected-elements: 
+      selection-type: Region
+      region: Map Tables [GRID] # 47412748283554624
+
+    execution: 
+      sequence: 10
+      event: CHANGE_FILTERS # 49102764353595574
+      fire-when-event-result-is: True
+      fire-on-initialization: false
 
 processes: 
 - # ====== Process: SAVE_TABLES ================================
