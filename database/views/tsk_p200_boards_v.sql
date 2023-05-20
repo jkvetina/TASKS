@@ -71,6 +71,8 @@ g AS (
         s.board_id
 )
 SELECT
+    t.board_id      AS old_board_id,
+    --
     t.client_id,
     t.project_id,
     t.board_id,

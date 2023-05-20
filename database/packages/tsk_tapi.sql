@@ -298,27 +298,28 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
 
     PROCEDURE boards (
-        rec                     IN OUT NOCOPY   tsk_boards%ROWTYPE,
-        in_action                               CHAR                                := NULL,
-        old_board_id            IN OUT NOCOPY   VARCHAR2                            -- apex item is a string
+        rec                 IN OUT NOCOPY   tsk_boards%ROWTYPE,
+        --
+        in_action           CHAR                            := NULL,
+        in_board_id         tsk_boards.board_id%TYPE        := NULL
     )
     AS
-        c_action                CONSTANT CHAR   := get_action(in_action);
+        c_action            CONSTANT CHAR                   := get_action(in_action);
     BEGIN
+        -- evaluate access to this table
         tsk_auth.check_allowed_dml (
             in_table_name       => get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
-            in_client_id        => rec.client_id,       -- lets check against new values
-            in_project_id       => rec.project_id
+            in_client_id        => rec.project_id,
+            in_project_id       => rec.client_id
         );
 
         -- delete record
         IF c_action = 'D' THEN
-            DELETE FROM tsk_boards t
-            WHERE t.board_id    = NVL(old_board_id, rec.board_id);
+            tsk_tapi.boards_d(NVL(in_board_id, rec.board_id));
             --
-            RETURN;
+            RETURN;  -- exit procedure
         END IF;
 
         -- generate primary key if needed
@@ -327,20 +328,37 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         END IF;
 
         -- overwrite some values
-        rec.updated_by := core.get_user_id();
-        rec.updated_at := SYSDATE;
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
 
         -- upsert record
         UPDATE tsk_boards t
-        SET ROW             = rec
-        WHERE t.board_id    = NVL(old_board_id, rec.board_id);
+        SET ROW = rec
+        WHERE t.board_id            = rec.board_id;
         --
         IF SQL%ROWCOUNT = 0 THEN
-            INSERT INTO tsk_boards VALUES rec;
+            INSERT INTO tsk_boards
+            VALUES rec;
         END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
 
-        -- update keys to APEX
-        old_board_id    := TO_CHAR(rec.board_id);
+
+
+    PROCEDURE boards_d (
+        in_board_id         tsk_boards.board_id%TYPE
+    )
+    AS
+        --PRAGMA AUTONOMOUS_TRANSACTION;
+    BEGIN
+        -- need to be sorted properly
+        DELETE FROM tsk_boards                      WHERE board_id = in_board_id;
+        DELETE FROM tsk_user_fav_boards             WHERE board_id = in_board_id;
+        --DELETE FROM tsk_tasks                       WHERE board_id = in_board_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
