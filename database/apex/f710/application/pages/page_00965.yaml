@@ -180,15 +180,20 @@ regions:
     heading: 
       heading: '&P0_ROLE_8.'
 
-  - # ====== Column Group: Counts ================================
+  - # ====== Column Group: Constraints ===========================
     id: 48959179175352042
     heading: 
-      heading: Counts
+      heading: Constraints
 
   - # ====== Column Group: Table Info ============================
     id: 48959246393352043
     heading: 
       heading: Table Info
+
+  - # ====== Column Group: TAPI ==================================
+    id: 48959325960352044
+    heading: 
+      heading: TAPI
 
   columns: 
   - # ====== Column: TABLE_NAME ==================================
@@ -1679,7 +1684,7 @@ regions:
       type: Display Only
 
     heading: 
-      heading: TAPI Procedure
+      heading: Procedure Name
       alignment: start
 
     settings: 
@@ -1688,6 +1693,8 @@ regions:
     layout: 
       sequence: 40
       column-alignment: start
+      group: TAPI # 48959325960352044
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -1739,7 +1746,7 @@ regions:
     layout: 
       sequence: 50
       column-alignment: end
-      group: Counts # 48959179175352042
+      group: Constraints # 48959179175352042
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -1788,7 +1795,7 @@ regions:
     layout: 
       sequence: 60
       column-alignment: end
-      group: Counts # 48959179175352042
+      group: Constraints # 48959179175352042
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -1837,7 +1844,7 @@ regions:
     layout: 
       sequence: 70
       column-alignment: end
-      group: Counts # 48959179175352042
+      group: Constraints # 48959179175352042
       use-group-for: Both
       stretch: Use Report Setting
 
