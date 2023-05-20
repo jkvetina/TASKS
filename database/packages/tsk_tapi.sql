@@ -479,71 +479,80 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
     PROCEDURE swimlanes (
         rec                     IN OUT NOCOPY   tsk_swimlanes%ROWTYPE,
-        in_action                               CHAR                                := NULL,
-        old_client_id           IN OUT NOCOPY   tsk_swimlanes.client_id%TYPE,
-        old_project_id          IN OUT NOCOPY   tsk_swimlanes.project_id%TYPE,
-        old_swimlane_id         IN OUT NOCOPY   tsk_swimlanes.swimlane_id%TYPE      -- old key
+        --
+        in_action               CHAR                                    := NULL,
+        in_client_id            tsk_swimlanes.client_id%TYPE            := NULL,
+        in_project_id           tsk_swimlanes.project_id%TYPE           := NULL,
+        in_swimlane_id          tsk_swimlanes.swimlane_id%TYPE          := NULL
     )
     AS
-        c_action                CONSTANT CHAR   := get_action(in_action);
+        c_action                CONSTANT CHAR                           := get_action(in_action);
     BEGIN
+        -- evaluate access to this table
         tsk_auth.check_allowed_dml (
             in_table_name       => get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
-            in_client_id        => rec.client_id,       -- lets check against new values
-            in_project_id       => rec.project_id
+            in_client_id        => rec.project_id,
+            in_project_id       => rec.client_id
         );
 
         -- delete record
         IF c_action = 'D' THEN
-            DELETE FROM tsk_swimlanes t
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.swimlane_id   = NVL(old_swimlane_id,   rec.swimlane_id);
+            tsk_tapi.swimlanes_d (
+                in_client_id            => NVL(in_client_id, rec.client_id),
+                in_project_id           => NVL(in_project_id, rec.project_id),
+                in_swimlane_id          => NVL(in_swimlane_id, rec.swimlane_id)
+            );
             --
-            RETURN;
+            RETURN;  -- exit procedure
+        END IF;
+
+        -- are we renaming the primary key?
+        IF c_action = 'U' AND in_swimlane_id != rec.swimlane_id THEN
+            tsk_tapi.rename_primary_key (
+                in_column_name  => 'SWIMLANE_ID',
+                in_old_key      => in_swimlane_id,
+                in_new_key      => rec.swimlane_id
+            );
         END IF;
 
         -- overwrite some values
-        rec.updated_by := core.get_user_id();
-        rec.updated_at := SYSDATE;
+        rec.updated_by          := core.get_user_id();
+        rec.updated_at          := SYSDATE;
 
-        -- are we renaming the primary key?
-        IF rec.swimlane_id != old_swimlane_id AND c_action = 'U' THEN
-            -- create new status
+        -- upsert record
+        UPDATE tsk_swimlanes t
+        SET ROW = rec
+        WHERE t.client_id               = rec.client_id
+            AND t.project_id            = rec.project_id
+            AND t.swimlane_id           = rec.swimlane_id;
+        --
+        IF SQL%ROWCOUNT = 0 THEN
             INSERT INTO tsk_swimlanes
             VALUES rec;
-
-            -- move old lines to the new status
-            UPDATE tsk_tasks t
-            SET t.swimlane_id         = rec.swimlane_id
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.swimlane_id   = NVL(old_swimlane_id,   rec.swimlane_id);
-            --
-            DELETE FROM tsk_swimlanes t
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.swimlane_id   = NVL(old_swimlane_id,   rec.swimlane_id);
-        ELSE
-            -- proceed with update or insert
-            UPDATE tsk_swimlanes t
-            SET ROW = rec
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.swimlane_id   = NVL(old_swimlane_id,   rec.swimlane_id);
-            --
-            IF SQL%ROWCOUNT = 0 THEN
-                INSERT INTO tsk_swimlanes
-                VALUES rec;
-            END IF;
         END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
 
-        -- update keys to APEX
-        old_client_id       := rec.client_id;
-        old_project_id      := rec.project_id;
-        old_swimlane_id     := rec.swimlane_id;
+
+
+    PROCEDURE swimlanes_d (
+        in_client_id            tsk_swimlanes.client_id%TYPE,
+        in_project_id           tsk_swimlanes.project_id%TYPE,
+        in_swimlane_id          tsk_swimlanes.swimlane_id%TYPE
+    )
+    AS
+        --PRAGMA AUTONOMOUS_TRANSACTION;
+    BEGIN
+        -- need to be sorted properly
+        DELETE FROM tsk_swimlanes                   WHERE client_id = in_client_id AND project_id = in_project_id AND swimlane_id = in_swimlane_id;
+        DELETE FROM tsk_user_fav_boards             WHERE client_id = in_client_id AND project_id = in_project_id AND swimlane_id = in_swimlane_id;
+        --DELETE FROM tsk_tasks                       WHERE client_id = in_client_id AND project_id = in_project_id AND swimlane_id = in_swimlane_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

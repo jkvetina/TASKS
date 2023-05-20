@@ -12,11 +12,7 @@ CREATE OR REPLACE PACKAGE tsk_p200 AS
 
 
 
-    PROCEDURE save_task_swimlanes (
-        io_client_id        IN OUT NOCOPY   tsk_swimlanes.client_id%TYPE,
-        io_project_id       IN OUT NOCOPY   tsk_swimlanes.project_id%TYPE,
-        io_swimlane_id      IN OUT NOCOPY   tsk_swimlanes.swimlane_id%TYPE
-    );
+    PROCEDURE save_swimlanes;
 
 
 

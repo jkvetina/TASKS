@@ -128,26 +128,34 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
 
 
-    PROCEDURE save_task_swimlanes (
-        io_client_id        IN OUT NOCOPY   tsk_swimlanes.client_id%TYPE,
-        io_project_id       IN OUT NOCOPY   tsk_swimlanes.project_id%TYPE,
-        io_swimlane_id      IN OUT NOCOPY   tsk_swimlanes.swimlane_id%TYPE
-    )
+    PROCEDURE save_swimlanes
     AS
-        rec                 tsk_swimlanes%ROWTYPE;
+        rec                     tsk_swimlanes%ROWTYPE;
+        in_action               CONSTANT CHAR := core.get_grid_action();
     BEGIN
-        rec.client_id       := core.get_grid_data('CLIENT_ID');
-        rec.project_id      := core.get_grid_data('PROJECT_ID');
-        rec.swimlane_id     := core.get_grid_data('SWIMLANE_ID');
-        rec.swimlane_name   := core.get_grid_data('SWIMLANE_NAME');
-        rec.is_active       := core.get_grid_data('IS_ACTIVE');
-        rec.order#          := core.get_grid_data('ORDER#');
+        -- change record in table
+        rec.swimlane_id         := core.get_grid_data('SWIMLANE_ID');
+        rec.swimlane_name       := core.get_grid_data('SWIMLANE_NAME');
+        rec.client_id           := core.get_grid_data('CLIENT_ID');
+        rec.project_id          := core.get_grid_data('PROJECT_ID');
+        rec.is_active           := core.get_grid_data('IS_ACTIVE');
+        rec.order#              := core.get_grid_data('ORDER#');
         --
         tsk_tapi.swimlanes (rec,
-            old_client_id       => io_client_id,
-            old_project_id      => io_project_id,
-            old_swimlane_id     => io_swimlane_id
+            in_action               => in_action,
+            in_client_id            => NVL(core.get_grid_data('OLD_CLIENT_ID'), rec.client_id),
+            in_project_id           => NVL(core.get_grid_data('OLD_PROJECT_ID'), rec.project_id),
+            in_swimlane_id          => NVL(core.get_grid_data('OLD_SWIMLANE_ID'), rec.swimlane_id)
         );
+        --
+        IF in_action = 'D' THEN
+            RETURN;     -- exit this procedure
+        END IF;
+
+        -- update primary key back to APEX grid for proper row refresh
+        core.set_grid_data('OLD_CLIENT_ID',         rec.client_id);
+        core.set_grid_data('OLD_PROJECT_ID',        rec.project_id);
+        core.set_grid_data('OLD_SWIMLANE_ID',       rec.swimlane_id);
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

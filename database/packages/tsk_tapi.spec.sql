@@ -115,10 +115,19 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
 
     PROCEDURE swimlanes (
         rec                     IN OUT NOCOPY   tsk_swimlanes%ROWTYPE,
-        in_action                               CHAR                                := NULL,
-        old_client_id           IN OUT NOCOPY   tsk_swimlanes.client_id%TYPE,
-        old_project_id          IN OUT NOCOPY   tsk_swimlanes.project_id%TYPE,
-        old_swimlane_id         IN OUT NOCOPY   tsk_swimlanes.swimlane_id%TYPE     -- old key
+        --
+        in_action               CHAR                                    := NULL,
+        in_client_id            tsk_swimlanes.client_id%TYPE            := NULL,
+        in_project_id           tsk_swimlanes.project_id%TYPE           := NULL,
+        in_swimlane_id          tsk_swimlanes.swimlane_id%TYPE          := NULL
+    );
+
+
+
+    PROCEDURE swimlanes_d (
+        in_client_id            tsk_swimlanes.client_id%TYPE,
+        in_project_id           tsk_swimlanes.project_id%TYPE,
+        in_swimlane_id          tsk_swimlanes.swimlane_id%TYPE
     );
 
 

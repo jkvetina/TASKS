@@ -18,7 +18,9 @@ c AS (
     GROUP BY t.swimlane_id
 )
 SELECT
-    t.swimlane_id       AS pk_swimlane_id,    -- to allow PK changes
+    t.client_id         AS old_client_id,
+    t.project_id        AS old_project_id,
+    t.swimlane_id       AS old_swimlane_id,
     --
     t.client_id,
     t.project_id,
