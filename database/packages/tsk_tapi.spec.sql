@@ -134,10 +134,19 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
 
     PROCEDURE categories (
         rec                     IN OUT NOCOPY   tsk_categories%ROWTYPE,
-        in_action                               CHAR                                := NULL,
-        old_client_id           IN OUT NOCOPY   tsk_categories.client_id%TYPE,
-        old_project_id          IN OUT NOCOPY   tsk_categories.project_id%TYPE,
-        old_category_id         IN OUT NOCOPY   tsk_categories.category_id%TYPE     -- old key
+        --
+        in_action               CHAR                                    := NULL,
+        in_client_id            tsk_categories.client_id%TYPE           := NULL,
+        in_project_id           tsk_categories.project_id%TYPE          := NULL,
+        in_category_id          tsk_categories.category_id%TYPE         := NULL
+    );
+
+
+
+    PROCEDURE categories_d (
+        in_client_id            tsk_categories.client_id%TYPE,
+        in_project_id           tsk_categories.project_id%TYPE,
+        in_category_id          tsk_categories.category_id%TYPE
     );
 
 

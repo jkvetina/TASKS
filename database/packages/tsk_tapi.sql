@@ -564,65 +564,58 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
     PROCEDURE categories (
         rec                     IN OUT NOCOPY   tsk_categories%ROWTYPE,
-        in_action                               CHAR                                := NULL,
-        old_client_id           IN OUT NOCOPY   tsk_categories.client_id%TYPE,
-        old_project_id          IN OUT NOCOPY   tsk_categories.project_id%TYPE,
-        old_category_id         IN OUT NOCOPY   tsk_categories.category_id%TYPE     -- old key
+        --
+        in_action               CHAR                                    := NULL,
+        in_client_id            tsk_categories.client_id%TYPE           := NULL,
+        in_project_id           tsk_categories.project_id%TYPE          := NULL,
+        in_category_id          tsk_categories.category_id%TYPE         := NULL
     )
     AS
-        c_action                CONSTANT CHAR   := get_action(in_action);
+        c_action                CONSTANT CHAR                           := get_action(in_action);
     BEGIN
+        -- evaluate access to this table
         tsk_auth.check_allowed_dml (
             in_table_name       => get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
-            in_client_id        => rec.client_id,       -- lets check against new values
-            in_project_id       => rec.project_id
+            in_client_id        => rec.project_id,
+            in_project_id       => rec.client_id
         );
 
         -- delete record
         IF c_action = 'D' THEN
-            DELETE FROM tsk_categories t
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.category_id   = NVL(old_category_id,   rec.category_id);
+            tsk_tapi.categories_d (
+                in_client_id            => NVL(in_client_id, rec.client_id),
+                in_project_id           => NVL(in_project_id, rec.project_id),
+                in_category_id          => NVL(in_category_id, rec.category_id)
+            );
             --
-            RETURN;
+            RETURN;  -- exit procedure
+        END IF;
+
+        -- are we renaming the primary key?
+        IF c_action = 'U' AND in_category_id != rec.category_id THEN
+            tsk_tapi.rename_primary_key (
+                in_column_name  => 'CATEGORY_ID',
+                in_old_key      => in_category_id,
+                in_new_key      => rec.category_id
+            );
         END IF;
 
         -- overwrite some values
-        rec.updated_by := core.get_user_id();
-        rec.updated_at := SYSDATE;
+        rec.updated_by          := core.get_user_id();
+        rec.updated_at          := SYSDATE;
 
-        -- are we renaming the primary key?
-        IF rec.category_id != old_category_id AND c_action = 'U' THEN
-            -- create new status
+        -- upsert record
+        UPDATE tsk_categories t
+        SET ROW = rec
+        WHERE t.client_id               = rec.client_id
+            AND t.project_id            = rec.project_id
+            AND t.category_id           = rec.category_id;
+        --
+        IF SQL%ROWCOUNT = 0 THEN
             INSERT INTO tsk_categories
             VALUES rec;
-
-            -- move old lines to the new status
-            UPDATE tsk_tasks t
-            SET t.category_id         = rec.category_id
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.category_id   = NVL(old_category_id,   rec.category_id);
-            --
-            DELETE FROM tsk_categories t
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.category_id   = NVL(old_category_id,   rec.category_id);
-        ELSE
-            -- proceed with update or insert
-            UPDATE tsk_categories t
-            SET ROW = rec
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.category_id   = NVL(old_category_id,   rec.category_id);
-            --
-            IF SQL%ROWCOUNT = 0 THEN
-                INSERT INTO tsk_categories
-                VALUES rec;
-            END IF;
         END IF;
 
         -- keep just one is_default row
@@ -634,11 +627,26 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
                 AND t.category_id   != rec.category_id
                 AND t.is_default    = 'Y';
         END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
 
-        -- update keys to APEX
-        old_client_id       := rec.client_id;
-        old_project_id      := rec.project_id;
-        old_category_id     := rec.category_id;
+
+
+    PROCEDURE categories_d (
+        in_client_id            tsk_categories.client_id%TYPE,
+        in_project_id           tsk_categories.project_id%TYPE,
+        in_category_id          tsk_categories.category_id%TYPE
+    )
+    AS
+        --PRAGMA AUTONOMOUS_TRANSACTION;
+    BEGIN
+        -- need to be sorted properly
+        DELETE FROM tsk_categories                  WHERE client_id = in_client_id AND project_id = in_project_id AND category_id = in_category_id;
+        --DELETE FROM tsk_tasks                       WHERE client_id = in_client_id AND project_id = in_project_id AND category_id = in_category_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

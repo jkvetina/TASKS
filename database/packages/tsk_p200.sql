@@ -165,29 +165,37 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
 
 
-    PROCEDURE save_task_categories (
-        io_client_id        IN OUT NOCOPY   tsk_categories.client_id%TYPE,
-        io_project_id       IN OUT NOCOPY   tsk_categories.project_id%TYPE,
-        io_category_id      IN OUT NOCOPY   tsk_categories.category_id%TYPE     -- old key
-    )
+    PROCEDURE save_categories
     AS
-        rec                 tsk_categories%ROWTYPE;
+        rec                     tsk_categories%ROWTYPE;
+        in_action               CONSTANT CHAR := core.get_grid_action();
     BEGIN
-        rec.client_id       := core.get_grid_data('CLIENT_ID');
-        rec.project_id      := core.get_grid_data('PROJECT_ID');
-        rec.category_id     := core.get_grid_data('CATEGORY_ID');       -- new key
-        rec.category_name   := core.get_grid_data('CATEGORY_NAME');
-        rec.color_bg        := core.get_grid_data('COLOR_BG');
-        rec.color_fg        := core.get_grid_data('COLOR_FG');
-        rec.is_active       := core.get_grid_data('IS_ACTIVE');
-        rec.is_default      := core.get_grid_data('IS_DEFAULT');
-        rec.order#          := core.get_grid_data('ORDER#');
+        -- change record in table
+        rec.category_id         := core.get_grid_data('CATEGORY_ID');
+        rec.category_name       := core.get_grid_data('CATEGORY_NAME');
+        rec.client_id           := core.get_grid_data('CLIENT_ID');
+        rec.project_id          := core.get_grid_data('PROJECT_ID');
+        rec.color_bg            := core.get_grid_data('COLOR_BG');
+        rec.color_fg            := core.get_grid_data('COLOR_FG');
+        rec.is_active           := core.get_grid_data('IS_ACTIVE');
+        rec.is_default          := core.get_grid_data('IS_DEFAULT');
+        rec.order#              := core.get_grid_data('ORDER#');
         --
         tsk_tapi.categories (rec,
-            old_client_id       => io_client_id,
-            old_project_id      => io_project_id,
-            old_category_id     => io_category_id
+            in_action               => in_action,
+            in_client_id            => NVL(core.get_grid_data('OLD_CLIENT_ID'), rec.client_id),
+            in_project_id           => NVL(core.get_grid_data('OLD_PROJECT_ID'), rec.project_id),
+            in_category_id          => NVL(core.get_grid_data('OLD_CATEGORY_ID'), rec.category_id)
         );
+        --
+        IF in_action = 'D' THEN
+            RETURN;     -- exit this procedure
+        END IF;
+
+        -- update primary key back to APEX grid for proper row refresh
+        core.set_grid_data('OLD_CLIENT_ID',         rec.client_id);
+        core.set_grid_data('OLD_PROJECT_ID',        rec.project_id);
+        core.set_grid_data('OLD_CATEGORY_ID',       rec.category_id);
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
