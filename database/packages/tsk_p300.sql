@@ -32,9 +32,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
         rec.is_active       := core.get_grid_data('IS_ACTIVE');
         --
         tsk_tapi.projects (rec,
-            in_action       => in_action,
-            in_client_id    => core.get_grid_data('OLD_CLIENT_ID'),
-            in_project_id   => core.get_grid_data('OLD_PROJECT_ID')
+            in_action           => in_action,
+            in_client_id        => NVL(core.get_grid_data('OLD_CLIENT_ID'), rec.client_id),
+            in_project_id       => NVL(core.get_grid_data('OLD_PROJECT_ID'), rec.project_id)
         );
         --
         IF in_action = 'D' THEN
@@ -43,8 +43,8 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
         END IF;
 
         -- update primary key back to APEX grid for proper row refresh
-        core.set_grid_data('OLD_CLIENT_ID',     rec.client_id);
-        core.set_grid_data('OLD_PROJECT_ID',    rec.project_id);
+        core.set_grid_data('OLD_CLIENT_ID',         rec.client_id);
+        core.set_grid_data('OLD_PROJECT_ID',        rec.project_id);
 
         -- just for the new records
         IF in_action = 'C' THEN

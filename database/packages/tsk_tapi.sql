@@ -206,11 +206,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
     AS
     BEGIN
         FOR c IN (
-            SELECT p.project_id
+            SELECT p.client_id, p.project_id
             FROM tsk_projects p
             WHERE p.client_id = in_client_id
         ) LOOP
-            tsk_tapi.projects_d(c.project_id);
+            tsk_tapi.projects_d(c.client_id, c.project_id);
         END LOOP;
         --
         DELETE FROM tsk_clients         WHERE client_id = in_client_id;
@@ -224,33 +224,32 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
 
     PROCEDURE projects (
-        rec                     IN OUT NOCOPY   tsk_projects%ROWTYPE,
+        rec                 IN OUT NOCOPY   tsk_projects%ROWTYPE,
         --
-        in_action               CHAR                            := NULL,
-        in_client_id            tsk_projects.client_id%TYPE     := NULL,
-        in_project_id           tsk_projects.project_id%TYPE    := NULL
+        in_action           CHAR                                := NULL,
+        in_client_id        tsk_projects.client_id%TYPE         := NULL,
+        in_project_id       tsk_projects.project_id%TYPE        := NULL
     )
     AS
-        c_action                CONSTANT CHAR   := get_action(in_action);
+        c_action            CONSTANT CHAR                       := get_action(in_action);
     BEGIN
+        -- evaluate access to this table
         tsk_auth.check_allowed_dml (
             in_table_name       => get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
-            in_client_id        => rec.client_id,       -- lets check against new values
-            in_project_id       => rec.project_id
+            in_client_id        => rec.project_id,
+            in_project_id       => rec.client_id
         );
 
         -- delete record
         IF c_action = 'D' THEN
-            tsk_tapi.projects_d(NVL(in_project_id, rec.project_id));
+            tsk_tapi.projects_d(NVL(in_client_id, rec.client_id), NVL(in_project_id, rec.project_id));
             --
-            RETURN;
+            RETURN;  -- exit procedure
         END IF;
 
         -- overwrite some values
-        rec.updated_by := core.get_user_id();
-        rec.updated_at := SYSDATE;
 
         -- are we renaming the primary key?
         IF c_action = 'U' AND in_project_id != rec.project_id THEN
@@ -260,14 +259,18 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
                 in_new_key      => rec.project_id
             );
         END IF;
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
 
         -- upsert record
         UPDATE tsk_projects t
-        SET ROW             = rec
-        WHERE t.project_id  = rec.project_id;
+        SET ROW = rec
+        WHERE t.client_id           = rec.client_id
+            AND t.project_id        = rec.project_id;
         --
         IF SQL%ROWCOUNT = 0 THEN
-            INSERT INTO tsk_projects VALUES rec;
+            INSERT INTO tsk_projects
+            VALUES rec;
         END IF;
     EXCEPTION
     WHEN core.app_exception THEN
@@ -279,15 +282,22 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
 
     PROCEDURE projects_d (
-        in_project_id           tsk_projects.project_id%TYPE
+        in_client_id        tsk_projects.client_id%TYPE,
+        in_project_id       tsk_projects.project_id%TYPE
     )
     AS
+        --PRAGMA AUTONOMOUS_TRANSACTION;
     BEGIN
-        DELETE FROM tsk_swimlanes       WHERE project_id = in_project_id;
-        DELETE FROM tsk_statuses        WHERE project_id = in_project_id;
-        DELETE FROM tsk_boards          WHERE project_id = in_project_id;
-        DELETE FROM tsk_auth_roles      WHERE project_id = in_project_id;
-        DELETE FROM tsk_projects        WHERE project_id = in_project_id;
+        -- need to be sorted properly
+        DELETE FROM tsk_auth_roles                  WHERE client_id = in_client_id AND project_id = in_project_id;
+        DELETE FROM tsk_boards                      WHERE client_id = in_client_id AND project_id = in_project_id;
+        DELETE FROM tsk_categories                  WHERE client_id = in_client_id AND project_id = in_project_id;
+        DELETE FROM tsk_projects                    WHERE client_id = in_client_id AND project_id = in_project_id;
+        DELETE FROM tsk_repos                       WHERE client_id = in_client_id AND project_id = in_project_id;
+        DELETE FROM tsk_statuses                    WHERE client_id = in_client_id AND project_id = in_project_id;
+        DELETE FROM tsk_swimlanes                   WHERE client_id = in_client_id AND project_id = in_project_id;
+        --DELETE FROM tsk_tasks                       WHERE client_id = in_client_id AND project_id = in_project_id;
+        DELETE FROM tsk_user_fav_boards             WHERE client_id = in_client_id AND project_id = in_project_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
