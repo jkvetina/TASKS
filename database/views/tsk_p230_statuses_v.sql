@@ -7,7 +7,9 @@ WITH x AS (
     FROM DUAL
 )
 SELECT
-    t.status_id         AS pk_status_id,    -- to allow PK changes
+    t.client_id         AS old_client_id,
+    t.project_id        AS old_project_id,
+    t.status_id         AS old_status_id,
     --
     t.client_id,
     t.project_id,

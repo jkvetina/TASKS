@@ -385,65 +385,58 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
     PROCEDURE statuses (
         rec                     IN OUT NOCOPY   tsk_statuses%ROWTYPE,
-        in_action                               CHAR                            := NULL,
-        old_client_id           IN OUT NOCOPY   tsk_statuses.client_id%TYPE,
-        old_project_id          IN OUT NOCOPY   tsk_statuses.project_id%TYPE,
-        old_status_id           IN OUT NOCOPY   tsk_statuses.status_id%TYPE     -- old key
+        --
+        in_action               CHAR                                    := NULL,
+        in_client_id            tsk_statuses.client_id%TYPE             := NULL,
+        in_project_id           tsk_statuses.project_id%TYPE            := NULL,
+        in_status_id            tsk_statuses.status_id%TYPE             := NULL
     )
     AS
-        c_action                CONSTANT CHAR   := get_action(in_action);
+        c_action                CONSTANT CHAR                           := get_action(in_action);
     BEGIN
+        -- evaluate access to this table
         tsk_auth.check_allowed_dml (
             in_table_name       => get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
-            in_client_id        => rec.client_id,       -- lets check against new values
-            in_project_id       => rec.project_id
+            in_client_id        => rec.project_id,
+            in_project_id       => rec.client_id
         );
 
         -- delete record
         IF c_action = 'D' THEN
-            DELETE FROM tsk_statuses t
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.status_id     = NVL(old_status_id,     rec.status_id);
+            tsk_tapi.statuses_d (
+                in_client_id            => NVL(in_client_id, rec.client_id),
+                in_project_id           => NVL(in_project_id, rec.project_id),
+                in_status_id            => NVL(in_status_id, rec.status_id)
+            );
             --
-            RETURN;
+            RETURN;  -- exit procedure
+        END IF;
+
+        -- are we renaming the primary key?
+        IF c_action = 'U' AND in_status_id != rec.status_id THEN
+            tsk_tapi.rename_primary_key (
+                in_column_name  => 'STATUS_ID',
+                in_old_key      => in_status_id,
+                in_new_key      => rec.status_id
+            );
         END IF;
 
         -- overwrite some values
-        rec.updated_by := core.get_user_id();
-        rec.updated_at := SYSDATE;
+        rec.updated_by          := core.get_user_id();
+        rec.updated_at          := SYSDATE;
 
-        -- are we renaming the primary key?
-        IF rec.status_id != old_status_id AND c_action = 'U' THEN
-            -- create new status
+        -- upsert record
+        UPDATE tsk_statuses t
+        SET ROW = rec
+        WHERE t.client_id               = rec.client_id
+            AND t.project_id            = rec.project_id
+            AND t.status_id             = rec.status_id;
+        --
+        IF SQL%ROWCOUNT = 0 THEN
             INSERT INTO tsk_statuses
             VALUES rec;
-
-            -- move old lines to the new status
-            UPDATE tsk_tasks t
-            SET t.status_id         = rec.status_id
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.status_id     = NVL(old_status_id,     rec.status_id);
-            --
-            DELETE FROM tsk_statuses t
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.status_id     = NVL(old_status_id,     rec.status_id);
-        ELSE
-            -- proceed with update or insert
-            UPDATE tsk_statuses t
-            SET ROW = rec
-            WHERE t.client_id       = NVL(old_client_id,     rec.client_id)
-                AND t.project_id    = NVL(old_project_id,    rec.project_id)
-                AND t.status_id     = NVL(old_status_id,     rec.status_id);
-            --
-            IF SQL%ROWCOUNT = 0 THEN
-                INSERT INTO tsk_statuses
-                VALUES rec;
-            END IF;
         END IF;
 
         -- keep just one is_default row
@@ -455,11 +448,26 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
                 AND t.status_id     != rec.status_id
                 AND t.is_default    = 'Y';
         END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
 
-        -- update keys to APEX
-        old_client_id       := rec.client_id;
-        old_project_id      := rec.project_id;
-        old_status_id       := rec.status_id;
+
+
+    PROCEDURE statuses_d (
+        in_client_id            tsk_statuses.client_id%TYPE,
+        in_project_id           tsk_statuses.project_id%TYPE,
+        in_status_id            tsk_statuses.status_id%TYPE
+    )
+    AS
+        --PRAGMA AUTONOMOUS_TRANSACTION;
+    BEGIN
+        -- need to be sorted properly
+        DELETE FROM tsk_statuses                    WHERE client_id = in_client_id AND project_id = in_project_id AND status_id = in_status_id;
+        --DELETE FROM tsk_tasks                       WHERE client_id = in_client_id AND project_id = in_project_id AND status_id = in_status_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

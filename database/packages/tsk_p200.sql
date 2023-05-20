@@ -87,31 +87,38 @@ CREATE OR REPLACE PACKAGE BODY tsk_p200 AS
 
 
 
-    PROCEDURE save_task_statuses (
-        io_client_id        IN OUT NOCOPY   tsk_statuses.client_id%TYPE,
-        io_project_id       IN OUT NOCOPY   tsk_statuses.project_id%TYPE,
-        io_status_id        IN OUT NOCOPY   tsk_statuses.status_id%TYPE         -- old key
-    )
+    PROCEDURE save_statuses
     AS
-        rec                 tsk_statuses%ROWTYPE;
+        rec                     tsk_statuses%ROWTYPE;
+        in_action               CONSTANT CHAR := core.get_grid_action();
     BEGIN
-        rec.client_id       := core.get_grid_data('CLIENT_ID');
-        rec.project_id      := core.get_grid_data('PROJECT_ID');
-        rec.status_id       := core.get_grid_data('STATUS_ID');        -- new key
-        rec.status_name     := core.get_grid_data('STATUS_NAME');
-        rec.is_active       := core.get_grid_data('IS_ACTIVE');
-        rec.is_default      := core.get_grid_data('IS_DEFAULT');
-        rec.is_colored      := core.get_grid_data('IS_COLORED');
-        rec.order#          := core.get_grid_data('ORDER#');
-        --
+        -- change record in table
+        rec.status_id           := core.get_grid_data('STATUS_ID');
+        rec.status_name         := core.get_grid_data('STATUS_NAME');
+        rec.client_id           := core.get_grid_data('CLIENT_ID');
+        rec.project_id          := core.get_grid_data('PROJECT_ID');
+        rec.is_active           := core.get_grid_data('IS_ACTIVE');
+        rec.is_default          := core.get_grid_data('IS_DEFAULT');
+        rec.is_colored          := core.get_grid_data('IS_COLORED');
         rec.is_show_user        := core.get_grid_data('IS_SHOW_USER');
         rec.is_show_swimlane    := core.get_grid_data('IS_SHOW_SWIMLANE');
+        rec.order#              := core.get_grid_data('ORDER#');
         --
         tsk_tapi.statuses (rec,
-            old_client_id       => io_client_id,
-            old_project_id      => io_project_id,
-            old_status_id       => io_status_id
+            in_action               => in_action,
+            in_client_id            => NVL(core.get_grid_data('OLD_CLIENT_ID'), rec.client_id),
+            in_project_id           => NVL(core.get_grid_data('OLD_PROJECT_ID'), rec.project_id),
+            in_status_id            => NVL(core.get_grid_data('OLD_STATUS_ID'), rec.status_id)
         );
+        --
+        IF in_action = 'D' THEN
+            RETURN;     -- exit this procedure
+        END IF;
+
+        -- update primary key back to APEX grid for proper row refresh
+        core.set_grid_data('OLD_CLIENT_ID',         rec.client_id);
+        core.set_grid_data('OLD_PROJECT_ID',        rec.project_id);
+        core.set_grid_data('OLD_STATUS_ID',         rec.status_id);
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

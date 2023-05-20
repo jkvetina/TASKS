@@ -96,10 +96,19 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
 
     PROCEDURE statuses (
         rec                     IN OUT NOCOPY   tsk_statuses%ROWTYPE,
-        in_action                               CHAR                                := NULL,
-        old_client_id           IN OUT NOCOPY   tsk_statuses.client_id%TYPE,
-        old_project_id          IN OUT NOCOPY   tsk_statuses.project_id%TYPE,
-        old_status_id           IN OUT NOCOPY   tsk_statuses.status_id%TYPE         -- old key
+        --
+        in_action               CHAR                                    := NULL,
+        in_client_id            tsk_statuses.client_id%TYPE             := NULL,
+        in_project_id           tsk_statuses.project_id%TYPE            := NULL,
+        in_status_id            tsk_statuses.status_id%TYPE             := NULL
+    );
+
+
+
+    PROCEDURE statuses_d (
+        in_client_id            tsk_statuses.client_id%TYPE,
+        in_project_id           tsk_statuses.project_id%TYPE,
+        in_status_id            tsk_statuses.status_id%TYPE
     );
 
 

@@ -85,9 +85,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_p300 AS
         rec.order#          := 100;
         --
         tsk_tapi.swimlanes (rec,
-            old_client_id       => rec.client_id,
-            old_project_id      => rec.project_id,
-            old_swimlane_id     => rec.swimlane_id
+            in_client_id        => rec.client_id,
+            in_project_id       => rec.project_id,
+            in_swimlane_id      => rec.swimlane_id
         );
     EXCEPTION
     WHEN core.app_exception THEN
