@@ -244,7 +244,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
         -- delete record
         IF c_action = 'D' THEN
-            tsk_tapi.projects_d(NVL(in_client_id, rec.client_id), NVL(in_project_id, rec.project_id));
+            tsk_tapi.projects_d (
+                in_client_id        => NVL(in_client_id, rec.client_id),
+                in_project_id       => NVL(in_project_id, rec.project_id)
+            );
             --
             RETURN;  -- exit procedure
         END IF;
@@ -327,7 +330,9 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
         -- delete record
         IF c_action = 'D' THEN
-            tsk_tapi.boards_d(NVL(in_board_id, rec.board_id));
+            tsk_tapi.boards_d (
+                in_board_id         => NVL(in_board_id, rec.board_id)
+            );
             --
             RETURN;  -- exit procedure
         END IF;
