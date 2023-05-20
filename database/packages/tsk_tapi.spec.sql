@@ -1,5 +1,9 @@
 CREATE OR REPLACE PACKAGE tsk_tapi AS
 
+    g_app_prefix            CONSTANT VARCHAR2(16)   := 'TSK';
+
+
+
     FUNCTION get_table_name
     RETURN VARCHAR2;
 

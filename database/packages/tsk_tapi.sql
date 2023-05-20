@@ -4,7 +4,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
     RETURN VARCHAR2
     AS
     BEGIN
-        RETURN REGEXP_REPLACE(core.get_caller_name(3), '[^\.]+\.', 'TSK_');
+        RETURN REGEXP_REPLACE(core.get_caller_name(3), '[^\.]+\.', g_app_prefix || '_');
     END;
 
 
@@ -35,7 +35,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
             AND c.constraint_name   = n.constraint_name
         WHERE n.owner               = core.get_owner()
             AND n.constraint_type   = 'P'
-            AND c.table_name        LIKE 'TSK\_%' ESCAPE '\'
+            AND c.table_name        LIKE g_app_prefix || '\_%' ESCAPE '\'
             AND c.column_name       = in_column_name
             AND c.position          = 1;
         --
@@ -100,7 +100,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
                 ON t.owner          = c.owner
                 AND t.table_name    = c.table_name
             WHERE c.owner           = core.get_owner()
-                AND c.table_name    LIKE 'TSK\_%' ESCAPE '\'
+                AND c.table_name    LIKE g_app_prefix || '\_%' ESCAPE '\'
                 AND c.column_name   = in_column_name
         ) LOOP
             -- @TODO: we should certainly log this
