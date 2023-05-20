@@ -180,6 +180,16 @@ regions:
     heading: 
       heading: '&P0_ROLE_8.'
 
+  - # ====== Column Group: Counts ================================
+    id: 48959179175352042
+    heading: 
+      heading: Counts
+
+  - # ====== Column Group: Table Info ============================
+    id: 48959246393352043
+    heading: 
+      heading: Table Info
+
   columns: 
   - # ====== Column: TABLE_NAME ==================================
     id: 47412992172554626
@@ -198,6 +208,8 @@ regions:
     layout: 
       sequence: 30
       column-alignment: start
+      group: Table Info # 48959246393352043
+      use-group-for: Both
       stretch: Use Report Setting
 
     accessibility: 
@@ -250,7 +262,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 50
+      sequence: 80
       column-alignment: center
       group: '&P0_ROLE_1.' # 47508692815863704
       use-group-for: Both
@@ -309,7 +321,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 60
+      sequence: 90
       column-alignment: center
       group: '&P0_ROLE_1.' # 47508692815863704
       use-group-for: Both
@@ -368,7 +380,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 70
+      sequence: 100
       column-alignment: center
       group: '&P0_ROLE_1.' # 47508692815863704
       use-group-for: Both
@@ -427,7 +439,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 80
+      sequence: 110
       column-alignment: center
       group: '&P0_ROLE_2.' # 47576813522232120
       use-group-for: Both
@@ -486,7 +498,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 90
+      sequence: 120
       column-alignment: center
       group: '&P0_ROLE_2.' # 47576813522232120
       use-group-for: Both
@@ -545,7 +557,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 100
+      sequence: 130
       column-alignment: center
       group: '&P0_ROLE_2.' # 47576813522232120
       use-group-for: Both
@@ -604,7 +616,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 110
+      sequence: 140
       column-alignment: center
       group: '&P0_ROLE_3.' # 47508775165863705
       use-group-for: Both
@@ -663,7 +675,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 120
+      sequence: 150
       column-alignment: center
       group: '&P0_ROLE_3.' # 47508775165863705
       use-group-for: Both
@@ -722,7 +734,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 130
+      sequence: 160
       column-alignment: center
       group: '&P0_ROLE_3.' # 47508775165863705
       use-group-for: Both
@@ -781,7 +793,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 140
+      sequence: 170
       column-alignment: center
       group: '&P0_ROLE_4.' # 47576953205232121
       use-group-for: Both
@@ -840,7 +852,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 150
+      sequence: 180
       column-alignment: center
       group: '&P0_ROLE_4.' # 47576953205232121
       use-group-for: Both
@@ -899,7 +911,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 160
+      sequence: 190
       column-alignment: center
       group: '&P0_ROLE_4.' # 47576953205232121
       use-group-for: Both
@@ -958,7 +970,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 170
+      sequence: 200
       column-alignment: center
       group: '&P0_ROLE_5.' # 47508854175863706
       use-group-for: Both
@@ -1017,7 +1029,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 180
+      sequence: 210
       column-alignment: center
       group: '&P0_ROLE_5.' # 47508854175863706
       use-group-for: Both
@@ -1076,7 +1088,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 190
+      sequence: 220
       column-alignment: center
       group: '&P0_ROLE_5.' # 47508854175863706
       use-group-for: Both
@@ -1135,7 +1147,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 200
+      sequence: 230
       column-alignment: center
       group: '&P0_ROLE_6.' # 47577016998232122
       use-group-for: Both
@@ -1194,7 +1206,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 210
+      sequence: 240
       column-alignment: center
       group: '&P0_ROLE_6.' # 47577016998232122
       use-group-for: Both
@@ -1253,7 +1265,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 220
+      sequence: 250
       column-alignment: center
       group: '&P0_ROLE_6.' # 47577016998232122
       use-group-for: Both
@@ -1312,7 +1324,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 230
+      sequence: 260
       column-alignment: center
       group: '&P0_ROLE_7.' # 47508923151863707
       use-group-for: Both
@@ -1371,7 +1383,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 240
+      sequence: 270
       column-alignment: center
       group: '&P0_ROLE_7.' # 47508923151863707
       use-group-for: Both
@@ -1430,7 +1442,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 250
+      sequence: 280
       column-alignment: center
       group: '&P0_ROLE_7.' # 47508923151863707
       use-group-for: Both
@@ -1489,7 +1501,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 260
+      sequence: 290
       column-alignment: center
       group: '&P0_ROLE_8.' # 47577186599232123
       use-group-for: Both
@@ -1548,7 +1560,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 270
+      sequence: 300
       column-alignment: center
       group: '&P0_ROLE_8.' # 47577186599232123
       use-group-for: Both
@@ -1607,7 +1619,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 280
+      sequence: 310
       column-alignment: center
       group: '&P0_ROLE_8.' # 47577186599232123
       use-group-for: Both
@@ -1701,6 +1713,153 @@ regions:
       text-case: Mixed
       lov-type: Distinct Column
       exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_PK ====================================
+    id: 48958884832352039
+    identification: 
+      column-name: COUNT_PK
+      type: Display Only
+
+    heading: 
+      heading: PK
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 50
+      column-alignment: end
+      group: Counts # 48959179175352042
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_PK
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_UQ ====================================
+    id: 48958992821352040
+    identification: 
+      column-name: COUNT_UQ
+      type: Display Only
+
+    heading: 
+      heading: UQ
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 60
+      column-alignment: end
+      group: Counts # 48959179175352042
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_UQ
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: COUNT_FK ====================================
+    id: 48959081215352041
+    identification: 
+      column-name: COUNT_FK
+      type: Display Only
+
+    heading: 
+      heading: FK
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 70
+      column-alignment: end
+      group: Counts # 48959179175352042
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: COUNT_FK
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
 
     export-/-printing: 
       include-in-export-/-print: true
