@@ -175,6 +175,11 @@ regions:
       lost-update-type: Row Values
       add-row-if-empty: false
 
+    edit-authorization: 
+      add: IS_USER_C # 47696452253028618
+      update: IS_USER_U # 47696708662034140
+      delete: IS_USER_D # 47697042010037770
+
     performance: 
       lazy-loading: false
 
@@ -1145,10 +1150,13 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:235:&SESSION.::&DEBUG.:235::'
-      page: 235 # Copy Statuses
+      page: 235
       clear-cache: 235
 
     warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Never
 
   security: 
     authorization-scheme: IS_USER # 47196033359190547

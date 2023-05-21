@@ -557,6 +557,9 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_internal_uid=>150806506016116936
 ,p_is_editable=>true
 ,p_edit_operations=>'i:u:d'
+,p_add_authorization_scheme=>wwv_flow_imp.id(47696452253028618)  -- IS_USER_C
+,p_update_authorization_scheme=>wwv_flow_imp.id(47696708662034140)  -- IS_USER_U
+,p_delete_authorization_scheme=>wwv_flow_imp.id(47697042010037770)  -- IS_USER_D
 ,p_lost_update_check_type=>'VALUES'
 ,p_add_row_if_empty=>false
 ,p_submit_checked_rows=>false
@@ -769,6 +772,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_image_alt=>'Copy Statuses'
 ,p_button_position=>'RIGHT_OF_TITLE'
 ,p_button_redirect_url=>'f?p=&APP_ID.:235:&SESSION.::&DEBUG.:235::'
+,p_button_condition_type=>'NEVER'
 ,p_icon_css_classes=>'fa-wizard'
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
 );
