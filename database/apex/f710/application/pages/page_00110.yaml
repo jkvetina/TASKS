@@ -225,6 +225,9 @@ regions:
       - Update Row
       lost-update-type: Row Values
 
+    edit-authorization: 
+      update: IS_USER_U # 47696708662034140
+
     performance: 
       lazy-loading: false
 
