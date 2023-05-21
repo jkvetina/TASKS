@@ -43,6 +43,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_p966 AS
             END;
             --
             rec.table_name  := NULL;
+        ELSE
+            -- remove table assignment
+            UPDATE tsk_auth_procedures t
+            SET t.table_name            = rec.table_name
+            WHERE t.object_name         = rec.object_name
+                AND t.procedure_name    = rec.procedure_name;
         END IF;
 
         -- go through pivoted columns
