@@ -28,7 +28,7 @@ prompt APPLICATION 710 - Tasks
 -- Application Export:
 --   Application:     710
 --   Name:            Tasks
---   Date and Time:   19:49 Neděle Květen 21, 2023
+--   Date and Time:   20:30 Neděle Květen 21, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -27914,6 +27914,7 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_internal_uid=>93157363962563238
 ,p_is_editable=>true
 ,p_edit_operations=>'u'
+,p_update_authorization_scheme=>wwv_flow_imp.id(47696708662034140)  -- IS_USER_U
 ,p_lost_update_check_type=>'VALUES'
 ,p_submit_checked_rows=>false
 ,p_lazy_loading=>false
@@ -28661,6 +28662,7 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_internal_uid=>280334327880543859
 ,p_is_editable=>true
 ,p_edit_operations=>'u'
+,p_update_authorization_scheme=>wwv_flow_imp.id(47696708662034140)  -- IS_USER_U
 ,p_lost_update_check_type=>'VALUES'
 ,p_submit_checked_rows=>false
 ,p_lazy_loading=>false
@@ -29511,6 +29513,7 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_is_editable=>true
 ,p_edit_operations=>'i:u:d'
 ,p_add_authorization_scheme=>wwv_flow_imp.id(47696452253028618)  -- IS_USER_C
+,p_update_authorization_scheme=>wwv_flow_imp.id(47696708662034140)  -- IS_USER_U
 ,p_delete_authorization_scheme=>wwv_flow_imp.id(47697042010037770)  -- IS_USER_D
 ,p_lost_update_check_type=>'VALUES'
 ,p_add_row_if_empty=>false
@@ -30362,6 +30365,7 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_internal_uid=>139768248980244790
 ,p_is_editable=>true
 ,p_edit_operations=>'u'
+,p_update_authorization_scheme=>wwv_flow_imp.id(47696708662034140)  -- IS_USER_U
 ,p_lost_update_check_type=>'VALUES'
 ,p_submit_checked_rows=>false
 ,p_lazy_loading=>false
@@ -32987,6 +32991,7 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_internal_uid=>47412866390554625
 ,p_is_editable=>true
 ,p_edit_operations=>'u'
+,p_update_authorization_scheme=>wwv_flow_imp.id(47696708662034140)  -- IS_USER_U
 ,p_lost_update_check_type=>'VALUES'
 ,p_submit_checked_rows=>false
 ,p_lazy_loading=>false
@@ -33854,6 +33859,9 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_internal_uid=>235347904099609971
 ,p_is_editable=>true
 ,p_edit_operations=>'i:u:d'
+,p_add_authorization_scheme=>wwv_flow_imp.id(47696452253028618)  -- IS_USER_C
+,p_update_authorization_scheme=>wwv_flow_imp.id(47696708662034140)  -- IS_USER_U
+,p_delete_authorization_scheme=>wwv_flow_imp.id(47697042010037770)  -- IS_USER_D
 ,p_lost_update_check_type=>'VALUES'
 ,p_add_row_if_empty=>false
 ,p_submit_checked_rows=>false

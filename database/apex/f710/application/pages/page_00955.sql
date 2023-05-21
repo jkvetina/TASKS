@@ -525,6 +525,7 @@ wwv_flow_imp_page.create_interactive_grid(
 ,p_internal_uid=>280334327880543859
 ,p_is_editable=>true
 ,p_edit_operations=>'u'
+,p_update_authorization_scheme=>wwv_flow_imp.id(47696708662034140)  -- IS_USER_U
 ,p_lost_update_check_type=>'VALUES'
 ,p_submit_checked_rows=>false
 ,p_lazy_loading=>false
