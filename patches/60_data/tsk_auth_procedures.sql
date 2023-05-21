@@ -23,9 +23,11 @@ USING (
     SELECT 'TSK_P105' AS object_name, 'DOWNLOAD_ATTACHEMENT' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P105' AS object_name, 'GET_BADGE_ICON' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P105' AS object_name, 'GET_BADGE_ICON' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P105' AS object_name, 'MOVE_TASK_TO_TOP' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P105' AS object_name, 'MOVE_TASK_TO_TOP' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P105' AS object_name, 'SAVE_ATTACHEMENTS' AS procedure_name, 'TSK_TASK_FILES' AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P105' AS object_name, 'SAVE_ATTACHEMENTS' AS procedure_name, 'TSK_TASK_FILES' AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P105' AS object_name, 'SAVE_ATTACHEMENTS' AS procedure_name, 'TSK_TASK_FILES' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'TSK_P105' AS object_name, 'SAVE_ATTACHEMENTS' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'TSK_P105' AS object_name, 'SAVE_ATTACHEMENTS' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P105' AS object_name, 'SAVE_CHECKLIST' AS procedure_name, 'TSK_TASK_CHECKLIST' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P105' AS object_name, 'SAVE_CHECKLIST' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P105' AS object_name, 'SAVE_CHECKLIST' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
@@ -41,10 +43,13 @@ USING (
     SELECT 'TSK_P105' AS object_name, 'SAVE_TASK' AS procedure_name, 'TSK_TASKS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P105' AS object_name, 'SAVE_TASK' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P105' AS object_name, 'SAVE_TASK' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P110' AS object_name, 'PROCESS_BULK_INIT' AS procedure_name, 'TSK_TASKS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P110' AS object_name, 'PROCESS_BULK_INIT' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P110' AS object_name, 'PROCESS_BULK_INIT' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P110' AS object_name, 'PROCESS_BULK_REQUEST' AS procedure_name, 'TSK_TASKS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P110' AS object_name, 'PROCESS_BULK_REQUEST' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P110' AS object_name, 'PROCESS_BULK_REQUEST' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P110' AS object_name, 'PROCESS_BULK_TASK_FILTERS' AS procedure_name, 'TSK_TASKS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P110' AS object_name, 'PROCESS_BULK_TASK_FILTERS' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P110' AS object_name, 'PROCESS_BULK_TASK_FILTERS' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P200' AS object_name, 'REORDER_CATEGORIES' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
@@ -56,6 +61,15 @@ USING (
     SELECT 'TSK_P200' AS object_name, 'SAVE_BOARDS' AS procedure_name, 'TSK_BOARDS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P200' AS object_name, 'SAVE_BOARDS' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P200' AS object_name, 'SAVE_BOARDS' AS procedure_name, NULL AS table_name, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P200' AS object_name, 'SAVE_CATEGORIES' AS procedure_name, 'TSK_CATEGORIES' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P200' AS object_name, 'SAVE_CATEGORIES' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P200' AS object_name, 'SAVE_CATEGORIES' AS procedure_name, NULL AS table_name, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P200' AS object_name, 'SAVE_STATUSES' AS procedure_name, 'TSK_STATUSES' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P200' AS object_name, 'SAVE_STATUSES' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P200' AS object_name, 'SAVE_STATUSES' AS procedure_name, NULL AS table_name, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P200' AS object_name, 'SAVE_SWIMLANES' AS procedure_name, 'TSK_SWIMLANES' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P200' AS object_name, 'SAVE_SWIMLANES' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P200' AS object_name, 'SAVE_SWIMLANES' AS procedure_name, NULL AS table_name, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P200' AS object_name, 'SAVE_TASK_CATEGORIES' AS procedure_name, 'TSK_CATEGORIES' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P200' AS object_name, 'SAVE_TASK_CATEGORIES' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P200' AS object_name, 'SAVE_TASK_CATEGORIES' AS procedure_name, NULL AS table_name, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
@@ -65,6 +79,8 @@ USING (
     SELECT 'TSK_P200' AS object_name, 'SAVE_TASK_SWIMLANES' AS procedure_name, 'TSK_SWIMLANES' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P200' AS object_name, 'SAVE_TASK_SWIMLANES' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P200' AS object_name, 'SAVE_TASK_SWIMLANES' AS procedure_name, NULL AS table_name, 'BOARDS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P300' AS object_name, 'CREATE_DEFAULT_SWIMLANE' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P300' AS object_name, 'CREATE_DEFAULT_SWIMLANE' AS procedure_name, NULL AS table_name, 'PROJECT_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P300' AS object_name, 'RENAME_PROJECT_ID' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P300' AS object_name, 'RENAME_PROJECT_ID' AS procedure_name, NULL AS table_name, 'PROJECT_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P300' AS object_name, 'SAVE_PROJECTS' AS procedure_name, 'TSK_PROJECTS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
@@ -78,12 +94,20 @@ USING (
     SELECT 'TSK_P500' AS object_name, 'SAVE_COMMITS' AS procedure_name, 'TSK_COMMITS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P500' AS object_name, 'SAVE_COMMITS' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P500' AS object_name, 'SAVE_COMMITS' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P500' AS object_name, 'SAVE_REPOS' AS procedure_name, 'TSK_REPOS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P500' AS object_name, 'SAVE_REPOS' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P500' AS object_name, 'SAVE_REPOS' AS procedure_name, NULL AS table_name, 'PROJECT_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P500' AS object_name, 'SAVE_REPO_ENDPOINTS' AS procedure_name, 'TSK_REPO_ENDPOINTS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P500' AS object_name, 'SAVE_REPO_ENDPOINTS' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P500' AS object_name, 'SAVE_REPO_ENDPOINTS' AS procedure_name, NULL AS table_name, 'PROJECT_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P500' AS object_name, 'SET_HEADER' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P500' AS object_name, 'SET_HEADER' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P500' AS object_name, 'SYNC_COMMITS' AS procedure_name, 'TSK_COMMITS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P500' AS object_name, 'SYNC_COMMITS' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'TSK_P500' AS object_name, 'SYNC_COMMITS' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P500' AS object_name, 'SYNC_COMMITS' AS procedure_name, NULL AS table_name, 'PROJECT_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P500' AS object_name, 'SYNC_COMMITS_JOB' AS procedure_name, 'TSK_COMMITS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P500' AS object_name, 'SYNC_COMMITS_JOB' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
-    SELECT 'TSK_P500' AS object_name, 'SYNC_COMMITS_JOB' AS procedure_name, NULL AS table_name, 'DEFAULT_USER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P500' AS object_name, 'SYNC_COMMITS_JOB' AS procedure_name, NULL AS table_name, 'PROJECT_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P952' AS object_name, 'SAVE_USERS' AS procedure_name, 'TSK_AUTH_USERS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P952' AS object_name, 'SAVE_USERS' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P952' AS object_name, 'SAVE_USERS' AS procedure_name, NULL AS table_name, 'USERS_MANAGER' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
@@ -102,6 +126,7 @@ USING (
     SELECT 'TSK_P962' AS object_name, 'REFRESH_MV' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P962' AS object_name, 'SAVE_PAGES' AS procedure_name, 'TSK_AUTH_PAGES' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P962' AS object_name, 'SAVE_PAGES' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
+    SELECT 'TSK_P963' AS object_name, 'REFRESH_MV' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P963' AS object_name, 'SAVE_COMPONENTS' AS procedure_name, 'TSK_AUTH_COMPONENTS' AS table_name, NULL AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P963' AS object_name, 'SAVE_COMPONENTS' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
     SELECT 'TSK_P963' AS object_name, 'SYNC_REGIONS' AS procedure_name, NULL AS table_name, 'ADMIN' AS role_id, 'Y' AS is_active FROM DUAL UNION ALL
