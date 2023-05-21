@@ -916,6 +916,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
                 in_new_key      => rec.repo_id
             );
         END IF;
+        --
+        IF c_action = 'U' AND in_owner_id != rec.owner_id THEN
+            tsk_tapi.rename_primary_key (
+                in_column_name  => 'OWNER_ID',
+                in_old_key      => in_owner_id,
+                in_new_key      => rec.owner_id
+            );
+        END IF;
 
         -- overwrite some values
         rec.updated_by          := core.get_user_id();
@@ -948,9 +956,78 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         --PRAGMA AUTONOMOUS_TRANSACTION;
     BEGIN
         -- need to be sorted properly
-        DELETE FROM tsk_commits                     WHERE repo_id = in_repo_id AND owner_id = in_owner_id;
         DELETE FROM tsk_repo_endpoints              WHERE repo_id = in_repo_id AND owner_id = in_owner_id;
         DELETE FROM tsk_repos                       WHERE repo_id = in_repo_id AND owner_id = in_owner_id;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE repo_endpoints (
+        rec                     IN OUT NOCOPY   tsk_repo_endpoints%ROWTYPE,
+        --
+        in_action               CHAR                                        := NULL,
+        in_repo_id              tsk_repo_endpoints.repo_id%TYPE             := NULL,
+        in_owner_id             tsk_repo_endpoints.owner_id%TYPE            := NULL
+    )
+    AS
+        c_action                CONSTANT CHAR                               := get_action(in_action);
+    BEGIN
+        -- evaluate access to this table
+        tsk_auth.check_allowed_dml (
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
+            in_user_id          => core.get_user_id(),
+            in_client_id        => NULL,
+            in_project_id       => NULL
+        );
+
+        -- delete record
+        IF c_action = 'D' THEN
+            tsk_tapi.repo_endpoints_d (
+                in_repo_id              => NVL(in_repo_id, rec.repo_id),
+                in_owner_id             => NVL(in_owner_id, rec.owner_id)
+            );
+            --
+            RETURN;  -- exit procedure
+        END IF;
+
+        -- overwrite some values
+        rec.updated_by          := core.get_user_id();
+        rec.updated_at          := SYSDATE;
+
+        -- upsert record
+        UPDATE tsk_repo_endpoints t
+        SET ROW = rec
+        WHERE t.repo_id                 = rec.repo_id
+            AND t.owner_id              = rec.owner_id;
+        --
+        IF SQL%ROWCOUNT = 0 THEN
+            INSERT INTO tsk_repo_endpoints
+            VALUES rec;
+        END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE repo_endpoints_d (
+        in_repo_id              tsk_repo_endpoints.repo_id%TYPE,
+        in_owner_id             tsk_repo_endpoints.owner_id%TYPE
+    )
+    AS
+        --PRAGMA AUTONOMOUS_TRANSACTION;
+    BEGIN
+        -- need to be sorted properly
+        DELETE FROM tsk_repo_endpoints              WHERE repo_id = in_repo_id AND owner_id = in_owner_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
