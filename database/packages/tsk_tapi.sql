@@ -879,17 +879,78 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
 
 
-    PROCEDURE roles_d (
-        in_role_id              tsk_roles.role_id%TYPE
+    PROCEDURE repos (
+        rec                     IN OUT NOCOPY   tsk_repos%ROWTYPE,
+        --
+        in_action               CHAR                                := NULL,
+        in_repo_id              tsk_repos.repo_id%TYPE              := NULL,
+        in_owner_id             tsk_repos.owner_id%TYPE             := NULL
     )
     AS
+        c_action                CONSTANT CHAR                       := get_action(in_action);
     BEGIN
-        DELETE FROM tsk_auth_pages          WHERE role_id = in_role_id;
-        DELETE FROM tsk_auth_components     WHERE role_id = in_role_id;
-        DELETE FROM tsk_auth_tables         WHERE role_id = in_role_id;
-        DELETE FROM tsk_auth_procedures     WHERE role_id = in_role_id;
-        DELETE FROM tsk_auth_roles          WHERE role_id = in_role_id;
-        DELETE FROM tsk_roles               WHERE role_id = in_role_id;
+        -- evaluate access to this table
+        tsk_auth.check_allowed_dml (
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
+            in_user_id          => core.get_user_id(),
+            in_client_id        => rec.project_id,
+            in_project_id       => rec.client_id
+        );
+
+        -- delete record
+        IF c_action = 'D' THEN
+            tsk_tapi.repos_d (
+                in_repo_id              => NVL(in_repo_id, rec.repo_id),
+                in_owner_id             => NVL(in_owner_id, rec.owner_id)
+            );
+            --
+            RETURN;  -- exit procedure
+        END IF;
+
+        -- are we renaming the primary key?
+        IF c_action = 'U' AND in_repo_id != rec.repo_id THEN
+            tsk_tapi.rename_primary_key (
+                in_column_name  => 'REPO_ID',
+                in_old_key      => in_repo_id,
+                in_new_key      => rec.repo_id
+            );
+        END IF;
+
+        -- overwrite some values
+        rec.updated_by          := core.get_user_id();
+        rec.updated_at          := SYSDATE;
+
+        -- upsert record
+        UPDATE tsk_repos t
+        SET ROW = rec
+        WHERE t.repo_id                 = rec.repo_id
+            AND t.owner_id              = rec.owner_id;
+        --
+        IF SQL%ROWCOUNT = 0 THEN
+            INSERT INTO tsk_repos
+            VALUES rec;
+        END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE repos_d (
+        in_repo_id              tsk_repos.repo_id%TYPE,
+        in_owner_id             tsk_repos.owner_id%TYPE
+    )
+    AS
+        --PRAGMA AUTONOMOUS_TRANSACTION;
+    BEGIN
+        -- need to be sorted properly
+        DELETE FROM tsk_commits                     WHERE repo_id = in_repo_id AND owner_id = in_owner_id;
+        DELETE FROM tsk_repo_endpoints              WHERE repo_id = in_repo_id AND owner_id = in_owner_id;
+        DELETE FROM tsk_repos                       WHERE repo_id = in_repo_id AND owner_id = in_owner_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;
@@ -944,6 +1005,26 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         IF SQL%ROWCOUNT = 0 THEN
             INSERT INTO tsk_roles VALUES rec;
         END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE roles_d (
+        in_role_id              tsk_roles.role_id%TYPE
+    )
+    AS
+    BEGIN
+        DELETE FROM tsk_auth_pages          WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_components     WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_tables         WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_procedures     WHERE role_id = in_role_id;
+        DELETE FROM tsk_auth_roles          WHERE role_id = in_role_id;
+        DELETE FROM tsk_roles               WHERE role_id = in_role_id;
     EXCEPTION
     WHEN core.app_exception THEN
         RAISE;

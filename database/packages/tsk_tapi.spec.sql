@@ -189,8 +189,36 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
 
 
 
-    PROCEDURE roles_d (
-        in_role_id              tsk_roles.role_id%TYPE
+    PROCEDURE repos (
+        rec                     IN OUT NOCOPY   tsk_repos%ROWTYPE,
+        --
+        in_action               CHAR                                := NULL,
+        in_repo_id              tsk_repos.repo_id%TYPE              := NULL,
+        in_owner_id             tsk_repos.owner_id%TYPE             := NULL
+    );
+
+
+
+    PROCEDURE repos_d (
+        in_repo_id              tsk_repos.repo_id%TYPE,
+        in_owner_id             tsk_repos.owner_id%TYPE
+    );
+
+
+
+    PROCEDURE repo_endpoints (
+        rec                     IN OUT NOCOPY   tsk_repo_endpoints%ROWTYPE,
+        --
+        in_action               CHAR                                        := NULL,
+        in_repo_id              tsk_repo_endpoints.repo_id%TYPE             := NULL,
+        in_owner_id             tsk_repo_endpoints.owner_id%TYPE            := NULL
+    );
+
+
+
+    PROCEDURE repo_endpoints_d (
+        in_repo_id              tsk_repo_endpoints.repo_id%TYPE,
+        in_owner_id             tsk_repo_endpoints.owner_id%TYPE
     );
 
 
@@ -200,6 +228,12 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
         --
         in_action               CHAR                        := NULL,
         in_role_id              tsk_roles.role_id%TYPE      := NULL
+    );
+
+
+
+    PROCEDURE roles_d (
+        in_role_id              tsk_roles.role_id%TYPE
     );
 
 END;

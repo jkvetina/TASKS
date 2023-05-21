@@ -201,6 +201,78 @@ CREATE OR REPLACE PACKAGE BODY tsk_p500 AS
         core.raise_error();
     END;
 
+
+
+    PROCEDURE save_repos
+    AS
+        rec                     tsk_repos%ROWTYPE;
+        in_action               CONSTANT CHAR := core.get_grid_action();
+    BEGIN
+        -- change record in table
+        rec.repo_id             := core.get_grid_data('REPO_ID');
+        rec.owner_id            := core.get_grid_data('OWNER_ID');
+        rec.client_id           := core.get_grid_data('CLIENT_ID');
+        rec.project_id          := core.get_grid_data('PROJECT_ID');
+        rec.branch_id           := core.get_grid_data('BRANCH_ID');
+        rec.api_type            := core.get_grid_data('API_TYPE');
+        rec.api_token           := core.get_grid_data('API_TOKEN');
+        rec.last_synced_at      := core.get_date(core.get_grid_data('LAST_SYNCED_AT'));
+        --
+        tsk_tapi.repos (rec,
+            in_action               => in_action,
+            in_repo_id              => NVL(core.get_grid_data('OLD_REPO_ID'), rec.repo_id),
+            in_owner_id             => NVL(core.get_grid_data('OLD_OWNER_ID'), rec.owner_id)
+        );
+        --
+        IF in_action = 'D' THEN
+            RETURN;     -- exit this procedure
+        END IF;
+
+        -- update primary key back to APEX grid for proper row refresh
+        core.set_grid_data('OLD_REPO_ID',           rec.repo_id);
+        core.set_grid_data('OLD_OWNER_ID',          rec.owner_id);
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE save_repo_endpoints
+    AS
+        rec                     tsk_repo_endpoints%ROWTYPE;
+        in_action               CONSTANT CHAR := core.get_grid_action();
+    BEGIN
+        -- change record in table
+        rec.repo_id             := core.get_grid_data('REPO_ID');
+        rec.owner_id            := core.get_grid_data('OWNER_ID');
+        rec.endpoint_id         := core.get_grid_data('ENDPOINT_ID');
+        rec.endpoint_url        := core.get_grid_data('ENDPOINT_URL');
+        rec.endpoint_body       := core.get_grid_data('ENDPOINT_BODY');
+        rec.endpoint_method     := core.get_grid_data('ENDPOINT_METHOD');
+        --
+        tsk_tapi.repo_endpoints (rec,
+            in_action               => in_action,
+            in_repo_id              => NVL(core.get_grid_data('OLD_REPO_ID'), rec.repo_id),
+            in_owner_id             => NVL(core.get_grid_data('OLD_OWNER_ID'), rec.owner_id)
+        );
+        --
+        IF in_action = 'D' THEN
+            RETURN;     -- exit this procedure
+        END IF;
+
+        -- update primary key back to APEX grid for proper row refresh
+        core.set_grid_data('OLD_REPO_ID',           rec.repo_id);
+        core.set_grid_data('OLD_OWNER_ID',          rec.owner_id);
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
 END;
 /
 

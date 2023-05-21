@@ -135,6 +135,11 @@ regions:
     table-owner: Parsing Schema
     table-name: TSK_P515_ENDPOINTS_V
     include-rowid-column: false
+    page-items-to-submit: 
+    - P515_CLIENT_ID
+    - P515_PROJECT_ID
+    - P515_OWNER_ID
+    - P515_REPO_ID
 
   layout: 
     sequence: 20
@@ -242,11 +247,11 @@ regions:
       type: Select List
 
     heading: 
-      heading: Client Id
+      heading: Client
       alignment: start
 
     layout: 
-      sequence: 30
+      sequence: 50
       column-alignment: start
       stretch: Use Report Setting
 
@@ -259,7 +264,7 @@ regions:
     list-of-values: 
       type: Shared Component
       list-of-values: 'LOV_CLIENTS #ALL' # 34762829880497308
-      display-extra-values: true
+      display-extra-values: false
       display-null-value: true
 
     source: 
@@ -270,6 +275,8 @@ regions:
       primary-key: false
 
     default: 
+      type: Item
+      item: P515_CLIENT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -302,11 +309,11 @@ regions:
       type: Select List
 
     heading: 
-      heading: Project Id
+      heading: Project
       alignment: start
 
     layout: 
-      sequence: 40
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -319,7 +326,7 @@ regions:
     list-of-values: 
       type: Shared Component
       list-of-values: 'LOV_PROJECTS #PAGE_ITEMS' # 45510330697215422
-      display-extra-values: true
+      display-extra-values: false
       display-null-value: true
 
     source: 
@@ -330,6 +337,8 @@ regions:
       primary-key: false
 
     default: 
+      type: Item
+      item: P515_PROJECT_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -355,22 +364,86 @@ regions:
       type: Always
       execute: Once
 
+  - # ====== Column: OLD_REPO_ID =================================
+    id: 48959951498352050
+    identification: 
+      column-name: OLD_REPO_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 30
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: OLD_REPO_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: OLD_OWNER_ID ================================
+    id: 49379617007622701
+    identification: 
+      column-name: OLD_OWNER_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 40
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: OLD_OWNER_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
   - # ====== Column: REPO_ID =====================================
     id: 137873943064399495
     identification: 
       column-name: REPO_ID
-      type: Text Field
+      type: Select List
 
     heading: 
-      heading: Repo Id
+      heading: Repo
       alignment: start
 
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
     layout: 
-      sequence: 50
+      sequence: 70
       column-alignment: start
       stretch: Use Report Setting
 
@@ -379,16 +452,23 @@ regions:
 
     validation: 
       value-required: true
-      maximum-length: 64
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: 'LOV_REPOS #PAGE_ITEMS' # 46964058460863294
+      display-extra-values: false
+      display-null-value: true
 
     source: 
       type: Database Column
       database-column: REPO_ID
       data-type: VARCHAR2
       query-only: false
-      primary-key: true
+      primary-key: false
 
     default: 
+      type: Item
+      item: P515_REPO_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -399,7 +479,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 
@@ -414,18 +494,14 @@ regions:
     id: 137874057387399496
     identification: 
       column-name: OWNER_ID
-      type: Text Field
+      type: Select List
 
     heading: 
-      heading: Owner Id
+      heading: Owner
       alignment: start
 
-    settings: 
-      trim-spaces: Leading and Trailing
-      text-case: NO CHANGE
-
     layout: 
-      sequence: 60
+      sequence: 80
       column-alignment: start
       stretch: Use Report Setting
 
@@ -434,16 +510,23 @@ regions:
 
     validation: 
       value-required: true
-      maximum-length: 64
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: 'LOV_REPO_OWNERS #PAGE_ITEMS' # 46963602040858567
+      display-extra-values: false
+      display-null-value: true
 
     source: 
       type: Database Column
       database-column: OWNER_ID
       data-type: VARCHAR2
       query-only: false
-      primary-key: true
+      primary-key: false
 
     default: 
+      type: Item
+      item: P515_OWNER_ID
       duplicate-copies-existing-value: true
 
     column-filter: 
@@ -454,7 +537,7 @@ regions:
       - Case Insensitive
       - Regular Expression
       text-case: Mixed
-      lov-type: Distinct Column
+      lov-type: Use List of Values
       exact-match: true
 
     export-/-printing: 
@@ -472,7 +555,7 @@ regions:
       type: Text Field
 
     heading: 
-      heading: Endpoint Id
+      heading: Endpoint
       alignment: start
 
     settings: 
@@ -480,7 +563,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 70
+      sequence: 90
       column-alignment: start
       stretch: Use Report Setting
 
@@ -496,7 +579,7 @@ regions:
       database-column: ENDPOINT_ID
       data-type: VARCHAR2
       query-only: false
-      primary-key: true
+      primary-key: false
 
     default: 
       duplicate-copies-existing-value: true
@@ -535,7 +618,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 80
+      sequence: 100
       column-alignment: start
       stretch: Use Report Setting
 
@@ -589,7 +672,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 90
+      sequence: 110
       column-alignment: start
       stretch: Use Report Setting
 
@@ -643,7 +726,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 100
+      sequence: 120
       column-alignment: center
       stretch: Use Report Setting
 
@@ -1053,20 +1136,18 @@ dynamic-actions:
       fire-on-initialization: false
 
 processes: 
-- # ====== Process: SAVE_ENDPOINTS =============================
+- # ====== Process: SAVE_REPO_ENDPOINTS ========================
   id: 46935060196538405
   identification: 
-    name: SAVE_ENDPOINTS
-    type: Interactive Grid - Automatic Row Processing (DML)
+    name: SAVE_REPO_ENDPOINTS
+    type: Invoke API
     editable-region: Endpoints [GRID] # 137873748848399493
 
   settings: 
-    target-type: Table / View
-    table-owner: PARSING SCHEMA
-    table-name: TSK_REPO_ENDPOINTS
-    prevent-lost-updates: true
-    lock-row: No
-    return-primary-key(s)-after-insert: true
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TSK_P500
+    procedure-or-function: SAVE_REPO_ENDPOINTS
 
   execution: 
     sequence: 40

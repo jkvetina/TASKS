@@ -3,11 +3,12 @@ WITH x AS (
     SELECT /*+ MATERIALIZE */
         core.get_item('$CLIENT_ID')     AS client_id,
         core.get_item('$PROJECT_ID')    AS project_id
-        --core.get_item('$OWNER_ID')      AS owner_id,
-        --core.get_item('$REPO_ID')       AS repo_id
     FROM DUAL
 )
 SELECT
+    t.repo_id           AS old_repo_id,
+    t.owner_id          AS old_owner_id,
+    --
     t.client_id,
     t.project_id,
     t.repo_id,

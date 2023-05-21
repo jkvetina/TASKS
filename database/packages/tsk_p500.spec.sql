@@ -19,6 +19,14 @@ CREATE OR REPLACE PACKAGE tsk_p500 AS
 
     PROCEDURE save_commits;
 
+
+
+    PROCEDURE save_repos;
+
+
+
+    PROCEDURE save_repo_endpoints;
+
 END;
 /
 
