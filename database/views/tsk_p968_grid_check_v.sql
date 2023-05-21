@@ -38,6 +38,7 @@ SELECT
     t.process_handler,
     --
     CASE WHEN t.object_name != 'TSK_P' || t.page_id THEN tsk_app.get_icon_warning('Package name should be TSK_P' || t.page_id) END || t.object_name AS object_name,
+    t.object_name AS object_name_raw,
     --
     t.procedure_name,
     REPLACE(t.table_name,       '[!]', tsk_app.get_icon_warning('Target table is not recognized')) AS table_name,

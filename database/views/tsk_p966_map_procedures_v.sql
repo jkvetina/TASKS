@@ -10,10 +10,12 @@ SELECT
     p.procedure_name,
     --
     CASE
-        WHEN MAX(g.procedure_name) IS NOT NULL AND MAX(t.table_name) IS NULL
-            THEN tsk_app.get_icon_warning('Grid handler is missing')
         WHEN MAX(g.procedure_name) IS NOT NULL AND MAX(t.table_name) IS NOT NULL
             THEN tsk_app.get_icon_check()
+        WHEN MAX(g.procedure_name) IS NOT NULL AND MAX(t.table_name) IS NULL
+            THEN tsk_app.get_icon_warning('Grid handler is missing')
+        WHEN p.procedure_name LIKE 'SAVE\_%' ESCAPE '\' AND MAX(t.table_name) IS NULL
+            THEN tsk_app.get_icon_warning('Table assignment missing')
         END AS grid_handler,
     --
     MAX(t.table_name) AS table_name,
@@ -39,7 +41,7 @@ LEFT JOIN tsk_auth_procedures t
     AND t.procedure_name    = p.procedure_name
     AND t.table_name        IS NOT NULL
 LEFT JOIN tsk_p968_grid_check_v g
-    ON g.object_name        = p.object_name
+    ON g.object_name_raw    = p.object_name
     AND g.procedure_name    = p.procedure_name
 WHERE 1 = 1
     AND (x.page_group       = p.page_group_raw  OR x.page_group IS NULL)
