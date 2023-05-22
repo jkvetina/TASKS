@@ -2141,7 +2141,6 @@ dynamic-actions:
     event: EVENT.EVENT.BROWSER.CHANGE
     selection-type: Item(s)
     item(s): 
-    - P965_ROLE_GROUP
     - P965_ROLE_ID
 
   execution: 

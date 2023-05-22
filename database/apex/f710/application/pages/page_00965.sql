@@ -1430,7 +1430,7 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_name=>'CHANGE_FILTERS'
 ,p_event_sequence=>10
 ,p_triggering_element_type=>'ITEM'
-,p_triggering_element=>'P965_ROLE_GROUP,P965_ROLE_ID'
+,p_triggering_element=>'P965_ROLE_ID'
 ,p_bind_type=>'bind'
 ,p_execution_type=>'IMMEDIATE'
 ,p_bind_event_type=>'change'

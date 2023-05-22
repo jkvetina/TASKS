@@ -1731,7 +1731,6 @@ dynamic-actions:
     selection-type: Item(s)
     item(s): 
     - P963_ROLE_ID
-    - P963_PAGE_GROUP
     - P963_PAGE_ID
 
   execution: 

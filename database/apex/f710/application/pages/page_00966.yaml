@@ -1371,7 +1371,6 @@ dynamic-actions:
     selection-type: Item(s)
     item(s): 
     - P966_ROLE_ID
-    - P966_PAGE_GROUP
     - P966_PAGE_ID
 
   execution: 
