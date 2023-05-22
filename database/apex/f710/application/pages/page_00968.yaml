@@ -1346,6 +1346,9 @@ dynamic-actions:
     event-scope: Static
     type: Immediate
 
+  security: 
+    authorization-scheme: IS_USER # 47196033359190547
+
   actions: 
   - # ====== Action: Hide ========================================
     id: 48684858966747276
@@ -1362,6 +1365,9 @@ dynamic-actions:
       fire-when-event-result-is: True
       fire-on-initialization: false
 
+    security: 
+      authorization-scheme: IS_USER # 47196033359190547
+
   - # ====== Action: Submit Page =================================
     id: 48685337950747277
     identification: 
@@ -1375,4 +1381,7 @@ dynamic-actions:
       event: CHANGE_FILTERS # 48684340398747272
       fire-when-event-result-is: True
       fire-on-initialization: false
+
+    security: 
+      authorization-scheme: IS_USER # 47196033359190547
 
