@@ -879,6 +879,115 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
 
 
+    PROCEDURE task_comments (
+        rec                     IN OUT NOCOPY   tsk_task_comments%ROWTYPE,
+        --
+        in_action               CHAR                                        := NULL,
+        in_task_id              tsk_task_comments.task_id%TYPE              := NULL,
+        in_comment_id           tsk_task_comments.comment_id%TYPE           := NULL
+    )
+    AS
+        c_action                CONSTANT CHAR                               := get_action(in_action);
+    BEGIN
+        -- evaluate access to this table
+        tsk_auth.check_allowed_dml (
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
+            in_user_id          => core.get_user_id(),
+            in_client_id        => NULL,
+            in_project_id       => NULL
+        );
+
+        -- delete record
+        IF c_action = 'D' THEN
+            DELETE FROM tsk_task_comments
+            WHERE task_id       = NVL(in_task_id, rec.task_id)
+                AND comment_id  = NVL(in_comment_id, rec.comment_id);
+            --
+            RETURN;  -- exit procedure
+        END IF;
+
+        -- generate primary key if needed
+        IF c_action = 'C' AND rec.comment_id IS NULL THEN
+            rec.comment_id := tsk_comment_id.NEXTVAL;
+        END IF;
+
+        -- overwrite some values
+        rec.updated_by          := core.get_user_id();
+        rec.updated_at          := SYSDATE;
+
+        -- upsert record
+        UPDATE tsk_task_comments t
+        SET ROW = rec
+        WHERE t.task_id                 = rec.task_id
+            AND t.comment_id            = rec.comment_id;
+        --
+        IF SQL%ROWCOUNT = 0 THEN
+            INSERT INTO tsk_task_comments
+            VALUES rec;
+        END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE task_files (
+        rec                 IN OUT NOCOPY   tsk_task_files%ROWTYPE,
+        --
+        in_action           CHAR                                    := NULL,
+        in_file_id          tsk_task_files.file_id%TYPE             := NULL
+    )
+    AS
+        c_action            CONSTANT CHAR                           := get_action(in_action);
+    BEGIN
+        -- evaluate access to this table
+        tsk_auth.check_allowed_dml (
+            in_table_name       => get_table_name(),
+            in_action           => c_action,
+            in_user_id          => core.get_user_id(),
+            in_client_id        => NULL,
+            in_project_id       => NULL
+        );
+
+        -- delete record
+        IF c_action = 'D' THEN
+            DELETE FROM tsk_task_files
+            WHERE file_id = NVL(in_file_id, rec.file_id);
+            --
+            RETURN;  -- exit procedure
+        END IF;
+
+        -- generate primary key if needed
+        IF c_action = 'C' AND rec.file_id IS NULL THEN
+            rec.file_id := tsk_file_id.NEXTVAL;
+        END IF;
+
+        -- overwrite some values
+        rec.updated_by      := core.get_user_id();
+        rec.updated_at      := SYSDATE;
+
+        -- upsert record
+        UPDATE tsk_task_files t
+        SET ROW = rec
+        WHERE t.file_id             = rec.file_id;
+        --
+        IF SQL%ROWCOUNT = 0 THEN
+            INSERT INTO tsk_task_files
+            VALUES rec;
+        END IF;
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
     PROCEDURE repos (
         rec                     IN OUT NOCOPY   tsk_repos%ROWTYPE,
         --

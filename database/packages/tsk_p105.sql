@@ -217,8 +217,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
         rec.updated_at      := SYSDATE;
         --
         IF rec.comment_id IS NOT NULL AND rec.comment_payload IS NOT NULL THEN
-            INSERT INTO tsk_task_comments
-            VALUES rec;
+            tsk_tapi.task_comments (rec,
+                in_action               => 'C',
+                in_task_id              => rec.task_id,
+                in_comment_id           => rec.comment_id
+            );
             --
             core.set_item('P105_COMMENT_ID',    '');
             core.set_item('P105_COMMENT',       '');
@@ -234,16 +237,17 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
 
     PROCEDURE ajax_delete_comment
     AS
-        v_task_id           tsk_task_comments.task_id%TYPE;
-        v_comment_id        tsk_task_comments.comment_id%TYPE;
+        rec                 tsk_task_comments%ROWTYPE;
     BEGIN
-        v_task_id           := APEX_APPLICATION.G_X01;
-        v_comment_id        := APEX_APPLICATION.G_X02;
+        rec.task_id         := APEX_APPLICATION.G_X01;
+        rec.comment_id      := APEX_APPLICATION.G_X02;
         --
-        IF v_task_id IS NOT NULL AND v_comment_id IS NOT NULL THEN
-            DELETE FROM tsk_task_comments c
-            WHERE c.task_id         = v_task_id
-                AND c.comment_id    = v_comment_id;
+        IF rec.task_id IS NOT NULL AND rec.comment_id IS NOT NULL THEN
+            tsk_tapi.task_comments (rec,
+                in_action               => 'D',
+                in_task_id              => rec.task_id,
+                in_comment_id           => rec.comment_id
+            );
             --
             IF SQL%ROWCOUNT = 1 THEN
                 HTP.P('Comment deleted');
@@ -327,17 +331,14 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
                 ON i.column_value   = f.name
             WHERE f.application_id  = core.get_app_id()
         ) LOOP
-            rec.file_id         := tsk_file_id.NEXTVAL;
+            rec.task_id         := core.get_item('P105_TASK_ID');
+            rec.file_id         := NULL;
             rec.file_name       := c.filename;
             rec.file_mime       := c.mime_type;
             rec.file_size       := DBMS_LOB.GETLENGTH(c.blob_content);
             rec.file_payload    := c.blob_content;
             --
-            rec.task_id         := core.get_item('P105_TASK_ID');
-            rec.updated_by      := core.get_user_id();
-            rec.updated_at      := SYSDATE;
-            --
-            INSERT INTO tsk_task_files VALUES rec;
+            tsk_tapi.task_files (rec);
         END LOOP;
     EXCEPTION
     WHEN core.app_exception THEN

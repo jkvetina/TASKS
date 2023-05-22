@@ -189,6 +189,25 @@ CREATE OR REPLACE PACKAGE tsk_tapi AS
 
 
 
+    PROCEDURE task_comments (
+        rec                     IN OUT NOCOPY   tsk_task_comments%ROWTYPE,
+        --
+        in_action               CHAR                                        := NULL,
+        in_task_id              tsk_task_comments.task_id%TYPE              := NULL,
+        in_comment_id           tsk_task_comments.comment_id%TYPE           := NULL
+    );
+
+
+
+    PROCEDURE task_files (
+        rec                 IN OUT NOCOPY   tsk_task_files%ROWTYPE,
+        --
+        in_action           CHAR                                    := NULL,
+        in_file_id          tsk_task_files.file_id%TYPE             := NULL
+    );
+
+
+
     PROCEDURE repos (
         rec                     IN OUT NOCOPY   tsk_repos%ROWTYPE,
         --
