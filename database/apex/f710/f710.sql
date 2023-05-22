@@ -28,7 +28,7 @@ prompt APPLICATION 710 - Tasks
 -- Application Export:
 --   Application:     710
 --   Name:            Tasks
---   Date and Time:   20:30 Neděle Květen 21, 2023
+--   Date and Time:   16:16 Pondělí Květen 22, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -110,7 +110,7 @@ wwv_flow_imp.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-05-21'
+,p_flow_version=>'2023-05-22'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -31890,7 +31890,7 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_name=>'CHANGE_FILTERS'
 ,p_event_sequence=>10
 ,p_triggering_element_type=>'ITEM'
-,p_triggering_element=>'P963_ROLE_ID,P963_PAGE_GROUP,P963_PAGE_ID'
+,p_triggering_element=>'P963_ROLE_ID,P963_PAGE_ID'
 ,p_bind_type=>'bind'
 ,p_execution_type=>'IMMEDIATE'
 ,p_bind_event_type=>'change'
@@ -33366,7 +33366,7 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_name=>'CHANGE_FILTERS'
 ,p_event_sequence=>10
 ,p_triggering_element_type=>'ITEM'
-,p_triggering_element=>'P965_ROLE_GROUP,P965_ROLE_ID'
+,p_triggering_element=>'P965_ROLE_ID'
 ,p_bind_type=>'bind'
 ,p_execution_type=>'IMMEDIATE'
 ,p_bind_event_type=>'change'
@@ -34167,7 +34167,7 @@ wwv_flow_imp_page.create_page_da_event(
 ,p_name=>'CHANGE_FILTERS'
 ,p_event_sequence=>10
 ,p_triggering_element_type=>'ITEM'
-,p_triggering_element=>'P966_ROLE_ID,P966_PAGE_GROUP,P966_PAGE_ID'
+,p_triggering_element=>'P966_ROLE_ID,P966_PAGE_ID'
 ,p_bind_type=>'bind'
 ,p_execution_type=>'IMMEDIATE'
 ,p_bind_event_type=>'change'
@@ -34236,7 +34236,7 @@ wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(284021041198357161)
 ,p_plug_name=>'Check Grids'
 ,p_parent_plug_id=>wwv_flow_imp.id(284019938443357150)
-,p_region_css_classes=>'FILTERS__'
+,p_region_css_classes=>'FILTERS'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70864195177975601)
 ,p_plug_display_sequence=>10
@@ -35079,7 +35079,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_cHeight=>1
 ,p_begin_on_new_line=>'N'
 ,p_colspan=>2
-,p_display_when_type=>'NEVER'
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_warn_on_unsaved_changes=>'I'

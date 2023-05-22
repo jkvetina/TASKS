@@ -39,7 +39,7 @@ wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(284021041198357161)
 ,p_plug_name=>'Check Grids'
 ,p_parent_plug_id=>wwv_flow_imp.id(284019938443357150)
-,p_region_css_classes=>'FILTERS__'
+,p_region_css_classes=>'FILTERS'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(70864195177975601)
 ,p_plug_display_sequence=>10
@@ -882,7 +882,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_cHeight=>1
 ,p_begin_on_new_line=>'N'
 ,p_colspan=>2
-,p_display_when_type=>'NEVER'
 ,p_field_template=>wwv_flow_imp.id(70967669576975668)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_warn_on_unsaved_changes=>'I'

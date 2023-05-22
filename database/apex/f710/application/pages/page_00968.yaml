@@ -101,7 +101,7 @@ regions:
     template-options: 
     - '#DEFAULT#'
     css-classes: 
-    - FILTERS__
+    - FILTERS
     render-components: Above Content
 
   accessibility: 
@@ -1321,9 +1321,6 @@ page-items:
 
   quick-picks: 
     show-quick-picks: false
-
-  server-side-condition: 
-    type: Never
 
   security: 
     session-state-protection: Unrestricted
