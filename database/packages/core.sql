@@ -774,6 +774,194 @@ CREATE OR REPLACE PACKAGE BODY core AS
 
 
 
+    PROCEDURE set_page_items (
+        in_query            VARCHAR2,
+        in_page_id          NUMBER          := NULL
+    )
+    AS
+        l_cursor            PLS_INTEGER;
+        l_refcur            SYS_REFCURSOR;
+        l_items             t_page_items;
+    BEGIN
+        -- process cursor
+        OPEN l_refcur FOR LTRIM(RTRIM(in_query));
+        --
+        l_cursor    := DBMS_SQL.TO_CURSOR_NUMBER(l_refcur);
+        l_items     := get_values(l_cursor , in_page_id);
+    EXCEPTION
+    WHEN OTHERS THEN
+        RAISE;
+    END;
+
+
+
+    FUNCTION set_page_items (
+        in_query            VARCHAR2,
+        in_page_id          NUMBER          := NULL
+    )
+    RETURN t_page_items PIPELINED
+    AS
+        l_cursor            PLS_INTEGER;
+        l_refcur            SYS_REFCURSOR;
+        l_items             t_page_items;
+    BEGIN
+        -- process cursor
+        OPEN l_refcur FOR LTRIM(RTRIM(in_query));
+        --
+        l_cursor    := DBMS_SQL.TO_CURSOR_NUMBER(l_refcur);
+        l_items     := get_values(l_cursor , in_page_id);
+        --
+        FOR i IN l_items.FIRST .. l_items.LAST LOOP
+            PIPE ROW (l_items(i));
+        END LOOP;
+        --
+        RETURN;
+    EXCEPTION
+    WHEN OTHERS THEN
+        RAISE;
+        RETURN;
+    END;
+
+
+
+    PROCEDURE set_page_items (
+        in_cursor           SYS_REFCURSOR,
+        in_page_id          NUMBER          := NULL
+    )
+    AS
+        l_cursor            PLS_INTEGER;
+        l_cloned_curs       SYS_REFCURSOR;
+        l_items             t_page_items;
+    BEGIN
+        l_cloned_curs   := in_cursor;
+        l_cursor        := get_cursor_number(l_cloned_curs);
+        l_items         := get_values(l_cursor , in_page_id);
+    EXCEPTION
+    WHEN OTHERS THEN
+        RAISE;
+    END;
+
+
+
+    FUNCTION set_page_items (
+        in_cursor           SYS_REFCURSOR,
+        in_page_id          NUMBER          := NULL
+    )
+    RETURN t_page_items PIPELINED
+    AS
+        l_cursor            PLS_INTEGER;
+        l_cloned_curs       SYS_REFCURSOR;
+        l_items             t_page_items;
+    BEGIN
+        l_cloned_curs   := in_cursor;
+        l_cursor        := get_cursor_number(l_cloned_curs);
+        l_items         := get_values(l_cursor , in_page_id);
+        --
+        FOR i IN l_items.FIRST .. l_items.LAST LOOP
+            PIPE ROW (l_items(i));
+        END LOOP;
+        --
+        RETURN;
+    EXCEPTION
+    WHEN OTHERS THEN
+        RAISE;
+        RETURN;
+    END;
+
+
+
+    FUNCTION get_values (
+        io_cursor           IN OUT  PLS_INTEGER,
+        in_page_id                  NUMBER          := NULL
+    )
+    RETURN t_page_items
+    AS
+        l_desc          DBMS_SQL.DESC_TAB;
+        l_cols          PLS_INTEGER;
+        l_number        NUMBER;
+        l_date          DATE;
+        l_string        VARCHAR2(4000);
+        --
+        out_items       t_page_items        := t_page_items();
+        out_item        type_page_items;
+    BEGIN
+        -- get column names
+        DBMS_SQL.DESCRIBE_COLUMNS(io_cursor, l_cols, l_desc);
+        --
+        FOR i IN 1 .. l_cols LOOP
+            IF l_desc(i).col_type = DBMS_SQL.NUMBER_TYPE THEN
+                DBMS_SQL.DEFINE_COLUMN(io_cursor, i, l_number);
+            ELSIF l_desc(i).col_type = DBMS_SQL.DATE_TYPE THEN
+                DBMS_SQL.DEFINE_COLUMN(io_cursor, i, l_date);
+            ELSE
+                DBMS_SQL.DEFINE_COLUMN(io_cursor, i, l_string, 4000);
+            END IF;
+        END LOOP;
+
+        -- fetch data
+        WHILE DBMS_SQL.FETCH_ROWS(io_cursor) > 0 LOOP
+            FOR i IN 1 .. l_cols LOOP
+                IF l_desc(i).col_type = DBMS_SQL.NUMBER_TYPE THEN
+                    DBMS_SQL.COLUMN_VALUE(io_cursor, i, l_number);
+                    l_string := TO_CHAR(l_number);
+                ELSIF l_desc(i).col_type = DBMS_SQL.DATE_TYPE THEN
+                    DBMS_SQL.COLUMN_VALUE(io_cursor, i, l_date);
+                    l_string := TO_CHAR(l_date);
+                ELSE
+                    DBMS_SQL.COLUMN_VALUE(io_cursor, i, l_string);
+                END IF;
+
+                -- set application/page item
+                out_item.column_name    := l_desc(i).col_name;
+                out_item.item_name      := CASE WHEN in_page_id IS NOT NULL THEN 'P' || in_page_id || '_' END || l_desc(i).col_name;
+                out_item.item_value     := l_string;
+                --
+                core.set_item (
+                    in_name     => out_item.item_name,
+                    in_value    => out_item.item_value
+                );
+                --
+                out_items.EXTEND;
+                out_items(out_items.LAST) := out_item;
+            END LOOP;
+        END LOOP;
+
+        -- cleanup
+        close_cursor(io_cursor);
+        --
+        RETURN out_items;
+    EXCEPTION
+    WHEN OTHERS THEN
+        close_cursor(io_cursor);
+        RAISE;
+    END;
+
+
+
+    FUNCTION get_cursor_number (
+        io_cursor           IN OUT SYS_REFCURSOR
+    )
+    RETURN PLS_INTEGER
+    AS
+    BEGIN
+        RETURN DBMS_SQL.TO_CURSOR_NUMBER(io_cursor);
+    END;
+
+
+
+    PROCEDURE close_cursor (
+        io_cursor           IN OUT PLS_INTEGER
+    )
+    AS
+    BEGIN
+        DBMS_SQL.CLOSE_CURSOR(io_cursor);
+    EXCEPTION
+    WHEN OTHERS THEN
+        NULL;
+    END;
+
+
+
     PROCEDURE clear_items
     AS
         req VARCHAR2(32767) := core.get_request_url();

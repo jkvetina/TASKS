@@ -54,6 +54,15 @@ CREATE OR REPLACE PACKAGE core AS
     c_smtp_username         CONSTANT VARCHAR2(128)  := '';
     c_smtp_password         CONSTANT VARCHAR2(128)  := '';
 
+    -- for bulk set_item(s)
+    TYPE type_page_items IS RECORD (
+        column_name     VARCHAR2(30),
+        item_name       VARCHAR2(64),
+        item_value      VARCHAR2(2000)
+    );
+    --
+    TYPE t_page_items IS TABLE OF type_page_items;
+
 
 
 
@@ -329,6 +338,57 @@ CREATE OR REPLACE PACKAGE core AS
     PROCEDURE set_date_item (
         in_name                 VARCHAR2,
         in_value                DATE
+    );
+
+
+
+    PROCEDURE set_page_items (
+        in_query            VARCHAR2,
+        in_page_id          NUMBER          := NULL
+    );
+
+
+
+    FUNCTION set_page_items (
+        in_query            VARCHAR2,
+        in_page_id          NUMBER          := NULL
+    )
+    RETURN t_page_items PIPELINED;
+
+
+
+    PROCEDURE set_page_items (
+        in_cursor           SYS_REFCURSOR,
+        in_page_id          NUMBER          := NULL
+    );
+
+
+
+    FUNCTION set_page_items (
+        in_cursor           SYS_REFCURSOR,
+        in_page_id          NUMBER          := NULL
+    )
+    RETURN t_page_items PIPELINED;
+
+
+
+    FUNCTION get_values (
+        io_cursor           IN OUT  PLS_INTEGER,
+        in_page_id                  NUMBER          := NULL
+    )
+    RETURN t_page_items;
+
+
+
+    FUNCTION get_cursor_number (
+        io_cursor           IN OUT SYS_REFCURSOR
+    )
+    RETURN PLS_INTEGER;
+
+
+
+    PROCEDURE close_cursor (
+        io_cursor           IN OUT PLS_INTEGER
     );
 
 
