@@ -141,12 +141,12 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             HAVING COUNT(d.column_name) = 2
             ORDER BY 1;
          */
-        -- make this more readable
+        -- make component types more readable
         RETURN CASE in_component_type
             WHEN 'APEX_APPLICATION_PAGES'           THEN 'PAGE'
             WHEN 'APEX_APPLICATION_PAGE_BRANCHES'   THEN 'BRANCH'
             WHEN 'APEX_APPLICATION_BUTTONS'         THEN 'BUTTON'
-            WHEN 'APEX_APPLICATION_PAGE_CHART_S'    THEN 'CHART'
+            WHEN 'APEX_APPLICATION_PAGE_CHART_S'    THEN 'CHART_SERIE'
             WHEN 'APEX_APPLICATION_PAGE_COMP'       THEN 'COMPUTATION'
             WHEN 'APEX_APPLICATION_PAGE_DA'         THEN 'ACTION'
             WHEN 'APEX_APPLICATION_PAGE_DA_ACTS'    THEN 'ACTION_ROW'
@@ -162,7 +162,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_auth AS
             WHEN 'APEX_APPL_PAGE_FILTER_GROUPS'     THEN 'FILTER_GROUP'
             WHEN 'APEX_APPL_PAGE_IG_COLUMNS'        THEN 'GRID_COLUMN'
             WHEN 'APEX_APPL_PAGE_IG_RPTS'           THEN 'GRID_REPORT'
-            WHEN 'APEX_APPL_PAGE_MAP_LAYERS'        THEN 'MAP_LAYER'            
+            WHEN 'APEX_APPL_PAGE_MAP_LAYERS'        THEN 'MAP_LAYER'
             ELSE in_component_type END;
     END;
 
