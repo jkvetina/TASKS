@@ -39,6 +39,15 @@ CREATE OR REPLACE PACKAGE core AS
     BAD_DEPTH EXCEPTION;
     PRAGMA EXCEPTION_INIT(BAD_DEPTH, -64610);
 
+    -- start error message with this
+    c_assert_message            CONSTANT VARCHAR2(30)   := 'ASSERT_FAILED|';
+
+    -- define assert exception
+    c_assert_exception_code     CONSTANT PLS_INTEGER    := -20000;
+    assert_exception            EXCEPTION;
+    --
+    PRAGMA EXCEPTION_INIT(assert_exception, c_assert_exception_code);
+
     -- some constants
     c_page_item_wild        CONSTANT VARCHAR2(2)    := '$';
     c_page_item_prefix      CONSTANT VARCHAR2(2)    := 'P';
@@ -591,6 +600,27 @@ CREATE OR REPLACE PACKAGE core AS
         in_file_name                        VARCHAR2,
         in_file_mime                        VARCHAR2,
         in_file_payload     IN OUT NOCOPY   BLOB
+    );
+
+
+
+    PROCEDURE assert_true (
+        in_error_message        VARCHAR2,
+        in_bool_expression      BOOLEAN
+    );
+
+
+
+    PROCEDURE assert_false (
+        in_error_message        VARCHAR2,
+        in_bool_expression      BOOLEAN
+    );
+
+
+
+    PROCEDURE assert_not_null (
+        in_error_message        VARCHAR2,
+        in_value                VARCHAR2
     );
 
 END;

@@ -1785,6 +1785,45 @@ CREATE OR REPLACE PACKAGE BODY core AS
         core.raise_error();
     END;
 
+
+
+    PROCEDURE assert_true (
+        in_error_message        VARCHAR2,
+        in_bool_expression      BOOLEAN
+    )
+    AS
+    BEGIN
+        IF in_bool_expression THEN
+            RAISE_APPLICATION_ERROR(c_assert_exception_code, c_assert_message || in_error_message);
+        END IF;
+    END;
+
+
+
+    PROCEDURE assert_false (
+        in_error_message        VARCHAR2,
+        in_bool_expression      BOOLEAN
+    )
+    AS
+    BEGIN
+        IF NOT in_bool_expression THEN
+            RAISE_APPLICATION_ERROR(c_assert_exception_code, c_assert_message || in_error_message);
+        END IF;
+    END;
+
+
+
+    PROCEDURE assert_not_null (
+        in_error_message        VARCHAR2,
+        in_value                VARCHAR2
+    )
+    AS
+    BEGIN
+        IF in_value IS NULL THEN
+            RAISE_APPLICATION_ERROR(c_assert_exception_code, c_assert_message || in_error_message);
+        END IF;
+    END;
+
 END;
 /
 
