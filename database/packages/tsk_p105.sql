@@ -26,6 +26,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p105 AS
                 SELECT t.task_id, t.prev_task, t.next_task
                 FROM tsk_p100_tasks_grid_v t
                 WHERE t.task_id = rec.task_id
+                    AND core.get_number_item('$SOURCE_PAGE') NOT IN (115)
             ) LOOP
                 core.set_item('P105_PREV_TASK_ID', NULLIF(c.prev_task, c.task_id));
                 core.set_item('P105_NEXT_TASK_ID', NULLIF(c.next_task, c.task_id));
