@@ -84,6 +84,74 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
+- # ====== Region: Search Results ==============================
+  id: 99158430707708590
+  identification: 
+    title: Search Results
+    type: Search
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Search Results Container # 70894488545975619
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      search-page-item: P115_SEARCH
+      search-as-you-type: true
+      minimum-characters: 1
+      lazy-loading: true
+      use-pagination: true
+      results-per-page: 15
+      show-result-count: No
+      custom-layout: false
+
+  search-sources: 
+  - # ====== Search Source: Task Checklists ======================
+    id: 49379852257622703
+    identification: 
+      name: Task Checklists
+      search-configuration: TASK_CHECKLISTS # 49581571275619160
+      use-as-initial-result: false
+
+    layout: 
+      sequence: 20
+
+  - # ====== Search Source: Tasks ================================
+    id: 49580117158355175
+    identification: 
+      name: Tasks
+      search-configuration: TASKS # 49576429373209742
+      use-as-initial-result: false
+
+    layout: 
+      sequence: 10
+
 - # ====== Region: Searching ===================================
   id: 153629537031198893
   identification: 
@@ -124,6 +192,65 @@ regions:
     settings: 
       output-as: HTML
       expand-shortcuts: false
+
+page-items: 
+- # ====== Page Item: P115_SEARCH ==============================
+  id: 49580604909355178
+  identification: 
+    name: P115_SEARCH
+    type: Text Field
+
+  label: 
+    label: Search
+    alignment: Left
+
+  settings: 
+    subtype: Search
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 10
+    region: Search Results # 99158430707708590
+    position: SEARCH_FIELD
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Hidden # 70967305008975667
+    template-options: 
+    - '#DEFAULT#'
+    - t-Form-fieldContainer--stretchInputs
+    - t-Form-fieldContainer--large
+    icon: fa-search
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Ignore
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    storage: Per Session (Persistent)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
 
 buttons: 
 - # ====== Button: CLOSE_DIALOG ================================

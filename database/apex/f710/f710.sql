@@ -28,15 +28,15 @@ prompt APPLICATION 710 - Tasks
 -- Application Export:
 --   Application:     710
 --   Name:            Tasks
---   Date and Time:   20:02 Pondělí Květen 22, 2023
+--   Date and Time:   19:30 Pondělí Květen 29, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
 --     Pages:                     31
---       Items:                  144
+--       Items:                  145
 --       Computations:             1
 --       Processes:               57
---       Regions:                109
+--       Regions:                110
 --       Buttons:                 52
 --       Dynamic Actions:         33
 --     Shared Components:
@@ -110,7 +110,7 @@ wwv_flow_imp.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-05-22'
+,p_flow_version=>'2023-05-29'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -15578,6 +15578,47 @@ wwv_flow_imp_shared.create_authentication(
 );
 end;
 /
+prompt --application/shared_components/navigation/search_config/tasks
+begin
+wwv_flow_imp_shared.create_search_config(
+ p_id=>wwv_flow_imp.id(49576429373209742)
+,p_label=>'TASKS'
+,p_static_id=>'TASKS'
+,p_search_type=>'SIMPLE'
+,p_location=>'LOCAL'
+,p_query_type=>'TABLE'
+,p_query_table=>'TSK_TASKS'
+,p_searchable_columns=>'CATEGORY_ID:OWNER_ID:TAGS:TASK_ID:TASK_NAME:TASK_DESC:STATUS_ID:SWIMLANE_ID'
+,p_pk_column_name=>'TASK_ID'
+,p_title_column_name=>'TASK_NAME'
+,p_description_column_name=>'TASK_DESC'
+,p_link_target_type=>'REDIRECT_PAGE'
+,p_link_target=>'f?p=&APP_ID.:105:&APP_SESSION.::&DEBUG.:105:P105_TASK_ID,P105_SOURCE_PAGE:&TASK_ID.,115'
+,p_icon_source_type=>'STATIC_CLASS'
+,p_icon_css_classes=>'fa-tasks'
+);
+end;
+/
+prompt --application/shared_components/navigation/search_config/task_checklists
+begin
+wwv_flow_imp_shared.create_search_config(
+ p_id=>wwv_flow_imp.id(49581571275619160)
+,p_label=>'TASK_CHECKLISTS'
+,p_static_id=>'TASK_CHECKLISTS'
+,p_search_type=>'SIMPLE'
+,p_location=>'LOCAL'
+,p_query_type=>'TABLE'
+,p_query_table=>'TSK_TASK_CHECKLIST'
+,p_searchable_columns=>'CHECKLIST_ITEM'
+,p_pk_column_name=>'CHECKLIST_ID'
+,p_title_column_name=>'CHECKLIST_ITEM'
+,p_link_target_type=>'REDIRECT_PAGE'
+,p_link_target=>'f?p=&APP_ID.:105:&APP_SESSION.::&DEBUG.:105:P105_TASK_ID,P105_SOURCE_PAGE:&TASK_ID.,115'
+,p_icon_source_type=>'STATIC_CLASS'
+,p_icon_css_classes=>'fa-tasks-alt'
+);
+end;
+/
 prompt --application/user_interfaces/combined_files
 begin
 null;
@@ -20299,7 +20340,7 @@ wwv_flow_imp_page.create_page(
 ,p_dialog_width=>'1280'
 ,p_dialog_chained=>'N'
 ,p_protection_level=>'C'
-,p_page_component_map=>'11'
+,p_page_component_map=>'26'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
@@ -20313,6 +20354,38 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(99158430707708590)
+,p_plug_name=>'Search Results'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(70894488545975619)
+,p_plug_display_sequence=>40
+,p_plug_source_type=>'NATIVE_SEARCH_REGION'
+,p_attribute_02=>'N'
+,p_attribute_04=>'Y'
+,p_attribute_05=>'P115_SEARCH'
+,p_attribute_06=>'N'
+,p_attribute_11=>'Y'
+,p_attribute_12=>'1'
+,p_attribute_14=>'15'
+,p_attribute_15=>'Y'
+);
+wwv_flow_imp_page.create_search_region_source(
+ p_id=>wwv_flow_imp.id(49580117158355175)
+,p_region_id=>wwv_flow_imp.id(99158430707708590)
+,p_search_config_id=>wwv_flow_imp.id(49576429373209742)
+,p_use_as_initial_result=>false
+,p_display_sequence=>10
+,p_name=>'Tasks'
+);
+wwv_flow_imp_page.create_search_region_source(
+ p_id=>wwv_flow_imp.id(49379852257622703)
+,p_region_id=>wwv_flow_imp.id(99158430707708590)
+,p_search_config_id=>wwv_flow_imp.id(49581571275619160)
+,p_use_as_initial_result=>false
+,p_display_sequence=>20
+,p_name=>'Task Checklists'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(153629537031198893)
@@ -20340,6 +20413,23 @@ wwv_flow_imp_page.create_page_button(
 ,p_warn_on_unsaved_changes=>null
 ,p_button_css_classes=>'u-pullRight'
 ,p_icon_css_classes=>'fa-times'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(49580604909355178)
+,p_name=>'P115_SEARCH'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(99158430707708590)
+,p_item_display_point=>'SEARCH_FIELD'
+,p_prompt=>'Search'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_field_template=>wwv_flow_imp.id(70967305008975667)
+,p_item_icon_css_classes=>'fa-search'
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_warn_on_unsaved_changes=>'I'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'SEARCH'
+,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(45241195474188628)

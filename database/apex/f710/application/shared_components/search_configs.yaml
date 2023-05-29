@@ -1,0 +1,68 @@
+---
+- # ====== Search Configuration: TASKS =========================
+  id: 49576429373209742
+  identification: 
+    name: TASKS
+
+  source: 
+    search-type: Simple (APEX Data Source)
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_TASKS
+    searchable-columns: 'CATEGORY_ID:OWNER_ID:TAGS:TASK_ID:TASK_NAME:TASK_DESC:STATUS_ID:SWIMLANE_ID'
+
+  column-mapping: 
+    primary-key-1-column-name: TASK_ID
+    title-column-name: TASK_NAME
+    description-column-name: TASK_DESC
+
+  link: 
+    type: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:105:&APP_SESSION.::&DEBUG.:105:P105_TASK_ID,P105_SOURCE_PAGE:&TASK_ID.,115'
+      page: 105 # Task Detail
+      clear-cache: 105
+      values: 
+        p105_task_id: '&TASK_ID.'
+        p105_source_page: 115
+
+  icon-and-badge: 
+    icon-source: Icon Class
+
+  advanced: 
+    static-id: TASKS
+
+- # ====== Search Configuration: TASK_CHECKLISTS ===============
+  id: 49581571275619160
+  identification: 
+    name: TASK_CHECKLISTS
+
+  source: 
+    search-type: Simple (APEX Data Source)
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TSK_TASK_CHECKLIST
+    searchable-columns: CHECKLIST_ITEM
+
+  column-mapping: 
+    primary-key-1-column-name: CHECKLIST_ID
+    title-column-name: CHECKLIST_ITEM
+
+  link: 
+    type: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:105:&APP_SESSION.::&DEBUG.:105:P105_TASK_ID,P105_SOURCE_PAGE:&TASK_ID.,115'
+      page: 105 # Task Detail
+      clear-cache: 105
+      values: 
+        p105_task_id: '&TASK_ID.'
+        p105_source_page: 115
+
+  icon-and-badge: 
+    icon-source: Icon Class
+
+  advanced: 
+    static-id: TASK_CHECKLISTS
+

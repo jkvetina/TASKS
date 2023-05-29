@@ -134,6 +134,8 @@ prompt --install
 @@application/shared_components/security/authentications/google.sql
 @@application/shared_components/security/authentications/master_apex_accounts.sql
 @@application/shared_components/security/authentications/master_open_door_testing_only.sql
+@@application/shared_components/navigation/search_config/tasks.sql
+@@application/shared_components/navigation/search_config/task_checklists.sql
 @@application/user_interfaces/combined_files.sql
 @@application/pages/page_00000.sql
 @@application/pages/page_00002.sql

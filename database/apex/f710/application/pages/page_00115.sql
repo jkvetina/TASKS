@@ -25,7 +25,7 @@ wwv_flow_imp_page.create_page(
 ,p_dialog_width=>'1280'
 ,p_dialog_chained=>'N'
 ,p_protection_level=>'C'
-,p_page_component_map=>'11'
+,p_page_component_map=>'26'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
@@ -39,6 +39,38 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(99158430707708590)
+,p_plug_name=>'Search Results'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(70894488545975619)
+,p_plug_display_sequence=>40
+,p_plug_source_type=>'NATIVE_SEARCH_REGION'
+,p_attribute_02=>'N'
+,p_attribute_04=>'Y'
+,p_attribute_05=>'P115_SEARCH'
+,p_attribute_06=>'N'
+,p_attribute_11=>'Y'
+,p_attribute_12=>'1'
+,p_attribute_14=>'15'
+,p_attribute_15=>'Y'
+);
+wwv_flow_imp_page.create_search_region_source(
+ p_id=>wwv_flow_imp.id(49580117158355175)
+,p_region_id=>wwv_flow_imp.id(99158430707708590)
+,p_search_config_id=>wwv_flow_imp.id(49576429373209742)
+,p_use_as_initial_result=>false
+,p_display_sequence=>10
+,p_name=>'Tasks'
+);
+wwv_flow_imp_page.create_search_region_source(
+ p_id=>wwv_flow_imp.id(49379852257622703)
+,p_region_id=>wwv_flow_imp.id(99158430707708590)
+,p_search_config_id=>wwv_flow_imp.id(49581571275619160)
+,p_use_as_initial_result=>false
+,p_display_sequence=>20
+,p_name=>'Task Checklists'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(153629537031198893)
@@ -66,6 +98,23 @@ wwv_flow_imp_page.create_page_button(
 ,p_warn_on_unsaved_changes=>null
 ,p_button_css_classes=>'u-pullRight'
 ,p_icon_css_classes=>'fa-times'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(49580604909355178)
+,p_name=>'P115_SEARCH'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(99158430707708590)
+,p_item_display_point=>'SEARCH_FIELD'
+,p_prompt=>'Search'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_field_template=>wwv_flow_imp.id(70967305008975667)
+,p_item_icon_css_classes=>'fa-search'
+,p_item_template_options=>'#DEFAULT#:t-Form-fieldContainer--stretchInputs:t-Form-fieldContainer--large'
+,p_warn_on_unsaved_changes=>'I'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'SEARCH'
+,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(45241195474188628)
