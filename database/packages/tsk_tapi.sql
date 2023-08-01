@@ -1,151 +1,5 @@
 CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
-    FUNCTION get_table_name
-    RETURN VARCHAR2
-    AS
-    BEGIN
-        RETURN REGEXP_REPLACE(core.get_caller_name(3), '[^\.]+\.', g_app_prefix || '_');
-    END;
-
-
-
-    FUNCTION get_action (
-        in_action               VARCHAR2        := NULL
-    )
-    RETURN CHAR
-    AS
-    BEGIN
-        RETURN COALESCE(in_action, core.get_grid_action(), SUBSTR(core.get_request(), 1, 1));
-    END;
-
-
-
-    FUNCTION get_master_table (
-        in_column_name          VARCHAR2
-    )
-    RETURN VARCHAR2
-    AS
-        out_table_name          all_constraints.table_name%TYPE;
-    BEGIN
-        SELECT n.table_name
-        INTO out_table_name
-        FROM all_constraints n
-        JOIN all_cons_columns c
-            ON c.owner              = n.owner
-            AND c.constraint_name   = n.constraint_name
-        WHERE n.owner               = core.get_owner()
-            AND n.constraint_type   = 'P'
-            AND c.table_name        LIKE g_app_prefix || '\_%' ESCAPE '\'
-            AND c.column_name       = in_column_name
-            AND c.position          = 1;
-        --
-        RETURN out_table_name;
-    EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        RETURN NULL;
-    WHEN core.app_exception THEN
-        RAISE;
-    WHEN OTHERS THEN
-        core.raise_error();
-    END;
-
-
-
-    FUNCTION get_query (
-        in_template             VARCHAR2,
-        in_arg1                 VARCHAR2        := NULL,
-        in_arg2                 VARCHAR2        := NULL,
-        in_arg3                 VARCHAR2        := NULL,
-        in_arg4                 VARCHAR2        := NULL,
-        in_arg5                 VARCHAR2        := NULL,
-        in_arg6                 VARCHAR2        := NULL,
-        in_arg7                 VARCHAR2        := NULL,
-        in_arg8                 VARCHAR2        := NULL
-    )
-    RETURN VARCHAR2
-    AS
-    BEGIN
-        -- @TODO: check missing args
-        RETURN TRIM(APEX_STRING.FORMAT(in_template,
-            in_arg1,            -- %0
-            in_arg2,            -- %1
-            in_arg3,            -- %2
-            in_arg4,            -- %3
-            in_arg5,            -- %4
-            in_arg6,            -- %5
-            in_arg7,            -- %6
-            in_arg8,            -- %7
-            p_prefix => '!'));
-    EXCEPTION
-    WHEN OTHERS THEN
-        core.raise_error();
-    END;
-
-
-
-    PROCEDURE rename_primary_key (
-        in_column_name          VARCHAR2,
-        in_old_key              VARCHAR2,
-        in_new_key              VARCHAR2,
-        in_merge                BOOLEAN         := TRUE
-    )
-    AS
-        v_query                 VARCHAR2(2000);
-    BEGIN
-        -- rename in all related tables, need deferred foreign keys for this
-        FOR c IN (
-            SELECT c.table_name
-            FROM all_tab_cols c
-            JOIN all_tables t
-                ON t.owner          = c.owner
-                AND t.table_name    = c.table_name
-            WHERE c.owner           = core.get_owner()
-                AND c.table_name    LIKE g_app_prefix || '\_%' ESCAPE '\'
-                AND c.column_name   = in_column_name
-        ) LOOP
-            -- @TODO: we should certainly log this
-            BEGIN
-                v_query := tsk_tapi.get_query(q'!
-                    !UPDATE %0
-                    !SET %1   = :NEW_KEY_ID
-                    !WHERE %1 = :OLD_KEY_ID
-                    !',
-                    c.table_name,           -- %0
-                    in_column_name          -- %1
-                );
-                --
-                EXECUTE IMMEDIATE v_query USING in_new_key, in_old_key;
-                --
-            EXCEPTION
-            WHEN DUP_VAL_ON_INDEX THEN
-                -- if this is the master table, we could remove the original row
-                IF in_merge AND c.table_name = tsk_tapi.get_master_table(in_column_name) THEN
-                    v_query := tsk_tapi.get_query(q'!
-                        !DELETE %0
-                        !WHERE %1 = :OLD_KEY_ID
-                        !',
-                        c.table_name,           -- %0
-                        in_column_name          -- %1
-                    );
-                    --
-                    EXECUTE IMMEDIATE v_query USING in_old_key;
-                    --
-                ELSE
-                    RAISE;
-                END IF;
-            WHEN OTHERS THEN
-                core.raise_error(NULL, c.table_name, in_column_name, in_old_key, in_new_key);
-            END;
-        END LOOP;
-    EXCEPTION
-    WHEN core.app_exception THEN
-        RAISE;
-    WHEN OTHERS THEN
-        core.raise_error();
-    END;
-
-
-
     PROCEDURE clients (
         rec                     IN OUT NOCOPY   tsk_clients%ROWTYPE,
         --
@@ -153,10 +7,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_client_id            tsk_clients.client_id%TYPE      := NULL
     )
     AS
-        c_action                CONSTANT CHAR   := get_action(in_action);
+        c_action                CONSTANT CHAR   := gen_tapi.get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => rec.client_id,       -- lets check against new values
@@ -176,7 +30,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
         -- are we renaming the primary key?
         IF c_action = 'U' AND in_client_id != rec.client_id THEN
-            tsk_tapi.rename_primary_key (
+            gen_tapi.rename_primary_key (
                 in_column_name  => 'CLIENT_ID',
                 in_old_key      => in_client_id,
                 in_new_key      => rec.client_id
@@ -231,11 +85,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_project_id       tsk_projects.project_id%TYPE        := NULL
     )
     AS
-        c_action            CONSTANT CHAR                       := get_action(in_action);
+        c_action            CONSTANT CHAR                       := gen_tapi.get_action(in_action);
     BEGIN
         -- evaluate access to this table
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => rec.project_id,
@@ -256,7 +110,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
         -- are we renaming the primary key?
         IF c_action = 'U' AND in_project_id != rec.project_id THEN
-            tsk_tapi.rename_primary_key (
+            gen_tapi.rename_primary_key (
                 in_column_name  => 'PROJECT_ID',
                 in_old_key      => in_project_id,
                 in_new_key      => rec.project_id
@@ -317,11 +171,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_board_id         tsk_boards.board_id%TYPE        := NULL
     )
     AS
-        c_action            CONSTANT CHAR                   := get_action(in_action);
+        c_action            CONSTANT CHAR                   := gen_tapi.get_action(in_action);
     BEGIN
         -- evaluate access to this table
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => rec.project_id,
@@ -392,11 +246,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_status_id            tsk_statuses.status_id%TYPE             := NULL
     )
     AS
-        c_action                CONSTANT CHAR                           := get_action(in_action);
+        c_action                CONSTANT CHAR                           := gen_tapi.get_action(in_action);
     BEGIN
         -- evaluate access to this table
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => rec.project_id,
@@ -416,7 +270,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
         -- are we renaming the primary key?
         IF c_action = 'U' AND in_status_id != rec.status_id THEN
-            tsk_tapi.rename_primary_key (
+            gen_tapi.rename_primary_key (
                 in_column_name  => 'STATUS_ID',
                 in_old_key      => in_status_id,
                 in_new_key      => rec.status_id
@@ -486,11 +340,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_swimlane_id          tsk_swimlanes.swimlane_id%TYPE          := NULL
     )
     AS
-        c_action                CONSTANT CHAR                           := get_action(in_action);
+        c_action                CONSTANT CHAR                           := gen_tapi.get_action(in_action);
     BEGIN
         -- evaluate access to this table
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => rec.project_id,
@@ -510,7 +364,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
         -- are we renaming the primary key?
         IF c_action = 'U' AND in_swimlane_id != rec.swimlane_id THEN
-            tsk_tapi.rename_primary_key (
+            gen_tapi.rename_primary_key (
                 in_column_name  => 'SWIMLANE_ID',
                 in_old_key      => in_swimlane_id,
                 in_new_key      => rec.swimlane_id
@@ -571,11 +425,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_category_id          tsk_categories.category_id%TYPE         := NULL
     )
     AS
-        c_action                CONSTANT CHAR                           := get_action(in_action);
+        c_action                CONSTANT CHAR                           := gen_tapi.get_action(in_action);
     BEGIN
         -- evaluate access to this table
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => rec.project_id,
@@ -595,7 +449,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
         -- are we renaming the primary key?
         IF c_action = 'U' AND in_category_id != rec.category_id THEN
-            tsk_tapi.rename_primary_key (
+            gen_tapi.rename_primary_key (
                 in_column_name  => 'CATEGORY_ID',
                 in_old_key      => in_category_id,
                 in_new_key      => rec.category_id
@@ -661,10 +515,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_action                               CHAR                                := NULL
     )
     AS
-        c_action                CONSTANT CHAR   := get_action(in_action);
+        c_action                CONSTANT CHAR   := gen_tapi.get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => rec.client_id,       -- lets check against new values
@@ -750,10 +604,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_action                               CHAR                                := NULL
     )
     AS
-        c_action                CONSTANT CHAR   := get_action(in_action);
+        c_action                CONSTANT CHAR   := gen_tapi.get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => tsk_app.get_client_id(),     -- lets check against context
@@ -795,10 +649,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_action               CHAR                            := NULL
     )
     AS
-        c_action                CONSTANT CHAR   := get_action(in_action);
+        c_action                CONSTANT CHAR   := gen_tapi.get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => NULL,
@@ -840,10 +694,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_task_id              tsk_task_commits.task_id%TYPE   := NULL
     )
     AS
-        c_action                CONSTANT CHAR   := get_action(in_action);
+        c_action                CONSTANT CHAR   := gen_tapi.get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => NULL,
@@ -887,11 +741,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_comment_id           tsk_task_comments.comment_id%TYPE           := NULL
     )
     AS
-        c_action                CONSTANT CHAR                               := get_action(in_action);
+        c_action                CONSTANT CHAR                               := gen_tapi.get_action(in_action);
     BEGIN
         -- evaluate access to this table
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => NULL,
@@ -942,11 +796,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_file_id          tsk_task_files.file_id%TYPE             := NULL
     )
     AS
-        c_action            CONSTANT CHAR                           := get_action(in_action);
+        c_action            CONSTANT CHAR                           := gen_tapi.get_action(in_action);
     BEGIN
         -- evaluate access to this table
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => NULL,
@@ -996,11 +850,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_owner_id             tsk_repos.owner_id%TYPE             := NULL
     )
     AS
-        c_action                CONSTANT CHAR                       := get_action(in_action);
+        c_action                CONSTANT CHAR                       := gen_tapi.get_action(in_action);
     BEGIN
         -- evaluate access to this table
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => rec.project_id,
@@ -1019,7 +873,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
         -- are we renaming the primary key?
         IF c_action = 'U' AND in_repo_id != rec.repo_id THEN
-            tsk_tapi.rename_primary_key (
+            gen_tapi.rename_primary_key (
                 in_column_name  => 'REPO_ID',
                 in_old_key      => in_repo_id,
                 in_new_key      => rec.repo_id
@@ -1027,7 +881,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         END IF;
         --
         IF c_action = 'U' AND in_owner_id != rec.owner_id THEN
-            tsk_tapi.rename_primary_key (
+            gen_tapi.rename_primary_key (
                 in_column_name  => 'OWNER_ID',
                 in_old_key      => in_owner_id,
                 in_new_key      => rec.owner_id
@@ -1084,11 +938,11 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_owner_id             tsk_repo_endpoints.owner_id%TYPE            := NULL
     )
     AS
-        c_action                CONSTANT CHAR                               := get_action(in_action);
+        c_action                CONSTANT CHAR                               := gen_tapi.get_action(in_action);
     BEGIN
         -- evaluate access to this table
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => NULL,
@@ -1153,10 +1007,10 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
         in_role_id              tsk_roles.role_id%TYPE      := NULL
     )
     AS
-        c_action                CONSTANT CHAR   := get_action(in_action);
+        c_action                CONSTANT CHAR   := gen_tapi.get_action(in_action);
     BEGIN
         tsk_auth.check_allowed_dml (
-            in_table_name       => get_table_name(),
+            in_table_name       => gen_tapi.get_table_name(),
             in_action           => c_action,
             in_user_id          => core.get_user_id(),
             in_client_id        => NULL,
@@ -1176,7 +1030,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_tapi AS
 
         -- are we renaming the primary key?
         IF c_action = 'U' AND in_role_id != rec.role_id THEN
-            tsk_tapi.rename_primary_key (
+            gen_tapi.rename_primary_key (
                 in_column_name  => 'ROLE_ID',
                 in_old_key      => in_role_id,
                 in_new_key      => rec.role_id

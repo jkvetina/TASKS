@@ -114,7 +114,7 @@ CREATE OR REPLACE PACKAGE BODY tsk_p963 AS
 
         -- update/shorten component type
         UPDATE tsk_auth_components c
-        SET c.component_type    = tsk_auth.get_component_type(c.component_type)    
+        SET c.component_type    = tsk_auth.get_component_type(c.component_type)
         WHERE c.component_type != tsk_auth.get_component_type(c.component_type);
 
         -- refresh regions
