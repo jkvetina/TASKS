@@ -188,7 +188,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -1555,6 +1555,7 @@ processes:
   identification: 
     name: SAVE_PAGES
     type: Invoke API
+    execution-chain: None
     editable-region: Map Pages [GRID] # 139765471013244762
 
   settings: 
@@ -1582,6 +1583,7 @@ processes:
   identification: 
     name: REFRESH_MV
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package

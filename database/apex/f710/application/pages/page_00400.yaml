@@ -187,7 +187,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -713,6 +713,7 @@ processes:
   identification: 
     name: SAVE_CLIENTS
     type: Invoke API
+    execution-chain: None
     editable-region: Clients [GRID] # 139230452615906107
 
   settings: 

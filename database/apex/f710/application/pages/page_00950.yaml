@@ -192,7 +192,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -701,6 +701,7 @@ processes:
   identification: 
     name: SAVE_USERS
     type: Interactive Grid - Automatic Row Processing (DML)
+    execution-chain: None
     editable-region: Users [GRID] # 185622990032829208
 
   settings: 

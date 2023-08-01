@@ -189,7 +189,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -1113,7 +1113,7 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
-    icon: fa-list-ol
+    icon: fa-sequence
 
   behavior: 
     action: Submit Page
@@ -1167,6 +1167,7 @@ processes:
   identification: 
     name: SAVE_STATUSES
     type: Invoke API
+    execution-chain: None
     editable-region: Statuses [GRID] # 150806183964116933
 
   settings: 
@@ -1194,6 +1195,7 @@ processes:
   identification: 
     name: REORDER_STATUSES
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package

@@ -3,9 +3,9 @@
   id: 35451863240367303
   identification: 
     name: NAVIGATION_TOP
-    type: SQL Query
 
   source: 
+    type: SQL Query
     sql-query: |
       SELECT
           t.lvl,

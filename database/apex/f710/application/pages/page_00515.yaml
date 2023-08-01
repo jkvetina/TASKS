@@ -199,7 +199,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -1141,6 +1141,7 @@ processes:
   identification: 
     name: SAVE_REPO_ENDPOINTS
     type: Invoke API
+    execution-chain: None
     editable-region: Endpoints [GRID] # 137873748848399493
 
   settings: 

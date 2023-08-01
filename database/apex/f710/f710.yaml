@@ -51,6 +51,9 @@ security:
   referrer-policy: strict-origin
   html-escaping-mode: Extended
 
+advanced: 
+  pass-ecid: N
+
 database-session: 
   parsing-schema: APPS
 
@@ -78,7 +81,8 @@ progressive-web-app:
   installable: false
   display: Standalone
   screen-orientation: Any
-  ios-status-bar-style: Black Text and White Background
+  ios-status-bar-style: Default
+  enable-push-notifications: false
 
 navigation: 
   home-url: 

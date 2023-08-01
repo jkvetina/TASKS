@@ -1266,7 +1266,7 @@ regions:
 
     pagination: 
       type: Scroll
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -1834,8 +1834,10 @@ page-items:
     alignment: Left
 
   settings: 
+    library: CKEditor [Deprecated]
     format: Markdown
     minimum-height: 300
+    allow-custom-html: false
 
   layout: 
     sequence: 10
@@ -3690,6 +3692,7 @@ processes:
   identification: 
     name: INIT_FORM
     type: Form - Initialization
+    execution-chain: None
     form-region: '[FORM]' # 63213536180844591
 
   execution: 
@@ -3706,6 +3709,7 @@ processes:
   identification: 
     name: SAVE_FORM
     type: Form - Automatic Row Processing (DML)
+    execution-chain: None
     form-region: '[FORM]' # 63213536180844591
 
   settings: 
@@ -3730,6 +3734,7 @@ processes:
   identification: 
     name: CLOSE_DIALOG_UPDATE
     type: Close Dialog
+    execution-chain: None
 
   execution: 
     sequence: 90
@@ -3747,6 +3752,7 @@ processes:
   identification: 
     name: CLOSE_DIALOG_DELETE
     type: Close Dialog
+    execution-chain: None
 
   execution: 
     sequence: 110
@@ -3764,6 +3770,7 @@ processes:
   identification: 
     name: CLOSE_DIALOG_CREATE
     type: Close Dialog
+    execution-chain: None
 
   execution: 
     sequence: 80
@@ -3781,6 +3788,7 @@ processes:
   identification: 
     name: SAVE_COMMENT
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package
@@ -3804,6 +3812,7 @@ processes:
   identification: 
     name: AJAX_DELETE_COMMENT
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package
@@ -3824,6 +3833,7 @@ processes:
   identification: 
     name: SAVE_SPLIT_CHECKLIST
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package
@@ -3850,6 +3860,7 @@ processes:
   identification: 
     name: SAVE_ATTACHEMENTS
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package
@@ -3877,6 +3888,7 @@ processes:
   identification: 
     name: SAVE_CHECKLIST
     type: Invoke API
+    execution-chain: None
     editable-region: Checklist [GRID] # 46260417924307821
 
   settings: 
@@ -3904,6 +3916,7 @@ processes:
   identification: 
     name: UPDATE_AND_MOVE_TO_TOP
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package
@@ -3930,6 +3943,7 @@ processes:
   identification: 
     name: CLOSE_DIALOG_MOVE_TO_TOP
     type: Close Dialog
+    execution-chain: None
 
   execution: 
     sequence: 100

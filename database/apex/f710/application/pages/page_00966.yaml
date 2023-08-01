@@ -193,7 +193,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -1413,6 +1413,7 @@ processes:
   identification: 
     name: SAVE_PROCEDURES
     type: Invoke API
+    execution-chain: None
     editable-region: Map Procedures [GRID] # 235345126132609943
 
   settings: 

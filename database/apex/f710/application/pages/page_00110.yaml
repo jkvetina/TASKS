@@ -237,7 +237,7 @@ regions:
 
     pagination: 
       type: Scroll
-      show-total-row-count: false
+      show-total-count: false
 
     toolbar: 
       show: false
@@ -1467,6 +1467,7 @@ processes:
   identification: 
     name: PROCESS_BULK_TASK_FILTERS
     type: Invoke API
+    execution-chain: None
     editable-region: FILTER_TASKS [GRID] # 44287803008494730
 
   settings: 
@@ -1494,6 +1495,7 @@ processes:
   identification: 
     name: PROCESS_BULK_REQUEST
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package
@@ -1517,6 +1519,7 @@ processes:
   identification: 
     name: PROCESS_BULK_INIT
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package

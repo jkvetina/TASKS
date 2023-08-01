@@ -255,7 +255,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -2144,7 +2144,7 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
-    icon: fa-heart-o
+    icon: fa-bookmark-o
 
   behavior: 
     action: Submit Page
@@ -2182,7 +2182,7 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
-    icon: fa-heart
+    icon: fa-bookmark
 
   behavior: 
     action: Submit Page
@@ -2679,6 +2679,7 @@ processes:
   identification: 
     name: UPDATE_TASK
     type: Execute Code
+    execution-chain: None
 
   source: 
     location: Local Database
@@ -2695,6 +2696,7 @@ processes:
   identification: 
     name: SAVE_FILTERS
     type: Execute Code
+    execution-chain: None
 
   source: 
     location: Local Database
@@ -2721,6 +2723,7 @@ processes:
   identification: 
     name: SAVE_TASKS
     type: Invoke API
+    execution-chain: None
     editable-region: Tasks [GRID] # 44091050489578013
 
   settings: 
@@ -2745,6 +2748,7 @@ processes:
   identification: 
     name: ADD_TO_FAVORITES
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package
@@ -2771,6 +2775,7 @@ processes:
   identification: 
     name: REMOVE_FROM_FAVORITES
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package

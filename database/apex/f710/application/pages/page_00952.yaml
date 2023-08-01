@@ -105,7 +105,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -367,9 +367,6 @@ regions:
       sort: true
       control-break/aggregate: true
       hide: true
-
-    security: 
-      escape-special-characters: true
 
   - # ====== Column: IS_ACTIVE ===================================
     id: 93157740072563242
@@ -803,6 +800,7 @@ processes:
   identification: 
     name: SAVE_USERS
     type: Invoke API
+    execution-chain: None
     editable-region: Map Clients [GRID] # 93157202664563237
 
   settings: 

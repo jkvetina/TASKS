@@ -102,7 +102,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -2183,6 +2183,7 @@ processes:
   identification: 
     name: SAVE_TABLES
     type: Invoke API
+    execution-chain: None
     editable-region: Map Tables [GRID] # 47412748283554624
 
   settings: 

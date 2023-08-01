@@ -387,8 +387,7 @@
 
   subscription: 
     master: 
-      app: 705 # MASTER
-      referenced-id: 9887859263442428 # LOV_APPLICATIONS
+      referenced-id: 9887859263442428
 
   source: 
     location: Local Database

@@ -75,6 +75,7 @@ processes:
   identification: 
     name: DOWNLOAD_FILE
     type: Execute Code
+    execution-chain: None
 
   source: 
     location: Local Database

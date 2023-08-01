@@ -4,8 +4,8 @@ begin
 --     PAGE: 00108
 --   Manifest End
 wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2022.10.07'
-,p_release=>'22.2.4'
+ p_version_yyyy_mm_dd=>'2023.04.28'
+,p_release=>'23.1.0'
 ,p_default_workspace_id=>8506563800894011
 ,p_default_application_id=>710
 ,p_default_id_offset=>84847035874187356
@@ -37,7 +37,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_template=>wwv_flow_imp.id(70831193948975578)
 ,p_plug_display_sequence=>30
 ,p_include_in_reg_disp_sel_yn=>'Y'
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -49,7 +48,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_sequence=>20
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_new_grid_row=>false
-,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -190,6 +188,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_imp.id(47750816880141749)
 ,p_security_scheme=>wwv_flow_imp.id(47196033359190547)  -- IS_USER
+,p_internal_uid=>47739813619626908
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(47740396652626913)
@@ -198,6 +197,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_type=>'NATIVE_CLOSE_WINDOW'
 ,p_process_name=>'CLOSE_DIALOG'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_internal_uid=>47740396652626913
 );
 wwv_flow_imp.component_end;
 end;

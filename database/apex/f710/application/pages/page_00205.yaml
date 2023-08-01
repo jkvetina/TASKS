@@ -616,6 +616,7 @@ processes:
   identification: 
     name: INIT_FORM
     type: Form - Initialization
+    execution-chain: None
     form-region: Add/Edit Board [FORM] # 135380799354520693
 
   execution: 
@@ -628,6 +629,7 @@ processes:
   identification: 
     name: SAVE_CHANGES
     type: Form - Automatic Row Processing (DML)
+    execution-chain: None
     form-region: Add/Edit Board [FORM] # 135380799354520693
 
   settings: 

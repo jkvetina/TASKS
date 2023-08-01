@@ -194,7 +194,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -1718,6 +1718,7 @@ processes:
   identification: 
     name: SAVE_ROLES
     type: Invoke API
+    execution-chain: None
     editable-region: Map Roles [GRID] # 280334188250543858
 
   settings: 

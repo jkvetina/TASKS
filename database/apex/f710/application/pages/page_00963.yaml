@@ -199,7 +199,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -1772,6 +1772,7 @@ processes:
   identification: 
     name: SAVE_COMPONENTS
     type: Invoke API
+    execution-chain: None
     editable-region: Map Components [GRID] # 187542958257422616
 
   settings: 
@@ -1799,6 +1800,7 @@ processes:
   identification: 
     name: SYNC_REGIONS
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package
@@ -1825,6 +1827,7 @@ processes:
   identification: 
     name: REFRESH_MV
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package

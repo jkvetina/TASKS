@@ -121,7 +121,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -458,6 +458,7 @@ processes:
   identification: 
     name: New - Save Interactive Grid Data
     type: Interactive Grid - Automatic Row Processing (DML)
+    execution-chain: None
     editable-region: New # 46173656617326336
 
   settings: 

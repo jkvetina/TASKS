@@ -296,7 +296,7 @@ regions:
 
     pagination: 
       type: Scroll
-      show-total-row-count: false
+      show-total-count: false
 
 page-items: 
 - # ====== Page Item: P900_USER_ID =============================
@@ -773,6 +773,7 @@ processes:
   identification: 
     name: INIT_FORM
     type: Form - Initialization
+    execution-chain: None
     form-region: User Profile [FORM] # 45894908819541629
 
   execution: 
@@ -785,6 +786,7 @@ processes:
   identification: 
     name: SAVE_PROFILE_CHANGES
     type: Form - Automatic Row Processing (DML)
+    execution-chain: None
     form-region: User Profile [FORM] # 45894908819541629
 
   settings: 

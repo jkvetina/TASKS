@@ -192,7 +192,7 @@ regions:
 
     pagination: 
       type: Page
-      show-total-row-count: true
+      show-total-count: true
 
     toolbar: 
       show: true
@@ -855,7 +855,7 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
-    icon: fa-list-ol
+    icon: fa-sequence
 
   behavior: 
     action: Submit Page
@@ -906,6 +906,7 @@ processes:
   identification: 
     name: SAVE_ROLES
     type: Invoke API
+    execution-chain: None
     editable-region: Roles [GRID] # 92944735956865462
 
   settings: 
@@ -933,6 +934,7 @@ processes:
   identification: 
     name: REORDER_ROLES
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package

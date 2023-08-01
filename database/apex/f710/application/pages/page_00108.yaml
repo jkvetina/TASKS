@@ -433,6 +433,7 @@ processes:
   identification: 
     name: MERGE_TASKS
     type: Invoke API
+    execution-chain: None
 
   settings: 
     type: PL/SQL Package
@@ -459,6 +460,7 @@ processes:
   identification: 
     name: CLOSE_DIALOG
     type: Close Dialog
+    execution-chain: None
 
   execution: 
     sequence: 20
