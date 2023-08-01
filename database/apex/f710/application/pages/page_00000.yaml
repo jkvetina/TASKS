@@ -55,42 +55,6 @@ regions:
   source: 
     html-code: |
       <script>
-      
-      //
-      // WAIT FOR ELEMENT TO EXIST
-      //
-      var wait_for_element = function(search, start, fn, disconnect) {
-          var ob  = new MutationObserver(function(mutations) {
-              if ($(search).length) {
-                  fn(search, start);
-                  if (disconnect) {
-                      observer.disconnect();  // keep observing
-                  }
-              }
-          });
-          //
-          ob.observe(document.getElementById(start), {
-              childList: true,
-              subtree: true
-          });
-      };
-      
-      //
-      // HIDE SUCCESS MESSAGE
-      //
-      var hide_success_message = function(search, start) {
-          var $start = $('#' + start);
-          //
-          setTimeout(function() {
-              apex.message.hidePageSuccess();  // hide message
-              var content = $start.text().trim();
-              if (content.length) {
-                  console.log('MESSAGE CLOSED:', content);
-              }
-              $start.html('').removeClass('u-visible');  // clean APEX mess
-          }, 2000);
-      };
-      
       </script>
       
 
