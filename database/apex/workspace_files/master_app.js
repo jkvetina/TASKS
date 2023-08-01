@@ -13,6 +13,17 @@ var copy_to_clipboard = function (text) {
 
 
 //
+// COPY GRID CELL - ATTACH ONLY TO GRIDS
+//
+/*
+document.addEventListener('copy', (event) => {
+    event.clipboardData.setData('text/plain', $(document.activeElement)[0].innerText || window.getSelection());
+    event.preventDefault();
+});*/
+
+
+
+//
 // CREATE COLORFUL IG/IR CELLS
 //
 const color_cell = function (options, value, title, color_bg, color_text) {

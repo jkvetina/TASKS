@@ -120,6 +120,9 @@ ul.t-Tabs li.t-Tabs-item a.t-Tabs-link:hover {
 .t-TabsRegion-items > div.apex-rds-slider {
     display             : block;
 }
+a.t-Tabs-link::before {
+    display             : none;  /* remove dupe green border */
+}
 
 
 
