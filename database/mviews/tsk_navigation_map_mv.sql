@@ -16,26 +16,38 @@ REFRESH FORCE ON DEMAND
 AS
 SELECT
     -- procedures handling authorization on each page
-    a.application_id            AS app_id,
-    a.page_id,
-    a.page_alias,
-    a.page_name,
+    p.application_id            AS app_id,
+    p.page_id,
+    p.page_alias,
+    p.page_name,
+    p.page_title,
+    p.page_group,
+    p.page_css_classes,
+    p.page_mode,
+    p.page_template,
+    p.page_comment,
     --
     NULLIF(MIN(s.owner || '.' || s.object_name || '.' || s.procedure_name), '..') AS procedure_name,
     --
-    a.authorization_scheme      AS auth_scheme
+    p.authorization_scheme      AS auth_scheme
     --
-FROM apex_application_pages a
+FROM apex_application_pages p
 LEFT JOIN all_procedures s
     ON s.owner                  = SYS_CONTEXT('USERENV', 'CURRENT_SCHEMA')
     AND s.object_name           = 'TSK_AUTH'
-    AND s.procedure_name        = REGEXP_SUBSTR(a.authorization_scheme, '\S+$')
-WHERE a.application_id          = 710
+    AND s.procedure_name        = REGEXP_SUBSTR(p.authorization_scheme, '\S+$')
+WHERE p.application_id          = 710
 GROUP BY
-    a.application_id,
-    a.page_id,
-    a.page_alias,
-    a.page_name,
-    a.authorization_scheme;
+    p.application_id,
+    p.page_id,
+    p.page_alias,
+    p.page_name,
+    p.page_title,
+    p.page_group,
+    p.page_css_classes,
+    p.page_mode,
+    p.page_template,
+    p.page_comment,
+    p.authorization_scheme;
 --
 
